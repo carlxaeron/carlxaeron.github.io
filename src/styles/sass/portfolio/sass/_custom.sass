@@ -1,0 +1,170 @@
+// =max-content
+//   width: -moz-max-content;
+//   width: -webkit-max-content;
+//   width: -o-max-content;
+//   width: -ms-max-content;
+//   width: max-content;
+
+// =position($pos)
+//   -webkit-position: $pos;
+//   -moz-position: $pos;
+//   -ms-position: $pos;
+//   -o-position: $pos;
+//   position: $pos;
+
+=aspect-ratio($width, $height, $important: false)
+  position: relative
+
+  &:after
+    display: block
+    content: " "
+    width: 100%
+    @if ($important != false)
+      padding-top: math.div($height, $width) * 100% !important
+    @else
+      padding-top: math.div($height, $width) * 100%
+
+=aspect-ratio-after()
+  display: block
+  content: " "
+  width: 100%
+
+=aspect-ratio-float
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+
+=aspect-ratio-float-img
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  width: 100%
+  // height: 100%
+  max-height: 100%
+  max-width: 100%
+
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white, 50%))
+  ::-webkit-scrollbar
+    width: $size
+    height: $size
+
+  ::-webkit-scrollbar-thumb
+    background: $foreground-color
+
+  ::-webkit-scrollbar-track
+    background: $background-color
+
+  // For Internet Explorer
+  body
+    scrollbar-face-color: $foreground-color
+    scrollbar-track-color: $background-color
+
+=clearfloat
+  &:before, &:after
+    display: table
+    content: ''
+    clear: both
+
+// @mixin placeholder()
+//   ::-webkit-input-placeholder
+//     @content
+
+//   ::-moz-placeholder
+//     @content
+
+//   :-ms-input-placeholder 
+//     @content
+
+//   :-moz-placeholder 
+//     @content
+
+@function strip-unit($number)
+  @if type-of($number) == 'number' and not unitless($number)
+    // @return $number / ($number * 0 + 1)
+    @return math.div($number, ($number * 0 + 1))
+
+  @return $number
+
+@function get-vw($target, $w: 1280)
+  $vw-context: strip-unit($w) * 0.01 * 1px
+  @return math.div($target, $vw-context * 1vw)
+
+@mixin calc($property, $default, $expression)
+  #{$property}: $default
+  #{$property}: -webkit-calc(#{$expression})
+  #{$property}: -moz-calc(#{$expression})
+  #{$property}: calc(#{$expression})
+
+// Responsive Sprites
+// example - include responsive-sprite(346px, 2192px, 173px, 274px, 0px, 0px);
+@mixin responsive-sprite($sprite-width, $sprite-height, $img-width, $img-height, $img-x, $img-y)
+  background-size: percentage($sprite-width/$img-width) percentage($sprite-height/$img-height)
+  background-position: percentage($img-x/($sprite-width - $img-width)) percentage($img-y/($sprite-height - $img-height))
+
+//ENHANCEMENTS
+$_screen-sm: 768px
+
+@function get-vw-($px,$media: lg)
+  @if $media == lg
+    @return get-vw($px,$screen-max-xl)
+  @else if $media == md
+    @return get-vw($px,$_screen-sm)
+  @else if $media == sm
+    @return get-vw($px,$screen-xs)
+  @else if $media == custom1
+    @return get-vw($px,1400px)
+  @else if $media > 0px
+    @return get-vw($px, $media)
+
+@mixin screen($media: false, $media2: 0px)
+  @if $media == xl
+    @media (max-width: $screen-xl - 1)
+      @content
+  @else if $media == lg
+    @media (max-width: $screen-lg - 1)
+      @content
+  @else if $media == md
+    @media (max-width: $screen-md - 1)
+      @content
+  @else if $media == sm
+    @media (max-width: $screen-sm - 1)
+      @content
+  @else if $media == xs
+    @media (max-width: $screen-xs - 1)
+      @content
+  @else if $media == retina2
+    @media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 3dppx), (min-resolution: 350dpi)
+      @content
+  @else if $media == retina
+    @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)
+      @content
+  @else if $media == false and $media2 > 0px
+    @media (min-width: $media2)
+      @content
+  @else if $media2 > 0px
+    @media (max-width: $media) and (min-width: $media2)
+      @content
+  @else
+    @media (max-width: $media)
+      @content
+
+// https://dvcs.w3.org/hg/FXTF/raw-file/tip/filters/index.html 
+//
+// grayscale      ex: filter: grayscale(100%);
+// sepia          ex: filter: sepia(100%);
+// saturate       ex: filter: saturate(0%);
+// hue-rotate     ex: filter: hue-rotate(45deg);
+// invert         ex: filter: invert(100%);
+// brightness     ex: filter: brightness(15%);
+// contrast       ex: filter: contrast(200%);
+// blur           ex: filter: blur(2px);
+=filter($filter-type,$filter-amount)
+  -webkit-filter: $filter-type+unquote('(#{$filter-amount})')
+  -moz-filter: $filter-type+unquote('(#{$filter-amount})')
+  -ms-filter: $filter-type+unquote('(#{$filter-amount})')
+  -o-filter: $filter-type+unquote('(#{$filter-amount})')
+  filter: $filter-type+unquote('(#{$filter-amount})')

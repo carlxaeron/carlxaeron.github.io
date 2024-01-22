@@ -1,0 +1,403 @@
+body
+    font-family: $font-1
+    .clm-container
+        max-width: 1340px
+        margin: auto
+    .clm-inner-container
+        padding: 5.5rem 0rem
+        padding-top: 2.5rem
+    header
+        &.clm-header-fixed
+            .clm-nav
+                position: fixed
+                width: 100%
+                top: 0px
+                left: 0px
+                z-index: 9
+        .clm-nav
+            background: $color-1
+            h1
+                margin: 0px
+                padding: 0px
+            a, h1
+                color: white
+                font-weight: bold
+                font-size: 1.4rem
+            ul, li
+                list-style-type: none
+                margin: 0px
+                padding: 0px
+            li
+                margin: 0 0.5rem
+    footer
+        background-color: $color-1
+        color: white
+        padding: 0.5rem 0
+        ul, li
+            list-style-type: none
+            margin: 0px
+            padding: 0px
+        li
+            padding: 0 0.5rem !important
+            margin: 0px
+        a
+            color: white
+            font-size: 1rem
+    main
+        .clm-title
+            text-align: center
+            margin-bottom: 4rem
+            > *
+                display: inline
+                font-family: $font-3
+                margin: 0px
+                padding: 0px
+                font-size: 3.4rem
+            &:after
+                content: ''
+                display: block
+                height: 3px
+                background-color: black
+                width: 100px
+                margin: auto
+                margin-top: 0.6rem
+        .clm-fixed-hc
+            min-height: 90vh
+            border-top: 1px solid #e8e8e8
+            +screen($md)
+                min-height: 50vh
+        .clm-cover
+            position: relative
+            background-color: darken($color-2, 15%)
+            text-align: center
+            overflow: hidden
+            border: none
+            &:before
+                position: absolute
+                width: 100%
+                height: 100%
+                content: ''
+                z-index: 2
+                left: 0px
+                top: 0px
+                background: black
+                opacity: 0.7
+                // +filter(blur, 10px)
+            &:after
+                position: absolute
+                width: 100%
+                height: 100%
+                background-image: url('/assets/images/me-bg.png')
+                content: ''
+                z-index: 1
+                left: 0px
+                top: 0px
+                background-size: cover
+                background-repeat: no-repeat
+                background-position: center center
+            .clm-c-content
+                color: white
+                position: absolute
+                top: 50%
+                left: 50%
+                +transform(translate(-50%, -50%))
+                z-index: 3
+                width: 75%
+                a
+                    color: white
+                    padding: 0.5rem 1rem
+                    // background-color: #333
+                    font-size: 1.2rem
+                h2
+                    font-size: 2.9rem
+                    line-height: 1.2
+                    margin-bottom: 1.6rem
+                    span
+                        display: block
+                        font-family: $font-2
+                        font-size: 2.1rem
+                h3
+                    font-size: 0.844rem
+                    margin-bottom: 3rem
+        .clm-m-nav
+            background: $color-3
+            ul, li
+                padding: 0px
+                margin: 0px
+                list-style-type: none
+            ul
+                +screen($sm)
+                    +flexbox2
+                    +align-items(center)
+            li
+                display: inline-block
+                border-right: 1px solid white
+                margin: 0.5rem 1rem
+                padding: 0rem 2rem
+                margin-right: 0px
+                margin-left: 0px
+                +screen($md)
+                    padding: 0rem 1.5rem
+                    margin-right: 0px
+                    margin-left: 0px
+                +screen($sm)
+                    padding: 0rem 1rem
+                    margin-right: 0px
+                    margin-left: 0px
+                &:last-child
+                    border: none
+            a
+                color: white
+                +screen($sm)
+                    // font-size: get-vw-(11px, $xs) // TODO: 
+        .clm-about
+            background-color: #d7ddde
+            background-image: url('/assets/images/about-bg.png')
+            background-size: cover
+            h6
+                font-size: 2rem
+                font-weight: bold
+            p
+                font-size: 1.3rem
+                width: 80%
+                margin: auto
+                font-style: italic
+                line-height: 1.6rem
+                margin-bottom: 2rem
+                +screen($md)
+                    width: 90%
+                +screen($sm)
+                    // font-size: get-vw-(16px, $xs) // TODO:
+                    // line-height: get-vw-(18px, $xs) // TODO:
+            .clm-profile
+                height: 200px
+                width: 200px
+                +border-radius(50%)
+                overflow: hidden
+                margin: auto
+                background-image: url('/assets/images/profile.jpg')
+                background-size: cover
+                border: 5px solid $color-3
+                margin-bottom: 1.5rem
+                img
+                    display: none
+            .clm-skills
+                padding-left: 6%
+                +screen($md)
+                    padding-left: 2rem
+                ul, li
+                    list-style-type: none
+                    margin: 0px
+                    padding: 0px
+                %li
+                    +flexbox2
+                    color: white
+                    +align-items(center)
+                    margin-right: 6%
+                    margin-bottom: 0.7rem
+                    +screen($md)
+                        margin-right: 2rem
+                    +screen($sm)
+                        // margin-bottom: get-vw-(8px, $xs) // TODO: 
+                > ul
+                    > li
+                        &:not(.li-parent)
+                            @extend %li
+                        > ul li
+                            margin-left: 5%
+                            @extend %li
+                            &:last-child
+                                margin-bottom: 1.8rem
+                                +screen($sm)
+                                    // margin-bottom: get-vw-(15px, $xs) // TODO: 
+                h5
+                    background-color: $color-3
+                    font-family: $font-1
+                    font-weight: bold
+                    width: 35%
+                    padding: 0.2rem 1rem
+                    margin: 0px
+                    font-size: 1.1rem
+                    height: 27px
+                    text-overflow: ellipsis
+                    overflow: hidden
+                    +flexbox2
+                    +align-items(center)
+                    +justify-content(center)
+                    +screen($sm)
+                        // font-size: get-vw-(14px, $xs) // TODO:
+                    &.size-1
+                        font-size: 0.9rem
+                        +screen($md)
+                            font-size: 0.7rem
+                        +screen($sm)
+                            // font-size: get-vw-(10px, $xs) // TODO:
+                .clm-sk-cont-2
+                    +flexbox2
+                    +align-items(center)
+                    width: 102%
+                    +border-radius-separate(0px, 10px, 0px, 10px)
+                    background-color: $color-2
+                    position: relative
+                    .clm-sk-percent-2
+                        position: absolute
+                        left: 0px
+                        top: 0px
+                        bottom: 0px
+                        z-index: 1
+                        div
+                            position: absolute
+                            left: 4px
+                            top: 4px
+                            bottom: 4px
+                            right: 4px
+                            background-color: $color-1
+                            +border-radius-separate(0px, 10px, 0px, 10px)
+                .clm-sk-cont
+                    width: 65%
+                    height: 27px
+                    background-color: $color-2
+                    +flexbox2
+                    +align-items(center)
+                    +border-radius-separate(0px, 10px, 0px, 10px)
+                    &.clm-sk-hide
+                        .clm-sk-yrs, .clm-sk-percent
+                            visibility: hidden
+                    .clm-sk-yrs
+                        width: 80%
+                        z-index: 2
+                        font-size: 0.8rem
+                        +screen($sm)
+                            // font-size: get-vw-(12px, $xs) // TODO:
+                    .clm-sk-percent
+                        width: 20%
+                        z-index: 2
+                        font-size: 0.9rem
+                        +screen($sm)
+                            // font-size: get-vw-(14px, $xs) // TODO:
+
+        .clm-projects
+            ul, li
+                list-style-type: none
+                padding: 0px
+                margin: 0px
+            .clm-p-btns
+                max-width: 715px
+                margin: auto
+                padding: 0px 2rem
+                max-width: calc(715px - 2rem)
+                margin-bottom: 3rem
+                li
+                    margin: 0.2rem
+                    text-align: center
+                a
+                    color: white
+                    word-break: keep-all
+            .clm-p-sites
+                padding: 0px 1.5rem
+                overflow: hidden
+                // a
+                //     height: 100%
+                //     width: 100%
+                //     display: block
+                .clm-p-s-cont
+                    background-color: $color-2
+                    margin: 2rem
+                    +aspect-ratio(1px, 1px)
+                    background-size: cover
+                    background-size: 100% auto
+                    position: relative
+                    background-position: center top
+                    background-repeat: no-repeat
+                    +screen($sm)
+                        margin: 1rem
+                    h5
+                        color: white
+                        position: absolute
+                        top: 50%
+                        left: 50%
+                        +transform(translate(-50%, -50%))
+                        font-family: $font-3
+                        font-size: 2.5rem
+                        margin: 0px
+                        text-align: center
+                img:not(.clm-img)
+                    max-height: 100%
+                    max-width: 100%
+                    visibility: hidden
+                    position: absolute
+                    left: 0px
+                    top: 0px
+                    height: 100%
+                    width: 100%
+                .modal
+                    .modal-body
+                        text-align: center
+                        .clm-modal-details
+                            text-align: left !important
+                        .clm-modal-tools
+                            color: $color-1
+                            margin-left: -0.5rem
+                            margin-right: -0.5rem
+                            li
+                                margin: 0 0.5rem
+                .clm-img
+                    max-width: 100%
+                    max-height: 70vh
+                    margin: auto
+                    margin-bottom: 1rem
+
+        .clm-exps
+            background-color: #eee
+            ul, li
+                list-style-type: none
+                margin: 0px
+                padding: 0px
+            ul
+                padding: 0 2rem
+            .clm-company
+                +screen($sm)
+                    padding: 0 1rem
+                li
+                    margin-bottom: 1.5rem
+                    padding-bottom: 1.5rem
+                    // border-bottom: 1px solid $color-2
+                    +screen($sm)
+                        &:nth-child(odd)
+                            background: #e8e8e8
+                h4, h5
+                    font-family: $font-3
+                .clm-com-logo
+                    margin-bottom: 1rem
+                    &.clm-com-logo-light
+                        .clm-com-logo-cont
+                            background-color: transparent
+                    .clm-com-logo-cont
+                        +aspect-ratio(1px, 1px)
+                        background-color: $color-2
+                        position: relative
+                    img
+                        max-width: 90%
+                        max-height: 90%
+                        position: absolute
+                        top: 50%
+                        left: 50%
+                        +transform(translate(-50%, -50%))
+                .clm-com-job-title
+                    h4
+                        font-size: 1.5rem
+                        margin-bottom: 1rem
+                .clm-com-title
+                    +screen(false, $sm)
+                        +flexbox2
+                        +align-items(center)
+                    span
+                        +flexbox2
+                        +align-items(center)
+                h4
+                    font-size: 2rem
+                    margin-bottom: 0.2rem
+                h5
+                    margin-left: 0.2rem
+                    font-size: 1.5rem
+                    margin-bottom: 0.2rem

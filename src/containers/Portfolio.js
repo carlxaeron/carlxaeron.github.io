@@ -1,3 +1,4 @@
+import "./../styles/sass/app.scss"
 import PortfolioAbout from "./Portfolio/About";
 import PortfolioContact from "./Portfolio/Contact";
 import PortfolioExperience from "./Portfolio/Experience";

@@ -1,0 +1,28 @@
+///////////////////
+// Media Queries //
+///////////////////
+
+// Retina query (remove when not needed)
+@media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+
+}
+
+// Largest devices
+@media (max-width: $screen-lg) {
+
+}
+
+// Large devices
+@media (max-width: $screen-md) {
+
+}
+
+// Medium devices
+@media (max-width: $screen-sm) {
+
+}
+
+// Small devices
+@media (max-width: $screen-xs) {
+
+}

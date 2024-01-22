@@ -21,7 +21,7 @@ function PortfolioAbout() {
                                     <div className="clm-sk-cont-2">
                                         <div className="clm-sk-yrs">8 Years Experience</div>
                                         <div className="clm-sk-percent">95%</div>
-                                        <div className="clm-sk-percent-2" style="width: 95%;">
+                                        <div className="clm-sk-percent-2" style={{width: '95%'}}>
                                             <div>&nbsp;</div>
                                         </div>
                                     </div>
@@ -35,7 +35,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">7 Years Experience</div>
                                                 <div className="clm-sk-percent">95%</div>
-                                                <div className="clm-sk-percent-2" style="width: 95%;">
+                                                <div className="clm-sk-percent-2" style={{width: '95%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -47,7 +47,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">3 Years Experience</div>
                                                 <div className="clm-sk-percent">90%</div>
-                                                <div className="clm-sk-percent-2" style="width: 90%;">
+                                                <div className="clm-sk-percent-2" style={{width: '90%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -59,7 +59,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">1 Year Experience</div>
                                                 <div className="clm-sk-percent">80%</div>
-                                                <div className="clm-sk-percent-2" style="width: 80%;">
+                                                <div className="clm-sk-percent-2" style={{width: '80%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -71,7 +71,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">5 Years Experience</div>
                                                 <div className="clm-sk-percent">90%</div>
-                                                <div className="clm-sk-percent-2" style="width: 90%;">
+                                                <div className="clm-sk-percent-2" style={{width: '90%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -83,7 +83,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">1 Year Experience</div>
                                                 <div className="clm-sk-percent">75%</div>
-                                                <div className="clm-sk-percent-2" style="width: 75%;">
+                                                <div className="clm-sk-percent-2" style={{width: '75%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -95,7 +95,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">7 Years Experience</div>
                                                 <div className="clm-sk-percent">95%</div>
-                                                <div className="clm-sk-percent-2" style="width: 95%;">
+                                                <div className="clm-sk-percent-2" style={{width: '95%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -109,7 +109,7 @@ function PortfolioAbout() {
                                     <div className="clm-sk-cont-2">
                                         <div className="clm-sk-yrs">7 Years Experience</div>
                                         <div className="clm-sk-percent">95%</div>
-                                        <div className="clm-sk-percent-2" style="width: 95%;">
+                                        <div className="clm-sk-percent-2" style={{width: '95%'}}>
                                             <div>&nbsp;</div>
                                         </div>
                                     </div>
@@ -123,7 +123,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">7 Years Experience</div>
                                                 <div className="clm-sk-percent">95%</div>
-                                                <div className="clm-sk-percent-2" style="width: 95%;">
+                                                <div className="clm-sk-percent-2" style={{width: '95%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -135,7 +135,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">2 Years Experience</div>
                                                 <div className="clm-sk-percent">90%</div>
-                                                <div className="clm-sk-percent-2" style="width: 90%;">
+                                                <div className="clm-sk-percent-2" style={{width: '90%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -147,7 +147,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">3 Years Experience</div>
                                                 <div className="clm-sk-percent">95%</div>
-                                                <div className="clm-sk-percent-2" style="width: 95%;">
+                                                <div className="clm-sk-percent-2" style={{width: '95%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -159,7 +159,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">1 Year Experience</div>
                                                 <div className="clm-sk-percent">95%</div>
-                                                <div className="clm-sk-percent-2" style="width: 95%;">
+                                                <div className="clm-sk-percent-2" style={{width: '95%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -173,7 +173,7 @@ function PortfolioAbout() {
                                     <div className="clm-sk-cont-2">
                                         <div className="clm-sk-yrs">5 Years Experience</div>
                                         <div className="clm-sk-percent">90%</div>
-                                        <div className="clm-sk-percent-2" style="width: 90%;">
+                                        <div className="clm-sk-percent-2" style={{width: '90%'}}>
                                             <div>&nbsp;</div>
                                         </div>
                                     </div>
@@ -187,7 +187,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">5 Years Experience</div>
                                                 <div className="clm-sk-percent">90%</div>
-                                                <div className="clm-sk-percent-2" style="width: 90%;">
+                                                <div className="clm-sk-percent-2" style={{width: '90%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -199,7 +199,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">7 Years Experience</div>
                                                 <div className="clm-sk-percent">95%</div>
-                                                <div className="clm-sk-percent-2" style="width: 95%;">
+                                                <div className="clm-sk-percent-2" style={{width: '95%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -213,7 +213,7 @@ function PortfolioAbout() {
                                     <div className="clm-sk-cont-2">
                                         <div className="clm-sk-yrs">8 Years Experience</div>
                                         <div className="clm-sk-percent">95%</div>
-                                        <div className="clm-sk-percent-2" style="width: 95%;">
+                                        <div className="clm-sk-percent-2" style={{width: '95%'}}>
                                             <div>&nbsp;</div>
                                         </div>
                                     </div>
@@ -227,7 +227,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">5 Years Experience</div>
                                                 <div className="clm-sk-percent">95%</div>
-                                                <div className="clm-sk-percent-2" style="width: 95%;">
+                                                <div className="clm-sk-percent-2" style={{width: '95%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -239,7 +239,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">4 Years Experience</div>
                                                 <div className="clm-sk-percent">90%</div>
-                                                <div className="clm-sk-percent-2" style="width: 90%;">
+                                                <div className="clm-sk-percent-2" style={{width: '90%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -251,7 +251,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">2 Years Experience</div>
                                                 <div className="clm-sk-percent">95%</div>
-                                                <div className="clm-sk-percent-2" style="width: 95%;">
+                                                <div className="clm-sk-percent-2" style={{width: '95%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -265,7 +265,7 @@ function PortfolioAbout() {
                                     <div className="clm-sk-cont-2">
                                         <div className="clm-sk-yrs">8 Years Experience</div>
                                         <div className="clm-sk-percent">95%</div>
-                                        <div className="clm-sk-percent-2" style="width: 95%;">
+                                        <div className="clm-sk-percent-2" style={{width: '95%'}}>
                                             <div>&nbsp;</div>
                                         </div>
                                     </div>
@@ -279,7 +279,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">6 Years Experience</div>
                                                 <div className="clm-sk-percent">95%</div>
-                                                <div className="clm-sk-percent-2" style="width: 95%;">
+                                                <div className="clm-sk-percent-2" style={{width: '95%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -293,7 +293,7 @@ function PortfolioAbout() {
                                     <div className="clm-sk-cont-2">
                                         <div className="clm-sk-yrs">7 Years Experience</div>
                                         <div className="clm-sk-percent">95%</div>
-                                        <div className="clm-sk-percent-2" style="width: 95%;">
+                                        <div className="clm-sk-percent-2" style={{width: '95%'}}>
                                             <div>&nbsp;</div>
                                         </div>
                                     </div>
@@ -307,7 +307,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">8 Years Experience</div>
                                                 <div className="clm-sk-percent">95%</div>
-                                                <div className="clm-sk-percent-2" style="width: 95%;">
+                                                <div className="clm-sk-percent-2" style={{width: '95%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -315,18 +315,18 @@ function PortfolioAbout() {
                                     </li>
                                 </ul>
                             </li>
-                            <li>
+                            {/* <li>
                                 <h5>Others</h5>
                                 <div className="clm-sk-cont clm-sk-hide">
                                     <div className="clm-sk-cont-2">
                                         <div className="clm-sk-yrs">false Years Experience</div>
                                         <div className="clm-sk-percent">false%</div>
-                                        <div className="clm-sk-percent-2" style="width: false%;">
+                                        <div className="clm-sk-percent-2" style={{width: false%'}}>
                                             <div>&nbsp;</div>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
+                            </li> TODO: */}
                             <li className="li-parent">
                                 <ul>
                                     <li>
@@ -335,7 +335,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">5 Years Experience</div>
                                                 <div className="clm-sk-percent">85%</div>
-                                                <div className="clm-sk-percent-2" style="width: 85%;">
+                                                <div className="clm-sk-percent-2" style={{width: '85%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -347,7 +347,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">2 Years Experience</div>
                                                 <div className="clm-sk-percent">85%</div>
-                                                <div className="clm-sk-percent-2" style="width: 85%;">
+                                                <div className="clm-sk-percent-2" style={{width: '85%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>
@@ -359,7 +359,7 @@ function PortfolioAbout() {
                                             <div className="clm-sk-cont-2">
                                                 <div className="clm-sk-yrs">6 Years Experience</div>
                                                 <div className="clm-sk-percent">90%</div>
-                                                <div className="clm-sk-percent-2" style="width: 90%;">
+                                                <div className="clm-sk-percent-2" style={{width: '90%'}}>
                                                     <div>&nbsp;</div>
                                                 </div>
                                             </div>

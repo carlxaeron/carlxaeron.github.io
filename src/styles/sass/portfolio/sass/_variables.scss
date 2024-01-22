@@ -1,0 +1,236 @@
+///////////////
+// Variables //
+///////////////
+
+// Screen sizes
+$screen-xs: 350px;
+$screen-sm: 540px;
+$screen-md: 768px;
+$screen-lg: 960px;
+$screen-xl: 1400px;
+
+$xs: $screen-xs;
+$sm: $screen-sm;
+$md: $screen-md;
+$lg: $screen-lg;
+$xl: $screen-xl;
+
+$color-1: #ff4141;
+$color-2: #363636;
+$color-3: #074a6a;
+
+// Bootstrap Theme
+$theme-colors: (
+	"primary": $color-1,
+	"info": $color-3
+);
+
+@font-face {
+	font-family: 'Agency FB';
+	src: url(./fonts/agency/AgencyFB-Bold.eot);
+	src: url(./fonts/agency/AgencyFB-Bold.eot?#iefix) format('embedded-opentype'),
+		url(./fonts/agency/AgencyFB-Bold.woff2) format('woff2'),
+		url(./fonts/agency/AgencyFB-Bold.woff) format('woff'),
+		url(./fonts/agency/AgencyFB-Bold.ttf) format('truetype'),
+		url(./fonts/agency/AgencyFB-Bold.svg#AgencyFB-Bold) format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
+// Fonts
+$font-base: 'Helvetica Neue', Arial, sans-serif;
+$font-1: 'Tahoma', $font-base;
+$font-2: 'Pacifico', cursive, $font-base;
+$font-3: 'Agency FB', $font-base;
+
+// Micro clearfix
+// http://nicolasgallagher.com/micro-clearfix-hack/
+.clearfix {
+	*zoom: 1;
+
+	&:before,
+	&:after {
+		content: " ";
+		display: table;
+	}
+
+	&:after {
+		clear: both;
+	}
+}
+
+// Image replacement technique
+// http://nicolasgallagher.com/another-css-image-replacement-technique/
+.ir {
+	font: 0/0 a;
+	color: transparent;
+	text-shadow: none;
+	background-color: transparent;
+	border: 0;
+}
+
+/*FLEX*/
+@mixin flex() {
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-justify-content: flex-start;
+	-ms-flex-pack: start;
+	justify-content: flex-start;
+	-webkit-align-content: flex-start;
+	-ms-flex-line-pack: start;
+	align-content: flex-start;
+	-webkit-align-items: flex-start;
+	-ms-flex-align: start;
+	align-items: flex-start;
+}
+
+@mixin flex-reverse-column() {
+	@include flex();
+	-webkit-flex-direction: column-reverse;
+	-ms-flex-direction: column-reverse;
+	flex-direction: column-reverse;
+}
+
+@mixin flex-reverse-row() {
+	-webkit-flex-direction: row-reverse;
+	-ms-flex-direction: row-reverse;
+	flex-direction: row-reverse;
+}
+
+@mixin flex-justify() {
+	@include flex();
+	-webkit-justify-content: space-between;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+}
+
+@mixin flex-center() {
+	@include flex();
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+
+@mixin flex-middle() {
+	@include flex();
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+@mixin flex-bottom() {
+	@include flex();
+	-webkit-align-items: flex-end;
+	-ms-flex-align: end;
+	align-items: flex-end;
+}
+
+
+//Positioning
+@mixin centered-horizontal() {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+	-ms-transform: translate(-50%, 0);
+	-o-transform: translate(-50%, 0);
+	-webkit-transform: translate(-50%, 0);
+}
+
+@mixin centered-vertical() {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+}
+
+@mixin centered-all() {
+	overflow: auto;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+@mixin centered-full() {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+//Fluidity
+@function fluidity($target, $context) {
+	@return percentage($target / $context);
+}
+
+// Border radius shorthand
+@mixin borderradius($radius) {
+	border-radius: $radius;
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	-o-border-radius: $radius;
+}
+
+// Border radius shorthand specific
+@mixin borderradius_custom($radius-top, $radius-left, $radius-bottom, $radius-right) {
+	border-radius: $radius-top $radius-left $radius-bottom $radius-right;
+	-webkit-border-radius: $radius-top $radius-left $radius-bottom $radius-right;
+	-moz-border-radius: $radius-top $radius-left $radius-bottom $radius-right;
+	-ms-border-radius: $radius-top $radius-left $radius-bottom $radius-right;
+	-o-border-radius: $radius-top $radius-left $radius-bottom $radius-right;
+}
+
+//Text Shadow
+@mixin textshadow($h-shadow, $v-shadow, $blur-radius, $color) {
+	-moz-shadow: $h-shadow $v-shadow $blur-radius $color;
+	-webkit-text-shadow: $h-shadow $v-shadow $blur-radius $color;
+	text-shadow: $h-shadow $v-shadow $blur-radius $color;
+}
+
+//Box Shadow
+@mixin boxshadow($h-shadow, $v-shadow, $blur-radius, $spread, $color) {
+	-moz-box-shadow: $h-shadow $v-shadow $blur-radius $spread $color;
+	-webkit-box-shadow: $h-shadow $v-shadow $blur-radius $spread $color;
+	box-shadow: $h-shadow $v-shadow $blur-radius $spread $color;
+}
+
+//Box Shadow
+@mixin boxshadow_none($shadow) {
+	-moz-box-shadow: $shadow;
+	-webkit-box-shadow: $shadow;
+	box-shadow: $shadow;
+}
+
+//Transition
+@mixin transitionAll($speed, $effect) {
+	-webkit-transition: all $speed $effect;
+	-moz-transition: all $speed $effect;
+	-o-transition: all $speed $effect;
+	transition: all $speed $effect;
+}
+
+//Gradients
+.gradient-black {
+	background: rgba(0, 0, 0, 0);
+	background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.7)));
+	background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+	background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+	background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+	background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#000000', GradientType=0);
+}
