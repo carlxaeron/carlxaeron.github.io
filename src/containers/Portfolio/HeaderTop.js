@@ -1,14 +1,9 @@
 import { useContext, useEffect, useRef } from "react";
 import { ThemeContext } from "./theme-context";
 import sessionstorage from "sessionstorage";
-import { useSpring, animated } from '@react-spring/web'
+import { AnimationFade } from "../../components/Animations";
 
 function PortfolioHeaderTop() {
-    const springs = useSpring({
-        from: { y: -200 },
-        to: { y: 0 },
-    })
-
     const themeContext = useContext(ThemeContext);
 
     // fix double call for useEffect because of strictmode is on
@@ -46,15 +41,14 @@ function PortfolioHeaderTop() {
     }
 
     return (
-        <>
-            <header className="clm-header-fixed" ref={headerRef}>
+        <header className="clm-header-fixed" ref={headerRef}>
                 <div className="clm-nav" ref={navRef}>
-                    <animated.div className="clm-container container" style={{
-                        ...springs
-                    }}>
+                    <div className="clm-container container">
                         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                        <a class="navbar-brand" href="#"><h1 onClick={handleClick}>{ themeContext.value.env === 'dev' ? 'Lorem Ipsum' : 'Carl Louis Manuel' }</h1></a>
-                    </animated.div>
+                        <AnimationFade>
+                            <a class="navbar-brand" href="#"><h1 onClick={handleClick}>{ themeContext.value.env === 'dev' ? 'Lorem Ipsum' : 'Carl Louis Manuel' }</h1></a>
+                        </AnimationFade>
+                    </div>
                 </div>
                 {/* <nav>
                     <ul>
@@ -65,8 +59,7 @@ function PortfolioHeaderTop() {
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </nav> */}
-            </header>
-    </>)
+            </header>)
 }
 
 export default PortfolioHeaderTop;

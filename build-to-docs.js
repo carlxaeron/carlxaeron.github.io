@@ -13,7 +13,11 @@ files.forEach(file => { // Iterate over each file in the source folder. Replace 
     const destinationStream = fs.createWriteStream(destinationFilePath); // Create a write stream for the destination file.  
     sourceStream.pipe(destinationStream); // Pipe the source stream to the destination stream.  
     sourceStream.on('finish', () => { // Print a success message when the file is copied.  
-        console.log(`File '${file}' copied successfully.`);  });  
-        sourceStream.on('error', err => { // Print an error message when an error occurs.  
-            console.error(`Error copying file '${file}': ${err.message}`);  });  });  
-            console.log('Files copied successfully.'); // Print a success message when all files are copied.
+        console.log(`File '${file}' copied successfully.`);  
+    });  
+    sourceStream.on('error', err => { // Print an error message when an error occurs.  
+        console.error(`Error copying file '${file}': ${err.message}`);  
+    });  
+});  
+    
+console.log('Files copied successfully.'); // Print a success message when all files are copied.
