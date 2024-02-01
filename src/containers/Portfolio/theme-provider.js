@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ThemeContext } from './theme-context';
 
 function ThemeProvider({ children }) {
-  const defaultEnv = 'dev';
+  const defaultEnv = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? 'dev' : 'prod';
 
   const [value, setValue] = useState({
     env: defaultEnv,

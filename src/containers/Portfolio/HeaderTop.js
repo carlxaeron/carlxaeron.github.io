@@ -5,34 +5,39 @@ import sessionstorage from "sessionstorage";
 function PortfolioHeaderTop() {
     const themeContext = useContext(ThemeContext);
 
-    const handleClick = (data) => {
-        themeContext.setValue({
-            ...themeContext.value,
-            env: themeContext.value.env === 'dev' ? 'prod' : 'dev',
-        });
-    }
-
+    // fix double call for useEffect because of strictmode is on
+    const init = useRef(false);
     const headerRef = useRef(null);
     const navRef = useRef(null);
 
     useEffect(() => {
         headerRef.current.style.height = `${navRef.current.clientHeight}px`;
 
-        if(sessionstorage.getItem('env')) {
-            themeContext.setValue({
-              env: sessionstorage.getItem('env'),
-            })
-          } else {
-            sessionstorage.setItem('env', themeContext.value.env)
-        }
+        // fix double call for useEffect because of strictmode is on
+        if(!init.current) {
+            init.current = true;
 
-        console.log('called')
+
+            if(sessionstorage.getItem('env')) {
+                themeContext.setValue({
+                  env: sessionstorage.getItem('env'),
+                })
+              } else {
+                sessionstorage.setItem('env', themeContext.value.env)
+            }
+        }
     }, [])
     
     useEffect(() => {
-        console.log(themeContext, themeContext.value)
         sessionstorage.setItem('env', themeContext.value.env)
     }, [themeContext.value.env])
+
+    const handleClick = (data) => {
+        themeContext.setValue({
+            ...themeContext.value,
+            env: themeContext.value.env === 'dev' ? 'prod' : 'dev',
+        });
+    }
 
     return (
         <>
