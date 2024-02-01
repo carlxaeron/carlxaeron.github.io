@@ -1,8 +1,14 @@
 import { useContext, useEffect, useRef } from "react";
 import { ThemeContext } from "./theme-context";
 import sessionstorage from "sessionstorage";
+import { useSpring, animated } from '@react-spring/web'
 
 function PortfolioHeaderTop() {
+    const springs = useSpring({
+        from: { y: -200 },
+        to: { y: 0 },
+    })
+
     const themeContext = useContext(ThemeContext);
 
     // fix double call for useEffect because of strictmode is on
@@ -43,10 +49,12 @@ function PortfolioHeaderTop() {
         <>
             <header className="clm-header-fixed" ref={headerRef}>
                 <div className="clm-nav" ref={navRef}>
-                    <div className="clm-container container">
+                    <animated.div className="clm-container container" style={{
+                        ...springs
+                    }}>
                         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                         <a class="navbar-brand" href="#"><h1 onClick={handleClick}>{ themeContext.value.env === 'dev' ? 'Lorem Ipsum' : 'Carl Louis Manuel' }</h1></a>
-                    </div>
+                    </animated.div>
                 </div>
                 {/* <nav>
                     <ul>
