@@ -46,7 +46,7 @@ function PortfolioHeaderTop() {
                     <div className="clm-container container">
                         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                         <AnimationFade>
-                            <a class="navbar-brand" href="#"><h1 onClick={handleClick}>{ themeContext.value.env === 'dev' ? 'Lorem Ipsum' : 'Carl Louis Manuel' }</h1></a>
+                            <a className="navbar-brand" href="#"><h1 onClick={handleClick}>{ themeContext.value.env === 'dev' ? 'Lorem Ipsum' : 'Carl Louis Manuel' }</h1></a>
                         </AnimationFade>
                     </div>
                 </div>
