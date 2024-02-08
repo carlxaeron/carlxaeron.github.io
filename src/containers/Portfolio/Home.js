@@ -1,12 +1,29 @@
-import { useContext } from "react";
+import { useCallback, useContext, useEffect, useRef } from "react";
 import { ThemeContext } from "./theme-context";
 import { AnimationDown } from "../../components/Animations";
+import Particles from "react-particles";
+import { loadFireflyPreset } from "tsparticles-preset-firefly";
 
 function PortfolioHome() {
     const themeContext = useContext(ThemeContext);
 
+    const particlesRef = useRef(null)
+
+    const particlesInit = useCallback(async (engine) => {
+        await loadFireflyPreset(engine);
+    }, [])
+
+    const particlesConfig={
+        preset: "firefly",
+    }
+
+    useEffect(() => {
+        console.log(particlesRef)
+    }, [])
+
     return (
         <div className={`clm-cover clm-fixed-hc${themeContext.value.env === 'dev' ? ' no-bg' : ''}`} id="home">
+            <Particles id="particles" ref={particlesRef} options={particlesConfig} init={particlesInit} />
             <div className="clm-c-content">
                 { themeContext.value.env === 'dev' && (
                 <>
