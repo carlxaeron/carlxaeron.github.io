@@ -18,12 +18,14 @@ function PortfolioHome() {
     }
 
     useEffect(() => {
-        console.log(particlesRef)
+        console.log(particlesRef.current.children)
     }, [])
 
     return (
         <div className={`clm-cover clm-fixed-hc${themeContext.value.env === 'dev' ? ' no-bg' : ''}`} id="home">
-            <Particles id="particles" ref={particlesRef} options={particlesConfig} init={particlesInit} />
+            <Particles id="particles" ref={particlesRef} options={particlesConfig} autoPlay={true} style={{
+                position: 'absolute !important',
+            }} init={particlesInit} />
             <div className="clm-c-content">
                 { themeContext.value.env === 'dev' && (
                 <>
