@@ -15,6 +15,7 @@ function PortfolioHome() {
 
     const particlesConfig={
         preset: "firefly",
+        position: 'relative',
     }
 
     useEffect(() => {

@@ -14,10 +14,30 @@ function Portfolio() {
             <PortfolioHeaderTop/>
             <main>
                 <PortfolioHome/>
-                <PortfolioAbout/>
-                <PortfolioProject/>
-                <PortfolioExperience/>
-                <PortfolioContact/>
+                <div style={{position: 'relative'}}>
+                    <PortfolioAbout/>
+                    <div style={{position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 9999}}>
+                        <PortfolioAbout/>
+                    </div>
+                </div>
+                <div style={{position: 'relative'}}>
+                    <PortfolioProject/>
+                    <div style={{position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 9999, background: '#eee'}}>
+                        <PortfolioProject/>
+                    </div>
+                </div>
+                <div style={{position: 'relative'}}>
+                    <PortfolioExperience/>
+                    <div style={{position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 9999}}>
+                        <PortfolioExperience/>
+                    </div>
+                </div>
+                <div style={{position: 'relative'}}>
+                    <PortfolioContact/>
+                    <div style={{position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 9999, background: '#eee'}}>
+                        <PortfolioContact/>
+                    </div>
+                </div>
             </main>
             <footer>
 
