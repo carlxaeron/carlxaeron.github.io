@@ -266,13 +266,19 @@ function PortfolioAbout(props) {
         delay: 500,
     })
     const springs2 = useSpring({
-        from: { opacity: 0, },
-        to: { opacity: show ? 1 : 0, },
+        from: { opacity: 0, y: 0, },
+        to: { 
+            opacity: show ? 1 : 0,
+            y: show ? 0 : 200,
+        },
         delay: 1000,
     })
     const springs3 = useSpring({
-        from: { opacity: 0, },
-        to: { opacity: show ? 1 : 0, },
+        from: { opacity: 0, y: 0 },
+        to: { 
+            opacity: show ? 1 : 0,
+            y: show ? 0 : 100,
+        },
         delay: 1500,
     })
 
