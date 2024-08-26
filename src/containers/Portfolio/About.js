@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "./theme-context";
+import { useSpring, animated } from "@react-spring/web";
 
 function PortfolioAbout() {
     const themeContext = useContext(ThemeContext);
@@ -34,7 +35,7 @@ function PortfolioAbout() {
         },
         {
             name: "Zend",
-            experience: "1 Year Experience",
+            experience: "1",
             percentage: "80",
             width: "80",
         },
@@ -46,7 +47,7 @@ function PortfolioAbout() {
         },
         {
             name: "Joomla CMS",
-            experience: "1 Year Experience",
+            experience: "1",
             percentage: "75",
             width: "75",
         },
@@ -83,7 +84,7 @@ function PortfolioAbout() {
         },
         {
             name: "ReactJS",
-            experience: "1 Year Experience",
+            experience: "1",
             percentage: "95",
             width: "95",
         },
@@ -192,32 +193,41 @@ function PortfolioAbout() {
         return s;
     }
 
-    const SkillComponent = ({ skill }) => (
-        <li>
-            <h5>{skill.name}</h5>
-            <div className="clm-sk-cont">
-                <div className="clm-sk-cont-2">
-                            <div className="bg-red">123</div>
-                            <div className="clm-sk-yrs">{skill.experience} Years Experience</div>
-                    <div className="clm-sk-percent">{skill.percentage}%</div>
-                    <div className="clm-sk-percent-2" style={{width: `${skill.percentage}%`}}>
-                        <div>&nbsp;</div>
+    const SkillComponent = ({ skill, i }) => { 
+        const springs = useSpring({
+            from: { width: '0%', },
+            to: { width: `${parseInt(skill.percentage)}%`, },
+            delay: 500 * parseInt(i),
+        })
+
+        console.log(i);
+        
+        return (
+            <li key={i}>
+                <h5>{skill.name}</h5>
+                <div className="clm-sk-cont">
+                    <div className="clm-sk-cont-2">
+                        <div className="clm-sk-yrs">{skill.experience} Years Experience</div>
+                        <div className="clm-sk-percent">{skill.percentage}%</div>
+                        <animated.div className="clm-sk-percent-2" style={{width: `${skill.percentage}%`, ...springs}}>
+                            <div>&nbsp;</div>
+                        </animated.div>
                     </div>
                 </div>
-            </div>
-        </li>
-    )
+            </li>
+        )
+    }
 
     const tempExps = (
         <ul>
             { skillsFiltered().map((skill, index) => (
                 <>
-                    <SkillComponent skill={skill} key={index} />
+                    <SkillComponent skill={skill} i={index} key={index} />
                     { skill.child && (
                         <li className="li-parent">
                             <ul>
                                 { skill.child.map((skill2, index2) => (
-                                    <SkillComponent skill={skill2} key={`${index}-${index2}`} />
+                                    <SkillComponent skill={skill2} i={index} key={index2} />
                                 )) }
                             </ul>
                         </li>
@@ -227,368 +237,11 @@ function PortfolioAbout() {
         </ul>
     )
 
-    // const tempExps2 = (
-    //     <ul>
-    //         <li>
-    //             <h5>PHP</h5>
-    //             <div className="clm-sk-cont">
-    //                 <div className="clm-sk-cont-2">
-    //                     <div className="clm-sk-yrs">8 Years Experience</div>
-    //                     <div className="clm-sk-percent">95%</div>
-    //                     <div className="clm-sk-percent-2" style={{width: '95%'}}>
-    //                         <div>&nbsp;</div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </li>
-    //         <li className="li-parent">
-    //             <ul>
-    //                 <li>
-    //                     <h5>Laravel</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">7 Years Experience</div>
-    //                             <div className="clm-sk-percent">95%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '95%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //                 <li>
-    //                     <h5>CodeIgniter</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">3 Years Experience</div>
-    //                             <div className="clm-sk-percent">90%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '90%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //                 <li>
-    //                     <h5>Zend</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">1 Year Experience</div>
-    //                             <div className="clm-sk-percent">80%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '80%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //                 <li>
-    //                     <h5 className="size-1">WordPress CMS</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">5 Years Experience</div>
-    //                             <div className="clm-sk-percent">90%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '90%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //                 <li>
-    //                     <h5>Joomla CMS</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">1 Year Experience</div>
-    //                             <div className="clm-sk-percent">75%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '75%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //                 <li>
-    //                     <h5>SQL (MYSQL)</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">7 Years Experience</div>
-    //                             <div className="clm-sk-percent">95%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '95%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //             </ul>
-    //         </li>
-    //         <li>
-    //             <h5 className="size-1">Javascript (JS)</h5>
-    //             <div className="clm-sk-cont">
-    //                 <div className="clm-sk-cont-2">
-    //                     <div className="clm-sk-yrs">7 Years Experience</div>
-    //                     <div className="clm-sk-percent">95%</div>
-    //                     <div className="clm-sk-percent-2" style={{width: '95%'}}>
-    //                         <div>&nbsp;</div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </li>
-    //         <li className="li-parent">
-    //             <ul>
-    //                 <li>
-    //                     <h5>JQuery</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">7 Years Experience</div>
-    //                             <div className="clm-sk-percent">95%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '95%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //                 <li>
-    //                     <h5>AngularJS</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">2 Years Experience</div>
-    //                             <div className="clm-sk-percent">90%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '90%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //                 <li>
-    //                     <h5>VueJS</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">3 Years Experience</div>
-    //                             <div className="clm-sk-percent">95%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '95%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //                 <li>
-    //                     <h5>ReactJS</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">1 Year Experience</div>
-    //                             <div className="clm-sk-percent">95%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '95%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //             </ul>
-    //         </li>
-    //         <li>
-    //             <h5 className="size-1">NPM (Node.js)</h5>
-    //             <div className="clm-sk-cont">
-    //                 <div className="clm-sk-cont-2">
-    //                     <div className="clm-sk-yrs">5 Years Experience</div>
-    //                     <div className="clm-sk-percent">90%</div>
-    //                     <div className="clm-sk-percent-2" style={{width: '90%'}}>
-    //                         <div>&nbsp;</div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </li>
-    //         <li className="li-parent">
-    //             <ul>
-    //                 <li>
-    //                     <h5 className="size-1">Gulp / Bower / Webpack</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">5 Years Experience</div>
-    //                             <div className="clm-sk-percent">90%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '90%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //                 <li>
-    //                     <h5 className="size-1">LESS / SCSS / Stylus</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">7 Years Experience</div>
-    //                             <div className="clm-sk-percent">95%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '95%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //             </ul>
-    //         </li>
-    //         <li>
-    //             <h5>CSS/CSS3</h5>
-    //             <div className="clm-sk-cont">
-    //                 <div className="clm-sk-cont-2">
-    //                     <div className="clm-sk-yrs">8 Years Experience</div>
-    //                     <div className="clm-sk-percent">95%</div>
-    //                     <div className="clm-sk-percent-2" style={{width: '95%'}}>
-    //                         <div>&nbsp;</div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </li>
-    //         <li className="li-parent">
-    //             <ul>
-    //                 <li>
-    //                     <h5 className="size-1">LESS / SCSS / Stylus</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">5 Years Experience</div>
-    //                             <div className="clm-sk-percent">95%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '95%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //                 <li>
-    //                     <h5 className="size-1">Twitter Bootstrap</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">4 Years Experience</div>
-    //                             <div className="clm-sk-percent">90%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '90%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //                 <li>
-    //                     <h5 className="size-1">TailwindCSS</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">2 Years Experience</div>
-    //                             <div className="clm-sk-percent">95%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '95%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //             </ul>
-    //         </li>
-    //         <li>
-    //             <h5>HTML/HTML5</h5>
-    //             <div className="clm-sk-cont">
-    //                 <div className="clm-sk-cont-2">
-    //                     <div className="clm-sk-yrs">8 Years Experience</div>
-    //                     <div className="clm-sk-percent">95%</div>
-    //                     <div className="clm-sk-percent-2" style={{width: '95%'}}>
-    //                         <div>&nbsp;</div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </li>
-    //         <li className="li-parent">
-    //             <ul>
-    //                 <li>
-    //                     <h5 className="size-1">Jade/Pug Template</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">6 Years Experience</div>
-    //                             <div className="clm-sk-percent">95%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '95%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //             </ul>
-    //         </li>
-    //         <li>
-    //             <h5 className="size-1">Version Control</h5>
-    //             <div className="clm-sk-cont">
-    //                 <div className="clm-sk-cont-2">
-    //                     <div className="clm-sk-yrs">7 Years Experience</div>
-    //                     <div className="clm-sk-percent">95%</div>
-    //                     <div className="clm-sk-percent-2" style={{width: '95%'}}>
-    //                         <div>&nbsp;</div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </li>
-    //         <li className="li-parent">
-    //             <ul>
-    //                 <li>
-    //                     <h5>Git/SVN</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">8 Years Experience</div>
-    //                             <div className="clm-sk-percent">95%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '95%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //             </ul>
-    //         </li>
-    //         {/* <li>
-    //             <h5>Others</h5>
-    //             <div className="clm-sk-cont clm-sk-hide">
-    //                 <div className="clm-sk-cont-2">
-    //                     <div className="clm-sk-yrs">false Years Experience</div>
-    //                     <div className="clm-sk-percent">false%</div>
-    //                     <div className="clm-sk-percent-2" style={{width: false%'}}>
-    //                         <div>&nbsp;</div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </li> TODO: */}
-    //         <li className="li-parent">
-    //             <ul>
-    //                 <li>
-    //                     <h5>Photoshop</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">5 Years Experience</div>
-    //                             <div className="clm-sk-percent">85%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '85%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //                 <li>
-    //                     <h5>Illustrator</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">2 Years Experience</div>
-    //                             <div className="clm-sk-percent">85%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '85%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //                 <li>
-    //                     <h5 className="size-1">Word Office Tools</h5>
-    //                     <div className="clm-sk-cont">
-    //                         <div className="clm-sk-cont-2">
-    //                             <div className="clm-sk-yrs">6 Years Experience</div>
-    //                             <div className="clm-sk-percent">90%</div>
-    //                             <div className="clm-sk-percent-2" style={{width: '90%'}}>
-    //                                 <div>&nbsp;</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </li>
-    //             </ul>
-    //         </li>
-    //     </ul>
-    // )
-
     const getExps = () => {
         let ret = tempExps;
         if(themeContext.value.env === 'dev') {
             ret = <ul>
-                { exps.map(v => <li>
+                { exps.map((v,k) => <li key={k}>
                     <h5>{v.title}</h5>
                     <div className="clm-sk-cont">
                         <div className="clm-sk-cont-2">
