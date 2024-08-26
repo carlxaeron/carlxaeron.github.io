@@ -185,6 +185,7 @@ function PortfolioAbout(props) {
         const s = [];
         let parent = -1;
         skills.forEach((v,k) => {
+            v.k = k;
             if(v.parent) {
                 s.push(v);
                 parent++;
@@ -200,7 +201,7 @@ function PortfolioAbout(props) {
         const springs = useSpring({
             from: { width: '0%', },
             to: { width: `${parseInt(show2 ? skill.percentage : 0)}%`, },
-            delay: 500 * parseInt(i),
+            delay: 100 * parseInt(skill.k),
         })
         
         return (
