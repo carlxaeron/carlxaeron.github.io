@@ -15,9 +15,9 @@ function Portfolio() {
             <main>
                 <PortfolioHome/>
                 <div style={{position: 'relative'}}>
-                    <PortfolioAbout/>
+                    <PortfolioAbout id='top'/>
                     <div style={{position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 9999}}>
-                        <PortfolioAbout/>
+                        <PortfolioAbout id='bottom'/>
                     </div>
                 </div>
                 <div style={{position: 'relative'}}>

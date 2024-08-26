@@ -1,9 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext } from "./theme-context";
 import { useSpring, animated } from "@react-spring/web";
+import Tracker from "../../components/Tracker";
 
-function PortfolioAbout() {
+function PortfolioAbout(props) {
     const themeContext = useContext(ThemeContext);
+    const [show, setShow] = useState(false);
+    const [show2, setShow2] = useState(false);
 
     const exps = [
         {
@@ -196,11 +199,9 @@ function PortfolioAbout() {
     const SkillComponent = ({ skill, i }) => { 
         const springs = useSpring({
             from: { width: '0%', },
-            to: { width: `${parseInt(skill.percentage)}%`, },
+            to: { width: `${parseInt(show2 ? skill.percentage : 0)}%`, },
             delay: 500 * parseInt(i),
         })
-
-        console.log(i);
         
         return (
             <li key={i}>
@@ -258,32 +259,60 @@ function PortfolioAbout() {
         return ret;
     }
 
+    const springs = useSpring({
+        from: { opacity: 0, },
+        to: { opacity: show ? 1 : 0, },
+        delay: 500,
+    })
+    const springs2 = useSpring({
+        from: { opacity: 0, },
+        to: { opacity: show ? 1 : 0, },
+        delay: 1000,
+    })
+    const springs3 = useSpring({
+        from: { opacity: 0, },
+        to: { opacity: show ? 1 : 0, },
+        delay: 1500,
+    })
+
     return (
-        <div className="clm-about clm-fixed-hc" id="about">
-            <div className="clm-inner-container clm-container">
-                <div className="clm-title">
-                    <h4>ABOUT </h4>
-                </div>
-                <div className="row">
-                    <div className="col-md-6 text-center">
-                        <div className={`clm-profile ${themeContext.value.env}`}>
-                            <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/profile.jpg" alt="Carl Louis Manuel"/>
-                        </div>
-                        {themeContext.value.env === 'dev' && (<>
-                            <h6>Hello</h6>
-                            <p>World World World World World World World World World World World World World World World World World World World </p>
-                        </>)}
-                        {themeContext.value.env !== 'dev' && (<>
-                            <h6>I'm Carl Louis Manuel</h6>
-                            <p>&ldquo;I am a fullstack web developer working for over 12 years since 2012, I am mainly focused on web development using HTML, CSS, JS (AngularJS, VueJS, JQuery), PHP/MySQL - (XAMPP, WAMP, LAMP). I build website from scratch using any top frameworks such as Laravel, Codeigniter, and Zend on any development environment with support of Linux command or local development environment and my code is up to the current standards, secure, and safe from SQL injections or similar hacking attempts with understanding of OOP. I could be a maintenance support with high analytical thinking skill to solve complex problems. All the websites I developed was built using the latest version of PHP. I have knowledge on building a website from CMS such as Wordpress, Drupal and Joomla, I could make customized themes. I have experienced in SEO friendly website that may affect the visibility of a website or a web page in a search engine’s results. I always adopt latest technologies to meet the market requirements and I am creating a responsive web design that loads correctly in all modern browsers and smaller devices.&rdquo;</p>
-                        </>)}
+        <Tracker id={`about-${props.id}`} 
+            set={0.1}
+            onSuccess={() => setShow(true)}
+            onFail={() => setShow(false)}    
+        >
+            <div className="clm-about clm-fixed-hc" id={`about-${props.id}`}>
+                <div className="clm-inner-container clm-container">
+                    <div className="clm-title">
+                        <animated.h4 style={{...springs}}>ABOUT</animated.h4>
                     </div>
-                    <div className="clm-skills col-md-6 text-center">
-                        {getExps()}
+                    <div className="row">
+                        <div className="col-md-6 text-center">
+                            <animated.div style={{...springs2}} className={`clm-profile ${themeContext.value.env}`}>
+                                <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/profile.jpg" alt="Carl Louis Manuel"/>
+                            </animated.div>
+                            {themeContext.value.env === 'dev' && (<>
+                                <h6>Hello</h6>
+                                <p>World World World World World World World World World World World World World World World World World World World </p>
+                            </>)}
+                            {themeContext.value.env !== 'dev' && (<animated.div style={{...springs3}}>
+                                <h6>I'm Carl Louis Manuel</h6>
+                                <p>&ldquo;I am a fullstack web developer working for over 12 years since 2012, I am mainly focused on web development using HTML, CSS, JS (AngularJS, VueJS, JQuery), PHP/MySQL - (XAMPP, WAMP, LAMP). I build website from scratch using any top frameworks such as Laravel, Codeigniter, and Zend on any development environment with support of Linux command or local development environment and my code is up to the current standards, secure, and safe from SQL injections or similar hacking attempts with understanding of OOP. I could be a maintenance support with high analytical thinking skill to solve complex problems. All the websites I developed was built using the latest version of PHP. I have knowledge on building a website from CMS such as Wordpress, Drupal and Joomla, I could make customized themes. I have experienced in SEO friendly website that may affect the visibility of a website or a web page in a search engine’s results. I always adopt latest technologies to meet the market requirements and I am creating a responsive web design that loads correctly in all modern browsers and smaller devices.&rdquo;</p>
+                            </animated.div>)}
+                        </div>
+                        <Tracker id={`about-exp-${props.id}`} 
+                            set={window.innerWidth >= 768 ? 0.3 : 0.7}
+                            onSuccess={() => setShow2(true)}
+                            onFail={() => setShow2(false)}    
+                        >
+                            <div id={`about-exp-${props.id}`} className="clm-skills col-md-6 text-center">
+                                {getExps()}
+                            </div>
+                        </Tracker>
                     </div>
                 </div>
             </div>
-        </div>
+        </Tracker>
     )
 }
 
