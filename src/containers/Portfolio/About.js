@@ -308,7 +308,7 @@ function PortfolioAbout(props) {
                             </animated.div>)}
                         </div>
                         <Tracker id={`about-exp-${props.id}`} 
-                            set={window.innerWidth >= 768 ? 0.3 : 0.7}
+                            set={window.innerWidth >= 768 ? 0.3 : 0.5}
                             onSuccess={() => setShow2(true)}
                             onFail={() => setShow2(false)}    
                         >
