@@ -44,10 +44,10 @@ function PortfolioHome() {
                 { themeContext.value.env === 'prod' && (
                 <>
                     <AnimationDown>
-                        <h2>Hello, I'm a <span>Fullstack Web / App Developer</span></h2>
+                        <h2>Hi, I'm a <span className="mt-4 !text-[2rem] sm:!text-[3rem]">Full-Stack WEB<br/> &<br/> APP Developer</span></h2>
                     </AnimationDown>
                     <AnimationDown delay={300}>
-                        <h3>I am a Web Developer who seeks challenging web development job.</h3>
+                        <h3 className="!text-[1rem]">Passionate about crafting innovative, scalable, and secure web solutions. I’m always ready for new challenges that push the boundaries of web development.</h3>
                     </AnimationDown>
                     <AnimationDown delay={500}>
                         <a className="btn btn-primary" href="#projects">View my works</a>

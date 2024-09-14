@@ -1,3 +1,5 @@
+import Img from "../../components/Img";
+
 function PortfolioExperience() {
     return (
         <div className="clm-exps clm-fixed-hc" id="experiences">
@@ -8,7 +10,7 @@ function PortfolioExperience() {
                 <ul className="clm-company">
                     <li className="row">
                         <div className="col-sm-3 col-md-2 clm-com-logo clm-com-logo-light">
-                            <div className="clm-com-logo-cont"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/companies/eco.jpg" />
+                            <div className="clm-com-logo-cont"><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/companies/eco.jpg" />
 </div>
                         </div>
                         <div className="col-sm-9 col-md-10">
@@ -27,7 +29,7 @@ function PortfolioExperience() {
                     </li>
                     <li className="row">
                         <div className="col-sm-3 col-md-2 clm-com-logo clm-com-logo-light">
-                            <div className="clm-com-logo-cont"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/companies/abscbn.png" />
+                            <div className="clm-com-logo-cont"><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/companies/abscbn.png" />
 </div>
                         </div>
                         <div className="col-sm-9 col-md-10">
@@ -46,7 +48,7 @@ function PortfolioExperience() {
                     </li>
                     <li className="row">
                         <div className="col-sm-3 col-md-2 clm-com-logo clm-com-logo-light">
-                            <div className="clm-com-logo-cont"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/companies/gl.png" />
+                            <div className="clm-com-logo-cont"><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/companies/gl.png" />
 </div>
                         </div>
                         <div className="col-sm-9 col-md-10">
@@ -65,7 +67,7 @@ function PortfolioExperience() {
                     </li>
                     <li className="row">
                         <div className="col-sm-3 col-md-2 clm-com-logo clm-com-logo-light">
-                            <div className="clm-com-logo-cont"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/companies/ccs.png" />
+                            <div className="clm-com-logo-cont"><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/companies/ccs.png" />
 </div>
                         </div>
                         <div className="col-sm-9 col-md-10">
@@ -84,7 +86,7 @@ function PortfolioExperience() {
                     </li>
                     <li className="row">
                         <div className="col-sm-3 col-md-2 clm-com-logo clm-com-logo-light">
-                            <div className="clm-com-logo-cont"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/companies/huxxer.png" />
+                            <div className="clm-com-logo-cont"><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/companies/huxxer.png" />
 </div>
                         </div>
                         <div className="col-sm-9 col-md-10">
@@ -103,7 +105,7 @@ function PortfolioExperience() {
                     </li>
                     <li className="row">
                         <div className="col-sm-3 col-md-2 clm-com-logo clm-com-logo-light">
-                            <div className="clm-com-logo-cont"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/companies/zeno.png" />
+                            <div className="clm-com-logo-cont"><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/companies/zeno.png" />
 </div>
                         </div>
                         <div className="col-sm-9 col-md-10">
@@ -122,7 +124,7 @@ function PortfolioExperience() {
                     </li>
                     <li className="row">
                         <div className="col-sm-3 col-md-2 clm-com-logo">
-                            <div className="clm-com-logo-cont"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/companies/leekie.jpg" />
+                            <div className="clm-com-logo-cont"><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/companies/leekie.jpg" />
 </div>
                         </div>
                         <div className="col-sm-9 col-md-10">
@@ -141,7 +143,7 @@ function PortfolioExperience() {
                     </li>
                     <li className="row">
                         <div className="col-sm-3 col-md-2 clm-com-logo clm-com-logo-light">
-                            <div className="clm-com-logo-cont"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/companies/vigattin.jpg" />
+                            <div className="clm-com-logo-cont"><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/companies/vigattin.jpg" />
 </div>
                         </div>
                         <div className="col-sm-9 col-md-10">

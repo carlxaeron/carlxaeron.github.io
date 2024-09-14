@@ -86,8 +86,8 @@ body
                 z-index: 2
                 left: 0px
                 top: 0px
-                background: black
-                opacity: 0.7
+                // background: black
+                // opacity: 0.7
                 // +filter(blur, 10px)
             &.no-bg
                 background: $color-1
@@ -394,9 +394,12 @@ body
                         .clm-com-logo-cont
                             background-color: transparent
                     .clm-com-logo-cont
+                        background: red
                         +aspect-ratio(1px, 1px)
                         background-color: $color-2
                         position: relative
+                        +screen($sm)
+                            content: '123'
                     img
                         max-width: 90%
                         max-height: 90%

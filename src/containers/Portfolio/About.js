@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 import { ThemeContext } from "./theme-context";
 import { useSpring, animated } from "@react-spring/web";
-import Tracker from "../../components/Tracker";
+import Tracker from "./../../components/Tracker";
+import { PROJECT_DESCRIPTION, PROJECTS_DESCRIPTION_AI, SKILLS } from "./../../config";
 
 function PortfolioAbout(props) {
     const themeContext = useContext(ThemeContext);
@@ -16,170 +17,7 @@ function PortfolioAbout(props) {
         },
     ];
 
-    const skills = [
-        {
-            name: "PHP",
-            experience: "8",
-            percentage: "95",
-            width: "95",
-            parent: true,
-        },
-        {
-            name: "Laravel",
-            experience: "7",
-            percentage: "95",
-            width: "95",
-        },
-        {
-            name: "CodeIgniter",
-            experience: "3",
-            percentage: "90",
-            width: "90",
-        },
-        {
-            name: "Zend",
-            experience: "1",
-            percentage: "80",
-            width: "80",
-        },
-        {
-            name: "WordPress CMS",
-            experience: "5",
-            percentage: "90",
-            width: "90",
-        },
-        {
-            name: "Joomla CMS",
-            experience: "1",
-            percentage: "75",
-            width: "75",
-        },
-        {
-            name: "SQL (MYSQL)",
-            experience: "7",
-            percentage: "95",
-            width: "95",
-        },
-        {
-            name: "Javascript (JS)",
-            experience: "7",
-            percentage: "95",
-            width: "95",
-            parent: true,
-        },
-        {
-            name: "JQuery",
-            experience: "7",
-            percentage: "95",
-            width: "95",
-        },
-        {
-            name: "AngularJS",
-            experience: "2",
-            percentage: "90",
-            width: "90",
-        },
-        {
-            name: "VueJS",
-            experience: "3",
-            percentage: "95",
-            width: "95",
-        },
-        {
-            name: "ReactJS",
-            experience: "1",
-            percentage: "95",
-            width: "95",
-        },
-        {
-            name: "NPM (Node.js)",
-            experience: "5",
-            percentage: "90",
-            width: "90",
-            parent: true,
-        },
-        {
-            name: "Gulp / Bower / Webpack",
-            experience: "5",
-            percentage: "90",
-            width: "90",
-        },
-        {
-            name: "LESS / SCSS / Stylus",
-            experience: "7",
-            percentage: "95",
-            width: "95",
-        },
-        {
-            name: "CSS/CSS3",
-            experience: "8",
-            percentage: "95",
-            width: "95",
-            parent: true,
-        },
-        {
-            name: "Twitter Bootstrap",
-            experience: "4",
-            percentage: "90",
-            width: "90",
-        },
-        {
-            name: "TailwindCSS",
-            experience: "2",
-            percentage: "95",
-            width: "95",
-        },
-        {
-            name: "HTML/HTML5",
-            experience: "8",
-            percentage: "95",
-            width: "95",
-            parent: true,
-        },
-        {
-            name: "Jade/Pug Template",
-            experience: "6",
-            percentage: "95",
-            width: "95",
-        },
-        {
-            name: "Version Control",
-            experience: "7",
-            percentage: "95",
-            width: "95",
-        },
-        {
-            name: "Git/SVN",
-            experience: "8",
-            percentage: "95",
-            width: "95",
-        },
-        {
-            name: "Others",
-            experience: "6",
-            percentage: "85",
-            width: "85",
-            parent: true,
-        },
-        {
-            name: "Photoshop",
-            experience: "5",
-            percentage: "85",
-            width: "85",
-        },
-        {
-            name: "Illustrator",
-            experience: "2",
-            percentage: "85",
-            width: "85",
-        },
-        {
-            name: "Word Office Tools",
-            experience: "6",
-            percentage: "90",
-            width: "90",
-        }
-    ];
+    const skills = SKILLS;
 
     const skillsFiltered = () => {
         const s = [];
@@ -304,7 +142,8 @@ function PortfolioAbout(props) {
                             </>)}
                             {themeContext.value.env !== 'dev' && (<animated.div style={{...springs3}}>
                                 <h6>I'm Carl Louis Manuel</h6>
-                                <p>&ldquo;I am a fullstack web developer working for over 12 years since 2012, I am mainly focused on web development using HTML, CSS, JS (AngularJS, VueJS, JQuery), PHP/MySQL - (XAMPP, WAMP, LAMP). I build website from scratch using any top frameworks such as Laravel, Codeigniter, and Zend on any development environment with support of Linux command or local development environment and my code is up to the current standards, secure, and safe from SQL injections or similar hacking attempts with understanding of OOP. I could be a maintenance support with high analytical thinking skill to solve complex problems. All the websites I developed was built using the latest version of PHP. I have knowledge on building a website from CMS such as Wordpress, Drupal and Joomla, I could make customized themes. I have experienced in SEO friendly website that may affect the visibility of a website or a web page in a search engine’s results. I always adopt latest technologies to meet the market requirements and I am creating a responsive web design that loads correctly in all modern browsers and smaller devices.&rdquo;</p>
+                                {/* <p>&ldquo;{PROJECT_DESCRIPTION}&rdquo;</p> */}
+                                {PROJECTS_DESCRIPTION_AI}
                             </animated.div>)}
                         </div>
                         <Tracker id={`about-exp-${props.id}`} 

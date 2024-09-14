@@ -21,7 +21,7 @@ function PortfolioProject() {
                 <div className="clm-p-sites">
                     <ul className="row">
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-ecoshift">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/eco.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/eco.jpg" alt="eco.jpg"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/eco.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/eco.jpg" alt="eco.jpg"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-ecoshift" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -32,7 +32,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/eco.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/eco.jpg" alt="eco.jpg"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/eco.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/eco.jpg" alt="eco.jpg"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -72,7 +72,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-starcinema">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/sc.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/sc.jpg" alt="sc.jpg"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/sc.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/sc.jpg" alt="sc.jpg"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-starcinema" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -83,7 +83,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/sc.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/sc.jpg" alt="sc.jpg"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/sc.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/sc.jpg" alt="sc.jpg"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -113,7 +113,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-kapamilyathankyou">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/kty.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/kty.png" alt="kty.png"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/kty.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/kty.png" alt="kty.png"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-kapamilyathankyou" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -124,7 +124,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/kty.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/kty.png" alt="kty.png"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/kty.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/kty.png" alt="kty.png"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -154,7 +154,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-push">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/push.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/push.jpg" alt="push.jpg"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/push.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/push.jpg" alt="push.jpg"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-push" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -165,7 +165,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/push.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/push.jpg" alt="push.jpg"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/push.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/push.jpg" alt="push.jpg"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -198,7 +198,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-corporate">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/corp.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/corp.png" alt="corp.png"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/corp.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/corp.png" alt="corp.png"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-corporate" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -209,7 +209,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/corp.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/corp.png" alt="corp.png"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/corp.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/corp.png" alt="corp.png"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -240,7 +240,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-careers">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/careers.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/careers.png" alt="careers.png"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/careers.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/careers.png" alt="careers.png"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-careers" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -251,7 +251,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/careers.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/careers.png" alt="careers.png"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/careers.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/careers.png" alt="careers.png"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -281,7 +281,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-anc">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/anc.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/anc.png" alt="anc.png"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/anc.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/anc.png" alt="anc.png"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-anc" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -292,7 +292,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/anc.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/anc.png" alt="anc.png"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/anc.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/anc.png" alt="anc.png"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -322,7 +322,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-kaiaq-admin">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/kaiaq.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/kaiaq.png" alt="kaiaq.png"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/kaiaq.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/kaiaq.png" alt="kaiaq.png"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-kaiaq-admin" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -333,7 +333,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/kaiaq.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/kaiaq.png" alt="kaiaq.png"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/kaiaq.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/kaiaq.png" alt="kaiaq.png"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -364,7 +364,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-asphaltnitro">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/asphaltnitro.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/asphaltnitro.jpg" alt="asphaltnitro.jpg"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/asphaltnitro.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/asphaltnitro.jpg" alt="asphaltnitro.jpg"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-asphaltnitro" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -375,7 +375,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/asphaltnitro.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/asphaltnitro.jpg" alt="asphaltnitro.jpg"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/asphaltnitro.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/asphaltnitro.jpg" alt="asphaltnitro.jpg"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -404,7 +404,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-asphalt8">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/asphalt8.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/asphalt8.jpg" alt="asphalt8.jpg"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/asphalt8.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/asphalt8.jpg" alt="asphalt8.jpg"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-asphalt8" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -415,7 +415,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/asphalt8.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/asphalt8.jpg" alt="asphalt8.jpg"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/asphalt8.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/asphalt8.jpg" alt="asphalt8.jpg"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -444,7 +444,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-gameloft-customercare">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/cc.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/cc.jpg" alt="cc.jpg"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/cc.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/cc.jpg" alt="cc.jpg"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-gameloft-customercare" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -455,7 +455,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/cc.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/cc.jpg" alt="cc.jpg"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/cc.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/cc.jpg" alt="cc.jpg"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -479,7 +479,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-despicableme">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/dm.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/dm.png" alt="dm.png"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/dm.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/dm.png" alt="dm.png"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-despicableme" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -490,7 +490,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/dm.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/dm.png" alt="dm.png"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/dm.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/dm.png" alt="dm.png"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -519,7 +519,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-dungeonhunter5">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/dh5.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/dh5.jpg" alt="dh5.jpg"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/dh5.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/dh5.jpg" alt="dh5.jpg"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-dungeonhunter5" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -530,7 +530,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/dh5.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/dh5.jpg" alt="dh5.jpg"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/dh5.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/dh5.jpg" alt="dh5.jpg"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -559,7 +559,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-gameloft-forum">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/gl-forum.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/gl-forum.jpg" alt="gl-forum.jpg"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/gl-forum.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/gl-forum.jpg" alt="gl-forum.jpg"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-gameloft-forum" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -570,7 +570,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/gl-forum.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/gl-forum.jpg" alt="gl-forum.jpg"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/gl-forum.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/gl-forum.jpg" alt="gl-forum.jpg"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -594,7 +594,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-gods-of-rome-game">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/gor.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/gor.jpg" alt="gor.jpg"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/gor.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/gor.jpg" alt="gor.jpg"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-gods-of-rome-game" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -605,7 +605,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/gor.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/gor.jpg" alt="gor.jpg"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/gor.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/gor.jpg" alt="gor.jpg"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -634,7 +634,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-heroes-of-order-and-chaos">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/hoc.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/hoc.png" alt="hoc.png"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/hoc.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/hoc.png" alt="hoc.png"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-heroes-of-order-and-chaos" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -645,7 +645,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/hoc.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/hoc.png" alt="hoc.png"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/hoc.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/hoc.png" alt="hoc.png"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -674,7 +674,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-sniper-fury">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/sf.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/sf.jpg" alt="sf.jpg"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/sf.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/sf.jpg" alt="sf.jpg"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-sniper-fury" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -685,7 +685,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/sf.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/sf.jpg" alt="sf.jpg"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/sf.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/sf.jpg" alt="sf.jpg"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -714,7 +714,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-blacklist">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/tbc.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/tbc.jpg" alt="tbc.jpg"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/tbc.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/tbc.jpg" alt="tbc.jpg"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-blacklist" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -725,7 +725,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/tbc.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/tbc.jpg" alt="tbc.jpg"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/tbc.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/tbc.jpg" alt="tbc.jpg"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -754,7 +754,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-coll8or">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/coll8or.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/coll8or.png" alt="coll8or.png"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/coll8or.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/coll8or.png" alt="coll8or.png"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-coll8or" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -765,7 +765,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/coll8or.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/coll8or.png" alt="coll8or.png"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/coll8or.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/coll8or.png" alt="coll8or.png"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -795,7 +795,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-kinkcakes">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/kinkcakes.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/kinkcakes.jpg" alt="kinkcakes.jpg"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/kinkcakes.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/kinkcakes.jpg" alt="kinkcakes.jpg"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-kinkcakes" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -806,7 +806,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/kinkcakes.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/kinkcakes.jpg" alt="kinkcakes.jpg"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/kinkcakes.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/kinkcakes.jpg" alt="kinkcakes.jpg"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -832,7 +832,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-zmr">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/zmr.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/zmr.png" alt="zmr.png"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/zmr.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/zmr.png" alt="zmr.png"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-zmr" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -843,7 +843,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/zmr.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/zmr.png" alt="zmr.png"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/zmr.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/zmr.png" alt="zmr.png"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -872,7 +872,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-zbceuit">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/zbceuit.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/zbceuit.png" alt="zbceuit.png"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/zbceuit.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/zbceuit.png" alt="zbceuit.png"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-zbceuit" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -883,7 +883,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/zbceuit.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/zbceuit.png" alt="zbceuit.png"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/zbceuit.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/zbceuit.png" alt="zbceuit.png"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -912,7 +912,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-zgi">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/zgi.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/zgi.png" alt="zgi.png"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/zgi.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/zgi.png" alt="zgi.png"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-zgi" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -923,7 +923,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/zgi.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/zgi.png" alt="zgi.png"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/zgi.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/zgi.png" alt="zgi.png"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -953,7 +953,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-388a-poker-games">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/undefined")'}}>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/undefined")'}}>
                                 <h5>No Preview</h5>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-388a-poker-games" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -991,7 +991,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-vigattintourism">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/vigattintourism.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/vigattintourism.jpg" alt="vigattintourism.jpg"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/vigattintourism.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/vigattintourism.jpg" alt="vigattintourism.jpg"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-vigattintourism" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -1002,7 +1002,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/vigattintourism.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/vigattintourism.jpg" alt="vigattintourism.jpg"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/vigattintourism.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/vigattintourism.jpg" alt="vigattintourism.jpg"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -1033,7 +1033,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-vigattindeals">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/vigattindeals.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/vigattindeals.png" alt="vigattindeals.png"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/vigattindeals.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/vigattindeals.png" alt="vigattindeals.png"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-vigattindeals" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -1044,7 +1044,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/vigattindeals.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/vigattindeals.png" alt="vigattindeals.png"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/vigattindeals.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/vigattindeals.png" alt="vigattindeals.png"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -1076,7 +1076,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-vigattintrade">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/vigattintrade.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/vigattintrade.png" alt="vigattintrade.png"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/vigattintrade.png")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/vigattintrade.png" alt="vigattintrade.png"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-vigattintrade" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -1087,7 +1087,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/vigattintrade.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/vigattintrade.png" alt="vigattintrade.png"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/vigattintrade.png" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/vigattintrade.png" alt="vigattintrade.png"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
@@ -1118,7 +1118,7 @@ function PortfolioProject() {
                             </div>
                         </li>
                         <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-vigattin">
-                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/theme/images/sites/vigattin.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/vigattin.jpg" alt="vigattin.jpg"/>
+                            <div className="clm-p-s-cont shadow" style={{backgroundImage: 'url("/static/images/sites/vigattin.jpg")'}}><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/vigattin.jpg" alt="vigattin.jpg"/>
                             </div>
                             <div className="modal fade" id="clm-sites-modal-vigattin" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -1129,7 +1129,7 @@ function PortfolioProject() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="row">
-                                                <div className="col-md-7"><a href="/theme/images/sites/vigattin.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/sites/vigattin.jpg" alt="vigattin.jpg"/>
+                                                <div className="col-md-7"><a href="/static/images/sites/vigattin.jpg" target="_blank"><img className="clm-img" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/sites/vigattin.jpg" alt="vigattin.jpg"/>
 </a>
                                                 </div>
                                                 <div className="col-md-5 clm-modal-details">
