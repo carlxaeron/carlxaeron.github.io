@@ -13,6 +13,12 @@ export const SKILLS = [
         width: "95",
     },
     {
+        name: "Firebase",
+        experience: "2",
+        percentage: "85",
+        width: "85",
+    },
+    {
         name: "NodeJS (Backend)",
         experience: "1",
         percentage: "80",
