@@ -43,6 +43,25 @@ export const SKILLS = [
         width: "95",
     },
     {
+        name: "Mobile Development",
+        experience: "1",
+        percentage: "80",
+        width: "80",
+        parent: true,
+    },
+    {
+        name: "Flutter",
+        experience: "1",
+        percentage: "80",
+        width: "80",
+    },
+    {
+        name: "React Native",
+        experience: "1",
+        percentage: "85",
+        width: "85",
+    },
+    {
         name: "PHP",
         experience: "10",
         percentage: "95",

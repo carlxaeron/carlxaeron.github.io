@@ -42,7 +42,7 @@ function PortfolioHeaderTop() {
 
     return (
         <header className="clm-header-fixed" ref={headerRef}>
-                <div className="clm-nav" ref={navRef}>
+                <div className="clm-nav z-[99999] bg-[red]" ref={navRef}>
                     <div className="clm-container container">
                         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                         <AnimationFade>
