@@ -203,3 +203,154 @@ for performance. </p>
     <p> I am skilled in both Linux and local development environments, with a focus on OOP principles, SQL injection prevention, and high analytical problem - solving.My experience extends to CMS platforms like WordPress, Drupal, and Joomla, with custom theme development and SEO optimization to improve search visibility. </p>
     <p> I continuously adopt the latest technologies to create responsive, cross - browser web designs that work seamlessly across all devices. </p>
 </>
+
+export const COMPANIES = [
+    {
+        id: 'eco',
+        projects: [
+            {
+                id: 'eco',
+            },
+        ],
+        title: 'Ecoshift Corp',
+    },
+    {
+        id: 'abs',
+        projects: [
+            {
+                id: 'sc',
+            },
+            {
+                id: 'kty',
+                imgType: 'png',
+            },
+            {
+                id: 'push',
+            },
+            {
+                id: 'corp',
+                imgType: 'png',
+            },
+            {
+                id: 'careers',
+                imgType: 'png',
+            },
+            {
+                id: 'anc',
+                imgType: 'png',
+            },
+            {
+                id: 'kaiaq',
+                imgType: 'png',
+            },
+        ],
+        title: 'ABS-CBN Corp',
+    },
+    {
+        id: 'game',
+        projects: [
+            {
+                id: 'asphaltnitro',
+            },
+            {
+                id: 'asphalt8',
+            },
+            {
+                id: 'cc',
+            },
+            {
+                id: 'dm',
+                imgType: 'png',
+            },
+            {
+                id: 'dh5',
+            },
+            {
+                id: 'gl-forum',
+            },
+            {
+                id: 'gor',
+            },
+            {
+                id: 'hoc',
+                imgType: 'png',
+            },
+            {
+                id: 'sf',
+            },
+            {
+                id: 'tbc',
+            },
+        ],
+        title: 'Gameloft Philippines',
+    },
+    {
+        id: 'cons',
+        projects: [
+            {
+                id: false,
+            },
+        ],
+        title: 'ConsumerCloud Services Inc',
+    },
+    {
+        id: 'hux',
+        projects: [
+            {
+                id: 'coll8or',
+                imgType: 'png',
+            },
+            {
+                id: 'kinkcakes',
+            },
+        ],
+        title: 'Huxxer Corp',
+    },
+    {
+        id: 'zen',
+        projects: [
+            {
+                id: 'zmr',
+                imgType: 'png',
+            },
+            {
+                id: 'zbceuit',
+                imgType: 'png',
+            },
+            {
+                id: 'zgi',
+                imgType: 'png',
+            },
+        ],
+        title: 'Zeno Group Investsments Inc',
+    },
+    {
+        id: 'lee',
+        projects: [
+            {
+                id: false,
+            },
+        ],
+        title: 'Leekie Enterprises Inc',
+    },
+    {
+        id: 'vig',
+        projects: [
+            {
+                id: 'vigattintourism',
+            },
+            {
+                id: 'vigattindeals',
+                imgType: 'png',
+            },
+            {
+                id: 'vigattintrade',
+                imgType: 'png',
+            },
+            {
+                id: 'vigattin',
+            },
+        ],
+        title: 'Vigattin Inc',
+    },
+]
