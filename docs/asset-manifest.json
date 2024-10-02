@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.3dedd09b.css",
-    "main.js": "/static/js/main.6a943bdc.js",
+    "main.css": "/static/css/main.7a97d51e.css",
+    "main.js": "/static/js/main.ba093e6a.js",
     "static/js/787.d4aba7ab.chunk.js": "/static/js/787.d4aba7ab.chunk.js",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/fontawesome-webfont.eot": "/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
@@ -13,16 +13,15 @@
     "static/media/AgencyFB-Bold.eot": "/static/media/AgencyFB-Bold.bdb8910561773ca3464a.eot",
     "static/media/AgencyFB-Bold.ttf": "/static/media/AgencyFB-Bold.b09163fb2d82d65a0d5a.ttf",
     "static/media/AgencyFB-Bold.woff": "/static/media/AgencyFB-Bold.f54b135ed79014b6a4a5.woff",
-    "static/media/profile.jpg": "/static/media/profile.080aa12a529a50ad5df4.jpg",
     "static/media/AgencyFB-Bold.woff2": "/static/media/AgencyFB-Bold.3d243b570fdc31dd04fb.woff2",
     "static/media/about-bg.png": "/static/media/about-bg.5792e0a1b000bba9019c.png",
     "index.html": "/index.html",
-    "main.3dedd09b.css.map": "/static/css/main.3dedd09b.css.map",
-    "main.6a943bdc.js.map": "/static/js/main.6a943bdc.js.map",
+    "main.7a97d51e.css.map": "/static/css/main.7a97d51e.css.map",
+    "main.ba093e6a.js.map": "/static/js/main.ba093e6a.js.map",
     "787.d4aba7ab.chunk.js.map": "/static/js/787.d4aba7ab.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3dedd09b.css",
-    "static/js/main.6a943bdc.js"
+    "static/css/main.7a97d51e.css",
+    "static/js/main.ba093e6a.js"
   ]
 }
