@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Tracker from "../../components/Tracker";
 import { COMPANIES } from "../../config";
+import { useSpring, animated } from "@react-spring/web";
 
 function PortfolioProject(props) {
     const [show, setShow] = useState(false);
@@ -39,22 +40,8 @@ function PortfolioProject(props) {
                                     const origImg = `/static/images/sites/${project.id}.${imgType}`;
                                     const resizedImg = `/static/images/sites/resized-images/${project.id}.${imgType}`;
                                     const img = resizedImg;
-                                    return (
-                                        <li key={`${k}+${k2}`} className="col-lg-4 col-6 col-xl-3">
-                                            {project.id && (
-                                                <div className="clm-p-s-cont shadow" style={{ backgroundImage: `url("${img}")` }}>
-                                                    <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src={`${img}`} alt={`${project.id}.${imgType}`} />
-                                                </div>
-                                            )}
-                                            {!project.id && (
-                                                <div className="clm-p-s-cont shadow"
-                                                // style={{ backgroundImage: 'url("/static/images/sites/undefined")' }}
-                                                >
-                                                    <h5>No Preview</h5>
-                                                </div>
-                                            )}
-                                        </li>
-                                    )
+                                    const key = `${k}_${k2}`;
+                                    return <LiComponent key={key} id={key} company={company} project={project} img={img} imgType={imgType} />
                                 })
                             })
                             }
@@ -69,6 +56,40 @@ function PortfolioProject(props) {
 }
 
 export default PortfolioProject;
+
+const LiComponent = ({ company, project, img, imgType, id }) => {
+    const [show, setShow] = useState(false);
+    const idKey = `li-component-${id}`;
+
+    const springs = useSpring({
+        from: { opacity: 0, transform: 'scale(0.8)' },
+        to: { opacity: show ? 1 : 0, transform: `scale(${show ? '1' : '0.8'})` },
+        delay: 100,
+    })
+
+    return (
+        <Tracker id={idKey} 
+            set={0.1}
+            onSuccess={() => setShow(true)}
+            onFail={() => setShow(false)}    
+        >
+            <animated.li id={idKey} style={{...springs}} className={`col-lg-4 col-6 col-xl-3`}>
+                {project.id && (
+                    <div className="clm-p-s-cont shadow" style={{ backgroundImage: `url("${img}")` }}>
+                        <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src={`${img}`} alt={`${project.id}.${imgType}`} />
+                    </div>
+                )}
+                {!project.id && (
+                    <div className="clm-p-s-cont shadow"
+                    // style={{ backgroundImage: 'url("/static/images/sites/undefined")' }}
+                    >
+                        <h5>No Preview</h5>
+                    </div>
+                )}
+            </animated.li>
+        </Tracker>
+    )
+}
 
 const skillsBak = (<>
     <li className="col-lg-4 col-6 col-xl-3" role="button" data-toggle="modal" data-target="#clm-sites-modal-ecoshift">

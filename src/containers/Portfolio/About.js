@@ -109,7 +109,7 @@ function PortfolioAbout(props) {
             opacity: show ? 1 : 0,
             y: show ? 0 : 200,
         },
-        delay: 1000,
+        delay: 600,
     })
     const springs3 = useSpring({
         from: { opacity: 0, y: 0 },
@@ -117,7 +117,7 @@ function PortfolioAbout(props) {
             opacity: show ? 1 : 0,
             y: show ? 0 : 100,
         },
-        delay: 1500,
+        delay: 700,
     })
 
     return (
