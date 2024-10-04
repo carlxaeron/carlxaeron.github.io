@@ -1,5 +1,4 @@
 import { useSpring, animated } from "@react-spring/web";
-import { useTransition } from "react";
 
 function AnimationDown(props) {
     const { children } = props;
