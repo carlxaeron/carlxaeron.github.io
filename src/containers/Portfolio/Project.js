@@ -35,7 +35,10 @@ function PortfolioProject(props) {
                             {COMPANIES.map((company, k) => {
                                 return company.projects?.map((project, k2) => {
                                     const imgType = project.imgType || 'jpg';
-                                    const img = `/static/images/sites/${project.id}.${imgType}`;
+                                    // const img = `/static/images/sites/${project.id}.${imgType}`;
+                                    const origImg = `/static/images/sites/${project.id}.${imgType}`;
+                                    const resizedImg = `/static/images/sites/resized-images/${project.id}.${imgType}`;
+                                    const img = resizedImg;
                                     return (
                                         <li key={`${k}+${k2}`} className="col-lg-4 col-6 col-xl-3">
                                             {project.id && (
