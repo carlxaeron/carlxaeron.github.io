@@ -3,6 +3,9 @@ import { ThemeContext } from "./theme-context";
 import { useSpring, animated } from "@react-spring/web";
 import Tracker from "./../../components/Tracker";
 import { PROJECT_DESCRIPTION, PROJECTS_DESCRIPTION_AI, SKILLS } from "./../../config";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngular, faBootstrap, faCss3, faFlutter, faGit, faGulp, faHtml5, faJoomla, faJs, faLaravel, faLess, faNode, faNodeJs, faNpm, faPhp, faReact, faVuejs, faWordpress } from '@fortawesome/free-brands-svg-icons';
+import { faMobile, faMobileAlt } from "@fortawesome/free-solid-svg-icons";
 
 function PortfolioAbout(props) {
     const themeContext = useContext(ThemeContext);
@@ -41,10 +44,66 @@ function PortfolioAbout(props) {
             to: { width: `${parseInt(show2 ? skill.percentage : 0)}%`, },
             delay: 100 * parseInt(skill.k),
         })
+
+        const generateTitle = (title) => {
+            const t = title.toLowerCase();
+            const props = {
+                alt: title,
+                title,
+            }
+            let icon = null;
+            if(t.indexOf('javascript') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faJs} /></>
+            } else if(t.indexOf('reactjs') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faReact} /> </>
+            } else if(t.indexOf('node') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faNodeJs} /></>
+            } else if(t.indexOf('angular') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faAngular} /></>
+            } else if(t.indexOf('vue') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faVuejs} /></>
+            } else if(t.indexOf('mobile') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faMobileAlt} /></>
+            } else if(t.indexOf('flutter') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faFlutter} /></>
+            } else if(t.indexOf('php') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faPhp} /></>
+            }  else if(t.indexOf('laravel') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faLaravel} /></>
+            } else if(t.indexOf('wordp') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faWordpress} /></>
+            } else if(t.indexOf('joom') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faJoomla} /></>
+            } else if(t.indexOf('npm') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faNpm} /></>
+            } else if(t.indexOf('gulp') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faGulp} /></>
+            } else if(t.indexOf('less') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faLess} /></>
+            } else if(t.indexOf('css') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faCss3} /></>
+            } else if(t.indexOf('bootstrap') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faBootstrap} /></>
+            } else if(t.indexOf('html') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faHtml5} /></>
+            } else if(t.indexOf('git') >= 0) {
+                icon = <><FontAwesomeIcon {...props} icon={faGit} /></>
+            }
+
+            if(icon) {
+                return <>{icon}&nbsp;<i className="!text-[10px]">{
+                    t 
+                    && t !== 'php' 
+                    && t !== 'npm' 
+                    ? title : ''}</i></>
+            } else {
+                return title;
+            }
+        }
         
         return (
             <li key={i}>
-                <h5>{skill.name}</h5>
+                <h5 className="!text-[0.9rem]">{generateTitle(skill.name)}</h5>
                 <div className="clm-sk-cont">
                     <div className="clm-sk-cont-2">
                         <div className="clm-sk-yrs">{skill.experience} Years Experience</div>

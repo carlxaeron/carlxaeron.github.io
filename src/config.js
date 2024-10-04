@@ -150,7 +150,13 @@ export const SKILLS = [
         parent: true,
     },
     {
-        name: "Jade/Pug Template",
+        name: "Jade Template",
+        experience: "6",
+        percentage: "95",
+        width: "95",
+    },
+    {
+        name: "Pug Template",
         experience: "6",
         percentage: "95",
         width: "95",
@@ -160,6 +166,7 @@ export const SKILLS = [
         experience: "9",
         percentage: "95",
         width: "95",
+        parent: true,
     },
     {
         name: "Git/SVN",
