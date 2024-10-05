@@ -52,42 +52,45 @@ function PortfolioAbout(props) {
                 title,
             }
             let icon = null;
+
+            const FontCompononent = (props) => <FontAwesomeIcon className="text-2xl my-2" {...props} />
+
             if(t.indexOf('javascript') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faJs} /></>
+                icon = <><FontCompononent {...props} icon={faJs} /></>
             } else if(t.indexOf('reactjs') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faReact} /> </>
+                icon = <><FontCompononent {...props} icon={faReact} /> </>
             } else if(t.indexOf('node') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faNodeJs} /></>
+                icon = <><FontCompononent {...props} icon={faNodeJs} /></>
             } else if(t.indexOf('angular') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faAngular} /></>
+                icon = <><FontCompononent {...props} icon={faAngular} /></>
             } else if(t.indexOf('vue') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faVuejs} /></>
+                icon = <><FontCompononent {...props} icon={faVuejs} /></>
             } else if(t.indexOf('mobile') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faMobileAlt} /></>
+                icon = <><FontCompononent {...props} icon={faMobileAlt} /></>
             } else if(t.indexOf('flutter') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faFlutter} /></>
+                icon = <><FontCompononent {...props} icon={faFlutter} /></>
             } else if(t.indexOf('php') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faPhp} /></>
+                icon = <><FontCompononent {...props} icon={faPhp} /></>
             }  else if(t.indexOf('laravel') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faLaravel} /></>
+                icon = <><FontCompononent {...props} icon={faLaravel} /></>
             } else if(t.indexOf('wordp') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faWordpress} /></>
+                icon = <><FontCompononent {...props} icon={faWordpress} /></>
             } else if(t.indexOf('joom') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faJoomla} /></>
+                icon = <><FontCompononent {...props} icon={faJoomla} /></>
             } else if(t.indexOf('npm') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faNpm} /></>
+                icon = <><FontCompononent {...props} icon={faNpm} /></>
             } else if(t.indexOf('gulp') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faGulp} /></>
+                icon = <><FontCompononent {...props} icon={faGulp} /></>
             } else if(t.indexOf('less') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faLess} /></>
+                icon = <><FontCompononent {...props} icon={faLess} /></>
             } else if(t.indexOf('css') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faCss3} /></>
+                icon = <><FontCompononent {...props} icon={faCss3} /></>
             } else if(t.indexOf('bootstrap') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faBootstrap} /></>
+                icon = <><FontCompononent {...props} icon={faBootstrap} /></>
             } else if(t.indexOf('html') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faHtml5} /></>
+                icon = <><FontCompononent {...props} icon={faHtml5} /></>
             } else if(t.indexOf('git') >= 0) {
-                icon = <><FontAwesomeIcon {...props} icon={faGit} /></>
+                icon = <><FontCompononent {...props} icon={faGit} /></>
             }
 
             if(icon) {
