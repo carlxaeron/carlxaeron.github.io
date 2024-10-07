@@ -19,12 +19,12 @@ function PortfolioProject(props) {
   })
 
   return (
-    <Tracker id={`projects`}
-      set={0.01}
+    <Tracker id={`projectstop`}
+      set={0.1}
       onSuccess={() => setShow(true)}
       onFail={() => setShow(false)}
     >
-      <animated.div style={{ ...springs2 }} className="clm-projects clm-fixed-hc" id="projects">
+      <animated.div style={props.id === 'bottom' ? { ...springs2 } : {}} className="clm-projects clm-fixed-hc" id={`projects${props.id}`}>
         <div className="clm-inner-container clm-container">
           <div className="clm-title">
             <h4>PROJECTS</h4>

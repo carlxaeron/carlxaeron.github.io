@@ -6,7 +6,7 @@ const defaultEnv = (!process.env.NODE_ENV || process.env.NODE_ENV === 'developme
 const useStore = create((set) => ({
   value: {
     env: defaultEnv,
-    isMobile: false,
+    isMobile: (window?.innerWidth <= 768) || false,
   },
   setValue: (newState) => set((state) => ({ value: {...state.value, ...newState} })),
 }))

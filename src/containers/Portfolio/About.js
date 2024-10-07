@@ -10,7 +10,6 @@ import { faMobile, faMobileAlt } from "@fortawesome/free-solid-svg-icons";
 function PortfolioAbout(props) {
   const themeContext = useContext(ThemeContext);
   const [show, setShow] = useState(false);
-  const [show2, setShow2] = useState(false);
 
   const exps = [
     {
@@ -39,10 +38,12 @@ function PortfolioAbout(props) {
   }
 
   const SkillComponent = ({ skill, i }) => {
+    const [show2, setShow2] = useState(false);
+
     const springs = useSpring({
       from: { width: '0%', },
       to: { width: `${parseInt(show2 ? skill.percentage : 0)}%`, },
-      delay: 100 * parseInt(skill.k),
+      // delay: 50 * parseInt(skill.k),
     })
 
     const generateTitle = (title) => {
@@ -105,18 +106,27 @@ function PortfolioAbout(props) {
     }
 
     return (
+      <Tracker id={`about-top-skill-${i}`}
+        set={0.1}
+        onSuccess={() => setShow2(true)}
+        onFail={() => setShow2(false)}
+      >
       <li key={i}>
         <h5 className="!text-[0.9rem]">{generateTitle(skill.name)}</h5>
         <div className="clm-sk-cont">
           <div className="clm-sk-cont-2">
             <div className="clm-sk-yrs">{skill.experience} Years Experience</div>
             <div className="clm-sk-percent">{skill.percentage}%</div>
-            <animated.div className="clm-sk-percent-2" style={{ width: `${skill.percentage}%`, ...springs }}>
+            <animated.div className="clm-sk-percent-2" id={`about-${props.id}-skill-${i}`} style={{ width: `${skill.percentage}%`, ...springs }}>
               <div>&nbsp;</div>
             </animated.div>
+            <div className="clm-sk-percent-2" id={`about-${props.id}-skill-${i}-2`} style={{ width: `${skill.percentage}%`, opacity: '50%' }}>
+              <div>&nbsp;</div>
+            </div>
           </div>
         </div>
       </li>
+      </Tracker>
     )
   }
 
@@ -213,15 +223,15 @@ function PortfolioAbout(props) {
                 {PROJECTS_DESCRIPTION_AI}
               </animated.div>)}
             </div>
-            <Tracker id={`about-exp-${props.id}`}
+            {/* <Tracker id={`about-exp-${props.id}`}
               set={window.innerWidth >= 768 ? 0.3 : 0.5}
               onSuccess={() => setShow2(true)}
               onFail={() => setShow2(false)}
-            >
+            > */}
               <div id={`about-exp-${props.id}`} className="clm-skills col-md-6 text-center">
                 {getExps()}
               </div>
-            </Tracker>
+            {/* </Tracker> */}
           </div>
         </animated.div>
       </div>

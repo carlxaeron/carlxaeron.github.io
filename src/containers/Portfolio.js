@@ -13,6 +13,7 @@ function Portfolio() {
 
     function handleResize() {
         const isMobile = window.innerWidth <= 768;
+        console.log(window.innerWidth);
         setValue({ isMobile });
     }
 
@@ -25,6 +26,10 @@ function Portfolio() {
             window.removeEventListener("resize", handleResize); // Clean up the event listener on component unmount
         };
     }, []);
+
+    useEffect(() => {
+        console.log(value);
+    }, [value]);
 
     return (
         <>
@@ -45,15 +50,15 @@ function Portfolio() {
                     </div>
                 </div>
                 <div style={{position: 'relative'}}>
-                    <PortfolioExperience/>
+                    <PortfolioExperience id='top' />
                     <div style={{position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 9999}}>
-                        <PortfolioExperience/>
+                        <PortfolioExperience id='bottom'/>
                     </div>
                 </div>
                 <div style={{position: 'relative'}}>
-                    <PortfolioContact/>
+                    <PortfolioContact id='top' />
                     <div style={{position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 9999, background: '#eee'}}>
-                        <PortfolioContact/>
+                        <PortfolioContact id='bottom'/>
                     </div>
                 </div>
             </main>
