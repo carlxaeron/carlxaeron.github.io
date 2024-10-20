@@ -107,7 +107,7 @@ function PortfolioAbout(props) {
 
     return (
       <Tracker id={`about-top-skill-${i}`}
-        set={0.1}
+        set={0.05}
         onSuccess={() => setShow2(true)}
         onFail={() => setShow2(false)}
       >
@@ -205,7 +205,13 @@ function PortfolioAbout(props) {
     >
       <div className="clm-about clm-fixed-hc" id={`about-${props.id}`}>
         <animated.div style={{ ...springs4 }} className="clm-inner-container clm-container">
-          <div className="clm-title">
+          <div className="clm-title" onClick={() => {
+            const el = document.getElementById(`projectsbottom`);
+            console.log(el);
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}>
             <animated.h4 style={{ ...springs }}>ABOUT</animated.h4>
           </div>
           <div className="row">

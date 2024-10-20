@@ -1,21 +1,58 @@
 import { useSpring, animated } from "@react-spring/web";
 import Img from "../../components/Img";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useStore } from "./theme-provider";
 import Tracker from "../../components/Tracker";
+import { EXPERIENCES } from "../../config";
 
 function PortfolioExperience(props) {
   const [show, setShow] = useState(false);
   const { value } = useStore();
   const springs = useSpring({
-    from: { opacity: 0, transform: 'scale(0.8)' },
-    to: { opacity: show ? 1 : 0, transform: `scale(${show ? '1' : '0.8'})` },
+    from: { opacity: 0},
+    to: { opacity: show ? 1 : 0 },
     delay: 100,
   })
 
+  const ExperiencesLi = ({ v, k }) => {
+    const [show, setShow] = useState(false);
+    const springs = useSpring({
+      from: { opacity: 0, transform: 'scale(0.8)' },
+      to: { opacity: show ? 1 : 0, transform: `scale(${show ? '1' : '0.8'})` },
+    })
+
+    return (
+      <animated.li id={`experiences-${props.id}-${k}`} style={props.id === 'bottom' ? {...springs} : {opacity: 0}}  className="row">
+        <Tracker id={`experiences-${props.id}-${k}`}
+          set={0.05}
+          onSuccess={() => setShow(true)}
+          onFail={() => setShow(false)}
+        >
+          <div className="col-sm-3 col-md-2 clm-com-logo clm-com-logo-light">
+            <div className="clm-com-logo-cont"><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src={v.companyLogo} />
+            </div>
+          </div>
+          <div className="col-sm-9 col-md-10">
+            <div className="clm-com-title">
+              <h4>{v.companyName}</h4><span>
+                <h5>(Feb 2019</h5>
+                <h5>- Present)</h5></span>
+            </div>
+            <div className="clm-com-job-title">
+              <h4>Web Developer</h4>
+            </div>
+            <div className="clm-com-detail">
+              <p> My job is to maintain the codes, enhance, debug the site. Make a custom plugin to work in woocommerce and additional features. Fix different bugs on design/layout. Fix website to make it more SEO friendly.</p>
+            </div>
+          </div>
+        </Tracker>
+      </animated.li>
+    )
+  }
+
   return (
     <Tracker id={`experiences-top`}
-      set={value.isMobile ? 0.1 : 0.3}
+      set={0.05}
       onSuccess={() => setShow(true)}
       onFail={() => setShow(false)}
     >
@@ -25,7 +62,11 @@ function PortfolioExperience(props) {
             <h4>EXPERIENCES</h4>
           </div>
           <ul className="clm-company">
-            <li className="row">
+            { 
+              EXPERIENCES.map((v, k) => (
+                <ExperiencesLi v={v} k={k} key={k} />
+              )) }
+            {/* <li className="row">
               <div className="col-sm-3 col-md-2 clm-com-logo clm-com-logo-light">
                 <div className="clm-com-logo-cont"><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/companies/eco.jpg" />
                 </div>
@@ -43,8 +84,8 @@ function PortfolioExperience(props) {
                   <p> My job is to maintain the codes, enhance, debug the site. Make a custom plugin to work in woocommerce and additional features. Fix different bugs on design/layout. Fix website to make it more SEO friendly.</p>
                 </div>
               </div>
-            </li>
-            <li className="row">
+            </li> */}
+            {/* <li className="row">
               <div className="col-sm-3 col-md-2 clm-com-logo clm-com-logo-light">
                 <div className="clm-com-logo-cont"><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/static/images/companies/abscbn.png" />
                 </div>
@@ -176,7 +217,7 @@ function PortfolioExperience(props) {
                   <p>My job is to develop the 4 websites. Web Designing, Coding, Debugging and Web Security. I used CodeIgniter PHP framework here. I made 2 websites here from scratch and I update/enhance other websites here.</p>
                 </div>
               </div>
-            </li>
+            </li> */}
           </ul>
         </div>
       </animated.div>

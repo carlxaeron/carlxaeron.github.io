@@ -19,7 +19,6 @@ export default function Tracker(props) {
             containerTop <= scrollYH &&
             containerBottom >= scrollYH
         ) {
-          console.log(`${props.id} ${scrollYH}-${containerTop}=${(scrollYH - containerTop)} ${percent}`)
           if ((scrollYH - containerTop) >= percent) {
             setShow(true);
           }

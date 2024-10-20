@@ -361,3 +361,118 @@ export const COMPANIES = [
         title: 'Vigattin Inc',
     },
 ]
+
+export const EXPERIENCES = [
+    {
+        "companyLogo": "/static/images/companies/eco.jpg",
+        "companyName": "Ecoshift Corp.",
+        "jobTitle": "Web Developer",
+        "dateRange": "(Feb 2019- Present)",
+        "jobDescription": " My job is to maintain the codes, enhance, debug the site. Make a custom plugin to work in woocommerce and additional features. Fix different bugs on design/layout. Fix website to make it more SEO friendly."
+    },
+    {
+        "companyLogo": "/static/images/companies/abscbn.png",
+        "companyName": "ABS-CBN Corp.",
+        "jobTitle": "Frontend Developer",
+        "dateRange": "(Sep 2016- Feb 2019)",
+        "jobDescription": "My responsibilities are make webpages that made of HTML, CSS, and JavaScript. By using latest and updated technology and using NPM we build some webpages that is supported the GULP task management. I used LESS, SASS for managing the CSS. I used webpack for compiling and just all the plugins or JavaScript in one file. I used JADE template for building the HTML file. Make the webpage supports all browsers from desktop to mobile devices. I finished three websites from scratch."
+    },
+    {
+        "companyLogo": "/static/images/companies/gl.png",
+        "companyName": "Gameloft Philippines",
+        "jobTitle": "R&D PHP Developer",
+        "dateRange": "(Aug 2015- Jul 2016)",
+        "jobDescription": "My responsibilities are doing the development for backend of the website after the projects are done from the designer and frontend developer. I'm doing the functionality of the website by using any frameworks. I used the zend framework 2 here and develop the website on cloud9 and in linux environment. I've learned here the zf2 framework, PHP unit testing (PHPUnit, selenium), js unit testing (karma.js, javascript frameworks(jQuery, angular.js), node.js, bower, etc."
+    },
+    {
+        "companyLogo": "/static/images/companies/ccs.png",
+        "companyName": "ConsumerCloud Services Inc.",
+        "jobTitle": "Senior PHP Developer",
+        "dateRange": "(Mar 2015- Aug 2015)",
+        "jobDescription": "The Australian client has LGS System, this is large system contains large data came from surveys and clients and are paying for every valid data and it is hosted in AWS (Amazon Web Services). My job as senior web developer is to document the system's flow so we can fix anything that needs by client to be fixed and support the junior developer."
+    },
+    {
+        "companyLogo": "/static/images/companies/huxxer.png",
+        "companyName": "Huxxer Corp.",
+        "jobTitle": "Senior Web Developer",
+        "dateRange": "(Dec 2014- Mar 2015)",
+        "jobDescription": "My responsibilities in one of our became clients are developed the two of the system using the laravel framework owned by one of the Australian client; one is Dontudare.com is about a social app that may post anonymously for the security purposes of the user and one is Coll8or is the social app that consists of many social API in one website. In our local client I developed a cake management web app from not optimized laravel kinkcakes made by last developers to scratch laravel kinkcakes."
+    },
+    {
+        "companyLogo": "/static/images/companies/zeno.png",
+        "companyName": "Zeno Group Investsments Inc.",
+        "jobTitle": "Web Admin",
+        "dateRange": "(Jul 2014- Dec 2014)",
+        "jobDescription": "My job is to create websites made with wordpress and customized or own themes from my leader or CEO on UK with support from his COO here in the Philippines. I made a 30+ websites from PSD to HTML and from scratch. I used also laravel PHP framework here on websites that dont need to be CMS."
+    },
+    {
+        "companyLogo": "/static/images/companies/leekie.jpg",
+        "companyName": "Leekie Enterprises Inc.",
+        "jobTitle": "Web Developer",
+        "dateRange": "(Apr 2014- Jul 2014)",
+        "jobDescription": "My responsilities are doing my task as a Web Developer based on the given task to give their expectation for the gaming website. Share ideas what I have learned from the recent work experience. My achievements is to share my ideas/experiences from what I have learned and show them that I am not the ordinary programmer."
+    },
+    {
+        "companyLogo": "/static/images/companies/vigattin.jpg",
+        "companyName": "Vigattin Inc.",
+        "jobTitle": "Web Developer",
+        "dateRange": "(May 2012- Apr 2014)",
+        "jobDescription": "My job is to develop the 4 websites. Web Designing, Coding, Debugging and Web Security. I used CodeIgniter PHP framework here. I made 2 websites here from scratch and I update/enhance other websites here."
+    },
+    {
+        "companyLogo": "/static/images/companies/eco.jpg",
+        "companyName": "Ecoshift Corp.",
+        "jobTitle": "Web Developer",
+        "dateRange": "(Feb 2019- Present)",
+        "jobDescription": " My job is to maintain the codes, enhance, debug the site. Make a custom plugin to work in woocommerce and additional features. Fix different bugs on design/layout. Fix website to make it more SEO friendly."
+    },
+    {
+        "companyLogo": "/static/images/companies/abscbn.png",
+        "companyName": "ABS-CBN Corp.",
+        "jobTitle": "Frontend Developer",
+        "dateRange": "(Sep 2016- Feb 2019)",
+        "jobDescription": "My responsibilities are make webpages that made of HTML, CSS, and JavaScript. By using latest and updated technology and using NPM we build some webpages that is supported the GULP task management. I used LESS, SASS for managing the CSS. I used webpack for compiling and just all the plugins or JavaScript in one file. I used JADE template for building the HTML file. Make the webpage supports all browsers from desktop to mobile devices. I finished three websites from scratch."
+    },
+    {
+        "companyLogo": "/static/images/companies/gl.png",
+        "companyName": "Gameloft Philippines",
+        "jobTitle": "R&D PHP Developer",
+        "dateRange": "(Aug 2015- Jul 2016)",
+        "jobDescription": "My responsibilities are doing the development for backend of the website after the projects are done from the designer and frontend developer. I'm doing the functionality of the website by using any frameworks. I used the zend framework 2 here and develop the website on cloud9 and in linux environment. I've learned here the zf2 framework, PHP unit testing (PHPUnit, selenium), js unit testing (karma.js, javascript frameworks(jQuery, angular.js), node.js, bower, etc."
+    },
+    {
+        "companyLogo": "/static/images/companies/ccs.png",
+        "companyName": "ConsumerCloud Services Inc.",
+        "jobTitle": "Senior PHP Developer",
+        "dateRange": "(Mar 2015- Aug 2015)",
+        "jobDescription": "The Australian client has LGS System, this is large system contains large data came from surveys and clients and are paying for every valid data and it is hosted in AWS (Amazon Web Services). My job as senior web developer is to document the system's flow so we can fix anything that needs by client to be fixed and support the junior developer."
+    },
+    {
+        "companyLogo": "/static/images/companies/huxxer.png",
+        "companyName": "Huxxer Corp.",
+        "jobTitle": "Senior Web Developer",
+        "dateRange": "(Dec 2014- Mar 2015)",
+        "jobDescription": "My responsibilities in one of our became clients are developed the two of the system using the laravel framework owned by one of the Australian client; one is Dontudare.com is about a social app that may post anonymously for the security purposes of the user and one is Coll8or is the social app that consists of many social API in one website. In our local client I developed a cake management web app from not optimized laravel kinkcakes made by last developers to scratch laravel kinkcakes."
+    },
+    {
+        "companyLogo": "/static/images/companies/zeno.png",
+        "companyName": "Zeno Group Investsments Inc.",
+        "jobTitle": "Web Admin",
+        "dateRange": "(Jul 2014- Dec 2014)",
+        "jobDescription": "My job is to create websites made with wordpress and customized or own themes from my leader or CEO on UK with support from his COO here in the Philippines. I made a 30+ websites from PSD to HTML and from scratch. I used also laravel PHP framework here on websites that dont need to be CMS."
+    },
+    {
+        "companyLogo": "/static/images/companies/leekie.jpg",
+        "companyName": "Leekie Enterprises Inc.",
+        "jobTitle": "Web Developer",
+        "dateRange": "(Apr 2014- Jul 2014)",
+        "jobDescription": "My responsilities are doing my task as a Web Developer based on the given task to give their expectation for the gaming website. Share ideas what I have learned from the recent work experience. My achievements is to share my ideas/experiences from what I have learned and show them that I am not the ordinary programmer."
+    },
+    {
+        "companyLogo": "/static/images/companies/vigattin.jpg",
+        "companyName": "Vigattin Inc.",
+        "jobTitle": "Web Developer",
+        "dateRange": "(May 2012- Apr 2014)",
+        "jobDescription": "My job is to develop the 4 websites. Web Designing, Coding, Debugging and Web Security. I used CodeIgniter PHP framework here. I made 2 websites here from scratch and I update/enhance other websites here."
+    }
+]
