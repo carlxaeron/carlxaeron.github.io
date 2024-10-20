@@ -35,15 +35,12 @@ function PortfolioExperience(props) {
           <div className="col-sm-9 col-md-10">
             <div className="clm-com-title">
               <h4>{v.companyName}</h4><span>
-                <h5>(Feb 2019</h5>
-                <h5>- Present)</h5></span>
+                <h5>{v.dateRange}</h5></span>
             </div>
             <div className="clm-com-job-title">
-              <h4>Web Developer</h4>
+              <h4>{v.jobTitle}</h4>
             </div>
-            <div className="clm-com-detail">
-              <p> My job is to maintain the codes, enhance, debug the site. Make a custom plugin to work in woocommerce and additional features. Fix different bugs on design/layout. Fix website to make it more SEO friendly.</p>
-            </div>
+            <div className="clm-com-detail" dangerouslySetInnerHTML={{ __html: v.jobDescription }} />
           </div>
         </Tracker>
       </animated.li>
