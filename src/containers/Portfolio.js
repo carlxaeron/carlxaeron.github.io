@@ -7,13 +7,13 @@ import PortfolioHeaderTop from "./Portfolio/HeaderTop";
 import PortfolioHome from "./Portfolio/Home";
 import PortfolioProject from "./Portfolio/Project";
 import ThemeProvider, { useStore } from "./Portfolio/theme-provider";
+import { Button, Modal } from "react-bootstrap";
 
 function Portfolio() {
     const { value, setValue } = useStore();
 
     function handleResize() {
         const isMobile = window.innerWidth <= 768;
-        console.log(window.innerWidth);
         setValue({ isMobile });
     }
 
@@ -63,8 +63,22 @@ function Portfolio() {
                 </div>
             </main>
             <footer>
-
             </footer>
+            
+            <Modal className="z-[999999]" show={value.modal.show} onHide={() => {}}>
+                <Modal.Header closeButton>
+                <Modal.Title>{value.modal.title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{value.modal.body}</Modal.Body>
+                <Modal.Footer>
+                <Button variant="primary" className="text-white" onClick={() => setValue({ modal: {...value.modal, show: false} })}>
+                    Close
+                </Button>
+                {/* <Button variant="primary" onClick={() => {}}>
+                    Save Changes
+                </Button> */}
+                </Modal.Footer>
+            </Modal>
         </ThemeProvider>
         </>
     )

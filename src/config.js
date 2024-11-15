@@ -1,5 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore'; // Import Firestore
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 
 export const SKILLS = [
     {
@@ -465,7 +465,6 @@ export const firebaseConfig = {
 };
 
 // Initialize Firebase
-// const app = firebase.initializeApp(firebaseConfig);
-// const db = firebase.firestore(); // Get a reference to the Firestore database
-
-// export { db }; // Export the Firestore instance
+export const fb_app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
+export const fb_db = getFirestore(fb_app);
