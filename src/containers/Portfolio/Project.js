@@ -22,7 +22,7 @@ function PortfolioProject(props) {
     <Tracker id={`projectstop`}
       set={0.1}
       onSuccess={() => setShow(true)}
-      onFail={() => setShow(false)}
+      // onFail={() => setShow(false)}
     >
       <animated.div style={props.id === 'bottom' ? { ...springs2 } : {}} className="clm-projects clm-fixed-hc" id={`projects${props.id}`}>
         <div className="clm-inner-container clm-container">
@@ -33,7 +33,7 @@ function PortfolioProject(props) {
             <Tracker id='proj-comps'
               set={0.1}
               onSuccess={() => setShowSkills(true)}
-              onFail={() => setShowSkills(false)}
+              // onFail={() => setShowSkills(false)}
             >
               <ul className="row">
                 {COMPANIES.map((v, k) => <li style={{ ...springs }} key={k} className="col"><a className="btn btn-primary" href="#">{v.title}.</a></li>)}
@@ -82,7 +82,7 @@ const LiComponent = ({ company, project, img, imgType, id }) => {
     <Tracker id={idKey}
       set={value.isMobile ? 0.01 : 0.1}
       onSuccess={() => setShow(true)}
-      onFail={() => setShow(false)}
+      // onFail={() => setShow(false)}
     >
       <animated.li id={idKey} style={{ ...springs }} className={`col-lg-4 col-6 col-xl-3`}>
         {project.id && (

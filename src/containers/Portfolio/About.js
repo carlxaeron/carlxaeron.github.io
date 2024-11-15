@@ -109,7 +109,7 @@ function PortfolioAbout(props) {
       <Tracker id={`about-top-skill-${i}`}
         set={0.05}
         onSuccess={() => setShow2(true)}
-        onFail={() => setShow2(false)}
+        // onFail={() => setShow2(false)}
       >
       <li key={i}>
         <h5 className="!text-[0.9rem]">{generateTitle(skill.name)}</h5>
@@ -201,7 +201,7 @@ function PortfolioAbout(props) {
     <Tracker id={`about-${props.id}`}
       set={0.1}
       onSuccess={() => setShow(true)}
-      onFail={() => setShow(false)}
+      // onFail={() => setShow(false)}
     >
       <div className="clm-about clm-fixed-hc" id={`about-${props.id}`}>
         <animated.div style={{ ...springs4 }} className="clm-inner-container clm-container">

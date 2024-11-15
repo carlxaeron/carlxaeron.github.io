@@ -1,3 +1,6 @@
+import firebase from 'firebase/app';
+import 'firebase/firestore'; // Import Firestore
+
 export const SKILLS = [
     {
         name: "Javascript (JS)",
@@ -368,9 +371,13 @@ export const EXPERIENCES = [
         "companyName": "Metropolitan Bank & Trust (Metrobank).",
         "jobTitle": "Programmer Analyst",
         "dateRange": "(Aug 2022- Present)",
-        "jobDescription": `	•	Developed and maintained banking applications, ensuring secure and efficient financial transactions.<br />
-	•	Collaborated with cross-functional teams to analyze requirements and implement technical solutions that improved system functionality.<br />
-	•	Conducted thorough testing and debugging to maintain high system reliability and minimize errors.`
+        // "jobDescription": `•	Developed and maintained banking applications, ensuring secure and efficient financial transactions.<br />•	Collaborated with cross-functional teams to analyze requirements and implement technical solutions that improved system functionality.•	Conducted thorough testing and debugging to maintain high system reliability and minimize errors. In testing we used jest, enzyme, and cypress for end to end testing. We used gitlab for version control and jira for project management. In communicating with backend if we need to get some data we used postman for API testing and mockoon for mocking the API while the backend is not yet finished. Upon developing the frontend we used reactjs and redux for state management and also if there is need to improve the the frontend design i used also a technique for pixel-perfect from desktop to mobile. We also have every day standup meeting to discuss the progress of the project and if there is any blocker we need to escalate it to the team lead and also with testers and BA.`,
+        "jobDescription": `	•	Developed and maintained banking applications, ensuring secure, efficient, and reliable financial transactions in alignment with industry standards.<br />
+	•	Collaborated with cross-functional teams, including testers and business analysts, to analyze requirements, design technical solutions, and enhance system functionality.<br />
+	•	Executed comprehensive testing and debugging to ensure system reliability and minimize errors. Utilized tools like Jest, Enzyme, and Cypress for end-to-end testing, GitLab for version control, and Jira for project management.<br />
+	•	Streamlined API integration by leveraging Postman for API testing and Mockoon for mocking APIs during development phases, enabling seamless communication with backend systems even before completion.<br />
+	•	Developed the frontend using ReactJS and Redux for efficient state management. Applied pixel-perfect techniques to achieve consistent and responsive designs across desktop and mobile platforms.<br />
+	•	Participated in daily stand-up meetings to track project progress, address blockers, and ensure alignment among team members, including testers and business analysts.`
     },
     {
         "companyLogo": "/static/images/companies/eco.jpg",
@@ -446,3 +453,19 @@ export const EXPERIENCES = [
         "jobDescription": "As a Web Developer at Vigattin Inc., I was responsible for developing and maintaining four websites using the CodeIgniter PHP framework. My role encompassed a range of tasks, including web design, coding, debugging, and implementing web security measures. I successfully built two websites from scratch and updated or enhanced additional sites, ensuring optimal performance and functionality. My work aimed at creating secure, responsive, and user-friendly websites that align with client requirements and industry standards."
     },
 ]
+
+export const firebaseConfig = {
+    apiKey: process.env.REACT_APP_apiKey,
+    authDomain: process.env.REACT_APP_authDomain,
+    projectId: process.env.REACT_APP_projectId,
+    storageBucket: process.env.REACT_APP_storageBucket,
+    messagingSenderId: process.env.REACT_APP_messagingSenderId,
+    appId: process.env.REACT_APP_appId,
+    measurementId: process.env.REACT_APP_measurementId
+};
+
+// Initialize Firebase
+// const app = firebase.initializeApp(firebaseConfig);
+// const db = firebase.firestore(); // Get a reference to the Firestore database
+
+// export { db }; // Export the Firestore instance

@@ -26,7 +26,7 @@ function PortfolioExperience(props) {
         <Tracker id={`experiences-${props.id}-${k}`}
           set={0.05}
           onSuccess={() => setShow(true)}
-          onFail={() => setShow(false)}
+          // onFail={() => setShow(false)}
         >
           <div className="col-sm-3 col-md-2 clm-com-logo clm-com-logo-light">
             <div className="clm-com-logo-cont"><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src={v.companyLogo} />
@@ -51,7 +51,7 @@ function PortfolioExperience(props) {
     <Tracker id={`experiences-top`}
       set={0.05}
       onSuccess={() => setShow(true)}
-      onFail={() => setShow(false)}
+      // onFail={() => setShow(false)}
     >
       <animated.div style={props.id === 'bottom' ? {...springs} : {opacity: 0}} className="clm-exps clm-fixed-hc bg-white" id={`experiences-${props.id}`}>
         <div className="clm-inner-container clm-container">
