@@ -10,40 +10,16 @@
 const {onRequest} = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
 const admin = require("firebase-admin");
+const { sendError, sendSuccess } = require("./helper");
 
 admin.initializeApp();
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
-
-exports.helloWorld = onRequest((request, response) => {
-  logger.info("Hello logs!", {structuredData: true});
-  response.send("Hello from Firebase!");
-});
-
-const httpResponses = ({ data, message, errCode }) => ({
-  success: {
-    status: 200,
-    message: message || "Success",
-    data: data || {}
-  },
-  error: {
-    status: 400,
-    message: message || "Error",
-    data: data || {},
-    errCode: errCode || "",
-  }
-});
-
-const sendError = ({ request, response }, data) => {
-  response.status(400).send(httpResponses(data).error);
-}
-
-const sendSuccess = ({ request, response }, data) => {
-  response.status(200).send(httpResponses(data).success);
-}
-
 exports.contact = onRequest((request, response) => {
+  // allow these https://carlxaeron.github.io, http://localhost:3000
+  response.setHeader('Access-Control-Allow-Origin', process.env.FIREBASE_DEBUG_MODE === 'true' ? '*' : 'https://carlxaeron.github.io');
+  response.setHeader('Access-Control-Allow-Methods', 'POST');
+  response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   const { name, email, message } = request.body;
 
   // Perform validation on the request body
