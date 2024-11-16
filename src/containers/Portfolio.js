@@ -22,14 +22,20 @@ function Portfolio() {
 
         window.addEventListener("resize", handleResize); // Add event listener for resize
 
+        setInterval(() => {
+            const currentTime = new Date().getTime();
+            const doneStorage = sessionStorage.getItem('done');
+            const doneTimer = doneStorage && parseInt(sessionStorage.getItem('done'));
+            if (doneTimer && doneTimer < currentTime) {
+                setValue({ done: false });
+                sessionStorage.removeItem('done');
+            }
+        }, 1000); // Set interval to check for the current time
+
         return () => {
             window.removeEventListener("resize", handleResize); // Clean up the event listener on component unmount
         };
     }, []);
-
-    useEffect(() => {
-        console.log(value);
-    }, [value]);
 
     return (
         <>

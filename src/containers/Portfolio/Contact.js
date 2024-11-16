@@ -3,6 +3,8 @@ import { fb_db } from "../../config";
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { useStore } from "./theme-provider";
+import axios from "axios";
+import { mapping } from "../../mapping";
 
 function PortfolioContact() {
     const { value, setValue } = useStore();
@@ -13,29 +15,20 @@ function PortfolioContact() {
 
         setLoading(true);
 
-        const db = fb_db;
-
-        // Access the form data
-        const name = e.target.name.value;
-        const email = e.target.email.value;
-        const message = e.target.message.value;
-
-        addDoc(collection(db, "contact"), {
-            name: name,
-            email: email,
-            message: message
-        })
-        .then(() => {
-            console.log("Form data saved successfully!");
+        axios.post(mapping.contact, {
+            name: e.target.name.value,
+            email: e.target.email.value,
+            message: e.target.message.value
+        }).then(response => {
+            console.log(response);
+            showSuccess();
+            setLoading(false);
             // Reset the form
             e.target.reset();
-
+        }).catch(error => {
+            console.error(error);
+            if(error?.response?.data?.errCode !== 'test') showFail();
             setLoading(false);
-            showSuccess();
-        })
-        .catch(error => {
-            setLoading(false);
-            console.error("Error saving form data: ", error);
         });
     }
 
@@ -43,6 +36,12 @@ function PortfolioContact() {
         // Set a timer to show the modal for 60mins
         sessionStorage.setItem('done', new Date().getTime() + 3600000);
         setValue({ done: true, modal: { show: true, title: 'Success', body: 'Message succesfully sent! I will respond to your message ASAP.' } });
+    }
+
+    const showFail = () => {
+        // Set a timer to show the modal for 10secs
+        sessionStorage.setItem('done', new Date().getTime() + 10000);
+        setValue({ modal: { show: true, title: 'Error', body: 'Message not sent. Please try again later after 10secs.' }, done: true });
     }
 
     return (

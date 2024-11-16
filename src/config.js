@@ -381,6 +381,18 @@ export const EXPERIENCES = [
 	•	Participated in daily stand-up meetings to track project progress, address blockers, and ensure alignment among team members, including testers and business analysts.`
     },
     {
+        "companyLogo": "/static/images/companies/GAD.jpeg",
+        "companyName": "GoAutoDial, Inc.",
+        "jobTitle": "Web Application Developer",
+        "dateRange": "(Jan 2022 - Present)",
+        "jobDescription": `At GoAutoDial, Inc., I spearheaded the modernization of the agent web application, which serves as a crucial tool for call center agents to efficiently dial leads. This application was initially built using jQuery and PHP.<br />
+	•	Revamped the system by transitioning to a Laravel backend and ReactJS frontend, adopting a modern technology stack for improved maintainability and scalability.<br />
+	•	Optimized the user experience by designing a more intuitive and responsive interface, ensuring seamless operation for call center agents.<br />
+	•	Enhanced the application’s performance and scalability, allowing it to handle increased workloads while maintaining reliability.<br />
+	•	Delivered significant improvements in efficiency, resulting in heightened user satisfaction and increased productivity for call center operations.<br />
+    	•	Designed and implemented a WHMCS provisioning module to streamline cloud service provisioning and management, enhancing automation and user experience.`
+    },
+    {
         "companyLogo": "/static/images/companies/eco.jpg",
         "companyName": "Ecoshift Corp.",
         "jobTitle": "Web App Developer",
@@ -455,6 +467,7 @@ export const EXPERIENCES = [
     },
 ]
 
+// FIREBASE CONFIG
 export const firebaseConfig = {
     apiKey: process.env.REACT_APP_apiKey,
     authDomain: process.env.REACT_APP_authDomain,
@@ -464,7 +477,6 @@ export const firebaseConfig = {
     appId: process.env.REACT_APP_appId,
     measurementId: process.env.REACT_APP_measurementId
 };
-
 // Initialize Firebase
 export const fb_app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics (fb_app);
