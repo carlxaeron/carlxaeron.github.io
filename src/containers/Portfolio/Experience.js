@@ -1,9 +1,10 @@
 import { useSpring, animated } from "@react-spring/web";
 import Img from "../../components/Img";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useStore } from "./theme-provider";
 import Tracker from "../../components/Tracker";
 import { EXPERIENCES } from "../../config";
+import { Overlay, Tooltip } from "react-bootstrap";
 
 function PortfolioExperience(props) {
   const [show, setShow] = useState(false);
@@ -16,17 +17,50 @@ function PortfolioExperience(props) {
 
   const ExperiencesLi = ({ v, k }) => {
     const [show, setShow] = useState(false);
+    const [hideExtra, setHideExtra2] = useState(null);
+    const [showTooltip, setShowTooltip] = useState(false);
+    const setHideExtra = (v, conf = {}) => {
+      if (!value.isMobile || conf.force) {
+        setHideExtra2(v);
+      }
+    }
+    const [h, setH] = useState('0px');
     const springs = useSpring({
       from: { opacity: 0, transform: 'scale(0.8)' },
       to: { opacity: show ? 1 : 0, transform: `scale(${show ? '1' : '0.8'})` },
     })
+    const hideSprings = useSpring({
+      from: { maxHeight: '87px' },
+      to: { maxHeight: hideExtra ? '87px' : h }
+    });
+
+    const expRef = useRef(null);
+    const expRefBtn = useRef(null);
+
+    useEffect(() => {
+      if (expRef.current) {
+        console.log(expRef.current.clientHeight, k);
+        if (expRef.current.clientHeight > 90) {
+          setHideExtra(true, { force: true });
+          const newH = `${expRef.current.clientHeight}px`;
+          setH(newH);
+          expRef.current.className = `${expRef.current.className} overflow-hidden`;
+        }
+      }
+    }, [])
 
     return (
       <animated.li id={`experiences-${props.id}-${k}`} style={props.id === 'bottom' ? {...springs} : {opacity: 0}}  className="row">
         <Tracker id={`experiences-${props.id}-${k}`}
           set={0.05}
-          onSuccess={() => setShow(true)}
-          // onFail={() => setShow(false)}
+          onSuccess={() => {
+            setShow(true);
+            setShowTooltip(false);
+          }}
+          onFail={() => {
+            // setShow(false)
+            setShowTooltip(false);
+          }}
         >
           <div className="col-sm-3 col-md-2 clm-com-logo clm-com-logo-light">
             <div className="clm-com-logo-cont"><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src={v.companyLogo} />
@@ -40,7 +74,27 @@ function PortfolioExperience(props) {
             <div className="clm-com-job-title">
               <h4>{v.jobTitle}</h4>
             </div>
-            <div className="clm-com-detail" dangerouslySetInnerHTML={{ __html: v.jobDescription }} />
+            <animated.div 
+              style={hideExtra === null ? {} : {...hideSprings}}
+              ref={expRef} 
+              className='clm-com-detail'>
+              <div dangerouslySetInnerHTML={{ __html: v.jobDescription }}></div>
+            </animated.div>
+            { props.id === 'bottom' && (
+              <Overlay target={expRefBtn.current} show={showTooltip} placement="bottom" rootClose={true} rootCloseEvent='click'>
+                {(props) => (
+                  <Tooltip className="z-[999999]" onClick={() => setShowTooltip(false)} id="overlay-example" {...props}>
+                    <span dangerouslySetInnerHTML={{ __html: v.jobDescription }}></span>
+                  </Tooltip>
+                )}
+              </Overlay>
+            ) }
+            { hideExtra && <button ref={expRefBtn} className="btn btn-primary text-white" onClick={() => {
+              setHideExtra(false);
+              if (value.isMobile) {
+                setShowTooltip(true);
+              }
+            }}>View More</button> }
           </div>
         </Tracker>
       </animated.li>

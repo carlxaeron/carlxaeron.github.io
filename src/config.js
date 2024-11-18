@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { getAnalytics } from 'firebase/analytics';
+import { getAnalytics, logEvent } from 'firebase/analytics';
 
 export const SKILLS = [
     {
@@ -480,4 +480,5 @@ export const firebaseConfig = {
 // Initialize Firebase
 export const fb_app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics (fb_app);
+logEvent(analytics, 'init_app');
 export const fb_db = getFirestore(fb_app);

@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "./theme-context";
 import { useSpring, animated } from "@react-spring/web";
 import Tracker from "./../../components/Tracker";
-import { PROJECT_DESCRIPTION, PROJECTS_DESCRIPTION_AI, SKILLS } from "./../../config";
+import { PROJECTS_DESCRIPTION_AI, SKILLS } from "./../../config";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngular, faBootstrap, faCss3, faFlutter, faGit, faGulp, faHtml5, faJoomla, faJs, faLaravel, faLess, faNode, faNodeJs, faNpm, faPhp, faReact, faVuejs, faWordpress } from '@fortawesome/free-brands-svg-icons';
-import { faMobile, faMobileAlt } from "@fortawesome/free-solid-svg-icons";
+import { faMobileAlt } from "@fortawesome/free-solid-svg-icons";
 
 function PortfolioAbout(props) {
   const themeContext = useContext(ThemeContext);
@@ -200,7 +200,9 @@ function PortfolioAbout(props) {
   return (
     <Tracker id={`about-${props.id}`}
       set={0.1}
-      onSuccess={() => setShow(true)}
+      onSuccess={() => {
+        setShow(true);
+      }}
       // onFail={() => setShow(false)}
     >
       <div className="clm-about clm-fixed-hc" id={`about-${props.id}`}>

@@ -15,10 +15,24 @@ const { sendError, sendSuccess } = require("./helper");
 admin.initializeApp();
 
 exports.contact = onRequest((request, response) => {
-  // allow these https://carlxaeron.github.io, http://localhost:3000
-  response.setHeader('Access-Control-Allow-Origin', process.env.FIREBASE_DEBUG_MODE === 'true' ? '*' : 'https://carlxaeron.github.io');
-  response.setHeader('Access-Control-Allow-Methods', 'POST');
+  // Allow these origins
+  const allowedOrigins = ['https://carlxaeron.github.io', 'http://localhost:3000'];
+  const origin = request.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    response.setHeader('Access-Control-Allow-Origin', origin);
+  } else {
+    response.setHeader('Access-Control-Allow-Origin', '*');
+  }
+
+  response.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight requests
+  if (request.method === 'OPTIONS') {
+    response.status(204).send('');
+    return;
+  }
 
   const { name, email, message } = request.body;
 
@@ -28,11 +42,27 @@ exports.contact = onRequest((request, response) => {
     return;
   }
 
+  // Save contact data to Firestore
   const contactRef = admin.firestore().collection("contact").doc();
-  contactRef.set({ name, email, message })
+  contactRef.set({ name, email, message, date: new Date() })
   .then(() => {
     logger.info("Contact data written to Firestore", { structuredData: true });
-    sendSuccess({ response }, { message: "Contact request received" });
+
+    // Send email to admin
+    admin.firestore().collection('mail').add({
+      to: 'carlxaeron09@gmail.com',
+      message: {
+        subject: 'Hello from Firebase!',
+        html: 'This is an <code>HTML</code> email body.',
+      },
+    }).then(() => {
+      logger.info("Email sent to admin", { structuredData: true });
+
+      // Send success response to the client
+      sendSuccess({ response }, { message: "Contact request received" });
+    }).catch((error) => {
+      logger.error("Error sending email to admin", { structuredData: true, error });
+    });
   })
   .catch((error) => {
     // log the error to the console and also put the error value in the structured data
