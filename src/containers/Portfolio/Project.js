@@ -165,9 +165,7 @@ const LiComponent = (props) => {
           </div>
         )}
         {!project.id && (
-          <div className="clm-p-s-cont shadow"
-          // style={{ backgroundImage: 'url("/static/images/sites/undefined")' }}
-          >
+          <div className="clm-p-s-cont shadow">
             <h5>No Preview</h5>
           </div>
         )}
