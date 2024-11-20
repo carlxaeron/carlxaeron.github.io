@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { logEvent } from "../config";
 
 export default function Tracker(props) {
     const [show, setShow] = useState(false);
@@ -30,7 +31,11 @@ export default function Tracker(props) {
     };
 
     useEffect(() => {
-        if(props.onSuccess && show === true) props.onSuccess(show);
+        if(props.onSuccess && show === true) {
+          // add analytics here
+          logEvent({ event: 'tracker', option: { id: props.id } });
+          props.onSuccess(show);
+        }
         if(props.onFail && show === false) props.onFail(show);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [show]);
