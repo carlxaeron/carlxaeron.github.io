@@ -217,6 +217,17 @@ for performance. </p>
 
 export const COMPANIES = [
     {
+        id: 'gad',
+        title: 'GoAutoDial Inc',
+        projects: [
+            {
+                id: 'agent',
+                imgType: 'png',
+                title: 'Agent Web Application',
+            },
+        ],
+    },
+    {
         id: 'eco',
         projects: [
             {
