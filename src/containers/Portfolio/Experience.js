@@ -39,7 +39,6 @@ function PortfolioExperience(props) {
 
     useEffect(() => {
       if (expRef.current) {
-        console.log(expRef.current.clientHeight, k);
         if (expRef.current.clientHeight > 90) {
           setHideExtra(true, { force: true });
           const newH = `${expRef.current.clientHeight}px`;

@@ -37,6 +37,10 @@ function Portfolio() {
         };
     }, []);
 
+    const closeModal = () => {
+        setValue({ modal: { ...value.modal, show: false } });
+    }
+
     return (
         <>
         <ThemeProvider>
@@ -71,13 +75,13 @@ function Portfolio() {
             <footer>
             </footer>
             
-            <Modal className="z-[999999]" show={value.modal.show} onHide={() => {}}>
+            <Modal backdrop='static' centered className="z-[999999]" show={value.modal.show} onHide={closeModal} fullscreen={value.modal.config?.fullscreen}>
                 <Modal.Header closeButton>
                 <Modal.Title>{value.modal.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{value.modal.body}</Modal.Body>
                 <Modal.Footer>
-                <Button variant="primary" className="text-white" onClick={() => setValue({ modal: {...value.modal, show: false} })}>
+                <Button variant="primary" className="text-white" onClick={closeModal}>
                     Close
                 </Button>
                 {/* <Button variant="primary" onClick={() => {}}>

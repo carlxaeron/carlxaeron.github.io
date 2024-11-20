@@ -9,9 +9,16 @@ import { mapping } from "../../mapping";
 function PortfolioContact() {
     const { value, setValue } = useStore();
     const [loading, setLoading] = useState(false);
+    const isDemo = true;
+    const isRequired = !isDemo;
 
     const handleSubmit = e => {
         e.preventDefault();
+
+        if(isDemo) {
+            showSuccess();
+            return;
+        }
 
         setLoading(true);
 
@@ -34,13 +41,13 @@ function PortfolioContact() {
 
     const showSuccess = () => {
         // Set a timer to show the modal for 60mins
-        sessionStorage.setItem('done', new Date().getTime() + 3600000);
-        setValue({ done: true, modal: { show: true, title: 'Success', body: 'Message succesfully sent! I will respond to your message ASAP.' } });
+        if(!isDemo) sessionStorage.setItem('done', new Date().getTime() + 3600000);
+        setValue({ done: !isDemo, modal: { show: true, title: 'Success', body: 'Message succesfully sent! I will respond to your message ASAP.' } });
     }
 
     const showFail = () => {
         // Set a timer to show the modal for 10secs
-        sessionStorage.setItem('done', new Date().getTime() + 10000);
+        if(!isDemo) sessionStorage.setItem('done', new Date().getTime() + 10000);
         setValue({ modal: { show: true, title: 'Error', body: 'Message not sent. Please try again later after 10secs.' }, done: true });
     }
 
@@ -56,19 +63,19 @@ function PortfolioContact() {
                             <Form.Label>Name</Form.Label>
                             <Form.Control 
                                  disabled={loading || value.done}
-                                size="md" required type="text" placeholder="Enter your name" />
+                                size="md" required={isRequired} type="text" placeholder="Enter your name" />
                         </Form.Group>
                         <Form.Group controlId="email">
                             <Form.Label>Email</Form.Label>
                             <Form.Control 
                                  disabled={loading || value.done}
-                                size="md" required type="email" placeholder="Enter your email" />
+                                size="md" required={isRequired} type="email" placeholder="Enter your email" />
                         </Form.Group>
                         <Form.Group controlId="message">
                             <Form.Label>Message</Form.Label>
                             <Form.Control 
                                  disabled={loading || value.done}
-                                size="md" required as="textarea" placeholder="Enter your message" />
+                                size="md" required={isRequired} as="textarea" placeholder="Enter your message" />
                         </Form.Group>
                         <div className="flex justify-content-center">
                             <Button disabled={loading || value.done} className="text-white mt-3" size="lg" variant="primary" type="submit">

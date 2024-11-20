@@ -230,29 +230,36 @@ export const COMPANIES = [
         projects: [
             {
                 id: 'sc',
+                title: 'Star Cinema',
             },
             {
                 id: 'kty',
                 imgType: 'png',
+                title: 'Kapamilya Thank You',
             },
             {
                 id: 'push',
+                title: 'Push Redesign',
             },
             {
                 id: 'corp',
                 imgType: 'png',
+                title: 'Corporate',
             },
             {
                 id: 'careers',
                 imgType: 'png',
+                title: 'Careers',
             },
             {
                 id: 'anc',
                 imgType: 'png',
+                title: 'ANC Form',
             },
             {
                 id: 'kaiaq',
                 imgType: 'png',
+                title: 'KAIAQ Admin Template',
             },
         ],
         title: 'ABS-CBN Corp',
@@ -482,3 +489,4 @@ export const fb_app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics (fb_app);
 logEvent(analytics, 'init_app');
 export const fb_db = getFirestore(fb_app);
+export { logEvent };

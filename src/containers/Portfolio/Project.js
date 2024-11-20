@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Tracker from "../../components/Tracker";
-import { COMPANIES } from "../../config";
+import { analytics, COMPANIES, logEvent } from "../../config";
 import { useSpring, animated } from "@react-spring/web";
 import { useStore } from "./theme-provider";
 
@@ -22,7 +22,7 @@ function PortfolioProject(props) {
     <Tracker id={`projectstop`}
       set={0.1}
       onSuccess={() => setShow(true)}
-      // onFail={() => setShow(false)}
+    // onFail={() => setShow(false)}
     >
       <animated.div style={props.id === 'bottom' ? { ...springs2 } : {}} className="clm-projects clm-fixed-hc" id={`projects${props.id}`}>
         <div className="clm-inner-container clm-container">
@@ -33,7 +33,7 @@ function PortfolioProject(props) {
             <Tracker id='proj-comps'
               set={0.1}
               onSuccess={() => setShowSkills(true)}
-              // onFail={() => setShowSkills(false)}
+            // onFail={() => setShowSkills(false)}
             >
               <ul className="row">
                 {COMPANIES.map((v, k) => <li style={{ ...springs }} key={k} className="col"><a className="btn btn-primary" href="#">{v.title}.</a></li>)}
@@ -67,7 +67,80 @@ function PortfolioProject(props) {
 
 export default PortfolioProject;
 
-const LiComponent = ({ company, project, img, imgType, id }) => {
+const compileValue = (value) => {
+  const img = `/static/images/sites/${value.project.id}.${value.project.imgType || 'jpg'}`;
+  return <div className="row">
+    <div className={`${value.html && 'col-md-7'}`}>
+      <a href={img} target="_blank" rel="noreferrer">
+        <img className="clm-img" src={img} alt={value.alt || img} />
+      </a>
+    </div>
+    {value.html && <div className="col-md-5 clm-modal-details">{value.html}</div>}
+  </div>;
+}
+
+const getContents = (props) => {
+  let content = false;
+  if (props) switch (props.project.id) {
+    case 'eco':
+      content = compileValue({
+        ...props,
+        html: (<><h5>Description</h5>
+          <p>Made in wordpress and woocommerce plugin. My job is to maintain the codes, enhance, debug the site. Make a custom plugin to work in woocommerce and additional features. Fix different bugs on design/layout. Fix website to make it more SEO friendly.</p>
+          <h5>Tags</h5>
+          <ul className="clm-modal-tools row">
+            <li>#wordpress</li>
+            <li>#woocommerce</li>
+            <li>#php</li>
+            <li>#html</li>
+            <li>#css</li>
+            <li>#js</li>
+            <li>#jquery</li>
+            <li>#pug</li>
+            <li>#nodejs</li>
+            <li>#seo</li>
+            <li>#debug</li>
+            <li>#enhancement</li>
+            <li>#sass</li>
+            <li>#jquery</li>
+            <li>#jade</li>
+            <li>#plugin</li>
+            <li>#wordpressplugin</li>
+            <li>#admin</li>
+            <li>#mobileresponsive</li>
+            <li>#angularjs</li>
+          </ul></>)
+      });
+      break;
+    default:
+      content = compileValue({
+        ...props, html: false
+      });
+      break;
+  };
+
+  // Log the event
+  if (content) logEvent(analytics, 'view_project', { item_id: props.project.id, item_name: props.project.title });
+
+  return content;
+}
+
+const LiComponent = (props) => {
+  const { company, project, img, imgType, id } = props;
+  const { setValue } = useStore();
+  const handleClickCompany = (e) => {
+    if (getContents(props)) setValue({
+      modal: {
+        show: true,
+        body: getContents(props),
+        title: `${company.title}${project.title ? ` - ${project.title}` : ''}`,
+        config: {
+          fullscreen: true,
+        }
+      }
+    });
+  }
+
   const { value } = useStore();
   const [show, setShow] = useState(false);
   const idKey = `li-component-${id}`;
@@ -82,11 +155,11 @@ const LiComponent = ({ company, project, img, imgType, id }) => {
     <Tracker id={idKey}
       set={value.isMobile ? 0.01 : 0.1}
       onSuccess={() => setShow(true)}
-      // onFail={() => setShow(false)}
+    // onFail={() => setShow(false)}
     >
       <animated.li id={idKey} style={{ ...springs }} className={`col-lg-4 col-6 col-xl-3`}>
         {project.id && (
-          <div className="clm-p-s-cont shadow" style={{ backgroundImage: `url("${img}")` }}>
+          <div onClick={e => handleClickCompany(e, props)} className="clm-p-s-cont shadow" style={{ backgroundImage: `url("${img}")` }}>
             <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src={`${img}`} alt={`${project.id}.${imgType}`} />
           </div>
         )}
