@@ -9,7 +9,7 @@ import { mapping } from "../../mapping";
 function PortfolioContact() {
     const { value, setValue } = useStore();
     const [loading, setLoading] = useState(false);
-    const isDemo = true;
+    const isDemo = process.env.NODE_ENV === 'development';
     const isRequired = !isDemo;
 
     const handleSubmit = e => {
