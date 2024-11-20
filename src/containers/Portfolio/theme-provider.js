@@ -16,6 +16,7 @@ const useStore = create((set) => ({
   value: {
     env: defaultEnv,
     isMobile: (window?.innerWidth <= 768) || false,
+    width: window?.innerWidth || 0,
     modal: modalDefault,
     done: doneTimer && doneTimer > new Date().getTime(),
   },

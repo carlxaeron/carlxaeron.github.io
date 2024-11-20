@@ -14,7 +14,7 @@ function Portfolio() {
 
     function handleResize() {
         const isMobile = window.innerWidth <= 768;
-        setValue({ isMobile });
+        setValue({ isMobile, width: window.innerWidth });
     }
 
     useEffect(() => {
@@ -75,7 +75,9 @@ function Portfolio() {
             <footer>
             </footer>
             
-            <Modal backdrop='static' centered className="z-[999999]" show={value.modal.show} onHide={closeModal} fullscreen={value.modal.config?.fullscreen}>
+            <Modal backdrop='static' centered className="z-[999999]" show={value.modal.show} onHide={closeModal} 
+                size={value.modal.config?.size}
+                fullscreen={value.modal.config?.fullscreen}>
                 <Modal.Header closeButton>
                 <Modal.Title>{value.modal.title}</Modal.Title>
                 </Modal.Header>

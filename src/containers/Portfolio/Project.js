@@ -135,7 +135,8 @@ const LiComponent = (props) => {
         body: getContents(props),
         title: `${company.title}${project.title ? ` - ${project.title}` : ''}`,
         config: {
-          fullscreen: true,
+          fullscreen: value.width > 1000 ? false : true,
+          size: value.width > 1000 ? 'xl' : false,
         }
       }
     });
@@ -157,9 +158,9 @@ const LiComponent = (props) => {
       onSuccess={() => setShow(true)}
     // onFail={() => setShow(false)}
     >
-      <animated.li id={idKey} style={{ ...springs }} className={`col-lg-4 col-6 col-xl-3`}>
+      <animated.li id={idKey} style={{ ...springs }} className='col-lg-4 col-6 col-xl-3'>
         {project.id && (
-          <div onClick={e => handleClickCompany(e, props)} className="clm-p-s-cont shadow" style={{ backgroundImage: `url("${img}")` }}>
+          <div onClick={e => handleClickCompany(e, props)} className="cursor-pointer clm-p-s-cont shadow" style={{ backgroundImage: `url("${img}")` }}>
             <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src={`${img}`} alt={`${project.id}.${imgType}`} />
           </div>
         )}
