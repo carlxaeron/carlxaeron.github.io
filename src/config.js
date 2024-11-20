@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { getAnalytics, logEvent } from 'firebase/analytics';
+import { getAnalytics, logEvent as LE } from 'firebase/analytics';
 
 export const SKILLS = [
     {
@@ -487,6 +487,9 @@ export const firebaseConfig = {
 // Initialize Firebase
 export const fb_app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics (fb_app);
-logEvent(analytics, 'init_app');
+const logEvent = ({ anal, event, option = {} }) => {
+    if (process.env.NODE_ENV !== 'development') LE(anal || analytics, event, option);
+};
+logEvent({event: 'init_app'});
 export const fb_db = getFirestore(fb_app);
 export { logEvent };

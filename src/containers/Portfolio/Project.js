@@ -120,9 +120,9 @@ const getContents = (props) => {
   };
 
   // Log the event
-  if (content) logEvent(analytics, 'view_project', { item_id: props.project.id, item_name: props.project.title });
+  if (content) logEvent({ event: 'view_project', option: { item_id: props.project.id, item_name: props.project.title } });
 
-  return content;
+return content;
 }
 
 const LiComponent = (props) => {
