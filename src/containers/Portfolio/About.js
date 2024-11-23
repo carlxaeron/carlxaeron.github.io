@@ -7,6 +7,39 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngular, faBootstrap, faCss3, faFlutter, faGit, faGulp, faHtml5, faJoomla, faJs, faLaravel, faLess, faNode, faNodeJs, faNpm, faPhp, faReact, faVuejs, faWordpress } from '@fortawesome/free-brands-svg-icons';
 import { faMobileAlt } from "@fortawesome/free-solid-svg-icons";
 
+function convertDateStringToYears(dateString) {
+  // Parse the date string
+  const [month, year] = dateString.split(' ');
+  const date = new Date(`${month} 1, ${year}`);
+  
+  // Get the current date
+  const currentDate = new Date();
+  
+  // Calculate the difference in years
+  let yearsDifference = currentDate.getFullYear() - date.getFullYear();
+  
+  // Adjust for the month difference
+  const monthsDifference = currentDate.getMonth() - date.getMonth();
+  if (monthsDifference < 0 || (monthsDifference === 0 && currentDate.getDate() < date.getDate())) {
+    yearsDifference--;
+  }
+  
+  // Calculate the difference in days
+  const timeDifference = currentDate - date;
+  const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  
+  // Calculate the difference in hours
+  const hoursDifference = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  
+  // Calculate the difference in minutes
+  const minutesDifference = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+  
+  // Calculate the difference in seconds
+  const secondsDifference = Math.floor((timeDifference % (1000 * 60)) / 1000);
+  
+  return `${yearsDifference} years (${daysDifference} days ${hoursDifference} hrs ${minutesDifference} mins ${secondsDifference} secs)`;
+}
+
 function PortfolioAbout(props) {
   const themeContext = useContext(ThemeContext);
   const [show, setShow] = useState(false);
@@ -228,7 +261,7 @@ function PortfolioAbout(props) {
               {themeContext.value.env !== 'dev' && (<animated.div style={{ ...springs3 }}>
                 <h6>I'm Carl Louis Manuel</h6>
                 {/* <p>&ldquo;{PROJECT_DESCRIPTION}&rdquo;</p> */}
-                {PROJECTS_DESCRIPTION_AI}
+                <Description />
               </animated.div>)}
             </div>
             {/* <Tracker id={`about-exp-${props.id}`}
@@ -245,6 +278,23 @@ function PortfolioAbout(props) {
       </div>
     </Tracker>
   )
+}
+
+function Description() {
+  const dateString = "June 2012";
+  const [time, setTime] = useState(convertDateStringToYears(dateString));
+
+  useEffect(() => {
+    setInterval(() => {
+      setTime(convertDateStringToYears(dateString));
+    }, 1000);
+  }, []);
+
+  return <>
+    {PROJECTS_DESCRIPTION_AI({
+      time
+    })}
+  </>
 }
 
 export default PortfolioAbout;
