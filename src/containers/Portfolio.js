@@ -8,6 +8,7 @@ import PortfolioHome from "./Portfolio/Home";
 import PortfolioProject from "./Portfolio/Project";
 import ThemeProvider, { useStore } from "./Portfolio/theme-provider";
 import { Button, Modal } from "react-bootstrap";
+import ChatAgent from "../components/ChatAgent";
 
 function Portfolio() {
     const { value, setValue } = useStore();
@@ -91,6 +92,8 @@ function Portfolio() {
                 </Button> */}
                 </Modal.Footer>
             </Modal>
+
+            <ChatAgent />
         </ThemeProvider>
         </>
     )

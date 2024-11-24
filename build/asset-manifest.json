@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.b115d819.css",
-    "main.js": "/static/js/main.11314233.js",
+    "main.css": "/static/css/main.797cbe5e.css",
+    "main.js": "/static/js/main.7d315068.js",
     "static/js/453.ed3810f9.chunk.js": "/static/js/453.ed3810f9.chunk.js",
     "static/media/profile3.jpg": "/static/media/profile3.35634b7206aeb790e4e0.jpg",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
@@ -17,12 +17,12 @@
     "static/media/AgencyFB-Bold.woff2": "/static/media/AgencyFB-Bold.3d243b570fdc31dd04fb.woff2",
     "static/media/about-bg.png": "/static/media/about-bg.5792e0a1b000bba9019c.png",
     "index.html": "/index.html",
-    "main.b115d819.css.map": "/static/css/main.b115d819.css.map",
-    "main.11314233.js.map": "/static/js/main.11314233.js.map",
+    "main.797cbe5e.css.map": "/static/css/main.797cbe5e.css.map",
+    "main.7d315068.js.map": "/static/js/main.7d315068.js.map",
     "453.ed3810f9.chunk.js.map": "/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b115d819.css",
-    "static/js/main.11314233.js"
+    "static/css/main.797cbe5e.css",
+    "static/js/main.7d315068.js"
   ]
 }
