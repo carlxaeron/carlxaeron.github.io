@@ -55,6 +55,7 @@ const ChatAgent = () => {
       const botMessage = { role: 'assistant', content: response.data.choices[0].message.content.trim() };
       setMessages([...messages, newMessage, botMessage]);
       setLoading(false);
+      logEvent({ event: 'chatai', option: { action: 'response', message: botMessage.content } });
     } catch (error) {
       console.error('Error sending message:', error);
       setMessages([...messages, { role: 'assistant', content: 'Sorry, I am unable to process your request at the moment.' }]);
