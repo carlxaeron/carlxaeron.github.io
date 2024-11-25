@@ -34,12 +34,12 @@ const ChatAgent = () => {
       const data = {
         // model: 'gpt-3.5-turbo',
         messages: [
-          { role: 'assistant', content: JSON.stringify({
-            ...SKILLS,
-            'DESCRIPTION': PROJECTS_DESCRIPTION_AI({time: '12 years'}),
-            ...COMPANIES,
-            ...EXPERIENCES,
-          }) },
+          // { role: 'assistant', content: JSON.stringify({
+          //   ...SKILLS,
+          //   'DESCRIPTION': PROJECTS_DESCRIPTION_AI({time: '12 years'}),
+          //   ...COMPANIES,
+          //   ...EXPERIENCES,
+          // }) },
           ...messages,
           newMessage,
         ],
