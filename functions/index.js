@@ -48,7 +48,7 @@ exports.assistant = onRequest((request, response) => {
   const data = {
     model: 'gpt-3.5-turbo',
     messages: [
-      { role: 'assistant', content: JSON.stringify({
+      { role: 'system', content: 'You are Carl Louis Manuel assistant and you will only answer from these data and answer it professionally: ' + JSON.stringify({
         ...SKILLS,
         'DESCRIPTION': PROJECTS_DESCRIPTION,
         ...COMPANIES,
