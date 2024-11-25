@@ -58,28 +58,13 @@ exports.assistant = onRequest((request, response) => {
     ],
   };
 
-  // // Send message to AI assistant
-  // axios.post('https://api.openai.com/v1/chat/completions', data, {
-  //   headers: {
-  //     'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-  //     'Content-Type': 'application/json',
-  //   },
-  // })
-  // .then((response2) => {
-  //   logger.info("AI assistant response", { structuredData: true, response: response2.data });
-  //   // Send success response to the client
-  //   sendSuccess({ response }, { message: "Contact request received", data: response2.data.choices });
-  // });
-
-  // ...
-
   // Send message to AI assistant
   const options = {
     hostname: 'api.openai.com',
     path: '/v1/chat/completions',
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${process.env.OPENAI_API_KEYs}`,
+      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
       'Content-Type': 'application/json',
     },
   };
