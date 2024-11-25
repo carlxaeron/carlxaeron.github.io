@@ -79,7 +79,7 @@ exports.assistant = onRequest((request, response) => {
     path: '/v1/chat/completions',
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+      'Authorization': `Bearer ${process.env.OPENAI_API_KEYs}`,
       'Content-Type': 'application/json',
     },
   };
