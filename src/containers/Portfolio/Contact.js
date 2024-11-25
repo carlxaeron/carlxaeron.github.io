@@ -15,10 +15,10 @@ function PortfolioContact() {
     const handleSubmit = e => {
         e.preventDefault();
 
-        if(isDemo) {
-            showSuccess();
-            return;
-        }
+        // if(isDemo) {
+        //     showSuccess();
+        //     return;
+        // }
 
         setLoading(true);
 

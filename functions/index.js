@@ -11,52 +11,52 @@ const {onRequest} = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
 const admin = require("firebase-admin");
 const { sendError, sendSuccess } = require("./helper");
-const { default: axios } = require("axios");
 const { SKILLS, PROJECTS_DESCRIPTION, COMPANIES, EXPERIENCES } = require("./external-config");
+const https = require('https');
 
 admin.initializeApp();
 
 // add new function for API for my AI assistant
-// exports.assistant = onRequest((request, response) => {
-  // // Allow these origins
-  // const allowedOrigins = ['https://carlxaeron.github.io', 'http://localhost:3000'];
-  // const origin = request.headers.origin;
+exports.assistant = onRequest((request, response) => {
+  // Allow these origins
+  const allowedOrigins = ['https://carlxaeron.github.io', 'http://localhost:3000'];
+  const origin = request.headers.origin;
 
-  // if (allowedOrigins.includes(origin)) {
-  //   response.setHeader('Access-Control-Allow-Origin', origin);
-  // } else {
-  //   response.setHeader('Access-Control-Allow-Origin', '*');
-  // }
+  if (allowedOrigins.includes(origin)) {
+    response.setHeader('Access-Control-Allow-Origin', origin);
+  } else {
+    response.setHeader('Access-Control-Allow-Origin', '*');
+  }
 
-  // response.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  // response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  response.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // // Handle preflight requests
-  // if (request.method === 'OPTIONS') {
-  //   response.status(204).send('');
-  //   return;
-  // }
+  // Handle preflight requests
+  if (request.method === 'OPTIONS') {
+    response.status(204).send('');
+    return;
+  }
 
-  // const { messages } = request.body;
+  const { messages } = request.body;
 
-  // // Perform validation on the request body
-  // if (!messages) {
-  //   sendError({ response }, { message: "Missing required fields" });
-  //   return;
-  // }
+  // Perform validation on the request body
+  if (!messages) {
+    sendError({ response }, { message: "Missing required fields" });
+    return;
+  }
 
-  // const data = {
-  //   model: 'gpt-3.5-turbo',
-  //   messages: [
-  //     { role: 'assistant', content: JSON.stringify({
-  //       ...SKILLS,
-  //       'DESCRIPTION': PROJECTS_DESCRIPTION,
-  //       ...COMPANIES,
-  //       ...EXPERIENCES,
-  //     }) },
-  //     ...messages,
-  //   ],
-  // };
+  const data = {
+    model: 'gpt-3.5-turbo',
+    messages: [
+      { role: 'assistant', content: JSON.stringify({
+        ...SKILLS,
+        'DESCRIPTION': PROJECTS_DESCRIPTION,
+        ...COMPANIES,
+        ...EXPERIENCES,
+      }) },
+      ...messages,
+    ],
+  };
 
   // // Send message to AI assistant
   // axios.post('https://api.openai.com/v1/chat/completions', data, {
@@ -71,8 +71,49 @@ admin.initializeApp();
   //   sendSuccess({ response }, { message: "Contact request received", data: response2.data.choices });
   // });
 
-//   sendError({ response }, { message: "AI assistant is disabled" });
-// });
+  // ...
+
+  // Send message to AI assistant
+  const options = {
+    hostname: 'api.openai.com',
+    path: '/v1/chat/completions',
+    method: 'POST',
+    headers: {
+      // 'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+      'Authorization': `Bearer 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`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const req = https.request(options, (res) => {
+    let data = '';
+
+    res.on('data', (chunk) => {
+      data += chunk;
+    });
+
+    res.on('end', () => {
+      const json = JSON.parse(data);
+
+      if(json.choices) {
+        logger.info("AI assistant response", { structuredData: true, response: json });
+        // Send success response to the client
+        sendSuccess({ response }, { message: "", data: json.choices });
+      } else {
+        logger.error("Error sending request to AI assistant", { structuredData: true, error: json });
+        sendError({ response }, { message: "Error sending request to AI assistant" });
+      }
+    });
+  });
+
+  req.on('error', (error) => {
+    logger.error("Error sending request to AI assistant", { structuredData: true, error });
+    sendError({ response }, { message: "Error sending request to AI assistant" });
+  });
+
+  req.write(JSON.stringify(data));
+  req.end();
+});
 
 exports.contact = onRequest((request, response) => {
   // Allow these origins
