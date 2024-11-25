@@ -1,0 +1,1 @@
+/Users/carllouismanuel/CARL MANUEL/DEV/GAD/carlxaeron.github.io/config.js

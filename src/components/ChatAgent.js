@@ -4,6 +4,7 @@ import { Button, Form, Modal, Stack } from 'react-bootstrap';
 import { COMPANIES, EXPERIENCES, logEvent, PROJECTS_DESCRIPTION_AI, SKILLS } from '../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
+import { mapping } from '../mapping';
 
 const ChatAgent = () => {
   const [messages, setMessages] = useState([
@@ -31,7 +32,7 @@ const ChatAgent = () => {
 
     try {
       const data = {
-        model: 'gpt-3.5-turbo',
+        // model: 'gpt-3.5-turbo',
         messages: [
           { role: 'assistant', content: JSON.stringify({
             ...SKILLS,
@@ -43,16 +44,10 @@ const ChatAgent = () => {
           newMessage,
         ],
       };
-      const config = {
-        headers: {
-          'Authorization': `Bearer ${process.env.REACT_APP_openaikey}`,
-          'Content-Type': 'application/json',
-        },
-      };
 
-      const response = await axios.post('https://api.openai.com/v1/chat/completions', data, config);
+      const response = await axios.post(mapping.assistant, data);
 
-      const botMessage = { role: 'assistant', content: response.data.choices[0].message.content.trim() };
+      const botMessage = { role: 'assistant', content: response.data.data[0].message.content.trim() };
       setMessages([...messages, newMessage, botMessage]);
       setLoading(false);
       logEvent({ event: 'chatai', option: { action: 'response', message: botMessage.content } });
@@ -64,58 +59,6 @@ const ChatAgent = () => {
     }
 
     setInput('');
-  };
-
-  const generatePrompt = (messages) => {
-    const portfolioContent = `
-      Carl Louis Manuel
-      Hello, I'm a Fullstack Web / App Developer
-      I am a Web Developer who seeks challenging web development job.
-      ABOUT
-      I'm Carl Louis Manuel
-      “I am a fullstack web developer working for over 12 years since 2012, I am mainly focused on web development using HTML, CSS, JS (AngularJS, VueJS, JQuery), PHP/MySQL - (XAMPP, WAMP, LAMP). I build website from scratch using any top frameworks such as Laravel, Codeigniter, and Zend on any development environment with support of Linux command or local development environment and my code is up to the current standards, secure, and safe from SQL injections or similar hacking attempts with understanding of OOP. I could be a maintenance support with high analytical thinking skill to solve complex problems. All the websites I developed was built using the latest version of PHP. I have knowledge on building a website from CMS such as Wordpress, Drupal and Joomla, I could make customized themes. I have experienced in SEO friendly website that may affect the visibility of a website or a web page in a search engine’s results. I always adopt latest technologies to meet the market requirements and I am creating a responsive web design that loads correctly in all modern browsers and smaller devices.”
-      PHP: 8 Years Experience, 95%
-      Laravel: 7 Years Experience, 95%
-      CodeIgniter: 3 Years Experience, 90%
-      Zend: 1 Year Experience, 80%
-      WordPress CMS: 5 Years Experience, 90%
-      Joomla CMS: 1 Year Experience, 75%
-      SQL (MYSQL): 7 Years Experience, 95%
-      Javascript (JS): 7 Years Experience, 95%
-      JQuery: 7 Years Experience, 95%
-      AngularJS: 2 Years Experience, 90%
-      VueJS: 3 Years Experience, 95%
-      ReactJS: 1 Year Experience, 95%
-      NPM (Node.js): 5 Years Experience, 90%
-      Gulp / Bower / Webpack: 5 Years Experience, 90%
-      LESS / SCSS / Stylus: 7 Years Experience, 95%
-      CSS/CSS3: 8 Years Experience, 95%
-      LESS / SCSS / Stylus: 5 Years Experience, 95%
-      Twitter Bootstrap: 4 Years Experience, 90%
-      TailwindCSS: 2 Years Experience, 95%
-      HTML/HTML5: 8 Years Experience, 95%
-      Jade/Pug Template: 6 Years Experience, 95%
-      Version Control: 7 Years Experience, 95%
-      Git/SVN: 8 Years Experience, 95%
-      Photoshop: 5 Years Experience, 85%
-      Illustrator: 2 Years Experience, 85%
-      Word Office Tools: 6 Years Experience, 90%
-      PROJECTS
-      No Preview
-      EXPERIENCES
-      Ecoshift Corp. (Feb 2019 - Present): Web Developer
-      ABS-CBN Corp. (Sep 2016 - Feb 2019): Frontend Developer
-      Gameloft Philippines (Aug 2015 - Jul 2016): R&D PHP Developer
-      ConsumerCloud Services Inc. (Mar 2015 - Aug 2015): Senior PHP Developer
-      Huxxer Corp. (Dec 2014 - Mar 2015): Senior Web Developer
-      Zeno Group Investments Inc. (Jul 2014 - Dec 2014): Web Admin
-      Leekie Enterprises Inc. (Apr 2014 - Jul 2014): Web Developer
-      Vigattin Inc. (May 2012 - Apr 2014): Web Developer
-      CONTACT
-    `;
-
-    const chatHistory = messages.map(msg => `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}`).join('\n');
-    return `${portfolioContent}\n\n${chatHistory}\nAssistant:`;
   };
 
   const closeModal = () => {
