@@ -148,7 +148,7 @@ function PortfolioAbout(props) {
         <h5 className="!text-[0.9rem]">{generateTitle(skill.name)}</h5>
         <div className="clm-sk-cont">
           <div className="clm-sk-cont-2">
-            <div className="clm-sk-yrs">{skill.experience} Years Experience</div>
+            <div className="clm-sk-yrs">{skill.experience} Year{skill.experience > 1 ? 's' : ''} Experience</div>
             <div className="clm-sk-percent">{skill.percentage}%</div>
             <animated.div className="clm-sk-percent-2" id={`about-${props.id}-skill-${i}`} style={{ width: `${skill.percentage}%`, ...springs }}>
               <div>&nbsp;</div>

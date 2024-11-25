@@ -84,14 +84,14 @@ exports.assistant = onRequest((request, response) => {
         // Send success response to the client
         sendSuccess({ response }, { message: "", data: json.choices });
       } else {
-        logger.error("Error sending request to AI assistant", { structuredData: true, error: json });
+        logger.error("Error sending request to AI assistant", { structuredData: true, error: json, data: process.env });
         sendError({ response }, { message: "Error sending request to AI assistant" });
       }
     });
   });
 
   req.on('error', (error) => {
-    logger.error("Error sending request to AI assistant", { structuredData: true, error });
+    logger.error("Error sending request to AI assistant", { structuredData: true, error, data: process.env });
     sendError({ response }, { message: "Error sending request to AI assistant" });
   });
 

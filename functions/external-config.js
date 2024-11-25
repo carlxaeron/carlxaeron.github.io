@@ -105,6 +105,19 @@ const SKILLS = [
       width: "95",
   },
   {
+    name: "Cloud",
+    experience: "2",
+    percentage: "80",
+    width: "80",
+    parent: true,
+  },
+  {
+    name: "Google Cloud Platform (GCP)",
+    experience: "2",
+    percentage: "80",
+    width: "80",
+},
+  {
       name: "NPM",
       experience: "7",
       percentage: "90",
