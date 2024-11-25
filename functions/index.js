@@ -67,6 +67,11 @@ exports.assistant = onRequest((request, response) => {
       'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
       'Content-Type': 'application/json',
     },
+    // i want to add payload
+    body: {
+      "model": "gpt-3.5-turbo",
+      "messages": messages,
+    },
   };
 
   const req = https.request(options, (res) => {

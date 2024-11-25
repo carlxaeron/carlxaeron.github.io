@@ -51,14 +51,14 @@ const ChatAgent = () => {
       setMessages([...messages, newMessage, botMessage]);
       setLoading(false);
       logEvent({ event: 'chatai', option: { action: 'response', message: botMessage.content } });
+
+      setInput('');
     } catch (error) {
       console.error('Error sending message:', error);
       setMessages([...messages, { role: 'assistant', content: 'Sorry, I am unable to process your request at the moment.' }]);
       setLoading(false);
       logEvent({ event: 'chatai', option: { action: 'error', message: error.message } });
     }
-
-    setInput('');
   };
 
   const closeModal = () => {
