@@ -215,6 +215,22 @@ const SKILLS = [
 ];
 
 const PROJECT_DESCRIPTION = 'I am a fullstack web developer working for over 12 years since 2012, I am mainly focused on web development using HTML, CSS, JS (AngularJS, VueJS, JQuery), PHP/MySQL - (XAMPP, WAMP, LAMP). I build website from scratch using any top frameworks such as Laravel, Codeigniter, and Zend on any development environment with support of Linux command or local development environment and my code is up to the current standards, secure, and safe from SQL injections or similar hacking attempts with understanding of OOP. I could be a maintenance support with high analytical thinking skill to solve complex problems. All the websites I developed was built using the latest version of PHP. I have knowledge on building a website from CMS such as Wordpress, Drupal and Joomla, I could make customized themes. I have experienced in SEO friendly website that may affect the visibility of a website or a web page in a search engine’s results. I always adopt latest technologies to meet the market requirements and I am creating a responsive web design that loads correctly in all modern browsers and smaller devices.';
+const PROJECT_DESCRIPTION2 = `I am a passionate Full-Stack Web Developer with over 12 years (4560 days 19 hrs 14 mins 17 secs) experience delivering robust web applications and responsive websites since 2012. My expertise spans a wide range of modern technologies, enabling me to create solutions that are secure, scalable, and user-focused.
+🔑 Core Expertise:
+Proficient in front-end development using HTML, CSS, and modern JavaScript frameworks like AngularJS, VueJS, ReactJS, and jQuery.
+Advanced backend skills with PHP/MySQL ecosystems (XAMPP, WAMP, LAMP) and frameworks like Laravel, CodeIgniter, and Zend.
+Extensive experience in CMS platforms such as WordPress, Drupal, and Joomla, with a track record of building custom themes and optimizing for SEO.
+💡 What Sets Me Apart:
+I follow Object-Oriented Programming principles and adhere to the latest coding standards, ensuring secure and resilient applications against vulnerabilities like SQL injections.
+Strong problem-solving and analytical skills, enabling me to deliver innovative solutions to complex technical challenges.
+Commitment to seamless user experiences with responsive web designs optimized for cross-browser and mobile compatibility.
+📈 Beyond Development:
+Skilled in creating SEO-friendly websites that enhance search engine visibility and drive user engagement.
+Experience in mobile development using Flutter and integrating backend solutions with Firebase.
+Proficient in providing maintenance and support for ongoing projects, ensuring they remain efficient, reliable, and up to date.
+💻 On the Cutting Edge:
+I stay ahead of industry trends, constantly refining my skill set to meet market demands. My dedication to professional growth and collaboration fuels my ability to bring innovative ideas to life.
+I am excited to connect with like-minded professionals and organizations seeking a creative, detail-oriented, and results-driven developer to transform digital visions into reality.`;
 
 const COMPANIES = [
   {
@@ -486,9 +502,42 @@ const EXPERIENCES = [
   },
 ]
 
+const HEADERCONFIG = {
+  title: "Carl Louis Manuel - Programmer Analyst | Full-Stack Web & App Developer | Software Engineer | 12+ Years of Experience",
+  meta: [
+    { name: "theme-color", content: "#000000" },
+    { name: "description", content: "Experienced Programmer Analyst | Full-Stack Web & App Developer | Software Engineer with 12+ years of expertise in ReactJS, NodeJS, PHP, and top frameworks like Laravel and CodeIgniter. Skilled in creating secure, scalable, and SEO-optimized websites, with a focus on responsive design and performance." },
+    { name: "keywords", content: "Programmer Analyst, Full-Stack Web & App Developer, Software Engineer, ReactJS, NodeJS, PHP, Laravel, CodeIgniter, AngularJS, VueJS, JQuery, HTML, CSS, Web Development, SEO, WordPress, Drupal, Joomla, Custom Themes, Responsive Design, OOP, Web Security, Scalable Websites, MySQL, Linux Development, CMS" },
+    { property: "og:locale", content: "en_US" },
+    { property: "og:type", content: "portfolio" },
+    { property: "og:title", content: "Programmer Analyst | Full-Stack Web & App Developer | Software Engineer | 12+ Years of Experience" },
+    { name: "twitter:title", content: "Programmer Analyst | Full-Stack Web & App Developer | Software Engineer | 12+ Years of Experience" },
+    { property: "og:description", content: "Experienced Programmer Analyst | Full-Stack Web & App Developer | Software Engineer with 12+ years of expertise in ReactJS, NodeJS, PHP, and top frameworks like Laravel and CodeIgniter. Skilled in creating secure, scalable, and SEO-optimized websites, with a focus on responsive design and performance." },
+    { name: "twitter:description", content: "Experienced Programmer Analyst | Full-Stack Web & App Developer | Software Engineer with 12+ years of expertise in ReactJS, NodeJS, PHP, and top frameworks like Laravel and CodeIgniter. Skilled in creating secure, scalable, and SEO-optimized websites, with a focus on responsive design and performance." },
+    { property: "og:image", content: "/static/images/me-bg.png" },
+    { name: "twitter:image", content: "/static/images/me-bg.png" },
+    { property: "og:url", content: "http://carlmanuel.orgfree.com/" },
+    { property: "og:site_name", content: "Carl Louis Manuel - Programmer Analyst | Full-Stack Web & App Developer | Software Engineer | 12+ Years of Experience" },
+    { name: "twitter:card", content: "summary" },
+    { name: "twitter:site", content: "@carlxaeron09" },
+    { name: "twitter:creator", content: "@carlxaeron09" },
+  ],
+  link: [
+    { rel: "canonical", href: "https://carlxaeron.github.io" },
+    { rel: "sitemap", type: "application/xml", title: "Sitemap", href: "/sitemap.xml" },
+    { rel: "manifest", href: "/manifest.json" },
+    { rel: "stylesheet", href: "/static/css/main.de26213c.css" },
+  ],
+  script: [
+    { defer: true, src: "/static/js/main.933fa6e9.js" },
+  ],
+};
+
 module.exports = {
   SKILLS,
   PROJECT_DESCRIPTION,
+  PROJECT_DESCRIPTION2,
   COMPANIES,
-  EXPERIENCES
+  EXPERIENCES,
+  HEADERCONFIG,
 }

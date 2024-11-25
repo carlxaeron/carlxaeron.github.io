@@ -11,7 +11,7 @@ const {onRequest} = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
 const admin = require("firebase-admin");
 const { sendError, sendSuccess } = require("./helper");
-const { SKILLS, PROJECTS_DESCRIPTION, COMPANIES, EXPERIENCES } = require("./external-config");
+const { SKILLS, PROJECTS_DESCRIPTION, COMPANIES, EXPERIENCES, PROJECTS_DESCRIPTION2 } = require("./external-config");
 const https = require('https');
 
 admin.initializeApp();
@@ -51,6 +51,7 @@ exports.assistant = onRequest((request, response) => {
       { role: 'system', content: 'You are Carl Louis Manuel assistant and you will only answer from these data and answer it professionally: ' + JSON.stringify({
         ...SKILLS,
         'DESCRIPTION': PROJECTS_DESCRIPTION,
+        'DESCRIPTIONAI': PROJECTS_DESCRIPTION2,
         ...COMPANIES,
         ...EXPERIENCES,
       }) },
