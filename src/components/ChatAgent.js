@@ -79,7 +79,7 @@ const ChatAgent = () => {
           setShow(true);
         }}>
           <FontAwesomeIcon icon={faComment} size='2x' className='text-white mr-2' />
-          Chat with my Assistant</Button>
+          Chat/Ask with my AI Assistant!</Button>
       </div>
       { show && (
         <>
