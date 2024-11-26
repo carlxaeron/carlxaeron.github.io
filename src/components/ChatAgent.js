@@ -8,7 +8,7 @@ import { mapping } from '../mapping';
 
 const ChatAgent = () => {
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Hello, I am your Carl Louis Manuel assistant. How can I help you?' },
+    { role: 'assistant', content: 'Hello, I am your Carl Louis Manuel an AI assistant. How can I help you?' },
   ]);
   const [input, setInput] = useState('');
   const [show, setShow] = useState(false);
@@ -104,7 +104,7 @@ const ChatAgent = () => {
           <Modal backdrop='static' centered className="z-[999999]" show={show} onHide={closeModal} 
             size='md'>
             <Modal.Header closeButton>
-              <Modal.Title>Hello welcome please chat with my assistant.</Modal.Title>
+              <Modal.Title>AI Assistant.</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form disabled={loading} onSubmit={e => {
