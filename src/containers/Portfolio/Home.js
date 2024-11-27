@@ -20,9 +20,9 @@ function PortfolioHome() {
 
     return (
         <div className={`clm-cover clm-fixed-hc${themeContext.value.env === 'dev' ? ' no-bg' : ''}`} id="home">
-            <Particles id="particles" ref={particlesRef} options={particlesConfig} autoPlay={true} style={{
+            {/* <Particles id="particles" ref={particlesRef} options={particlesConfig} autoPlay={true} style={{
                 position: 'absolute !important',
-            }} init={particlesInit} />
+            }} init={particlesInit} /> */}
             <div className="clm-c-content">
                 { themeContext.value.env === 'dev' && (
                 <>
@@ -60,7 +60,7 @@ function PortfolioHome() {
                             </text>
                         </svg>
                         APP Developer</span></h2> */}
-                        <h2>
+                        <h2 className="!text-[1.5rem] md:!text-[2.9rem]">
                             Hi, I'm a <br />
                             Software Engr., Web/App Developer, Fullstack Developer - ReactJS | NextJS | Vue | NuxtJS | PHP | Laravel | CodeIgniter | Wordpress | Flutter | React Native | Javascript | Typescript
                         </h2>

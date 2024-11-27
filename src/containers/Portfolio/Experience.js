@@ -49,7 +49,7 @@ function PortfolioExperience(props) {
     }, [])
 
     return (
-      <animated.li id={`experiences-${props.id}-${k}`} style={props.id === 'bottom' ? {...springs} : {opacity: 0}}  className="row">
+      <animated.li id={`experiences-${props.id}-${k}`} style={{...springs}}  className="row">
         <Tracker id={`experiences-${props.id}-${k}`}
           set={0.05}
           onSuccess={() => {
@@ -79,7 +79,7 @@ function PortfolioExperience(props) {
               className='clm-com-detail'>
               <div dangerouslySetInnerHTML={{ __html: v.jobDescription }}></div>
             </animated.div>
-            { props.id === 'bottom' && (
+            { props.id === 'top' && (
               <Overlay target={expRefBtn.current} show={showTooltip} placement="bottom" rootClose={true} rootCloseEvent='click'>
                 {(props) => (
                   <Tooltip className="z-[999999]" onClick={() => setShowTooltip(false)} id="overlay-example" {...props}>
@@ -106,7 +106,7 @@ function PortfolioExperience(props) {
       onSuccess={() => setShow(true)}
       // onFail={() => setShow(false)}
     >
-      <animated.div style={props.id === 'bottom' ? {...springs} : {opacity: 0}} className="clm-exps clm-fixed-hc bg-white" id={`experiences-${props.id}`}>
+      <animated.div style={{...springs}} className="clm-exps clm-fixed-hc bg-white" id={`experiences-${props.id}`}>
         <div className="clm-inner-container clm-container">
           <div className="clm-title">
             <h4>EXPERIENCES</h4>

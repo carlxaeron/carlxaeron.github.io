@@ -48,30 +48,30 @@ function Portfolio() {
             <PortfolioHeaderTop/>
             <main>
                 <PortfolioHome/>
-                <div style={{position: 'relative'}}>
+                {/* <div style={{position: 'relative'}}> */}
                     <PortfolioAbout id='top'/>
-                    <div style={{position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 9999}}>
+                    {/* <div style={{position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 9999}}>
                         <PortfolioAbout id='bottom'/>
-                    </div>
-                </div>
-                <div style={{position: 'relative'}}>
+                    </div> */}
+                {/* </div>
+                <div style={{position: 'relative'}}> */}
                     <PortfolioProject id='top' />
-                    <div style={{position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 9999, background: '#eee'}}>
+                    {/* <div style={{position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 9999, background: '#eee'}}>
                         <PortfolioProject id='bottom'/>
                     </div>
                 </div>
-                <div style={{position: 'relative'}}>
+                <div style={{position: 'relative'}}> */}
                     <PortfolioExperience id='top' />
-                    <div style={{position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 9999}}>
+                    {/* <div style={{position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 9999}}>
                         <PortfolioExperience id='bottom'/>
                     </div>
                 </div>
-                <div style={{position: 'relative'}}>
+                <div style={{position: 'relative'}}> */}
                     <PortfolioContact id='top' />
-                    <div style={{position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 9999, background: '#eee'}}>
+                    {/* <div style={{position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 9999, background: '#eee'}}>
                         <PortfolioContact id='bottom'/>
                     </div>
-                </div>
+                </div> */}
             </main>
             <footer>
             </footer>

@@ -24,7 +24,7 @@ function PortfolioProject(props) {
       onSuccess={() => setShow(true)}
     // onFail={() => setShow(false)}
     >
-      <animated.div style={props.id === 'bottom' ? { ...springs2 } : {}} className="clm-projects clm-fixed-hc" id={`projects${props.id}`}>
+      <animated.div style={{ ...springs2 }} className="clm-projects clm-fixed-hc" id={`projects${props.id}`}>
         <div className="clm-inner-container clm-container">
           <div className="clm-title">
             <h4>PROJECTS</h4>
