@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { Button, Form, Modal, Stack } from 'react-bootstrap';
-import { COMPANIES, EXPERIENCES, logEvent, PROJECTS_DESCRIPTION_AI, SKILLS } from '../config';
+import { logEvent } from '../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 import { mapping } from '../mapping';
