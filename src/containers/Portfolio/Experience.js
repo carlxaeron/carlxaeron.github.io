@@ -62,7 +62,7 @@ function PortfolioExperience(props) {
           }}
         >
           <div className="col-sm-3 col-md-2 clm-com-logo clm-com-logo-light">
-            <div className="clm-com-logo-cont"><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src={v.companyLogo} />
+            <div className={`clm-com-logo-cont ${!v.companyLogo && 'bg-black'}`}><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src={v.companyLogo} />
             </div>
           </div>
           <div className="col-sm-9 col-md-10">
@@ -71,7 +71,14 @@ function PortfolioExperience(props) {
                 <h5>{v.dateRange}</h5></span>
             </div>
             <div className="clm-com-job-title">
-              <h4>{v.jobTitle}</h4>
+              <h4>{v.jobTitle} {v.skills && (
+                <div className="text-sm text-red-500 font-sans">
+                  <b>SKILLS: </b> 
+                  { v.skills.map((v2, k2) => (
+                    <span key={k2}>{v2} {(k2 + 1 !== v.skills.length ) && ', '}</span>
+                  )) }
+                </div>
+              )}</h4>
             </div>
             <animated.div 
               style={hideExtra === null ? {} : {...hideSprings}}

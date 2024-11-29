@@ -2,11 +2,59 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAnalytics, logEvent as LE } from 'firebase/analytics';
 import * as conf from './external-config';
+import styled from 'styled-components';
 
 export const SKILLS = conf.SKILLS;
 
 export const PROJECT_DESCRIPTION = conf.PROJECT_DESCRIPTION
-export const PROJECTS_DESCRIPTION_AI = (data) => <div className='m-4 text-sm lg:text-lg text-left'>
+
+const LiParent = styled.li`
+  margin-bottom: 1rem;
+  li {
+    margin-left: 1.25rem;
+    list-style-type: disc;
+  }
+`;
+
+export const PROJECTS_DESCRIPTION_AI = (data) => (
+  <div className='m-4 text-sm lg:text-lg text-left'>
+    <ul>
+      <LiParent>Hi there! I’m a passionate Full-Stack Web Developer with over 12 years ({data.time}) of experience (and counting!) crafting robust web applications and responsive websites. Since starting my journey in 2012, I’ve worked with a wide range of modern technologies to create secure, scalable, and user-focused solutions.</LiParent>
+      <LiParent>
+        <b>💻 My Expertise:</b>
+        <ul>
+          <li>Front-End Development: I build visually appealing and user-friendly interfaces with HTML, CSS, and JavaScript frameworks like AngularJS, VueJS, ReactJS, and jQuery.</li>
+          <li>Back-End Mastery: I’m well-versed in PHP/MySQL environments (XAMPP, WAMP, LAMP) and frameworks like Laravel, CodeIgniter, and Zend.</li>
+          <li>CMS Customization: From WordPress and Drupal to Joomla, I specialize in creating custom themes, ensuring high performance, and optimizing for SEO.</li>
+        </ul>
+      </LiParent>
+      <LiParent>
+        <b>🔍 What Makes Me Different:</b>
+        <ul>
+          <li>I combine technical expertise with a deep commitment to delivering secure, high-quality applications. By following Object-Oriented Programming principles and modern coding standards, I ensure my projects are robust and protected against vulnerabilities like SQL injections.</li>
+          <li>I’m also passionate about user experience—every website I build is responsive, mobile-friendly, and compatible across all major browsers. And when it comes to problem-solving, I enjoy tackling challenges head-on, using creative and innovative approaches.</li>
+        </ul>
+      </LiParent>
+      <LiParent>
+        <b>🌟 Beyond Coding:</b>
+        <ul>
+          <li>SEO-Driven Development: I help businesses enhance their online presence by creating websites optimized for search engine visibility.</li>
+          <li>Mobile Development: I have experience with Flutter and integrating back-end systems with Firebase to create seamless experiences.</li>
+          <li>Reliable Support: I provide ongoing maintenance and support to keep projects running smoothly and efficiently over time.</li>
+        </ul>
+      </LiParent>
+      <LiParent>
+        <b>🚀 Always Evolving:</b>
+        <ul>
+          <li>Staying ahead of industry trends is essential to me. I’m always learning, growing, and exploring new technologies to ensure I can bring fresh ideas and innovative solutions to the table.</li>
+        </ul>
+      </LiParent>
+      <LiParent>If you’re looking for a creative, detail-oriented developer who’s as passionate about delivering results as you are about achieving them, let’s connect. I’d love to help transform your digital vision into reality!</LiParent>
+    </ul>
+  </div>
+);
+
+export const PROJECTS_DESCRIPTION_AI3 = (data) => <div className='m-4 text-sm lg:text-lg text-left'>
   <ul>
     <li className='mb-2'>I am a passionate Full-Stack Web Developer with over {data.time} experience delivering robust web applications and responsive websites since 2012. My expertise spans a wide range of modern technologies, enabling me to create solutions that are secure, scalable, and user-focused.</li>
     <li className='mb-2'><b>🔑 Core Expertise:</b>

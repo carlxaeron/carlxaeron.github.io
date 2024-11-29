@@ -66,7 +66,8 @@ function PortfolioHome() {
                         </h2>
                     </AnimationDown>
                     <AnimationDown delay={300}>
-                        <h3 className="!text-[1rem]">Passionate about crafting innovative, scalable, and secure web solutions. I’m always ready for new challenges that push the boundaries of web development.</h3>
+                        {/* <h3 className="!text-[1rem]">Passionate about crafting innovative, scalable, and secure web solutions. I’m always ready for new challenges that push the boundaries of web development.</h3> */}
+                        <h3 className="!text-[1rem]">I’m passionate about building innovative, scalable, and secure web solutions. I love tackling new challenges that push the boundaries of what’s possible in web/app development.</h3>
                     </AnimationDown>
                     <AnimationDown delay={500}>
                         <a className="btn btn-primary" href="#projects">View my works</a>
