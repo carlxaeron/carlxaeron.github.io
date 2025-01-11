@@ -71,11 +71,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## Directory Structure
 
-The repository contains the following directories:
+The repository contains the following directories and files:
 
 ### `docs`
 
-Contains files related to the build output and static assets.
+Contains the build output and static assets for the project. It includes files such as `docs/index.html`, `docs/asset-manifest.json`, and various static assets like CSS, JavaScript, and media files.
 
 ### `functions`
 
@@ -89,8 +89,68 @@ Contains server-side code for Firebase functions.
 
 ### `public`
 
-Contains static files like `index.html` and assets.
+Contains static files that are used during the build process and are copied to the build output. It includes files such as `public/index.html`, `public/asset-manifest.json`, and other static assets like CSS, JavaScript, and media files.
 
 ### `src`
 
 Contains the main source code for the React application.
+
+* `src/assets`: Contains static assets like images, fonts, and styles.
+* `src/components`: Contains reusable React components.
+* `src/containers`: Contains container components that manage state and logic.
+* `src/pages`: Contains page components that represent different routes in the application.
+* `src/styles`: Contains global styles and CSS files.
+* `src/config.js`: Contains configuration settings for the application.
+
+### `.github`
+
+Contains GitHub-specific configuration files and workflows.
+
+### `.env.example`
+
+Provides an example environment variable configuration.
+
+### `.firebaserc`
+
+Contains Firebase project configuration.
+
+### `.gitignore`
+
+Specifies files and directories to be ignored by Git.
+
+### `build-to-docs.js`
+
+A script to copy the build output to the `docs` directory.
+
+### `firebase.json`
+
+Contains Firebase project configuration.
+
+### `gulpfile.js`
+
+Defines tasks for the Gulp task runner.
+
+### `package.json`
+
+Defines the dependencies and scripts for the project.
+
+### `postcss.config.js`
+
+Contains PostCSS configuration.
+
+### `tailwind.config.js`
+
+Contains Tailwind CSS configuration.
+
+### `webpack.config.js`
+
+Contains Webpack configuration.
+
+## Differences between `docs` and `public` directories
+
+The `docs` and `public` directories serve different purposes in the repository:
+
+* The `docs` directory contains the build output and static assets for the project. It includes files such as `docs/index.html`, `docs/asset-manifest.json`, and various static assets like CSS, JavaScript, and media files.
+* The `public` directory contains static files that are used during the build process and are copied to the build output. It includes files such as `public/index.html`, `public/asset-manifest.json`, and other static assets like CSS, JavaScript, and media files.
+
+In summary, the `docs` directory holds the final build output, while the `public` directory contains the static files used during the build process.
