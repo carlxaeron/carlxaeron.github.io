@@ -68,3 +68,29 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Directory Structure
+
+The repository contains the following directories:
+
+### `docs`
+
+Contains files related to the build output and static assets.
+
+### `functions`
+
+Contains server-side code for Firebase functions.
+
+* `functions/index.js`: The main entry point for the Firebase Cloud Functions.
+* `functions/helper.js`: Contains helper functions for sending success and error responses.
+* `functions/external-config.js`: Contains configuration data used by the functions defined in `index.js`.
+* `functions/.env.example`: Provides an example environment variable configuration.
+* `functions/package.json`: Defines the dependencies and scripts for the Firebase Cloud Functions.
+
+### `public`
+
+Contains static files like `index.html` and assets.
+
+### `src`
+
+Contains the main source code for the React application.
