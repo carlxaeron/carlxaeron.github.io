@@ -406,7 +406,7 @@ const EXPERIENCES = [
       "companyLogo": "/static/images/companies/mb.jpg",
       "companyName": "Metropolitan Bank & Trust (Metrobank).",
       "jobTitle": "Programmer Analyst",
-      "dateRange": "(Aug 2022- Present)",
+      "dateRange": "(Aug 2022- Dec 2024)",
       // "jobDescription": `•	Developed and maintained banking applications, ensuring secure and efficient financial transactions.<br />•	Collaborated with cross-functional teams to analyze requirements and implement technical solutions that improved system functionality.•	Conducted thorough testing and debugging to maintain high system reliability and minimize errors. In testing we used jest, enzyme, and cypress for end to end testing. We used gitlab for version control and jira for project management. In communicating with backend if we need to get some data we used postman for API testing and mockoon for mocking the API while the backend is not yet finished. Upon developing the frontend we used reactjs and redux for state management and also if there is need to improve the the frontend design i used also a technique for pixel-perfect from desktop to mobile. We also have every day standup meeting to discuss the progress of the project and if there is any blocker we need to escalate it to the team lead and also with testers and BA.`,
       "jobDescription": `	•	Developed and maintained banking applications, ensuring secure, efficient, and reliable financial transactions in alignment with industry standards.<br />
 •	Collaborated with cross-functional teams, including testers and business analysts, to analyze requirements, design technical solutions, and enhance system functionality.<br />
