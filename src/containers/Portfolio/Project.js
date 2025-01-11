@@ -95,6 +95,8 @@ const getContents = (props) => {
         html: (<><H5>Description</H5>
         {/* <p>I have started the feature for MB AppKey in the frontend where i setup the module for appkey that contains the redux, unit test, view, and sub components. After building the core for AppKey, many developers starts to integrate it to different pages/module by just adding a maximum of 5 lines of code to their tasks. It minimizes the repetetive codes and able to maintain easily by updating its core for the frontend.</p> */}
         <p>The MB AppKey feature front-end development spearheaded by me was all about laying down the groundwork for the initial module, including the design and full implementation of an entire base plan. Redux integration, unit tests, views, and subcomponents created an army of a solid and reusable backbone. Once the core part was finished, it could be integrated easily by other developers across pages and even modules without much fuss-usually in less than five lines of code. This proved to be an effortless repetitive coding and easy maintenance, where updates to the core are automatically propagated throughout the entire application.</p>
+        <a href="/static/images/sites/mb1.png" target="_blank"><img src="/static/images/sites/resized-images/mb2.png" alt="mb2.png" /></a>
+        <a href="/static/images/sites/mb2.png" target="_blank"><img src="/static/images/sites/resized-images/mb3.png" alt="mb3.png" /></a>
         <H5>Tags</H5>
         <ul className="clm-modal-tools row">
           <li>#reactJS</li>
