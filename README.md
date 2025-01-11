@@ -145,12 +145,3 @@ Contains Tailwind CSS configuration.
 ### `webpack.config.js`
 
 Contains Webpack configuration.
-
-## Differences between `docs` and `public` directories
-
-The `docs` and `public` directories serve different purposes in the repository:
-
-* The `docs` directory contains the build output and static assets for the project. It includes files such as `docs/index.html`, `docs/asset-manifest.json`, and various static assets like CSS, JavaScript, and media files.
-* The `public` directory contains static files that are used during the build process and are copied to the build output. It includes files such as `public/index.html`, `public/asset-manifest.json`, and other static assets like CSS, JavaScript, and media files.
-
-In summary, the `docs` directory holds the final build output, while the `public` directory contains the static files used during the build process.
