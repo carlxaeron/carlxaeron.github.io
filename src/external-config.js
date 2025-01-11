@@ -409,12 +409,12 @@ const EXPERIENCES = [
       "dateRange": "(Aug 2022- Present)",
       "skills": ['ReactJS', 'Redux', 'Jest', 'GitLab', 'Jira', 'Postman', 'Mockoon', 'Pixel-Perfect', 'Standup Meeting', 'Unit-Tesing', 'End-to-End Testing', 'API Implementation to UI', 'Frontend Development', 'Responsive Design', 'Bug Fixing'],
       // "jobDescription": `•	Developed and maintained banking applications, ensuring secure and efficient financial transactions.<br />•	Collaborated with cross-functional teams to analyze requirements and implement technical solutions that improved system functionality.•	Conducted thorough testing and debugging to maintain high system reliability and minimize errors. In testing we used jest, enzyme, and cypress for end to end testing. We used gitlab for version control and jira for project management. In communicating with backend if we need to get some data we used postman for API testing and mockoon for mocking the API while the backend is not yet finished. Upon developing the frontend we used reactjs and redux for state management and also if there is need to improve the the frontend design i used also a technique for pixel-perfect from desktop to mobile. We also have every day standup meeting to discuss the progress of the project and if there is any blocker we need to escalate it to the team lead and also with testers and BA.`,
-      "jobDescription": `	•	Designed and maintained secure and efficient banking applications, ensuring reliable financial transactions that met industry standards.<br/>
-	•	Worked closely with cross-functional teams, including testers and business analysts, to understand requirements, craft technical solutions, and improve system functionality.<br/>
-	•	Focused on delivering high-quality results by conducting thorough testing and debugging using tools like Jest, Enzyme, and Cypress, while managing projects with GitLab and Jira.<br/>
-	•	Simplified API integration by using Postman for testing and Mockoon to simulate APIs during development, making it possible to continue frontend work even when backend systems weren’t ready.<br/>
-	•	Built intuitive and responsive frontends with ReactJS and Redux, ensuring pixel-perfect designs that worked seamlessly on both desktop and mobile devices.<br/>
-	•	Actively participated in daily stand-ups to share updates, address challenges, and keep the team—including testers and business analysts—aligned and on track.`
+      "jobDescription": `• Designed and maintained secure and efficient banking applications, ensuring financial transactions to an industry standard.<br/>
+• Worked closely with cross-functional teams, including testers and business analysts, to understand requirements from all aspects in order to engineer a technical solution and improve system functionality.<br/>
+• Focus on delivering high-quality results by thoroughly maintaining toolsets, testing, and debugging such as Jest, Enzyme, Cypress while tracking modifications on projects using GitLab and sometimes Jira.<br/>
+• Simplified API integration by utilizing Postman for testing and Mockoon to simulate APIs during development, thus enabling front-end work to proceed when the back-end is not yet ready.<br/>
+• Created intuitive and responsive frontends by ReactJS and Redux which closely knitted to the pixel-perfect designs functioning amazingly well on the desktop and mobile.<br/>
+• Make sure active participation on a daily stand up, giving updates that address challenges with the team, especially testers and business analysts to line up.`
   },
   {
       "companyLogo": "/static/images/companies/GAD.jpeg",
@@ -422,14 +422,14 @@ const EXPERIENCES = [
       "jobTitle": "Web Application Developer (Part-time/Remote)",
       "dateRange": "(Jan 2022 - Present)",
       "skills": ['Laravel', 'ReactJS', 'WHMCS', 'PHP', 'User Experience', 'Bug Fixing'],
-      "jobDescription": `At GoAutoDial, Inc., I led the modernization of their agent web application, a vital tool for call center agents to efficiently manage and dial leads. Originally built with jQuery and PHP, the system needed a significant upgrade to meet modern standards.<br/>
-	•	I transformed the application by integrating a Laravel backend with a ReactJS frontend, creating a more scalable and maintainable platform.<br/>
-	•	Designed a cleaner, more intuitive, and fully responsive interface to enhance the user experience, making daily operations smoother for call center agents.<br/>
-	•	Focused on improving performance and scalability, ensuring the application could handle higher workloads without compromising reliability.<br/>
-	•	These updates resulted in greater efficiency, boosted user satisfaction, and increased productivity across call center operations.<br/>
-	•	Additionally, I developed a WHMCS provisioning module, streamlining cloud service management and automation, which further improved the user experience and operational workflows.<br/><br/>
+      "jobDescription": `At GoAutoDial, Inc, I have spearheaded the entire modernization of the Agent Web Application-the Word of the call center agents for managing and dialing leads. It was initially built with jQuery and PHP, and clearly needed an update to make it up-to-date.<br/>
+• The rewrite is carrying out an entirely newly built Laravel Backend and ReactJS Frontend for a more scalable and maintainable application.<br/>
+• A cleaner, more user-friendly, fully responsive interface was designed to avoid such hassles and to make it easier for call-center agents to use within their daily processes.<br/>
+• It is more performance- and scalability-oriented, meant to ensure that application could carry a higher load without compromising reliability.<br/>
+• All of these are efficiency-increasing and boosting user satisfaction at the same time increasing productivity in call center work.<br/>
+• Developed a provisioning module for WHMCS which further simplifies cloud service management and automation, thus improving the overall user experience and operational workflows significantly.<br/><br/>
 
-This project was a rewarding opportunity to bring modern solutions to life, delivering lasting value for both the team and its users.`
+This project was an exciting chance to use technology to inject modern solutions into a workplace that was going to last and be valuable to both the internal team and their user base forever.`
   },
   {
         "companyLogo": "",
@@ -437,22 +437,20 @@ This project was a rewarding opportunity to bring modern solutions to life, deli
         "jobTitle": "Fullstack Dev/Engineer & API Integrator (Part-time/Remote)",
         "dateRange": "(Dec 2020- June 2022)",
         "skills": ['PHP', 'Laravel', 'VueJS', 'Flutter', 'Firebase', 'API Integrations', 'Payment Gateways'],
-        "jobDescription": `I worked as a Full-Stack Developer, using PHP and Laravel to create a variety of applications, including projects in the banking sector. On the frontend, I used HTML, CSS, and VueJS to deliver responsive and user-friendly designs.
-<br/><br/>
-In addition to web development, I served as an API Integrator, building numerous APIs for both web and mobile apps. This included payment gateway integrations like Dragonpay and features like mobile loading services. I also developed a mobile app using Flutter with Firebase as its database, providing a seamless and efficient user experience.
-<br/><br/>
-My Skills:
-<br/>
-	•	Backend: PHP, Laravel, Websockets, PHPUnit for unit testing, Docker<br/>
-	•	Frontend: HTML, CSS, VueJS<br/>
-	•	Mobile Development: Flutter and Firebase<br/>
-	•	API Integrations: Payment gateways like Dragonpay<br/>
-<br/><br/>
-Notable Achievements:
-<br/>
-	•	Created a banking web application featuring a loading module and payment gateway integration.<br/>
-	•	Built APIs for analytics, including a system used to analyze election results.<br/>
-	•	Developed a mobile app backed by Firebase, offering robust and scalable performance.<br/>
+        "jobDescription": `Furthermore, even working with applications for full-stack banking systems; such as, working with PHP and Laravel. HTML, CSS, and VueJS are used for the frontend technologies for the applications to be responsive and user-friendly. <br/><br/>
+
+API Integrator, is mostly for API services on web and mobile applications. Dragonpay is integrated into their payment gateways, and mobile loading is the offering from most of their services. I've developed a mobile app using Flutter and Firebase with end-user experience in mind.<br/><br/>
+
+My Skills: <br/>
+• Backend: PHP, Laravel, Websockets, PHPUnit for unit testing, Docker <br/>
+• Frontend: HTML, CSS, VueJS <br/>
+• Mobile Development: Flutter and Firebase <br/>
+• API Integration: Dragonpay and other payment gateways<br/><br/>
+
+Achievements: <br/>
+• Created a web application for the bank to load modules and integrated payment gateways. <br/>
+• Made an application programming interface for analytics and put together a system for the analysis of election results. <br/>
+• Developed a solid, well-scalable mobile application using Firebase from the backend.<br/>
 `,
   },
   {
@@ -462,11 +460,11 @@ Notable Achievements:
       "dateRange": "(Feb 2019- July 2022)",
       "skills": ['WooCommerce', 'WordPress', 'SEO', 'Custom Plugins', 'Shopify', 'Email Templating', 'Bug Fixing', 'Design/Layout'],
       // "jobDescription": " My job is to maintain the codes, enhance, debug the site. Make a custom plugin to work in woocommerce and additional features. Fix different bugs on design/layout. Fix website to make it more SEO friendly."
-      "jobDescription": `At Ecoshift Corp., a company specializing in LED lighting solutions, I was responsible for maintaining and enhancing their primary e-commerce website. My work included developing custom WooCommerce plugins to introduce tailored features, optimizing the website for SEO to boost search engine rankings and performance, and resolving design and layout issues to ensure a professional, user-friendly experience.
-<br/><br/>
-Additionally, I managed the company’s email templates, ensuring they were visually appealing, aligned with the brand identity, and effective in customer engagement.
-</br></br>
-In parallel, I contributed to a separate project for Ecoshift that involved transitioning their new website from Shopify to a customized platform. This included customizing the theme and functionality to better align with their branding and operational needs. This dual focus allowed me to support both ongoing operations and strategic advancements in their web presence.`
+      "jobDescription": `At Ecoshift Corp, I'm currently doing development and maintenance for e-commerce and assisting in improving the two custom WooCommerce plugins that were developed to perform specific functions. Other projects also include designing SEO campaigns for ranking and optimizing traffic through search engines as well as fixing design and layout issues on pages for a more professional look with user-friendliness.<br/><br/>
+
+Also, it dealt with mail templates, making them appealing, warm, branded, and really created for customer engagements.<br/><br/>
+
+Simultaneously, I managed another project for Ecoshift, where the company needed to change its site from Shopify to a customized-built platform. This meant developing a theme and functionalities aligned to the brand and operations. This gave me the opportunity to support both an operational platform and the strategic development of their web presence.`
   },
   {
       "companyLogo": "/static/images/companies/abscbn.png",
@@ -542,17 +540,17 @@ const HEADERCONFIG = {
   title: "Carl Louis Manuel - Programmer Analyst | Full-Stack Web & App Developer | Software Engineer | 12+ Years of Experience",
   meta: [
     { name: "theme-color", content: "#000000" },
-    { name: "description", content: "Experienced Programmer Analyst | Full-Stack Web & App Developer | Software Engineer with 12+ years of expertise in ReactJS, NodeJS, PHP, and top frameworks like Laravel and CodeIgniter. Skilled in creating secure, scalable, and SEO-optimized websites, with a focus on responsive design and performance." },
-    { name: "keywords", content: "Programmer Analyst, Full-Stack Web & App Developer, Software Engineer, ReactJS, NodeJS, PHP, Laravel, CodeIgniter, AngularJS, VueJS, JQuery, HTML, CSS, Web Development, SEO, WordPress, Drupal, Joomla, Custom Themes, Responsive Design, OOP, Web Security, Scalable Websites, MySQL, Linux Development, CMS" },
+    { name: "description", content: "Experienced Programmer Analyst | Full-Stack Web & App Developer | Software Engineer with 12+ years of expertise in ReactJS, VueJS, AngularJS, NodeJS, PHP, and top frameworks like Laravel and CodeIgniter. Skilled in creating secure, scalable, and SEO-optimized websites, with a focus on responsive design and performance." },
+    { name: "keywords", content: "Programmer Analyst, Full-Stack Web & App Developer, Software Engineer, ReactJS, VueJS, AngularJS, NodeJS, PHP, Laravel, CodeIgniter, AngularJS, VueJS, JQuery, HTML, CSS, Web Development, SEO, WordPress, Drupal, Joomla, Custom Themes, Responsive Design, OOP, Web Security, Scalable Websites, MySQL, Linux Development, CMS" },
     { property: "og:locale", content: "en_US" },
     { property: "og:type", content: "portfolio" },
     { property: "og:title", content: "Programmer Analyst | Full-Stack Web & App Developer | Software Engineer | 12+ Years of Experience" },
     { name: "twitter:title", content: "Programmer Analyst | Full-Stack Web & App Developer | Software Engineer | 12+ Years of Experience" },
     { property: "og:description", content: "Experienced Programmer Analyst | Full-Stack Web & App Developer | Software Engineer with 12+ years of expertise in ReactJS, NodeJS, PHP, and top frameworks like Laravel and CodeIgniter. Skilled in creating secure, scalable, and SEO-optimized websites, with a focus on responsive design and performance." },
     { name: "twitter:description", content: "Experienced Programmer Analyst | Full-Stack Web & App Developer | Software Engineer with 12+ years of expertise in ReactJS, NodeJS, PHP, and top frameworks like Laravel and CodeIgniter. Skilled in creating secure, scalable, and SEO-optimized websites, with a focus on responsive design and performance." },
-    { property: "og:image", content: "/static/images/me-bg.png" },
-    { name: "twitter:image", content: "/static/images/me-bg.png" },
-    { property: "og:url", content: "http://carlmanuel.orgfree.com/" },
+    { property: "og:image", content: "/static/images/profile3.jpg" },
+    { name: "twitter:image", content: "/static/images/profile3.jpg" },
+    { property: "og:url", content: "https://carlxaeron.github.io/" },
     { property: "og:site_name", content: "Carl Louis Manuel - Programmer Analyst | Full-Stack Web & App Developer | Software Engineer | 12+ Years of Experience" },
     { name: "twitter:card", content: "summary" },
     { name: "twitter:site", content: "@carlxaeron09" },

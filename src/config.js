@@ -19,37 +19,37 @@ const LiParent = styled.li`
 export const PROJECTS_DESCRIPTION_AI = (data) => (
   <div className='m-4 text-sm lg:text-lg text-left'>
     <ul>
-      <LiParent>Hi there! I’m a passionate Full-Stack Web Developer with over 12 years ({data.time}) of experience (and counting!) crafting robust web applications and responsive websites. Since starting my journey in 2012, I’ve worked with a wide range of modern technologies to create secure, scalable, and user-focused solutions.</LiParent>
+      <LiParent>Hi! I have 12 years ({data.time}) experience (and still counting) as a full-stack web developer, building web applications and websites that are robust and responsive. I have been experimenting with all sorts of technology, modern to old, since I began in 2012, to come up with solutions that are secure, fault-tolerant, user-centric, and scalable.</LiParent>
       <LiParent>
-        <b>💻 My Expertise:</b>
+        <b>My Expertise:</b>
         <ul>
-          <li>Front-End Development: I build visually appealing and user-friendly interfaces with HTML, CSS, and JavaScript frameworks like AngularJS, VueJS, ReactJS, and jQuery.</li>
-          <li>Back-End Mastery: I’m well-versed in PHP/MySQL environments (XAMPP, WAMP, LAMP) and frameworks like Laravel, CodeIgniter, and Zend.</li>
-          <li>CMS Customization: From WordPress and Drupal to Joomla, I specialize in creating custom themes, ensuring high performance, and optimizing for SEO.</li>
+          <li>Front-End Development: I use HTML, CSS, JavaScript frameworks - JQuery, AngularJS, ReactJS, and VueJS - to create interfaces that reflect visually appealing and user-friendly experiences.</li>
+          <li>Back-End Mastery: Well versed in PHP/MySQL environments (XAMPP, WAMP, LAMP) and frameworks like Laravel, CodeIgniter, and Zend.</li>
+          <li>CMS: From starting with WordPress and Drupal or going all the way to Joomla, I'm an expert in creating and optimizing themes for high performance and SEO.</li>
         </ul>
       </LiParent>
       <LiParent>
-        <b>🔍 What Makes Me Different:</b>
+        <b>What Makes Me Different:</b>
         <ul>
-          <li>I combine technical expertise with a deep commitment to delivering secure, high-quality applications. By following Object-Oriented Programming principles and modern coding standards, I ensure my projects are robust and protected against vulnerabilities like SQL injections.</li>
-          <li>I’m also passionate about user experience—every website I build is responsive, mobile-friendly, and compatible across all major browsers. And when it comes to problem-solving, I enjoy tackling challenges head-on, using creative and innovative approaches.</li>
+          <li>I combine my technical expertise with a commitment to provide high-performing applications that are entirely secure. Adhering to Object-Oriented principles, techniques, and modern coding standards applicable to my projects result in airtight projects against varying vulnerabilities like SQL injections.</li>
+          <li>At the same time, I'm a user experience advocate. To create sites, it must be mobile-friendly, responsive, and all standard modern browsers compatible. And when it comes to problem-solving I'm an upfront'll face it type of person. I would always throw innovative and creative approaches to it.</li>
         </ul>
       </LiParent>
       <LiParent>
-        <b>🌟 Beyond Coding:</b>
+        <b>Beyond Coding:</b>
         <ul>
-          <li>SEO-Driven Development: I help businesses enhance their online presence by creating websites optimized for search engine visibility.</li>
-          <li>Mobile Development: I have experience with Flutter and integrating back-end systems with Firebase to create seamless experiences.</li>
-          <li>Reliable Support: I provide ongoing maintenance and support to keep projects running smoothly and efficiently over time.</li>
+          <li>SEO Development: Making websites for traffic generation through search engine optimization for businesses.</li>
+          <li>Mobile Development: Fluency in Flutter, back ending Firebase integration, functioning as one, making a smooth experience.</li>
+          <li>Ongoing Maintenance: Trusted and provided to ensure that projects run smoothly and easily over a long time.</li>
         </ul>
       </LiParent>
       <LiParent>
-        <b>🚀 Always Evolving:</b>
+        <b>Always Evolving:</b>
         <ul>
-          <li>Staying ahead of industry trends is essential to me. I’m always learning, growing, and exploring new technologies to ensure I can bring fresh ideas and innovative solutions to the table.</li>
+          <li>In fact, the never-ending endeavor for me is to keep up with the industry trends. Learning, growing, exploring new technologies in order to keep bringing original ideas and innovative groundbreaking solutions.</li>
         </ul>
       </LiParent>
-      <LiParent>If you’re looking for a creative, detail-oriented developer who’s as passionate about delivering results as you are about achieving them, let’s connect. I’d love to help transform your digital vision into reality!</LiParent>
+      <LiParent>If you are searching for an imaginative detail-oriented developer who is as much passionate about delivery as you are in making it happen, then we really ought to get in touch because it would be amazing helping you turn your digital dream into a reality!</LiParent>
     </ul>
   </div>
 );
