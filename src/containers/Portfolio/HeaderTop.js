@@ -43,11 +43,22 @@ function PortfolioHeaderTop() {
   return (
     <header className="clm-header-fixed" ref={headerRef}>
       <div className="clm-nav" style={{ zIndex: 99999 }} ref={navRef}>
-        <div className="clm-container container">
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <AnimationFade>
-            <a className="navbar-brand" href="#"><h1 onClick={handleClick}>{themeContext.value.env === 'dev' ? 'Lorem Ipsum' : 'Carl Louis Manuel'}</h1></a>
-          </AnimationFade>
+        <div className="clm-container container flex justify-between items-center">
+          <div className="">
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            <AnimationFade>
+              <a className="navbar-brand" href="#"><h1 onClick={handleClick}>{themeContext.value.env === 'dev' ? 'Lorem Ipsum' : 'Carl Louis Manuel'}</h1></a>
+            </AnimationFade>
+          </div>
+          <div className="">
+            <nav className="clm-nav-menu">
+              <ul>
+                <li><a href="https://github.com/carlxaeron" target="_blank">
+                  <i className="fa fa-github"></i>
+                </a></li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
       {/* <nav>
