@@ -234,6 +234,17 @@ I am excited to connect with like-minded professionals and organizations seeking
 
 const COMPANIES = [
   {
+      id: 'mb',
+      title: 'Metrobank',
+      projects: [
+          {
+              id: 'mb1',
+              imgType: 'png',
+              title: 'AppKey',
+          },
+      ],
+  },
+  {
       id: 'gad',
       title: 'GoAutoDial Inc',
       projects: [

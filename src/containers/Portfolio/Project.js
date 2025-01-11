@@ -3,6 +3,7 @@ import Tracker from "../../components/Tracker";
 import { analytics, COMPANIES, logEvent } from "../../config";
 import { useSpring, animated } from "@react-spring/web";
 import { useStore } from "./theme-provider";
+import styled from "styled-components";
 
 function PortfolioProject(props) {
   const [show, setShow] = useState(false);
@@ -79,15 +80,40 @@ const compileValue = (value) => {
   </div>;
 }
 
+const H5 = styled.h5`
+  margin-top: 1rem;
+  font-weight: bold;
+`;
+
 const getContents = (props) => {
+
   let content = false;
   if (props) switch (props.project.id) {
+    case 'mb1':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        {/* <p>I have started the feature for MB AppKey in the frontend where i setup the module for appkey that contains the redux, unit test, view, and sub components. After building the core for AppKey, many developers starts to integrate it to different pages/module by just adding a maximum of 5 lines of code to their tasks. It minimizes the repetetive codes and able to maintain easily by updating its core for the frontend.</p> */}
+        <p>The MB AppKey feature front-end development spearheaded by me was all about laying down the groundwork for the initial module, including the design and full implementation of an entire base plan. Redux integration, unit tests, views, and subcomponents created an army of a solid and reusable backbone. Once the core part was finished, it could be integrated easily by other developers across pages and even modules without much fuss-usually in less than five lines of code. This proved to be an effortless repetitive coding and easy maintenance, where updates to the core are automatically propagated throughout the entire application.</p>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#reactJS</li>
+          <li>#redux</li>
+          <li>#frontend</li>
+          <li>#unittesting</li>
+          <li>#API</li>
+          <li>#html</li>
+          <li>#css</li>
+
+        </ul></>)
+      });
+      break;
     case 'eco':
       content = compileValue({
         ...props,
-        html: (<><h5>Description</h5>
+        html: (<><H5>Description</H5>
           <p>Made in wordpress and woocommerce plugin. My job is to maintain the codes, enhance, debug the site. Make a custom plugin to work in woocommerce and additional features. Fix different bugs on design/layout. Fix website to make it more SEO friendly.</p>
-          <h5>Tags</h5>
+          <H5>Tags</H5>
           <ul className="clm-modal-tools row">
             <li>#wordpress</li>
             <li>#woocommerce</li>
