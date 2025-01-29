@@ -416,7 +416,7 @@ const EXPERIENCES = [
   {
       "companyLogo": "/static/images/companies/mb.jpg",
       "companyName": "Metropolitan Bank & Trust (Metrobank).",
-      "jobTitle": "Programmer Analyst",
+      "jobTitle": "Programmer Analyst / Javascript Developer",
       "dateRange": "(Aug 2022- Dec 2024)",
       "skills": ['ReactJS', 'Redux', 'Jest', 'GitLab', 'Jira', 'Postman', 'Mockoon', 'Pixel-Perfect', 'Standup Meeting', 'Unit-Tesing', 'End-to-End Testing', 'API Implementation to UI', 'Frontend Development', 'Responsive Design', 'Bug Fixing'],
       // "jobDescription": `•	Developed and maintained banking applications, ensuring secure and efficient financial transactions.<br />•	Collaborated with cross-functional teams to analyze requirements and implement technical solutions that improved system functionality.•	Conducted thorough testing and debugging to maintain high system reliability and minimize errors. In testing we used jest, enzyme, and cypress for end to end testing. We used gitlab for version control and jira for project management. In communicating with backend if we need to get some data we used postman for API testing and mockoon for mocking the API while the backend is not yet finished. Upon developing the frontend we used reactjs and redux for state management and also if there is need to improve the the frontend design i used also a technique for pixel-perfect from desktop to mobile. We also have every day standup meeting to discuss the progress of the project and if there is any blocker we need to escalate it to the team lead and also with testers and BA.`,
@@ -467,7 +467,7 @@ Achievements: <br/>
   {
       "companyLogo": "/static/images/companies/eco.jpg",
       "companyName": "Ecoshift Corp.",
-      "jobTitle": "Web App Developer (Regular/Remote)",
+      "jobTitle": "Lead Web Developer (Regular/Remote)",
       "dateRange": "(Feb 2019- July 2022)",
       "skills": ['WooCommerce', 'WordPress', 'SEO', 'Custom Plugins', 'Shopify', 'Email Templating', 'Bug Fixing', 'Design/Layout'],
       // "jobDescription": " My job is to maintain the codes, enhance, debug the site. Make a custom plugin to work in woocommerce and additional features. Fix different bugs on design/layout. Fix website to make it more SEO friendly."
