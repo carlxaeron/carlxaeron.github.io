@@ -234,6 +234,17 @@ I am excited to connect with like-minded professionals and organizations seeking
 
 const COMPANIES = [
   {
+      id: 'mb',
+      title: 'Metrobank',
+      projects: [
+          {
+              id: 'mb1',
+              imgType: 'png',
+              title: 'AppKey',
+          },
+      ],
+  },
+  {
       id: 'gad',
       title: 'GoAutoDial Inc',
       projects: [
@@ -407,41 +418,75 @@ const EXPERIENCES = [
       "companyName": "Metropolitan Bank & Trust (Metrobank).",
       "jobTitle": "Programmer Analyst / Javascript Developer",
       "dateRange": "(Aug 2022- Dec 2024)",
+      "skills": ['ReactJS', 'Redux', 'Jest', 'GitLab', 'Jira', 'Postman', 'Mockoon', 'Pixel-Perfect', 'Standup Meeting', 'Unit-Tesing', 'End-to-End Testing', 'API Implementation to UI', 'Frontend Development', 'Responsive Design', 'Bug Fixing'],
       // "jobDescription": `•	Developed and maintained banking applications, ensuring secure and efficient financial transactions.<br />•	Collaborated with cross-functional teams to analyze requirements and implement technical solutions that improved system functionality.•	Conducted thorough testing and debugging to maintain high system reliability and minimize errors. In testing we used jest, enzyme, and cypress for end to end testing. We used gitlab for version control and jira for project management. In communicating with backend if we need to get some data we used postman for API testing and mockoon for mocking the API while the backend is not yet finished. Upon developing the frontend we used reactjs and redux for state management and also if there is need to improve the the frontend design i used also a technique for pixel-perfect from desktop to mobile. We also have every day standup meeting to discuss the progress of the project and if there is any blocker we need to escalate it to the team lead and also with testers and BA.`,
-      "jobDescription": `	•	Developed and maintained banking applications, ensuring secure, efficient, and reliable financial transactions in alignment with industry standards.<br />
-•	Collaborated with cross-functional teams, including testers and business analysts, to analyze requirements, design technical solutions, and enhance system functionality.<br />
-•	Executed comprehensive testing and debugging to ensure system reliability and minimize errors. Utilized tools like Jest, Enzyme, and Cypress for end-to-end testing, GitLab for version control, and Jira for project management.<br />
-•	Streamlined API integration by leveraging Postman for API testing and Mockoon for mocking APIs during development phases, enabling seamless communication with backend systems even before completion.<br />
-•	Developed the frontend using ReactJS and Redux for efficient state management. Applied pixel-perfect techniques to achieve consistent and responsive designs across desktop and mobile platforms.<br />
-•	Participated in daily stand-up meetings to track project progress, address blockers, and ensure alignment among team members, including testers and business analysts.`
+      "jobDescription": `• Designed and maintained secure and efficient banking applications, ensuring financial transactions to an industry standard.<br/>
+• Worked closely with cross-functional teams, including testers and business analysts, to understand requirements from all aspects in order to engineer a technical solution and improve system functionality.<br/>
+• Focus on delivering high-quality results by thoroughly maintaining toolsets, testing, and debugging such as Jest, Enzyme, Cypress while tracking modifications on projects using GitLab and sometimes Jira.<br/>
+• Simplified API integration by utilizing Postman for testing and Mockoon to simulate APIs during development, thus enabling front-end work to proceed when the back-end is not yet ready.<br/>
+• Created intuitive and responsive frontends by ReactJS and Redux which closely knitted to the pixel-perfect designs functioning amazingly well on the desktop and mobile.<br/>
+• Make sure active participation on a daily stand up, giving updates that address challenges with the team, especially testers and business analysts to line up.`
   },
   {
       "companyLogo": "/static/images/companies/GAD.jpeg",
       "companyName": "GoAutoDial, Inc.",
-      "jobTitle": "Web Application Developer",
+      "jobTitle": "Web Application Developer (Part-time/Remote)",
       "dateRange": "(Jan 2022 - Present)",
-      "jobDescription": `At GoAutoDial, Inc., I spearheaded the modernization of the agent web application, which serves as a crucial tool for call center agents to efficiently dial leads. This application was initially built using jQuery and PHP.<br />
-•	Revamped the system by transitioning to a Laravel backend and ReactJS frontend, adopting a modern technology stack for improved maintainability and scalability.<br />
-•	Optimized the user experience by designing a more intuitive and responsive interface, ensuring seamless operation for call center agents.<br />
-•	Enhanced the application’s performance and scalability, allowing it to handle increased workloads while maintaining reliability.<br />
-•	Delivered significant improvements in efficiency, resulting in heightened user satisfaction and increased productivity for call center operations.<br />
-    •	Designed and implemented a WHMCS provisioning module to streamline cloud service provisioning and management, enhancing automation and user experience.`
+      "skills": ['Laravel', 'ReactJS', 'WHMCS', 'PHP', 'User Experience', 'Bug Fixing'],
+      "jobDescription": `At GoAutoDial, Inc, I have spearheaded the entire modernization of the Agent Web Application-the Word of the call center agents for managing and dialing leads. It was initially built with jQuery and PHP, and clearly needed an update to make it up-to-date.<br/>
+• The rewrite is carrying out an entirely newly built Laravel Backend and ReactJS Frontend for a more scalable and maintainable application.<br/>
+• A cleaner, more user-friendly, fully responsive interface was designed to avoid such hassles and to make it easier for call-center agents to use within their daily processes.<br/>
+• It is more performance- and scalability-oriented, meant to ensure that application could carry a higher load without compromising reliability.<br/>
+• All of these are efficiency-increasing and boosting user satisfaction at the same time increasing productivity in call center work.<br/>
+• Developed a provisioning module for WHMCS which further simplifies cloud service management and automation, thus improving the overall user experience and operational workflows significantly.<br/><br/>
+
+This project was an exciting chance to use technology to inject modern solutions into a workplace that was going to last and be valuable to both the internal team and their user base forever.`
+  },
+  {
+        "companyLogo": "",
+        "companyName": "UCC, Cornerstone and MNX",
+        "jobTitle": "Fullstack Dev/Engineer & API Integrator (Part-time/Remote)",
+        "dateRange": "(Dec 2020- June 2022)",
+        "skills": ['PHP', 'Laravel', 'VueJS', 'Flutter', 'Firebase', 'API Integrations', 'Payment Gateways'],
+        "jobDescription": `Furthermore, even working with applications for full-stack banking systems; such as, working with PHP and Laravel. HTML, CSS, and VueJS are used for the frontend technologies for the applications to be responsive and user-friendly. <br/><br/>
+
+API Integrator, is mostly for API services on web and mobile applications. Dragonpay is integrated into their payment gateways, and mobile loading is the offering from most of their services. I've developed a mobile app using Flutter and Firebase with end-user experience in mind.<br/><br/>
+
+My Skills: <br/>
+• Backend: PHP, Laravel, Websockets, PHPUnit for unit testing, Docker <br/>
+• Frontend: HTML, CSS, VueJS <br/>
+• Mobile Development: Flutter and Firebase <br/>
+• API Integration: Dragonpay and other payment gateways<br/><br/>
+
+Achievements: <br/>
+• Created a web application for the bank to load modules and integrated payment gateways. <br/>
+• Made an application programming interface for analytics and put together a system for the analysis of election results. <br/>
+• Developed a solid, well-scalable mobile application using Firebase from the backend.<br/>
+`,
   },
   {
       "companyLogo": "/static/images/companies/eco.jpg",
       "companyName": "Ecoshift Corp.",
-      "jobTitle": "Lead Web Developer",
+      "jobTitle": "Lead Web Developer (Regular/Remote)",
       "dateRange": "(Feb 2019- July 2022)",
+      "skills": ['WooCommerce', 'WordPress', 'SEO', 'Custom Plugins', 'Shopify', 'Email Templating', 'Bug Fixing', 'Design/Layout'],
       // "jobDescription": " My job is to maintain the codes, enhance, debug the site. Make a custom plugin to work in woocommerce and additional features. Fix different bugs on design/layout. Fix website to make it more SEO friendly."
-      "jobDescription": "In my role at Ecoshift Corp., I was responsible for the ongoing maintenance, enhancement, and debugging of the company’s website. I developed custom plugins tailored for WooCommerce, adding new features and functionalities to meet business needs. My work also included troubleshooting and fixing various design and layout issues, ensuring the site maintained a professional and user-friendly appearance. Additionally, I optimized the website for SEO, implementing strategies to improve search engine visibility and site performance."
+      "jobDescription": `At Ecoshift Corp, I'm currently doing development and maintenance for e-commerce and assisting in improving the two custom WooCommerce plugins that were developed to perform specific functions. Other projects also include designing SEO campaigns for ranking and optimizing traffic through search engines as well as fixing design and layout issues on pages for a more professional look with user-friendliness.<br/><br/>
+
+Also, it dealt with mail templates, making them appealing, warm, branded, and really created for customer engagements.<br/><br/>
+
+Simultaneously, I managed another project for Ecoshift, where the company needed to change its site from Shopify to a customized-built platform. This meant developing a theme and functionalities aligned to the brand and operations. This gave me the opportunity to support both an operational platform and the strategic development of their web presence.`
   },
   {
       "companyLogo": "/static/images/companies/abscbn.png",
       "companyName": "ABS-CBN Corp.",
       "jobTitle": "Frontend Developer",
       "dateRange": "(Sep 2016- Feb 2019)",
+      "skills": ['HTML', 'CSS', 'JQuery', 'AngularJS', 'VueJS', 'ReactJS', 'Bootstrap', 'TailwindCSS', 'Jade', 'Pug', 'Gulp', 'Webpack', 'LESS', 'SASS', 'Responsive Design', 'Cross-Browser Compatibility'],
       // "jobDescription": "My responsibilities are make webpages that made of HTML, CSS, and JavaScript. By using latest and updated technology and using NPM we build some webpages that is supported the GULP task management. I used LESS, SASS for managing the CSS. I used webpack for compiling and just all the plugins or JavaScript in one file. I used JADE template for building the HTML file. Make the webpage supports all browsers from desktop to mobile devices. I finished three websites from scratch."
-      "jobDescription": "At ABS-CBN Corp., I was responsible for developing responsive and cross-browser-compatible web pages using modern front-end technologies. I utilized HTML, CSS, and JavaScript, integrating tools like NPM and Gulp for efficient task management. For CSS, I managed styles using LESS and SASS, ensuring modular and maintainable code. I also implemented Webpack for bundling JavaScript, optimizing performance by compiling all scripts into a single file. Using the JADE templating engine, I built dynamic HTML files that adapted seamlessly across desktop and mobile devices. During my tenure, I successfully completed three websites from scratch, delivering robust and high-quality results."
+      "jobDescription": `I was responsible for building web pages using HTML, CSS, and JavaScript, always staying up-to-date with the latest tools and technologies. To streamline the process, I used NPM for managing dependencies and GULP for automating tasks. For managing CSS, I worked with LESS and SASS, and I used Webpack to compile JavaScript and bundle all scripts into a single, optimized file.
+<br/><br/>
+To speed up development, I utilized the JADE template engine for creating HTML files. I made sure every webpage was fully responsive and worked seamlessly across all browsers, whether on desktops or mobile devices. During this time, I had the opportunity to build three complete websites from scratch, which was a rewarding experience.`
   },
   {
       "companyLogo": "/static/images/companies/gl.png",

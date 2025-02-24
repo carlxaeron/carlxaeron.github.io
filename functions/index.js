@@ -161,3 +161,22 @@ exports.contact = onRequest((request, response) => {
     sendError({ response }, { message: "Error saving contact data" });
   });
 });
+
+exports.license = onRequest((request, response) => {
+  console.log(request.body);
+  const requestBody = request.body;
+
+  const allowedDomains = ['https://vivawellnessdripdotcom.test', 'https://vivawellnessdrip.com', 'https://staging.vivawellnessdrip.com']
+
+  let valid = false;
+  if (requestBody.license_key === 'carlxaeron09@gmail.com' && allowedDomains.includes(requestBody.domain)) {
+    valid = true;
+  }
+
+  if (valid) return sendSuccess({ response, request }, { message: "License validated", data: {
+    status: 'valid',
+  } });
+  else return sendError({ response, request }, { message: "License invalid", data: {
+    status: 'invalid',
+  } });
+});
