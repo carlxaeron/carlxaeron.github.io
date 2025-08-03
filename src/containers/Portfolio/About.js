@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "./theme-context";
 import { useSpring, animated } from "@react-spring/web";
 import Tracker from "./../../components/Tracker";
@@ -233,18 +233,18 @@ function PortfolioAbout(props) {
   const tempExps = (
     <ul>
       {skillsFiltered().map((skill, index) => (
-        <>
-          <SkillComponent skill={skill} i={index} key={index} />
+        <React.Fragment key={`skill-${index}`}>
+          <SkillComponent skill={skill} i={index} />
           {skill.child && (
             <li className="li-parent">
               <ul>
                 {skill.child.map((skill2, index2) => (
-                  <SkillComponent skill={skill2} i={index} key={index2} />
+                  <SkillComponent skill={skill2} i={index} key={`skill-${index}-${index2}`} />
                 ))}
               </ul>
             </li>
           )}
-        </>
+        </React.Fragment>
       ))}
     </ul>
   )

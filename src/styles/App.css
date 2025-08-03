@@ -343,3 +343,77 @@ a:focus {
   outline: 2px solid #ef4444;
   outline-offset: 2px;
 }
+
+/* Full-page slider navigation styles */
+.portfolio-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-navigation {
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.nav-dot:hover {
+  transform: scale(1.3) !important;
+  background: rgba(239, 68, 68, 0.8) !important;
+}
+
+.nav-arrow:hover {
+  transform: translateX(-50%) scale(1.1) !important;
+  background: rgba(239, 68, 68, 1) !important;
+}
+
+.nav-arrow:disabled {
+  opacity: 0.3 !important;
+  cursor: not-allowed !important;
+}
+
+.sections-container {
+  position: relative;
+}
+
+.section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Smooth transitions for section changes */
+.section.active {
+  z-index: 1;
+}
+
+/* Hide scrollbar */
+body {
+  overflow: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile responsive navigation */
+@media (max-width: 768px) {
+  .section-navigation {
+    right: 10px;
+    gap: 8px;
+  }
+  
+  .nav-dot {
+    width: 10px !important;
+    height: 10px !important;
+  }
+  
+  .nav-arrow {
+    width: 35px !important;
+    height: 35px !important;
+  }
+}

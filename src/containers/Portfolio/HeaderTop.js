@@ -3,7 +3,7 @@ import { ThemeContext } from "./theme-context";
 import sessionstorage from "sessionstorage";
 import { AnimationFade } from "../../components/Animations";
 
-function PortfolioHeaderTop() {
+function PortfolioHeaderTop({ onToggleSlider, useSlider }) {
   const themeContext = useContext(ThemeContext);
 
   // fix double call for useEffect because of strictmode is on
@@ -52,7 +52,28 @@ function PortfolioHeaderTop() {
           </div>
           <div className="">
             <nav className="clm-nav-menu">
-              <ul>
+              <ul className="flex items-center gap-2">
+                {/* Slider Toggle Button */}
+                <li>
+                  <button 
+                    onClick={onToggleSlider}
+                    style={{
+                      background: useSlider ? '#ef4444' : 'transparent',
+                      color: useSlider ? 'white' : 'white',
+                      border: '1px solid white',
+                      borderRadius: '4px',
+                      padding: '8px 12px',
+                      cursor: 'pointer',
+                      fontSize: '12px',
+                      fontWeight: 'bold',
+                      transition: 'all 0.3s ease',
+                      marginRight: '10px'
+                    }}
+                    title={useSlider ? 'Switch to Original Layout' : 'Switch to Slider Layout'}
+                  >
+                    {useSlider ? 'Original' : 'Slider'} (WIP)
+                  </button>
+                </li>
                 <li><a href="https://github.com/carlxaeron" target="_blank">
                   <i className="fa fa-github"></i>
                 </a></li>

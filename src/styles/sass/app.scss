@@ -11,3 +11,109 @@
 
 // MAIN
 @import 'portfolio/sass/master.scss';
+
+/* Full-Page Slider Styles */
+body {
+  overflow: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.portfolio-container {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.sections-container {
+  height: 100vh;
+  will-change: transform;
+}
+
+.section {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-navigation {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+.nav-dot.active {
+  background: #ef4444;
+  transform: scale(1.2);
+}
+
+.nav-dot:hover {
+  transform: scale(1.1);
+}
+
+.nav-arrow {
+  position: fixed;
+  background: rgba(239, 68, 68, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: white;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav-arrow:hover {
+  background: rgba(239, 68, 68, 1);
+  transform: scale(1.1);
+}
+
+.nav-arrow-up {
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-arrow-down {
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .section-navigation {
+    right: 10px;
+  }
+  
+  .nav-arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+}
+
