@@ -233,6 +233,17 @@ I stay ahead of industry trends, constantly refining my skill set to meet market
 I am excited to connect with like-minded professionals and organizations seeking a creative, detail-oriented, and results-driven developer to transform digital visions into reality.`;
 
 const COMPANIES = [
+    {
+        id: 'omniscius',
+        projects: [
+            {
+                id: 'omniscius',
+                imgType: 'png',
+                title: 'Cybersecurity Intelligence Platform',
+            },
+        ],
+        title: 'Omniscius',
+    },
   {
       id: 'mb',
       title: 'Metrobank',

@@ -140,6 +140,482 @@ const getContents = (props) => {
           </ul></>)
       });
       break;
+    case 'omniscius':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Omniscius is a comprehensive cybersecurity intelligence platform designed to monitor ransomware groups, track data breaches, and gather intelligence from dark web forums and marketplaces. The platform provides a complete view of the threat landscape, helping organizations stay ahead of cyber threats.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Ransomware Tracking: Monitor active ransomware groups, their victims, and attack patterns</li>
+          <li>Credential Monitoring: Identify compromised credentials and data from Infostealer malware</li>
+          <li>Forum Intelligence: Track underground forums and marketplaces for threat intelligence</li>
+          <li>Early Warning System: Receive alerts about potential threats before they impact your organization</li>
+          <li>Global Threat Landscape: Access comprehensive data on cyber threats worldwide</li>
+          <li>Threat Actor Profiles: Detailed information about known threat actors and their tactics</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#cybersecurity</li>
+          <li>#threatintelligence</li>
+          <li>#darkweb</li>
+          <li>#ransomware</li>
+          <li>#databreaches</li>
+          <li>#securityplatform</li>
+          <li>#monitoring</li>
+          <li>#intelligence</li>
+          <li>#nextjs</li>
+          <li>#tailwindcss</li>
+          <li>#typescript</li>
+          <li>#reactjs</li>
+          <li>#redux</li>
+          <li>#nodejs</li>
+          <li>#expressjs</li>
+        </ul></>)
+      });
+      break;
+    case 'agent':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Modernized the entire Agent Web Application for GoAutoDial Inc, transforming it from a jQuery and PHP-based system to a modern, scalable application. The project involved complete rewrite with Laravel backend and ReactJS frontend to create a more efficient and user-friendly interface for call center agents.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Complete system modernization from jQuery/PHP to Laravel/ReactJS</li>
+          <li>Responsive design optimized for call center agent workflows</li>
+          <li>Enhanced performance and scalability for high-load operations</li>
+          <li>WHMCS provisioning module for cloud service management</li>
+          <li>Improved user experience and productivity for daily operations</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#laravel</li>
+          <li>#reactjs</li>
+          <li>#php</li>
+          <li>#whmcs</li>
+          <li>#modernization</li>
+          <li>#callcenter</li>
+          <li>#responsive</li>
+          <li>#scalable</li>
+        </ul></>)
+      });
+      break;
+    case 'sc':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Developed the Star Cinema website for ABS-CBN Corp, creating a comprehensive movie booking and information platform. The site features movie listings, showtimes, ticket booking functionality, and promotional content management.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Movie booking system with real-time availability</li>
+          <li>Responsive design for mobile and desktop users</li>
+          <li>Content management for movie listings and promotions</li>
+          <li>SEO optimization for better search visibility</li>
+          <li>Cross-browser compatibility and performance optimization</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#jquery</li>
+          <li>#responsive</li>
+          <li>#booking</li>
+          <li>#seo</li>
+          <li>#crossbrowser</li>
+        </ul></>)
+      });
+      break;
+    case 'kty':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Built the "Kapamilya Thank You" platform for ABS-CBN Corp, a special promotional website designed to engage viewers and provide exclusive content and rewards for loyal Kapamilya members.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Interactive promotional campaigns and rewards system</li>
+          <li>User engagement features and loyalty programs</li>
+          <li>Responsive design for all device types</li>
+          <li>Integration with ABS-CBN's content management system</li>
+          <li>Performance optimization for high traffic periods</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#jquery</li>
+          <li>#promotional</li>
+          <li>#engagement</li>
+          <li>#responsive</li>
+          <li>#optimization</li>
+        </ul></>)
+      });
+      break;
+    case 'push':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Redesigned and developed the Push website for ABS-CBN Corp, creating a modern entertainment news platform with improved user experience and content delivery. The redesign focused on better navigation and content organization.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Complete website redesign with modern UI/UX</li>
+          <li>Improved content organization and navigation</li>
+          <li>Enhanced mobile responsiveness and performance</li>
+          <li>Better SEO optimization for entertainment content</li>
+          <li>Integration with ABS-CBN's content management systems</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#redesign</li>
+          <li>#uiux</li>
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#responsive</li>
+          <li>#seo</li>
+          <li>#entertainment</li>
+        </ul></>)
+      });
+      break;
+    case 'corp':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Developed the Corporate website for ABS-CBN Corp, creating a professional business platform that showcases the company's corporate information, investor relations, and business services.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Professional corporate website with business information</li>
+          <li>Investor relations and corporate governance sections</li>
+          <li>Responsive design for professional presentation</li>
+          <li>Content management for corporate updates</li>
+          <li>SEO optimization for business visibility</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#corporate</li>
+          <li>#business</li>
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#responsive</li>
+          <li>#seo</li>
+          <li>#professional</li>
+        </ul></>)
+      });
+      break;
+    case 'careers':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Built the Careers website for ABS-CBN Corp, creating a comprehensive job portal for the company's recruitment needs. The platform features job listings, application forms, and career information.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Job portal with listing and application functionality</li>
+          <li>Career information and company culture sections</li>
+          <li>Responsive design for job seekers</li>
+          <li>Integration with HR systems and processes</li>
+          <li>SEO optimization for recruitment visibility</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#careers</li>
+          <li>#jobportal</li>
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#responsive</li>
+          <li>#recruitment</li>
+          <li>#seo</li>
+        </ul></>)
+      });
+      break;
+    case 'anc':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Developed the ANC Form system for ABS-CBN Corp, creating a comprehensive form management platform for the news organization's various data collection and submission needs.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Form management system for data collection</li>
+          <li>User-friendly interface for form submissions</li>
+          <li>Data validation and processing capabilities</li>
+          <li>Responsive design for mobile form access</li>
+          <li>Integration with news organization workflows</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#forms</li>
+          <li>#datacollection</li>
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#validation</li>
+          <li>#responsive</li>
+          <li>#news</li>
+        </ul></>)
+      });
+      break;
+    case 'kaiaq':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Created the KAIAQ Admin Template for ABS-CBN Corp, developing a comprehensive administrative interface template that can be used across various internal systems and applications.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Reusable admin template for internal systems</li>
+          <li>Consistent UI/UX across administrative interfaces</li>
+          <li>Modular design for easy customization</li>
+          <li>Responsive layout for various screen sizes</li>
+          <li>Integration with ABS-CBN's design standards</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#admin</li>
+          <li>#template</li>
+          <li>#uiux</li>
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#responsive</li>
+          <li>#modular</li>
+        </ul></>)
+      });
+      break;
+    case 'coll8or':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Developed the Coll8or project for Huxxer Corp, creating a collaborative platform that enables team members to work together efficiently on various projects and tasks.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Team collaboration and project management tools</li>
+          <li>Real-time communication and file sharing</li>
+          <li>Task tracking and progress monitoring</li>
+          <li>Responsive design for team accessibility</li>
+          <li>Integration with existing workflow systems</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#collaboration</li>
+          <li>#teamwork</li>
+          <li>#projectmanagement</li>
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#responsive</li>
+          <li>#realtime</li>
+        </ul></>)
+      });
+      break;
+    case 'kinkcakes':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Built the Kinkcakes website for Huxxer Corp, creating an e-commerce platform for a bakery business with online ordering, product catalog, and customer management features.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>E-commerce platform for bakery products</li>
+          <li>Online ordering and payment processing</li>
+          <li>Product catalog with detailed descriptions</li>
+          <li>Customer account management</li>
+          <li>Responsive design for mobile shopping</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#ecommerce</li>
+          <li>#bakery</li>
+          <li>#onlineordering</li>
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#responsive</li>
+          <li>#payment</li>
+        </ul></>)
+      });
+      break;
+    case 'zmr':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Developed the ZMR project for Zeno Group Investments Inc, creating a comprehensive financial management and investment tracking platform for the company's portfolio management needs.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Portfolio management and investment tracking</li>
+          <li>Financial data visualization and reporting</li>
+          <li>Real-time market data integration</li>
+          <li>Secure user authentication and data protection</li>
+          <li>Responsive design for financial professionals</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#finance</li>
+          <li>#investment</li>
+          <li>#portfolio</li>
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#responsive</li>
+          <li>#security</li>
+        </ul></>)
+      });
+      break;
+    case 'zbceuit':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Built the ZBCEUIT project for Zeno Group Investments Inc, creating an educational technology platform that provides learning management and course delivery capabilities.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Learning management system (LMS) functionality</li>
+          <li>Course creation and content delivery</li>
+          <li>Student progress tracking and assessment</li>
+          <li>Interactive learning tools and resources</li>
+          <li>Responsive design for educational access</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#education</li>
+          <li>#lms</li>
+          <li>#elearning</li>
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#responsive</li>
+          <li>#interactive</li>
+        </ul></>)
+      });
+      break;
+    case 'zgi':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Developed the ZGI project for Zeno Group Investments Inc, creating a comprehensive business intelligence and analytics platform for data-driven decision making.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Business intelligence and analytics dashboard</li>
+          <li>Data visualization and reporting tools</li>
+          <li>Real-time data processing and analysis</li>
+          <li>Customizable dashboards and metrics</li>
+          <li>Responsive design for business users</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#analytics</li>
+          <li>#businessintelligence</li>
+          <li>#dashboard</li>
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#responsive</li>
+          <li>#visualization</li>
+        </ul></>)
+      });
+      break;
+    case 'vigattintourism':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Developed the Vigattin Tourism website for Vigattin Inc, creating a comprehensive travel and tourism platform that showcases destinations, travel packages, and booking services.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Tourism destination showcase and information</li>
+          <li>Travel package booking and reservation system</li>
+          <li>Interactive maps and destination guides</li>
+          <li>Customer reviews and ratings system</li>
+          <li>Responsive design for travelers on mobile devices</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#tourism</li>
+          <li>#travel</li>
+          <li>#booking</li>
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#responsive</li>
+          <li>#maps</li>
+        </ul></>)
+      });
+      break;
+    case 'vigattindeals':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Built the Vigattin Deals platform for Vigattin Inc, creating a deals and promotions website that offers special discounts, offers, and promotional campaigns for various products and services.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Deals and promotions management system</li>
+          <li>Special offers and discount tracking</li>
+          <li>User registration and deal claiming</li>
+          <li>Promotional campaign management</li>
+          <li>Responsive design for deal hunters</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#deals</li>
+          <li>#promotions</li>
+          <li>#discounts</li>
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#responsive</li>
+          <li>#campaigns</li>
+        </ul></>)
+      });
+      break;
+    case 'vigattintrade':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Developed the Vigattin Trade platform for Vigattin Inc, creating a marketplace similar to OLX where users can buy and sell various products and services.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Buy and sell marketplace functionality</li>
+          <li>Product listing and search capabilities</li>
+          <li>User authentication and profile management</li>
+          <li>Messaging system between buyers and sellers</li>
+          <li>Responsive design for marketplace users</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#marketplace</li>
+          <li>#buyandsell</li>
+          <li>#olx</li>
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#responsive</li>
+          <li>#messaging</li>
+        </ul></>)
+      });
+      break;
+    case 'vigattin':
+      content = compileValue({
+        ...props,
+        html: (<><H5>Description</H5>
+        <p>Developed the main Vigattin website for Vigattin Inc, creating the primary platform that serves as the central hub for all Vigattin services and business operations.</p>
+        <H5>Key Features</H5>
+        <ul>
+          <li>Main corporate website and service hub</li>
+          <li>Company information and service overview</li>
+          <li>Integration with all Vigattin sub-platforms</li>
+          <li>Professional business presentation</li>
+          <li>Responsive design for all users</li>
+        </ul>
+        <H5>Tags</H5>
+        <ul className="clm-modal-tools row">
+          <li>#corporate</li>
+          <li>#mainwebsite</li>
+          <li>#business</li>
+          <li>#html</li>
+          <li>#css</li>
+          <li>#javascript</li>
+          <li>#responsive</li>
+          <li>#professional</li>
+        </ul></>)
+      });
+      break;
     default:
       content = compileValue({
         ...props, html: false
