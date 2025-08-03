@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import "./../styles/sass/app.scss"
+import "./../styles/css/app.css"
 import PortfolioAbout from "./Portfolio/About";
 import PortfolioContact from "./Portfolio/Contact";
 import PortfolioExperience from "./Portfolio/Experience";

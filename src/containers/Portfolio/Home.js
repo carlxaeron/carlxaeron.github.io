@@ -41,37 +41,22 @@ function PortfolioHome() {
                 { themeContext.value.env === 'prod' && (
                 <>
                     <AnimationDown>
-                        {/* <h2>Hi, I'm a <span className="mt-4 !text-[2rem] sm:!text-[3rem]">Full-Stack WEB/Software Engineer
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="50"
-                            height="50"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="feather feather-code mx-auto"
-                        >
-                            <polyline points="16 18 22 12 16 6"></polyline>
-                            <polyline points="8 6 2 12 8 18"></polyline>
-                            <text x="12" y="12" textAnchor="middle" dominantBaseline="middle" fontSize="12" fontWeight="bold">
-                                {"/"}
-                            </text>
-                        </svg>
-                        APP Developer</span></h2> */}
-                        <h2 className="!text-[1.5rem] md:!text-[2.9rem]">
+                        <h2 className="!text-[1.5rem] md:!text-[2.9rem] animate-pulse">
                             Hi, I'm a <br />
-                            Software Engr., Web/App Developer, Fullstack Developer - ReactJS | NextJS | Vue | NuxtJS | PHP | Laravel | CodeIgniter | Wordpress | Flutter | React Native | Javascript | Typescript
+                            Software Engineer & Full-Stack Developer
+                        </h2>
+                    </AnimationDown>
+                    <AnimationDown delay={200}>
+                        <h2 className="!text-[1.5rem] md:!text-[2.9rem] hover:scale-105 transition-all duration-300 cursor-pointer hover:text-primary">
+                            <span className="hover:animate-bounce inline-block">ReactJS</span> | <span className="hover:animate-bounce inline-block">NextJS</span> | <span className="hover:animate-bounce inline-block">Vue</span> | <span className="hover:animate-bounce inline-block">NuxtJS</span> | <span className="hover:animate-bounce inline-block">PHP</span> | <span className="hover:animate-bounce inline-block">Laravel</span> | <span className="hover:animate-bounce inline-block">CodeIgniter</span> | <span className="hover:animate-bounce inline-block">WordPress</span> | <span className="hover:animate-bounce inline-block">Flutter</span> | <span className="hover:animate-bounce inline-block">React Native</span> | <span className="hover:animate-bounce inline-block">JavaScript</span> | <span className="hover:animate-bounce inline-block">TypeScript</span>
                         </h2>
                     </AnimationDown>
                     <AnimationDown delay={300}>
-                        {/* <h3 className="!text-[1rem]">Passionate about crafting innovative, scalable, and secure web solutions. I’m always ready for new challenges that push the boundaries of web development.</h3> */}
-                        <h3 className="!text-[1rem]">I’m passionate about building innovative, scalable, and secure web solutions. I love tackling new challenges that push the boundaries of what’s possible in web/app development.</h3>
+                        {/* <h3 className="!text-[1rem]">Passionate about crafting innovative, scalable, and secure web solutions. I'm always ready for new challenges that push the boundaries of web development.</h3> */}
+                        <h3 className="!text-[1rem] hover:scale-105 transition-transform duration-300">I'm passionate about building innovative, scalable, and secure web solutions. I love tackling new challenges that push the boundaries of what's possible in web/app development.</h3>
                     </AnimationDown>
                     <AnimationDown delay={500}>
-                        <a className="btn btn-primary" href="#projects">View my works</a>
+                        <a className="btn btn-primary hover:scale-110 transition-transform duration-300 hover:shadow-lg" href="#projects">View my works</a>
                     </AnimationDown>
                 </>
                 )}

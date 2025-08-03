@@ -38,8 +38,10 @@
     "zustand": "^5.0.0-rc.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && rm -rf docs && mkdir -p docs && cp -r build/* docs/",
+    "start": "concurrently \"sass src/styles/sass/app.scss src/styles/css/app.css --style=expanded --load-path=node_modules --watch\" \"react-scripts start\"",
+    "build": "sass src/styles/sass/app.scss src/styles/css/app.css --style=compressed --load-path=node_modules && react-scripts build && rm -rf docs && mkdir -p docs && cp -r build/* docs/",
+    "build:sass": "sass src/styles/sass/app.scss src/styles/css/app.css --style=compressed --load-path=node_modules",
+    "watch:sass": "sass src/styles/sass/app.scss src/styles/css/app.css --watch",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
@@ -65,6 +67,7 @@
   },
   "devDependencies": {
     "browser-sync": "^3.0.2",
+    "concurrently": "^9.2.0",
     "dotenv": "^16.4.5",
     "gulp": "^5.0.0",
     "gulp-autoprefixer": "^9.0.0",

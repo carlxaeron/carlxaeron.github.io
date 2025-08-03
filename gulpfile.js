@@ -1,19 +1,15 @@
-import gulp from 'gulp';
-import sass from 'gulp-sass';
-import autoprefixer from 'gulp-autoprefixer';
-import browserSync from 'browser-sync';
+const gulp = require('gulp');
+const sass = require('gulp-sass')(require('sass'));
+const autoprefixer = require('gulp-autoprefixer').default;
 
-gulp.task('styles', function(){
-	return gulp.src('portfolio/resources/sass/**/*.scss')
-		// .pipe(plumber({
-		// 	errorHandler: function (error) {
-		// 		console.log(error.message);
-		// 		this.emit('end');
-		// }}))
-		.pipe(sass({
-			outputStyle: 'compressed'
-		}))
-		.pipe(autoprefixer('last 3 versions'))
-		.pipe(gulp.dest('theme/styles/css/'))
-		.pipe(browserSync.stream())
-});
+gulp.task('styles', function(done) {
+    const stream = gulp.src('src/styles/sass/**/*.scss')
+        .pipe(sass({
+            outputStyle: 'compressed'
+        }))
+        .pipe(autoprefixer())
+        .pipe(gulp.dest('src/styles/css/'));
+    
+    stream.on('finish', done);
+    return stream;
+}); 
