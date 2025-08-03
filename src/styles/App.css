@@ -181,3 +181,165 @@ a:focus {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+/* Experience section animations */
+.experience-item {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 15px 0;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.experience-item:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(239, 68, 68, 0.2);
+  transform: translateY(-2px);
+}
+
+.experience-logo {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.experience-logo:hover {
+  transform: scale(1.1) rotate(2deg);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.experience-company-name {
+  transition: all 0.3s ease;
+  color: #1f2937;
+  font-weight: 700;
+}
+
+.experience-item:hover .experience-company-name {
+  color: #ef4444;
+  transform: translateX(5px);
+}
+
+.experience-date {
+  transition: all 0.3s ease;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.experience-item:hover .experience-date {
+  color: #9ca3af;
+}
+
+.experience-job-title {
+  transition: all 0.3s ease;
+  color: #374151;
+  font-weight: 600;
+}
+
+.experience-item:hover .experience-job-title {
+  color: #1f2937;
+}
+
+.experience-skills {
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+.skill-tag {
+  transition: all 0.3s ease;
+  display: inline-block;
+  padding: 2px 6px;
+  margin: 2px;
+  border-radius: 4px;
+  background: rgba(239, 68, 68, 0.1);
+  font-size: 0.75rem;
+}
+
+.skill-tag:hover {
+  background: rgba(239, 68, 68, 0.2);
+  transform: scale(1.05);
+  color: #dc2626;
+}
+
+.experience-description {
+  transition: all 0.3s ease;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+.experience-item:hover .experience-description {
+  color: #374151;
+}
+
+.experience-btn {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.experience-btn:hover {
+  transform: translateY(-2px);
+}
+
+.experience-section-title {
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.experience-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ef4444, #f97316);
+  transition: width 0.3s ease;
+}
+
+.experience-section-title:hover::after {
+  width: 100%;
+}
+
+/* Staggered animation for experience items */
+.experience-item:nth-child(1) { animation-delay: 0.1s; }
+.experience-item:nth-child(2) { animation-delay: 0.2s; }
+.experience-item:nth-child(3) { animation-delay: 0.3s; }
+.experience-item:nth-child(4) { animation-delay: 0.4s; }
+.experience-item:nth-child(5) { animation-delay: 0.5s; }
+.experience-item:nth-child(6) { animation-delay: 0.6s; }
+.experience-item:nth-child(7) { animation-delay: 0.7s; }
+.experience-item:nth-child(8) { animation-delay: 0.8s; }
+.experience-item:nth-child(9) { animation-delay: 0.9s; }
+.experience-item:nth-child(10) { animation-delay: 1.0s; }
+
+/* Floating animation for company logos */
+@keyframes float-logo {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(1deg); }
+}
+
+.experience-logo:hover {
+  animation: float-logo 2s ease-in-out infinite;
+}
+
+/* Pulse animation for important elements */
+.experience-item:hover .experience-company-name {
+  animation: pulse-important 2s infinite;
+}
+
+/* Enhanced focus states for accessibility */
+.experience-item:focus-within {
+  outline: 2px solid #ef4444;
+  outline-offset: 2px;
+}
+
+.experience-btn:focus {
+  outline: 2px solid #ef4444;
+  outline-offset: 2px;
+}
