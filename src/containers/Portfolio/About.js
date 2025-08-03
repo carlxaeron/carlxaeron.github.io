@@ -43,6 +43,8 @@ function convertDateStringToYears(dateString) {
 function PortfolioAbout(props) {
   const themeContext = useContext(ThemeContext);
   const [show, setShow] = useState(false);
+  const [skillAnimations, setSkillAnimations] = useState({});
+  const [visibleSkills, setVisibleSkills] = useState(new Set());
 
   const exps = [
     {
@@ -70,14 +72,56 @@ function PortfolioAbout(props) {
     return s;
   }
 
+  // Optimize skill animations with intersection observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const skillId = entry.target.getAttribute('data-skill-id');
+            if (skillId) {
+              setVisibleSkills(prev => new Set([...prev, skillId]));
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    const skillElements = document.querySelectorAll('[data-skill-id]');
+    skillElements.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   const SkillComponent = ({ skill, i }) => {
     const [show2, setShow2] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+    const skillId = `skill-${i}`;
+    const isVisible = visibleSkills.has(skillId);
 
     const springs = useSpring({
       from: { width: '0%', },
-      to: { width: `${parseInt(show2 ? skill.percentage : 0)}%`, },
-      // delay: 50 * parseInt(skill.k),
+      to: { width: `${parseInt(show2 && isVisible ? skill.percentage : 0)}%`, },
+      config: { 
+        tension: 200, 
+        friction: 30,
+        mass: 1
+      },
+      immediate: !show2 || !isVisible
     })
+
+    const hoverSprings = useSpring({
+      from: { scale: 1, y: 0 },
+      to: { 
+        scale: isHovered ? 1.05 : 1, 
+        y: isHovered ? -5 : 0 
+      },
+      config: { tension: 300, friction: 20 }
+    });
 
     const generateTitle = (title) => {
       const t = title.toLowerCase();
@@ -142,23 +186,46 @@ function PortfolioAbout(props) {
       <Tracker id={`about-top-skill-${i}`}
         set={0.05}
         onSuccess={() => setShow2(true)}
-        // onFail={() => setShow2(false)}
+        onFail={() => setShow2(false)}
       >
-      <li key={i}>
+      <animated.li 
+        key={i} 
+        style={hoverSprings}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-2"
+        data-skill-id={skillId}
+      >
         <h5 className="!text-[0.9rem]">{generateTitle(skill.name)}</h5>
         <div className="clm-sk-cont">
           <div className="clm-sk-cont-2">
             <div className="clm-sk-yrs">{skill.experience} Year{skill.experience > 1 ? 's' : ''} Experience</div>
             <div className="clm-sk-percent">{skill.percentage}%</div>
-            <animated.div className="clm-sk-percent-2" id={`about-${props.id}-skill-${i}`} style={{ width: `${skill.percentage}%`, ...springs }}>
+            <animated.div 
+              className="clm-sk-percent-2" 
+              id={`about-${props.id}-skill-${i}`} 
+              style={{ 
+                width: `${skill.percentage}%`, 
+                ...springs,
+                willChange: 'width'
+              }}
+            >
               <div>&nbsp;</div>
             </animated.div>
-            <div className="clm-sk-percent-2" id={`about-${props.id}-skill-${i}-2`} style={{ width: `${skill.percentage}%`, opacity: '50%' }}>
+            <div 
+              className="clm-sk-percent-2" 
+              id={`about-${props.id}-skill-${i}-2`} 
+              style={{ 
+                width: `${skill.percentage}%`, 
+                opacity: '100%',
+                willChange: 'width'
+              }}
+            >
               <div>&nbsp;</div>
             </div>
           </div>
         </div>
-      </li>
+      </animated.li>
       </Tracker>
     )
   }
@@ -230,6 +297,21 @@ function PortfolioAbout(props) {
     delay: 200,
   })
 
+  const profileSprings = useSpring({
+    from: { 
+      opacity: 0, 
+      transform: 'scale(0.5) rotate(-10deg)',
+      filter: 'blur(10px)'
+    },
+    to: { 
+      opacity: show ? 1 : 0, 
+      transform: show ? 'scale(1) rotate(0deg)' : 'scale(0.5) rotate(-10deg)',
+      filter: show ? 'blur(0px)' : 'blur(10px)'
+    },
+    delay: 800,
+    config: { tension: 200, friction: 20 }
+  });
+
   return (
     <Tracker id={`about-${props.id}`}
       set={0.1}
@@ -251,7 +333,7 @@ function PortfolioAbout(props) {
           </div>
           <div className="row">
             <div className="col-md-6 text-center">
-              <animated.div style={{ ...springs2 }} className={`clm-profile ${themeContext.value.env}`}>
+              <animated.div style={{ ...profileSprings }} className={`clm-profile ${themeContext.value.env}`}>
                 <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/profile.jpg" alt="Carl Louis Manuel" />
               </animated.div>
               {themeContext.value.env === 'dev' && (<>
@@ -259,8 +341,8 @@ function PortfolioAbout(props) {
                 <p>World World World World World World World World World World World World World World World World World World World </p>
               </>)}
               {themeContext.value.env !== 'dev' && (<animated.div style={{ ...springs3 }}>
-                <h6>I'm Carl Louis Manuel</h6>
-                {/* <p>&ldquo;{PROJECT_DESCRIPTION}&rdquo;</p> */}
+                <h6 className="text-2xl font-bold mb-3">I'm Carl Louis Manuel</h6>
+                <p className="text-gray-600 mb-4">Full-Stack Web Developer</p>
                 <Description />
               </animated.div>)}
             </div>

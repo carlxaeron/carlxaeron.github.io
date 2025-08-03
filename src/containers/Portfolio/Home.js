@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { ThemeContext } from "./theme-context";
 import { AnimationDown } from "../../components/Animations";
 // import Particles from "react-particles";
@@ -6,6 +6,9 @@ import { AnimationDown } from "../../components/Animations";
 
 function PortfolioHome() {
     const themeContext = useContext(ThemeContext);
+    const [typedText, setTypedText] = useState('');
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isTyping, setIsTyping] = useState(true);
 
     // const particlesRef = useRef(null)
 
@@ -21,6 +24,21 @@ function PortfolioHome() {
     // {/* <Particles id="particles" ref={particlesRef} options={particlesConfig} autoPlay={true} style={{
     //             position: 'absolute !important',
     //         }} init={particlesInit} /> */}
+
+    const fullText = "Hi, I'm a Software Engineer & Full-Stack Developer";
+    const technologies = "ReactJS | NextJS | Vue | NuxtJS | PHP | Laravel | CodeIgniter | WordPress | Flutter | React Native | JavaScript | TypeScript";
+
+    useEffect(() => {
+        if (isTyping && currentIndex < fullText.length) {
+            const timeout = setTimeout(() => {
+                setTypedText(fullText.slice(0, currentIndex + 1));
+                setCurrentIndex(currentIndex + 1);
+            }, 100);
+            return () => clearTimeout(timeout);
+        } else if (currentIndex >= fullText.length) {
+            setIsTyping(false);
+        }
+    }, [currentIndex, isTyping, fullText]);
 
     return (
         <div className={`clm-cover clm-fixed-hc${themeContext.value.env === 'dev' ? ' no-bg' : ''}`} id="home">
@@ -42,8 +60,8 @@ function PortfolioHome() {
                 <>
                     <AnimationDown>
                         <h2 className="!text-[1.5rem] md:!text-[2.9rem] animate-pulse">
-                            Hi, I'm a <br />
-                            Software Engineer & Full-Stack Developer
+                            <span className="typing-text">{typedText}</span>
+                            <span className="animate-pulse">|</span>
                         </h2>
                     </AnimationDown>
                     <AnimationDown delay={200}>
@@ -56,7 +74,7 @@ function PortfolioHome() {
                         <h3 className="!text-[1rem] hover:scale-105 transition-transform duration-300">I'm passionate about building innovative, scalable, and secure web solutions. I love tackling new challenges that push the boundaries of what's possible in web/app development.</h3>
                     </AnimationDown>
                     <AnimationDown delay={500}>
-                        <a className="btn btn-primary hover:scale-110 transition-transform duration-300 hover:shadow-lg" href="#projects">View my works</a>
+                        <a className="btn btn-primary hover:scale-110 transition-transform duration-300 hover:shadow-lg animate-pulse" href="#projects">View my works</a>
                     </AnimationDown>
                 </>
                 )}

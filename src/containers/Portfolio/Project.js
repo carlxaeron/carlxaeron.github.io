@@ -632,6 +632,8 @@ return content;
 const LiComponent = (props) => {
   const { company, project, img, imgType, id } = props;
   const { setValue } = useStore();
+  const [isHovered, setIsHovered] = useState(false);
+  
   const handleClickCompany = (e) => {
     if (getContents(props)) setValue({
       modal: {
@@ -656,20 +658,59 @@ const LiComponent = (props) => {
     delay: 100,
   })
 
+  const hoverSprings = useSpring({
+    from: { 
+      scale: 1, 
+      y: 0, 
+      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' 
+    },
+    to: { 
+      scale: isHovered ? 1.05 : 1, 
+      y: isHovered ? -10 : 0,
+      boxShadow: isHovered ? '0 20px 25px rgba(0, 0, 0, 0.2)' : '0 4px 6px rgba(0, 0, 0, 0.1)'
+    },
+    config: { tension: 300, friction: 20 }
+  });
+
   return (
     <Tracker id={idKey}
       set={value.isMobile ? 0.01 : 0.1}
       onSuccess={() => setShow(true)}
     // onFail={() => setShow(false)}
     >
-      <animated.li id={idKey} style={{ ...springs }} className='col-lg-4 col-6 col-xl-3'>
+      <animated.li 
+        id={idKey} 
+        style={{ ...springs, ...hoverSprings }} 
+        className='col-lg-4 col-6 col-xl-3'
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         {project.id && (
-          <div onClick={e => handleClickCompany(e, props)} className="cursor-pointer clm-p-s-cont shadow" style={{ backgroundImage: `url("${img}")` }}>
-            <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src={`${img}`} alt={`${project.id}.${imgType}`} />
+          <div 
+            onClick={e => handleClickCompany(e, props)} 
+            className="cursor-pointer clm-p-s-cont shadow transition-all duration-300" 
+            style={{ 
+              backgroundImage: `url("${img}")`,
+              borderRadius: '12px',
+              overflow: 'hidden'
+            }}
+          >
+            <img 
+              src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" 
+              data-src={`${img}`} 
+              alt={`${project.id}.${imgType}`}
+              className="transition-transform duration-300 hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end">
+              <div className="text-white p-4 w-full">
+                <h6 className="font-semibold text-sm">{project.title || company.title}</h6>
+                <p className="text-xs opacity-90">{company.title}</p>
+              </div>
+            </div>
           </div>
         )}
         {!project.id && (
-          <div className="clm-p-s-cont shadow">
+          <div className="clm-p-s-cont shadow rounded-lg">
             <h5>No Preview</h5>
           </div>
         )}

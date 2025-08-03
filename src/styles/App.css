@@ -14,3 +14,170 @@ header {
 .main {
   color: white;
 } */
+
+/* Add your custom styles here */
+
+/* Typing animation */
+.typing-text {
+  border-right: 2px solid #ef4444;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { border-color: transparent; }
+  51%, 100% { border-color: #ef4444; }
+}
+
+/* Skill bar animations */
+.clm-sk-percent-2 {
+  transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: linear-gradient(90deg, #ef4444 0%, #f97316 100%);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.clm-sk-percent-2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmer 1.5s infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Profile image hover effect */
+.clm-profile {
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.clm-profile:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.clm-profile img {
+  transition: all 0.3s ease;
+}
+
+.clm-profile:hover img {
+  transform: scale(1.1);
+}
+
+/* Technology hover effects */
+.technology-item {
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.technology-item:hover {
+  transform: translateY(-3px) scale(1.1);
+  color: #ef4444;
+}
+
+/* Button animations */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+/* Skill item hover animations */
+.skill-item {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 4px 0;
+}
+
+.skill-item:hover {
+  background: rgba(239, 68, 68, 0.1);
+  transform: translateX(5px);
+}
+
+/* Staggered animation for skills */
+.skill-item:nth-child(1) { animation-delay: 0.1s; }
+.skill-item:nth-child(2) { animation-delay: 0.2s; }
+.skill-item:nth-child(3) { animation-delay: 0.3s; }
+.skill-item:nth-child(4) { animation-delay: 0.4s; }
+.skill-item:nth-child(5) { animation-delay: 0.5s; }
+.skill-item:nth-child(6) { animation-delay: 0.6s; }
+.skill-item:nth-child(7) { animation-delay: 0.7s; }
+.skill-item:nth-child(8) { animation-delay: 0.8s; }
+
+/* Floating animation for icons */
+.floating-icon {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Pulse animation for important elements */
+.pulse-important {
+  animation: pulse-important 2s infinite;
+}
+
+@keyframes pulse-important {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  50% { 
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced focus states */
+.btn:focus,
+a:focus {
+  outline: 2px solid #ef4444;
+  outline-offset: 2px;
+}
+
+/* Loading animation for images */
+.image-loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

@@ -18,39 +18,35 @@ const LiParent = styled.li`
 
 export const PROJECTS_DESCRIPTION_AI = (data) => (
   <div className='m-4 text-sm lg:text-lg text-left'>
-    <ul>
-      <LiParent>Hi! I have 12 years ({data.time}) experience (and still counting) as a full-stack web developer, building web applications and websites that are robust and responsive. I have been experimenting with all sorts of technology, modern to old, since I began in 2012, to come up with solutions that are secure, fault-tolerant, user-centric, and scalable.</LiParent>
-      <LiParent>
-        <b>My Expertise:</b>
-        <ul>
-          <li>Front-End Development: I use HTML, CSS, JavaScript frameworks - JQuery, AngularJS, ReactJS, and VueJS - to create interfaces that reflect visually appealing and user-friendly experiences.</li>
-          <li>Back-End Mastery: Well versed in PHP/MySQL environments (XAMPP, WAMP, LAMP) and frameworks like Laravel, CodeIgniter, and Zend.</li>
-          <li>CMS: From starting with WordPress and Drupal or going all the way to Joomla, I'm an expert in creating and optimizing themes for high performance and SEO.</li>
-        </ul>
-      </LiParent>
-      <LiParent>
-        <b>What Makes Me Different:</b>
-        <ul>
-          <li>I combine my technical expertise with a commitment to provide high-performing applications that are entirely secure. Adhering to Object-Oriented principles, techniques, and modern coding standards applicable to my projects result in airtight projects against varying vulnerabilities like SQL injections.</li>
-          <li>At the same time, I'm a user experience advocate. To create sites, it must be mobile-friendly, responsive, and all standard modern browsers compatible. And when it comes to problem-solving I'm an upfront'll face it type of person. I would always throw innovative and creative approaches to it.</li>
-        </ul>
-      </LiParent>
-      <LiParent>
-        <b>Beyond Coding:</b>
-        <ul>
-          <li>SEO Development: Making websites for traffic generation through search engine optimization for businesses.</li>
-          <li>Mobile Development: Fluency in Flutter, back ending Firebase integration, functioning as one, making a smooth experience.</li>
-          <li>Ongoing Maintenance: Trusted and provided to ensure that projects run smoothly and easily over a long time.</li>
-        </ul>
-      </LiParent>
-      <LiParent>
-        <b>Always Evolving:</b>
-        <ul>
-          <li>In fact, the never-ending endeavor for me is to keep up with the industry trends. Learning, growing, exploring new technologies in order to keep bringing original ideas and innovative groundbreaking solutions.</li>
-        </ul>
-      </LiParent>
-      <LiParent>If you are searching for an imaginative detail-oriented developer who is as much passionate about delivery as you are in making it happen, then we really ought to get in touch because it would be amazing helping you turn your digital dream into a reality!</LiParent>
-    </ul>
+    <p className='mb-4 leading-relaxed'>
+      I've been crafting web solutions for over {data.time}, starting from the early days of web development when jQuery was king. My journey began in 2012, and I've seen the web evolve from simple static pages to complex, dynamic applications that power modern businesses.
+    </p>
+    
+    <p className='mb-4 leading-relaxed'>
+      What drives me is not just writing code, but solving real problems. I've worked with companies ranging from major banks to startups, each with unique challenges that required creative solutions. Whether it's building secure banking applications for Metrobank, modernizing call center systems for GoAutoDial, or creating e-commerce platforms, I focus on delivering solutions that work in the real world.
+    </p>
+
+    <div className='mb-4'>
+      <h6 className='font-semibold mb-2'>Technical Foundation</h6>
+      <p className='leading-relaxed'>
+        My core strength lies in full-stack development. I'm comfortable with both frontend and backend, having worked extensively with PHP/Laravel ecosystems and modern JavaScript frameworks. I've built everything from simple WordPress sites to complex React applications with real-time features.
+      </p>
+    </div>
+
+    <div className='mb-4'>
+      <h6 className='font-semibold mb-2'>What I Bring to Projects</h6>
+      <ul className='list-disc ml-6 space-y-1'>
+        <li>Deep understanding of both legacy and modern web technologies</li>
+        <li>Experience with high-traffic, mission-critical applications</li>
+        <li>Focus on security, performance, and maintainable code</li>
+        <li>Ability to work across the entire development stack</li>
+        <li>Proven track record of delivering projects on time and within scope</li>
+      </ul>
+    </div>
+
+    <p className='leading-relaxed'>
+      I believe in writing code that not only works today but can evolve with your business needs. Every project I take on is an opportunity to learn something new while delivering value to my clients. If you're looking for someone who can turn your ideas into working software, let's talk about how I can help bring your vision to life.
+    </p>
   </div>
 );
 
