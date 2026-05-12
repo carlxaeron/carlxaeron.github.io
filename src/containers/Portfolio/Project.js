@@ -1,5 +1,4 @@
-import { useState } from "react";
-import Tracker from "../../components/Tracker";
+import { useState, useEffect } from "react";
 import { analytics, COMPANIES, logEvent } from "../../config";
 import { useSpring, animated } from "@react-spring/web";
 import { useStore } from "./theme-provider";
@@ -19,28 +18,26 @@ function PortfolioProject(props) {
     delay: 100,
   })
 
+  useEffect(() => {
+    const t1 = setTimeout(() => setShow(true), 200);
+    const t2 = setTimeout(() => setShowSkills(true), 400);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, []);
+
   return (
-    <Tracker id={`projectstop`}
-      set={0.1}
-      onSuccess={() => setShow(true)}
-    // onFail={() => setShow(false)}
-    >
       <animated.div style={{ ...springs2 }} className="clm-projects clm-fixed-hc" id={`projects${props.id}`}>
         <div className="clm-inner-container clm-container">
           <div className="clm-title">
             <h4>PROJECTS</h4>
           </div>
           <div className="clm-p-btns">
-            <Tracker id='proj-comps'
-              set={0.1}
-              onSuccess={() => setShowSkills(true)}
-            // onFail={() => setShowSkills(false)}
-            >
               <ul className="row">
                 {COMPANIES.map((v, k) => <li style={{ ...springs }} key={k} className="col"><a className="btn btn-primary" href="#">{v.title}.</a></li>)}
                 <li style={{ ...springs }} className="col"><a className="btn btn-primary" href="#">Show All </a></li>
               </ul>
-            </Tracker>
           </div>
           <div className="clm-p-sites">
             <ul className="row">
@@ -61,8 +58,6 @@ function PortfolioProject(props) {
           </div>
         </div>
       </animated.div>
-
-    </Tracker>
   )
 }
 
@@ -155,7 +150,10 @@ return content;
 
 const LiComponent = (props) => {
   const { company, project, img, imgType, id } = props;
-  const { setValue } = useStore();
+  const { value, setValue } = useStore();
+  const [show, setShow] = useState(false);
+  const idKey = `li-component-${id}`;
+
   const handleClickCompany = (e) => {
     if (getContents(props)) setValue({
       modal: {
@@ -170,9 +168,12 @@ const LiComponent = (props) => {
     });
   }
 
-  const { value } = useStore();
-  const [show, setShow] = useState(false);
-  const idKey = `li-component-${id}`;
+  useEffect(() => {
+    const parts = String(id).split("_").map(Number);
+    const k = (parts[0] || 0) + (parts[1] || 0);
+    const t = setTimeout(() => setShow(true), 120 + k * 25);
+    return () => clearTimeout(t);
+  }, [id]);
 
   const springs = useSpring({
     from: { opacity: 0, transform: 'scale(0.8)' },
@@ -181,11 +182,6 @@ const LiComponent = (props) => {
   })
 
   return (
-    <Tracker id={idKey}
-      set={value.isMobile ? 0.01 : 0.1}
-      onSuccess={() => setShow(true)}
-    // onFail={() => setShow(false)}
-    >
       <animated.li id={idKey} style={{ ...springs }} className='col-lg-4 col-6 col-xl-3'>
         {project.id && (
           <div onClick={e => handleClickCompany(e, props)} className="cursor-pointer clm-p-s-cont shadow" style={{ backgroundImage: `url("${img}")` }}>
@@ -198,7 +194,6 @@ const LiComponent = (props) => {
           </div>
         )}
       </animated.li>
-    </Tracker>
   )
 }
 

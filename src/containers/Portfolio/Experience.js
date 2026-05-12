@@ -2,7 +2,6 @@ import { useSpring, animated } from "@react-spring/web";
 import Img from "../../components/Img";
 import { useEffect, useRef, useState } from "react";
 import { useStore } from "./theme-provider";
-import Tracker from "../../components/Tracker";
 import { EXPERIENCES } from "../../config";
 import { Overlay, Tooltip } from "react-bootstrap";
 
@@ -14,6 +13,11 @@ function PortfolioExperience(props) {
     to: { opacity: show ? 1 : 0 },
     delay: 100,
   })
+
+  useEffect(() => {
+    const t = setTimeout(() => setShow(true), 200);
+    return () => clearTimeout(t);
+  }, []);
 
   const ExperiencesLi = ({ v, k }) => {
     const [show, setShow] = useState(false);
@@ -48,19 +52,16 @@ function PortfolioExperience(props) {
       }
     }, [])
 
+    useEffect(() => {
+      const t = setTimeout(() => {
+        setShow(true);
+        setShowTooltip(false);
+      }, 120 + k * 70);
+      return () => clearTimeout(t);
+    }, [k]);
+
     return (
       <animated.li id={`experiences-${props.id}-${k}`} style={{...springs}}  className="row">
-        <Tracker id={`experiences-${props.id}-${k}`}
-          set={0.05}
-          onSuccess={() => {
-            setShow(true);
-            setShowTooltip(false);
-          }}
-          onFail={() => {
-            // setShow(false)
-            setShowTooltip(false);
-          }}
-        >
           <div className="col-sm-3 col-md-2 clm-com-logo clm-com-logo-light">
             <div className={`clm-com-logo-cont ${!v.companyLogo && 'bg-black'}`}><Img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src={v.companyLogo} />
             </div>
@@ -102,17 +103,11 @@ function PortfolioExperience(props) {
               }
             }}>View More</button> }
           </div>
-        </Tracker>
       </animated.li>
     )
   }
 
   return (
-    <Tracker id={`experiences-top`}
-      set={0.05}
-      onSuccess={() => setShow(true)}
-      // onFail={() => setShow(false)}
-    >
       <animated.div style={{...springs}} className="clm-exps clm-fixed-hc bg-white" id={`experiences-${props.id}`}>
         <div className="clm-inner-container clm-container">
           <div className="clm-title">
@@ -278,7 +273,6 @@ function PortfolioExperience(props) {
           </ul>
         </div>
       </animated.div>
-    </Tracker>
   )
 }
 

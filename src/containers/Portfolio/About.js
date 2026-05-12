@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "./theme-context";
 import { useSpring, animated } from "@react-spring/web";
-import Tracker from "./../../components/Tracker";
 import { PROJECTS_DESCRIPTION_AI, SKILLS } from "./../../config";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngular, faBootstrap, faCss3, faFlutter, faGit, faGulp, faHtml5, faJoomla, faJs, faLaravel, faLess, faNode, faNodeJs, faNpm, faPhp, faReact, faVuejs, faWordpress } from '@fortawesome/free-brands-svg-icons';
@@ -44,13 +43,10 @@ function PortfolioAbout(props) {
   const themeContext = useContext(ThemeContext);
   const [show, setShow] = useState(false);
 
-  const exps = [
-    {
-      title: 'Title #1',
-      yrs: 5,
-      percent: 66,
-    },
-  ];
+  useEffect(() => {
+    const t = setTimeout(() => setShow(true), 200);
+    return () => clearTimeout(t);
+  }, []);
 
   const skills = SKILLS;
 
@@ -72,6 +68,11 @@ function PortfolioAbout(props) {
 
   const SkillComponent = ({ skill, i }) => {
     const [show2, setShow2] = useState(false);
+
+    useEffect(() => {
+      const t = setTimeout(() => setShow2(true), 250 + i * 40);
+      return () => clearTimeout(t);
+    }, [i]);
 
     const springs = useSpring({
       from: { width: '0%', },
@@ -139,11 +140,6 @@ function PortfolioAbout(props) {
     }
 
     return (
-      <Tracker id={`about-top-skill-${i}`}
-        set={0.05}
-        onSuccess={() => setShow2(true)}
-        // onFail={() => setShow2(false)}
-      >
       <li key={i}>
         <h5 className="!text-[0.9rem]">{generateTitle(skill.name)}</h5>
         <div className="clm-sk-cont">
@@ -159,7 +155,6 @@ function PortfolioAbout(props) {
           </div>
         </div>
       </li>
-      </Tracker>
     )
   }
 
@@ -182,26 +177,7 @@ function PortfolioAbout(props) {
     </ul>
   )
 
-  const getExps = () => {
-    let ret = tempExps;
-    if (themeContext.value.env === 'dev') {
-      ret = <ul>
-        {exps.map((v, k) => <li key={k}>
-          <h5>{v.title}</h5>
-          <div className="clm-sk-cont">
-            <div className="clm-sk-cont-2">
-              <div className="clm-sk-yrs">{v.yrs} Years Experience</div>
-              <div className="clm-sk-percent">{v.percent}%</div>
-              <div className="clm-sk-percent-2" style={{ width: `${v.percent}%` }}>
-                <div>&nbsp;</div>
-              </div>
-            </div>
-          </div>
-        </li>)}
-      </ul>
-    }
-    return ret;
-  }
+  const getExps = () => tempExps;
 
   const springs = useSpring({
     from: { opacity: 0, },
@@ -231,21 +207,10 @@ function PortfolioAbout(props) {
   })
 
   return (
-    <Tracker id={`about-${props.id}`}
-      set={0.1}
-      onSuccess={() => {
-        setShow(true);
-      }}
-      // onFail={() => setShow(false)}
-    >
       <div className="clm-about clm-fixed-hc" id={`about-${props.id}`}>
         <animated.div style={{ ...springs4 }} className="clm-inner-container clm-container">
           <div className="clm-title" onClick={() => {
-            const el = document.getElementById(`projectsbottom`);
-            console.log(el);
-            if (el) {
-              el.scrollIntoView({ behavior: 'smooth' });
-            }
+            window.location.hash = '#portfolio';
           }}>
             <animated.h4 style={{ ...springs }}>ABOUT</animated.h4>
           </div>
@@ -254,15 +219,10 @@ function PortfolioAbout(props) {
               <animated.div style={{ ...springs2 }} className={`clm-profile ${themeContext.value.env}`}>
                 <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="/theme/images/profile.jpg" alt="Carl Louis Manuel" />
               </animated.div>
-              {themeContext.value.env === 'dev' && (<>
-                <h6>Hello</h6>
-                <p>World World World World World World World World World World World World World World World World World World World </p>
-              </>)}
-              {themeContext.value.env !== 'dev' && (<animated.div style={{ ...springs3 }}>
-                <h6>I'm Carl Louis Manuel</h6>
-                {/* <p>&ldquo;{PROJECT_DESCRIPTION}&rdquo;</p> */}
+              <animated.div style={{ ...springs3 }}>
+                <h6>I&apos;m Carl Louis Manuel</h6>
                 <Description />
-              </animated.div>)}
+              </animated.div>
             </div>
             {/* <Tracker id={`about-exp-${props.id}`}
               set={window.innerWidth >= 768 ? 0.3 : 0.5}
@@ -276,7 +236,6 @@ function PortfolioAbout(props) {
           </div>
         </animated.div>
       </div>
-    </Tracker>
   )
 }
 

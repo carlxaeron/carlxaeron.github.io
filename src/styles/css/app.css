@@ -1,0 +1,18 @@
+/* Error: Can't find stylesheet to import.
+ *    ,
+ * 25 | @import "node_modules/bootstrap/scss/bootstrap";
+ *    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *    '
+ *   src/styles/sass/portfolio/sass/master.scss 25:9  @import
+ *   src/styles/sass/app.scss 13:9                    root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Can't find stylesheet to import.\a    \2577 \a 25 \2502  @import \"node_modules/bootstrap/scss/bootstrap\";\a    \2502          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a    \2575 \a   src/styles/sass/portfolio/sass/master.scss 25:9  @import\a   src/styles/sass/app.scss 13:9                    root stylesheet";
+}

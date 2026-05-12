@@ -1,0 +1,49 @@
+---
+description: UI/UX and layout conventions for this portfolio site
+globs:
+  - src/containers/Portfolio/**/*.js
+  - src/components/**/*.js
+  - src/styles/sass/**/*.scss
+  - src/external-config.js
+---
+
+# Portfolio UI/UX (CARLXAERON / CMSDS)
+
+## Content source of truth
+
+- Prefer **structured data** in [`src/external-config.js`](src/external-config.js) and re-exported values in [`src/config.js`](src/config.js) where applicable (`COMPANIES`, `EXPERIENCES`, `SKILLS`, etc.).
+- New sections should read from config objects; avoid hard-coding long copy in JSX when it belongs in config.
+
+## Layout and sections
+
+- Full-page sections live in [`src/containers/Portfolio/Portfolio.js`](src/containers/Portfolio/Portfolio.js): each slide is `100vh` with `translateY` on the container.
+- Section bodies typically use: `clm-fixed-hc`, `clm-inner-container`, `clm-container`, and headings inside `clm-title`.
+- **Do not rely on `IntersectionObserver`** (e.g. via [`src/components/Tracker.js`](src/components/Tracker.js)) for visibility inside slides: transformed ancestors break intersection. Use `useEffect` + `setTimeout` (stagger) with `@react-spring/web` for enter animations instead.
+
+## Styling
+
+- **Bootstrap** grid: `row`, `col-md-*`, etc.
+- **Tailwind** utilities for spacing, typography, and small layout tweaks where already used in the file.
+- **SASS**: global tokens and overrides under [`src/styles/sass/`](src/styles/sass/); palette variables in [`src/styles/sass/_variables.scss`](src/styles/sass/_variables.scss) (primary / corporate blue `#1e40af` when aligned with the design).
+
+## Motion
+
+- Use `useSpring` / `animated.*` from `@react-spring/web` for transitions.
+- Stagger list items with indexed delays (`k * 70` ms style) rather than many independent observers.
+
+## Accessibility
+
+- Meaningful `alt` on images; `aria-label` on icon-only controls (e.g. section nav).
+- Prefer real `<button type="button">` for custom controls.
+
+## Responsiveness
+
+- Treat **768px** as the mobile breakpoint; `isMobile` from the zustand store in [`src/containers/Portfolio/theme-provider.js`](src/containers/Portfolio/theme-provider.js) should stay consistent with layout decisions.
+
+## App shell
+
+- [`src/pages/Index.js`](src/pages/Index.js) mounts the scroll portfolio at [`src/containers/Portfolio/Portfolio.js`](src/containers/Portfolio/Portfolio.js), which wraps **ThemeProvider**, modal, and **ChatAgent**. Legacy [`src/containers/Portfolio.js`](src/containers/Portfolio.js) is not the active entry.
+
+## Theme / environment
+
+- [`ThemeContext`](src/containers/Portfolio/theme-context.js) from [`theme-provider.js`](src/containers/Portfolio/theme-provider.js) defaults to **`env: 'prod'`** so local `npm start` matches production hero, header, and about copy. Do not reintroduce `NODE_ENV === 'development'` branching for placeholder (Lorem) content in portfolio sections.

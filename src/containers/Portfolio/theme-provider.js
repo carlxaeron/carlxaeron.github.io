@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ThemeContext } from './theme-context';
 import { create } from 'zustand';
 import sessionstorage from 'sessionstorage';
 
-const defaultEnv = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? 'dev' : 'prod';
+const defaultEnv = 'prod';
 const doneTimer = sessionstorage.getItem('done') || false;
 const modalDefault = {
   show: false,
@@ -31,10 +31,8 @@ const useStore = create((set) => ({
 }))
 
 function ThemeProvider({ children }) {
-  const defaultEnv = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? 'dev' : 'prod';
-
   const [value, setValue] = useState({
-    env: defaultEnv,
+    env: 'prod',
   });
 
   return (
