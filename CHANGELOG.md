@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.1] — 2026-05-27
+
+### Fixed
+- Mobile fast-touch no longer jumps to the next section while scrolling inside Experience, Projects, and other long sections
+- Touch swipe navigation now uses the same inner-scroll boundary gating as wheel navigation
+- Nested scrollable areas (e.g. Experience timeline) resolve to the correct overflow container
+
+### Added
+- Unit tests for `SwipeHandler` and Portfolio touch boundary navigation
+
 ## [3.0.0] — 2026-05-13
 
 ### Added

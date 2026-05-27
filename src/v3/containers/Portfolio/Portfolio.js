@@ -29,6 +29,7 @@ function V3PortfolioScroll() {
   const [currentSection, setCurrentSection] = useState(0);
   const isTransitioningRef = useRef(false);
   const wheelThrottleRef = useRef(0);
+  const WHEEL_THROTTLE_MS = 160;
 
   const getActiveSlide = useCallback(() => {
     const activeSectionId = SECTIONS_CONFIG[currentSection]?.id;
@@ -46,16 +47,31 @@ function V3PortfolioScroll() {
     return false;
   }, []);
 
+  const findScrollableWithOverflow = useCallback((root) => {
+    if (!root) return null;
+    const scrollables = root.querySelectorAll(".v3-scrollable");
+    for (const el of scrollables) {
+      if (el.scrollHeight - el.clientHeight > 0) return el;
+    }
+    return scrollables[0] ?? null;
+  }, []);
+
   const resolveScrollableTarget = useCallback((target, activeSlide) => {
     if (!target || !activeSlide || !(target instanceof Node)) return null;
     const elementTarget = target instanceof Element ? target : target.parentElement;
     if (!elementTarget) return null;
 
     const targetScrollable = elementTarget.closest(".v3-scrollable");
-    if (targetScrollable && activeSlide.contains(targetScrollable)) return targetScrollable;
+    if (
+      targetScrollable &&
+      activeSlide.contains(targetScrollable) &&
+      targetScrollable.scrollHeight - targetScrollable.clientHeight > 0
+    ) {
+      return targetScrollable;
+    }
 
-    return activeSlide.querySelector(".v3-scrollable");
-  }, []);
+    return findScrollableWithOverflow(activeSlide);
+  }, [findScrollableWithOverflow]);
 
   // Navigate to section by index
   const navigateToSection = useCallback((index) => {
@@ -69,6 +85,36 @@ function V3PortfolioScroll() {
     }, 850);
   }, []);
 
+  const trySectionNavigate = useCallback(
+    (deltaY, target, { throttleRef, throttleMs, preventDefault } = {}) => {
+      if (!deltaY) return false;
+      if (isTransitioningRef.current) return false;
+
+      const now = Date.now();
+      if (throttleRef && throttleMs && now - throttleRef.current < throttleMs) {
+        return false;
+      }
+
+      const activeSlide = getActiveSlide();
+      const scrollableEl = resolveScrollableTarget(target, activeSlide);
+      if (canScrollableMove(scrollableEl, deltaY)) return false;
+
+      if (preventDefault) preventDefault();
+      if (throttleRef) throttleRef.current = now;
+
+      if (deltaY > 0) navigateToSection(currentSection + 1);
+      else navigateToSection(currentSection - 1);
+      return true;
+    },
+    [
+      canScrollableMove,
+      currentSection,
+      getActiveSlide,
+      navigateToSection,
+      resolveScrollableTarget,
+    ]
+  );
+
   // Expose navigate function so sections can trigger navigation
   useEffect(() => {
     window.__v3Navigate = navigateToSection;
@@ -79,26 +125,15 @@ function V3PortfolioScroll() {
   useEffect(() => {
     const onWheel = (e) => {
       if (!e.deltaY) return;
-      const now = Date.now();
-      if (now - wheelThrottleRef.current < 160) return;
-
-      const activeSlide = getActiveSlide();
-      const scrollableEl = resolveScrollableTarget(e.target, activeSlide);
-
-      // Allow natural scrolling while there is scroll space in the active section.
-      if (canScrollableMove(scrollableEl, e.deltaY)) {
-        return;
-      }
-
-      // At scroll boundaries, convert wheel movement into section navigation.
-      e.preventDefault();
-      wheelThrottleRef.current = now;
-      if (e.deltaY > 0) navigateToSection(currentSection + 1);
-      else navigateToSection(currentSection - 1);
+      trySectionNavigate(e.deltaY, e.target, {
+        throttleRef: wheelThrottleRef,
+        throttleMs: WHEEL_THROTTLE_MS,
+        preventDefault: () => e.preventDefault(),
+      });
     };
     window.addEventListener("wheel", onWheel, { passive: false });
     return () => window.removeEventListener("wheel", onWheel);
-  }, [canScrollableMove, currentSection, getActiveSlide, navigateToSection, resolveScrollableTarget]);
+  }, [trySectionNavigate]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -146,8 +181,17 @@ function V3PortfolioScroll() {
 
   // Touch swipe on the outer container
   const swipeRef = useSwipeHandler({
-    onSwipeUp:   () => navigateToSection(currentSection + 1),
-    onSwipeDown: () => navigateToSection(currentSection - 1),
+    shouldAllowSwipe: ({ direction, deltaY, event }) => {
+      if (isTransitioningRef.current) return false;
+      const activeSlide = getActiveSlide();
+      const scrollableEl = resolveScrollableTarget(event.target, activeSlide);
+      const signedDelta = direction === "up" ? deltaY : -deltaY;
+      return !canScrollableMove(scrollableEl, signedDelta);
+    },
+    onSwipe: ({ direction, event }) => {
+      const signedDelta = direction === "up" ? 1 : -1;
+      trySectionNavigate(signedDelta, event.target);
+    },
   });
 
   const closeModal = () =>
@@ -203,6 +247,7 @@ function V3PortfolioScroll() {
         className="v3-portfolio-root"
         ref={swipeRef}
         aria-live="polite"
+        data-testid="portfolio-root"
       >
         {SECTIONS_CONFIG.map((section, index) => {
           const SectionComponent = section.component;
