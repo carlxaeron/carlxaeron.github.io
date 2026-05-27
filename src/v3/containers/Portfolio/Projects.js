@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { COMPANIES } from "../../../external-config";
 import { logEvent, analytics } from "../../../config";
-import { Button, Modal } from "react-bootstrap";
 import SectionTitle from "../../components/SectionTitle";
+import ProjectDetailModal from "../../components/ProjectDetailModal";
+import { getProjectDetails } from "../../data/projectDetails";
 
 function ProjectThumb({ company, project, img, index, isActive, onOpen }) {
   const [show, setShow] = useState(false);
@@ -45,8 +46,8 @@ function ProjectThumb({ company, project, img, index, isActive, onOpen }) {
       role="button"
       tabIndex={0}
       aria-label={`View project: ${projectTitle}`}
-      onClick={() => onOpen(company, project, img)}
-      onKeyDown={(e) => e.key === "Enter" && onOpen(company, project, img)}
+      onClick={() => onOpen(company, project)}
+      onKeyDown={(e) => e.key === "Enter" && onOpen(company, project)}
     >
       {imageReady && (
         <img
@@ -84,7 +85,7 @@ const ALL_PROJECTS = buildProjectList(COMPANIES);
 
 function V3Projects({ isActive }) {
   const [filter, setFilter] = useState("all");
-  const [modal, setModal] = useState({ show: false, company: null, project: null, img: null });
+  const [modal, setModal] = useState({ show: false, company: null, project: null, details: null });
 
   const headerSpring = useSpring({
     from: { opacity: 0, y: -20 },
@@ -97,9 +98,14 @@ function V3Projects({ isActive }) {
     ? ALL_PROJECTS
     : ALL_PROJECTS.filter((p) => p.company.title === filter);
 
-  const handleOpen = (company, project, img) => {
+  const handleOpen = (company, project) => {
     logEvent({ anal: analytics, event: "view_project", option: { project_id: project.id } });
-    setModal({ show: true, company, project, img });
+    setModal({
+      show: true,
+      company,
+      project,
+      details: getProjectDetails(project.id),
+    });
   };
 
   const handleClose = () => setModal((m) => ({ ...m, show: false }));
@@ -117,7 +123,6 @@ function V3Projects({ isActive }) {
           <SectionTitle subtitle="A selection of recent work">Projects</SectionTitle>
         </animated.div>
 
-        {/* Company filter */}
         <div className="v3-filter-btns">
           <button
             type="button"
@@ -138,7 +143,6 @@ function V3Projects({ isActive }) {
           ))}
         </div>
 
-        {/* Grid */}
         <div className="v3-projects-grid">
           {filteredProjects.map(({ company, project, img, index }) => (
             <ProjectThumb
@@ -154,42 +158,13 @@ function V3Projects({ isActive }) {
         </div>
       </div>
 
-      {/* Project detail modal */}
-      <Modal show={modal.show} onHide={handleClose} centered size="lg">
-        <Modal.Header closeButton style={{ background: "#1E3932", borderColor: "rgba(0,168,98,0.2)" }}>
-          <Modal.Title style={{ color: "#fff", fontFamily: "'Playfair Display', serif" }}>
-            {modal.company?.title} — {modal.project?.title || modal.project?.id}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body style={{ background: "#1E3932", padding: "1.5rem" }}>
-          {modal.img && (
-            <img
-              src={modal.img}
-              alt={modal.project?.id}
-              loading="lazy"
-              style={{ width: "100%", borderRadius: "8px", marginBottom: "1rem", maxHeight: "300px", objectFit: "cover" }}
-              onError={(e) => { e.target.style.display = "none"; }}
-            />
-          )}
-          <p style={{ color: "#D4E9E2", lineHeight: 1.7, fontSize: "0.9rem" }}>
-            {modal.project?.description || `Project built for ${modal.company?.title}.`}
-          </p>
-          {modal.project?.url && (
-            <a
-              href={modal.project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="v3-btn v3-btn--primary"
-              style={{ display: "inline-flex", marginTop: "1rem" }}
-            >
-              Visit Site ↗
-            </a>
-          )}
-        </Modal.Body>
-        <Modal.Footer style={{ background: "#1E3932", borderColor: "rgba(0,168,98,0.2)" }}>
-          <Button variant="secondary" onClick={handleClose}>Close</Button>
-        </Modal.Footer>
-      </Modal>
+      <ProjectDetailModal
+        show={modal.show}
+        onHide={handleClose}
+        company={modal.company}
+        project={modal.project}
+        details={modal.details}
+      />
     </section>
   );
 }

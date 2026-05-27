@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.7] — 2026-05-27
+
+### Added
+- Project detail modal: click any project thumbnail for full-resolution image, description, tags, gallery, and website link
+- Ported legacy project copy into `src/v3/data/projectDetails.js` (28 projects)
+- `ProjectDetailModal` component with xl/fullscreen mobile layout and V3 styling
+
+### Changed
+- Projects grid still uses resized thumbnails; modal uses full `/static/images/sites/` images
+
 ## [3.0.6] — 2026-05-27
 
 ### Fixed

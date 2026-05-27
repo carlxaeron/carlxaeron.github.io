@@ -517,6 +517,152 @@ html, body {
 }
 
 // =============================================================
+// Project detail modal
+// =============================================================
+.v3-project-modal {
+  z-index: 1300;
+
+  &__content {
+    background: $green-mid;
+    border: 1px solid rgba($green-accent, 0.25);
+    color: $white;
+  }
+
+  &__header {
+    background: $green-dark;
+    border-bottom: 1px solid rgba($green-accent, 0.2);
+    color: $white;
+    font-family: $font-display;
+
+    .btn-close {
+      filter: invert(1);
+    }
+  }
+
+  &__body {
+    padding: $space-4;
+    max-height: 75vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    @media (max-width: #{$bp-mobile}) {
+      max-height: none;
+    }
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-6;
+    align-items: start;
+
+    @media (max-width: #{$bp-mobile}) {
+      grid-template-columns: 1fr;
+      gap: $space-4;
+    }
+  }
+
+  &__hero-link {
+    display: block;
+    border-radius: $border-radius-sm;
+    overflow: hidden;
+    background: rgba($green-dark, 0.5);
+  }
+
+  &__hero-img {
+    display: block;
+    width: 100%;
+    max-height: 60vh;
+    max-height: 60svh;
+    object-fit: contain;
+    margin: 0 auto;
+
+    @media (max-width: #{$bp-mobile}) {
+      max-height: 50svh;
+    }
+  }
+
+  &__label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: $green-accent;
+    margin: 0 0 $space-2;
+  }
+
+  &__description {
+    color: $green-light;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin: 0 0 $space-4;
+
+    &--muted {
+      opacity: 0.85;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__tag {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 100px;
+    border: 1px solid rgba($green-accent, 0.45);
+    background: rgba($green-accent, 0.12);
+    color: $green-light;
+  }
+
+  &__gallery-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    margin-bottom: $space-4;
+  }
+
+  &__gallery-thumb {
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: $border-radius-sm;
+    overflow: hidden;
+    background: transparent;
+    cursor: pointer;
+    width: 72px;
+    height: 48px;
+    transition: border-color $transition-base;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    &--active,
+    &:hover {
+      border-color: $green-accent;
+    }
+  }
+
+  &__footer {
+    background: $green-dark;
+    border-top: 1px solid rgba($green-accent, 0.2);
+    gap: $space-2;
+  }
+
+  &__close {
+    min-height: 44px;
+  }
+}
+
+// =============================================================
 // Header / brand bar
 // =============================================================
 .v3-header {
