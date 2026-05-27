@@ -1,0 +1,82 @@
+---
+description: V3 portfolio release and GitHub Pages deploy checklist
+globs:
+  - .github/workflows/**
+  - docs/**
+  - CHANGELOG.md
+  - package.json
+  - functions/**
+  - public/CNAME
+  - src/mapping.js
+  - src/config.js
+alwaysApply: false
+---
+
+# Portfolio V3 — Deployment
+
+Do **not** edit plan files. For UI/data conventions see [`v3-design-system.mdc`](v3-design-system.mdc), [`v3-components.mdc`](v3-components.mdc), etc.
+
+## Architecture
+
+| Piece | Location |
+|-------|----------|
+| V3 (active) | `src/v3/` — entry via [`src/pages/Index.js`](src/pages/Index.js) → `src/v3/containers/Portfolio/Portfolio.js` |
+| V2 (legacy) | `src/containers/Portfolio/` — not the active entry |
+| Build output | `npm run build` → `build/*` copied to `docs/` |
+| GitHub Pages | [`.github/workflows/static.yml`](.github/workflows/static.yml) on push to `main` |
+| Custom domain | [`public/CNAME`](public/CNAME) → `carlmanuel.com` (copied into `docs/` on build) |
+| Redirect | `carlxaeron.github.io` → `carlmanuel.com` |
+| Contact API | [`src/mapping.js`](src/mapping.js) → Firebase Cloud Functions |
+| CORS origins | [`functions/index.js`](functions/index.js) — must include `carlmanuel.com` / `www` |
+
+## Pre-push checklist
+
+1. **Tests:** `CI=true npm test -- --watchAll=false --passWithNoTests`
+2. **Production build:** `CI=true npm run build` — `CI=true` treats ESLint warnings as errors
+3. **Version:** bump `package.json` version for releases
+4. **CHANGELOG:** add entry under [`CHANGELOG.md`](CHANGELOG.md) (see 3.0.0 format)
+5. Fix ESLint before push: unused imports, missing hook deps
+6. Confirm `docs/` reflects build (committed if repo tracks deploy artifacts)
+
+## Git workflow
+
+1. Feature branch → commit → merge to `main`
+2. Push `main` → triggers GitHub Actions deploy
+3. Tag: `git tag -a vX.Y.Z -m "Release vX.Y.Z" && git push origin main --tags`
+4. Create GitHub Release (`gh release create vX.Y.Z --notes-file CHANGELOG.md` or UI)
+
+## GitHub Actions (`.github/workflows/static.yml`)
+
+On push to `main` or `workflow_dispatch`:
+
+1. `npm ci`
+2. `npm run build` with secrets injected:
+   - `REACT_APP_apiKey`, `REACT_APP_authDomain`, `REACT_APP_projectId`
+   - `REACT_APP_storageBucket`, `REACT_APP_messagingSenderId`
+   - `REACT_APP_appId`, `REACT_APP_measurementId`
+3. Upload `docs/` artifact → deploy to GitHub Pages
+
+**Troubleshooting**
+
+| Symptom | Fix |
+|---------|-----|
+| ESLint fails in CI | Run `CI=true npm run build` locally; fix warnings |
+| `npm ci` 404 | Do not re-add removed deps (`react-particles`, `tsparticles-preset-firefly`) |
+| Analytics missing | Add GitHub repo secrets; [`src/config.js`](src/config.js) skips Firebase init when `REACT_APP_projectId` is unset |
+| Contact form CORS | Deploy functions after updating allowed origins in `functions/index.js` |
+
+## Firebase functions (when CORS/backend changes)
+
+```bash
+cd functions && npm run deploy
+```
+
+Deploy copies `src/external-config.js` into `functions/` then runs `firebase deploy --only functions`.
+
+## Post-deploy verification
+
+- `https://carlmanuel.com` — V3 loads, sections/hash nav work, contact form submits
+- `https://carlxaeron.github.io` — redirects to custom domain
+- Chrome DevTools MCP or `curl -I` for status/redirect headers
+
+For the full agent workflow with exact commands, use skill [`.cursor/skills/deploy-portfolio/SKILL.md`](.cursor/skills/deploy-portfolio/SKILL.md).

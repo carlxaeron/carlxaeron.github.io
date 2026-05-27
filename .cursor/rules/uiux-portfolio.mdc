@@ -14,12 +14,16 @@ globs:
 
 ## Version 3 (from scratch, same stack)
 
-- **Code location:** new work lives under **`src/v3/`** (containers, components, styles). Current production-style app remains under [`src/containers/Portfolio/`](src/containers/Portfolio/) until you cut over routing in [`src/pages/Index.js`](src/pages/Index.js).
+- **Code location:** active V3 lives under **`src/v3/`** (containers, components, styles). Entry point: [`src/pages/Index.js`](src/pages/Index.js) imports `src/v3/containers/Portfolio/Portfolio.js`. Legacy v2 remains under [`src/containers/Portfolio/`](src/containers/Portfolio/).
 - **Cursor rules for V3:**
   - [`v3-design-system.mdc`](v3-design-system.mdc) — Starbucks-style **green palette** (`#00473e`, `#1E3932`, `#00A862`, `#D4E9E2`, gold accent `#CBA258`), **Inter** + **Playfair Display**, spacing and max width **1280px**.
   - [`v3-components.mdc`](v3-components.mdc) — slide deck, `v3-section` / `v3-inner` / `v3-title`, cards, nav dots, motion (no `IntersectionObserver` inside slides).
   - [`v3-content-data.mdc`](v3-content-data.mdc) — **`SECTIONS_CONFIG`** contract and data from [`src/external-config.js`](src/external-config.js).
 - V3 SASS tokens live beside V3 code (e.g. `src/v3/styles/sass/_v3-variables.scss`); do not overwrite v2-only palette in [`src/styles/sass/_variables.scss`](src/styles/sass/_variables.scss) unless intentionally migrating the whole site.
+
+## Deployment
+
+Release and GitHub Pages deploy steps live in [`v3-deploy.mdc`](v3-deploy.mdc). For an end-to-end agent workflow with exact commands, use [`.cursor/skills/deploy-portfolio/SKILL.md`](.cursor/skills/deploy-portfolio/SKILL.md).
 
 ---
 
@@ -58,7 +62,7 @@ globs:
 
 ## App shell
 
-- [`src/pages/Index.js`](src/pages/Index.js) mounts the scroll portfolio at [`src/containers/Portfolio/Portfolio.js`](src/containers/Portfolio/Portfolio.js), which wraps **ThemeProvider**, modal, and **ChatAgent**. Legacy [`src/containers/Portfolio.js`](src/containers/Portfolio.js) is not the active entry.
+- [`src/pages/Index.js`](src/pages/Index.js) mounts V3 at [`src/v3/containers/Portfolio/Portfolio.js`](src/v3/containers/Portfolio/Portfolio.js) (ThemeProvider, modal, ChatAgent). Legacy v2 lives at [`src/containers/Portfolio/Portfolio.js`](src/containers/Portfolio/Portfolio.js). [`src/containers/Portfolio.js`](src/containers/Portfolio.js) is not the active entry.
 
 ## Theme / environment
 
