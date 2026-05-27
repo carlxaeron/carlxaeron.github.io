@@ -28,6 +28,34 @@ function V3PortfolioScroll() {
   const { value, setValue } = useStore();
   const [currentSection, setCurrentSection] = useState(0);
   const isTransitioningRef = useRef(false);
+  const wheelThrottleRef = useRef(0);
+
+  const getActiveSlide = useCallback(() => {
+    const activeSectionId = SECTIONS_CONFIG[currentSection]?.id;
+    if (!activeSectionId) return null;
+    return document.getElementById(`v3-section-${activeSectionId}`);
+  }, [currentSection]);
+
+  const canScrollableMove = useCallback((scrollableEl, deltaY) => {
+    if (!scrollableEl) return false;
+    const maxScrollTop = scrollableEl.scrollHeight - scrollableEl.clientHeight;
+    if (maxScrollTop <= 0) return false;
+    const currentTop = scrollableEl.scrollTop;
+    if (deltaY > 0) return currentTop < maxScrollTop - 1;
+    if (deltaY < 0) return currentTop > 1;
+    return false;
+  }, []);
+
+  const resolveScrollableTarget = useCallback((target, activeSlide) => {
+    if (!target || !activeSlide || !(target instanceof Node)) return null;
+    const elementTarget = target instanceof Element ? target : target.parentElement;
+    if (!elementTarget) return null;
+
+    const targetScrollable = elementTarget.closest(".v3-scrollable");
+    if (targetScrollable && activeSlide.contains(targetScrollable)) return targetScrollable;
+
+    return activeSlide.querySelector(".v3-scrollable");
+  }, []);
 
   // Navigate to section by index
   const navigateToSection = useCallback((index) => {
@@ -50,13 +78,27 @@ function V3PortfolioScroll() {
   // Mouse wheel navigation
   useEffect(() => {
     const onWheel = (e) => {
+      if (!e.deltaY) return;
+      const now = Date.now();
+      if (now - wheelThrottleRef.current < 160) return;
+
+      const activeSlide = getActiveSlide();
+      const scrollableEl = resolveScrollableTarget(e.target, activeSlide);
+
+      // Allow natural scrolling while there is scroll space in the active section.
+      if (canScrollableMove(scrollableEl, e.deltaY)) {
+        return;
+      }
+
+      // At scroll boundaries, convert wheel movement into section navigation.
       e.preventDefault();
+      wheelThrottleRef.current = now;
       if (e.deltaY > 0) navigateToSection(currentSection + 1);
       else navigateToSection(currentSection - 1);
     };
     window.addEventListener("wheel", onWheel, { passive: false });
     return () => window.removeEventListener("wheel", onWheel);
-  }, [currentSection, navigateToSection]);
+  }, [canScrollableMove, currentSection, getActiveSlide, navigateToSection, resolveScrollableTarget]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -90,6 +132,16 @@ function V3PortfolioScroll() {
     const hash = window.location.hash.replace("#", "");
     const idx = SECTIONS_CONFIG.findIndex((s) => s.id === hash);
     if (idx !== -1) setCurrentSection(idx);
+  }, []);
+
+  // Keep a stable viewport unit for fixed-slide transforms.
+  useEffect(() => {
+    const setViewportUnit = () => {
+      document.documentElement.style.setProperty("--v3-vh", `${window.innerHeight * 0.01}px`);
+    };
+    setViewportUnit();
+    window.addEventListener("resize", setViewportUnit);
+    return () => window.removeEventListener("resize", setViewportUnit);
   }, []);
 
   // Touch swipe on the outer container
@@ -162,7 +214,7 @@ function V3PortfolioScroll() {
               id={`v3-section-${section.id}`}
               className="v3-section-slide"
               style={{
-                transform: `translateY(${offset * 100}vh)`,
+                transform: `translateY(calc(var(--v3-vh, 1vh) * ${offset * 100}))`,
                 pointerEvents: currentSection !== index ? "none" : undefined,
               }}
             >

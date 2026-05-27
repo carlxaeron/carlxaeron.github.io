@@ -61,6 +61,20 @@ html, body {
   }
 }
 
+.v3-section-scroll {
+  justify-content: flex-start;
+  overflow-y: auto;
+  max-height: calc(100vh - 72px);
+  max-height: calc(100svh - 72px);
+  padding-top: $space-6;
+
+  @media (max-width: #{$bp-mobile}) {
+    max-height: calc(100vh - 68px);
+    max-height: calc(100svh - 68px);
+    padding-top: $space-4;
+  }
+}
+
 // =============================================================
 // Typography
 // =============================================================
@@ -434,7 +448,7 @@ html, body {
 
 .v3-timeline-item {
   position: relative;
-  margin-bottom: $space-8;
+  margin-bottom: $space-6;
 
   &__dot {
     position: absolute;
@@ -532,16 +546,16 @@ html, body {
 // =============================================================
 .v3-projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: $space-4;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: $space-3;
 
   @media (max-width: #{$bp-tablet}) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   @media (max-width: #{$bp-mobile}) {
     grid-template-columns: repeat(2, 1fr);
-    gap: $space-3;
+    gap: $space-2;
   }
 }
 
@@ -549,7 +563,7 @@ html, body {
   position: relative;
   border-radius: $border-radius-sm;
   overflow: hidden;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 8;
   background: $green-dark;
   cursor: pointer;
 

@@ -114,10 +114,10 @@ function V3Experience({ isActive }) {
   return (
     <section
       id="experience"
-      className="v3-section-body v3-scrollable"
+      className="v3-section-body"
       style={{ background: "#1E3932", height: "100%", overflow: "hidden" }}
     >
-      <div className="v3-inner">
+      <div className="v3-inner v3-scrollable v3-section-scroll">
         <SectionTitle subtitle="My professional journey">Experience</SectionTitle>
 
         <animated.div
@@ -125,8 +125,9 @@ function V3Experience({ isActive }) {
           style={{
             ...containerSpring,
             overflowY: "auto",
-            maxHeight: "calc(100vh - 200px)",
+            maxHeight: "none",
             paddingRight: "0.5rem",
+            paddingBottom: "1rem",
           }}
         >
           {EXPERIENCES.map((exp, i) => (

@@ -25,36 +25,34 @@ function ProjectThumb({ company, project, img, index, isActive, onOpen }) {
   const projectTitle = project.title || (project.id ? String(project.id) : "Project");
 
   return (
-    <div className="col-lg-4 col-6 col-xl-3 mb-3">
-      <animated.div
-        style={spring}
-        className="v3-project-thumb"
-        role="button"
-        tabIndex={0}
-        aria-label={`View project: ${projectTitle}`}
-        onClick={() => onOpen(company, project, img)}
-        onKeyDown={(e) => e.key === "Enter" && onOpen(company, project, img)}
-      >
-        <img
-          src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-          data-src={img}
-          alt={projectTitle}
-          loading="lazy"
-          onLoad={(e) => {
-            const src = e.target.getAttribute("data-src");
-            if (src) e.target.src = src;
-          }}
-          onError={(e) => { e.target.style.opacity = 0.4; }}
-          style={{ background: "#00473e" }}
-        />
-        <div className="v3-project-thumb__overlay">
-          <span className="v3-project-thumb__label">
-            <strong>{company.title}</strong><br />
-            {projectTitle}
-          </span>
-        </div>
-      </animated.div>
-    </div>
+    <animated.div
+      style={spring}
+      className="v3-project-thumb"
+      role="button"
+      tabIndex={0}
+      aria-label={`View project: ${projectTitle}`}
+      onClick={() => onOpen(company, project, img)}
+      onKeyDown={(e) => e.key === "Enter" && onOpen(company, project, img)}
+    >
+      <img
+        src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+        data-src={img}
+        alt={projectTitle}
+        loading="lazy"
+        onLoad={(e) => {
+          const src = e.target.getAttribute("data-src");
+          if (src) e.target.src = src;
+        }}
+        onError={(e) => { e.target.style.opacity = 0.4; }}
+        style={{ background: "#00473e" }}
+      />
+      <div className="v3-project-thumb__overlay">
+        <span className="v3-project-thumb__label">
+          <strong>{company.title}</strong><br />
+          {projectTitle}
+        </span>
+      </div>
+    </animated.div>
   );
 }
 
@@ -97,12 +95,11 @@ function V3Projects({ isActive }) {
   return (
     <section
       id="projects"
-      className="v3-section-body v3-scrollable"
+      className="v3-section-body"
       style={{ background: "#00473e", height: "100vh", overflow: "hidden" }}
     >
       <div
-        className="v3-inner"
-        style={{ overflowY: "auto", maxHeight: "100vh" }}
+        className="v3-inner v3-scrollable v3-section-scroll"
       >
         <animated.div style={headerSpring}>
           <SectionTitle subtitle="A selection of recent work">Projects</SectionTitle>
@@ -130,20 +127,18 @@ function V3Projects({ isActive }) {
         </div>
 
         {/* Grid */}
-        <div className="v3-projects-grid" style={{ display: undefined }}>
-          <div className="row">
-            {filteredProjects.map(({ company, project, img, index }) => (
-              <ProjectThumb
-                key={`${company.title}-${project.id || index}`}
-                company={company}
-                project={project}
-                img={img}
-                index={index}
-                isActive={isActive}
-                onOpen={handleOpen}
-              />
-            ))}
-          </div>
+        <div className="v3-projects-grid">
+          {filteredProjects.map(({ company, project, img, index }) => (
+            <ProjectThumb
+              key={`${company.title}-${project.id || index}`}
+              company={company}
+              project={project}
+              img={img}
+              index={index}
+              isActive={isActive}
+              onOpen={handleOpen}
+            />
+          ))}
         </div>
       </div>
 
