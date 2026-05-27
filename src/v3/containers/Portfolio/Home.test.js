@@ -12,6 +12,13 @@ describe('V3Home', () => {
     expect(screen.getByRole('button', { name: /Get In Touch/i })).toBeInTheDocument();
   });
 
+  test('renders animated geometric background shapes', () => {
+    render(<V3Home onNavigate={jest.fn()} />);
+    expect(screen.getByTestId('home-shapes')).toBeInTheDocument();
+    expect(document.querySelector('.v3-shape--orb-lg')).toBeInTheDocument();
+    expect(document.querySelector('.v3-shape--hex svg')).toBeInTheDocument();
+  });
+
   test('CTAs call onNavigate with correct section indices', () => {
     const onNavigate = jest.fn();
     render(<V3Home onNavigate={onNavigate} />);

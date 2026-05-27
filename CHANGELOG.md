@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.4] — 2026-05-27
+
+### Added
+- Home hero animated geometric shapes (circles, ring, hexagon) with slow spin, pulse, and drift
+- Mouse and touch parallax on Home shapes — layered depth response on desktop and mobile
+- `prefers-reduced-motion` disables shape animations and parallax
+
 ## [3.0.3] — 2026-05-27
 
 ### Fixed

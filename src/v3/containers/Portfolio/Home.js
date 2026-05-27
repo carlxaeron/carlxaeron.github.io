@@ -1,8 +1,121 @@
+import { useEffect, useRef } from "react";
+import { useSpring, animated, to } from "@react-spring/web";
 import { AnimationDown, AnimationFade, AnimationUp } from "../../components/Animations";
 
+function prefersReducedMotion() {
+  if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+    return false;
+  }
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function useParallax(containerRef) {
+  const reducedMotionRef = useRef(prefersReducedMotion());
+  const [{ px, py }, api] = useSpring(() => ({
+    px: 0,
+    py: 0,
+    config: { tension: 60, friction: 20 },
+  }));
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || reducedMotionRef.current) return undefined;
+
+    const updatePosition = (clientX, clientY) => {
+      const rect = el.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const nx = ((clientX - rect.left) / rect.width) * 2 - 1;
+      const ny = ((clientY - rect.top) / rect.height) * 2 - 1;
+      api.start({
+        px: Math.max(-1, Math.min(1, nx)),
+        py: Math.max(-1, Math.min(1, ny)),
+      });
+    };
+
+    const reset = () => api.start({ px: 0, py: 0 });
+
+    const onMouseMove = (e) => updatePosition(e.clientX, e.clientY);
+    const onTouchMove = (e) => {
+      if (e.touches[0]) {
+        updatePosition(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    };
+
+    el.addEventListener("mousemove", onMouseMove);
+    el.addEventListener("mouseleave", reset);
+    el.addEventListener("touchmove", onTouchMove, { passive: true });
+    el.addEventListener("touchend", reset);
+    el.addEventListener("touchcancel", reset);
+
+    return () => {
+      el.removeEventListener("mousemove", onMouseMove);
+      el.removeEventListener("mouseleave", reset);
+      el.removeEventListener("touchmove", onTouchMove);
+      el.removeEventListener("touchend", reset);
+      el.removeEventListener("touchcancel", reset);
+    };
+  }, [api, containerRef]);
+
+  return { px, py };
+}
+
+function ParallaxShape({ px, py, depth, wrapClass, children }) {
+  return (
+    <animated.div
+      className={`v3-shape-wrap ${wrapClass}`}
+      style={{
+        transform: to(
+          [px, py],
+          (x, y) => `translate(${x * depth}px, ${y * depth}px)`
+        ),
+      }}
+    >
+      {children}
+    </animated.div>
+  );
+}
+
+function HomeShapes({ px, py }) {
+  return (
+    <div className="v3-home-shapes" data-testid="home-shapes" aria-hidden="true">
+      <ParallaxShape px={px} py={py} depth={8} wrapClass="v3-shape-wrap--orb-lg">
+        <div className="v3-shape v3-shape--orb-lg" />
+      </ParallaxShape>
+
+      <ParallaxShape px={px} py={py} depth={18} wrapClass="v3-shape-wrap--ring">
+        <div className="v3-shape v3-shape--ring" />
+      </ParallaxShape>
+
+      <ParallaxShape px={px} py={py} depth={14} wrapClass="v3-shape-wrap--gold">
+        <div className="v3-shape v3-shape--gold" />
+      </ParallaxShape>
+
+      <ParallaxShape px={px} py={py} depth={28} wrapClass="v3-shape-wrap--orb-sm">
+        <div className="v3-shape v3-shape--orb-sm" />
+      </ParallaxShape>
+
+      <ParallaxShape px={px} py={py} depth={10} wrapClass="v3-shape-wrap--hex">
+        <div className="v3-shape v3-shape--hex">
+          <svg viewBox="0 0 200 230" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon
+              points="100,8 188,58 188,172 100,222 12,172 12,58"
+              stroke="rgba(0,168,98,0.14)"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </ParallaxShape>
+    </div>
+  );
+}
+
 function V3Home({ onNavigate }) {
+  const sectionRef = useRef(null);
+  const { px, py } = useParallax(sectionRef);
+
   return (
     <section
+      ref={sectionRef}
       className="v3-section-body"
       id="home"
       style={{
@@ -26,6 +139,8 @@ function V3Home({ onNavigate }) {
           pointerEvents: "none",
         }}
       />
+
+      <HomeShapes px={px} py={py} />
 
       <div className="v3-inner" style={{ position: "relative", zIndex: 1, justifyContent: "center", textAlign: "left" }}>
         <AnimationFade delay={0}>

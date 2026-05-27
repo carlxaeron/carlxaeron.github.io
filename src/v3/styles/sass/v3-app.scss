@@ -737,6 +737,167 @@ html, body {
 }
 
 // =============================================================
+// Home — animated geometric shapes
+// =============================================================
+@keyframes v3-spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes v3-pulse-glow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.06;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0.12;
+  }
+}
+
+@keyframes v3-float-drift {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-20px) rotate(120deg);
+  }
+  66% {
+    transform: translateY(8px) rotate(240deg);
+  }
+}
+
+.v3-home-shapes {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.v3-shape-wrap {
+  position: absolute;
+  will-change: transform;
+}
+
+.v3-shape-wrap--orb-lg {
+  right: -10%;
+  bottom: -8%;
+}
+
+.v3-shape-wrap--ring {
+  left: -80px;
+  top: 50%;
+  margin-top: -180px;
+}
+
+.v3-shape-wrap--gold {
+  right: 5%;
+  top: 12%;
+}
+
+.v3-shape-wrap--orb-sm {
+  left: 30%;
+  top: 18%;
+}
+
+.v3-shape-wrap--hex {
+  right: 8%;
+  top: 42%;
+}
+
+.v3-shape {
+  display: block;
+}
+
+.v3-shape--orb-lg {
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: rgba(0, 168, 98, 0.08);
+  animation: v3-pulse-glow 9s ease-in-out infinite;
+}
+
+.v3-shape--ring {
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 168, 98, 0.12);
+  background: transparent;
+  animation: v3-spin-slow 28s linear infinite;
+}
+
+.v3-shape--gold {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: rgba(203, 162, 88, 0.06);
+  animation: v3-spin-slow 20s linear infinite reverse, v3-pulse-glow 7s ease-in-out infinite;
+}
+
+.v3-shape--orb-sm {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(212, 233, 226, 0.1);
+  animation: v3-float-drift 14s ease-in-out infinite;
+}
+
+.v3-shape--hex {
+  width: 200px;
+  height: 230px;
+  animation: v3-spin-slow 40s linear infinite;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+@media (max-width: #{$bp-mobile}) {
+  .v3-shape-wrap--orb-lg {
+    right: -18%;
+    bottom: -12%;
+  }
+
+  .v3-shape-wrap--ring {
+    left: -120px;
+    margin-top: -120px;
+  }
+
+  .v3-shape--orb-lg {
+    width: 300px;
+    height: 300px;
+  }
+
+  .v3-shape--ring {
+    width: 220px;
+    height: 220px;
+  }
+
+  .v3-shape--gold {
+    width: 140px;
+    height: 140px;
+  }
+
+  .v3-shape--orb-sm {
+    width: 72px;
+    height: 72px;
+  }
+
+  .v3-shape--hex {
+    width: 120px;
+    height: 138px;
+  }
+
+  .v3-shape-wrap--hex {
+    right: 4%;
+    top: 50%;
+  }
+}
+
+// =============================================================
 // Section scroll container (used by Portfolio.js)
 // =============================================================
 .v3-portfolio-root {
@@ -769,9 +930,12 @@ html, body {
   .v3-sections-track,
   .v3-nav-overlay,
   .v3-card,
-  .v3-btn {
+  .v3-btn,
+  .v3-shape,
+  .v3-shape--hex {
     transition: none !important;
     animation: none !important;
+    animation-duration: 0.001ms !important;
   }
 }
 
