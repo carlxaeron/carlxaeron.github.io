@@ -5,9 +5,25 @@ globs:
   - src/components/**/*.js
   - src/styles/sass/**/*.scss
   - src/external-config.js
+  - src/v3/**/*.js
+  - src/v3/**/*.jsx
+  - src/v3/**/*.scss
 ---
 
 # Portfolio UI/UX (CARLXAERON / CMSDS)
+
+## Version 3 (from scratch, same stack)
+
+- **Code location:** new work lives under **`src/v3/`** (containers, components, styles). Current production-style app remains under [`src/containers/Portfolio/`](src/containers/Portfolio/) until you cut over routing in [`src/pages/Index.js`](src/pages/Index.js).
+- **Cursor rules for V3:**
+  - [`v3-design-system.mdc`](v3-design-system.mdc) — Starbucks-style **green palette** (`#00473e`, `#1E3932`, `#00A862`, `#D4E9E2`, gold accent `#CBA258`), **Inter** + **Playfair Display**, spacing and max width **1280px**.
+  - [`v3-components.mdc`](v3-components.mdc) — slide deck, `v3-section` / `v3-inner` / `v3-title`, cards, nav dots, motion (no `IntersectionObserver` inside slides).
+  - [`v3-content-data.mdc`](v3-content-data.mdc) — **`SECTIONS_CONFIG`** contract and data from [`src/external-config.js`](src/external-config.js).
+- V3 SASS tokens live beside V3 code (e.g. `src/v3/styles/sass/_v3-variables.scss`); do not overwrite v2-only palette in [`src/styles/sass/_variables.scss`](src/styles/sass/_variables.scss) unless intentionally migrating the whole site.
+
+---
+
+# Portfolio UI/UX (CARLXAERON / CMSDS) — v2
 
 ## Content source of truth
 
@@ -24,7 +40,7 @@ globs:
 
 - **Bootstrap** grid: `row`, `col-md-*`, etc.
 - **Tailwind** utilities for spacing, typography, and small layout tweaks where already used in the file.
-- **SASS**: global tokens and overrides under [`src/styles/sass/`](src/styles/sass/); palette variables in [`src/styles/sass/_variables.scss`](src/styles/sass/_variables.scss) (primary / corporate blue `#1e40af` when aligned with the design).
+- **SASS**: global tokens and overrides under [`src/styles/sass/`](src/styles/sass/); palette variables in [`src/styles/sass/_variables.scss`](src/styles/sass/_variables.scss) (v2 primary / blue as defined there). V3 green tokens live only in V3 SASS — see [`v3-design-system.mdc`](v3-design-system.mdc).
 
 ## Motion
 

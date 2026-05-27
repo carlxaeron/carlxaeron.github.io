@@ -1,0 +1,744 @@
+@use "sass:math";
+
+// Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+
+// V3 tokens
+@import 'v3-variables';
+
+// =============================================================
+// Global reset & base
+// =============================================================
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden; // full-page slides own the scroll
+  font-family: $font-body;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  background-color: $green-mid;
+  color: $white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// =============================================================
+// Section slide system
+// =============================================================
+.v3-slide-track {
+  will-change: transform;
+  transition: transform $transition-slide;
+}
+
+.v3-section {
+  height: 100svh; // mobile safe viewport height
+  height: 100vh;  // fallback
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  &.is-inactive {
+    pointer-events: none;
+  }
+}
+
+.v3-inner {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $space-8 $space-8 $space-12; // top:2rem sides:2rem bottom:3rem (header offset is on .v3-section-slide)
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: #{$bp-mobile}) {
+    padding: $space-4 $space-4 $space-8;
+  }
+}
+
+// =============================================================
+// Typography
+// =============================================================
+.v3-display {
+  font-family: $font-display;
+  font-weight: 700;
+}
+
+.v3-title {
+  font-family: $font-display;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  font-weight: 600;
+  margin-bottom: $space-6;
+  letter-spacing: -0.02em;
+
+  span.accent {
+    color: $green-accent;
+  }
+}
+
+.v3-subtitle {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: $green-light;
+  margin-bottom: $space-4;
+}
+
+// =============================================================
+// Buttons
+// =============================================================
+.v3-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-8;
+  border-radius: 100px;
+  font-family: $font-body;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background $transition-base, box-shadow $transition-base, transform $transition-base;
+  border: 2px solid transparent;
+  // Tap target compliance
+  min-height: 44px;
+  min-width: 44px;
+
+  &--primary {
+    background: $green-accent;
+    color: $white;
+    border-color: $green-accent;
+
+    &:hover, &:focus {
+      background: darken($green-accent, 8%);
+      box-shadow: 0 6px 24px rgba(0, 168, 98, 0.4);
+      transform: translateY(-2px);
+      color: $white;
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: $green-accent;
+    border-color: $green-accent;
+
+    &:hover, &:focus {
+      background: rgba($green-accent, 0.1);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// =============================================================
+// Cards
+// =============================================================
+.v3-card {
+  background: $white;
+  color: $text-dark;
+  border-radius: $border-radius;
+  box-shadow: $card-shadow;
+  padding: $space-8;
+  transition: transform $transition-base, box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: $card-shadow-hover;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $green-dark;
+    margin-bottom: $space-2;
+  }
+
+  &__body {
+    font-size: 0.9rem;
+    color: $text-muted;
+    line-height: 1.7;
+  }
+}
+
+// =============================================================
+// Nav dots (section navigation rail)
+// =============================================================
+.v3-nav-dots {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  border-radius: 100px;
+  // Safe area offset on the right side
+  padding-right: calc(12px + env(safe-area-inset-right, 0px));
+
+  @media (max-width: #{$bp-mobile}) {
+    // Move to bottom horizontal tray on mobile
+    right: unset;
+    top: unset;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row;
+    padding: 10px 16px;
+  }
+}
+
+.v3-nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba($white, 0.3);
+  cursor: pointer;
+  transition: background $transition-base, transform $transition-base;
+  padding: 0;
+  // Enlarge tap target without changing visual size
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+  }
+
+  &.active, &:focus-visible {
+    background: $green-accent;
+    transform: scale(1.3);
+    outline: none;
+  }
+
+  &:hover:not(.active) {
+    background: rgba($white, 0.6);
+  }
+
+  @media (max-width: #{$bp-mobile}) {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+// =============================================================
+// Hamburger / mobile nav overlay
+// =============================================================
+.v3-hamburger {
+  position: fixed;
+  top: calc(16px + env(safe-area-inset-top, 0px));
+  right: calc(16px + env(safe-area-inset-right, 0px));
+  z-index: 1100;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: #{$bp-mobile}) {
+    display: flex;
+  }
+
+  span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: $white;
+    border-radius: 2px;
+    transition: transform $transition-base, opacity $transition-base;
+  }
+
+  &.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  &.open span:nth-child(2) { opacity: 0; }
+  &.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
+
+.v3-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: $green-dark;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-8;
+  transform: translateX(100%);
+  transition: transform $transition-slide;
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+.v3-nav-overlay__item {
+  font-family: $font-display;
+  font-size: clamp(1.5rem, 6vw, 2.5rem);
+  color: $white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity $transition-base, color $transition-base;
+  min-height: 44px;
+
+  &:hover, &:focus, &.active {
+    opacity: 1;
+    color: $green-accent;
+    outline: none;
+  }
+}
+
+// =============================================================
+// Arrow nav buttons
+// =============================================================
+.v3-arrow {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: rgba($green-dark, 0.85);
+  border: 1.5px solid rgba($green-accent, 0.4);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: $white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: opacity $transition-base, background $transition-base;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &--up {
+    top: calc(16px + env(safe-area-inset-top, 0px));
+  }
+
+  &--down {
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  }
+
+  &:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    background: $green-dark;
+    border-color: $green-accent;
+  }
+
+  // Hide on mobile (swipe takes over)
+  @media (max-width: #{$bp-mobile}) {
+    display: none;
+  }
+}
+
+// =============================================================
+// Header / brand bar
+// =============================================================
+.v3-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  background: rgba($green-mid, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba($green-accent, 0.15);
+  padding: $space-3 $space-8;
+  padding-top: calc(#{$space-3} + env(safe-area-inset-top, 0px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: #{$bp-mobile}) {
+    padding: $space-3 $space-4;
+    padding-top: calc(#{$space-3} + env(safe-area-inset-top, 0px));
+  }
+}
+
+.v3-brand {
+  font-family: $font-display;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $white;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+
+  span {
+    color: $green-accent;
+  }
+}
+
+// =============================================================
+// Skill bars
+// =============================================================
+.v3-skill-bar {
+  margin-bottom: $space-4;
+
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-bottom: $space-2;
+    color: $green-light;
+  }
+
+  &__track {
+    height: 6px;
+    background: rgba($white, 0.12);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  &__fill {
+    height: 100%;
+    background: $green-accent;
+    border-radius: 100px;
+    transition: width 1s ease;
+  }
+}
+
+// =============================================================
+// Timeline (experience)
+// =============================================================
+.v3-timeline {
+  position: relative;
+  padding-left: $space-8;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba($green-accent, 0.25);
+  }
+}
+
+.v3-timeline-item {
+  position: relative;
+  margin-bottom: $space-8;
+
+  &__dot {
+    position: absolute;
+    left: calc(-#{$space-8} + 12px);
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: $green-accent;
+    border: 2px solid $green-mid;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-4;
+    margin-bottom: $space-2;
+
+    @media (max-width: #{$bp-mobile}) {
+      flex-direction: column;
+      gap: $space-2;
+    }
+  }
+
+  &__logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: $border-radius-sm;
+    background: $white;
+    padding: 4px;
+    flex-shrink: 0;
+  }
+
+  &__company {
+    font-family: $font-display;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: $white;
+  }
+
+  &__date {
+    font-size: 0.8rem;
+    color: $green-accent;
+    font-weight: 500;
+  }
+
+  &__title {
+    font-size: 0.9rem;
+    color: $green-light;
+    margin-bottom: $space-2;
+  }
+
+  &__skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: $space-3;
+  }
+
+  &__skill-tag {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 100px;
+    background: rgba($green-accent, 0.15);
+    color: $green-accent;
+    font-weight: 500;
+  }
+
+  &__desc {
+    font-size: 0.875rem;
+    color: $text-muted;
+    line-height: 1.7;
+    color: rgba($white, 0.7);
+  }
+
+  &__toggle {
+    background: none;
+    border: none;
+    color: $green-accent;
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: $space-1 0;
+    margin-top: $space-2;
+    min-height: 44px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// =============================================================
+// Project grid
+// =============================================================
+.v3-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-4;
+
+  @media (max-width: #{$bp-tablet}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: #{$bp-mobile}) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-3;
+  }
+}
+
+.v3-project-thumb {
+  position: relative;
+  border-radius: $border-radius-sm;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: $green-dark;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform $transition-base;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba($green-dark, 0.7);
+    display: flex;
+    align-items: flex-end;
+    padding: $space-3;
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+
+  &:hover &__overlay {
+    opacity: 1;
+  }
+
+  &__label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: $white;
+    line-height: 1.3;
+  }
+}
+
+.v3-filter-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-bottom: $space-6;
+
+  button {
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 1.5px solid rgba($green-accent, 0.4);
+    background: transparent;
+    color: $green-light;
+    cursor: pointer;
+    transition: all $transition-base;
+    min-height: 36px;
+
+    &.active, &:hover {
+      background: $green-accent;
+      color: $white;
+      border-color: $green-accent;
+    }
+  }
+}
+
+// =============================================================
+// Contact form
+// =============================================================
+.v3-form {
+  &__group {
+    margin-bottom: $space-4;
+  }
+
+  &__label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: $green-light;
+    margin-bottom: $space-2;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__control {
+    width: 100%;
+    padding: $space-3 $space-4;
+    background: rgba($white, 0.07);
+    border: 1.5px solid rgba($green-accent, 0.2);
+    border-radius: $border-radius-sm;
+    color: $white;
+    font-family: $font-body;
+    font-size: 16px; // prevents iOS auto-zoom
+    line-height: 1.5;
+    transition: border-color $transition-base;
+
+    &::placeholder {
+      color: rgba($white, 0.35);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $green-accent;
+      background: rgba($white, 0.1);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+
+  textarea.v3-form__control {
+    resize: vertical;
+    min-height: 120px;
+  }
+}
+
+// =============================================================
+// Stats bar (About)
+// =============================================================
+.v3-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-4;
+  text-align: center;
+
+  @media (max-width: #{$bp-mobile}) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-2;
+  }
+
+  &__value {
+    font-family: $font-display;
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: $green-accent;
+    line-height: 1;
+  }
+
+  &__label {
+    font-size: 0.7rem;
+    color: $green-light;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: $space-1;
+  }
+}
+
+// =============================================================
+// Section scroll container (used by Portfolio.js)
+// =============================================================
+.v3-portfolio-root {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+// Each section slide — positioned over the viewport, slides in/out via translateY
+.v3-section-slide {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  transition: transform $transition-slide;
+  will-change: transform;
+  z-index: 1;
+  // Reserve space below the fixed header
+  padding-top: calc(60px + env(safe-area-inset-top, 0px));
+  box-sizing: border-box;
+}
+
+// =============================================================
+// Reduced motion
+// =============================================================
+@media (prefers-reduced-motion: reduce) {
+  .v3-sections-track,
+  .v3-nav-overlay,
+  .v3-card,
+  .v3-btn {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+// =============================================================
+// Utility
+// =============================================================
+.v3-scrollable {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}

@@ -1,0 +1,56 @@
+// =============================================================
+// V3 Portfolio — Design Tokens (Starbucks-inspired green palette)
+// =============================================================
+
+// --- Core palette ---
+$green-dark:   #00473e;
+$green-mid:    #1E3932;
+$green-accent: #00A862;
+$green-light:  #D4E9E2;
+$gold:         #CBA258;
+$white:        #ffffff;
+$text-dark:    #1A1A1A;
+$text-muted:   #5f6b63;
+
+// --- Bootstrap / global mappings ---
+$primary:      $green-accent;
+$secondary:    $green-dark;
+$body-bg:      $green-mid;
+$body-color:   $white;
+$link-color:   $green-accent;
+
+// --- Typography ---
+$font-display: 'Playfair Display', Georgia, serif;
+$font-body:    'Inter', 'Segoe UI', Arial, sans-serif;
+$font-size-base: 1rem;
+$line-height-base: 1.6;
+
+// --- Spacing scale (4px base) ---
+$space-1:  0.25rem;  //  4px
+$space-2:  0.5rem;   //  8px
+$space-3:  0.75rem;  // 12px
+$space-4:  1rem;     // 16px
+$space-6:  1.5rem;   // 24px
+$space-8:  2rem;     // 32px
+$space-12: 3rem;     // 48px
+$space-16: 4rem;     // 64px
+$space-24: 6rem;     // 96px
+
+// --- Layout ---
+$max-width:       1280px;
+$section-padding: $space-12 $space-8;
+$border-radius:   16px;
+$border-radius-sm: 8px;
+
+// --- Cards ---
+$card-shadow:       0 12px 40px rgba(0, 168, 98, 0.12);
+$card-shadow-hover: 0 20px 60px rgba(0, 168, 98, 0.22);
+
+// --- Transitions ---
+$transition-fast:  0.2s ease;
+$transition-base:  0.25s ease;
+$transition-slide: 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+// --- Breakpoints (aligned with v2) ---
+$bp-mobile: 768px;
+$bp-tablet: 1024px;

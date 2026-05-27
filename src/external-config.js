@@ -548,10 +548,10 @@ To speed up development, I utilized the JADE template engine for creating HTML f
 ]
 
 const HEADERCONFIG = {
-  title: "Carl Louis Manuel - Programmer Analyst | Full-Stack Web & App Developer | Software Engineer | 12+ Years of Experience",
+  title: "Carl Louis Manuel — Senior Full-Stack Engineer & AI Integration Specialist | 12+ Years Enterprise Experience",
   meta: [
     { name: "theme-color", content: "#000000" },
-    { name: "description", content: "Experienced Programmer Analyst | Full-Stack Web & App Developer | Software Engineer with 12+ years of expertise in ReactJS, VueJS, AngularJS, NodeJS, PHP, and top frameworks like Laravel and CodeIgniter. Skilled in creating secure, scalable, and SEO-optimized websites, with a focus on responsive design and performance." },
+    { name: "description", content: "Senior Full-Stack Engineer & AI Integration Specialist with 12+ years delivering enterprise-grade web applications for banks, media companies, and technology firms. Expert in ReactJS, Laravel, OpenAI API, Flutter, and Firebase." },
     { name: "keywords", content: "Programmer Analyst, Full-Stack Web & App Developer, Software Engineer, ReactJS, VueJS, AngularJS, NodeJS, PHP, Laravel, CodeIgniter, AngularJS, VueJS, JQuery, HTML, CSS, Web Development, SEO, WordPress, Drupal, Joomla, Custom Themes, Responsive Design, OOP, Web Security, Scalable Websites, MySQL, Linux Development, CMS" },
     { property: "og:locale", content: "en_US" },
     { property: "og:type", content: "portfolio" },

@@ -1,0 +1,68 @@
+---
+description: Professional copywriting conventions for V3 portfolio — enterprise and AI positioning
+globs:
+  - "src/v3/**/*.js"
+  - "src/v3/**/*.jsx"
+  - "src/external-config.js"
+---
+
+# Portfolio V3 — Copy & Messaging
+
+All copy under `src/v3/` and in `src/external-config.js` must follow these conventions.
+
+## Target audience
+
+1. **Enterprise / Fortune 500 clients** — banks, telcos, media conglomerates, large government-adjacent orgs.
+2. **Companies hiring AI-integrated developers** — teams building with OpenAI APIs, LLM-powered products, AI chat assistants, agentic workflows.
+
+## Voice & tone
+
+- **Confident, outcome-driven.** Not "I built X" — "Delivered X that resulted in Y."
+- **Leadership vocabulary.** Architect, spearhead, deliver, modernize, scale, secure, integrate.
+- **Results first.** Mention business impact (efficiency, scale, security, revenue) before implementation detail.
+- **Senior-level, never junior-sounding.** Avoid: "I helped with", "I assisted", "I tried to". Prefer: "Led", "Designed", "Delivered", "Architected".
+- **No passive voice.** "Was responsible for" → "Owned / Led / Delivered."
+
+## Messaging pillars
+
+| Pillar | Supporting evidence |
+|---|---|
+| Enterprise-grade delivery | Metrobank banking apps, ABS-CBN digital platforms, GoAutoDial call-center modernization |
+| AI & LLM integration | OpenAI API, AI chat assistants, LLM-powered features |
+| Full-stack architecture | ReactJS frontends + PHP/Laravel backends + Firebase real-time + Flutter mobile |
+| Scale & security | Banking-grade security, high-load systems, end-to-end testing (Jest, Cypress) |
+| 12+ years depth | Consistent record across media, banking, gaming, and technology sectors |
+
+## Hero copy (Home section)
+
+- **Eyebrow (small label above h1):** `Senior Full-Stack Engineer · AI Integration Specialist`
+- **H1 (name block):** Keep `Carl Louis` / `Manuel` split — name is the brand.
+- **Sub-headline:** `12+ years delivering secure, scalable applications for banks, media companies & enterprises. ReactJS · Laravel · OpenAI · Flutter.`
+- **CTAs:** "View My Work" (primary) + "Get In Touch" (ghost) — keep as-is.
+
+## About bio (3-paragraph arc)
+
+1. **Who + credentials:** "I'm Carl Louis Manuel — a Senior Full-Stack Engineer with 12+ years of experience architecting and delivering production-grade web and mobile applications for enterprises across banking, media, and technology sectors."
+2. **What I build:** "My work spans the full stack: from pixel-perfect ReactJS frontends to secure PHP/Laravel backends, Firebase real-time systems, and AI-powered features using OpenAI's API. I've built banking applications at Metrobank, modernized legacy call-center systems at GoAutoDial, and created responsive digital experiences for ABS-CBN's properties."
+3. **Why it matters:** "I don't just write code — I architect solutions that scale, stay secure under load, and deliver measurable business outcomes. Whether you're building an enterprise platform or integrating AI into your product, I bring the depth and discipline to do it right."
+
+## Skill tags (About section)
+
+Include: `ReactJS`, `Vue`, `PHP`, `Laravel`, `Node.js`, `Flutter`, `Firebase`, **`OpenAI`**, **`AI Integration`**, **`LLM Apps`**
+
+## Contact section
+
+- **Heading:** "Get In Touch"
+- **Intro line (below SectionTitle subtitle):** "Looking to build an enterprise-grade platform or integrate AI into your product? Let's talk."
+
+## Meta / SEO (external-config.js)
+
+- **`HEADERCONFIG.title`:** `"Carl Louis Manuel — Senior Full-Stack Engineer & AI Integration Specialist | 12+ Years Enterprise Experience"`
+- **`description` meta content:** `"Senior Full-Stack Engineer & AI Integration Specialist with 12+ years delivering enterprise-grade web applications for banks, media companies, and technology firms. Expert in ReactJS, Laravel, OpenAI API, Flutter, and Firebase."`
+
+## What to avoid
+
+- Buzzword soup without substance ("passionate", "ninja", "rockstar").
+- Listing every technology in the hero — keep the sub-headline to 6–8 key items.
+- Lorem ipsum or placeholder copy in any `env: 'prod'` path.
+- Re-introducing `NODE_ENV === 'development'` copy branches.

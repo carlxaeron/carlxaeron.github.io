@@ -1,0 +1,44 @@
+---
+description: V3 portfolio content — data layer and SECTIONS_CONFIG contract
+globs:
+  - src/v3/**/*.js
+  - src/v3/**/*.jsx
+  - src/v3/config/**
+  - src/external-config.js
+  - src/config.js
+---
+
+# Portfolio V3 — Content & data
+
+## Single source of truth
+
+- **Primary:** [`src/external-config.js`](src/external-config.js) — exports such as `SKILLS`, `EXPERIENCES`, `COMPANIES`, `COMPANY_INFO`, `SERVICES`, `TESTIMONIALS`, `TEAM_MEMBERS`, `HEADERCONFIG`, etc.
+- **Re-exports / runtime wiring:** [`src/config.js`](src/config.js) when the app already maps external config into hooks or analytics — keep imports consistent across v2 and v3.
+
+## Rules for JSX
+
+- **No long marketing copy in components** — pull strings, lists, and SEO fields from config objects.
+- Images and asset paths should live next to structured entries (e.g. per project `id`, `imgType`) as they do today for `COMPANIES` / projects.
+
+## Recommended section order (V3 deck)
+
+Wire `SECTIONS_CONFIG` in V3’s `Portfolio.js` to this order (ids must match hash routes):
+
+1. `home` — Hero / positioning  
+2. `services` — from `SERVICES`  
+3. `about` — company + story; can lean on `COMPANY_INFO`  
+4. `skills` — from `SKILLS` (consider grouped display matching parent/child structure)  
+5. `experience` — from `EXPERIENCES`  
+6. `projects` — from `COMPANIES` / project list  
+7. `testimonials` — from `TESTIMONIALS`  
+8. `contact` — form + `COMPANY_INFO.contact`
+
+Each entry: `{ id, component, title }` where **`id`** is the URL hash fragment (e.g. `services` → `#services`).
+
+## Optional V3-only config
+
+- If V3 needs layout-only options (e.g. section visibility, feature flags), add **`src/v3/config/sections.js`** (or `.ts` later) that **only** imports from `external-config` and exports `SECTIONS_CONFIG` / metadata — avoid duplicating copy.
+
+## Migration note
+
+- V2 remains under [`src/containers/Portfolio/`](src/containers/Portfolio/). V3 lives under **`src/v3/`** until cutover; [`Index.js`](src/pages/Index.js) can switch the default export when ready.

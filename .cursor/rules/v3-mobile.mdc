@@ -1,0 +1,122 @@
+---
+description: V3 portfolio mobile support rules — touch, tap targets, safe areas, svh, fonts, overflow
+globs:
+  - src/v3/**/*.js
+  - src/v3/**/*.jsx
+  - src/v3/**/*.scss
+  - src/v3/**/*.css
+---
+
+# Portfolio V3 — Mobile Support
+
+All rules in this file apply to `src/v3/**` only. Cross-read [`v3-components.mdc`](v3-components.mdc) for component-level conventions and [`v3-design-system.mdc`](v3-design-system.mdc) for palette/type tokens.
+
+---
+
+## Touch navigation
+
+- Attach the `useSwipeHandler` hook ([`src/v3/components/SwipeHandler.js`](src/v3/components/SwipeHandler.js)) to the `.sections-container` / `v3-portfolio-root` wrapper — **not** to individual sections.
+- Minimum swipe delta: **50 px** vertical before triggering a section change.
+- Use `{ passive: true }` on `touchstart` and `touchend` listeners to keep scroll performance smooth.
+- Prevent double-firing: guard with a `useRef` boolean lock that resets after the slide transition finishes (same pattern as `isTransitioningRef`).
+
+---
+
+## Tap targets
+
+- **Minimum 44 × 44 px** for every interactive control: nav dots, hamburger icon, close button, expand/collapse toggles, filter buttons, form submit.
+- Extend the hit area with a transparent `::after` pseudo-element (`inset: -8px`) rather than inflating the visible element.
+- On mobile, nav dots get `width: 8px; height: 8px` visually but the `::after` inset makes them 24 × 24 px effective.
+
+---
+
+## Navigation layout on mobile (≤ 768 px)
+
+- **Nav dots**: move from the fixed right vertical column to a **fixed horizontal bottom tray** (`bottom: calc(16px + env(safe-area-inset-bottom, 0px))`; `flex-direction: row`).
+- **Hamburger menu** ([`src/v3/components/HamburgerMenu.js`](src/v3/components/HamburgerMenu.js)): shown only on mobile; replaces the desktop right-rail with a full-screen green overlay (`$green-dark` bg, `v3-nav-overlay`).
+- **Arrow buttons** (up/down): `display: none` on mobile — swipe + hamburger cover navigation.
+- **Desktop nav links** in the header bar: hidden on mobile (`v3-header` hides the `<nav>` via `isMobile` from the zustand store).
+
+---
+
+## Safe areas (notch / home indicator)
+
+Apply `env(safe-area-inset-*)` to every fixed-position element:
+
+```scss
+// Header
+padding-top: calc(#{$space-3} + env(safe-area-inset-top, 0px));
+
+// Bottom dots tray
+bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+
+// Hamburger button
+top:   calc(16px + env(safe-area-inset-top, 0px));
+right: calc(16px + env(safe-area-inset-right, 0px));
+
+// Nav overlay (full-screen)
+padding: env(safe-area-inset-top, 0)
+         env(safe-area-inset-right, 0)
+         env(safe-area-inset-bottom, 0)
+         env(safe-area-inset-left, 0);
+```
+
+The `<meta name="viewport">` tag in `public/index.html` must include `viewport-fit=cover` for safe-area insets to work:
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+```
+
+---
+
+## Section height
+
+- Use `100vh` with a `100svh` override for the small viewport height (excludes the mobile browser chrome bar):
+  ```scss
+  height: 100vh;   /* fallback for browsers without svh support */
+  height: 100svh;  /* override — excludes mobile browser chrome */
+  ```
+- Apply on `.v3-section-slide` (individual section wrappers) and `.v3-portfolio-root`.
+- Each `.v3-section-slide` is `position: fixed; top: 0; left: 0; width: 100%` and slides in/out via `transform: translateY(${offset * 100}vh)`.
+- Add `padding-top: calc(60px + env(safe-area-inset-top, 0px))` on `.v3-section-slide` to push section content below the fixed header.
+- Never use `100%` on section root elements — it resolves relative to the parent which may differ from the viewport.
+
+---
+
+## Font sizes
+
+- **Minimum 16 px on all `<input>`, `<textarea>`, `<select>` elements** to prevent iOS Safari auto-zoom on focus. The `.v3-form__control` class sets `font-size: 16px`.
+- Hero headings: use `clamp()` — e.g. `clamp(2.2rem, 7vw, 5rem)` — so they scale gracefully from 320 px up to 1280 px+.
+- Section titles: `clamp(1.6rem, 4vw, 2.8rem)`.
+- Body copy minimum: **0.875 rem** (14 px) on small phones; prefer `0.9 rem` — `1 rem` for comfortable reading.
+
+---
+
+## Image sizing
+
+- Every `<img>` inside sections must have:
+  ```css
+  max-width: 100%;
+  height: auto;
+  ```
+- Profile image and project thumbnails: `object-fit: cover` to fill their containers without distortion.
+- Use `loading="lazy"` on project thumbnails and any non-hero images.
+- Decorative/background images: `role="presentation"` and `alt=""`.
+
+---
+
+## Overflow
+
+- Every `.v3-section-slide` wrapper: `overflow: hidden` — prevents inner content from breaking the slide boundary on small screens.
+- Scrollable section content (Experience list, Projects grid): use a nested `.v3-scrollable` wrapper (`overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain`), **not** the section root.
+- `html, body { overflow: hidden }` is set globally in `v3-app.scss` — do not override this on the section root elements.
+- `.v3-portfolio-root` is `position: fixed; inset: 0; overflow: hidden` — it is the stacking container for all `position: fixed` section slides.
+
+---
+
+## Performance
+
+- Lazy-load project thumbnails: `<img loading="lazy" />`.
+- Defer image `src` assignment: set `data-src` and swap `src` in the `onLoad` handler (or use a lightweight Intersection Observer only for the lazy loader, not for animation triggers).
+- Reduce motion: `@media (prefers-reduced-motion: reduce)` disables all transitions and spring animations (already in `v3-app.scss`).
+- Keep each section's own JS light: heavy data arrays (`EXPERIENCES`, `COMPANIES`) are module-level constants — they parse once per bundle, not per render.

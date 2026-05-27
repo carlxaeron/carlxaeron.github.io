@@ -1,0 +1,67 @@
+---
+description: V3 portfolio components — slides, motion, cards, nav, a11y
+globs:
+  - src/v3/**/*.js
+  - src/v3/**/*.jsx
+  - src/v3/**/*.scss
+  - src/v3/**/*.css
+---
+
+# Portfolio V3 — Components & layout
+
+Cross-read [`v3-design-system.mdc`](v3-design-system.mdc) for colors and type. Prefer **Bootstrap grid** + **Tailwind utilities** + **V3 SASS** for anything global or token-heavy.
+
+## Full-page slide shell
+
+- **Architecture**: each section is `position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100svh`. Sections slide in/out via `transform: translateY(${(index - currentSection) * 100}vh)` applied **per section**, not on a shared track. This avoids vh/svh mismatch issues.
+- `.v3-portfolio-root` is `position: fixed; inset: 0; overflow: hidden` — the stacking context for all slides.
+- Each `.v3-section-slide` includes `padding-top: calc(60px + env(safe-area-inset-top, 0px))` to reserve space below the fixed header.
+- Transition per slide: `transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)`.
+- Define **`SECTIONS_CONFIG` outside the React component** (module-level const) so the array identity does not change every render — avoids unnecessary remounts and animation resets.
+- Sync URL hash with the active section id (e.g. `#skills`) and listen for `hashchange`.
+
+## Section anatomy (BEM-style classes)
+
+- Outer: `v3-section v3-section--{name}` (full-bleed background).
+- Inner: `v3-inner` — max-width `1280px`, centered, horizontal padding.
+- Title block: `v3-title` (use display font for main heading where appropriate).
+
+## Motion and visibility
+
+- **Do not use `IntersectionObserver`** (including [`src/components/Tracker.js`](src/components/Tracker.js)) for enter animations **inside** the transformed slide track — intersection is unreliable with `translateY` parents.
+- Use **`@react-spring/web`** `useSpring` + **`useEffect` + `setTimeout`** stagger (e.g. `120 + index * 70` ms per row/card).
+- Add animation primitives under V3, e.g. [`src/v3/components/Animations.js`](src/v3/components/Animations.js): `AnimationDown`, `AnimationUp`, `AnimationFade`, `AnimationScale`, `AnimationSlideLeft`. Reuse patterns from [`src/components/Animations.js`](src/components/Animations.js); keep v2 imports unchanged unless migrating.
+
+## Nav dots (section rail)
+
+- Fixed column of `<button type="button">` dots on the right; **`aria-label`** per section (“Go to Services”, etc.).
+- Active dot uses **`green-accent`** (`#00A862`); inactive dots muted (e.g. semi-transparent white on dark sections).
+- Up/down arrows: same accent; do not disable both directions during transition unless you intentionally block input — prefer a short **`useRef` lock** instead of disabling UI for long periods.
+
+## Cards
+
+- Surface: white; **`border-radius: 16px`**.
+- Shadow: subtle green tint, e.g. `box-shadow: 0 12px 40px rgba(0, 168, 98, 0.12)`.
+- Hover: lift `translateY(-6px)` + slightly stronger shadow; **`transition ~0.25s ease`**.
+
+## Buttons
+
+- **Primary:** `green-accent` background, white text, rounded (pill or `8px`+).
+- **Ghost:** `1px solid` `green-accent`, transparent background, `green-accent` text on light surfaces.
+- **`transition: 0.25s ease`** on color, background, box-shadow, transform.
+
+## Inactive slides (UX + a11y)
+
+- On non-active section wrappers: **`aria-hidden={true}`** and **`pointer-events: none`** so hidden slides are not focusable or clickable.
+- Keep **one** `main` landmark and logical heading order inside the active section where possible.
+
+## Accessibility checklist
+
+- Real **`<button type="button">`** for custom controls (dots, arrows, toggles).
+- **`alt`** on all meaningful images; decorative images: `alt=""` or `role="presentation"`.
+- **Keyboard:** `ArrowDown` / `ArrowUp` (and optionally `PageDown` / `PageUp`, `Home` / `End`) navigate slides when focus is on the document / portfolio root.
+- Respect **reduced motion**: `@media (prefers-reduced-motion: reduce)` — shorten or disable transforms.
+
+## State
+
+- Reuse zustand + context patterns from v2 if desired; **`env` should stay `'prod'`** for real copy (no Lorem placeholder branches tied to `NODE_ENV`).

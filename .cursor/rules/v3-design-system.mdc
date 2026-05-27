@@ -1,0 +1,54 @@
+---
+description: V3 portfolio design tokens — Starbucks-style green palette, type, spacing
+alwaysApply: true
+---
+
+# Portfolio V3 — Design system
+
+Use these tokens for **all new V3 UI** under `src/v3/`. Stack stays CRA + React + Bootstrap + Tailwind + SASS + react-spring; V3 owns its own SASS entry (e.g. `src/v3/styles/sass/_v3-variables.scss`).
+
+## Color palette (Starbucks-inspired greens + gold)
+
+| Token | Hex | Role |
+|-------|-----|------|
+| `green-dark` | `#00473e` | Hero depth, emphasis bands, dark UI surfaces |
+| `green-mid` | `#1E3932` | Nav, footer, alternate full-bleed sections |
+| `green-accent` | `#00A862` | Primary CTAs, links on dark, active nav, progress |
+| `green-light` | `#D4E9E2` | Soft section fills, card tints, dividers |
+| `gold` | `#CBA258` | Badges, highlights, premium accents (use sparingly) |
+| `white` | `#FFFFFF` | Text on dark, card faces |
+| `text-dark` | `#1A1A1A` | Body copy on light backgrounds |
+
+**SASS mapping (example):**
+
+```scss
+$green-dark:   #00473e;
+$green-mid:    #1E3932;
+$green-accent: #00A862;
+$green-light:  #D4E9E2;
+$gold:         #CBA258;
+$primary:      $green-accent;
+$secondary:    $green-dark;
+```
+
+Contrast: pair **white / green-light** text on `green-mid` and `green-dark`; use **text-dark** on `green-light` and white cards. Aim for **WCAG AA** minimum (4.5:1 body, 3:1 large headings).
+
+## Typography
+
+- **Display / hero:** `Playfair Display`, serif (Google Fonts).
+- **UI / body:** `Inter`, sans-serif (Google Fonts).
+- Load fonts once in V3 SASS or `public/index.html`; avoid duplicate `@import` in every partial.
+
+## Spacing (4px base)
+
+Use multiples: **4, 8, 12, 16, 24, 32, 48, 64, 96** px. Prefer Tailwind spacing tokens or SCSS variables aligned to this scale for consistency.
+
+## Layout
+
+- **Max content width:** `1280px` (inner wrapper, centered with horizontal padding).
+- **Sections:** full-bleed background; content constrained inside the max-width inner.
+- **Breakpoint:** align with existing app — **768px** for mobile vs desktop patterns.
+
+## Motion (high level)
+
+Motion should feel **calm and premium** (ease-out, short durations). Detailed animation patterns live in [`v3-components.mdc`](v3-components.mdc).

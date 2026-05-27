@@ -1,4 +1,4 @@
-import Portfolio from '../containers/Portfolio/Portfolio';
+import Portfolio from '../v3/containers/Portfolio/Portfolio';
 import './../styles/App.css';
 
 function Index() {
