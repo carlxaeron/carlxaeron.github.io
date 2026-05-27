@@ -19,7 +19,12 @@ admin.initializeApp();
 // add new function for API for my AI assistant
 exports.assistant = onRequest((request, response) => {
   // Allow these origins
-  const allowedOrigins = ['https://carlxaeron.github.io', 'http://localhost:3000'];
+  const allowedOrigins = [
+    'https://carlxaeron.github.io',
+    'https://carlmanuel.com',
+    'https://www.carlmanuel.com',
+    'http://localhost:3000',
+  ];
   const origin = request.headers.origin;
 
   if (allowedOrigins.includes(origin)) {
@@ -107,7 +112,12 @@ exports.assistant = onRequest((request, response) => {
 
 exports.contact = onRequest((request, response) => {
   // Allow these origins
-  const allowedOrigins = ['https://carlxaeron.github.io', 'http://localhost:3000'];
+  const allowedOrigins = [
+    'https://carlxaeron.github.io',
+    'https://carlmanuel.com',
+    'https://www.carlmanuel.com',
+    'http://localhost:3000',
+  ];
   const origin = request.headers.origin;
 
   if (allowedOrigins.includes(origin)) {
