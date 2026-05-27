@@ -7,14 +7,23 @@ import SectionTitle from "../../components/SectionTitle";
 
 function ProjectThumb({ company, project, img, index, isActive, onOpen }) {
   const [show, setShow] = useState(false);
+  const [imageReady, setImageReady] = useState(false);
 
   useEffect(() => {
-    if (!isActive) return;
+    if (!isActive) {
+      setShow(false);
+      setImageReady(false);
+      return;
+    }
     const parts = String(index).split("_").map(Number);
     const k = (parts[0] || 0) * 3 + (parts[1] || 0);
     const t = setTimeout(() => setShow(true), 100 + k * 25);
     return () => clearTimeout(t);
   }, [isActive, index]);
+
+  useEffect(() => {
+    if (isActive && show) setImageReady(true);
+  }, [isActive, show]);
 
   const spring = useSpring({
     from: { opacity: 0, scale: 0.9 },
@@ -26,7 +35,12 @@ function ProjectThumb({ company, project, img, index, isActive, onOpen }) {
 
   return (
     <animated.div
-      style={spring}
+      style={{
+        ...spring,
+        backgroundImage: imageReady ? `url(${img})` : undefined,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
       className="v3-project-thumb"
       role="button"
       tabIndex={0}
@@ -34,18 +48,15 @@ function ProjectThumb({ company, project, img, index, isActive, onOpen }) {
       onClick={() => onOpen(company, project, img)}
       onKeyDown={(e) => e.key === "Enter" && onOpen(company, project, img)}
     >
-      <img
-        src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-        data-src={img}
-        alt={projectTitle}
-        loading="lazy"
-        onLoad={(e) => {
-          const src = e.target.getAttribute("data-src");
-          if (src) e.target.src = src;
-        }}
-        onError={(e) => { e.target.style.opacity = 0.4; }}
-        style={{ background: "#00473e" }}
-      />
+      {imageReady && (
+        <img
+          src={img}
+          alt={projectTitle}
+          loading="eager"
+          decoding="async"
+          onError={(e) => { e.target.style.display = "none"; }}
+        />
+      )}
       <div className="v3-project-thumb__overlay">
         <span className="v3-project-thumb__label">
           <strong>{company.title}</strong><br />
@@ -60,6 +71,7 @@ function buildProjectList(companies) {
   const list = [];
   companies.forEach((company, ci) => {
     company.projects?.forEach((project, pi) => {
+      if (!project?.id) return;
       const imgType = project.imgType || "jpg";
       const img = `/static/images/sites/resized-images/${project.id}.${imgType}`;
       list.push({ company, project, img, index: `${ci}_${pi}` });

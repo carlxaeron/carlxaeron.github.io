@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.3] — 2026-05-27
+
+### Fixed
+- Project thumbnail images not appearing on mobile (iOS): replaced broken placeholder lazy-load with eager load when Projects section is active
+- Added `background-image` fallback on project cards (same pattern as V2)
+- Skip projects with invalid ids in the grid (no more broken `false.jpg` entries)
+
+### Added
+- `Projects.test.js` for image loading regression
+
 ## [3.0.2] — 2026-05-27
 
 ### Fixed
