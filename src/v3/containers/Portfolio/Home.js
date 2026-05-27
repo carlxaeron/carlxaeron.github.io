@@ -9,8 +9,19 @@ function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+function isTouchDevice() {
+  if (typeof window === "undefined") return false;
+  return (
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    window.matchMedia?.("(pointer: coarse)")?.matches
+  );
+}
+
 function useParallax(containerRef) {
   const reducedMotionRef = useRef(prefersReducedMotion());
+  const gyroActiveRef = useRef(false);
+  const gyroRequestedRef = useRef(false);
   const [{ px, py }, api] = useSpring(() => ({
     px: 0,
     py: 0,
@@ -21,38 +32,87 @@ function useParallax(containerRef) {
     const el = containerRef.current;
     if (!el || reducedMotionRef.current) return undefined;
 
-    const updatePosition = (clientX, clientY) => {
-      const rect = el.getBoundingClientRect();
-      if (!rect.width || !rect.height) return;
-      const nx = ((clientX - rect.left) / rect.width) * 2 - 1;
-      const ny = ((clientY - rect.top) / rect.height) * 2 - 1;
+    const setParallax = (nx, ny) => {
       api.start({
         px: Math.max(-1, Math.min(1, nx)),
         py: Math.max(-1, Math.min(1, ny)),
       });
     };
 
+    const updateFromPointer = (clientX, clientY) => {
+      const rect = el.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const nx = ((clientX - rect.left) / rect.width) * 2 - 1;
+      const ny = ((clientY - rect.top) / rect.height) * 2 - 1;
+      setParallax(nx, ny);
+    };
+
     const reset = () => api.start({ px: 0, py: 0 });
 
-    const onMouseMove = (e) => updatePosition(e.clientX, e.clientY);
-    const onTouchMove = (e) => {
-      if (e.touches[0]) {
-        updatePosition(e.touches[0].clientX, e.touches[0].clientY);
+    const onOrientation = (e) => {
+      if (!gyroActiveRef.current || e.gamma == null || e.beta == null) return;
+      const nx = e.gamma / 30;
+      const ny = (e.beta - 50) / 30;
+      setParallax(nx, ny);
+    };
+
+    const enableGyro = async () => {
+      if (gyroRequestedRef.current || typeof window === "undefined") return;
+      gyroRequestedRef.current = true;
+
+      if (typeof DeviceOrientationEvent === "undefined") return;
+
+      try {
+        if (typeof DeviceOrientationEvent.requestPermission === "function") {
+          const state = await DeviceOrientationEvent.requestPermission();
+          if (state !== "granted") return;
+        }
+        gyroActiveRef.current = true;
+        window.addEventListener("deviceorientation", onOrientation, true);
+      } catch {
+        gyroActiveRef.current = false;
       }
+    };
+
+    const onMouseMove = (e) => {
+      if (!gyroActiveRef.current) updateFromPointer(e.clientX, e.clientY);
+    };
+
+    const onTouchStart = () => {
+      if (isTouchDevice()) enableGyro();
+    };
+
+    const onTouchMove = (e) => {
+      if (gyroActiveRef.current || !e.touches[0]) return;
+      updateFromPointer(e.touches[0].clientX, e.touches[0].clientY);
+    };
+
+    const onTouchEnd = () => {
+      if (!gyroActiveRef.current) reset();
     };
 
     el.addEventListener("mousemove", onMouseMove);
     el.addEventListener("mouseleave", reset);
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
     el.addEventListener("touchmove", onTouchMove, { passive: true });
-    el.addEventListener("touchend", reset);
-    el.addEventListener("touchcancel", reset);
+    el.addEventListener("touchend", onTouchEnd);
+    el.addEventListener("touchcancel", onTouchEnd);
+
+    if (isTouchDevice() && typeof DeviceOrientationEvent !== "undefined") {
+      if (typeof DeviceOrientationEvent.requestPermission !== "function") {
+        gyroActiveRef.current = true;
+        window.addEventListener("deviceorientation", onOrientation, true);
+      }
+    }
 
     return () => {
       el.removeEventListener("mousemove", onMouseMove);
       el.removeEventListener("mouseleave", reset);
+      el.removeEventListener("touchstart", onTouchStart);
       el.removeEventListener("touchmove", onTouchMove);
-      el.removeEventListener("touchend", reset);
-      el.removeEventListener("touchcancel", reset);
+      el.removeEventListener("touchend", onTouchEnd);
+      el.removeEventListener("touchcancel", onTouchEnd);
+      window.removeEventListener("deviceorientation", onOrientation, true);
     };
   }, [api, containerRef]);
 

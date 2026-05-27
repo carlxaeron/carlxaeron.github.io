@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.5] — 2026-05-27
+
+### Added
+- Home shape parallax via device gyroscope on mobile (tilt to move shapes)
+- iOS motion permission requested on first tap; touch parallax remains as fallback
+
 ## [3.0.4] — 2026-05-27
 
 ### Added
