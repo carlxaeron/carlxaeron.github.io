@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.8] — 2026-05-27
+
+### Fixed
+- Project and AI chat modals: solid green backgrounds on header, body, and footer (no transparent bleed-through)
+- Modals now layer above nav dots/arrows (z-index 1400) with a darker backdrop (82% black)
+- Improved chat bubble and project description text contrast
+
 ## [3.0.7] — 2026-05-27
 
 ### Added

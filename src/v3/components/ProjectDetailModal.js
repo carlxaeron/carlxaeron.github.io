@@ -28,6 +28,8 @@ function ProjectDetailModal({ show, onHide, company, project, details }) {
       centered
       size="xl"
       fullscreen="md-down"
+      className="v3-modal-layer"
+      backdropClassName="v3-modal-backdrop"
       dialogClassName="v3-project-modal"
       contentClassName="v3-project-modal__content"
     >

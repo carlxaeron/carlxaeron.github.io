@@ -425,19 +425,32 @@ html, body {
   }
 }
 
-.v3-chat-modal {
-  z-index: 1300;
+// Modals must sit above nav dots/arrows (1200); Bootstrap default is 1055.
+.v3-modal-layer {
+  z-index: 1400 !important;
+}
 
+.v3-modal-backdrop {
+  z-index: 1390 !important;
+  background-color: rgba(0, 0, 0, 0.82) !important;
+  opacity: 1 !important;
+}
+
+.v3-chat-modal {
   &__content {
-    background: $green-mid;
+    background-color: $green-mid !important;
     border: 1px solid rgba($green-accent, 0.25);
     color: $white;
   }
 
   &__header {
-    background: $green-dark;
+    background-color: $green-dark !important;
     border-bottom: 1px solid rgba($green-accent, 0.2);
     color: $white;
+
+    .modal-title {
+      color: $white;
+    }
 
     .btn-close {
       filter: invert(1);
@@ -446,12 +459,28 @@ html, body {
 
   &__body {
     padding: $space-4;
+    background-color: $green-mid;
+    color: $white;
   }
 
   &__footer {
-    background: $green-dark;
+    background-color: $green-dark !important;
     border-top: 1px solid rgba($green-accent, 0.2);
     gap: $space-2;
+  }
+}
+
+.modal-fullscreen-md-down {
+  .v3-chat-modal__content,
+  .v3-project-modal__content {
+    min-height: 100%;
+    background-color: $green-mid !important;
+    border: none;
+  }
+
+  .v3-chat-modal__body,
+  .v3-project-modal__body {
+    background-color: $green-mid;
   }
 }
 
@@ -482,15 +511,17 @@ html, body {
   &--user {
     align-self: flex-end;
     margin-left: auto;
-    background: rgba($green-accent, 0.2);
-    color: $green-light;
+    background: rgba($green-accent, 0.35);
+    color: $white;
+    border: 1px solid rgba($green-accent, 0.45);
   }
 
   &--assistant {
     align-self: flex-start;
     margin-right: auto;
-    background: rgba($green-dark, 0.9);
+    background: $green-dark;
     color: $white;
+    border: 1px solid rgba($green-accent, 0.2);
   }
 }
 
@@ -520,19 +551,21 @@ html, body {
 // Project detail modal
 // =============================================================
 .v3-project-modal {
-  z-index: 1300;
-
   &__content {
-    background: $green-mid;
+    background-color: $green-mid !important;
     border: 1px solid rgba($green-accent, 0.25);
     color: $white;
   }
 
   &__header {
-    background: $green-dark;
+    background-color: $green-dark !important;
     border-bottom: 1px solid rgba($green-accent, 0.2);
     color: $white;
     font-family: $font-display;
+
+    .modal-title {
+      color: $white;
+    }
 
     .btn-close {
       filter: invert(1);
@@ -544,6 +577,8 @@ html, body {
     max-height: 75vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    background-color: $green-mid;
+    color: $white;
 
     @media (max-width: #{$bp-mobile}) {
       max-height: none;
@@ -592,13 +627,13 @@ html, body {
   }
 
   &__description {
-    color: $green-light;
+    color: $white;
     font-size: 0.9rem;
     line-height: 1.7;
     margin: 0 0 $space-4;
 
     &--muted {
-      opacity: 0.85;
+      color: $green-light;
     }
   }
 
@@ -616,8 +651,8 @@ html, body {
     padding: 4px 10px;
     border-radius: 100px;
     border: 1px solid rgba($green-accent, 0.45);
-    background: rgba($green-accent, 0.12);
-    color: $green-light;
+    background: rgba($green-accent, 0.2);
+    color: $white;
   }
 
   &__gallery-row {
@@ -652,13 +687,22 @@ html, body {
   }
 
   &__footer {
-    background: $green-dark;
+    background-color: $green-dark !important;
     border-top: 1px solid rgba($green-accent, 0.2);
     gap: $space-2;
   }
 
   &__close {
     min-height: 44px;
+    background-color: rgba($white, 0.12);
+    border-color: rgba($green-light, 0.35);
+    color: $white;
+
+    &:hover,
+    &:focus {
+      background-color: rgba($white, 0.2);
+      color: $white;
+    }
   }
 }
 

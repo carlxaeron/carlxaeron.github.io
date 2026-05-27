@@ -115,6 +115,8 @@ const ChatAgent = () => {
         centered
         fullscreen="md-down"
         size="md"
+        className="v3-modal-layer"
+        backdropClassName="v3-modal-backdrop"
         dialogClassName="v3-chat-modal"
         contentClassName="v3-chat-modal__content"
       >
