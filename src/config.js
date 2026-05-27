@@ -110,12 +110,22 @@ export const firebaseConfig = {
     appId: process.env.REACT_APP_appId,
     measurementId: process.env.REACT_APP_measurementId
 };
-// Initialize Firebase
-export const fb_app = initializeApp(firebaseConfig);
-export const analytics = getAnalytics (fb_app);
+
+const hasFirebaseConfig = Boolean(firebaseConfig.projectId);
+
+export const fb_app = hasFirebaseConfig ? initializeApp(firebaseConfig) : null;
+export const analytics = hasFirebaseConfig && typeof window !== 'undefined' ? getAnalytics(fb_app) : null;
+
 const logEvent = ({ anal, event, option = {} }) => {
-    if (process.env.NODE_ENV !== 'development') LE(anal || analytics, event, option);
+    const analInstance = anal || analytics;
+    if (process.env.NODE_ENV !== 'development' && analInstance) {
+        LE(analInstance, event, option);
+    }
 };
-logEvent({event: 'init_app'});
-export const fb_db = getFirestore(fb_app);
+
+if (hasFirebaseConfig) {
+    logEvent({ event: 'init_app' });
+}
+
+export const fb_db = hasFirebaseConfig ? getFirestore(fb_app) : null;
 export { logEvent };
