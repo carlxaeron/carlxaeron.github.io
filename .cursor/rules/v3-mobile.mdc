@@ -34,7 +34,8 @@ All rules in this file apply to `src/v3/**` only. Cross-read [`v3-components.mdc
 
 - **Nav dots**: move from the fixed right vertical column to a **fixed horizontal bottom tray** (`bottom: calc(16px + env(safe-area-inset-bottom, 0px))`; `flex-direction: row`).
 - **Hamburger menu** ([`src/v3/components/HamburgerMenu.js`](src/v3/components/HamburgerMenu.js)): shown only on mobile; replaces the desktop right-rail with a full-screen green overlay (`$green-dark` bg, `v3-nav-overlay`).
-- **Arrow buttons** (up/down): `display: none` on mobile — swipe + hamburger cover navigation.
+- **Arrow buttons** (up/down): visible on mobile above the bottom dot tray (`bottom: calc(72px + safe-area-inset-bottom))`; 44×44 px tap targets. Swipe and hamburger remain available.
+- **Chat FAB** ([`src/components/ChatAgent.js`](src/components/ChatAgent.js)): bottom-left on mobile (icon only); nav dots stay bottom-center — avoid overlap.
 - **Desktop nav links** in the header bar: hidden on mobile (`v3-header` hides the `<nav>` via `isMobile` from the zustand store).
 
 ---

@@ -281,7 +281,7 @@ function V3PortfolioScroll() {
         onNavigate={navigateToSection}
       />
 
-      {/* Arrow buttons (desktop only) */}
+      {/* Section arrow buttons */}
       <button
         type="button"
         className="v3-arrow v3-arrow--up"

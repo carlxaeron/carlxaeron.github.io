@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.6] — 2026-05-27
+
+### Fixed
+- AI Chat assistant: V3 styling, empty-send loading bug, safe API response parsing, scrollable messages, mobile fullscreen modal
+- Mobile nav dots: higher z-index and stronger bottom tray contrast so they stay visible above content
+- Mobile section arrows: visible again with safe positioning above nav dots and below header (44px tap targets)
+
+### Added
+- Chat FAB bottom-left on mobile (icon-only) to avoid overlapping nav dots
+- `ChatAgent.test.js` for FAB, empty submit, and API reply flow
+
 ## [3.0.5] — 2026-05-27
 
 ### Added
