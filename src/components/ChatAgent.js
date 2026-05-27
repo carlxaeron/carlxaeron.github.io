@@ -18,9 +18,9 @@ const ChatAgent = () => {
 
   useEffect(() => {
     if (show) {
-      inputRef.current.focus();
+      inputRef.current?.focus();
     }
-  }, []);
+  }, [show]);
 
   const handleSend = async () => {
     setLoading(true);
