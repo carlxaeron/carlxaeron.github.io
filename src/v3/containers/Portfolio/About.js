@@ -40,35 +40,21 @@ function V3About({ isActive }) {
   return (
     <section
       id="about"
-      className="v3-section-body v3-scrollable"
+      className="v3-section-body"
       style={{ background: "#1E3932", height: "100%", overflow: "hidden" }}
     >
-      <div className="v3-inner">
+      <div className="v3-inner v3-scrollable v3-section-scroll" data-testid="about-scrollable">
         <SectionTitle accent="Us">About</SectionTitle>
 
-        <div
-          className="row align-items-center"
-          style={{ flex: 1 }}
-        >
+        <div className="row align-items-center">
           {/* Profile image */}
           <div className="col-md-4 text-center mb-4 mb-md-0">
             <animated.div style={imgSpring}>
-              <div
-                style={{
-                  width: 200,
-                  height: 200,
-                  borderRadius: "50%",
-                  overflow: "hidden",
-                  margin: "0 auto",
-                  border: "4px solid #00A862",
-                  boxShadow: "0 0 40px rgba(0,168,98,0.25)",
-                }}
-              >
+              <div className="v3-profile-avatar">
                 <img
                   src="/static/images/profile3.jpg"
                   alt="Carl Louis Manuel"
                   loading="lazy"
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   onError={(e) => { e.target.style.display = "none"; }}
                 />
               </div>
@@ -86,8 +72,8 @@ function V3About({ isActive }) {
                   marginBottom: "1rem",
                 }}
               >
-              I&apos;m Carl Louis Manuel
-            </h3>
+                I&apos;m Carl Louis Manuel
+              </h3>
               <p style={{ color: "rgba(212,233,226,0.85)", lineHeight: 1.8, fontSize: "0.95rem", marginBottom: "1rem" }}>
                 A Senior Full-Stack Engineer with 12+ years of experience architecting and delivering
                 production-grade web and mobile applications for enterprises across banking, media, and

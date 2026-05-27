@@ -64,10 +64,10 @@ function V3Contact({ isActive }) {
   return (
     <section
       id="contact"
-      className="v3-section-body v3-scrollable"
+      className="v3-section-body"
       style={{ background: "linear-gradient(160deg, #1E3932 0%, #00473e 100%)", height: "100%", overflow: "hidden" }}
     >
-      <div className="v3-inner">
+      <div className="v3-inner v3-scrollable v3-section-scroll">
         <SectionTitle subtitle="Looking to build an enterprise-grade platform or integrate AI into your product? Let's talk.">Contact</SectionTitle>
 
         <animated.div style={spring} className="row">

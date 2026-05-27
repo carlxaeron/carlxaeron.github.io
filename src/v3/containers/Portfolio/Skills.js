@@ -87,10 +87,10 @@ function V3Skills({ isActive }) {
   return (
     <section
       id="skills"
-      className="v3-section-body v3-scrollable"
+      className="v3-section-body"
       style={{ background: "#00473e", height: "100%", overflow: "hidden" }}
     >
-      <div className="v3-inner">
+      <div className="v3-inner v3-scrollable v3-section-scroll">
         <animated.div style={headerSpring}>
           <SectionTitle subtitle="Technologies I work with">Skills</SectionTitle>
         </animated.div>

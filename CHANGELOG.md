@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.2] — 2026-05-27
+
+### Fixed
+- About section scroll lock on mobile: inner content now scrolls correctly and section navigation works at boundaries
+- Profile photo crop on About: face visible with improved `object-position`
+- Skills and Contact sections use the same inner-scroll pattern to prevent identical mobile scroll traps
+
+### Added
+- `About.test.js` regression tests for scroll structure
+
 ## [3.0.1] — 2026-05-27
 
 ### Fixed
