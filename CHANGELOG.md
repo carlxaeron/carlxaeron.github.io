@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.10] — 2026-05-29
+
+### Fixed
+- Project detail modal now renders correctly (centered dialog with full content) by adding Bootstrap modal layout shell CSS required by React-Bootstrap
+- Lifted `ProjectDetailModal` to portfolio root so it layers above fixed section slides without being obscured
+
+### Changed
+- Improved project modal typography (Playfair title, Inter body), spacing, and footer Close button styling
+- Chat agent footer close uses native button with explicit Escape handler and test coverage
+
 ## [3.0.9] — 2026-05-28
 
 ### Fixed

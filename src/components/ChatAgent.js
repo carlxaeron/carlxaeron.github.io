@@ -43,6 +43,19 @@ const ChatAgent = () => {
     }
   }, [messages, show]);
 
+  useEffect(() => {
+    if (!show) return undefined;
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [show]);
+
   const handleSend = async () => {
     const trimmed = input.trim();
     if (!trimmed || loading) return;
@@ -171,14 +184,13 @@ const ChatAgent = () => {
           >
             {loading ? "Sending…" : "Send"}
           </Button>
-          <Button
+          <button
             type="button"
-            variant="secondary"
-            className="v3-chat-close-btn"
+            className="btn btn-secondary v3-chat-close-btn"
             onClick={closeModal}
           >
             Close
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
     </>

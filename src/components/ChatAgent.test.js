@@ -90,4 +90,17 @@ describe("ChatAgent", () => {
       expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     });
   });
+
+  test("closes modal with footer close button", async () => {
+    render(<ChatAgent />);
+
+    fireEvent.click(screen.getByRole("button", { name: /Chat with AI assistant/i }));
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+
+    fireEvent.click(screen.getAllByRole("button", { name: /^Close$/i })[1]);
+
+    await waitFor(() => {
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    });
+  });
 });

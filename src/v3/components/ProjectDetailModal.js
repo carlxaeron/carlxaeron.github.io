@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import useModalBodyLock from "../hooks/useModalBodyLock";
 
 function fullImagePath(project) {
@@ -11,16 +11,16 @@ function ProjectDetailModal({ show, onHide, company, project, details }) {
   const [heroSrc, setHeroSrc] = useState(null);
   useModalBodyLock(show);
 
+  const handleExited = () => {
+    setHeroSrc(null);
+  };
+
   if (!project?.id) return null;
 
   const defaultHero = fullImagePath(project);
   const activeHero = heroSrc || defaultHero;
   const projectTitle = project.title || String(project.id);
   const gallery = details?.gallery || [];
-
-  const handleExited = () => {
-    setHeroSrc(null);
-  };
 
   return (
     <Modal
@@ -69,13 +69,13 @@ function ProjectDetailModal({ show, onHide, company, project, details }) {
           </div>
           <div className="v3-project-modal__details">
             {details?.description && (
-              <>
+              <section className="v3-project-modal__section">
                 <h3 className="v3-project-modal__label">Overview</h3>
                 <p className="v3-project-modal__description">{details.description}</p>
-              </>
+              </section>
             )}
             {gallery.length > 0 && (
-              <div className="v3-project-modal__gallery">
+              <section className="v3-project-modal__section">
                 <h3 className="v3-project-modal__label">Additional Screens</h3>
                 <div className="v3-project-modal__gallery-row">
                   {gallery.map((src) => (
@@ -92,10 +92,10 @@ function ProjectDetailModal({ show, onHide, company, project, details }) {
                     </button>
                   ))}
                 </div>
-              </div>
+              </section>
             )}
             {details?.tags?.length > 0 && (
-              <>
+              <section className="v3-project-modal__section">
                 <h3 className="v3-project-modal__label">Technologies</h3>
                 <ul className="v3-project-modal__tags">
                   {details.tags.map((tag) => (
@@ -104,7 +104,7 @@ function ProjectDetailModal({ show, onHide, company, project, details }) {
                     </li>
                   ))}
                 </ul>
-              </>
+              </section>
             )}
             {!details?.description && !details?.tags?.length && (
               <p className="v3-project-modal__description v3-project-modal__description--muted">
@@ -125,9 +125,9 @@ function ProjectDetailModal({ show, onHide, company, project, details }) {
             View Live Site
           </a>
         )}
-        <Button type="button" variant="secondary" className="v3-project-modal__close" onClick={onHide}>
+        <button type="button" className="v3-btn v3-btn--ghost v3-project-modal__close" onClick={onHide}>
           Close
-        </Button>
+        </button>
       </Modal.Footer>
     </Modal>
   );

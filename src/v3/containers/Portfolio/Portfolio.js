@@ -13,6 +13,8 @@ import V3Skills from "./Skills";
 import V3Experience from "./Experience";
 import V3Projects from "./Projects";
 import V3Contact from "./Contact";
+import ProjectDetailModal from "../../components/ProjectDetailModal";
+import { getProjectDetails } from "../../data/projectDetails";
 
 // Module-level constant: stable identity across renders, no remount resets
 const SECTIONS_CONFIG = [
@@ -30,6 +32,12 @@ function V3PortfolioScroll() {
   const isTransitioningRef = useRef(false);
   const wheelThrottleRef = useRef(0);
   const WHEEL_THROTTLE_MS = 160;
+  const [projectModal, setProjectModal] = useState({
+    show: false,
+    company: null,
+    project: null,
+    details: null,
+  });
   const isAnyModalOpen = useCallback(
     () => document.body.classList.contains("v3-modal-open"),
     []
@@ -206,6 +214,19 @@ function V3PortfolioScroll() {
   const closeModal = () =>
     setValue((prev) => ({ ...prev, modal: { show: false, title: "", body: null } }));
 
+  const openProjectModal = useCallback((company, project) => {
+    setProjectModal({
+      show: true,
+      company,
+      project,
+      details: getProjectDetails(project?.id),
+    });
+  }, []);
+
+  const closeProjectModal = useCallback(() => {
+    setProjectModal((prev) => ({ ...prev, show: false }));
+  }, []);
+
   return (
     <>
       {/* Fixed header / brand */}
@@ -277,6 +298,7 @@ function V3PortfolioScroll() {
                 onNavigate={navigateToSection}
                 sectionIndex={index}
                 totalSections={SECTIONS_CONFIG.length}
+                onOpenProject={section.id === "projects" ? openProjectModal : undefined}
               />
             </div>
           );
@@ -320,6 +342,14 @@ function V3PortfolioScroll() {
           <Button variant="secondary" onClick={closeModal}>Close</Button>
         </Modal.Footer>
       </Modal>
+
+      <ProjectDetailModal
+        show={projectModal.show}
+        onHide={closeProjectModal}
+        company={projectModal.company}
+        project={projectModal.project}
+        details={projectModal.details}
+      />
 
       {/* AI Chat assistant */}
       <ChatAgent />

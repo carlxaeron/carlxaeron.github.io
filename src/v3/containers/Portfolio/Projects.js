@@ -83,7 +83,7 @@ function buildProjectList(companies) {
 
 const ALL_PROJECTS = buildProjectList(COMPANIES);
 
-function V3Projects({ isActive }) {
+function V3Projects({ isActive, onOpenProject }) {
   const [filter, setFilter] = useState("all");
   const [modal, setModal] = useState({ show: false, company: null, project: null, details: null });
 
@@ -100,6 +100,10 @@ function V3Projects({ isActive }) {
 
   const handleOpen = (company, project) => {
     logEvent({ anal: analytics, event: "view_project", option: { project_id: project.id } });
+    if (typeof onOpenProject === "function") {
+      onOpenProject(company, project);
+      return;
+    }
     setModal({
       show: true,
       company,
@@ -158,13 +162,15 @@ function V3Projects({ isActive }) {
         </div>
       </div>
 
-      <ProjectDetailModal
-        show={modal.show}
-        onHide={handleClose}
-        company={modal.company}
-        project={modal.project}
-        details={modal.details}
-      />
+      {!onOpenProject && (
+        <ProjectDetailModal
+          show={modal.show}
+          onHide={handleClose}
+          company={modal.company}
+          project={modal.project}
+          details={modal.details}
+        />
+      )}
     </section>
   );
 }
