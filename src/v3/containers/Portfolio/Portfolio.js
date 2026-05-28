@@ -30,6 +30,10 @@ function V3PortfolioScroll() {
   const isTransitioningRef = useRef(false);
   const wheelThrottleRef = useRef(0);
   const WHEEL_THROTTLE_MS = 160;
+  const isAnyModalOpen = useCallback(
+    () => document.body.classList.contains("v3-modal-open"),
+    []
+  );
 
   const getActiveSlide = useCallback(() => {
     const activeSectionId = SECTIONS_CONFIG[currentSection]?.id;
@@ -89,6 +93,7 @@ function V3PortfolioScroll() {
     (deltaY, target, { throttleRef, throttleMs, preventDefault } = {}) => {
       if (!deltaY) return false;
       if (isTransitioningRef.current) return false;
+      if (isAnyModalOpen()) return false;
 
       const now = Date.now();
       if (throttleRef && throttleMs && now - throttleRef.current < throttleMs) {
@@ -112,6 +117,7 @@ function V3PortfolioScroll() {
       getActiveSlide,
       navigateToSection,
       resolveScrollableTarget,
+      isAnyModalOpen,
     ]
   );
 
@@ -125,6 +131,7 @@ function V3PortfolioScroll() {
   useEffect(() => {
     const onWheel = (e) => {
       if (!e.deltaY) return;
+      if (isAnyModalOpen()) return;
       trySectionNavigate(e.deltaY, e.target, {
         throttleRef: wheelThrottleRef,
         throttleMs: WHEEL_THROTTLE_MS,
@@ -133,11 +140,12 @@ function V3PortfolioScroll() {
     };
     window.addEventListener("wheel", onWheel, { passive: false });
     return () => window.removeEventListener("wheel", onWheel);
-  }, [trySectionNavigate]);
+  }, [trySectionNavigate, isAnyModalOpen]);
 
   // Keyboard navigation
   useEffect(() => {
     const onKey = (e) => {
+      if (isAnyModalOpen()) return;
       if (e.key === "ArrowDown" || e.key === "PageDown") navigateToSection(currentSection + 1);
       if (e.key === "ArrowUp"   || e.key === "PageUp")   navigateToSection(currentSection - 1);
       if (e.key === "Home") navigateToSection(0);
@@ -145,7 +153,7 @@ function V3PortfolioScroll() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [currentSection, navigateToSection]);
+  }, [currentSection, navigateToSection, isAnyModalOpen]);
 
   // Hash change (browser back/forward)
   useEffect(() => {
@@ -183,6 +191,7 @@ function V3PortfolioScroll() {
   const swipeRef = useSwipeHandler({
     shouldAllowSwipe: ({ direction, deltaY, event }) => {
       if (isTransitioningRef.current) return false;
+      if (isAnyModalOpen()) return false;
       const activeSlide = getActiveSlide();
       const scrollableEl = resolveScrollableTarget(event.target, activeSlide);
       const signedDelta = direction === "up" ? deltaY : -deltaY;

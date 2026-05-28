@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import useModalBodyLock from "../hooks/useModalBodyLock";
 
 function fullImagePath(project) {
   const imgType = project?.imgType || "jpg";
@@ -8,6 +9,7 @@ function fullImagePath(project) {
 
 function ProjectDetailModal({ show, onHide, company, project, details }) {
   const [heroSrc, setHeroSrc] = useState(null);
+  useModalBodyLock(show);
 
   if (!project?.id) return null;
 
@@ -33,10 +35,16 @@ function ProjectDetailModal({ show, onHide, company, project, details }) {
       dialogClassName="v3-project-modal"
       contentClassName="v3-project-modal__content"
     >
-      <Modal.Header closeButton className="v3-project-modal__header">
+      <Modal.Header className="v3-project-modal__header">
         <Modal.Title>
           {company?.title} — {projectTitle}
         </Modal.Title>
+        <button
+          type="button"
+          className="btn-close v3-modal-dismiss"
+          aria-label="Close"
+          onClick={onHide}
+        />
       </Modal.Header>
       <Modal.Body className="v3-project-modal__body">
         <div className="v3-project-modal__layout">
@@ -62,13 +70,13 @@ function ProjectDetailModal({ show, onHide, company, project, details }) {
           <div className="v3-project-modal__details">
             {details?.description && (
               <>
-                <h3 className="v3-project-modal__label">Description</h3>
+                <h3 className="v3-project-modal__label">Overview</h3>
                 <p className="v3-project-modal__description">{details.description}</p>
               </>
             )}
             {gallery.length > 0 && (
               <div className="v3-project-modal__gallery">
-                <h3 className="v3-project-modal__label">Gallery</h3>
+                <h3 className="v3-project-modal__label">Additional Screens</h3>
                 <div className="v3-project-modal__gallery-row">
                   {gallery.map((src) => (
                     <button
@@ -78,7 +86,7 @@ function ProjectDetailModal({ show, onHide, company, project, details }) {
                         activeHero === src ? " v3-project-modal__gallery-thumb--active" : ""
                       }`}
                       onClick={() => setHeroSrc(src)}
-                      aria-label="View screenshot"
+                      aria-label="View additional screenshot"
                     >
                       <img src={src.replace("/sites/", "/sites/resized-images/")} alt="" />
                     </button>
@@ -88,7 +96,7 @@ function ProjectDetailModal({ show, onHide, company, project, details }) {
             )}
             {details?.tags?.length > 0 && (
               <>
-                <h3 className="v3-project-modal__label">Tags</h3>
+                <h3 className="v3-project-modal__label">Technologies</h3>
                 <ul className="v3-project-modal__tags">
                   {details.tags.map((tag) => (
                     <li key={tag} className="v3-project-modal__tag">
@@ -100,7 +108,7 @@ function ProjectDetailModal({ show, onHide, company, project, details }) {
             )}
             {!details?.description && !details?.tags?.length && (
               <p className="v3-project-modal__description v3-project-modal__description--muted">
-                Project for {company?.title}.
+                Work delivered for {company?.title}. Full case study available on request.
               </p>
             )}
           </div>
@@ -114,7 +122,7 @@ function ProjectDetailModal({ show, onHide, company, project, details }) {
             rel="noopener noreferrer"
             className="v3-btn v3-btn--primary"
           >
-            Visit Site ↗
+            View Live Site
           </a>
         )}
         <Button type="button" variant="secondary" className="v3-project-modal__close" onClick={onHide}>

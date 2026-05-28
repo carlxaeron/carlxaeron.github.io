@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.9] — 2026-05-28
+
+### Fixed
+- Project and chat modal close behavior now works reliably via header close icon, footer close button, and Escape key
+- Prevented background portfolio interactions while a modal is open by locking page interaction and section navigation handlers
+- Improved modal close-button hit area and layering so controls are consistently clickable on desktop and mobile
+
+### Changed
+- Updated chat and project modal UI copy to a more professional tone
+- Rewrote all ported project descriptions in `projectDetails.js` with clearer, professional language while preserving original scope
+
 ## [3.0.8] — 2026-05-27
 
 ### Fixed

@@ -5,9 +5,10 @@ import { logEvent } from "../config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment } from "@fortawesome/free-solid-svg-icons";
 import { mapping } from "../mapping";
+import useModalBodyLock from "../v3/hooks/useModalBodyLock";
 
 const GREETING =
-  "Hi — I'm Carl's AI assistant. Ask about experience, skills, or projects.";
+  "Hello. I'm Carl's portfolio assistant. Ask about experience, skills, or selected projects.";
 
 function parseAssistantReply(response) {
   const content = response?.data?.data?.[0]?.message?.content;
@@ -27,6 +28,7 @@ const ChatAgent = () => {
 
   const inputRef = useRef(null);
   const messagesEndRef = useRef(null);
+  useModalBodyLock(show);
 
   useEffect(() => {
     if (show) {
@@ -63,7 +65,7 @@ const ChatAgent = () => {
         role: "assistant",
         content:
           reply ||
-          "Sorry, I could not read the assistant response. Please try again.",
+          "I received an unexpected response format. Please try again.",
       };
 
       setMessages([...nextMessages, botMessage]);
@@ -74,7 +76,7 @@ const ChatAgent = () => {
         ...nextMessages,
         {
           role: "assistant",
-          content: "Sorry, I am unable to process your request at the moment.",
+          content: "Unable to reach the assistant right now. Please try again.",
         },
       ]);
       logEvent({ event: "chatai", option: { action: "error", message: error.message } });
@@ -111,7 +113,7 @@ const ChatAgent = () => {
       <Modal
         show={show}
         onHide={closeModal}
-        backdrop="static"
+        backdrop={true}
         centered
         fullscreen="md-down"
         size="md"
@@ -120,8 +122,14 @@ const ChatAgent = () => {
         dialogClassName="v3-chat-modal"
         contentClassName="v3-chat-modal__content"
       >
-        <Modal.Header closeButton className="v3-chat-modal__header">
+        <Modal.Header className="v3-chat-modal__header">
           <Modal.Title>AI Assistant</Modal.Title>
+          <button
+            type="button"
+            className="btn-close v3-modal-dismiss"
+            aria-label="Close"
+            onClick={closeModal}
+          />
         </Modal.Header>
         <Modal.Body className="v3-chat-modal__body">
           <div className="v3-chat-messages" data-testid="chat-messages">

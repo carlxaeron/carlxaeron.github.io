@@ -1,7 +1,7 @@
 /** Ported from legacy Project.js (getContents + skillsBak). */
 export const PROJECT_DETAILS = {
   "eco": {
-    "description": "Made in wordpress and woocommerce plugin. My job is to maintain the codes, enhance, debug the site. Make a custom plugin to work in woocommerce and additional features. Fix different bugs on design/layout. Fix website to make it more SEO friendly.",
+    "description": "Built and maintained a WordPress and WooCommerce implementation, including feature enhancements, bug fixes, and custom plugin development. Improved site layout quality and strengthened SEO readiness.",
     "tags": [
       "#wordpress",
       "#woocommerce",
@@ -26,7 +26,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://www.ecoshiftcorp.com/"
   },
   "sc": {
-    "description": "Made in .net system (kentico). Redesign the old layout from scratch from PSD Layout to HTML,CSS,JS. Make it friendly site to desktop and mobile.",
+    "description": "Delivered a full front-end redesign on a .NET (Kentico) platform, converting PSD designs into production-ready HTML, CSS, and JavaScript with responsive behavior across desktop and mobile.",
     "tags": [
       "#html",
       "#css",
@@ -42,7 +42,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://starcinema.abs-cbn.com/"
   },
   "kty": {
-    "description": "Made in .net system (kentico). Redesign the old layout from scratch from PSD Layout to HTML,CSS,JS. Make it friendly site to desktop and mobile.",
+    "description": "Implemented a complete UI refresh on .NET (Kentico), translating PSD assets into responsive HTML, CSS, and JavaScript for desktop and mobile users.",
     "tags": [
       "#html",
       "#css",
@@ -58,7 +58,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://thankyou.abs-cbn.com/"
   },
   "push": {
-    "description": "Made in .net system (kentico). Redesign the old layout from scratch from PSD Layout to HTML,CSS,JS. Make it friendly site to desktop and mobile.",
+    "description": "Rebuilt the interface on .NET (Kentico) from PSD to responsive HTML, CSS, and JavaScript, with improvements for usability across devices.",
     "tags": [
       "#html",
       "#psdtohtml",
@@ -77,7 +77,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://push.abs-cbn.com"
   },
   "corp": {
-    "description": "Enhance the website.",
+    "description": "Enhanced the corporate website through targeted UI, front-end, and maintenance improvements.",
     "tags": [
       "#html",
       "#css",
@@ -94,7 +94,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://www.abs-cbn.com/corporate"
   },
   "careers": {
-    "description": "Enhance the careers website.",
+    "description": "Improved the careers website with front-end enhancements, usability refinements, and issue resolution.",
     "tags": [
       "#html",
       "#css",
@@ -110,7 +110,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://careers.abs-cbn.com/"
   },
   "anc": {
-    "description": "ANC Form for 1 week event.",
+    "description": "Built and delivered an ANC event form experience for a one-week campaign window.",
     "tags": [
       "#html",
       "#css",
@@ -125,7 +125,7 @@ export const PROJECT_DETAILS = {
     ]
   },
   "kaiaq": {
-    "description": "KAIAQ Admin Template to be use.",
+    "description": "Developed and prepared the KAIAQ Admin Template for internal platform use.",
     "tags": [
       "#html",
       "#css",
@@ -141,7 +141,7 @@ export const PROJECT_DETAILS = {
     ]
   },
   "asphaltnitro": {
-    "description": "Made it from scratch and from PSD Layout to HTML,CSS,JS. Friendly website from desktop to mobile and created a codeigniter system to make the repeatable codes in one for all the gamelofts 1 pager sites",
+    "description": "Built this one-pager from scratch by converting PSD layouts into responsive HTML, CSS, and JavaScript. Also created a reusable CodeIgniter base to standardize shared components across Gameloft campaign pages.",
     "tags": [
       "#codeigniter",
       "#psdtohtml",
@@ -156,7 +156,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://www.gameloft.com/en/game/asphalt-nitro-mobile"
   },
   "asphalt8": {
-    "description": "Made it from scratch and from PSD Layout to HTML,CSS,JS. Friendly website from desktop to mobile and created a codeigniter system to make the repeatable codes in one for all the gamelofts 1 pager sites",
+    "description": "Delivered end-to-end front-end implementation from PSD to responsive HTML, CSS, and JavaScript, then integrated a reusable CodeIgniter structure for consistency across related Gameloft one-pager sites.",
     "tags": [
       "#codeigniter",
       "#psdtohtml",
@@ -171,7 +171,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://www.gameloft.com/asphalt8/"
   },
   "cc": {
-    "description": "Enhance the site and fixed the problem from PHP, HTML, CSS, JS.",
+    "description": "Maintained and enhanced the support site by resolving cross-layer issues in PHP, HTML, CSS, and JavaScript.",
     "tags": [
       "#codeigniter",
       "#debug",
@@ -181,7 +181,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://support.gameloft.com/"
   },
   "dm": {
-    "description": "Made it from scratch and from PSD Layout to HTML,CSS,JS. Friendly website from desktop to mobile and created a codeigniter system to make the repeatable codes in one for all the gamelofts 1 pager sites",
+    "description": "Implemented the site from PSD to production with responsive HTML, CSS, and JavaScript, and leveraged a shared CodeIgniter foundation for repeatable development across Gameloft microsites.",
     "tags": [
       "#codeigniter",
       "#psdtohtml",
@@ -196,7 +196,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://minionrush.com/"
   },
   "dh5": {
-    "description": "Made it from scratch and from PSD Layout to HTML,CSS,JS. Friendly website from desktop to mobile and created a codeigniter system to make the repeatable codes in one for all the gamelofts 1 pager sites",
+    "description": "Developed this campaign site from the ground up using PSD-based front-end implementation and responsive design, supported by a reusable CodeIgniter framework for shared components.",
     "tags": [
       "#codeigniter",
       "#psdtohtml",
@@ -211,7 +211,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "http://dungeonhunter5.com/"
   },
   "gl-forum": {
-    "description": "Enhance the site and fixed the problem from PHP, HTML, CSS, JS.",
+    "description": "Improved site stability and functionality through maintenance and bug fixes across PHP, HTML, CSS, and JavaScript.",
     "tags": [
       "#codeigniter",
       "#debug",
@@ -221,7 +221,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://forum.gameloft.com/"
   },
   "gor": {
-    "description": "Made it from scratch and from PSD Layout to HTML,CSS,JS. Friendly website from desktop to mobile and created a codeigniter system to make the repeatable codes in one for all the gamelofts 1 pager sites",
+    "description": "Built and launched the site from PSD assets with responsive HTML, CSS, and JavaScript, while reusing a CodeIgniter base to streamline delivery across similar projects.",
     "tags": [
       "#codeigniter",
       "#psdtohtml",
@@ -236,7 +236,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://www.gameloft.com/en/game/gods-of-rome"
   },
   "hoc": {
-    "description": "Made it from scratch and from PSD Layout to HTML,CSS,JS. Friendly website from desktop to mobile and created a codeigniter system to make the repeatable codes in one for all the gamelofts 1 pager sites",
+    "description": "Executed full front-end development from PSD to responsive production output and reused a common CodeIgniter architecture for scalable one-pager development.",
     "tags": [
       "#codeigniter",
       "#psdtohtml",
@@ -251,7 +251,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "http://www.heroesoforderandchaosgame.com/index.php"
   },
   "sf": {
-    "description": "Made it from scratch and from PSD Layout to HTML,CSS,JS. Friendly website from desktop to mobile and created a codeigniter system to make the repeatable codes in one for all the gamelofts 1 pager sites",
+    "description": "Delivered a complete PSD-to-web implementation with mobile-ready behavior and reusable CodeIgniter patterns to support faster delivery across related game pages.",
     "tags": [
       "#codeigniter",
       "#psdtohtml",
@@ -266,7 +266,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://www.sniperfury.com/"
   },
   "tbc": {
-    "description": "Made it from scratch and from PSD Layout to HTML,CSS,JS. Friendly website from desktop to mobile and created a codeigniter system to make the repeatable codes in one for all the gamelofts 1 pager sites.",
+    "description": "Built this project from scratch from PSD designs and implemented responsive HTML, CSS, and JavaScript, backed by a reusable CodeIgniter setup for maintainable one-pager releases.",
     "tags": [
       "#codeigniter",
       "#psdtohtml",
@@ -281,7 +281,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://www.gameloft.com/en-gb/game/blacklist"
   },
   "coll8or": {
-    "description": "All social media in one site by using the social medias API.",
+    "description": "Built a social aggregation experience that unified multiple social media feeds through API integrations.",
     "tags": [
       "#socialmedia",
       "#php",
@@ -297,7 +297,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "http://coll8or.com/"
   },
   "kinkcakes": {
-    "description": "About cakes.",
+    "description": "Implemented a branded website experience for a cake-focused business, including front-end presentation and interaction polish.",
     "tags": [
       "#css",
       "#less",
@@ -309,7 +309,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "http://kinkcakes.com.ph/"
   },
   "zmr": {
-    "description": "News About Zenos websites and all good works of Zeno Company in every city and country.",
+    "description": "Developed a publication-style site for company updates, project highlights, and media content across multiple regions.",
     "tags": [
       "#css",
       "#sass",
@@ -324,7 +324,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "http://zenomediarelease.com/"
   },
   "zbceuit": {
-    "description": "About construction on italy-based company.",
+    "description": "Designed and developed a company site for an Italy-based construction business with a clean, responsive front-end.",
     "tags": [
       "#css",
       "#sass",
@@ -339,7 +339,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "http://zbccostruzioni.it/"
   },
   "zgi": {
-    "description": "About investments and the members of zeno group investments.",
+    "description": "Built an investment-focused corporate site presenting organizational information, members, and business offerings.",
     "tags": [
       "#css",
       "#sass",
@@ -355,7 +355,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "http://zenogroupinvestments.com/home"
   },
   "vigattintourism": {
-    "description": "Tourism site for the Philippines.",
+    "description": "Developed a tourism platform focused on destinations and travel discovery in the Philippines.",
     "tags": [
       "#codeigniter",
       "#psdtohtml",
@@ -372,7 +372,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://www.vigattintourism.com/"
   },
   "vigattindeals": {
-    "description": "It is about a site with a coupon that can buy with very big discounts.",
+    "description": "Delivered a deals and coupon platform featuring discount campaigns and commerce-focused user flows.",
     "tags": [
       "#codeigniter",
       "#psdtohtml",
@@ -390,7 +390,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://www.vigattindeals.com/"
   },
   "vigattintrade": {
-    "description": "It is a trading site like OLX. Buy and Sell Website.",
+    "description": "Built a buy-and-sell marketplace platform with listing and trading workflows similar to classified commerce models.",
     "tags": [
       "#codeigniter",
       "#psdtohtml",
@@ -407,7 +407,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://www.vigattintrade.com/"
   },
   "vigattin": {
-    "description": "The main site of all vigattin websites.",
+    "description": "Implemented the primary Vigattin portal as the central entry point connecting the broader site ecosystem.",
     "tags": [
       "#codeigniter",
       "#psdtohtml",
@@ -424,7 +424,7 @@ export const PROJECT_DETAILS = {
     "websiteUrl": "https://www.vigattin.com/"
   },
   "mb1": {
-    "description": "The MB AppKey feature front-end development spearheaded by me was all about laying down the groundwork for the initial module, including the design and full implementation of an entire base plan. Redux integration, unit tests, views, and subcomponents created a solid and reusable backbone. Once the core part was finished, it could be integrated easily by other developers across pages and modules—usually in less than five lines of code. Updates to the core propagate throughout the entire application.",
+    "description": "Led front-end architecture for Metrobank AppKey, establishing a reusable module with Redux, unit tests, shared views, and composable subcomponents. The core design enabled lightweight integration across pages and modules while improving consistency and long-term maintainability.",
     "tags": [
       "#reactJS",
       "#redux",

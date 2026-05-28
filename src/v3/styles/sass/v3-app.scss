@@ -428,6 +428,16 @@ html, body {
 // Modals must sit above nav dots/arrows (1200); Bootstrap default is 1055.
 .v3-modal-layer {
   z-index: 1400 !important;
+  pointer-events: auto !important;
+
+  .modal-dialog {
+    pointer-events: auto !important;
+  }
+}
+
+.v3-modal-dismiss {
+  pointer-events: auto !important;
+  cursor: pointer;
 }
 
 .v3-modal-backdrop {
@@ -454,6 +464,15 @@ html, body {
 
     .btn-close {
       filter: invert(1);
+      position: relative;
+      z-index: 1;
+      width: 2rem;
+      height: 2rem;
+      min-width: 2rem;
+      min-height: 2rem;
+      padding: 0.5rem;
+      opacity: 0.95;
+      background-size: 1rem;
     }
   }
 
@@ -545,6 +564,8 @@ html, body {
 
 .v3-chat-close-btn {
   min-height: 44px;
+  position: relative;
+  z-index: 1;
 }
 
 // =============================================================
@@ -569,6 +590,15 @@ html, body {
 
     .btn-close {
       filter: invert(1);
+      position: relative;
+      z-index: 1;
+      width: 2rem;
+      height: 2rem;
+      min-width: 2rem;
+      min-height: 2rem;
+      padding: 0.5rem;
+      opacity: 0.95;
+      background-size: 1rem;
     }
   }
 
@@ -694,6 +724,8 @@ html, body {
 
   &__close {
     min-height: 44px;
+    position: relative;
+    z-index: 1;
     background-color: rgba($white, 0.12);
     border-color: rgba($green-light, 0.35);
     color: $white;
@@ -703,6 +735,15 @@ html, body {
       background-color: rgba($white, 0.2);
       color: $white;
     }
+  }
+}
+
+body.v3-modal-open {
+  .v3-portfolio-root,
+  .v3-nav-dots,
+  .v3-arrow,
+  .v3-chat-fab {
+    pointer-events: none !important;
   }
 }
 

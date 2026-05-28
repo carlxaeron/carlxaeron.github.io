@@ -27,6 +27,7 @@ describe("ChatAgent", () => {
 
     expect(screen.getByRole("dialog")).toBeInTheDocument();
     expect(screen.getByTestId("chat-messages")).toBeInTheDocument();
+    expect(document.body).toHaveClass("v3-modal-open");
   });
 
   test("does not call API when submitting empty message", async () => {
@@ -61,5 +62,32 @@ describe("ChatAgent", () => {
     expect(
       await screen.findByText(/I specialize in React and Laravel/i)
     ).toBeInTheDocument();
+  });
+
+  test("closes modal on Escape and removes body lock", async () => {
+    render(<ChatAgent />);
+
+    fireEvent.click(screen.getByRole("button", { name: /Chat with AI assistant/i }));
+    expect(document.body).toHaveClass("v3-modal-open");
+
+    fireEvent.keyDown(document, { key: "Escape", code: "Escape" });
+
+    await waitFor(() => {
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    });
+    expect(document.body).not.toHaveClass("v3-modal-open");
+  });
+
+  test("closes modal with header close button", async () => {
+    render(<ChatAgent />);
+
+    fireEvent.click(screen.getByRole("button", { name: /Chat with AI assistant/i }));
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+
+    fireEvent.click(screen.getAllByRole("button", { name: /^Close$/i })[0]);
+
+    await waitFor(() => {
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    });
   });
 });

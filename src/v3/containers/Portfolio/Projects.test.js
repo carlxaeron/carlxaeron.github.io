@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor, within } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import V3Projects from "./Projects";
 
 jest.mock("../../../config", () => ({
@@ -39,7 +39,7 @@ describe("V3Projects", () => {
     expect(heroImg).toHaveAttribute("src", "/static/images/sites/mb1.png");
     expect(heroImg.getAttribute("src")).not.toContain("resized-images");
 
-    expect(screen.getByText(/MB AppKey feature front-end development/i)).toBeInTheDocument();
+    expect(screen.getByText(/Led front-end architecture for Metrobank AppKey/i)).toBeInTheDocument();
     expect(screen.getByText("#reactJS")).toBeInTheDocument();
   });
 
@@ -52,7 +52,7 @@ describe("V3Projects", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /View project: Star Cinema/i }));
 
-    const visitLink = await screen.findByRole("link", { name: /Visit Site/i });
+    const visitLink = await screen.findByRole("link", { name: /View Live Site/i });
     expect(visitLink).toHaveAttribute("href", "https://starcinema.abs-cbn.com/");
   });
 
@@ -66,9 +66,45 @@ describe("V3Projects", () => {
     fireEvent.click(screen.getByRole("button", { name: /View project: AppKey/i }));
     const dialog = screen.getByRole("dialog");
     expect(dialog).toBeInTheDocument();
+    expect(document.body).toHaveClass("v3-modal-open");
 
     const closeBtn = dialog.querySelector(".v3-project-modal__close");
     fireEvent.click(closeBtn);
+
+    await waitFor(() => {
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    });
+    expect(document.body).not.toHaveClass("v3-modal-open");
+  });
+
+  test("closes project modal on Escape", async () => {
+    render(<V3Projects isActive={true} />);
+
+    await waitFor(() => {
+      expect(screen.getByAltText("AppKey")).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: /View project: AppKey/i }));
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+
+    fireEvent.keyDown(document, { key: "Escape", code: "Escape" });
+
+    await waitFor(() => {
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    });
+  });
+
+  test("closes project modal with header close button", async () => {
+    render(<V3Projects isActive={true} />);
+
+    await waitFor(() => {
+      expect(screen.getByAltText("AppKey")).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: /View project: AppKey/i }));
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+
+    fireEvent.click(screen.getAllByRole("button", { name: /^Close$/i })[0]);
 
     await waitFor(() => {
       expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
