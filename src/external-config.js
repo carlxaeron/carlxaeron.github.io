@@ -418,7 +418,7 @@ const EXPERIENCES = [
       "companyName": "Metropolitan Bank & Trust (Metrobank).",
       "jobTitle": "Programmer Analyst / Javascript Developer",
       "dateRange": "(Aug 2022- Dec 2024)",
-      "skills": ['ReactJS', 'Redux', 'Jest', 'GitLab', 'Jira', 'Postman', 'Mockoon', 'Pixel-Perfect', 'Standup Meeting', 'Unit-Tesing', 'End-to-End Testing', 'API Implementation to UI', 'Frontend Development', 'Responsive Design', 'Bug Fixing'],
+      "skills": ['ReactJS', 'Redux', 'Jest', 'GitLab', 'Jira', 'Postman', 'Mockoon', 'Pixel-Perfect', 'Standup Meeting', 'Unit-Testing', 'End-to-End Testing', 'API Implementation to UI', 'Frontend Development', 'Responsive Design', 'Bug Fixing'],
       // "jobDescription": `•	Developed and maintained banking applications, ensuring secure and efficient financial transactions.<br />•	Collaborated with cross-functional teams to analyze requirements and implement technical solutions that improved system functionality.•	Conducted thorough testing and debugging to maintain high system reliability and minimize errors. In testing we used jest, enzyme, and cypress for end to end testing. We used gitlab for version control and jira for project management. In communicating with backend if we need to get some data we used postman for API testing and mockoon for mocking the API while the backend is not yet finished. Upon developing the frontend we used reactjs and redux for state management and also if there is need to improve the the frontend design i used also a technique for pixel-perfect from desktop to mobile. We also have every day standup meeting to discuss the progress of the project and if there is any blocker we need to escalate it to the team lead and also with testers and BA.`,
       "jobDescription": `• Designed and maintained secure and efficient banking applications, ensuring financial transactions to an industry standard.<br/>
 • Worked closely with cross-functional teams, including testers and business analysts, to understand requirements from all aspects in order to engineer a technical solution and improve system functionality.<br/>
@@ -431,10 +431,10 @@ const EXPERIENCES = [
       "companyLogo": "/static/images/companies/GAD.jpeg",
       "companyName": "GoAutoDial, Inc.",
       "jobTitle": "Web Application Developer (Part-time/Remote)",
-      "dateRange": "(Jan 2022 - Present)",
+      "dateRange": "(Jan 2022 - Dec 2024)",
       "skills": ['Laravel', 'ReactJS', 'WHMCS', 'PHP', 'User Experience', 'Bug Fixing'],
-      "jobDescription": `At GoAutoDial, Inc, I have spearheaded the entire modernization of the Agent Web Application-the Word of the call center agents for managing and dialing leads. It was initially built with jQuery and PHP, and clearly needed an update to make it up-to-date.<br/>
-• The rewrite is carrying out an entirely newly built Laravel Backend and ReactJS Frontend for a more scalable and maintainable application.<br/>
+      "jobDescription": `At GoAutoDial, Inc, I spearheaded the entire modernization of the Agent Web Application-the tool for call center agents for managing and dialing leads. It was initially built with jQuery and PHP, and clearly needed an update to make it up-to-date.<br/>
+• The rewrite carried out an entirely newly built Laravel Backend and ReactJS Frontend for a more scalable and maintainable application.<br/>
 • A cleaner, more user-friendly, fully responsive interface was designed to avoid such hassles and to make it easier for call-center agents to use within their daily processes.<br/>
 • It is more performance- and scalability-oriented, meant to ensure that application could carry a higher load without compromising reliability.<br/>
 • All of these are efficiency-increasing and boosting user satisfaction at the same time increasing productivity in call center work.<br/>

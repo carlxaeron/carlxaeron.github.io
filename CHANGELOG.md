@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.11] — 2026-05-31
+
+### Changed
+- GoAutoDial experience end date updated to Dec 2024 (no longer listed as Present)
+- Metrobank experience skill tag typo fixed (`Unit-Testing`)
+
 ## [3.0.10] — 2026-05-29
 
 ### Fixed
