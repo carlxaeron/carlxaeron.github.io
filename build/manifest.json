@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Carl Manuel",
+  "name": "Carl Louis Manuel — Senior Full-Stack Engineer",
+  "description": "Portfolio of Carl Louis Manuel — Senior Full-Stack Engineer & AI Integration Specialist",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +19,8 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#1E3932",
+  "background_color": "#00473e"
 }

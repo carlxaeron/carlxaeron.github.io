@@ -27,3 +27,6 @@ yarn-error.log*
 *.log
 
 /graphify**/
+
+extensions/*.env
+!extensions/*.env.example

@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.0.12] — 2026-06-04
+
+### Added
+- `sitemap.xml` created (was referenced in HTML but returned 404)
+- JSON-LD `Person` + `WebSite` structured data in `<head>`
+- `<meta name="robots" content="index, follow">` and `<meta name="author">` tags
+- Google Fonts preconnect hints for performance
+
+### Fixed
+- `og:image` and `twitter:image` changed to absolute URL (`https://carlmanuel.com/...`)
+- `twitter:card` upgraded from `summary` to `summary_large_image`
+- `og:type` corrected from invalid `portfolio` to `website`
+- `robots.txt` updated with `Sitemap:` directive
+- `manifest.json` branding corrected (was "Create React App Sample")
+- PWA theme/background colors aligned to design tokens (`#1E3932` / `#00473e`)
+
 ## [3.0.11] — 2026-05-31
 
 ### Changed

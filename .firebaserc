@@ -1,5 +1,13 @@
 {
   "projects": {
     "default": "carllouismanuel-1e3a9"
+  },
+  "targets": {},
+  "etags": {
+    "carllouismanuel-1e3a9": {
+      "extensionInstances": {
+        "firestore-send-email": "bf0e2d6ed56f1d59b445dd68bfde6d512691f78e1588eef3c58c61d3cef2c13b"
+      }
+    }
   }
 }

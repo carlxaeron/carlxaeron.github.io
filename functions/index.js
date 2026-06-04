@@ -16,6 +16,94 @@ const https = require('https');
 
 admin.initializeApp();
 
+const ADMIN_RECIPIENTS = [
+  "info@carlmanuel.com",
+  "carllouismanuel09@gmail.com",
+];
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function buildContactMailPayload({ name, email, message }) {
+  const safeName = escapeHtml(name);
+  const safeEmail = escapeHtml(email);
+  const safeMessage = escapeHtml(message).replace(/\n/g, "<br/>");
+
+  const subject = `Portfolio contact from ${name}`;
+  const html = `
+    <h2>New portfolio contact message</h2>
+    <p><strong>Name:</strong> ${safeName}</p>
+    <p><strong>Email:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p>
+    <p><strong>Message:</strong></p>
+    <p>${safeMessage}</p>
+  `.trim();
+  const text = [
+    "New portfolio contact message",
+    "",
+    `Name: ${name}`,
+    `Email: ${email}`,
+    "",
+    "Message:",
+    message,
+  ].join("\n");
+
+  return {
+    replyTo: email,
+    message: { subject, html, text },
+  };
+}
+
+function buildMailDocuments(mailContent) {
+  return ADMIN_RECIPIENTS.map((recipient) => ({
+    to: recipient,
+    replyTo: mailContent.replyTo,
+    message: mailContent.message,
+  }));
+}
+
+async function queueMailDocuments(mailContent) {
+  const documents = buildMailDocuments(mailContent);
+  await Promise.all(
+    documents.map((doc) => admin.firestore().collection("mail").add(doc))
+  );
+}
+
+function createMailTransport() {
+  const smtpUri = process.env.SMTP_CONNECTION_URI;
+  if (!smtpUri) {
+    return null;
+  }
+
+  const nodemailer = require("nodemailer");
+  const normalizedUri = smtpUri.replace(/^smtp:\/\//, "smtps://");
+  return nodemailer.createTransport(normalizedUri);
+}
+
+async function sendContactEmailDirect(mailContent) {
+  const transporter = createMailTransport();
+  if (!transporter) {
+    logger.warn("SMTP_CONNECTION_URI not set; direct email skipped");
+    return;
+  }
+
+  const from = process.env.DEFAULT_FROM || "carllouismanuel09@gmail.com";
+
+  await transporter.sendMail({
+    from,
+    to: ADMIN_RECIPIENTS.join(", "),
+    replyTo: mailContent.replyTo,
+    subject: mailContent.message.subject,
+    html: mailContent.message.html,
+    text: mailContent.message.text,
+  });
+}
+
 // add new function for API for my AI assistant
 exports.assistant = onRequest((request, response) => {
   // Allow these origins
@@ -135,6 +223,11 @@ exports.contact = onRequest((request, response) => {
     return;
   }
 
+  if (request.method !== "POST") {
+    sendError({ response }, { message: "Method not allowed" });
+    return;
+  }
+
   const { name, email, message } = request.body;
 
   // Perform validation on the request body
@@ -143,33 +236,53 @@ exports.contact = onRequest((request, response) => {
     return;
   }
 
-  // Save contact data to Firestore
+  const trimmedName = String(name).trim();
+  const trimmedEmail = String(email).trim();
+  const trimmedMessage = String(message).trim();
+
+  if (!trimmedName || !trimmedEmail || !trimmedMessage) {
+    sendError({ response }, { message: "Missing required fields" });
+    return;
+  }
+
   const contactRef = admin.firestore().collection("contact").doc();
-  contactRef.set({ name, email, message, date: new Date() })
-  .then(() => {
-    logger.info("Contact data written to Firestore", { structuredData: true });
-
-    // Send email to admin
-    admin.firestore().collection('mail').add({
-      to: 'carlxaeron09@gmail.com',
-      message: {
-        subject: 'Hello from Firebase!',
-        html: 'This is an <code>HTML</code> email body.',
-      },
-    }).then(() => {
-      logger.info("Email sent to admin", { structuredData: true });
-
-      // Send success response to the client
-      sendSuccess({ response }, { message: "Contact request received" });
-    }).catch((error) => {
-      logger.error("Error sending email to admin", { structuredData: true, error });
-    });
-  })
-  .catch((error) => {
-    // log the error to the console and also put the error value in the structured data
-    logger.error("Error writing contact data to Firestore", { structuredData: true, error });
-    sendError({ response }, { message: "Error saving contact data" });
+  const mailPayload = buildContactMailPayload({
+    name: trimmedName,
+    email: trimmedEmail,
+    message: trimmedMessage,
   });
+
+  contactRef
+    .set({ name: trimmedName, email: trimmedEmail, message: trimmedMessage, date: new Date() })
+    .then(async () => {
+      logger.info("Contact data written to Firestore", { structuredData: true });
+
+      try {
+        await queueMailDocuments(mailPayload);
+        logger.info("Contact email queued in mail collection", { structuredData: true });
+      } catch (queueError) {
+        logger.error("Failed to queue contact email in Firestore", {
+          structuredData: true,
+          error: queueError,
+        });
+      }
+
+      try {
+        await sendContactEmailDirect(mailPayload);
+        logger.info("Contact email sent via SMTP", { structuredData: true });
+      } catch (smtpError) {
+        logger.error("Failed to send contact email via SMTP", {
+          structuredData: true,
+          error: smtpError,
+        });
+      }
+
+      sendSuccess({ response }, { message: "Contact request received" });
+    })
+    .catch((error) => {
+      logger.error("Error saving contact to Firestore", { structuredData: true, error });
+      sendError({ response }, { message: "Error saving contact data" });
+    });
 });
 
 exports.license = onRequest((request, response) => {
