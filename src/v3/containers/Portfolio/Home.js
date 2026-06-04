@@ -212,7 +212,7 @@ function V3Home({ onNavigate }) {
             fontWeight: 600,
             marginBottom: "1rem",
           }}>
-            Senior Full-Stack Engineer · AI Integration Specialist
+            Building AI-Powered Enterprise Applications
           </p>
         </AnimationFade>
 
@@ -243,8 +243,8 @@ function V3Home({ onNavigate }) {
               marginBottom: "2.5rem",
             }}
           >
-            12+ years delivering secure, scalable applications for banks, media companies &amp; enterprises.
-            ReactJS · Laravel · OpenAI · Flutter
+            12+ years architecting production-grade systems for banks, media companies &amp; enterprises — with AI built in.
+            ReactJS · Laravel · OpenAI API · Firebase · Flutter
           </p>
         </AnimationUp>
 

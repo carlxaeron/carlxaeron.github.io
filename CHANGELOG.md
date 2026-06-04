@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.13] — 2026-06-04
+
+### Changed
+- Hero eyebrow updated to "Building AI-Powered Enterprise Applications" (Bryl Lim-inspired AI-first framing)
+- Hero sub-headline updated to lead with architecture + AI angle
+- About paragraphs rewritten: AI-first opening, named proof points with outcomes, builder/founder closing
+- About skill tags reordered to lead with AI stack (OpenAI API, AI Integration, LLM Apps, SaaS)
+- Stats row: added 4th stat "1 SaaS Shipped"
+- Job descriptions for Metrobank, GoAutoDial, UCC/Cornerstone/MNX, ABS-CBN: added Impact lines with quantified outcomes
+- Project descriptions: added Impact lines to mb1, eco, sc; added new entries for GoAutoDial Agent app and stealth SaaS card
+- SEO: title, description, keywords, JSON-LD jobTitle and knowsAbout updated to AI-first/SaaS-builder framing
+- CV rebuilt to pick up all updated content
+
 ## [3.0.12] — 2026-06-04
 
 ### Added

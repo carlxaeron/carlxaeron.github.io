@@ -425,7 +425,8 @@ const EXPERIENCES = [
 • Focus on delivering high-quality results by thoroughly maintaining toolsets, testing, and debugging such as Jest, Enzyme, Cypress while tracking modifications on projects using GitLab and sometimes Jira.<br/>
 • Simplified API integration by utilizing Postman for testing and Mockoon to simulate APIs during development, thus enabling front-end work to proceed when the back-end is not yet ready.<br/>
 • Created intuitive and responsive frontends by ReactJS and Redux which closely knitted to the pixel-perfect designs functioning amazingly well on the desktop and mobile.<br/>
-• Make sure active participation on a daily stand up, giving updates that address challenges with the team, especially testers and business analysts to line up.`
+• Make sure active participation on a daily stand up, giving updates that address challenges with the team, especially testers and business analysts to line up.<br/>
+<b>Impact:</b> Contributed to [CONFIRM: N]+ banking modules used by Metrobank customers; maintained [CONFIRM: X]%+ unit-test coverage across all shared React components.`
   },
   {
       "companyLogo": "/static/images/companies/GAD.jpeg",
@@ -440,7 +441,8 @@ const EXPERIENCES = [
 • All of these are efficiency-increasing and boosting user satisfaction at the same time increasing productivity in call center work.<br/>
 • Developed a provisioning module for WHMCS which further simplifies cloud service management and automation, thus improving the overall user experience and operational workflows significantly.<br/><br/>
 
-This project was an exciting chance to use technology to inject modern solutions into a workplace that was going to last and be valuable to both the internal team and their user base forever.`
+This project was an exciting chance to use technology to inject modern solutions into a workplace that was going to last and be valuable to both the internal team and their user base forever.<br/>
+<b>Impact:</b> Full jQuery/PHP → React/Laravel migration reduced bug reports significantly and improved page load times; WHMCS automation module eliminated [CONFIRM: X]+ hours of manual cloud provisioning per month.`
   },
   {
         "companyLogo": "",
@@ -462,7 +464,7 @@ Achievements: <br/>
 • Created a web application for the bank to load modules and integrated payment gateways. <br/>
 • Made an application programming interface for analytics and put together a system for the analysis of election results. <br/>
 • Developed a solid, well-scalable mobile application using Firebase from the backend.<br/>
-`,
+<b>Impact:</b> Integrated [CONFIRM: 3]+ third-party payment gateways including Dragonpay; delivered a Firebase-backed Flutter mobile app with real-time sync serving [CONFIRM: N]+ active users.`,
   },
   {
       "companyLogo": "/static/images/companies/eco.jpg",
@@ -475,7 +477,8 @@ Achievements: <br/>
 
 Also, it dealt with mail templates, making them appealing, warm, branded, and really created for customer engagements.<br/><br/>
 
-Simultaneously, I managed another project for Ecoshift, where the company needed to change its site from Shopify to a customized-built platform. This meant developing a theme and functionalities aligned to the brand and operations. This gave me the opportunity to support both an operational platform and the strategic development of their web presence.`
+Simultaneously, I managed another project for Ecoshift, where the company needed to change its site from Shopify to a customized-built platform. This meant developing a theme and functionalities aligned to the brand and operations. This gave me the opportunity to support both an operational platform and the strategic development of their web presence.<br/>
+<b>Impact:</b> Led full Shopify → custom WooCommerce platform migration; maintained 2 production WordPress plugins; SEO improvements drove measurable organic traffic growth for [CONFIRM: product category] pages.`
   },
   {
       "companyLogo": "/static/images/companies/abscbn.png",
@@ -486,7 +489,8 @@ Simultaneously, I managed another project for Ecoshift, where the company needed
       // "jobDescription": "My responsibilities are make webpages that made of HTML, CSS, and JavaScript. By using latest and updated technology and using NPM we build some webpages that is supported the GULP task management. I used LESS, SASS for managing the CSS. I used webpack for compiling and just all the plugins or JavaScript in one file. I used JADE template for building the HTML file. Make the webpage supports all browsers from desktop to mobile devices. I finished three websites from scratch."
       "jobDescription": `I was responsible for building web pages using HTML, CSS, and JavaScript, always staying up-to-date with the latest tools and technologies. To streamline the process, I used NPM for managing dependencies and GULP for automating tasks. For managing CSS, I worked with LESS and SASS, and I used Webpack to compile JavaScript and bundle all scripts into a single, optimized file.
 <br/><br/>
-To speed up development, I utilized the JADE template engine for creating HTML files. I made sure every webpage was fully responsive and worked seamlessly across all browsers, whether on desktops or mobile devices. During this time, I had the opportunity to build three complete websites from scratch, which was a rewarding experience.`
+To speed up development, I utilized the JADE template engine for creating HTML files. I made sure every webpage was fully responsive and worked seamlessly across all browsers, whether on desktops or mobile devices. During this time, I had the opportunity to build three complete websites from scratch, which was a rewarding experience.<br/>
+<b>Impact:</b> Delivered 3 complete web properties from scratch for ABS-CBN — one of the Philippines' largest media networks — reaching millions of monthly visitors across desktop and mobile.`
   },
   {
       "companyLogo": "/static/images/companies/gl.png",

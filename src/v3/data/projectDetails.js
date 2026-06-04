@@ -2,6 +2,7 @@
 export const PROJECT_DETAILS = {
   "eco": {
     "description": "Built and maintained a WordPress and WooCommerce implementation, including feature enhancements, bug fixes, and custom plugin development. Improved site layout quality and strengthened SEO readiness.",
+    "impact": "Led Shopify → custom WooCommerce platform migration; maintained 2 production plugins and drove measurable organic traffic growth through SEO improvements.",
     "tags": [
       "#wordpress",
       "#woocommerce",
@@ -27,6 +28,7 @@ export const PROJECT_DETAILS = {
   },
   "sc": {
     "description": "Delivered a full front-end redesign on a .NET (Kentico) platform, converting PSD designs into production-ready HTML, CSS, and JavaScript with responsive behavior across desktop and mobile.",
+    "impact": "Shipped production-ready redesign for Star Cinema — ABS-CBN's film arm — reaching millions of monthly visitors across the Philippines.",
     "tags": [
       "#html",
       "#css",
@@ -425,6 +427,7 @@ export const PROJECT_DETAILS = {
   },
   "mb1": {
     "description": "Led front-end architecture for Metrobank AppKey, establishing a reusable module with Redux, unit tests, shared views, and composable subcomponents. The core design enabled lightweight integration across pages and modules while improving consistency and long-term maintainability.",
+    "impact": "Adopted as the standard module pattern across Metrobank web properties, reducing new-feature integration time and improving cross-team consistency.",
     "tags": [
       "#reactJS",
       "#redux",
@@ -437,6 +440,32 @@ export const PROJECT_DETAILS = {
     "gallery": [
       "/static/images/sites/mb2.png",
       "/static/images/sites/mb3.png"
+    ]
+  },
+  "agent": {
+    "description": "Spearheaded a full modernization of the GoAutoDial Agent Web Application — migrating a legacy jQuery/PHP monolith to a React/Laravel stack. Delivered a cleaner, fully responsive interface that made daily call-center workflows faster and more reliable.",
+    "impact": "Legacy-to-modern migration reduced bug surface and improved agent productivity; WHMCS provisioning module automated cloud service setup for GoAutoDial customers.",
+    "tags": [
+      "#reactJS",
+      "#laravel",
+      "#php",
+      "#legacymigration",
+      "#ux",
+      "#whmcs",
+      "#responsive"
+    ]
+  },
+  "stealth-saas": {
+    "description": "A live multi-tenant SaaS platform built solo from the ground up — Laravel 12 API backend, Next.js 16 PWA frontend, and Flutter mobile app — serving real communities in the Philippines. Currently in private beta.",
+    "impact": "Independently designed, built, and shipped end-to-end: API, web app, and mobile app. Deployed to production with CI/CD, real users, and zero external funding.",
+    "tags": [
+      "#laravel",
+      "#nextjs",
+      "#flutter",
+      "#saas",
+      "#multitenant",
+      "#pwa",
+      "#independentproject"
     ]
   }
 };

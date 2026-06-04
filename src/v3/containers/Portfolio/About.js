@@ -6,6 +6,7 @@ const STATS = [
   { value: "12+", label: "Years Experience" },
   { value: "10+", label: "Companies" },
   { value: "50+", label: "Projects" },
+  { value: "1", label: "SaaS Shipped" },
 ];
 
 function V3About({ isActive }) {
@@ -75,23 +76,26 @@ function V3About({ isActive }) {
                 I&apos;m Carl Louis Manuel
               </h3>
               <p style={{ color: "rgba(212,233,226,0.85)", lineHeight: 1.8, fontSize: "0.95rem", marginBottom: "1rem" }}>
-                A Senior Full-Stack Engineer with 12+ years of experience architecting and delivering
-                production-grade web and mobile applications for enterprises across banking, media, and
-                technology sectors.
+                I build AI-powered applications and production-grade software that enterprises actually ship.
+                With 12+ years across banking, media, and technology — I&apos;ve led full-stack delivery at
+                Metrobank, ABS-CBN, and GoAutoDial, integrating AI features that solve real business problems.
               </p>
               <p style={{ color: "rgba(212,233,226,0.75)", lineHeight: 1.8, fontSize: "0.9rem", marginBottom: "1rem" }}>
-                My work spans the full stack: from pixel-perfect ReactJS frontends to secure PHP/Laravel
-                backends, Firebase real-time systems, and AI-powered features using OpenAI&apos;s API. I&apos;ve built
-                banking applications at Metrobank, modernized legacy call-center systems at GoAutoDial, and
-                created responsive digital experiences for ABS-CBN&apos;s properties.
+                My stack spans pixel-perfect ReactJS frontends, secure PHP/Laravel backends, Firebase real-time
+                systems, and OpenAI API integrations in live client-facing products. At Metrobank I helped
+                deliver secure banking interfaces across multiple modules. At GoAutoDial I led a full
+                legacy-to-modern migration — jQuery/PHP rewritten into a React/Laravel platform — that cut
+                bug reports and improved agent productivity. At ABS-CBN I built 3 complete web properties
+                from scratch serving millions of visitors.
               </p>
               <p style={{ color: "rgba(212,233,226,0.65)", lineHeight: 1.8, fontSize: "0.875rem", marginBottom: "1.5rem" }}>
-                I don&apos;t just write code — I architect solutions that scale, stay secure under load, and deliver
-                measurable business outcomes. Whether you&apos;re building an enterprise platform or integrating AI
-                into your product, I bring the depth and discipline to do it right.
+                Beyond client work, I build and ship software products independently — including a live
+                multi-tenant SaaS platform currently in use by real communities in the Philippines.
+                Whether you need enterprise-grade engineering or AI woven into your product, I bring the
+                depth and discipline to do it right.
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                {["ReactJS", "Vue", "PHP", "Laravel", "Node.js", "Flutter", "Firebase", "OpenAI", "AI Integration", "LLM Apps"].map((tech) => (
+                {["OpenAI API", "AI Integration", "LLM Apps", "SaaS", "ReactJS", "Laravel", "Flutter", "Firebase", "Vue", "PHP", "Node.js"].map((tech) => (
                   <span
                     key={tech}
                     style={{
