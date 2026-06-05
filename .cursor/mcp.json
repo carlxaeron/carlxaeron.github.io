@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "onlinejobs-apify": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "/Users/carllouismanuel/CARL MANUEL/DEV/carlxaeron.github.io/OnlineJobs-MCP-Server",
+        "onlinejobs-mcp-server"
+      ],
+      "env": {
+        "APIFY_API_TOKEN": ""
+      }
+    }
+  }
+}

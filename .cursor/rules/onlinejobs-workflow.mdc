@@ -1,0 +1,70 @@
+---
+description: OnlineJobs.ph search and job-application workflow — Apify MCP, folders, tailored CV, submission.txt
+globs:
+  - OnlineJobs-MCP-Server/**
+  - job-applications/**
+  - Office-Word-MCP-Server/apply_canva_cv_design.py
+  - .cursor/skills/onlinejobs-apify/**
+alwaysApply: false
+---
+
+# OnlineJobs.ph — Job application workflow
+
+Read skill: [`.cursor/skills/onlinejobs-apify/SKILL.md`](../skills/onlinejobs-apify/SKILL.md).
+
+## When the agent should act
+
+- User mentions **OnlineJobs.ph**, **OJP**, remote PH jobs, or “find laravel/react jobs”
+- User says **apply to #N** after a search result table
+- User asks for **cover letter**, **submission message**, or **CV for this job**
+
+## Search → apply flow
+
+1. Use MCP `search_onlinejobs` or `search_onlinejobs_fullstack_ai`.
+2. Show the returned Markdown table as-is (includes row numbers).
+3. On apply: call `create_job_application` with fields from the **Apply reference (JSON)** block for that row.
+4. Report folder path and remind user to open `submission.txt` + attach CV.
+
+## Application folder convention
+
+```text
+job-applications/YYYY-MM-DD_Slug-Title_Slug-Company/
+  job-info.json
+  submission.txt
+  CARLLOUISMANUEL-CV.docx
+```
+
+- `job-applications/` is **gitignored** — local only.
+- Do not commit application folders.
+
+## Tailored CV tagline
+
+Infer from job title unless user passes `tailored_tagline`:
+
+| Title signals | Tagline |
+|---------------|---------|
+| react, node, typescript | Senior React Developer · Full-Stack Engineer |
+| laravel, php | Senior PHP/Laravel Engineer · Full-Stack Developer |
+| ai, openai, llm, claude | Full-Stack Engineer · AI Integration Specialist |
+| flutter, mobile | Full-Stack Engineer · Flutter & Mobile Developer |
+| (default) | Senior Full-Stack Engineer · AI Integration Specialist |
+
+CV is generated via `apply_canva_cv_design.py --output ... --tagline ... --no-backup`.
+
+## Cover message rules
+
+- Professional, outcome-focused tone (see [`v3-copy.mdc`](v3-copy.mdc)).
+- Reference Metrobank, GoAutoDial, ABS-CBN only as **public** portfolio proof — no confidential details.
+- **Never** mention Tahanan, HOA platform, or `tahanan.org` in submission text.
+- Do not invent salary or employer facts not in the listing.
+
+## Before user submits
+
+- Suggest they skim `submission.txt` and personalize one sentence if needed.
+- Note any `[CONFIRM: ...]` metrics still in `src/external-config.js` / generated CV if relevant.
+
+## MCP troubleshooting
+
+- If `onlinejobs-apify` errors: check `APIFY_API_TOKEN` in Cursor MCP settings and restart Cursor.
+- Apify runs can take **2–5 minutes** — warn user when searching.
+- CV generation requires `python-docx` (used by `Office-Word-MCP-Server/apply_canva_cv_design.py`).

@@ -1,0 +1,110 @@
+---
+name: onlinejobs-apify
+description: Search OnlineJobs.ph remote job listings via the onlinejobs-apify MCP server (Apify Job Radar actor). Use when the user asks to find jobs on OnlineJobs.ph, monitor VA/full-stack listings, match roles to their portfolio skills, or prepare an application folder with CV and submission text.
+---
+
+# OnlineJobs.ph (Apify MCP)
+
+## When to use
+
+- User asks to search **OnlineJobs.ph** / **OJP** / Filipino remote jobs
+- User wants job leads matching **full-stack**, **React**, **Laravel**, **OpenAI**, or **Flutter**
+- User says **apply to #N** or wants a **submission.txt** / tailored **CV** for a listing
+- Comparing listings to portfolio/CV positioning
+
+## MCP server
+
+Project server: `onlinejobs-apify` (see [OnlineJobs-MCP-Server/README.md](../../OnlineJobs-MCP-Server/README.md)).
+
+Requires `APIFY_API_TOKEN` in MCP env (Apify Console → Integrations). Restart Cursor after changing the token.
+
+## End-to-end workflow
+
+```text
+1. search_onlinejobs / search_onlinejobs_fullstack_ai
+2. Present Markdown table (# | Title | Company | Salary | Posted)
+3. User picks a row → create_job_application with fields from JSON block
+4. User opens job-applications/.../submission.txt and attaches CARLLOUISMANUEL-CV.docx
+```
+
+## Tools
+
+### `search_onlinejobs`
+
+- `keywords`: array, required (e.g. `["laravel", "react developer"]`)
+- `maximum_items`: default 50, max 500
+- `date_filter`: `LAST_24_HOURS` | `LAST_3_DAYS` (default) | `LAST_7_DAYS` | …
+- `company_name`: optional employer substring
+- `remote_work`: optional boolean
+
+### `search_onlinejobs_fullstack_ai`
+
+Preset keywords for Carl’s stack (full-stack, React, Laravel, OpenAI, Flutter, Firebase, senior developer).
+
+### `create_job_application`
+
+Creates one folder per job under `job-applications/`:
+
+```text
+job-applications/
+  YYYY-MM-DD_Job-Title_Company-Name/
+    job-info.json          # listing metadata + timestamp
+    submission.txt         # SUBJECT + OnlineJobs.ph message body
+    CARLLOUISMANUEL-CV.docx  # CV with tailored header tagline
+```
+
+**Parameters:**
+
+| Param | Required | Notes |
+|-------|----------|--------|
+| `job_title` | yes | From search table |
+| `job_url` | yes | Listing URL |
+| `company` | no | Empty if unknown |
+| `job_id` | no | From JSON apply block |
+| `salary` | no | From table |
+| `tailored_tagline` | no | Auto-inferred from title if omitted |
+| `extra_notes` | no | Appended to cover message |
+
+**Tagline inference (when `tailored_tagline` empty):**
+
+- React roles → `Senior React Developer · Full-Stack Engineer`
+- Laravel/PHP → `Senior PHP/Laravel Engineer · Full-Stack Developer`
+- AI/LLM → `Full-Stack Engineer · AI Integration Specialist`
+- Flutter/mobile → `Full-Stack Engineer · Flutter & Mobile Developer`
+- Default → `Senior Full-Stack Engineer · AI Integration Specialist`
+
+## Search output format
+
+Results are a **Markdown table** with row numbers `#1`, `#2`, … plus:
+
+- **Links** section (one URL per row)
+- **Apply reference (JSON)** — copy `job_title`, `company`, `job_url`, `job_id` into `create_job_application`
+
+User can say: *"apply to #3"* — use the matching JSON entry.
+
+## submission.txt format
+
+```text
+SUBJECT: Application for [Job Title] — Carl Louis Manuel
+
+--- ONLINEJOBS.PH MESSAGE ---
+
+Hi [Company or Hiring Manager],
+...
+---
+URL: [job_url]
+```
+
+Paste the block under `--- ONLINEJOBS.PH MESSAGE ---` into OnlineJobs.ph when applying. Attach `CARLLOUISMANUEL-CV.docx` from the same folder.
+
+## Rules
+
+- Do not run `maximum_items` > 200 unless the user asks (Apify cost).
+- Never mention **Tahanan**, `tahanan.org`, or stealth SaaS product details in cover messages.
+- Remind user to replace `[CONFIRM: ...]` placeholders in master CV data in `src/external-config.js` before mass applying.
+- After creating a package, tell the user the exact folder path.
+
+## Related
+
+- Workflow rule: [`.cursor/rules/onlinejobs-workflow.mdc`](../../rules/onlinejobs-workflow.mdc)
+- CV generator: [`Office-Word-MCP-Server/apply_canva_cv_design.py`](../../Office-Word-MCP-Server/apply_canva_cv_design.py) (`--output`, `--tagline`, `--no-backup`)

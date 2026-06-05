@@ -30,3 +30,7 @@ yarn-error.log*
 
 extensions/*.env
 !extensions/*.env.example
+
+OnlineJobs-MCP-Server/.env
+
+job-applications/

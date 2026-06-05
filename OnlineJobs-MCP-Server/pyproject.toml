@@ -1,0 +1,20 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "onlinejobs-mcp-server"
+version = "0.1.0"
+description = "MCP server for OnlineJobs.ph job search via Apify"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "apify-client>=1.8.0",
+    "fastmcp>=2.8.1",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["onlinejobs_mcp_server"]
+
+[project.scripts]
+onlinejobs-mcp-server = "onlinejobs_mcp_server.main:run_server"
