@@ -6,6 +6,7 @@ MCP server that searches [OnlineJobs.ph](https://www.onlinejobs.ph) using the Ap
 
 1. [Apify account](https://console.apify.com/) with an API token
 2. Python 3.11+ and [uv](https://docs.astral.sh/uv/) (recommended) or `pip`
+3. Optional: Dropbox or Google Drive for shareable CV links
 
 ## Setup
 
@@ -13,7 +14,51 @@ MCP server that searches [OnlineJobs.ph](https://www.onlinejobs.ph) using the Ap
 cd OnlineJobs-MCP-Server
 cp .env.example .env
 # Edit .env and set APIFY_API_TOKEN
+uv sync
 ```
+
+## CV upload (Dropbox or Google Drive)
+
+When configured, `create_job_application` uploads `CARLLOUISMANUEL-CV.docx` and writes a **shareable link** into `submission.txt` and `job-info.json` (`cv_share_url`).
+
+### Option A — Dropbox (fastest)
+
+1. [Create a Dropbox app](https://www.dropbox.com/developers/apps) → **Scoped access** → **Full Dropbox** or **App folder**
+2. Enable permissions: `files.content.write`, `sharing.write`
+3. Generate an access token under the app’s **Permissions** tab
+4. Add to `.env` and Cursor MCP `env`:
+
+```env
+CV_UPLOAD_PROVIDER=dropbox
+DROPBOX_ACCESS_TOKEN=sl.u.YOUR_TOKEN
+DROPBOX_CV_FOLDER=/job-applications
+```
+
+Files land at `/job-applications/CARLLOUISMANUEL-CV.docx` (overwritten per upload). Share links use `?dl=1` for direct download.
+
+### Option B — Google Drive
+
+1. [Google Cloud Console](https://console.cloud.google.com/) → enable **Google Drive API**
+2. **Credentials** → **OAuth client ID** → **Desktop app** → download JSON
+3. Save as `OnlineJobs-MCP-Server/google_drive_credentials.json` (gitignored)
+4. Run the one-time auth script:
+
+```bash
+cd OnlineJobs-MCP-Server
+uv run python scripts/google_drive_auth.py
+```
+
+5. Copy the printed values into `.env` and Cursor MCP `env`:
+
+```env
+CV_UPLOAD_PROVIDER=google_drive
+GOOGLE_DRIVE_CLIENT_ID=...
+GOOGLE_DRIVE_CLIENT_SECRET=...
+GOOGLE_DRIVE_REFRESH_TOKEN=...
+GOOGLE_DRIVE_FOLDER_ID=optional_folder_id
+```
+
+Uploaded files are set to **anyone with the link can view**.
 
 ## Cursor MCP config
 
@@ -31,14 +76,16 @@ Add to **Cursor Settings → MCP** (or merge into `~/.cursor/mcp.json`):
         "onlinejobs-mcp-server"
       ],
       "env": {
-        "APIFY_API_TOKEN": "YOUR_APIFY_TOKEN"
+        "APIFY_API_TOKEN": "YOUR_APIFY_TOKEN",
+        "CV_UPLOAD_PROVIDER": "dropbox",
+        "DROPBOX_ACCESS_TOKEN": "YOUR_DROPBOX_TOKEN"
       }
     }
   }
 }
 ```
 
-Replace the path and token. Restart Cursor after saving.
+Replace the path and tokens. Restart Cursor after saving.
 
 ## Tools
 
@@ -46,11 +93,21 @@ Replace the path and token. Restart Cursor after saving.
 |------|-------------|
 | `search_onlinejobs` | Search by custom keywords; returns Markdown table with row numbers |
 | `search_onlinejobs_fullstack_ai` | Preset keywords for full-stack + AI roles |
-| `create_job_application` | Creates `job-applications/YYYY-MM-DD_Title_Company/` with `submission.txt`, tailored `CARLLOUISMANUEL-CV.docx`, and `job-info.json` |
+| `create_job_application` | Folder + `submission.txt`, tailored CV, `job-info.json`; uploads CV when cloud is configured |
+| `upload_job_cv` | Re-upload CV from an existing application folder and refresh share link |
 
 ## Application folders
 
-After `create_job_application`, files are written under `job-applications/` at the repo root (gitignored). Open `submission.txt` for the OnlineJobs.ph **subject** and **message**; attach the CV from the same folder.
+After `create_job_application`, files are written under `job-applications/` at the repo root (gitignored):
+
+```text
+job-applications/YYYY-MM-DD_Title_Company/
+  job-info.json       # includes cv_share_url when uploaded
+  submission.txt      # message includes share link or "CV attached."
+  CARLLOUISMANUEL-CV.docx
+```
+
+Open `submission.txt` for the OnlineJobs.ph **subject** and **message**. Paste the share link or attach the local CV.
 
 ## Alternative: Apify hosted MCP (no local install)
 
@@ -70,6 +127,8 @@ After `create_job_application`, files are written under `job-applications/` at t
   }
 }
 ```
+
+Note: hosted MCP does not include `create_job_application` or CV upload — use the local server for the full workflow.
 
 ## Cost note
 

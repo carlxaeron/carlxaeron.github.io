@@ -9,6 +9,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from onlinejobs_mcp_server.cv_upload import CvUploadError, is_upload_configured, upload_cv
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 JOB_APPLICATIONS_ROOT = REPO_ROOT / "job-applications"
 WORD_MCP_DIR = REPO_ROOT / "Office-Word-MCP-Server"
@@ -101,12 +103,17 @@ def build_submission_text(
     company: str | None,
     job_url: str,
     extra_notes: str = "",
+    cv_share_url: str = "",
 ) -> str:
     employer = (company or "").strip() or "Hiring Manager"
     greeting = f"Hi {employer}," if company and company.strip() else "Hi Hiring Manager,"
     skills = infer_skills(job_title)
     hook = infer_hook(job_title)
     extra_block = f"\n\n{extra_notes.strip()}" if extra_notes.strip() else ""
+    if cv_share_url.strip():
+        cv_line = f"CV (shareable link): {cv_share_url.strip()}"
+    else:
+        cv_line = "CV attached."
 
     body = f"""SUBJECT: Application for {job_title} — Carl Louis Manuel
 
@@ -121,7 +128,7 @@ I came across your listing for {job_title} on OnlineJobs.ph and I believe my bac
 {hook}{extra_block}
 
 My portfolio and full work history: https://carlmanuel.com
-CV attached.
+{cv_line}
 
 Best regards,
 Carl Louis Manuel
@@ -155,6 +162,35 @@ def generate_cv(output_path: Path, tagline: str) -> None:
     subprocess.run(cmd, check=True, cwd=str(WORD_MCP_DIR), timeout=180)
 
 
+def upload_application_cv(
+    cv_path: Path,
+    job_info_path: Path,
+    submission_path: Path,
+    job_title: str,
+    company: str | None,
+    job_url: str,
+    extra_notes: str = "",
+) -> dict[str, Any]:
+    """Upload CV to cloud and refresh job-info.json + submission.txt with share link."""
+    result = upload_cv(cv_path)
+    job_info = json.loads(job_info_path.read_text(encoding="utf-8"))
+    job_info["cv_share_url"] = result["share_url"]
+    job_info["cv_upload_provider"] = result["provider"]
+    job_info_path.write_text(json.dumps(job_info, indent=2), encoding="utf-8")
+
+    submission_path.write_text(
+        build_submission_text(
+            job_title,
+            company,
+            job_url,
+            extra_notes,
+            cv_share_url=result["share_url"],
+        ),
+        encoding="utf-8",
+    )
+    return result
+
+
 def create_application_package(
     job_title: str,
     company: str | None,
@@ -163,6 +199,7 @@ def create_application_package(
     salary: str | None = None,
     tailored_tagline: str = "",
     extra_notes: str = "",
+    upload_cv_to_cloud: bool = True,
 ) -> dict[str, Any]:
     folder_name = application_folder_name(job_title, company)
     folder = JOB_APPLICATIONS_ROOT / folder_name
@@ -192,10 +229,32 @@ def create_application_package(
 
     generate_cv(cv_path, tagline)
 
-    return {
+    upload_result: dict[str, Any] | None = None
+    upload_error: str | None = None
+    if upload_cv_to_cloud and is_upload_configured():
+        try:
+            upload_result = upload_application_cv(
+                cv_path,
+                job_info_path,
+                submission_path,
+                job_title,
+                company,
+                job_url,
+                extra_notes,
+            )
+        except CvUploadError as exc:
+            upload_error = str(exc)
+
+    out: dict[str, Any] = {
         "folder": str(folder),
         "cv": str(cv_path),
         "submission": str(submission_path),
         "job_info": str(job_info_path),
         "tagline": tagline,
     }
+    if upload_result:
+        out["cv_share_url"] = upload_result["share_url"]
+        out["cv_upload_provider"] = upload_result["provider"]
+    if upload_error:
+        out["upload_error"] = upload_error
+    return out

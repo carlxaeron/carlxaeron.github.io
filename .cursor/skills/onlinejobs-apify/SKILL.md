@@ -24,7 +24,8 @@ Requires `APIFY_API_TOKEN` in MCP env (Apify Console → Integrations). Restart 
 1. search_onlinejobs / search_onlinejobs_fullstack_ai
 2. Present Markdown table (# | Title | Company | Salary | Posted)
 3. User picks a row → create_job_application with fields from JSON block
-4. User opens job-applications/.../submission.txt and attaches CARLLOUISMANUEL-CV.docx
+4. If CV_UPLOAD_PROVIDER is set (Dropbox/Google Drive), CV is uploaded and submission.txt gets a share link
+5. User opens submission.txt — paste share link or attach local CARLLOUISMANUEL-CV.docx on OnlineJobs.ph
 ```
 
 ## Tools
@@ -53,6 +54,8 @@ job-applications/
     CARLLOUISMANUEL-CV.docx  # CV with tailored header tagline
 ```
 
+`job-info.json` may include `cv_share_url` and `cv_upload_provider` when cloud upload is configured.
+
 **Parameters:**
 
 | Param | Required | Notes |
@@ -64,6 +67,13 @@ job-applications/
 | `salary` | no | From table |
 | `tailored_tagline` | no | Auto-inferred from title if omitted |
 | `extra_notes` | no | Appended to cover message |
+| `upload_cv_to_cloud` | no | Default `true`; uploads when `CV_UPLOAD_PROVIDER` is set |
+
+### `upload_job_cv`
+
+Re-upload CV from an existing `job-applications/...` folder; refreshes `cv_share_url` in `job-info.json` and `submission.txt`.
+
+**Cloud setup:** see [OnlineJobs-MCP-Server/README.md](../../OnlineJobs-MCP-Server/README.md) — `CV_UPLOAD_PROVIDER=dropbox` or `google_drive` plus tokens in MCP env.
 
 **Tagline inference (when `tailored_tagline` empty):**
 
@@ -95,7 +105,10 @@ Hi [Company or Hiring Manager],
 URL: [job_url]
 ```
 
-Paste the block under `--- ONLINEJOBS.PH MESSAGE ---` into OnlineJobs.ph when applying. Attach `CARLLOUISMANUEL-CV.docx` from the same folder.
+Paste the block under `--- ONLINEJOBS.PH MESSAGE ---` into OnlineJobs.ph when applying.
+
+- If uploaded: message includes `CV (shareable link): https://...` — paste that link in the application form.
+- Otherwise: attach `CARLLOUISMANUEL-CV.docx` from the same folder.
 
 ## Rules
 

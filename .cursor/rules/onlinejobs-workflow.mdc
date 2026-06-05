@@ -23,7 +23,7 @@ Read skill: [`.cursor/skills/onlinejobs-apify/SKILL.md`](../skills/onlinejobs-ap
 1. Use MCP `search_onlinejobs` or `search_onlinejobs_fullstack_ai`.
 2. Show the returned Markdown table as-is (includes row numbers).
 3. On apply: call `create_job_application` with fields from the **Apply reference (JSON)** block for that row.
-4. Report folder path and remind user to open `submission.txt` + attach CV.
+4. Report folder path, `cv_share_url` if present, and remind user to open `submission.txt` (share link or local CV).
 
 ## Application folder convention
 
@@ -34,6 +34,7 @@ job-applications/YYYY-MM-DD_Slug-Title_Slug-Company/
   CARLLOUISMANUEL-CV.docx
 ```
 
+- `job-info.json` may include `cv_share_url` when `CV_UPLOAD_PROVIDER` (Dropbox/Google Drive) is configured in MCP env.
 - `job-applications/` is **gitignored** — local only.
 - Do not commit application folders.
 
@@ -68,3 +69,4 @@ CV is generated via `apply_canva_cv_design.py --output ... --tagline ... --no-ba
 - If `onlinejobs-apify` errors: check `APIFY_API_TOKEN` in Cursor MCP settings and restart Cursor.
 - Apify runs can take **2–5 minutes** — warn user when searching.
 - CV generation requires `python-docx` (used by `Office-Word-MCP-Server/apply_canva_cv_design.py`).
+- CV upload: set `CV_UPLOAD_PROVIDER` + Dropbox or Google Drive tokens — see `OnlineJobs-MCP-Server/README.md`. Use `upload_job_cv` to re-upload an existing folder.

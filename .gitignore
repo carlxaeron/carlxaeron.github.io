@@ -32,5 +32,6 @@ extensions/*.env
 !extensions/*.env.example
 
 OnlineJobs-MCP-Server/.env
+OnlineJobs-MCP-Server/google_drive_credentials.json
 
 job-applications/
