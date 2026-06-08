@@ -17,6 +17,7 @@ Read skill: [`.cursor/skills/onlinejobs-apify/SKILL.md`](../skills/onlinejobs-ap
 - User mentions **OnlineJobs.ph**, **OJP**, remote PH jobs, or “find laravel/react jobs”
 - User says **apply to #N** after a search result table
 - User asks for **cover letter**, **submission message**, or **CV for this job**
+- User wants to **track applications**, update status, or use the **local dashboard**
 
 ## Search → apply flow
 
@@ -34,7 +35,8 @@ job-applications/YYYY-MM-DD_Slug-Title_Slug-Company/
   CARLLOUISMANUEL-CV.docx
 ```
 
-- `job-info.json` may include `cv_share_url` when `CV_UPLOAD_PROVIDER` (Dropbox/Google Drive) is configured in MCP env.
+- `job-info.json` includes tracking fields: `status`, `notes`, `submitted_at`, `updated_at`, `location`, `posted_at`; may include `cv_share_url` when cloud upload is configured.
+- **Local dashboard:** `uv run job-dashboard` → http://localhost:8787 (see `OnlineJobs-MCP-Server/README.md`).
 - `job-applications/` is **gitignored** — local only.
 - Do not commit application folders.
 

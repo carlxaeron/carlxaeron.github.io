@@ -16,6 +16,17 @@ JOB_APPLICATIONS_ROOT = REPO_ROOT / "job-applications"
 WORD_MCP_DIR = REPO_ROOT / "Office-Word-MCP-Server"
 CV_SCRIPT = WORD_MCP_DIR / "apply_canva_cv_design.py"
 DEFAULT_TAGLINE = "Senior Full-Stack Engineer · AI Integration Specialist"
+APPLICATION_STATUSES = (
+    "draft",
+    "submitted",
+    "interviewing",
+    "rejected",
+    "offer",
+    "withdrawn",
+)
+CV_FILENAME = "CARLLOUISMANUEL-CV.docx"
+JOB_INFO_FILENAME = "job-info.json"
+SUBMISSION_FILENAME = "submission.txt"
 
 
 def slug_part(text: str | None, max_len: int = 45) -> str:
@@ -145,6 +156,117 @@ def application_folder_name(job_title: str, company: str | None) -> str:
     return f"{today}_{slug_part(job_title)}_{slug_part(company)}"
 
 
+def application_folder_path(folder_id: str) -> Path:
+    folder = (JOB_APPLICATIONS_ROOT / folder_id).resolve()
+    if not folder.is_dir() or folder.parent != JOB_APPLICATIONS_ROOT.resolve():
+        raise FileNotFoundError(f"Application folder not found: {folder_id}")
+    return folder
+
+
+def normalize_job_info(data: dict[str, Any], folder_id: str) -> dict[str, Any]:
+    created_at = data.get("created_at") or datetime.now(timezone.utc).isoformat()
+    status = data.get("status") or "draft"
+    if status not in APPLICATION_STATUSES:
+        status = "draft"
+    out = {
+        **data,
+        "id": folder_id,
+        "status": status,
+        "notes": data.get("notes") or "",
+        "submitted_at": data.get("submitted_at"),
+        "updated_at": data.get("updated_at") or created_at,
+        "location": data.get("location"),
+        "posted_at": data.get("posted_at"),
+    }
+    return out
+
+
+def list_applications(
+    status: str | None = None,
+    q: str | None = None,
+) -> list[dict[str, Any]]:
+    if not JOB_APPLICATIONS_ROOT.is_dir():
+        return []
+
+    query = (q or "").strip().lower()
+    apps: list[dict[str, Any]] = []
+    for folder in JOB_APPLICATIONS_ROOT.iterdir():
+        if not folder.is_dir():
+            continue
+        job_info_path = folder / JOB_INFO_FILENAME
+        if not job_info_path.is_file():
+            continue
+        data = json.loads(job_info_path.read_text(encoding="utf-8"))
+        record = normalize_job_info(data, folder.name)
+        if status and record["status"] != status:
+            continue
+        if query:
+            haystack = " ".join(
+                str(record.get(k, "") or "")
+                for k in ("job_title", "company", "notes", "tailored_tagline")
+            ).lower()
+            if query not in haystack:
+                continue
+        apps.append(record)
+
+    apps.sort(key=lambda item: item.get("created_at") or "", reverse=True)
+    return apps
+
+
+def get_application(folder_id: str) -> dict[str, Any]:
+    folder = application_folder_path(folder_id)
+    job_info_path = folder / JOB_INFO_FILENAME
+    data = json.loads(job_info_path.read_text(encoding="utf-8"))
+    record = normalize_job_info(data, folder_id)
+    submission_path = folder / SUBMISSION_FILENAME
+    if submission_path.is_file():
+        record["submission_preview"] = submission_path.read_text(encoding="utf-8")
+    cv_path = folder / CV_FILENAME
+    record["has_cv"] = cv_path.is_file()
+    return record
+
+
+def read_submission(folder_id: str) -> str:
+    folder = application_folder_path(folder_id)
+    submission_path = folder / SUBMISSION_FILENAME
+    if not submission_path.is_file():
+        raise FileNotFoundError(f"submission.txt not found for {folder_id}")
+    return submission_path.read_text(encoding="utf-8")
+
+
+def cv_file_path(folder_id: str) -> Path:
+    folder = application_folder_path(folder_id)
+    cv_path = folder / CV_FILENAME
+    if not cv_path.is_file():
+        raise FileNotFoundError(f"CV not found for {folder_id}")
+    return cv_path
+
+
+def update_application(folder_id: str, patch: dict[str, Any]) -> dict[str, Any]:
+    folder = application_folder_path(folder_id)
+    job_info_path = folder / JOB_INFO_FILENAME
+    data = json.loads(job_info_path.read_text(encoding="utf-8"))
+    now = datetime.now(timezone.utc).isoformat()
+
+    if "status" in patch and patch["status"] is not None:
+        status = str(patch["status"]).strip()
+        if status not in APPLICATION_STATUSES:
+            raise ValueError(f"status must be one of: {', '.join(APPLICATION_STATUSES)}")
+        data["status"] = status
+        if status == "submitted" and not data.get("submitted_at"):
+            data["submitted_at"] = now
+
+    if "notes" in patch:
+        data["notes"] = str(patch.get("notes") or "")
+
+    if "submitted_at" in patch:
+        data["submitted_at"] = patch["submitted_at"]
+
+    data["updated_at"] = now
+    job_info_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+    return normalize_job_info(data, folder_id)
+
+
 def generate_cv(output_path: Path, tagline: str) -> None:
     if not CV_SCRIPT.is_file():
         raise FileNotFoundError(f"CV script not found: {CV_SCRIPT}")
@@ -200,23 +322,32 @@ def create_application_package(
     tailored_tagline: str = "",
     extra_notes: str = "",
     upload_cv_to_cloud: bool = True,
+    location: str | None = None,
+    posted_at: str | None = None,
 ) -> dict[str, Any]:
     folder_name = application_folder_name(job_title, company)
     folder = JOB_APPLICATIONS_ROOT / folder_name
     folder.mkdir(parents=True, exist_ok=True)
 
     tagline = infer_tagline(job_title, tailored_tagline)
-    cv_path = folder / "CARLLOUISMANUEL-CV.docx"
-    submission_path = folder / "submission.txt"
-    job_info_path = folder / "job-info.json"
+    cv_path = folder / CV_FILENAME
+    submission_path = folder / SUBMISSION_FILENAME
+    job_info_path = folder / JOB_INFO_FILENAME
+    now = datetime.now(timezone.utc).isoformat()
 
     job_info = {
-        "created_at": datetime.now(timezone.utc).isoformat(),
+        "created_at": now,
+        "updated_at": now,
+        "status": "draft",
+        "notes": "",
+        "submitted_at": None,
         "job_id": job_id,
         "job_title": job_title,
         "company": company,
         "salary": salary,
         "job_url": job_url,
+        "location": location,
+        "posted_at": posted_at,
         "tailored_tagline": tagline,
         "folder": str(folder),
     }
@@ -246,6 +377,7 @@ def create_application_package(
             upload_error = str(exc)
 
     out: dict[str, Any] = {
+        "id": folder_name,
         "folder": str(folder),
         "cv": str(cv_path),
         "submission": str(submission_path),

@@ -11,10 +11,13 @@ requires-python = ">=3.11"
 dependencies = [
     "apify-client>=1.8.0",
     "dropbox>=12.0.0",
+    "fastapi>=0.115.0",
     "fastmcp>=2.8.1",
     "google-api-python-client>=2.150.0",
     "google-auth>=2.35.0",
     "google-auth-oauthlib>=1.2.0",
+    "python-multipart>=0.0.9",
+    "uvicorn>=0.32.0",
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -22,3 +25,4 @@ packages = ["onlinejobs_mcp_server"]
 
 [project.scripts]
 onlinejobs-mcp-server = "onlinejobs_mcp_server.main:run_server"
+job-dashboard = "onlinejobs_mcp_server.dashboard_api:run"

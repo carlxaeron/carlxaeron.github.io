@@ -87,6 +87,40 @@ Add to **Cursor Settings → MCP** (or merge into `~/.cursor/mcp.json`):
 
 Replace the path and tokens. Restart Cursor after saving.
 
+## Local dashboard (job tracker UI)
+
+Private localhost UI to list applications, update status/notes, search OnlineJobs.ph, and create apply packages.
+
+```bash
+cd OnlineJobs-MCP-Server
+uv sync
+cd dashboard-ui && npm install && npm run build && cd ..
+uv run job-dashboard
+```
+
+Open **http://localhost:8787**
+
+**Dev mode** (hot reload UI):
+
+```bash
+# Terminal 1
+uv run job-dashboard
+
+# Terminal 2
+cd dashboard-ui && npm run dev   # http://localhost:5173 (proxies /api)
+```
+
+Set `DASHBOARD_PORT` in `.env` to change the API port (default `8787`).
+
+**Dashboard features:**
+
+- **Applications** — filter by status, search title/company/notes, open detail drawer
+- **Detail drawer** — edit status & notes, copy submission, CV share link, download CV, re-upload
+- **Search & Apply** — OnlineJobs.ph search via Apify + Apply button per row
+- **Manual apply** — create a package without searching first
+
+`job-info.json` tracking fields: `status`, `notes`, `submitted_at`, `updated_at`, `location`, `posted_at`.
+
 ## Tools
 
 | Tool | Description |
@@ -94,6 +128,8 @@ Replace the path and tokens. Restart Cursor after saving.
 | `search_onlinejobs` | Search by custom keywords; returns Markdown table with row numbers |
 | `search_onlinejobs_fullstack_ai` | Preset keywords for full-stack + AI roles |
 | `create_job_application` | Folder + `submission.txt`, tailored CV, `job-info.json`; uploads CV when cloud is configured |
+| `list_job_applications` | List local application folders with status and metadata |
+| `update_job_application` | Update status and notes on an existing folder |
 | `upload_job_cv` | Re-upload CV from an existing application folder and refresh share link |
 
 ## Application folders

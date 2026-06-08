@@ -18,6 +18,16 @@ Project server: `onlinejobs-apify` (see [OnlineJobs-MCP-Server/README.md](../../
 
 Requires `APIFY_API_TOKEN` in MCP env (Apify Console → Integrations). Restart Cursor after changing the token.
 
+## Local dashboard
+
+```bash
+cd OnlineJobs-MCP-Server
+cd dashboard-ui && npm run build && cd ..
+uv run job-dashboard
+```
+
+Open **http://localhost:8787** — list applications, update status/notes, search & apply, manual create.
+
 ## End-to-end workflow
 
 ```text
@@ -34,7 +44,7 @@ Requires `APIFY_API_TOKEN` in MCP env (Apify Console → Integrations). Restart 
 
 - `keywords`: array, required (e.g. `["laravel", "react developer"]`)
 - `maximum_items`: default 50, max 500
-- `date_filter`: `LAST_24_HOURS` | `LAST_3_DAYS` (default) | `LAST_7_DAYS` | …
+- `date_filter`: `LAST_24_HOURS` | `LAST_3_DAYS` (default; only values Apify actor accepts)
 - `company_name`: optional employer substring
 - `remote_work`: optional boolean
 
@@ -68,6 +78,14 @@ job-applications/
 | `tailored_tagline` | no | Auto-inferred from title if omitted |
 | `extra_notes` | no | Appended to cover message |
 | `upload_cv_to_cloud` | no | Default `true`; uploads when `CV_UPLOAD_PROVIDER` is set |
+
+### `list_job_applications`
+
+List local folders with `status`, title, company, created date. Optional filters: `status`, `q`.
+
+### `update_job_application`
+
+Update `status` and/or `notes` on a folder (`folder_id` = directory name under `job-applications/`).
 
 ### `upload_job_cv`
 
