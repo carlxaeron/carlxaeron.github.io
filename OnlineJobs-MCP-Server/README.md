@@ -1,64 +1,110 @@
 # OnlineJobs.ph MCP Server (Apify)
 
-MCP server that searches [OnlineJobs.ph](https://www.onlinejobs.ph) using the Apify actor [`vjkhush/onlinejobsph-job-radar-actor`](https://apify.com/vjkhush/onlinejobsph-job-radar-actor).
+MCP server + **local job tracker dashboard** for [OnlineJobs.ph](https://www.onlinejobs.ph), powered by the Apify actor [`vjkhush/onlinejobsph-job-radar-actor`](https://apify.com/vjkhush/onlinejobsph-job-radar-actor).
+
+**Full workflow guide:** [../docs/job-applications-workflow.md](../docs/job-applications-workflow.md)
+
+---
+
+## Major update — Job application platform
+
+This folder is no longer search-only. It now includes:
+
+1. **Local dashboard** (`uv run job-dashboard`) — React UI at http://localhost:8787  
+2. **Application packages** — per-job folders with tailored CV, `submission.txt`, `job-info.json`  
+3. **Status tracking** — draft / submitted / interviewing / rejected / offer / withdrawn + notes  
+4. **CV cloud upload** — optional Dropbox or Google Drive share links  
+5. **Cursor MCP tools** — search, apply, list, update, re-upload CV from chat  
+
+```text
+Search (Apify) → create_job_application → job-applications/YYYY-MM-DD_Title_Company/
+                                              ├── job-info.json
+                                              ├── submission.txt
+                                              └── CARLLOUISMANUEL-CV.docx
+Dashboard ←→ same folders (list, patch status, search & apply)
+```
+
+---
 
 ## Prerequisites
 
-1. [Apify account](https://console.apify.com/) with an API token
-2. Python 3.11+ and [uv](https://docs.astral.sh/uv/) (recommended) or `pip`
-3. Optional: Dropbox or Google Drive for shareable CV links
+1. [Apify account](https://console.apify.com/) with an API token  
+2. Python 3.11+ and [uv](https://docs.astral.sh/uv/)  
+3. Node.js 18+ (for dashboard UI build)  
+4. Optional: Dropbox or Google Drive for shareable CV links  
+
+---
 
 ## Setup
 
 ```bash
 cd OnlineJobs-MCP-Server
 cp .env.example .env
-# Edit .env and set APIFY_API_TOKEN
+# Edit .env — at minimum set APIFY_API_TOKEN
 uv sync
 ```
 
-## CV upload (Dropbox or Google Drive)
+### Environment variables (`.env`)
 
-When configured, `create_job_application` uploads `CARLLOUISMANUEL-CV.docx` and writes a **shareable link** into `submission.txt` and `job-info.json` (`cv_share_url`).
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `APIFY_API_TOKEN` | Yes (search) | Apify API token |
+| `DASHBOARD_PORT` | No | Default `8787` |
+| `CV_UPLOAD_PROVIDER` | No | `dropbox` or `google_drive` |
+| `DROPBOX_ACCESS_TOKEN` | If Dropbox | Scoped app token |
+| `DROPBOX_CV_FOLDER` | No | Default `/job-applications` |
+| `GOOGLE_DRIVE_*` | If Google Drive | See [Google Drive setup](#option-b--google-drive) |
 
-### Option A — Dropbox (fastest)
+---
 
-1. [Create a Dropbox app](https://www.dropbox.com/developers/apps) → **Scoped access** → **Full Dropbox** or **App folder**
-2. Enable permissions: `files.content.write`, `sharing.write`
-3. Generate an access token under the app’s **Permissions** tab
-4. Add to `.env` and Cursor MCP `env`:
+## Local dashboard (job tracker UI)
 
-```env
-CV_UPLOAD_PROVIDER=dropbox
-DROPBOX_ACCESS_TOKEN=sl.u.YOUR_TOKEN
-DROPBOX_CV_FOLDER=/job-applications
-```
-
-Files land at `/job-applications/CARLLOUISMANUEL-CV.docx` (overwritten per upload). Share links use `?dl=1` for direct download.
-
-### Option B — Google Drive
-
-1. [Google Cloud Console](https://console.cloud.google.com/) → enable **Google Drive API**
-2. **Credentials** → **OAuth client ID** → **Desktop app** → download JSON
-3. Save as `OnlineJobs-MCP-Server/google_drive_credentials.json` (gitignored)
-4. Run the one-time auth script:
+Private localhost UI — list applications, update status/notes, search OnlineJobs.ph, create apply packages.
 
 ```bash
 cd OnlineJobs-MCP-Server
-uv run python scripts/google_drive_auth.py
+uv sync
+cd dashboard-ui && npm install && npm run build && cd ..
+uv run job-dashboard
 ```
 
-5. Copy the printed values into `.env` and Cursor MCP `env`:
+Open **http://localhost:8787**
 
-```env
-CV_UPLOAD_PROVIDER=google_drive
-GOOGLE_DRIVE_CLIENT_ID=...
-GOOGLE_DRIVE_CLIENT_SECRET=...
-GOOGLE_DRIVE_REFRESH_TOKEN=...
-GOOGLE_DRIVE_FOLDER_ID=optional_folder_id
+### Dev mode (UI hot reload)
+
+```bash
+# Terminal 1
+uv run job-dashboard
+
+# Terminal 2
+cd dashboard-ui && npm run dev   # http://localhost:5173 (proxies /api)
 ```
 
-Uploaded files are set to **anyone with the link can view**.
+See [dashboard-ui/README.md](dashboard-ui/README.md) for UI-specific notes.
+
+### Dashboard features
+
+| Tab / area | Actions |
+|------------|---------|
+| **Applications** | Filter by status, search title/company/notes, open detail drawer |
+| **Detail drawer** | Edit status & notes, open job URL, copy submission, CV link, download CV, re-upload |
+| **Search & Apply** | Keyword search (Apify), apply per row, manual apply form |
+
+### REST API (used by dashboard)
+
+| Method | Path | Purpose |
+|--------|------|---------|
+| `GET` | `/api/applications` | List (`?status=`, `?q=`) |
+| `GET` | `/api/applications/{id}` | Detail + submission preview |
+| `PATCH` | `/api/applications/{id}` | Update status, notes |
+| `GET` | `/api/applications/{id}/submission` | Raw submission text |
+| `GET` | `/api/applications/{id}/cv` | Download CV docx |
+| `POST` | `/api/applications/{id}/upload-cv` | Cloud re-upload |
+| `POST` | `/api/applications` | Create package |
+| `POST` | `/api/search` | OnlineJobs search (JSON) |
+| `GET` | `/api/meta` | Statuses, date filters |
+
+---
 
 ## Cursor MCP config
 
@@ -72,7 +118,7 @@ Add to **Cursor Settings → MCP** (or merge into `~/.cursor/mcp.json`):
       "args": [
         "run",
         "--directory",
-        "/Users/carllouismanuel/CARL MANUEL/DEV/carlxaeron.github.io/OnlineJobs-MCP-Server",
+        "/ABSOLUTE/PATH/TO/carlxaeron.github.io/OnlineJobs-MCP-Server",
         "onlinejobs-mcp-server"
       ],
       "env": {
@@ -85,67 +131,120 @@ Add to **Cursor Settings → MCP** (or merge into `~/.cursor/mcp.json`):
 }
 ```
 
-Replace the path and tokens. Restart Cursor after saving.
+Replace paths and tokens. **Restart Cursor** after saving.
 
-## Local dashboard (job tracker UI)
-
-Private localhost UI to list applications, update status/notes, search OnlineJobs.ph, and create apply packages.
-
-```bash
-cd OnlineJobs-MCP-Server
-uv sync
-cd dashboard-ui && npm install && npm run build && cd ..
-uv run job-dashboard
-```
-
-Open **http://localhost:8787**
-
-**Dev mode** (hot reload UI):
-
-```bash
-# Terminal 1
-uv run job-dashboard
-
-# Terminal 2
-cd dashboard-ui && npm run dev   # http://localhost:5173 (proxies /api)
-```
-
-Set `DASHBOARD_PORT` in `.env` to change the API port (default `8787`).
-
-**Dashboard features:**
-
-- **Applications** — filter by status, search title/company/notes, open detail drawer
-- **Detail drawer** — edit status & notes, copy submission, CV share link, download CV, re-upload
-- **Search & Apply** — OnlineJobs.ph search via Apify + Apply button per row
-- **Manual apply** — create a package without searching first
-
-`job-info.json` tracking fields: `status`, `notes`, `submitted_at`, `updated_at`, `location`, `posted_at`.
-
-## Tools
+### MCP tools
 
 | Tool | Description |
 |------|-------------|
-| `search_onlinejobs` | Search by custom keywords; returns Markdown table with row numbers |
-| `search_onlinejobs_fullstack_ai` | Preset keywords for full-stack + AI roles |
-| `create_job_application` | Folder + `submission.txt`, tailored CV, `job-info.json`; uploads CV when cloud is configured |
-| `list_job_applications` | List local application folders with status and metadata |
-| `update_job_application` | Update status and notes on an existing folder |
-| `upload_job_cv` | Re-upload CV from an existing application folder and refresh share link |
+| `search_onlinejobs` | Search by keywords → Markdown table + apply JSON |
+| `search_onlinejobs_fullstack_ai` | Preset full-stack + AI keywords |
+| `create_job_application` | Folder + tailored CV + submission + job-info |
+| `list_job_applications` | List local folders with status/metadata |
+| `update_job_application` | Update status and notes |
+| `upload_job_cv` | Re-upload CV; refresh share link |
+
+### Chat workflow example
+
+```text
+You: Search OnlineJobs for laravel and react, last 3 days
+Agent: [Markdown table with #1, #2, …]
+
+You: Apply to #3
+Agent: create_job_application(...) → job-applications/2026-06-05_.../
+```
+
+---
 
 ## Application folders
 
-After `create_job_application`, files are written under `job-applications/` at the repo root (gitignored):
+Written under `job-applications/` at the **repo root** (gitignored):
 
 ```text
 job-applications/YYYY-MM-DD_Title_Company/
-  job-info.json       # includes cv_share_url when uploaded
-  submission.txt      # message includes share link or "CV attached."
+  job-info.json       # tracking + listing metadata
+  submission.txt      # SUBJECT + OnlineJobs.ph message body
   CARLLOUISMANUEL-CV.docx
 ```
 
-Open `submission.txt` for the OnlineJobs.ph **subject** and **message**. Paste the share link or attach the local CV.
+### `job-info.json` tracking fields
 
-## Alternative: Apify hosted MCP (no local install)
+`status`, `notes`, `submitted_at`, `updated_at`, `location`, `posted_at`, plus optional `cv_share_url` / `cv_upload_provider`.
+
+CV is generated by `Office-Word-MCP-Server/apply_canva_cv_design.py` with `--output`, `--tagline`, `--no-backup`.
+
+---
+
+## CV upload (Dropbox or Google Drive)
+
+When configured, `create_job_application` uploads the CV and writes a **shareable link** into `submission.txt` and `job-info.json`.
+
+### Option A — Dropbox (fastest)
+
+1. [Create a Dropbox app](https://www.dropbox.com/developers/apps) → Scoped access  
+2. Permissions: `files.content.write`, `sharing.write`  
+3. Generate access token  
+
+```env
+CV_UPLOAD_PROVIDER=dropbox
+DROPBOX_ACCESS_TOKEN=sl.u.YOUR_TOKEN
+DROPBOX_CV_FOLDER=/job-applications
+```
+
+### Option B — Google Drive
+
+1. [Google Cloud Console](https://console.cloud.google.com/) → enable **Google Drive API**  
+2. OAuth client ID → Desktop app → download JSON  
+3. Save as `google_drive_credentials.json` (gitignored)  
+4. Run once:
+
+```bash
+uv run python scripts/google_drive_auth.py
+```
+
+5. Copy printed env vars into `.env` and MCP config.
+
+---
+
+## Python package layout
+
+```text
+onlinejobs_mcp_server/
+  main.py           # MCP tools (FastMCP)
+  dashboard_api.py  # FastAPI + job-dashboard CLI
+  applications.py   # Folder create/list/update, submission, CV invoke
+  search.py         # Apify search (shared by MCP + dashboard)
+  cv_upload.py      # Dropbox / Google Drive
+dashboard-ui/       # Vite + React local dashboard
+scripts/
+  google_drive_auth.py
+```
+
+### CLI entry points
+
+```bash
+uv run onlinejobs-mcp-server   # MCP stdio server (Cursor)
+uv run job-dashboard           # Local web UI + REST API
+```
+
+---
+
+## Troubleshooting
+
+| Issue | Fix |
+|-------|-----|
+| Search returns **500** / Internal Server Error | Date filter must be `LAST_24_HOURS` or `LAST_3_DAYS` only |
+| Search hangs 2–5 min | Normal — Apify actor runtime |
+| MCP token errors | Set `APIFY_API_TOKEN` in Cursor MCP env; restart Cursor |
+| Dashboard empty | Create via **Manual apply** or MCP; data lives in `job-applications/` |
+| UI not updating | `cd dashboard-ui && npm run build`; restart `job-dashboard` |
+| CV build fails | `cd Office-Word-MCP-Server && uv sync` |
+
+---
+
+## Alternative: Apify hosted MCP (search only)
+
+Hosted MCP does **not** include application folders, dashboard, or CV upload — use the local server for the full workflow.
 
 ```json
 {
@@ -164,8 +263,16 @@ Open `submission.txt` for the OnlineJobs.ph **subject** and **message**. Paste t
 }
 ```
 
-Note: hosted MCP does not include `create_job_application` or CV upload — use the local server for the full workflow.
+---
 
 ## Cost note
 
-Apify charges per actor run. The actor includes a small free trial; check [actor pricing](https://apify.com/vjkhush/onlinejobsph-job-radar-actor) before large sweeps.
+Apify charges per actor run. Check [actor pricing](https://apify.com/vjkhush/onlinejobsph-job-radar-actor) before large sweeps.
+
+---
+
+## Related
+
+- [docs/job-applications-workflow.md](../docs/job-applications-workflow.md) — end-user workflow guide  
+- [.cursor/skills/onlinejobs-apify/SKILL.md](../.cursor/skills/onlinejobs-apify/SKILL.md) — Cursor agent skill  
+- [.cursor/rules/onlinejobs-workflow.mdc](../.cursor/rules/onlinejobs-workflow.mdc) — apply rules (no confidential project names in cover letters)  

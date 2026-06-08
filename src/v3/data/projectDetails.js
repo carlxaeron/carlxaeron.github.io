@@ -455,9 +455,9 @@ export const PROJECT_DETAILS = {
       "#responsive"
     ]
   },
-  "stealth-saas": {
-    "description": "A live multi-tenant SaaS platform built solo from the ground up — Laravel 12 API backend, Next.js 16 PWA frontend, and Flutter mobile app — serving real communities in the Philippines. Currently in private beta.",
-    "impact": "Independently designed, built, and shipped end-to-end: API, web app, and mobile app. Deployed to production with CI/CD, real users, and zero external funding.",
+  "tahanan": {
+    "description": "Homeowners associations and residential communities in the Philippines often rely on Facebook groups, spreadsheets, and ad-hoc messaging to run day-to-day operations — announcements get buried, documents are hard to find, and there is no single source of truth for members and officers.\n\nTahanan is the multi-tenant community platform I designed and built solo to solve that. One Laravel 12 API serves many communities with strict tenant isolation. A Next.js 16 PWA gives officers and residents a fast, installable web experience for announcements, document sharing, member directories, and role-based access. A Flutter mobile app extends the same workflows for members on the go.\n\nI owned the full product lifecycle: database schema and API design, authentication and permissions, responsive UI, mobile builds, production deployment, and CI/CD — without external funding or a separate product team. The stack is built for real operational load: structured content instead of chat threads, audit-friendly document storage, and workflows that match how HOAs actually operate in the field.\n\nTahanan is live with real communities today — not a demo or prototype. It represents how I approach independent product work: identify a recurring pain in a market I understand, ship a complete vertical slice, and iterate with real users.",
+    "impact": "Shipped end-to-end from architecture to production: API, web app, mobile app, and CI/CD. Live with real communities — zero external funding, full product ownership.",
     "tags": [
       "#laravel",
       "#nextjs",
@@ -465,12 +465,34 @@ export const PROJECT_DETAILS = {
       "#saas",
       "#multitenant",
       "#pwa",
+      "#firebase",
       "#independentproject"
+    ],
+    "websiteUrl": "https://tahanan.org"
+  },
+  "ojp-workflow": {
+    "description": "Applying to remote roles on OnlineJobs.ph is repetitive: search listings, read requirements, tailor a CV header, write a cover message, track what you sent, and remember which folder holds which submission — often across dozens of listings per week.\n\nI built a personal application pipeline that automates the boring parts while keeping quality high. An Apify-powered search layer pulls fresh listings from OnlineJobs.ph by keyword and date window. A Python workflow creates one folder per job under job-applications/ with job-info.json metadata, a ready-to-paste submission.txt (subject + message body), and a tailored Word CV generated from my portfolio data with a role-specific header tagline.\n\nThe same core logic is exposed three ways: Cursor MCP tools (search, apply, list, update status from the IDE), a local FastAPI + React dashboard at localhost:8787 (filter applications, edit notes, search and apply from the browser), and optional Dropbox or Google Drive upload so each CV gets a shareable link written into the submission message.\n\nStatus tracking turns folders into a lightweight CRM: draft, submitted, interviewing, rejected, offer, or withdrawn — with notes and timestamps so nothing falls through the cracks. The dashboard and MCP server share one applications.py module, so chat and UI stay in sync.\n\nThis is developer tooling applied to my own job search: less copy-paste, fewer missed follow-ups, and a consistent professional package for every listing — built with Python, FastAPI, React, Apify, and the Model Context Protocol.",
+    "impact": "Turns a multi-step apply workflow into one command — search listings, generate submission text, tailor CV taglines by role, track draft → submitted → interview status, and paste share links into applications.",
+    "tags": [
+      "#python",
+      "#fastapi",
+      "#react",
+      "#mcp",
+      "#apify",
+      "#automation",
+      "#cursor",
+      "#word",
+      "#productivity"
     ]
   }
 };
 
+const PROJECT_ALIASES = {
+  "stealth-saas": "tahanan",
+};
+
 export function getProjectDetails(projectId) {
   if (!projectId) return null;
-  return PROJECT_DETAILS[projectId] || null;
+  const resolved = PROJECT_ALIASES[projectId] || projectId;
+  return PROJECT_DETAILS[resolved] || null;
 }

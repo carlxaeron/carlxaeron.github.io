@@ -1,147 +1,123 @@
-# Getting Started with Create React App
+# Carl Louis Manuel — Portfolio & Dev Tooling
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal portfolio ([carlmanuel.com](https://carlmanuel.com)) built with Create React App, V3 design system, Firebase, and GitHub Pages.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Major features (2026 updates)
+
+### Portfolio V3
+
+- Starbucks-inspired green/gold design system under `src/v3/`
+- SEO: sitemap, JSON-LD, Open Graph, manifest (`public/`)
+- Bryl Lim–style copy: quantified experience, project impact lines
+- **Side Projects** on portfolio: **Tahanan** (community SaaS) and **OnlineJobs Application Pipeline** (MCP + dashboard)
+
+### Job applications workflow (new)
+
+Full pipeline for **OnlineJobs.ph** remote job search, tailored CVs, apply tracking, and optional cloud CV links — also featured as a **Side Project** on the portfolio (`Side Projects` filter in Projects).
+
+| What | Where |
+|------|--------|
+| **Local dashboard** | `OnlineJobs-MCP-Server/` → `uv run job-dashboard` → http://localhost:8787 |
+| **Cursor MCP** | `onlinejobs-apify` server — search & apply from chat |
+| **CV generator** | `Office-Word-MCP-Server/apply_canva_cv_design.py` |
+| **Application data** | `job-applications/` (gitignored, local only) |
+| **Full guide** | [docs/job-applications-workflow.md](docs/job-applications-workflow.md) |
+
+**Dashboard capabilities:** list/filter applications, status & notes, copy submission message, download CV, search OnlineJobs.ph, one-click apply, manual apply form.
+
+**MCP capabilities:** search listings, create application folders, list/update tracking, upload CV to Dropbox or Google Drive.
+
+---
+
+## Quick links
+
+| Task | Command / doc |
+|------|----------------|
+| Run portfolio locally | `npm start` → http://localhost:3000 |
+| Run job dashboard | `cd OnlineJobs-MCP-Server && uv run job-dashboard` |
+| Job workflow guide | [docs/job-applications-workflow.md](docs/job-applications-workflow.md) |
+| MCP + env setup | [OnlineJobs-MCP-Server/README.md](OnlineJobs-MCP-Server/README.md) |
+| Deploy portfolio | [.cursor/skills/deploy-portfolio/SKILL.md](.cursor/skills/deploy-portfolio/SKILL.md) |
+
+---
+
+## Repository layout (high level)
+
+```text
+src/v3/                    # Portfolio V3 (active UI)
+OnlineJobs-MCP-Server/     # MCP server + FastAPI dashboard + dashboard-ui/
+Office-Word-MCP-Server/    # CV Word doc generator (Canva-style)
+job-applications/          # Generated apply folders (gitignored)
+docs/                      # GitHub Pages build + workflow docs
+functions/                 # Firebase Cloud Functions (contact, chat)
+.cursor/skills/            # Cursor agent skills (onlinejobs, deploy, …)
+.cursor/rules/             # Agent rules (v3 design, onlinejobs workflow)
+```
+
+---
+
+## Portfolio development
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Runs the app in development mode at [http://localhost:3000](http://localhost:3000).
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in watch mode.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds for production to the `build/` folder.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+See [Create React App documentation](https://github.com/facebook/create-react-app) for more.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-## Directory Structure
-
-The repository contains the following directories and files:
+## Directory structure (legacy CRA reference)
 
 ### `docs`
 
-Contains the build output and static assets for the project. It includes files such as `docs/index.html`, `docs/asset-manifest.json`, and various static assets like CSS, JavaScript, and media files.
+Build output and static assets for GitHub Pages.
 
 ### `functions`
 
-Contains server-side code for Firebase functions.
-
-* `functions/index.js`: The main entry point for the Firebase Cloud Functions.
-* `functions/helper.js`: Contains helper functions for sending success and error responses.
-* `functions/external-config.js`: Contains configuration data used by the functions defined in `index.js`.
-* `functions/.env.example`: Provides an example environment variable configuration.
-* `functions/package.json`: Defines the dependencies and scripts for the Firebase Cloud Functions.
+Firebase Cloud Functions — contact form, chat API.
 
 ### `public`
 
-Contains static files that are used during the build process and are copied to the build output. It includes files such as `public/index.html`, `public/asset-manifest.json`, and other static assets like CSS, JavaScript, and media files.
+Static files copied at build time (index.html, sitemap, robots, manifest).
 
 ### `src`
 
-Contains the main source code for the React application.
+React source — V3 portfolio in `src/v3/`, shared config in `src/external-config.js`.
 
-* `src/assets`: Contains static assets like images, fonts, and styles.
-* `src/components`: Contains reusable React components.
-* `src/containers`: Contains container components that manage state and logic.
-* `src/pages`: Contains page components that represent different routes in the application.
-* `src/styles`: Contains global styles and CSS files.
-* `src/config.js`: Contains configuration settings for the application.
+### `OnlineJobs-MCP-Server`
 
-### `.github`
+OnlineJobs.ph integration: Apify search, application packages, local dashboard.
 
-Contains GitHub-specific configuration files and workflows.
+### `Office-Word-MCP-Server`
 
-### `.env.example`
+Generates `CARLLOUISMANUEL-CV.docx` from portfolio data with per-job tagline override.
 
-Provides an example environment variable configuration.
+---
 
-### `.firebaserc`
+## Environment & secrets
 
-Contains Firebase project configuration.
+| File | Purpose |
+|------|---------|
+| `OnlineJobs-MCP-Server/.env` | `APIFY_API_TOKEN`, CV upload tokens, `DASHBOARD_PORT` |
+| `.cursor/mcp.json` | Cursor MCP server config (gitignored or local) |
+| `functions/.env` | Firebase function secrets |
 
-### `.gitignore`
+Never commit tokens or `job-applications/` folders.
 
-Specifies files and directories to be ignored by Git.
+---
 
-### `build-to-docs.js`
+## Learn more
 
-A script to copy the build output to the `docs` directory.
-
-### `firebase.json`
-
-Contains Firebase project configuration.
-
-### `gulpfile.js`
-
-Defines tasks for the Gulp task runner.
-
-### `package.json`
-
-Defines the dependencies and scripts for the project.
-
-### `postcss.config.js`
-
-Contains PostCSS configuration.
-
-### `tailwind.config.js`
-
-Contains Tailwind CSS configuration.
-
-### `webpack.config.js`
-
-Contains Webpack configuration.
+- [Job applications workflow](docs/job-applications-workflow.md)
+- [OnlineJobs MCP server](OnlineJobs-MCP-Server/README.md)
+- [Create React App docs](https://facebook.github.io/create-react-app/docs/getting-started)

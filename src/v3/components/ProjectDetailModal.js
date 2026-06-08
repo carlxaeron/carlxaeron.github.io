@@ -7,6 +7,14 @@ function fullImagePath(project) {
   return `/static/images/sites/${project.id}.${imgType}`;
 }
 
+function descriptionParagraphs(text) {
+  if (!text) return [];
+  return String(text)
+    .split(/\n\n+/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+}
+
 function ProjectDetailModal({ show, onHide, company, project, details }) {
   const [heroSrc, setHeroSrc] = useState(null);
   useModalBodyLock(show);
@@ -21,6 +29,7 @@ function ProjectDetailModal({ show, onHide, company, project, details }) {
   const activeHero = heroSrc || defaultHero;
   const projectTitle = project.title || String(project.id);
   const gallery = details?.gallery || [];
+  const overviewParagraphs = descriptionParagraphs(details?.description);
 
   return (
     <Modal
@@ -67,11 +76,25 @@ function ProjectDetailModal({ show, onHide, company, project, details }) {
               />
             </a>
           </div>
-          <div className="v3-project-modal__details">
-            {details?.description && (
+          <div className="v3-project-modal__details v3-project-modal__details--scroll">
+            {overviewParagraphs.length > 0 && (
               <section className="v3-project-modal__section">
                 <h3 className="v3-project-modal__label">Overview</h3>
-                <p className="v3-project-modal__description">{details.description}</p>
+                <div className="v3-project-modal__description-stack">
+                  {overviewParagraphs.map((paragraph) => (
+                    <p key={paragraph.slice(0, 48)} className="v3-project-modal__description">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </section>
+            )}
+            {details?.impact && (
+              <section className="v3-project-modal__section">
+                <h3 className="v3-project-modal__label">Impact</h3>
+                <p className="v3-project-modal__description v3-project-modal__description--impact">
+                  {details.impact}
+                </p>
               </section>
             )}
             {gallery.length > 0 && (
@@ -106,7 +129,7 @@ function ProjectDetailModal({ show, onHide, company, project, details }) {
                 </ul>
               </section>
             )}
-            {!details?.description && !details?.tags?.length && (
+            {!overviewParagraphs.length && !details?.tags?.length && (
               <p className="v3-project-modal__description v3-project-modal__description--muted">
                 Work delivered for {company?.title}. Full case study available on request.
               </p>

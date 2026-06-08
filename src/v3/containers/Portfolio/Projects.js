@@ -6,29 +6,29 @@ import SectionTitle from "../../components/SectionTitle";
 import ProjectDetailModal from "../../components/ProjectDetailModal";
 import { getProjectDetails } from "../../data/projectDetails";
 
-function ProjectThumb({ company, project, img, index, isActive, onOpen }) {
+function ProjectThumb({ company, project, img, index, isActive, onOpen, animationKey }) {
   const [show, setShow] = useState(false);
   const [imageReady, setImageReady] = useState(false);
+  const [imageFailed, setImageFailed] = useState(false);
 
   useEffect(() => {
-    if (!isActive) {
-      setShow(false);
-      setImageReady(false);
-      return;
-    }
+    setShow(false);
+    setImageReady(false);
+    setImageFailed(false);
+    if (!isActive) return undefined;
     const parts = String(index).split("_").map(Number);
     const k = (parts[0] || 0) * 3 + (parts[1] || 0);
-    const t = setTimeout(() => setShow(true), 100 + k * 25);
+    const t = setTimeout(() => setShow(true), 60 + k * 20);
     return () => clearTimeout(t);
-  }, [isActive, index]);
+  }, [isActive, index, animationKey]);
 
   useEffect(() => {
-    if (isActive && show) setImageReady(true);
-  }, [isActive, show]);
+    if (isActive && show && !imageFailed) setImageReady(true);
+  }, [isActive, show, imageFailed]);
 
   const spring = useSpring({
-    from: { opacity: 0, scale: 0.9 },
-    to: { opacity: show ? 1 : 0, scale: show ? 1 : 0.9 },
+    from: { opacity: 0, scale: 0.96 },
+    to: { opacity: show ? 1 : 0, scale: show ? 1 : 0.96 },
     config: { tension: 260, friction: 26 },
   });
 
@@ -38,24 +38,27 @@ function ProjectThumb({ company, project, img, index, isActive, onOpen }) {
     <animated.div
       style={{
         ...spring,
-        backgroundImage: imageReady ? `url(${img})` : undefined,
+        backgroundImage: imageReady && !imageFailed ? `url(${img})` : undefined,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      className="v3-project-thumb"
+      className={`v3-project-thumb${imageFailed ? " v3-project-thumb--fallback" : ""}`}
       role="button"
       tabIndex={0}
       aria-label={`View project: ${projectTitle}`}
       onClick={() => onOpen(company, project)}
       onKeyDown={(e) => e.key === "Enter" && onOpen(company, project)}
     >
-      {imageReady && (
+      {imageReady && !imageFailed && (
         <img
           src={img}
           alt={projectTitle}
           loading="eager"
           decoding="async"
-          onError={(e) => { e.target.style.display = "none"; }}
+          onError={() => {
+            setImageFailed(true);
+            setImageReady(false);
+          }}
         />
       )}
       <div className="v3-project-thumb__overlay">
@@ -81,11 +84,11 @@ function buildProjectList(companies) {
   return list;
 }
 
-const ALL_PROJECTS = buildProjectList(COMPANIES);
-
 function V3Projects({ isActive, onOpenProject }) {
   const [filter, setFilter] = useState("all");
   const [modal, setModal] = useState({ show: false, company: null, project: null, details: null });
+
+  const allProjects = buildProjectList(COMPANIES);
 
   const headerSpring = useSpring({
     from: { opacity: 0, y: -20 },
@@ -95,8 +98,8 @@ function V3Projects({ isActive, onOpenProject }) {
   });
 
   const filteredProjects = filter === "all"
-    ? ALL_PROJECTS
-    : ALL_PROJECTS.filter((p) => p.company.title === filter);
+    ? allProjects
+    : allProjects.filter((p) => p.company.title === filter);
 
   const handleOpen = (company, project) => {
     logEvent({ anal: analytics, event: "view_project", option: { project_id: project.id } });
@@ -148,14 +151,18 @@ function V3Projects({ isActive, onOpenProject }) {
         </div>
 
         <div className="v3-projects-grid">
+          {filteredProjects.length === 0 && (
+            <p className="v3-projects-empty">No projects in this category yet.</p>
+          )}
           {filteredProjects.map(({ company, project, img, index }) => (
             <ProjectThumb
-              key={`${company.title}-${project.id || index}`}
+              key={`${filter}-${company.title}-${project.id || index}`}
               company={company}
               project={project}
               img={img}
               index={index}
               isActive={isActive}
+              animationKey={filter}
               onOpen={handleOpen}
             />
           ))}

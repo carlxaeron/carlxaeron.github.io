@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-label="OnlineJobs application pipeline">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E3932"/>
+      <stop offset="100%" stop-color="#00473e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg2)"/>
+  <rect x="60" y="80" width="200" height="120" rx="12" fill="#00A862" opacity="0.9"/>
+  <rect x="300" y="80" width="200" height="120" rx="12" fill="#D4E9E2" opacity="0.25"/>
+  <rect x="540" y="80" width="200" height="120" rx="12" fill="#CBA258" opacity="0.85"/>
+  <text x="160" y="145" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="14" font-weight="700">SEARCH</text>
+  <text x="400" y="145" text-anchor="middle" fill="#D4E9E2" font-family="Arial, sans-serif" font-size="14" font-weight="700">APPLY</text>
+  <text x="640" y="145" text-anchor="middle" fill="#00473e" font-family="Arial, sans-serif" font-size="14" font-weight="700">TRACK</text>
+  <text x="400" y="280" text-anchor="middle" fill="#ffffff" font-family="Georgia, serif" font-size="36" font-weight="700">Job Applications</text>
+  <text x="400" y="320" text-anchor="middle" fill="#00A862" font-family="Arial, sans-serif" font-size="18">MCP � Dashboard � Tailored CV</text>
+  <text x="400" y="380" text-anchor="middle" fill="#D4E9E2" font-family="Arial, sans-serif" font-size="14">Python � FastAPI � React � Apify � Cursor</text>
+</svg>

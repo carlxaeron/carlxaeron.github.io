@@ -135,7 +135,8 @@ Paste the block under `--- ONLINEJOBS.PH MESSAGE ---` into OnlineJobs.ph when ap
 - Remind user to replace `[CONFIRM: ...]` placeholders in master CV data in `src/external-config.js` before mass applying.
 - After creating a package, tell the user the exact folder path.
 
-## Related
+## Related docs
 
 - Workflow rule: [`.cursor/rules/onlinejobs-workflow.mdc`](../../rules/onlinejobs-workflow.mdc)
+- Full guide: [docs/job-applications-workflow.md](../../../docs/job-applications-workflow.md)
 - CV generator: [`Office-Word-MCP-Server/apply_canva_cv_design.py`](../../Office-Word-MCP-Server/apply_canva_cv_design.py) (`--output`, `--tagline`, `--no-backup`)

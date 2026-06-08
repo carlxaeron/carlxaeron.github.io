@@ -234,6 +234,22 @@ I am excited to connect with like-minded professionals and organizations seeking
 
 const COMPANIES = [
   {
+      id: 'side',
+      title: 'Side Projects',
+      projects: [
+          {
+              id: 'tahanan',
+              imgType: 'svg',
+              title: 'Tahanan — Community SaaS',
+          },
+          {
+              id: 'ojp-workflow',
+              imgType: 'svg',
+              title: 'OnlineJobs Application Pipeline',
+          },
+      ],
+  },
+  {
       id: 'mb',
       title: 'Metrobank',
       projects: [
