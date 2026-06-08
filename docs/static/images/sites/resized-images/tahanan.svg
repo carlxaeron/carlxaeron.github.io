@@ -9,7 +9,7 @@
   <rect x="48" y="48" width="704" height="404" rx="20" fill="#D4E9E2" opacity="0.12"/>
   <text x="400" y="200" text-anchor="middle" fill="#ffffff" font-family="Georgia, serif" font-size="52" font-weight="700">Tahanan</text>
   <text x="400" y="248" text-anchor="middle" fill="#00A862" font-family="Arial, sans-serif" font-size="20" letter-spacing="4">COMMUNITY SaaS</text>
-  <text x="400" y="300" text-anchor="middle" fill="#D4E9E2" font-family="Arial, sans-serif" font-size="16">Laravel · Next.js · Flutter · Multi-tenant</text>
+  <text x="400" y="300" text-anchor="middle" fill="#D4E9E2" font-family="Arial, sans-serif" font-size="16">Laravel ï¿½ Next.js ï¿½ Flutter ï¿½ Multi-tenant</text>
   <circle cx="120" cy="380" r="8" fill="#CBA258"/>
   <circle cx="400" cy="380" r="8" fill="#00A862"/>
   <circle cx="680" cy="380" r="8" fill="#D4E9E2"/>

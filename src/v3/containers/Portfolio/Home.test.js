@@ -6,7 +6,8 @@ describe('V3Home', () => {
     const onNavigate = jest.fn();
     render(<V3Home onNavigate={onNavigate} />);
 
-    expect(screen.getByText(/Senior Full-Stack Engineer · AI Integration Specialist/i)).toBeInTheDocument();
+    expect(screen.getByText(/Building AI-Powered Enterprise Applications/i)).toBeInTheDocument();
+    expect(screen.getByText(/12\+ years architecting production-grade systems/i)).toBeInTheDocument();
     expect(screen.getByText(/Carl Louis/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /View My Work/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Get In Touch/i })).toBeInTheDocument();

@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.0.14] — 2026-06-08
+
+### Added
+- **Side Projects** portfolio section: Tahanan (community SaaS) and OnlineJobs Application Pipeline with hero SVGs
+- Long-form scrollable project case studies for all portfolio projects (Overview + Impact in modal)
+- Job applications workflow docs (`docs/job-applications-workflow.md`) and expanded README coverage
+- OnlineJobs MCP server, local job tracker dashboard, CV cloud upload (Dropbox/Google Drive)
+
+### Changed
+- About section names Tahanan and job pipeline side projects; stat updated to "2 Side Projects Shipped"
+- Project grid: always-visible thumb labels, filter remount fix for Side Projects
+- Project detail modal: multi-paragraph descriptions, scrollable body, dedicated Impact section
+- Home hero test updated for AI-first copy
+
 ## [3.0.13] — 2026-06-04
 
 ### Changed
