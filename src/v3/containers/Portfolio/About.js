@@ -89,11 +89,9 @@ function V3About({ isActive }) {
                 from scratch serving millions of visitors.
               </p>
               <p style={{ color: "rgba(212,233,226,0.65)", lineHeight: 1.8, fontSize: "0.875rem", marginBottom: "1.5rem" }}>
-                Beyond client work, I ship independently —{" "}
-                <strong style={{ color: "#D4E9E2" }}>Tahanan</strong>, a multi-tenant community SaaS
-                (Laravel, Next.js, Flutter) serving real HOAs in the Philippines, and an{" "}
-                <strong style={{ color: "#D4E9E2" }}>OnlineJobs.ph application pipeline</strong> with
-                MCP tooling, tailored CV generation, and a local tracking dashboard. Whether you need
+                Beyond client work, I ship independently — including{" "}
+                <strong style={{ color: "#D4E9E2" }}>Tahanan</strong>, a community SaaS live in the
+                Philippines. Whether you need
                 enterprise-grade engineering or AI woven into your product, I bring the depth and
                 discipline to do it right.
               </p>

@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.15] — 2026-06-08
+
+### Changed
+- Shortened Side Projects copy (Tahanan, OnlineJobs pipeline) — high-level only; client project case studies stay long
+- About section: less detail on independent products; Tahanan mentioned briefly without stack spoon-feeding
+
 ## [3.0.14] — 2026-06-08
 
 ### Added
