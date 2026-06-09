@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.0.16] — 2026-06-09
+
+### Added
+- **Get a Quote** portfolio section with full project brief form (project type, services, budget, timeline)
+- Firebase `quotation` Cloud Function — saves to Firestore `quotations` collection and queues email to Carl
+- AI automation skills in portfolio/CV config: AI Automation, OpenAI/Claude APIs, Prompt Engineering, MCP
+
+### Changed
+- About section leads with AI automation workflows; added AI Automation, MCP, Prompt Engineering tags
+- Metrobank experience: testing automation and GitLab CI pipeline emphasis
+- GoAutoDial experience: AI-assisted tooling and workflow automation in migration delivery
+
 ## [3.0.15] — 2026-06-08
 
 ### Changed

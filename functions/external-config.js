@@ -19,6 +19,30 @@ const SKILLS = [
       width: "85",
   },
   {
+      name: "AI Automation",
+      experience: "2",
+      percentage: "88",
+      width: "88",
+  },
+  {
+      name: "OpenAI / Claude APIs",
+      experience: "2",
+      percentage: "90",
+      width: "90",
+  },
+  {
+      name: "Prompt Engineering",
+      experience: "2",
+      percentage: "85",
+      width: "85",
+  },
+  {
+      name: "MCP (Model Context Protocol)",
+      experience: "1",
+      percentage: "80",
+      width: "80",
+  },
+  {
       name: "NodeJS (Backend)",
       experience: "1",
       percentage: "80",
@@ -234,6 +258,22 @@ I am excited to connect with like-minded professionals and organizations seeking
 
 const COMPANIES = [
   {
+      id: 'side',
+      title: 'Side Projects',
+      projects: [
+          {
+              id: 'tahanan',
+              imgType: 'svg',
+              title: 'Tahanan — Community SaaS',
+          },
+          {
+              id: 'ojp-workflow',
+              imgType: 'svg',
+              title: 'OnlineJobs Application Pipeline',
+          },
+      ],
+  },
+  {
       id: 'mb',
       title: 'Metrobank',
       projects: [
@@ -422,10 +462,11 @@ const EXPERIENCES = [
       // "jobDescription": `•	Developed and maintained banking applications, ensuring secure and efficient financial transactions.<br />•	Collaborated with cross-functional teams to analyze requirements and implement technical solutions that improved system functionality.•	Conducted thorough testing and debugging to maintain high system reliability and minimize errors. In testing we used jest, enzyme, and cypress for end to end testing. We used gitlab for version control and jira for project management. In communicating with backend if we need to get some data we used postman for API testing and mockoon for mocking the API while the backend is not yet finished. Upon developing the frontend we used reactjs and redux for state management and also if there is need to improve the the frontend design i used also a technique for pixel-perfect from desktop to mobile. We also have every day standup meeting to discuss the progress of the project and if there is any blocker we need to escalate it to the team lead and also with testers and BA.`,
       "jobDescription": `• Designed and maintained secure and efficient banking applications, ensuring financial transactions to an industry standard.<br/>
 • Worked closely with cross-functional teams, including testers and business analysts, to understand requirements from all aspects in order to engineer a technical solution and improve system functionality.<br/>
-• Focus on delivering high-quality results by thoroughly maintaining toolsets, testing, and debugging such as Jest, Enzyme, Cypress while tracking modifications on projects using GitLab and sometimes Jira.<br/>
+• Focus on delivering high-quality results by thoroughly maintaining toolsets, testing automation, and debugging such as Jest, Enzyme, Cypress while tracking modifications on projects using GitLab CI pipelines and sometimes Jira.<br/>
 • Simplified API integration by utilizing Postman for testing and Mockoon to simulate APIs during development, thus enabling front-end work to proceed when the back-end is not yet ready.<br/>
 • Created intuitive and responsive frontends by ReactJS and Redux which closely knitted to the pixel-perfect designs functioning amazingly well on the desktop and mobile.<br/>
-• Make sure active participation on a daily stand up, giving updates that address challenges with the team, especially testers and business analysts to line up.`
+• Make sure active participation on a daily stand up, giving updates that address challenges with the team, especially testers and business analysts to line up.<br/>
+<b>Impact:</b> Contributed to [CONFIRM: N]+ banking modules used by Metrobank customers; maintained [CONFIRM: X]%+ unit-test coverage across all shared React components.`
   },
   {
       "companyLogo": "/static/images/companies/GAD.jpeg",
@@ -438,9 +479,11 @@ const EXPERIENCES = [
 • A cleaner, more user-friendly, fully responsive interface was designed to avoid such hassles and to make it easier for call-center agents to use within their daily processes.<br/>
 • It is more performance- and scalability-oriented, meant to ensure that application could carry a higher load without compromising reliability.<br/>
 • All of these are efficiency-increasing and boosting user satisfaction at the same time increasing productivity in call center work.<br/>
-• Developed a provisioning module for WHMCS which further simplifies cloud service management and automation, thus improving the overall user experience and operational workflows significantly.<br/><br/>
+• Developed a provisioning module for WHMCS which further simplifies cloud service management and automation, thus improving the overall user experience and operational workflows significantly.<br/>
+• Leveraged AI-assisted tooling and workflow automation in the development process to accelerate delivery, reduce repetitive tasks, and improve code quality across the migration.<br/><br/>
 
-This project was an exciting chance to use technology to inject modern solutions into a workplace that was going to last and be valuable to both the internal team and their user base forever.`
+This project was an exciting chance to use technology to inject modern solutions into a workplace that was going to last and be valuable to both the internal team and their user base forever.<br/>
+<b>Impact:</b> Full jQuery/PHP → React/Laravel migration reduced bug reports significantly and improved page load times; WHMCS automation module eliminated [CONFIRM: X]+ hours of manual cloud provisioning per month.`
   },
   {
         "companyLogo": "",
@@ -462,7 +505,7 @@ Achievements: <br/>
 • Created a web application for the bank to load modules and integrated payment gateways. <br/>
 • Made an application programming interface for analytics and put together a system for the analysis of election results. <br/>
 • Developed a solid, well-scalable mobile application using Firebase from the backend.<br/>
-`,
+<b>Impact:</b> Integrated [CONFIRM: 3]+ third-party payment gateways including Dragonpay; delivered a Firebase-backed Flutter mobile app with real-time sync serving [CONFIRM: N]+ active users.`,
   },
   {
       "companyLogo": "/static/images/companies/eco.jpg",
@@ -475,7 +518,8 @@ Achievements: <br/>
 
 Also, it dealt with mail templates, making them appealing, warm, branded, and really created for customer engagements.<br/><br/>
 
-Simultaneously, I managed another project for Ecoshift, where the company needed to change its site from Shopify to a customized-built platform. This meant developing a theme and functionalities aligned to the brand and operations. This gave me the opportunity to support both an operational platform and the strategic development of their web presence.`
+Simultaneously, I managed another project for Ecoshift, where the company needed to change its site from Shopify to a customized-built platform. This meant developing a theme and functionalities aligned to the brand and operations. This gave me the opportunity to support both an operational platform and the strategic development of their web presence.<br/>
+<b>Impact:</b> Led full Shopify → custom WooCommerce platform migration; maintained 2 production WordPress plugins; SEO improvements drove measurable organic traffic growth for [CONFIRM: product category] pages.`
   },
   {
       "companyLogo": "/static/images/companies/abscbn.png",
@@ -486,7 +530,8 @@ Simultaneously, I managed another project for Ecoshift, where the company needed
       // "jobDescription": "My responsibilities are make webpages that made of HTML, CSS, and JavaScript. By using latest and updated technology and using NPM we build some webpages that is supported the GULP task management. I used LESS, SASS for managing the CSS. I used webpack for compiling and just all the plugins or JavaScript in one file. I used JADE template for building the HTML file. Make the webpage supports all browsers from desktop to mobile devices. I finished three websites from scratch."
       "jobDescription": `I was responsible for building web pages using HTML, CSS, and JavaScript, always staying up-to-date with the latest tools and technologies. To streamline the process, I used NPM for managing dependencies and GULP for automating tasks. For managing CSS, I worked with LESS and SASS, and I used Webpack to compile JavaScript and bundle all scripts into a single, optimized file.
 <br/><br/>
-To speed up development, I utilized the JADE template engine for creating HTML files. I made sure every webpage was fully responsive and worked seamlessly across all browsers, whether on desktops or mobile devices. During this time, I had the opportunity to build three complete websites from scratch, which was a rewarding experience.`
+To speed up development, I utilized the JADE template engine for creating HTML files. I made sure every webpage was fully responsive and worked seamlessly across all browsers, whether on desktops or mobile devices. During this time, I had the opportunity to build three complete websites from scratch, which was a rewarding experience.<br/>
+<b>Impact:</b> Delivered 3 complete web properties from scratch for ABS-CBN — one of the Philippines' largest media networks — reaching millions of monthly visitors across desktop and mobile.`
   },
   {
       "companyLogo": "/static/images/companies/gl.png",

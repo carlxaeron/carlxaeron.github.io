@@ -13,6 +13,7 @@ import V3Skills from "./Skills";
 import V3Experience from "./Experience";
 import V3Projects from "./Projects";
 import V3Contact from "./Contact";
+import V3Quote from "./Quote";
 import ProjectDetailModal from "../../components/ProjectDetailModal";
 import { getProjectDetails } from "../../data/projectDetails";
 
@@ -24,6 +25,7 @@ const SECTIONS_CONFIG = [
   { id: "experience", component: V3Experience, title: "Experience" },
   { id: "projects",   component: V3Projects,   title: "Projects" },
   { id: "contact",    component: V3Contact,    title: "Contact" },
+  { id: "quote",      component: V3Quote,      title: "Get a Quote" },
 ];
 
 function V3PortfolioScroll() {

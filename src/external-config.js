@@ -19,6 +19,30 @@ const SKILLS = [
       width: "85",
   },
   {
+      name: "AI Automation",
+      experience: "2",
+      percentage: "88",
+      width: "88",
+  },
+  {
+      name: "OpenAI / Claude APIs",
+      experience: "2",
+      percentage: "90",
+      width: "90",
+  },
+  {
+      name: "Prompt Engineering",
+      experience: "2",
+      percentage: "85",
+      width: "85",
+  },
+  {
+      name: "MCP (Model Context Protocol)",
+      experience: "1",
+      percentage: "80",
+      width: "80",
+  },
+  {
       name: "NodeJS (Backend)",
       experience: "1",
       percentage: "80",
@@ -438,7 +462,7 @@ const EXPERIENCES = [
       // "jobDescription": `•	Developed and maintained banking applications, ensuring secure and efficient financial transactions.<br />•	Collaborated with cross-functional teams to analyze requirements and implement technical solutions that improved system functionality.•	Conducted thorough testing and debugging to maintain high system reliability and minimize errors. In testing we used jest, enzyme, and cypress for end to end testing. We used gitlab for version control and jira for project management. In communicating with backend if we need to get some data we used postman for API testing and mockoon for mocking the API while the backend is not yet finished. Upon developing the frontend we used reactjs and redux for state management and also if there is need to improve the the frontend design i used also a technique for pixel-perfect from desktop to mobile. We also have every day standup meeting to discuss the progress of the project and if there is any blocker we need to escalate it to the team lead and also with testers and BA.`,
       "jobDescription": `• Designed and maintained secure and efficient banking applications, ensuring financial transactions to an industry standard.<br/>
 • Worked closely with cross-functional teams, including testers and business analysts, to understand requirements from all aspects in order to engineer a technical solution and improve system functionality.<br/>
-• Focus on delivering high-quality results by thoroughly maintaining toolsets, testing, and debugging such as Jest, Enzyme, Cypress while tracking modifications on projects using GitLab and sometimes Jira.<br/>
+• Focus on delivering high-quality results by thoroughly maintaining toolsets, testing automation, and debugging such as Jest, Enzyme, Cypress while tracking modifications on projects using GitLab CI pipelines and sometimes Jira.<br/>
 • Simplified API integration by utilizing Postman for testing and Mockoon to simulate APIs during development, thus enabling front-end work to proceed when the back-end is not yet ready.<br/>
 • Created intuitive and responsive frontends by ReactJS and Redux which closely knitted to the pixel-perfect designs functioning amazingly well on the desktop and mobile.<br/>
 • Make sure active participation on a daily stand up, giving updates that address challenges with the team, especially testers and business analysts to line up.<br/>
@@ -455,7 +479,8 @@ const EXPERIENCES = [
 • A cleaner, more user-friendly, fully responsive interface was designed to avoid such hassles and to make it easier for call-center agents to use within their daily processes.<br/>
 • It is more performance- and scalability-oriented, meant to ensure that application could carry a higher load without compromising reliability.<br/>
 • All of these are efficiency-increasing and boosting user satisfaction at the same time increasing productivity in call center work.<br/>
-• Developed a provisioning module for WHMCS which further simplifies cloud service management and automation, thus improving the overall user experience and operational workflows significantly.<br/><br/>
+• Developed a provisioning module for WHMCS which further simplifies cloud service management and automation, thus improving the overall user experience and operational workflows significantly.<br/>
+• Leveraged AI-assisted tooling and workflow automation in the development process to accelerate delivery, reduce repetitive tasks, and improve code quality across the migration.<br/><br/>
 
 This project was an exciting chance to use technology to inject modern solutions into a workplace that was going to last and be valuable to both the internal team and their user base forever.<br/>
 <b>Impact:</b> Full jQuery/PHP → React/Laravel migration reduced bug reports significantly and improved page load times; WHMCS automation module eliminated [CONFIRM: X]+ hours of manual cloud provisioning per month.`

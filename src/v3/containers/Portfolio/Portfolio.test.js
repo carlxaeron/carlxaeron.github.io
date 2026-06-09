@@ -28,6 +28,7 @@ jest.mock("./Skills", () => () => <section>Skills content</section>);
 jest.mock("./Experience", () => () => <section>Experience content</section>);
 jest.mock("./Projects", () => () => <section>Projects content</section>);
 jest.mock("./Contact", () => () => <section>Contact content</section>);
+jest.mock("./Quote", () => () => <section>Quote content</section>);
 
 describe("V3Portfolio wheel navigation", () => {
   beforeEach(() => {

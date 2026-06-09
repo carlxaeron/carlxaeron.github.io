@@ -76,9 +76,9 @@ function V3About({ isActive }) {
                 I&apos;m Carl Louis Manuel
               </h3>
               <p style={{ color: "rgba(212,233,226,0.85)", lineHeight: 1.8, fontSize: "0.95rem", marginBottom: "1rem" }}>
-                I build AI-powered applications and production-grade software that enterprises actually ship.
+                I build AI-powered applications and automation workflows that enterprises actually ship.
                 With 12+ years across banking, media, and technology — I&apos;ve led full-stack delivery at
-                Metrobank, ABS-CBN, and GoAutoDial, integrating AI features that solve real business problems.
+                Metrobank, ABS-CBN, and GoAutoDial, integrating AI features and MCP-powered tooling that solve real business problems.
               </p>
               <p style={{ color: "rgba(212,233,226,0.75)", lineHeight: 1.8, fontSize: "0.9rem", marginBottom: "1rem" }}>
                 My stack spans pixel-perfect ReactJS frontends, secure PHP/Laravel backends, Firebase real-time
@@ -96,7 +96,7 @@ function V3About({ isActive }) {
                 discipline to do it right.
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                {["OpenAI API", "AI Integration", "LLM Apps", "SaaS", "ReactJS", "Laravel", "Flutter", "Firebase", "Vue", "PHP", "Node.js"].map((tech) => (
+                {["AI Automation", "MCP", "Prompt Engineering", "OpenAI API", "AI Integration", "LLM Apps", "SaaS", "ReactJS", "Laravel", "Flutter", "Firebase", "Vue", "PHP", "Node.js"].map((tech) => (
                   <span
                     key={tech}
                     style={{

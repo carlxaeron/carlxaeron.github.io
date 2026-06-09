@@ -59,6 +59,84 @@ function buildContactMailPayload({ name, email, message }) {
   };
 }
 
+function buildQuotationMailPayload({
+  name,
+  company,
+  email,
+  phone,
+  projectType,
+  budgetRange,
+  timeline,
+  services,
+  details,
+}) {
+  const safeName = escapeHtml(name);
+  const safeCompany = escapeHtml(company || "—");
+  const safeEmail = escapeHtml(email);
+  const safePhone = escapeHtml(phone || "—");
+  const safeProjectType = escapeHtml(projectType || "—");
+  const safeBudget = escapeHtml(budgetRange || "—");
+  const safeTimeline = escapeHtml(timeline || "—");
+  const safeServices = Array.isArray(services) && services.length
+    ? services.map((s) => escapeHtml(s)).join(", ")
+    : "—";
+  const safeDetails = escapeHtml(details).replace(/\n/g, "<br/>");
+
+  const subject = `Quote request from ${name}${company ? ` (${company})` : ""}`;
+  const html = `
+    <h2>New portfolio quote request</h2>
+    <p><strong>Name:</strong> ${safeName}</p>
+    <p><strong>Company:</strong> ${safeCompany}</p>
+    <p><strong>Email:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p>
+    <p><strong>Phone:</strong> ${safePhone}</p>
+    <p><strong>Project type:</strong> ${safeProjectType}</p>
+    <p><strong>Services:</strong> ${safeServices}</p>
+    <p><strong>Budget:</strong> ${safeBudget}</p>
+    <p><strong>Timeline:</strong> ${safeTimeline}</p>
+    <p><strong>Project details:</strong></p>
+    <p>${safeDetails}</p>
+  `.trim();
+  const text = [
+    "New portfolio quote request",
+    "",
+    `Name: ${name}`,
+    `Company: ${company || "—"}`,
+    `Email: ${email}`,
+    `Phone: ${phone || "—"}`,
+    `Project type: ${projectType || "—"}`,
+    `Services: ${Array.isArray(services) && services.length ? services.join(", ") : "—"}`,
+    `Budget: ${budgetRange || "—"}`,
+    `Timeline: ${timeline || "—"}`,
+    "",
+    "Project details:",
+    details,
+  ].join("\n");
+
+  return {
+    replyTo: email,
+    message: { subject, html, text },
+  };
+}
+
+function applyCorsHeaders(request, response) {
+  const allowedOrigins = [
+    "https://carlxaeron.github.io",
+    "https://carlmanuel.com",
+    "https://www.carlmanuel.com",
+    "http://localhost:3000",
+  ];
+  const origin = request.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    response.setHeader("Access-Control-Allow-Origin", origin);
+  } else {
+    response.setHeader("Access-Control-Allow-Origin", "*");
+  }
+
+  response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+}
+
 function buildMailDocuments(mailContent) {
   return ADMIN_RECIPIENTS.map((recipient) => ({
     to: recipient,
@@ -282,6 +360,110 @@ exports.contact = onRequest((request, response) => {
     .catch((error) => {
       logger.error("Error saving contact to Firestore", { structuredData: true, error });
       sendError({ response }, { message: "Error saving contact data" });
+    });
+});
+
+exports.quotation = onRequest((request, response) => {
+  applyCorsHeaders(request, response);
+
+  if (request.method === "OPTIONS") {
+    response.status(204).send("");
+    return;
+  }
+
+  if (request.method !== "POST") {
+    sendError({ response }, { message: "Method not allowed" });
+    return;
+  }
+
+  const {
+    name,
+    company,
+    email,
+    phone,
+    projectType,
+    budgetRange,
+    timeline,
+    services,
+    details,
+  } = request.body;
+
+  if (!name || !email || !details) {
+    sendError({ response }, { message: "Missing required fields" });
+    return;
+  }
+
+  const trimmedName = String(name).trim();
+  const trimmedEmail = String(email).trim();
+  const trimmedDetails = String(details).trim();
+  const trimmedCompany = company ? String(company).trim() : "";
+  const trimmedPhone = phone ? String(phone).trim() : "";
+  const trimmedProjectType = projectType ? String(projectType).trim() : "";
+  const trimmedBudget = budgetRange ? String(budgetRange).trim() : "";
+  const trimmedTimeline = timeline ? String(timeline).trim() : "";
+  const selectedServices = Array.isArray(services)
+    ? services.map((s) => String(s).trim()).filter(Boolean)
+    : [];
+
+  if (!trimmedName || !trimmedEmail || !trimmedDetails) {
+    sendError({ response }, { message: "Missing required fields" });
+    return;
+  }
+
+  const quotationRef = admin.firestore().collection("quotations").doc();
+  const mailPayload = buildQuotationMailPayload({
+    name: trimmedName,
+    company: trimmedCompany,
+    email: trimmedEmail,
+    phone: trimmedPhone,
+    projectType: trimmedProjectType,
+    budgetRange: trimmedBudget,
+    timeline: trimmedTimeline,
+    services: selectedServices,
+    details: trimmedDetails,
+  });
+
+  quotationRef
+    .set({
+      name: trimmedName,
+      company: trimmedCompany,
+      email: trimmedEmail,
+      phone: trimmedPhone,
+      projectType: trimmedProjectType,
+      budgetRange: trimmedBudget,
+      timeline: trimmedTimeline,
+      services: selectedServices,
+      details: trimmedDetails,
+      date: new Date(),
+    })
+    .then(async () => {
+      logger.info("Quotation data written to Firestore", { structuredData: true });
+
+      try {
+        await queueMailDocuments(mailPayload);
+        logger.info("Quotation email queued in mail collection", { structuredData: true });
+      } catch (queueError) {
+        logger.error("Failed to queue quotation email in Firestore", {
+          structuredData: true,
+          error: queueError,
+        });
+      }
+
+      try {
+        await sendContactEmailDirect(mailPayload);
+        logger.info("Quotation email sent via SMTP", { structuredData: true });
+      } catch (smtpError) {
+        logger.error("Failed to send quotation email via SMTP", {
+          structuredData: true,
+          error: smtpError,
+        });
+      }
+
+      sendSuccess({ response }, { message: "Quote request received" });
+    })
+    .catch((error) => {
+      logger.error("Error saving quotation to Firestore", { structuredData: true, error });
+      sendError({ response }, { message: "Error saving quote request" });
     });
 });
 
