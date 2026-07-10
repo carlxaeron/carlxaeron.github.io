@@ -1,0 +1,30 @@
+{
+  "businessName": "Extra Rice 8 Trading, OPC",
+  "slug": "extra-rice",
+  "previewHost": "extra-rice-trading.netlify.app",
+  "industry": "Rice wholesale & retail",
+  "deployedAt": "2026-07-10T02:55:00.000Z",
+  "contact": {
+    "name": "Extra Rice 8 Trading team",
+    "email": "extraricetradingdmanuel@gmail.com",
+    "phone": "+63 967 582 0455"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive site (products, services, locations, contact), mobile-friendly, Facebook integration",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront, 50% on delivery",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=extra-rice-trading.netlify.app"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt"
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/p/Extra-Rice-8-Trading-OPC-100085354996870/",
+    "addressMain": "2820 MH Del Pilar, Barangay San Rafael, Rodriguez, Rizal 1860",
+    "addressBranch": "E. Rodriguez Highway, Barangay San Jose, Rodriguez, Rizal"
+  }
+}

@@ -10,6 +10,12 @@ export const PREVIEW_SITES = [
     label: "Bamboo Grove Café — Sample Quotation Site",
     netlifySite: "bamboo-grove-cafe",
   },
+  {
+    id: "extra-rice",
+    host: "extra-rice-trading.netlify.app",
+    label: "Extra Rice 8 Trading, OPC",
+    netlifySite: "extra-rice-trading",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
