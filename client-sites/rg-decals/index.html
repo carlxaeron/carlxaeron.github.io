@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,129 +8,169 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { dark: "#12151c", red: "#c62828", accent: "#e53935", cyan: "#00acc1", light: "#f4f6f8" },
+          },
+          fontFamily: { display: ["Playfair Display", "Georgia", "serif"], sans: ["Inter", "system-ui", "sans-serif"] },
+        },
+      },
+    };
+  </script>
   <link rel="stylesheet" href="styles.css" />
   <script src="embed-guard.js"></script>
 </head>
-<body>
-  <header class="site-header">
-    <div class="container site-header__inner">
-      <a class="logo" href="#">
-        <img class="logo__img" src="assets/logo.png" alt="RG Decals and Printing Shop" width="40" height="40" />
-        <span class="logo__name logo__name--full">RG Decals and Printing Shop</span>
-        <span class="logo__name logo__name--short">RG Decals</span>
+<body class="font-sans text-gray-900 antialiased">
+  <header data-header class="sticky top-0 z-50 border-b border-brand-dark/10 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#" class="flex min-w-0 items-center gap-2 font-display text-lg font-bold text-brand-dark">
+        <img src="assets/logo.png" alt="" width="36" height="36" class="h-9 w-9 shrink-0 rounded-lg object-cover" />
+        <span class="hidden truncate sm:inline">RG Decals and Printing Shop</span>
+        <span class="sm:hidden">RG Decals</span>
       </a>
-      <nav class="nav" aria-label="Main">
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#contact" class="nav__cta">Get a quote</a>
+      <nav class="hidden items-center gap-5 text-sm font-medium text-brand-dark/80 md:flex" aria-label="Main">
+        <a href="#services" class="hover:text-brand-cyan transition-colors">Services</a>
+        <a href="#faq" class="hover:text-brand-cyan transition-colors">FAQ</a>
+        <a href="#contact" class="rounded-full bg-brand-red px-4 py-2 font-semibold text-white hover:brightness-105 transition">Get a quote</a>
       </nav>
+      <button type="button" data-nav-toggle class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-dark/15 text-brand-dark md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="hidden flex-col border-t border-brand-dark/10 bg-white px-4 py-4 md:hidden">
+      <a href="#services" class="rounded-lg px-3 py-3 hover:bg-brand-light">Services</a>
+      <a href="#faq" class="rounded-lg px-3 py-3 hover:bg-brand-light">FAQ</a>
+      <a href="#contact" class="mt-2 rounded-full bg-brand-red px-4 py-3 text-center font-semibold text-white">Get a quote</a>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero__bg" aria-hidden="true"></div>
-      <div class="container hero__inner">
-        <p class="eyebrow">Rodriguez, Rizal · Decals, signs &amp; printing</p>
-        <h1>Your ideas, printed into reality</h1>
-        <p class="lead">Vehicle decals, signs, banners, and custom printing — quality work for personal, business, and fleet branding needs.</p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="#contact">Request a quote</a>
-          <a class="btn btn--ghost" href="https://www.facebook.com/p/RG-Decals-and-Printing-Shop-61576011299710/" target="_blank" rel="noopener noreferrer">Message on Facebook</a>
+    <section class="relative overflow-hidden bg-brand-dark text-white">
+      <div class="hero-bg hero-bg--rg absolute inset-0"></div>
+      <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+        <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-brand-cyan" data-reveal>Rodriguez, Rizal · Decals, signs &amp; printing</p>
+        <h1 class="font-display max-w-2xl text-4xl font-bold leading-tight sm:text-5xl" data-reveal>Your ideas, printed into reality</h1>
+        <p class="mt-5 max-w-xl text-lg text-gray-300" data-reveal>Vehicle decals, signs, banners, and custom printing — quality work for personal, business, and fleet branding needs.</p>
+        <div class="mt-8 flex flex-wrap gap-3" data-reveal>
+          <a href="#contact" class="rounded-full bg-brand-red px-6 py-3 font-semibold text-white hover:brightness-105 transition">Request a quote</a>
+          <a href="https://www.facebook.com/p/RG-Decals-and-Printing-Shop-61576011299710/" target="_blank" rel="noopener noreferrer" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Message on Facebook</a>
         </div>
-        <p class="hero__badge">Metro Manila Hills · Rodriguez, Rizal</p>
+        <p class="mt-4 text-sm text-gray-400" data-reveal>Metro Manila Hills · Rodriguez, Rizal</p>
       </div>
     </section>
 
-    <section id="services" class="section">
-      <div class="container">
-        <h2>Our services</h2>
-        <p class="section-intro">From one-off stickers to full vehicle wraps and large-format signage — we help bring your design to life.</p>
-        <div class="cards">
-          <article class="card card--service">
-            <div class="card__icon" aria-hidden="true">🚗</div>
-            <h3>Vehicle decals &amp; stickers</h3>
-            <p>Custom decals for cars, trucks, and motorcycles — branding, graphics, and personalized designs.</p>
-          </article>
-          <article class="card card--service">
-            <div class="card__icon" aria-hidden="true">🪧</div>
-            <h3>Signs &amp; banners</h3>
-            <p>Storefront signs, event banners, tarpaulins, and outdoor signage built to get noticed.</p>
-          </article>
-          <article class="card card--service">
-            <div class="card__icon" aria-hidden="true">🖨️</div>
-            <h3>Custom printing</h3>
-            <p>Flyers, labels, stickers, and print jobs for business promotions and personal projects.</p>
-          </article>
-          <article class="card card--service">
-            <div class="card__icon" aria-hidden="true">✏️</div>
-            <h3>Design support</h3>
-            <p>Have an idea but need help laying it out? We can work with your artwork or assist with design.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section section--alt">
-      <div class="container about">
-        <div class="about__grid">
-          <div class="about__image">
-            <img src="assets/hero-print.jpg" alt="Printing press and ink rollers" width="600" height="400" loading="lazy" />
+    <section id="services" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Our services</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>Tap a category to explore. From one-off stickers to full vehicle graphics and large-format signage.</p>
+        <div data-filter class="mt-8">
+          <div class="flex flex-wrap gap-2">
+            <button type="button" data-filter-btn="all" class="filter-active rounded-full bg-brand-red px-4 py-2 text-sm text-white" aria-pressed="true">All</button>
+            <button type="button" data-filter-btn="vehicle" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Vehicle</button>
+            <button type="button" data-filter-btn="signs" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Signs</button>
+            <button type="button" data-filter-btn="print" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Print</button>
           </div>
-          <div>
-            <h2>About RG Decals</h2>
-            <p><strong>RG Decals and Printing Shop</strong> serves Rodriguez and nearby areas with decals, signs, banners, and printing services for individuals and businesses.</p>
-            <p>Whether you need a bold vehicle decal, a storefront sign, or custom print materials for your brand, we focus on clear communication, fair pricing, and quality output you can be proud to show off.</p>
-            <p class="about__tagline">“Your Ideas we Print into Reality.”</p>
-            <a class="btn btn--primary btn--inline" href="https://www.facebook.com/p/RG-Decals-and-Printing-Shop-61576011299710/" target="_blank" rel="noopener noreferrer">Follow on Facebook</a>
+          <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <article data-filter-item data-categories="vehicle,all" data-reveal class="rounded-2xl border-t-4 border-brand-cyan bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <div class="text-2xl" aria-hidden="true">🚗</div>
+              <h3 class="mt-2 font-semibold text-brand-dark">Vehicle decals &amp; stickers</h3>
+              <p class="mt-2 text-sm text-gray-600">Custom decals for cars, trucks, and motorcycles — branding and personalized designs.</p>
+            </article>
+            <article data-filter-item data-categories="signs,all" data-reveal class="rounded-2xl border-t-4 border-brand-cyan bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <div class="text-2xl" aria-hidden="true">🪧</div>
+              <h3 class="mt-2 font-semibold text-brand-dark">Signs &amp; banners</h3>
+              <p class="mt-2 text-sm text-gray-600">Storefront signs, event banners, tarpaulins, and outdoor signage.</p>
+            </article>
+            <article data-filter-item data-categories="print,all" data-reveal class="rounded-2xl border-t-4 border-brand-cyan bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <div class="text-2xl" aria-hidden="true">🖨️</div>
+              <h3 class="mt-2 font-semibold text-brand-dark">Custom printing</h3>
+              <p class="mt-2 text-sm text-gray-600">Flyers, labels, stickers, and print jobs for promotions and projects.</p>
+            </article>
+            <article data-filter-item data-categories="print,all" data-reveal class="rounded-2xl border-t-4 border-brand-cyan bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <div class="text-2xl" aria-hidden="true">✏️</div>
+              <h3 class="mt-2 font-semibold text-brand-dark">Design support</h3>
+              <p class="mt-2 text-sm text-gray-600">Have an idea but need layout help? We work with your artwork or assist with design.</p>
+            </article>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="why" class="section">
-      <div class="container">
-        <h2>Why customers choose us</h2>
-        <div class="services-grid">
-          <article class="service">
-            <h3>Local &amp; accessible</h3>
-            <p>Based in Metro Manila Hills, Rodriguez — easy to reach for consultations and pickups.</p>
+    <section id="about" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2">
+        <img src="assets/hero-print.jpg" alt="Printing press and ink rollers" width="600" height="400" loading="lazy" class="rounded-2xl shadow-lg" data-reveal />
+        <div data-reveal>
+          <h2 class="font-display text-3xl font-bold text-brand-dark">About RG Decals</h2>
+          <p class="mt-4 text-gray-700"><strong>RG Decals and Printing Shop</strong> serves Rodriguez and nearby areas with decals, signs, banners, and printing for individuals and businesses.</p>
+          <p class="mt-3 font-display italic text-brand-red">"Your Ideas we Print into Reality."</p>
+          <a class="mt-6 inline-block rounded-full bg-brand-red px-6 py-3 font-semibold text-white hover:brightness-105 transition" href="https://www.facebook.com/p/RG-Decals-and-Printing-Shop-61576011299710/" target="_blank" rel="noopener noreferrer">Follow on Facebook</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="why" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Why customers choose us</h2>
+        <div class="mt-10 grid gap-6 sm:grid-cols-3">
+          <article data-reveal class="rounded-2xl bg-brand-light p-6 transition hover:shadow-md">
+            <h3 class="font-semibold text-brand-dark">Local &amp; accessible</h3>
+            <p class="mt-2 text-sm text-gray-600">Based in Metro Manila Hills, Rodriguez — easy to reach for consultations and pickups.</p>
           </article>
-          <article class="service">
-            <h3>Wide range of work</h3>
-            <p>From small sticker runs to vehicle graphics and large banners — one shop for many print needs.</p>
+          <article data-reveal class="rounded-2xl bg-brand-light p-6 transition hover:shadow-md">
+            <h3 class="font-semibold text-brand-dark">Wide range of work</h3>
+            <p class="mt-2 text-sm text-gray-600">From small sticker runs to vehicle graphics and large banners — one shop for many print needs.</p>
           </article>
-          <article class="service">
-            <h3>Easy to inquire</h3>
-            <p>Message us on Facebook or call to share your design, size, and quantity for a quick quote.</p>
+          <article data-reveal class="rounded-2xl bg-brand-light p-6 transition hover:shadow-md">
+            <h3 class="font-semibold text-brand-dark">Easy to inquire</h3>
+            <p class="mt-2 text-sm text-gray-600">Message us on Facebook or call to share your design, size, and quantity for a quick quote.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="section section--contact">
-      <div class="container contact">
-        <h2>Get a quote</h2>
-        <p>Send your design or describe your project — we'll get back to you with options and pricing.</p>
-        <div class="contact-grid">
-          <p><strong>Address</strong><br />Metro Manila Hills<br />Rodriguez, Rizal</p>
-          <p><strong>Phone</strong><br /><a href="tel:+639954567971">+63 995 456 7971</a></p>
-          <p><strong>Email</strong><br /><a href="mailto:rgdecals123@gmail.com">rgdecals123@gmail.com</a></p>
-          <p><strong>Facebook</strong><br /><a href="https://www.facebook.com/p/RG-Decals-and-Printing-Shop-61576011299710/" target="_blank" rel="noopener noreferrer">RG Decals and Printing Shop</a></p>
-          <p><strong>Google Maps</strong><br /><a href="https://www.google.com/maps/place/RG+Decals+and+Printing+Shop/@14.7557777,121.1330426,18z" target="_blank" rel="noopener noreferrer">Get directions</a></p>
+    <section id="faq" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Before you order</h2>
+        <div data-accordion class="mt-8 space-y-3">
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">What file format should I send?</button>
+            <div data-accordion-panel class="hidden border-t px-5 py-4 text-sm text-gray-600">PNG, JPG, PDF, or AI work best. Send your design on Facebook or email — we'll confirm if it's print-ready.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">How long does a typical job take?</button>
+            <div data-accordion-panel class="hidden border-t px-5 py-4 text-sm text-gray-600">Turnaround depends on size and quantity. Message us with your deadline — we'll let you know what's possible.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Do you install vehicle decals?</button>
+            <div data-accordion-panel class="hidden border-t px-5 py-4 text-sm text-gray-600">Ask when you inquire — installation options depend on the job. We'll quote print and install separately if needed.</div>
+          </div>
         </div>
-        <p class="demo-note">Sample website prepared for outreach — services, hours, and copy to be confirmed with the business owner.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-brand-dark py-16 text-white sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold" data-reveal>Get a quote</h2>
+        <p class="mt-2 text-gray-300" data-reveal>Send your design or describe your project — we'll get back to you with options and pricing.</p>
+        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-reveal>
+          <p><span class="font-semibold text-brand-cyan">Address</span><br />Metro Manila Hills<br />Rodriguez, Rizal</p>
+          <p><span class="font-semibold text-brand-cyan">Phone</span><br /><a href="tel:+639954567971" class="text-gray-200 hover:underline">+63 995 456 7971</a></p>
+          <p><span class="font-semibold text-brand-cyan">Email</span><br /><a href="mailto:rgdecals123@gmail.com" class="text-gray-200 hover:underline">rgdecals123@gmail.com</a></p>
+          <p><span class="font-semibold text-brand-cyan">Facebook</span><br /><a href="https://www.facebook.com/p/RG-Decals-and-Printing-Shop-61576011299710/" target="_blank" rel="noopener noreferrer" class="text-gray-200 hover:underline">RG Decals and Printing Shop</a></p>
+          <p><span class="font-semibold text-brand-cyan">Google Maps</span><br /><a href="https://www.google.com/maps/place/RG+Decals+and+Printing+Shop/@14.7557777,121.1330426,18z" target="_blank" rel="noopener noreferrer" class="text-gray-200 hover:underline">Get directions</a></p>
+        </div>
+        <p class="mt-6 text-sm italic text-gray-500">Sample website prepared for outreach — services, hours, and copy to be confirmed with the business owner.</p>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; <span id="year"></span> RG Decals and Printing Shop. Rodriguez, Rizal.</p>
-    </div>
+  <footer class="bg-brand-dark border-t border-white/10 py-8 text-center text-sm text-gray-400">
+    <p>&copy; <span data-year></span> RG Decals and Printing Shop. Rodriguez, Rizal.</p>
   </footer>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <script src="site.js"></script>
 </body>
 </html>
