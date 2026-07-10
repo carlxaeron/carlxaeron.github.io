@@ -72,10 +72,10 @@ function ViewportIframe({
 function PreviewShowcase({ previewUrl, host, label }) {
   const [desktopBlocked, setDesktopBlocked] = useState(false);
   const [mobileBlocked, setMobileBlocked] = useState(false);
-  const desktopBezelRef = useRef(null);
+  const desktopScreenRef = useRef(null);
   const phoneScreenRef = useRef(null);
 
-  const desktopScale = useViewportScale(desktopBezelRef, DESKTOP_VIEWPORT, 0.25);
+  const desktopScale = useViewportScale(desktopScreenRef, DESKTOP_VIEWPORT, 0.25);
   const mobileScale = useViewportScale(phoneScreenRef, MOBILE_VIEWPORT, 0.65);
 
   const displayLabel = label || host;
@@ -124,15 +124,17 @@ function PreviewShowcase({ previewUrl, host, label }) {
           <section className="v3-preview-device v3-preview-device--desktop" aria-label="Desktop preview">
             <h2 className="v3-preview-device__label">Desktop</h2>
             <div className="v3-preview-monitor">
-              <div className="v3-preview-monitor__bezel" ref={desktopBezelRef}>
-                <ViewportIframe
-                  viewport={DESKTOP_VIEWPORT}
-                  scale={desktopScale}
-                  previewUrl={previewUrl}
-                  title={`Desktop preview of ${displayLabel}`}
-                  className="v3-preview-iframe v3-preview-iframe--desktop"
-                  onError={() => setDesktopBlocked(true)}
-                />
+              <div className="v3-preview-monitor__bezel">
+                <div className="v3-preview-monitor__screen" ref={desktopScreenRef}>
+                  <ViewportIframe
+                    viewport={DESKTOP_VIEWPORT}
+                    scale={desktopScale}
+                    previewUrl={previewUrl}
+                    title={`Desktop preview of ${displayLabel}`}
+                    className="v3-preview-iframe v3-preview-iframe--desktop"
+                    onError={() => setDesktopBlocked(true)}
+                  />
+                </div>
               </div>
               <div className="v3-preview-monitor__stand" aria-hidden="true" />
             </div>

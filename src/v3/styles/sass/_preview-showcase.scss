@@ -128,6 +128,7 @@ body.v3-preview-active {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .v3-preview-monitor__bezel {
@@ -135,32 +136,66 @@ body.v3-preview-active {
   width: 100%;
   max-width: 900px;
   aspect-ratio: 16 / 10;
-  background: #1a1a1a;
-  border-radius: 12px 12px 4px 4px;
-  padding: 10px 10px 14px;
+  background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+  border-radius: 14px 14px 6px 6px;
+  padding: 14px 14px 18px;
   box-shadow:
     0 24px 48px rgba(0, 0, 0, 0.35),
-    inset 0 0 0 1px rgba($white, 0.08);
-  overflow: hidden;
+    inset 0 0 0 1px rgba($white, 0.1),
+    inset 0 1px 0 rgba($white, 0.06);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 
-  @media (max-width: 991px) {
-    max-height: min(42vh, 320px);
-    aspect-ratio: auto;
-    height: min(42vh, 320px);
-    min-height: 200px;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba($white, 0.15);
+    z-index: 2;
+    pointer-events: none;
   }
 }
 
+.v3-preview-monitor__screen {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #0d0d0d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 1px rgba($white, 0.04);
+}
+
 .v3-preview-monitor__stand {
-  width: 120px;
-  height: 28px;
-  background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
-  border-radius: 0 0 4px 4px;
-  margin-top: -2px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  width: 140px;
+  height: 32px;
+  background: linear-gradient(180deg, #3a3a3a 0%, #1a1a1a 100%);
+  border-radius: 0 0 6px 6px;
+  margin-top: -4px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.35);
+    filter: blur(4px);
+  }
 }
 
 .v3-preview-iframe-scaler {
