@@ -15,7 +15,9 @@ Reference rule: [`.cursor/rules/v3-deploy.mdc`](../../rules/v3-deploy.mdc). Do *
 - **Build:** `npm run build` → copies `build/*` to `docs/`
 - **Deploy:** push to `main` → `.github/workflows/static.yml`
 - **Domain:** `public/CNAME` → `carlmanuel.com`
-- **Backend:** contact/assistant URLs in `src/mapping.js`; CORS in `functions/index.js`
+- **Backend:** contact, quotation, assistant URLs in `src/mapping.js`; CORS in `functions/index.js`
+- **Email:** Trigger Email extension + `functions/.env` SMTP (Gmail App Password)
+- **History:** [docs/project-history.md](../../../docs/project-history.md)
 
 ## Release checklist
 
@@ -28,7 +30,8 @@ Deploy progress:
 - [ ] CHANGELOG + version bumped
 - [ ] Merged to main and pushed
 - [ ] Tag + GitHub Release created
-- [ ] Firebase functions deployed (if CORS/backend changed)
+- [ ] Firebase functions deployed (if CORS/backend/forms/email changed)
+- [ ] Contact + quote forms submit; email received at info@carlmanuel.com
 - [ ] carlmanuel.com verified
 ```
 
@@ -73,7 +76,7 @@ Adjust tag message and release notes to match the CHANGELOG entry.
 
 ## Step 5 — Firebase functions (conditional)
 
-Run **only** if `functions/index.js`, contact/assistant logic, or CORS origins changed:
+Run **only** if `functions/index.js`, contact/quotation/assistant logic, email, or CORS origins changed:
 
 ```bash
 cd functions && npm run deploy
@@ -97,7 +100,7 @@ Manual checks on **carlmanuel.com**:
 
 - V3 portfolio renders (green design system)
 - Hash / section navigation works
-- Contact form submits without CORS errors
+- Contact + quote forms submit without CORS errors
 
 Use Chrome DevTools MCP when available for live inspection.
 

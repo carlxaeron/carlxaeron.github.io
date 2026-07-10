@@ -16,6 +16,8 @@ description: Search OnlineJobs.ph remote job listings via the onlinejobs-apify M
 
 Project server: `onlinejobs-apify` (see [OnlineJobs-MCP-Server/README.md](../../OnlineJobs-MCP-Server/README.md)).
 
+Full repo map: [docs/project-history.md](../../docs/project-history.md) · [AGENTS.md](../../AGENTS.md)
+
 Requires `APIFY_API_TOKEN` in MCP env (Apify Console → Integrations). Restart Cursor after changing the token.
 
 ## Local dashboard

@@ -22,18 +22,19 @@ globs:
 
 ## Recommended section order (V3 deck)
 
-Wire `SECTIONS_CONFIG` in V3’s `Portfolio.js` to this order (ids must match hash routes):
+Wire `SECTIONS_CONFIG` in [`src/v3/containers/Portfolio/Portfolio.js`](src/v3/containers/Portfolio/Portfolio.js):
 
 1. `home` — Hero / positioning  
-2. `services` — from `SERVICES`  
-3. `about` — company + story; can lean on `COMPANY_INFO`  
-4. `skills` — from `SKILLS` (consider grouped display matching parent/child structure)  
-5. `experience` — from `EXPERIENCES`  
-6. `projects` — from `COMPANIES` / project list  
-7. `testimonials` — from `TESTIMONIALS`  
-8. `contact` — form + `COMPANY_INFO.contact`
+2. `about` — Bio, stats, skill tags  
+3. `skills` — from `SKILLS`  
+4. `experience` — from `EXPERIENCES`  
+5. `projects` — from `COMPANIES` (incl. Side Projects filter)  
+6. `contact` — message form → `mapping.contact`  
+7. `quote` — project brief form → `mapping.quotation`
 
-Each entry: `{ id, component, title }` where **`id`** is the URL hash fragment (e.g. `services` → `#services`).
+Each entry: `{ id, component, title }` where **`id`** is the URL hash fragment (e.g. `quote` → `#quote`).
+
+Long project copy: [`src/v3/data/projectDetails.js`](src/v3/data/projectDetails.js) — **short** for side projects, **long** for client work.
 
 ## Optional V3-only config
 

@@ -1,0 +1,42 @@
+---
+description: Repo map and pointers — portfolio V3, Firebase, OnlineJobs tooling (always read for orientation)
+alwaysApply: true
+---
+
+# Project overview
+
+**Repo:** `carlxaeron.github.io` · **Site:** [carlmanuel.com](https://carlmanuel.com) · **Version:** `package.json`
+
+## Read first
+
+- **History & current state:** [docs/project-history.md](../../docs/project-history.md)
+- **Agent workflows:** [AGENTS.md](../../AGENTS.md)
+
+## Three subsystems
+
+| Subsystem | Path | Deploy |
+|-----------|------|--------|
+| Portfolio V3 | `src/v3/` | GitHub Pages (`docs/`) |
+| Firebase backend | `functions/` | `cd functions && npm run deploy` |
+| Job applications | `OnlineJobs-MCP-Server/`, `job-applications/` | Local only |
+
+## Portfolio sections (7)
+
+`home` → `about` → `skills` → `experience` → `projects` → `contact` → `quote`
+
+Config: `src/v3/containers/Portfolio/Portfolio.js` · Content: `src/external-config.js`
+
+## Skills by task
+
+| Task | Skill |
+|------|--------|
+| Deploy / release | `.cursor/skills/deploy-portfolio/` |
+| Contact / quote / email | `.cursor/skills/firebase-backend/` |
+| OnlineJobs search & apply | `.cursor/skills/onlinejobs-apify/` |
+
+## Hard rules
+
+- Do **not** edit plan files in `.cursor/plans/`
+- Do **not** commit `job-applications/`, `exports/`, `.env` secrets
+- Side project copy: **short**; client projects: **long** case studies
+- Never mention **Tahanan** in OnlineJobs `submission.txt`

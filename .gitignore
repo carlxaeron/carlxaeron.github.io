@@ -35,5 +35,6 @@ OnlineJobs-MCP-Server/.env
 OnlineJobs-MCP-Server/google_drive_credentials.json
 
 job-applications/
+exports/
 OnlineJobs-MCP-Server/dashboard-ui/node_modules/
 OnlineJobs-MCP-Server/dashboard-ui/dist/

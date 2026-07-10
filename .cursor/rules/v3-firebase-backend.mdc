@@ -1,0 +1,54 @@
+---
+description: Firebase Functions, Firestore forms, email, and API mapping for portfolio backend
+globs:
+  - functions/**
+  - src/mapping.js
+  - extensions/**
+  - firebase.json
+  - firestore.rules
+  - firestore.indexes.json
+alwaysApply: false
+---
+
+# Firebase backend
+
+Skill: [`.cursor/skills/firebase-backend/SKILL.md`](../skills/firebase-backend/SKILL.md)
+
+## Functions (`functions/index.js`)
+
+| Export | Collection | Email |
+|--------|------------|-------|
+| `contact` | `contact` | Yes |
+| `quotation` | `quotations` | Yes |
+| `assistant` | — | OpenAI proxy |
+| `license` | — | Client WHMCS |
+
+## Email path
+
+1. Save to Firestore → 2. `mail` collection doc → 3. Trigger Email extension → 4. optional direct SMTP
+
+Recipients: `info@carlmanuel.com`, `carllouismanuel09@gmail.com`
+
+**SMTP:** Gmail App Password only — `smtps://user:APP_PASSWORD@smtp.gmail.com:465` in `functions/.env` and extension config.
+
+## `src/mapping.js`
+
+Add prod + dev emulator URLs for every new HTTPS function. After deploy, verify prod URL from `firebase deploy` output.
+
+## Deploy
+
+```bash
+cd functions && npm run deploy
+```
+
+Syncs `src/external-config.js` into `functions/` automatically.
+
+## CORS (`applyCorsHeaders` / per-function origins)
+
+Must include: `carlmanuel.com`, `www.carlmanuel.com`, `carlxaeron.github.io`, `localhost:3000`.
+
+## Do not
+
+- Commit `functions/.env` or extension `*.env` with secrets
+- Leave temporary admin/export endpoints deployed without auth
+- Use Gmail login password in SMTP URI (requires App Password)

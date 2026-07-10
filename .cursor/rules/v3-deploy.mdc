@@ -26,8 +26,9 @@ Do **not** edit plan files. For UI/data conventions see [`v3-design-system.mdc`]
 | GitHub Pages | [`.github/workflows/static.yml`](.github/workflows/static.yml) on push to `main` |
 | Custom domain | [`public/CNAME`](public/CNAME) → `carlmanuel.com` (copied into `docs/` on build) |
 | Redirect | `carlxaeron.github.io` → `carlmanuel.com` |
-| Contact API | [`src/mapping.js`](src/mapping.js) → Firebase Cloud Functions |
+| Contact API | [`src/mapping.js`](src/mapping.js) → `contact`, `quotation`, `assistant` |
 | CORS origins | [`functions/index.js`](functions/index.js) — must include `carlmanuel.com` / `www` |
+| Email | Trigger Email extension + SMTP in `functions/.env` (Gmail App Password) |
 
 ## Pre-push checklist
 
@@ -75,7 +76,7 @@ Deploy copies `src/external-config.js` into `functions/` then runs `firebase dep
 
 ## Post-deploy verification
 
-- `https://carlmanuel.com` — V3 loads, sections/hash nav work, contact form submits
+- `https://carlmanuel.com` — V3 loads, sections/hash nav work, contact + quote forms submit, email received
 - `https://carlxaeron.github.io` — redirects to custom domain
 - Chrome DevTools MCP or `curl -I` for status/redirect headers
 
