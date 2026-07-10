@@ -50,6 +50,7 @@ function PreviewShowcase({ previewUrl, host, label }) {
                   src={previewUrl}
                   className="v3-preview-iframe v3-preview-iframe--desktop"
                   sandbox={IFRAME_SANDBOX}
+                  scrolling="yes"
                   onError={() => setDesktopBlocked(true)}
                 />
               </div>
@@ -67,6 +68,7 @@ function PreviewShowcase({ previewUrl, host, label }) {
                 src={previewUrl}
                 className="v3-preview-iframe v3-preview-iframe--mobile"
                 sandbox={IFRAME_SANDBOX}
+                scrolling="yes"
                 loading="lazy"
                 onError={() => setMobileBlocked(true)}
               />

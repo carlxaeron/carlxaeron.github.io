@@ -124,6 +124,39 @@ After the site is built and `previewUrl` is known, customize the three draft fil
 
 Follow [deploy-portfolio/SKILL.md](../deploy-portfolio/SKILL.md) — bump version, CHANGELOG, push.
 
+## Step 7 — Post-deploy browser QA (required)
+
+After Netlify deploy **and** portfolio push (if whitelist changed), verify UI in a real browser before sharing outreach drafts.
+
+**Preview URL:** `https://carlmanuel.com/?preview={previewHost}`
+
+```
+Browser QA checklist:
+- [ ] Preview page loads (title, hostname, Back to portfolio)
+- [ ] Desktop mockup: site visible, header/hero readable, iframe scrolls
+- [ ] Mobile mockup: logo not cramped, CTA visible, iframe scrolls
+- [ ] Direct URL returns 403 (embed-only)
+- [ ] No broken images or layout overflow at ~256px (phone iframe width)
+```
+
+**How to verify:**
+
+1. Open the portfolio preview link in Chrome (or Chrome DevTools MCP / browser screenshot).
+2. Scroll inside desktop and mobile iframes — confirm products, contact, footer render.
+3. Resize or emulate mobile (~390px) on the preview page — devices stack vertically.
+4. Optional CLI checks:
+
+```bash
+curl -sI "https://{previewHost}" | head -1                    # expect 403
+curl -sI -H "Sec-Fetch-Dest: iframe" \
+  -H "Referer: https://carlmanuel.com/?preview={previewHost}" \
+  "https://{previewHost}" | head -1                           # expect 200
+```
+
+**Fix loop:** if mobile header/hero breaks in the phone mockup (~256px inner width), tighten `styles.css` (`@media max-width: 480px`), redeploy Netlify, re-check preview.
+
+**Do not commit:** `.qa/` screenshots or local `qa-iframe.html` — dev-only.
+
 ## Rules
 
 - Whitelist-only preview hosts (no arbitrary domains).

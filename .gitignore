@@ -40,3 +40,6 @@ OnlineJobs-MCP-Server/dashboard-ui/node_modules/
 OnlineJobs-MCP-Server/dashboard-ui/dist/
 # Local Netlify folder
 .netlify
+
+# Client site local QA screenshots (dev only)
+client-sites/**/.qa/

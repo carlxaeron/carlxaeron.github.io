@@ -37,6 +37,10 @@ Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-net
 
 Pull package/price/contact from `client.json`. Present drafts to user for review — never auto-send.
 
+## Post-deploy browser QA
+
+After deploy, open `https://carlmanuel.com/?preview={hostname}` and verify desktop + mobile mockups (scroll iframes, check header/hero at narrow width). Fix client `styles.css` and redeploy if layout breaks. See skill Step 7.
+
 ## Content guidelines
 
 - Mobile-first, fast load (sales demo on phone matters).
