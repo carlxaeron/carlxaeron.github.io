@@ -122,6 +122,7 @@ CORS: `carlmanuel.com`, `www.carlmanuel.com`, `carlxaeron.github.io`, `localhost
 | Client template | `client-sites/_template/` |
 | Sample demo | `client-sites/quotation/` (Bamboo Grove Café) |
 | Embed security | `embed-guard.js` + `netlify/edge-functions/embed-only.js` |
+| Outreach drafts | `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt` |
 | Cursor skill | `.cursor/skills/client-site-netlify/SKILL.md` |
 
 **Preview URL:** `https://carlmanuel.com/?preview=bamboo-grove-cafe.netlify.app`

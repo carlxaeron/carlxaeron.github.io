@@ -26,6 +26,7 @@ alwaysApply: true
 - **Default:** 7-section slide deck (`home` … `quote`)
 - **Preview:** `?preview=host.netlify.app` → device showcase (desktop + mobile iframes, no live-site link)
 - **Client demos:** embed-only on Netlify — direct URL blocked; view via portfolio preview only
+- **Outreach:** each `client-sites/{slug}/` includes draft email, SMS, and messenger quotations
 
 `home` → `about` → `skills` → `experience` → `projects` → `contact` → `quote`
 

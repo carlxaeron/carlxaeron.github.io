@@ -1,0 +1,17 @@
+Hi {{contactName}}! 👋
+
+I'm Carl Louis Manuel, web developer. I put together a **sample website** for {{businessName}} so you can see how it looks on phone and desktop before deciding.
+
+🔗 Preview: {{previewUrl}}
+
+📦 {{packageName}}
+• {{packageScope}}
+• Timeline: {{timeline}}
+• Investment: {{quotedAmount}} ({{paymentTerms}})
+
+Open the link when you have a minute — it's a demo layout we can customize with your photos, menu/services, and colors.
+
+Let me know what you think or if you want a quick call. Salamat!
+
+— Carl
+carlmanuel.com | info@carlmanuel.com

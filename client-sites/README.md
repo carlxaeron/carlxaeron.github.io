@@ -13,7 +13,12 @@ client-sites/
     index.html
     styles.css
     netlify.toml
-    client.json
+    client.json       # business, contact, quotation package, preview URL
+    quotation-email.md
+    quotation-sms.txt
+    quotation-messenger.txt
+    embed-guard.js
+    netlify/edge-functions/embed-only.js
 ```
 
 ## client.json schema
@@ -24,15 +29,34 @@ client-sites/
   "slug": "business-slug",
   "previewHost": "business-slug.netlify.app",
   "industry": "Restaurant | Salon | Clinic | …",
-  "deployedAt": "2026-07-10T00:00:00.000Z"
+  "deployedAt": "2026-07-10T00:00:00.000Z",
+  "contact": {
+    "name": "Client Name",
+    "email": "client@example.com",
+    "phone": "+63 900 000 0000"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive site, contact section, basic SEO",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront, 50% on delivery",
+    "timeline": "5–7 business days",
+    "previewUrl": "https://carlmanuel.com/?preview=business-slug.netlify.app"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt"
+  }
 }
 ```
 
 After deploy:
 
-1. Set `previewHost` to the live Netlify URL hostname.
-2. Add entry to `src/v3/config/previewWhitelist.js` (`PREVIEW_SITES`).
-3. Share portfolio preview link with the prospect.
+1. Set `previewHost` and `quotation.previewUrl` to the live preview link.
+2. Customize `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`.
+3. Add entry to `src/v3/config/previewWhitelist.js` (`PREVIEW_SITES`).
+4. Share preview link + drafts with the prospect (user approves before send).
 
 ## New client workflow
 

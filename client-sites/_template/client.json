@@ -3,5 +3,23 @@
   "slug": "your-slug",
   "previewHost": "your-slug.netlify.app",
   "industry": "Local business",
-  "deployedAt": null
+  "deployedAt": null,
+  "contact": {
+    "name": "Client Name",
+    "email": "client@example.com",
+    "phone": "+63 900 000 0000"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive site, contact section, basic SEO, Netlify hosting setup",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront, 50% on delivery",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=your-slug.netlify.app"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt"
+  }
 }

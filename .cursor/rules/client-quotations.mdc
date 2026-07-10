@@ -21,16 +21,28 @@ Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-net
 ## New client folder
 
 1. Copy `client-sites/_template/` → `client-sites/{slug}/`
-2. Customize `index.html`, `styles.css`, `client.json`
+2. Customize `index.html`, `styles.css`, `client.json` (`contact` + `quotation` blocks)
 3. Keep `embed-guard.js`, `netlify/edge-functions/embed-only.js`, and `netlify.toml` security headers
-4. Deploy to Netlify; set `previewHost` and `deployedAt` in `client.json`
-5. Register in `PREVIEW_SITES`
+4. Deploy to Netlify; set `previewHost`, `deployedAt`, and `quotation.previewUrl` in `client.json`
+5. Write outreach drafts: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`
+6. Register in `PREVIEW_SITES`
+
+## Outreach drafts (required per client)
+
+| File | Use |
+|------|-----|
+| `quotation-email.md` | Formal email with subject, package table, preview link |
+| `quotation-sms.txt` | Short SMS (~300 chars) |
+| `quotation-messenger.txt` | FB Messenger, Viber, Telegram |
+
+Pull package/price/contact from `client.json`. Present drafts to user for review — never auto-send.
 
 ## Content guidelines
 
 - Mobile-first, fast load (sales demo on phone matters).
 - Philippine/local business context OK (₱, Metro Manila, etc.).
 - Fictitious demo businesses: label clearly (see `quotation/` sample).
+- Outreach drafts: warm professional tone; ₱ pricing; Carl Louis Manuel sign-off.
 - Match V3 greens for template consistency unless client has brand colors.
 
 ## Security
@@ -48,5 +60,6 @@ Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-net
 
 - Commit Netlify auth tokens or `.netlify/` link state (gitignored)
 - Remove or bypass embed-only guards without user approval
-- Add real client PII without user approval
+- Add real client PII without user approval (use placeholders in demos)
+- Auto-send quotation email/SMS/messenger — drafts only until user approves
 - Auto-add every client to public portfolio projects without user sign-off

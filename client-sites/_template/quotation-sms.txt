@@ -1,0 +1,5 @@
+Hi {{contactName}}! Carl here — I made a sample website preview for {{businessName}} (desktop + mobile view):
+
+{{previewUrl}}
+
+Package: {{packageName}} — {{quotedAmount}}. Reply if you'd like changes or to proceed. Thanks!

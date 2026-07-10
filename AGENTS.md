@@ -24,7 +24,7 @@ Instructions for AI agents working in this repository.
 | [.cursor/skills/deploy-portfolio/SKILL.md](.cursor/skills/deploy-portfolio/SKILL.md) | Deploy, release, tag, verify carlmanuel.com, CI failures |
 | [.cursor/skills/onlinejobs-apify/SKILL.md](.cursor/skills/onlinejobs-apify/SKILL.md) | OnlineJobs.ph search, apply, CV, dashboard |
 | [.cursor/skills/firebase-backend/SKILL.md](.cursor/skills/firebase-backend/SKILL.md) | Contact/quote forms, email, Firestore, functions deploy |
-| [.cursor/skills/client-site-netlify/SKILL.md](.cursor/skills/client-site-netlify/SKILL.md) | Local business sites, Netlify deploy, portfolio `?preview=` links |
+| [.cursor/skills/client-site-netlify/SKILL.md](.cursor/skills/client-site-netlify/SKILL.md) | Local business sites, Netlify deploy, portfolio `?preview=` links, quotation email/SMS drafts |
 
 ## Rules (auto-attached by glob)
 
@@ -73,9 +73,11 @@ Instructions for AI agents working in this repository.
 ### Client site + Netlify preview
 1. Copy `client-sites/_template/` → `client-sites/{slug}/`
 2. Customize HTML/CSS; **keep** `embed-guard.js` + edge `embed-only` + CSP headers
-3. Deploy via Netlify MCP or CLI (`netlify.toml`: `command = ""`)
-4. Add host to `src/v3/config/previewWhitelist.js`; update `client.json`
-5. Share `https://carlmanuel.com/?preview={host}` (embed-only — direct Netlify URL returns 403)
+3. Fill `client.json` (`contact`, `quotation` package/price/timeline)
+4. Deploy via Netlify MCP or CLI (`netlify.toml`: `command = ""`)
+5. Add host to `src/v3/config/previewWhitelist.js`; update `client.json`
+6. Draft outreach: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`
+7. Share preview `https://carlmanuel.com/?preview={host}` + drafts for user review (embed-only — direct Netlify URL returns 403)
 
 ## MCP servers
 
