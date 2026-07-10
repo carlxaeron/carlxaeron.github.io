@@ -7,7 +7,7 @@ const DESKTOP_VIEWPORT = { width: 1280, height: 800 };
 function PreviewShowcase({ previewUrl, host, label }) {
   const [desktopBlocked, setDesktopBlocked] = useState(false);
   const [mobileBlocked, setMobileBlocked] = useState(false);
-  const [desktopScale, setDesktopScale] = useState(1);
+  const [desktopScale, setDesktopScale] = useState(0.25);
   const bezelRef = useRef(null);
 
   const displayLabel = label || host;
@@ -81,24 +81,29 @@ function PreviewShowcase({ previewUrl, host, label }) {
                 <div
                   className="v3-preview-iframe-scaler"
                   style={{
-                    width: DESKTOP_VIEWPORT.width * desktopScale,
-                    height: DESKTOP_VIEWPORT.height * desktopScale,
+                    width: Math.round(DESKTOP_VIEWPORT.width * desktopScale),
+                    height: Math.round(DESKTOP_VIEWPORT.height * desktopScale),
                   }}
                 >
-                  <iframe
-                    title={`Desktop preview of ${displayLabel}`}
-                    src={previewUrl}
-                    className="v3-preview-iframe v3-preview-iframe--desktop"
-                    sandbox={IFRAME_SANDBOX}
-                    scrolling="yes"
-                    width={DESKTOP_VIEWPORT.width}
-                    height={DESKTOP_VIEWPORT.height}
+                  <div
+                    className="v3-preview-iframe-scaler__inner"
                     style={{
+                      width: DESKTOP_VIEWPORT.width,
+                      height: DESKTOP_VIEWPORT.height,
                       transform: `scale(${desktopScale})`,
-                      transformOrigin: "top left",
                     }}
-                    onError={() => setDesktopBlocked(true)}
-                  />
+                  >
+                    <iframe
+                      title={`Desktop preview of ${displayLabel}`}
+                      src={previewUrl}
+                      className="v3-preview-iframe v3-preview-iframe--desktop"
+                      sandbox={IFRAME_SANDBOX}
+                      scrolling="yes"
+                      width={DESKTOP_VIEWPORT.width}
+                      height={DESKTOP_VIEWPORT.height}
+                      onError={() => setDesktopBlocked(true)}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="v3-preview-monitor__stand" aria-hidden="true" />
