@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.0.17] — 2026-07-10
+
+### Added
+- Portfolio **preview showcase** — `?preview=host.netlify.app` shows desktop monitor + mobile phone mockups with embedded iframes
+- Whitelist-gated preview config (`src/v3/config/previewWhitelist.js`)
+- `client-sites/` monorepo — `_template/` and sample `quotation/` demo (Bamboo Grove Café)
+- Cursor skill `client-site-netlify`, rule `client-quotations.mdc`, Netlify MCP in `.cursor/mcp.json`
+
+### Changed
+- `Index.js` routes to PreviewShowcase when valid `?preview=` query is present
+- AGENTS.md, project-history, README updated for client quotation workflow
+
 ## [3.0.16] — 2026-06-09
 
 ### Added

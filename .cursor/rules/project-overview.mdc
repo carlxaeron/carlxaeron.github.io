@@ -19,12 +19,16 @@ alwaysApply: true
 | Portfolio V3 | `src/v3/` | GitHub Pages (`docs/`) |
 | Firebase backend | `functions/` | `cd functions && npm run deploy` |
 | Job applications | `OnlineJobs-MCP-Server/`, `job-applications/` | Local only |
+| Client quotation sites | `client-sites/` | Netlify per folder |
 
-## Portfolio sections (7)
+## Portfolio modes
+
+- **Default:** 7-section slide deck (`home` … `quote`)
+- **Preview:** `?preview=host.netlify.app` → device showcase (desktop + mobile iframes)
 
 `home` → `about` → `skills` → `experience` → `projects` → `contact` → `quote`
 
-Config: `src/v3/containers/Portfolio/Portfolio.js` · Content: `src/external-config.js`
+Config: `src/v3/containers/Portfolio/Portfolio.js` · Content: `src/external-config.js` · Preview: `src/v3/config/previewWhitelist.js`
 
 ## Skills by task
 
@@ -33,6 +37,7 @@ Config: `src/v3/containers/Portfolio/Portfolio.js` · Content: `src/external-con
 | Deploy / release | `.cursor/skills/deploy-portfolio/` |
 | Contact / quote / email | `.cursor/skills/firebase-backend/` |
 | OnlineJobs search & apply | `.cursor/skills/onlinejobs-apify/` |
+| Client site + Netlify | `.cursor/skills/client-site-netlify/` |
 
 ## Hard rules
 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Your Business Name — local services for your community." />
+  <title>Your Business Name</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="#">Your Business</a>
+      <nav class="nav" aria-label="Main">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="nav__cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero__inner">
+        <p class="eyebrow">Serving your neighborhood</p>
+        <h1>Quality service your customers can trust</h1>
+        <p class="lead">Replace this hero with the client’s value proposition — hours, location, and what makes them different.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#contact">Get a quote</a>
+          <a class="btn btn--ghost" href="tel:+639000000000">Call now</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <h2>Services</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>Service one</h3>
+            <p>Short description of a core offering.</p>
+          </article>
+          <article class="card">
+            <h3>Service two</h3>
+            <p>Short description of a core offering.</p>
+          </article>
+          <article class="card">
+            <h3>Service three</h3>
+            <p>Short description of a core offering.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section section--alt">
+      <div class="container about">
+        <h2>About us</h2>
+        <p>Founded locally, focused on reliable service and fair pricing. Add the owner story, years in business, and service area.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container contact">
+        <h2>Contact</h2>
+        <p>Phone: <a href="tel:+639000000000">+63 900 000 0000</a></p>
+        <p>Email: <a href="mailto:hello@example.com">hello@example.com</a></p>
+        <p>Address: Your street, City, Philippines</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Your Business Name. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

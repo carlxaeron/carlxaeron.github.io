@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bamboo Grove Café — specialty coffee and comfort food in your neighborhood." />
+  <title>Bamboo Grove Café</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="#">Bamboo Grove Café</a>
+      <nav class="nav" aria-label="Main">
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="nav__cta">Visit us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero__inner">
+        <p class="eyebrow">Quezon City · Open daily 7am–9pm</p>
+        <h1>Fresh coffee, honest meals, neighborhood warmth</h1>
+        <p class="lead">A sample quotation site for nearby businesses — swap copy, photos, and colors for each client pitch.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#contact">Book a table</a>
+          <a class="btn btn--ghost" href="tel:+639171234567">Call +63 917 123 4567</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu" class="section">
+      <div class="container">
+        <h2>Popular picks</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>House blend coffee</h3>
+            <p>Single-origin roast, smooth finish. Hot or iced from ₱120.</p>
+          </article>
+          <article class="card">
+            <h3>Bamboo breakfast plate</h3>
+            <p>Eggs, garlic rice, and grilled tomatoes — a local favorite.</p>
+          </article>
+          <article class="card">
+            <h3>Weekend pastry box</h3>
+            <p>Rotating bakes from partner kitchens. Perfect for sharing.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section section--alt">
+      <div class="container about">
+        <h2>Our story</h2>
+        <p>Family-run since 2019, Bamboo Grove is built for freelancers, students, and families who want a calm place to work, eat, and connect. This demo site shows how a simple one-page presence can look on desktop and mobile.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container contact">
+        <h2>Visit & contact</h2>
+        <p>123 Mabini Street, Quezon City, Metro Manila</p>
+        <p>Phone: <a href="tel:+639171234567">+63 917 123 4567</a></p>
+        <p>Email: <a href="mailto:hello@bamboogrove.demo">hello@bamboogrove.demo</a></p>
+        <p class="demo-note">Demo site for web quotation pitches — not a real business.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Bamboo Grove Café (demo). Built by Carl Louis Manuel.</p>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

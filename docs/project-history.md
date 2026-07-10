@@ -1,7 +1,7 @@
 # Project history — carlxaeron.github.io
 
 Living record of what this repository contains, how it evolved, and where things live.  
-**Current version:** `3.0.16` · **Production:** [carlmanuel.com](https://carlmanuel.com)
+**Current version:** `3.0.17` · **Production:** [carlmanuel.com](https://carlmanuel.com)
 
 ---
 
@@ -13,9 +13,10 @@ Living record of what this repository contains, how it evolved, and where things
 | **Backend** | Firebase Cloud Functions + Firestore + Trigger Email extension |
 | **Deploy** | GitHub Pages (`docs/`) via GitHub Actions; custom domain `carlmanuel.com` |
 | **Job tooling** | OnlineJobs.ph MCP server, local dashboard, CV generator, `job-applications/` |
+| **Client demos** | `client-sites/` — static sites deployed to Netlify; portfolio preview via `?preview=` |
 | **AI in product** | Portfolio chat assistant (OpenAI), AI-first marketing copy |
 
-**Not in this repo:** Tahanan app codebase, ME-ONE Foundation admin, Netlify hosting (portfolio uses GitHub Pages).
+**Not in this repo:** Tahanan app codebase, ME-ONE Foundation admin. Portfolio uses GitHub Pages; client demo sites use Netlify.
 
 ---
 
@@ -32,7 +33,7 @@ Living record of what this repository contains, how it evolved, and where things
 | 7 | `quote` | Get a Quote | Project brief form → Firebase (v3.0.16) |
 
 **Navigation:** hash routes (`#about`, `#quote`), nav dots, hamburger, keyboard, swipe.  
-**Entry:** `src/pages/Index.js` → `src/v3/containers/Portfolio/Portfolio.js`.
+**Entry:** `src/pages/Index.js` → Portfolio or `?preview=host` → PreviewShowcase.
 
 ---
 
@@ -112,6 +113,22 @@ CORS: `carlmanuel.com`, `www.carlmanuel.com`, `carlxaeron.github.io`, `localhost
 
 ---
 
+## Client sites + preview showcase (v3.0.17)
+
+| Piece | Location |
+|-------|----------|
+| Preview whitelist | `src/v3/config/previewWhitelist.js` |
+| Showcase UI | `src/v3/containers/PreviewShowcase/` |
+| Client template | `client-sites/_template/` |
+| Sample demo | `client-sites/quotation/` (Bamboo Grove Café) |
+| Cursor skill | `.cursor/skills/client-site-netlify/SKILL.md` |
+
+**Preview URL:** `https://carlmanuel.com/?preview=quotation.netlify.app` (after Netlify deploy).
+
+Hosts must match `*.netlify.app` or explicit `PREVIEW_SITES` list.
+
+---
+
 ## Deploy pipeline
 
 ```text
@@ -125,6 +142,11 @@ Tag releases: `v3.0.x` · Update `CHANGELOG.md` + `package.json`.
 ---
 
 ## Version timeline (major)
+
+### v3.0.17 — 2026-07-10
+- Preview showcase page (`?preview=`) with desktop + mobile device mockups
+- `client-sites/` monorepo with `_template/` and `quotation/` demo
+- Cursor skill `client-site-netlify`, rule `client-quotations.mdc`, Netlify MCP
 
 ### v3.0.16 — 2026-06-09
 - Get a Quote section + `quotation` Cloud Function
@@ -154,9 +176,9 @@ Tag releases: `v3.0.x` · Update `CHANGELOG.md` + `package.json`.
 | Asset | Path |
 |-------|------|
 | Agent guide | `AGENTS.md` |
-| Skills | `.cursor/skills/` — deploy-portfolio, onlinejobs-apify, firebase-backend |
-| Rules | `.cursor/rules/` — V3 design, deploy, content, OnlineJobs, Firebase |
-| MCP (project) | `.cursor/mcp.json` — `onlinejobs-apify` |
+| Skills | `.cursor/skills/` — deploy-portfolio, onlinejobs-apify, firebase-backend, client-site-netlify |
+| Rules | `.cursor/rules/` — V3 design, deploy, content, OnlineJobs, Firebase, client-quotations |
+| MCP (project) | `.cursor/mcp.json` — `onlinejobs-apify`, `netlify` |
 
 ---
 

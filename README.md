@@ -39,6 +39,7 @@ Full pipeline for **OnlineJobs.ph** remote job search, tailored CVs, apply track
 | Run job dashboard | `cd OnlineJobs-MCP-Server && uv run job-dashboard` |
 | Job workflow guide | [docs/job-applications-workflow.md](docs/job-applications-workflow.md) |
 | Project history | [docs/project-history.md](docs/project-history.md) |
+| Client sites | [client-sites/README.md](client-sites/README.md) |
 | Agent guide | [AGENTS.md](AGENTS.md) |
 | MCP + env setup | [OnlineJobs-MCP-Server/README.md](OnlineJobs-MCP-Server/README.md) |
 | Deploy portfolio | [.cursor/skills/deploy-portfolio/SKILL.md](.cursor/skills/deploy-portfolio/SKILL.md) |
@@ -51,10 +52,11 @@ Full pipeline for **OnlineJobs.ph** remote job search, tailored CVs, apply track
 src/v3/                    # Portfolio V3 (active UI)
 OnlineJobs-MCP-Server/     # MCP server + FastAPI dashboard + dashboard-ui/
 Office-Word-MCP-Server/    # CV Word doc generator (Canva-style)
+client-sites/              # Netlify client quotation demos
 job-applications/          # Generated apply folders (gitignored)
 docs/                      # GitHub Pages build + workflow docs
 functions/                 # Firebase Cloud Functions (contact, chat)
-.cursor/skills/            # Cursor agent skills (deploy, onlinejobs, firebase-backend)
+.cursor/skills/            # Cursor agent skills (deploy, onlinejobs, firebase, client-site-netlify)
 .cursor/rules/             # Agent rules (v3 design, deploy, firebase, onlinejobs)
 AGENTS.md                  # Agent entry point
 docs/project-history.md    # What the repo has now + version timeline

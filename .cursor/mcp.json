@@ -11,6 +11,10 @@
       "env": {
         "APIFY_API_TOKEN": ""
       }
+    },
+    "netlify": {
+      "command": "npx",
+      "args": ["-y", "@netlify/mcp"]
     }
   }
 }

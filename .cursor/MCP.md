@@ -1,26 +1,29 @@
-# MCP configuration notes
+# MCP configuration
 
 ## Project MCP (`.cursor/mcp.json`)
 
 | Server | Purpose |
 |--------|---------|
 | `onlinejobs-apify` | OnlineJobs.ph search, apply, CV upload |
+| `netlify` | Create/deploy client sites under `client-sites/` |
 
-Set `APIFY_API_TOKEN` in Cursor MCP env. Restart Cursor after changes.
+Set `APIFY_API_TOKEN` in Cursor MCP env for onlinejobs. Restart Cursor after changes.
 
-## Optional user-level MCP
+## Netlify MCP
 
-**Netlify** — not used for portfolio deploy (GitHub Pages + Firebase). Install in Cursor user settings if deploying other projects:
+Required for [client-site-netlify skill](skills/client-site-netlify/SKILL.md).
 
 ```json
-{
-  "mcpServers": {
-    "netlify": {
-      "command": "npx",
-      "args": ["-y", "@netlify/mcp"]
-    }
-  }
+"netlify": {
+  "command": "npx",
+  "args": ["-y", "@netlify/mcp"]
 }
 ```
 
-Requires Node.js 22+ and Netlify account auth on first use.
+- Node.js **22+**
+- Netlify account — authenticate on first tool use
+- Portfolio itself deploys via **GitHub Pages**, not Netlify
+
+## onlinejobs-apify
+
+See [OnlineJobs-MCP-Server/README.md](../OnlineJobs-MCP-Server/README.md).

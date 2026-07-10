@@ -24,6 +24,7 @@ Instructions for AI agents working in this repository.
 | [.cursor/skills/deploy-portfolio/SKILL.md](.cursor/skills/deploy-portfolio/SKILL.md) | Deploy, release, tag, verify carlmanuel.com, CI failures |
 | [.cursor/skills/onlinejobs-apify/SKILL.md](.cursor/skills/onlinejobs-apify/SKILL.md) | OnlineJobs.ph search, apply, CV, dashboard |
 | [.cursor/skills/firebase-backend/SKILL.md](.cursor/skills/firebase-backend/SKILL.md) | Contact/quote forms, email, Firestore, functions deploy |
+| [.cursor/skills/client-site-netlify/SKILL.md](.cursor/skills/client-site-netlify/SKILL.md) | Local business sites, Netlify deploy, portfolio `?preview=` links |
 
 ## Rules (auto-attached by glob)
 
@@ -36,6 +37,7 @@ Instructions for AI agents working in this repository.
 | `v3-deploy.mdc` | Build, GitHub Pages, releases |
 | `v3-firebase-backend.mdc` | `functions/`, `mapping.js`, email |
 | `onlinejobs-workflow.mdc` | OJP MCP, job-applications |
+| `client-quotations.mdc` | `client-sites/`, Netlify previews |
 | `project-overview.mdc` | Always-on repo map |
 
 ## Common tasks
@@ -68,12 +70,18 @@ Instructions for AI agents working in this repository.
 2. `create_job_application` → folder in `job-applications/`
 3. Never mention Tahanan in `submission.txt`
 
+### Client site + Netlify preview
+1. Copy `client-sites/_template/` → `client-sites/{slug}/`
+2. Customize HTML/CSS; deploy via Netlify MCP or CLI
+3. Add host to `src/v3/config/previewWhitelist.js`
+4. Share `https://carlmanuel.com/?preview={host}`
+
 ## MCP servers
 
 | Server | Config | Purpose |
 |--------|--------|---------|
 | `onlinejobs-apify` | `.cursor/mcp.json` | Job search & apply |
-| Netlify (optional) | User Cursor settings | Not used for this portfolio deploy |
+| `netlify` | `.cursor/mcp.json` | Client site deploy (required for client-site-netlify skill) |
 
 ## Tests
 

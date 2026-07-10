@@ -1,0 +1,44 @@
+---
+description: Client quotation websites — client-sites/, Netlify deploy, portfolio ?preview= showcase
+globs:
+  - client-sites/**
+  - src/v3/config/previewWhitelist.js
+  - src/v3/containers/PreviewShowcase/**
+alwaysApply: false
+---
+
+# Client quotation sites
+
+Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-netlify/SKILL.md)
+
+## Preview showcase
+
+- URL: `https://carlmanuel.com/?preview={hostname}`
+- Whitelist: `*.netlify.app` OR explicit `PREVIEW_SITES` in [`previewWhitelist.js`](../../src/v3/config/previewWhitelist.js)
+- Component: [`PreviewShowcase.js`](../../src/v3/containers/PreviewShowcase/PreviewShowcase.js)
+
+## New client folder
+
+1. Copy `client-sites/_template/` → `client-sites/{slug}/`
+2. Customize `index.html`, `styles.css`, `client.json`
+3. Deploy to Netlify; set `previewHost`
+4. Register in `PREVIEW_SITES`
+
+## Content guidelines
+
+- Mobile-first, fast load (sales demo on phone matters).
+- Philippine/local business context OK (₱, Metro Manila, etc.).
+- Fictitious demo businesses: label clearly (see `quotation/` sample).
+- Match V3 greens for template consistency unless client has brand colors.
+
+## Security
+
+- Never iframe non-whitelisted domains.
+- No API keys in `client-sites/` commits.
+- `X-Frame-Options: SAMEORIGIN` on client sites (allows same-origin; Netlify subdomains work for portfolio parent).
+
+## Do not
+
+- Commit Netlify auth tokens
+- Add real client PII without user approval
+- Auto-add every client to public portfolio projects without user sign-off
