@@ -21,8 +21,8 @@ Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-net
 ## New client folder
 
 1. Copy `client-sites/_template/` → `client-sites/{slug}/`
-2. Customize `index.html`, `styles.css`, `client.json` (`contact` + `quotation` blocks)
-3. Keep `embed-guard.js`, `netlify/edge-functions/embed-only.js`, and `netlify.toml` security headers
+2. Customize `index.html` (Tailwind utilities), `styles.css` (hero/reveal only), `client.json`
+3. Keep `site.js`, `embed-guard.js`, `netlify/edge-functions/embed-only.js`, and `netlify.toml` security headers
 4. Deploy to Netlify; set `previewHost`, `deployedAt`, and `quotation.previewUrl` in `client.json`
 5. Write outreach drafts: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`
 6. Register in `PREVIEW_SITES`
@@ -44,6 +44,7 @@ After deploy, open `https://carlmanuel.com/?preview={hostname}` and verify deskt
 ## Content guidelines
 
 - Mobile-first, fast load (sales demo on phone matters).
+- **Tailwind CDN + `site.js`** for interactive demos (mobile nav, accordions, tabs/filters, scroll reveal).
 - Philippine/local business context OK (₱, Metro Manila, etc.).
 - Fictitious demo businesses: label clearly (see `quotation/` sample).
 - Outreach drafts: warm professional tone; ₱ pricing; Carl Louis Manuel sign-off.

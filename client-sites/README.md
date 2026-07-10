@@ -10,8 +10,9 @@ Static business websites for local quotation / sales demos. Each folder deploys 
 client-sites/
   _template/          # Copy for new clients
   {slug}/             # One folder per business
-    index.html
-    styles.css
+    index.html        # Tailwind CDN utilities (primary layout)
+    styles.css        # Hero bg, reveal animations (supplemental)
+    site.js           # Mobile nav, accordions, tabs, scroll reveal
     netlify.toml
     client.json       # business, contact, quotation package, preview URL
     quotation-email.md
@@ -62,7 +63,7 @@ After deploy:
 
 ```bash
 cp -R client-sites/_template client-sites/my-client
-# Edit index.html, styles.css, client.json
+# Edit index.html (Tailwind), styles.css, site.js, client.json
 cd client-sites/my-client
 npx netlify deploy --prod   # or use Netlify MCP from Cursor
 ```

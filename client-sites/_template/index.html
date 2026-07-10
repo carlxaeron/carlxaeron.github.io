@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,78 +8,116 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: "#00473e",
+              mid: "#1e3932",
+              accent: "#00a862",
+              light: "#d4e9e2",
+              gold: "#cba258",
+            },
+          },
+          fontFamily: {
+            display: ["Playfair Display", "Georgia", "serif"],
+            sans: ["Inter", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
   <link rel="stylesheet" href="styles.css" />
   <script src="embed-guard.js"></script>
 </head>
-<body>
-  <header class="site-header">
-    <div class="container site-header__inner">
-      <a class="logo" href="#">Your Business</a>
-      <nav class="nav" aria-label="Main">
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#contact" class="nav__cta">Contact</a>
+<body class="font-sans text-gray-900 antialiased">
+  <header data-header class="sticky top-0 z-50 border-b border-brand-dark/10 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#" class="font-display text-lg font-bold text-brand-dark">Your Business</a>
+      <nav class="hidden items-center gap-6 text-sm font-medium text-brand-mid md:flex" aria-label="Main">
+        <a href="#services" class="hover:text-brand-accent transition-colors">Services</a>
+        <a href="#faq" class="hover:text-brand-accent transition-colors">FAQ</a>
+        <a href="#contact" class="rounded-full bg-brand-accent px-4 py-2 text-white hover:brightness-105 transition">Contact</a>
       </nav>
+      <button type="button" data-nav-toggle class="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-brand-dark/15 text-brand-dark md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="hidden flex-col border-t border-brand-dark/10 bg-white px-4 py-4 md:hidden" role="dialog" aria-label="Mobile navigation">
+      <a href="#services" class="rounded-lg px-3 py-3 text-brand-mid hover:bg-brand-light">Services</a>
+      <a href="#faq" class="rounded-lg px-3 py-3 text-brand-mid hover:bg-brand-light">FAQ</a>
+      <a href="#contact" class="mt-2 rounded-full bg-brand-accent px-4 py-3 text-center font-semibold text-white">Contact</a>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="container hero__inner">
-        <p class="eyebrow">Serving your neighborhood</p>
-        <h1>Quality service your customers can trust</h1>
-        <p class="lead">Replace this hero with the client’s value proposition — hours, location, and what makes them different.</p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="#contact">Get a quote</a>
-          <a class="btn btn--ghost" href="tel:+639000000000">Call now</a>
+    <section class="relative overflow-hidden bg-brand-dark text-white">
+      <div class="hero-bg absolute inset-0 opacity-30" style="background-image: linear-gradient(135deg, #00473e, #1e3932);"></div>
+      <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+        <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-brand-gold" data-reveal>Serving your neighborhood</p>
+        <h1 class="font-display max-w-2xl text-4xl font-bold leading-tight sm:text-5xl" data-reveal>Quality service your customers can trust</h1>
+        <p class="mt-5 max-w-xl text-lg text-brand-light/90" data-reveal>Replace this hero with the client's value proposition — hours, location, and what makes them different.</p>
+        <div class="mt-8 flex flex-wrap gap-3" data-reveal>
+          <a href="#contact" class="rounded-full bg-brand-accent px-6 py-3 font-semibold text-white hover:brightness-105 transition">Get a quote</a>
+          <a href="tel:+639000000000" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Call now</a>
         </div>
       </div>
     </section>
 
-    <section id="services" class="section">
-      <div class="container">
-        <h2>Services</h2>
-        <div class="cards">
-          <article class="card">
-            <h3>Service one</h3>
-            <p>Short description of a core offering.</p>
+    <section id="services" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Services</h2>
+        <div class="mt-10 grid gap-6 sm:grid-cols-3">
+          <article data-reveal class="rounded-2xl border border-brand-dark/10 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <h3 class="font-semibold text-brand-mid">Service one</h3>
+            <p class="mt-2 text-sm text-gray-600">Short description of a core offering.</p>
           </article>
-          <article class="card">
-            <h3>Service two</h3>
-            <p>Short description of a core offering.</p>
+          <article data-reveal class="rounded-2xl border border-brand-dark/10 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <h3 class="font-semibold text-brand-mid">Service two</h3>
+            <p class="mt-2 text-sm text-gray-600">Short description of a core offering.</p>
           </article>
-          <article class="card">
-            <h3>Service three</h3>
-            <p>Short description of a core offering.</p>
+          <article data-reveal class="rounded-2xl border border-brand-dark/10 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <h3 class="font-semibold text-brand-mid">Service three</h3>
+            <p class="mt-2 text-sm text-gray-600">Short description of a core offering.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="about" class="section section--alt">
-      <div class="container about">
-        <h2>About us</h2>
-        <p>Founded locally, focused on reliable service and fair pricing. Add the owner story, years in business, and service area.</p>
+    <section id="faq" class="bg-brand-light/40 py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Common questions</h2>
+        <div data-accordion class="mt-8 space-y-3">
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-mid" aria-expanded="false">What are your hours?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/5 px-5 py-4 text-sm text-gray-600">Update with client hours — e.g. Mon–Sat 9am–6pm.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-mid" aria-expanded="false">How do I book or inquire?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/5 px-5 py-4 text-sm text-gray-600">Call, message on Facebook, or use the contact section below.</div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="contact" class="section">
-      <div class="container contact">
-        <h2>Contact</h2>
-        <p>Phone: <a href="tel:+639000000000">+63 900 000 0000</a></p>
-        <p>Email: <a href="mailto:hello@example.com">hello@example.com</a></p>
-        <p>Address: Your street, City, Philippines</p>
+    <section id="contact" class="bg-brand-dark py-16 text-white sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold" data-reveal>Contact</h2>
+        <div class="mt-8 grid gap-6 sm:grid-cols-3" data-reveal>
+          <p><span class="font-semibold text-brand-gold">Phone</span><br /><a href="tel:+639000000000" class="text-brand-light hover:underline">+63 900 000 0000</a></p>
+          <p><span class="font-semibold text-brand-gold">Email</span><br /><a href="mailto:hello@example.com" class="text-brand-light hover:underline">hello@example.com</a></p>
+          <p><span class="font-semibold text-brand-gold">Address</span><br />Your street, City, Philippines</p>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; <span id="year"></span> Your Business Name. All rights reserved.</p>
-    </div>
+  <footer class="bg-brand-mid py-8 text-center text-sm text-brand-light/80">
+    <p>&copy; <span data-year></span> Your Business Name. All rights reserved.</p>
   </footer>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <script src="site.js"></script>
 </body>
 </html>

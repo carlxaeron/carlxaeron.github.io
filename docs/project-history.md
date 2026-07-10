@@ -126,6 +126,7 @@ CORS: `carlmanuel.com`, `www.carlmanuel.com`, `carlxaeron.github.io`, `localhost
 | Suyat Notary Public | `client-sites/suyat/` → `suyat-notary-public.netlify.app` |
 | RG Decals and Printing Shop | `client-sites/rg-decals/` → `rg-decals-printing.netlify.app` |
 | Embed security | `embed-guard.js` + `netlify/edge-functions/embed-only.js` |
+| Interactive stack | Tailwind CDN + `site.js` (nav, accordions, tabs, scroll reveal) |
 | Outreach drafts | `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt` |
 | Cursor skill | `.cursor/skills/client-site-netlify/SKILL.md` |
 

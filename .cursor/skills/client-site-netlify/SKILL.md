@@ -39,15 +39,34 @@ Edit `client.json`: `businessName`, `slug`, `industry`, `contact`, `quotation` (
 
 ## Step 2 — Build site
 
-- Keep **static HTML + CSS** unless client needs a framework.
-- Mobile-first; match quality bar from V3 greens (`#00473e`, `#00A862`).
-- One-page layout: hero, services, about, contact.
+- **Tailwind-first** static HTML — load via CDN (`https://cdn.tailwindcss.com`) with per-client `tailwind.config` inline for brand colors.
+- **Supplemental `styles.css`** only for hero backgrounds, scroll-reveal, and effects Tailwind cannot express cleanly.
+- **Interactive `site.js`** (copy from `_template/site.js`) — required on every client site:
+  - Mobile hamburger nav (`data-nav-toggle`, `data-mobile-nav`)
+  - Sticky header shadow on scroll (`data-header`)
+  - Smooth anchor scroll
+  - Scroll-reveal animations (`data-reveal`)
+  - FAQ accordions (`data-accordion`)
+  - Optional tabs (`data-tabs` / `data-tab`) or filters (`data-filter` / `data-filter-btn`)
+- Mobile-first; default brand palette from V3 greens (`#00473e`, `#00A862`) unless client has brand colors.
+- One-page layout: hero, services, about, FAQ, contact.
 - `netlify.toml`: `publish = "."`, `command = ""` (static site — do not run portfolio CRA build).
 - **Do not remove** template security files:
   - `embed-guard.js` — client-side iframe + referrer check
   - `netlify/edge-functions/embed-only.js` — server-side 403 on direct access
   - CSP `frame-ancestors` in `netlify.toml` — only portfolio domains may embed
 - Load guard in `<head>` before body: `<script src="embed-guard.js"></script>`
+- Load interactivity at end of `<body>`: `<script src="site.js"></script>`
+
+### Tailwind + interactive stack
+
+| File | Role |
+|------|------|
+| `index.html` | Mostly Tailwind utility classes; brand tokens in inline `tailwind.config` |
+| `styles.css` | Hero bg images, `[data-reveal]`, header scroll — not full layout |
+| `site.js` | Mobile nav, accordions, tabs, filters, scroll reveal |
+
+Do **not** add a CRA/webpack build to client folders — Tailwind CDN keeps deploys zero-config on Netlify.
 
 ### Embed-only security (required)
 
@@ -154,7 +173,7 @@ curl -sI -H "Sec-Fetch-Dest: iframe" \
   "https://{previewHost}" | head -1                           # expect 200
 ```
 
-**Fix loop:** if mobile header/hero breaks in the phone mockup (~256px inner width), tighten `styles.css` (`@media max-width: 480px`), redeploy Netlify, re-check preview.
+**Fix loop:** if mobile header/hero breaks in the phone mockup (~256px inner width), tighten Tailwind responsive classes (`sm:`, `md:`) and `styles.css`, redeploy Netlify, re-check preview.
 
 **Do not commit:** `.qa/` screenshots or local `qa-iframe.html` — dev-only.
 

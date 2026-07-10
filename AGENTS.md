@@ -72,7 +72,8 @@ Instructions for AI agents working in this repository.
 
 ### Client site + Netlify preview
 1. Copy `client-sites/_template/` → `client-sites/{slug}/`
-2. Customize HTML/CSS; **keep** `embed-guard.js` + edge `embed-only` + CSP headers
+2. Customize HTML with **Tailwind CDN** + supplemental `styles.css`; keep `site.js` for interactivity
+3. **Keep** `embed-guard.js` + edge `embed-only` + CSP headers
 3. Fill `client.json` (`contact`, `quotation` package/price/timeline)
 4. Deploy via Netlify MCP or CLI (`netlify.toml`: `command = ""`)
 5. Add host to `src/v3/config/previewWhitelist.js`; update `client.json`
