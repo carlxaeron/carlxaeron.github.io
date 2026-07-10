@@ -38,3 +38,5 @@ job-applications/
 exports/
 OnlineJobs-MCP-Server/dashboard-ui/node_modules/
 OnlineJobs-MCP-Server/dashboard-ui/dist/
+# Local Netlify folder
+.netlify

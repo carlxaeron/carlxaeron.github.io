@@ -35,7 +35,8 @@ Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-net
 
 - Never iframe non-whitelisted domains.
 - No API keys in `client-sites/` commits.
-- `X-Frame-Options: SAMEORIGIN` on client sites (allows same-origin; Netlify subdomains work for portfolio parent).
+- Client demos use `embed-guard.js` + Netlify edge function `embed-only` — direct URL access returns 403; only portfolio iframe preview works.
+- CSP `frame-ancestors` limits embedding to portfolio domains.
 
 ## Do not
 

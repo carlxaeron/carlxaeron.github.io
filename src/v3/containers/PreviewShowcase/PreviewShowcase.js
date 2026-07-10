@@ -8,7 +8,6 @@ function PreviewShowcase({ previewUrl, host, label }) {
   const [mobileBlocked, setMobileBlocked] = useState(false);
 
   const displayLabel = label || host;
-  const liveHref = previewUrl;
 
   const handleBack = useCallback(() => {
     const next = new URL(window.location.href);
@@ -19,10 +18,7 @@ function PreviewShowcase({ previewUrl, host, label }) {
   const embedNotice = (blocked) =>
     blocked ? (
       <p className="v3-preview-embed-notice">
-        This site may block embedding.{" "}
-        <a href={liveHref} target="_blank" rel="noopener noreferrer">
-          Open live site
-        </a>
+        This site may block embedding in the preview frame.
       </p>
     ) : null;
 
@@ -36,14 +32,6 @@ function PreviewShowcase({ previewUrl, host, label }) {
             <p className="v3-preview-host">{host}</p>
           </div>
           <div className="v3-preview-actions">
-            <a
-              href={liveHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="v3-btn v3-btn--primary"
-            >
-              Open live site
-            </a>
             <button type="button" className="v3-btn v3-btn--ghost" onClick={handleBack}>
               Back to portfolio
             </button>

@@ -43,6 +43,7 @@ describe("PreviewShowcase", () => {
     expect(screen.getByLabelText(/Desktop preview/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Mobile preview/i)).toBeInTheDocument();
     expect(screen.getAllByTitle(/preview of Sample Business/i)).toHaveLength(2);
+    expect(screen.queryByText(/Open live site/i)).not.toBeInTheDocument();
   });
 });
 

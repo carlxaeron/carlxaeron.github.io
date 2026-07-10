@@ -50,4 +50,5 @@ See [`.cursor/skills/client-site-netlify/SKILL.md`](../.cursor/skills/client-sit
 ## Security
 
 - Preview iframes only allow `*.netlify.app` or hosts in `PREVIEW_SITES`.
+- Client demos ship with `embed-guard.js` + Netlify edge `embed-only` — direct URL visits are blocked; only portfolio iframe preview works.
 - Do not commit API keys; use Netlify env vars for forms later.
