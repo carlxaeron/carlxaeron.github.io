@@ -2,13 +2,26 @@
 // Preview showcase (?preview=host)
 // =============================================================
 
+html.v3-preview-active,
+body.v3-preview-active {
+  height: 100%;
+  overflow: hidden;
+}
+
 .v3-preview-page {
-  min-height: 100vh;
-  min-height: 100svh;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  height: 100%;
+  height: 100svh;
+  max-height: 100svh;
   background: linear-gradient(165deg, $green-dark 0%, $green-mid 55%, darken($green-mid, 4%) 100%);
   color: $white;
   overflow-x: hidden;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
 }
 
 .v3-preview-header {
@@ -88,6 +101,7 @@
 }
 
 .v3-preview-monitor__bezel {
+  position: relative;
   width: 100%;
   max-width: 900px;
   aspect-ratio: 16 / 10;
@@ -97,6 +111,12 @@
   box-shadow:
     0 24px 48px rgba(0, 0, 0, 0.35),
     inset 0 0 0 1px rgba($white, 0.08);
+
+  @media (max-width: 991px) {
+    max-height: min(48vh, 360px);
+    aspect-ratio: auto;
+    height: min(48vh, 360px);
+  }
 }
 
 .v3-preview-monitor__stand {
@@ -160,6 +180,32 @@
 
   a {
     color: $green-accent;
+  }
+}
+
+.v3-preview-interact-toggle {
+  display: none;
+  margin-top: $space-3;
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: $space-2 $space-3;
+  border-radius: 999px;
+  border: 1px solid rgba($green-light, 0.35);
+  background: rgba($green-dark, 0.45);
+  color: rgba($green-light, 0.95);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+
+  @media (max-width: 991px) {
+    display: block;
+  }
+
+  .v3-preview-device--mobile & {
+    max-width: 280px;
   }
 }
 

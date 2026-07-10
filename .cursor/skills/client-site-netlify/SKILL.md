@@ -135,6 +135,7 @@ Browser QA checklist:
 - [ ] Preview page loads (title, hostname, Back to portfolio)
 - [ ] Desktop mockup: site visible, header/hero readable, iframe scrolls
 - [ ] Mobile mockup: logo not cramped, CTA visible, iframe scrolls
+- [ ] **Mobile page scroll** — preview page scrolls past desktop mockup to mobile section (iframes use pointer-events:none until “Tap to interact”)
 - [ ] Direct URL returns 403 (embed-only)
 - [ ] No broken images or layout overflow at ~256px (phone iframe width)
 ```
