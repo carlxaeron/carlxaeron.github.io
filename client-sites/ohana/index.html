@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ohana Business Solutions Inc — business consulting, tax filing, and document services in Rodriguez, Rizal." />
+  <title>Ohana Business Solutions Inc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="embed-guard.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="#">
+        <span class="logo__mark" aria-hidden="true">O</span>
+        <span class="logo__name logo__name--full">Ohana Business Solutions</span>
+        <span class="logo__name logo__name--short">Ohana Biz</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="nav__cta">Get in touch</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="container hero__inner">
+        <p class="eyebrow">Rodriguez, Rizal · Business consultancy</p>
+        <h1>Your family in doing business</h1>
+        <p class="lead">Trusted support for startups and growing companies — permits, tax filing, bookkeeping, and documents handled with care.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#contact">Book a consultation</a>
+          <a class="btn btn--ghost" href="mailto:ohanabusinessconsultancyinc@gmail.com">Email us</a>
+        </div>
+        <p class="hero__badge">Ohana Biz — Rizal Branch</p>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <h2>How we help</h2>
+        <p class="section-intro">Practical business services for entrepreneurs, SMEs, and corporate clients in Rizal and nearby areas.</p>
+        <div class="cards">
+          <article class="card card--service">
+            <div class="card__icon" aria-hidden="true">📋</div>
+            <h3>Business registration &amp; permits</h3>
+            <p>DTI, SEC, LGU permits, and compliance guidance so you can operate with confidence.</p>
+          </article>
+          <article class="card card--service">
+            <div class="card__icon" aria-hidden="true">📊</div>
+            <h3>Tax filing &amp; bookkeeping</h3>
+            <p>BIR filings, financial records, and organized books — stay compliant and audit-ready.</p>
+          </article>
+          <article class="card card--service">
+            <div class="card__icon" aria-hidden="true">📄</div>
+            <h3>Document preparation</h3>
+            <p>Contracts, government forms, and business documents prepared accurately and on time.</p>
+          </article>
+          <article class="card card--service">
+            <div class="card__icon" aria-hidden="true">🤝</div>
+            <h3>Business consulting</h3>
+            <p>One-on-one advice for new ventures, expansions, and day-to-day operational questions.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section section--alt">
+      <div class="container about">
+        <div class="about__grid">
+          <div class="about__image">
+            <img src="assets/hero-office.jpg" alt="Modern office workspace" width="600" height="400" loading="lazy" />
+          </div>
+          <div>
+            <h2>About Ohana</h2>
+            <p><strong>Ohana Business Solutions Inc</strong> serves the Rodriguez community with the mindset that good business is built on trust — like family.</p>
+            <p>Whether you are registering your first business or keeping an established company compliant, our Rizal branch offers hands-on support without the corporate runaround.</p>
+            <p class="about__tagline">“Your family in doing business.”</p>
+            <a class="btn btn--primary btn--inline" href="https://www.facebook.com/OhanaBusinessConsultancyInc/" target="_blank" rel="noopener noreferrer">Follow on Facebook</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="why" class="section">
+      <div class="container">
+        <h2>Why clients choose us</h2>
+        <div class="services-grid">
+          <article class="service">
+            <h3>Local &amp; accessible</h3>
+            <p>Eastwood Greenview, San Isidro — easy to reach for Rizal and Metro Manila clients.</p>
+          </article>
+          <article class="service">
+            <h3>End-to-end support</h3>
+            <p>From registration to tax season, one team that knows your files.</p>
+          </article>
+          <article class="service">
+            <h3>Clear communication</h3>
+            <p>We explain requirements in plain language — no jargon overload.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section section--contact">
+      <div class="container contact">
+        <h2>Visit or inquire</h2>
+        <p>Message us for a free initial consultation on your business needs.</p>
+        <div class="contact-grid">
+          <p><strong>Address</strong><br />Block 1 Lot 5 Phase 4 Eastwood Greenview<br />San Isidro, Rodriguez, Rizal 1860</p>
+          <p><strong>Email</strong><br /><a href="mailto:ohanabusinessconsultancyinc@gmail.com">ohanabusinessconsultancyinc@gmail.com</a></p>
+          <p><strong>Facebook</strong><br /><a href="https://www.facebook.com/OhanaBusinessConsultancyInc/" target="_blank" rel="noopener noreferrer">Ohana Biz — Rizal Branch</a></p>
+        </div>
+        <p class="demo-note">Sample website prepared for outreach — services and copy to be confirmed with the business owner.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Ohana Business Solutions Inc. Rodriguez, Rizal.</p>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

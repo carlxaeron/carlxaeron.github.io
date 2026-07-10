@@ -16,6 +16,12 @@ export const PREVIEW_SITES = [
     label: "Extra Rice 8 Trading, OPC",
     netlifySite: "extra-rice-trading",
   },
+  {
+    id: "ohana",
+    host: "ohana-business-solutions.netlify.app",
+    label: "Ohana Business Solutions Inc",
+    netlifySite: "ohana-business-solutions",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

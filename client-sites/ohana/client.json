@@ -1,0 +1,31 @@
+{
+  "businessName": "Ohana Business Solutions Inc",
+  "slug": "ohana",
+  "previewHost": "ohana-business-solutions.netlify.app",
+  "industry": "Business consultancy / corporate services",
+  "deployedAt": "2026-07-10",
+  "contact": {
+    "name": "Ohana Biz — Rizal Branch",
+    "email": "ohanabusinessconsultancyinc@gmail.com",
+    "phone": null
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive site (services, about, contact), mobile-friendly, Facebook integration",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront, 50% on delivery",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=ohana-business-solutions.netlify.app"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt"
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/OhanaBusinessConsultancyInc/",
+    "googleMaps": "https://www.google.com/maps/place/Ohana+Business+Solutions+Inc/@14.7301222,121.1375017,18z",
+    "address": "Block 1 Lot 5 Phase 4 Eastwood Greenview, San Isidro, Rodriguez, Rizal 1860",
+    "tagline": "Your family in doing business"
+  }
+}
