@@ -24,7 +24,8 @@ alwaysApply: true
 ## Portfolio modes
 
 - **Default:** 7-section slide deck (`home` … `quote`)
-- **Preview:** `?preview=host.netlify.app` → device showcase (desktop + mobile iframes)
+- **Preview:** `?preview=host.netlify.app` → device showcase (desktop + mobile iframes, no live-site link)
+- **Client demos:** embed-only on Netlify — direct URL blocked; view via portfolio preview only
 
 `home` → `about` → `skills` → `experience` → `projects` → `contact` → `quote`
 

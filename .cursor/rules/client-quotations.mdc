@@ -16,13 +16,15 @@ Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-net
 - URL: `https://carlmanuel.com/?preview={hostname}`
 - Whitelist: `*.netlify.app` OR explicit `PREVIEW_SITES` in [`previewWhitelist.js`](../../src/v3/config/previewWhitelist.js)
 - Component: [`PreviewShowcase.js`](../../src/v3/containers/PreviewShowcase/PreviewShowcase.js)
+- UI: desktop monitor + mobile phone mockups; **Back to portfolio** only (no live-site link)
 
 ## New client folder
 
 1. Copy `client-sites/_template/` → `client-sites/{slug}/`
 2. Customize `index.html`, `styles.css`, `client.json`
-3. Deploy to Netlify; set `previewHost`
-4. Register in `PREVIEW_SITES`
+3. Keep `embed-guard.js`, `netlify/edge-functions/embed-only.js`, and `netlify.toml` security headers
+4. Deploy to Netlify; set `previewHost` and `deployedAt` in `client.json`
+5. Register in `PREVIEW_SITES`
 
 ## Content guidelines
 
@@ -33,13 +35,18 @@ Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-net
 
 ## Security
 
-- Never iframe non-whitelisted domains.
+- Never iframe non-whitelisted domains on the portfolio.
 - No API keys in `client-sites/` commits.
-- Client demos use `embed-guard.js` + Netlify edge function `embed-only` — direct URL access returns 403; only portfolio iframe preview works.
-- CSP `frame-ancestors` limits embedding to portfolio domains.
+- **Embed-only client demos** — required on every site:
+  - `embed-guard.js` (loaded in `<head>`)
+  - `netlify/edge-functions/embed-only.js` + `[[edge_functions]]` in `netlify.toml`
+  - CSP `frame-ancestors` for portfolio domains (+ `localhost:3000` for dev)
+- Direct URL visits to client Netlify sites return **403**; content only loads in portfolio preview iframes.
+- Do not add “open live site” links in `PreviewShowcase` or client HTML.
 
 ## Do not
 
-- Commit Netlify auth tokens
+- Commit Netlify auth tokens or `.netlify/` link state (gitignored)
+- Remove or bypass embed-only guards without user approval
 - Add real client PII without user approval
 - Auto-add every client to public portfolio projects without user sign-off

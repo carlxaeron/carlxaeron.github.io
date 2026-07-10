@@ -121,11 +121,12 @@ CORS: `carlmanuel.com`, `www.carlmanuel.com`, `carlxaeron.github.io`, `localhost
 | Showcase UI | `src/v3/containers/PreviewShowcase/` |
 | Client template | `client-sites/_template/` |
 | Sample demo | `client-sites/quotation/` (Bamboo Grove Café) |
+| Embed security | `embed-guard.js` + `netlify/edge-functions/embed-only.js` |
 | Cursor skill | `.cursor/skills/client-site-netlify/SKILL.md` |
 
-**Preview URL:** `https://carlmanuel.com/?preview=quotation.netlify.app` (after Netlify deploy).
+**Preview URL:** `https://carlmanuel.com/?preview=bamboo-grove-cafe.netlify.app`
 
-Hosts must match `*.netlify.app` or explicit `PREVIEW_SITES` list.
+Hosts must match `*.netlify.app` or explicit `PREVIEW_SITES` list. Client Netlify URLs are **embed-only** (direct access returns 403). Preview UI has no “open live site” link.
 
 ---
 
@@ -146,6 +147,7 @@ Tag releases: `v3.0.x` · Update `CHANGELOG.md` + `package.json`.
 ### v3.0.17 — 2026-07-10
 - Preview showcase page (`?preview=`) with desktop + mobile device mockups
 - `client-sites/` monorepo with `_template/` and `quotation/` demo
+- Embed-only client security (edge function + `embed-guard.js`; direct Netlify URL blocked)
 - Cursor skill `client-site-netlify`, rule `client-quotations.mdc`, Netlify MCP
 
 ### v3.0.16 — 2026-06-09

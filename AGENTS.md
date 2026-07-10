@@ -72,9 +72,10 @@ Instructions for AI agents working in this repository.
 
 ### Client site + Netlify preview
 1. Copy `client-sites/_template/` → `client-sites/{slug}/`
-2. Customize HTML/CSS; deploy via Netlify MCP or CLI
-3. Add host to `src/v3/config/previewWhitelist.js`
-4. Share `https://carlmanuel.com/?preview={host}`
+2. Customize HTML/CSS; **keep** `embed-guard.js` + edge `embed-only` + CSP headers
+3. Deploy via Netlify MCP or CLI (`netlify.toml`: `command = ""`)
+4. Add host to `src/v3/config/previewWhitelist.js`; update `client.json`
+5. Share `https://carlmanuel.com/?preview={host}` (embed-only — direct Netlify URL returns 403)
 
 ## MCP servers
 
@@ -89,4 +90,4 @@ Instructions for AI agents working in this repository.
 CI=true npm test -- --watchAll=false --passWithNoTests
 ```
 
-10 suites, 34+ tests — run before release.
+10 suites, 43 tests — run before release.

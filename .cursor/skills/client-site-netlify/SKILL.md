@@ -41,8 +41,34 @@ Edit `client.json`: `businessName`, `slug`, `industry`.
 - Keep **static HTML + CSS** unless client needs a framework.
 - Mobile-first; match quality bar from V3 greens (`#00473e`, `#00A862`).
 - One-page layout: hero, services, about, contact.
-- `netlify.toml`: `publish = "."`
-- Use `X-Frame-Options: SAMEORIGIN` so portfolio can iframe `*.netlify.app`.
+- `netlify.toml`: `publish = "."`, `command = ""` (static site — do not run portfolio CRA build).
+- **Do not remove** template security files:
+  - `embed-guard.js` — client-side iframe + referrer check
+  - `netlify/edge-functions/embed-only.js` — server-side 403 on direct access
+  - CSP `frame-ancestors` in `netlify.toml` — only portfolio domains may embed
+- Load guard in `<head>` before body: `<script src="embed-guard.js"></script>`
+
+### Embed-only security (required)
+
+Client demos are **not** meant to be browsed directly. They only render inside the portfolio preview iframes.
+
+| Layer | File | Behavior |
+|-------|------|----------|
+| Edge | `netlify/edge-functions/embed-only.js` | 403 for direct document loads; allows `Sec-Fetch-Dest: iframe` or portfolio referer |
+| Client | `embed-guard.js` | Replaces page if not in iframe or referrer not from allowed portfolio hosts |
+| Headers | `netlify.toml` | `frame-ancestors` limits who can embed the site |
+
+Allowed portfolio hosts: `carlmanuel.com`, `www.carlmanuel.com`, `carlxaeron.github.io`, `localhost`.
+
+After deploy, verify:
+
+```bash
+# Direct access → 403
+curl -sI https://{previewHost} | head -1
+
+# Iframe simulation → 200
+curl -sI -H "Sec-Fetch-Dest: iframe" -H "Referer: https://carlmanuel.com/?preview={previewHost}" "https://{previewHost}" | head -1
+```
 
 ## Step 3 — Deploy (Netlify MCP or CLI)
 
@@ -66,7 +92,9 @@ Record hostname (e.g. `bamboo-grove-cafe.netlify.app`).
 { id: "slug", host: "slug.netlify.app", label: "Business Name", netlifySite: "slug" }
 ```
 
-3. Share: `https://carlmanuel.com/?preview=slug.netlify.app`
+3. Share: `https://carlmanuel.com/?preview={previewHost}`
+
+**Preview UI:** `PreviewShowcase` shows desktop + mobile mockups only — there is **no “Open live site”** link (client URLs are embed-only by design).
 
 ## Step 5 — Portfolio release (if preview UI changed)
 
@@ -75,6 +103,7 @@ Follow [deploy-portfolio/SKILL.md](../deploy-portfolio/SKILL.md) — bump versio
 ## Rules
 
 - Whitelist-only preview hosts (no arbitrary domains).
+- Keep `embed-guard.js` + edge `embed-only` on every client folder — do not ship browsable public demos.
 - No secrets in `client-sites/` — use Netlify env for forms later.
 - Demo copy OK; mark fictitious businesses clearly.
 - Do not add client sites to portfolio Side Projects without user approval.

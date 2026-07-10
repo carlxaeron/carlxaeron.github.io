@@ -21,8 +21,9 @@ Required for [client-site-netlify skill](skills/client-site-netlify/SKILL.md).
 ```
 
 - Node.js **22+**
-- Netlify account — authenticate on first tool use
+- Netlify account — authenticate on first tool use (`npx netlify login` or MCP auth flow)
 - Portfolio itself deploys via **GitHub Pages**, not Netlify
+- Client sites deploy to Netlify with **embed-only** security (edge `embed-only` + `embed-guard.js`) — see [client-site-netlify skill](skills/client-site-netlify/SKILL.md)
 
 ## onlinejobs-apify
 
