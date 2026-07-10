@@ -6,11 +6,11 @@ import {
 } from "../../config/previewWhitelist";
 
 describe("previewWhitelist", () => {
-  test("allows quotation.netlify.app", () => {
-    expect(isPreviewHostAllowed("quotation.netlify.app")).toBe(true);
-    const resolved = resolvePreviewUrl("quotation.netlify.app");
-    expect(resolved?.url).toBe("https://quotation.netlify.app");
-    expect(resolved?.host).toBe("quotation.netlify.app");
+  test("allows bamboo-grove-cafe.netlify.app", () => {
+    expect(isPreviewHostAllowed("bamboo-grove-cafe.netlify.app")).toBe(true);
+    const resolved = resolvePreviewUrl("bamboo-grove-cafe.netlify.app");
+    expect(resolved?.url).toBe("https://bamboo-grove-cafe.netlify.app");
+    expect(resolved?.host).toBe("bamboo-grove-cafe.netlify.app");
   });
 
   test("allows netlify.app subdomains", () => {
@@ -23,8 +23,8 @@ describe("previewWhitelist", () => {
   });
 
   test("strips protocol from preview value", () => {
-    const resolved = resolvePreviewUrl("https://quotation.netlify.app/path");
-    expect(resolved?.host).toBe("quotation.netlify.app");
+    const resolved = resolvePreviewUrl("https://bamboo-grove-cafe.netlify.app/path");
+    expect(resolved?.host).toBe("bamboo-grove-cafe.netlify.app");
   });
 });
 
@@ -32,8 +32,8 @@ describe("PreviewShowcase", () => {
   test("renders desktop and mobile preview frames", () => {
     render(
       <PreviewShowcase
-        previewUrl="https://quotation.netlify.app"
-        host="quotation.netlify.app"
+        previewUrl="https://bamboo-grove-cafe.netlify.app"
+        host="bamboo-grove-cafe.netlify.app"
         label="Sample Business Quotation Site"
       />
     );

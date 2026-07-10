@@ -6,9 +6,9 @@
 export const PREVIEW_SITES = [
   {
     id: "quotation",
-    host: "quotation.netlify.app",
-    label: "Sample Business Quotation Site",
-    netlifySite: "quotation",
+    host: "bamboo-grove-cafe.netlify.app",
+    label: "Bamboo Grove Café — Sample Quotation Site",
+    netlifySite: "bamboo-grove-cafe",
   },
 ];
 

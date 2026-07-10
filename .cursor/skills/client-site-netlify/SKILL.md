@@ -55,7 +55,7 @@ cd client-sites/{slug}
 npx netlify deploy --prod --site {site-id}
 ```
 
-Record hostname (e.g. `quotation.netlify.app`).
+Record hostname (e.g. `bamboo-grove-cafe.netlify.app`).
 
 ## Step 4 — Register portfolio preview
 

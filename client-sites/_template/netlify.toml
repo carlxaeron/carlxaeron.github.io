@@ -4,5 +4,5 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "SAMEORIGIN"
+    Content-Security-Policy = "frame-ancestors 'self' https://carlmanuel.com https://www.carlmanuel.com https://carlxaeron.github.io"
     X-Content-Type-Options = "nosniff"

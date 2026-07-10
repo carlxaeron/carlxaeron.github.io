@@ -25,7 +25,7 @@ describe("Index preview routing", () => {
   });
 
   test("renders preview showcase for whitelisted host", () => {
-    mockSearch("?preview=quotation.netlify.app");
+    mockSearch("?preview=bamboo-grove-cafe.netlify.app");
     render(<Index />);
     expect(screen.getByTestId("preview-showcase")).toBeInTheDocument();
     expect(screen.queryByTestId("portfolio-mock")).not.toBeInTheDocument();
