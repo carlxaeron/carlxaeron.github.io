@@ -1,11 +1,14 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "../../styles/sass/v3-app.scss";
 
 const IFRAME_SANDBOX = "allow-scripts allow-same-origin allow-forms allow-popups";
+const DESKTOP_VIEWPORT = { width: 1280, height: 800 };
 
 function PreviewShowcase({ previewUrl, host, label }) {
   const [desktopBlocked, setDesktopBlocked] = useState(false);
   const [mobileBlocked, setMobileBlocked] = useState(false);
+  const [desktopScale, setDesktopScale] = useState(1);
+  const bezelRef = useRef(null);
 
   const displayLabel = label || host;
 
@@ -16,6 +19,27 @@ function PreviewShowcase({ previewUrl, host, label }) {
       document.documentElement.classList.remove("v3-preview-active");
       document.body.classList.remove("v3-preview-active");
     };
+  }, []);
+
+  useEffect(() => {
+    const bezel = bezelRef.current;
+    if (!bezel || typeof ResizeObserver === "undefined") return undefined;
+
+    const updateScale = () => {
+      const { width, height } = bezel.getBoundingClientRect();
+      if (width <= 0 || height <= 0) return;
+
+      const scale = Math.min(
+        width / DESKTOP_VIEWPORT.width,
+        height / DESKTOP_VIEWPORT.height
+      );
+      setDesktopScale(scale);
+    };
+
+    updateScale();
+    const observer = new ResizeObserver(updateScale);
+    observer.observe(bezel);
+    return () => observer.disconnect();
   }, []);
 
   const handleBack = useCallback(() => {
@@ -53,15 +77,29 @@ function PreviewShowcase({ previewUrl, host, label }) {
           <section className="v3-preview-device v3-preview-device--desktop" aria-label="Desktop preview">
             <h2 className="v3-preview-device__label">Desktop</h2>
             <div className="v3-preview-monitor">
-              <div className="v3-preview-monitor__bezel">
-                <iframe
-                  title={`Desktop preview of ${displayLabel}`}
-                  src={previewUrl}
-                  className="v3-preview-iframe v3-preview-iframe--desktop"
-                  sandbox={IFRAME_SANDBOX}
-                  scrolling="yes"
-                  onError={() => setDesktopBlocked(true)}
-                />
+              <div className="v3-preview-monitor__bezel" ref={bezelRef}>
+                <div
+                  className="v3-preview-iframe-scaler"
+                  style={{
+                    width: DESKTOP_VIEWPORT.width * desktopScale,
+                    height: DESKTOP_VIEWPORT.height * desktopScale,
+                  }}
+                >
+                  <iframe
+                    title={`Desktop preview of ${displayLabel}`}
+                    src={previewUrl}
+                    className="v3-preview-iframe v3-preview-iframe--desktop"
+                    sandbox={IFRAME_SANDBOX}
+                    scrolling="yes"
+                    width={DESKTOP_VIEWPORT.width}
+                    height={DESKTOP_VIEWPORT.height}
+                    style={{
+                      transform: `scale(${desktopScale})`,
+                      transformOrigin: "top left",
+                    }}
+                    onError={() => setDesktopBlocked(true)}
+                  />
+                </div>
               </div>
               <div className="v3-preview-monitor__stand" aria-hidden="true" />
             </div>

@@ -153,6 +153,7 @@ After Netlify deploy **and** portfolio push (if whitelist changed), verify UI in
 Browser QA checklist:
 - [ ] Preview page loads (title, hostname, Back to portfolio)
 - [ ] Desktop mockup: site visible, header/hero readable, iframe scrolls
+- [ ] **Desktop on phone** — monitor shows full 1280px layout scaled down (not mobile breakpoints)
 - [ ] Mobile mockup: logo not cramped, CTA visible, iframe scrolls
 - [ ] **Mobile page scroll** — preview page scrolls past desktop mockup to mobile section (desktop iframe ignores touch on mobile so page scroll works)
 - [ ] Direct URL returns 403 (embed-only)
