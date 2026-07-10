@@ -118,7 +118,7 @@ CORS: `carlmanuel.com`, `www.carlmanuel.com`, `carlxaeron.github.io`, `localhost
 | Piece | Location |
 |-------|----------|
 | Preview whitelist | `src/v3/config/previewWhitelist.js` |
-| Showcase UI | `src/v3/containers/PreviewShowcase/` |
+| Showcase UI | `src/v3/containers/PreviewShowcase/` — desktop iframe 1280×800, phone iframe 390×844, scaled to mockups |
 | Client template | `client-sites/_template/` |
 | Sample demo | `client-sites/quotation/` (Bamboo Grove Café) |
 | Extra Rice 8 Trading | `client-sites/extra-rice/` → `extra-rice-trading.netlify.app` |

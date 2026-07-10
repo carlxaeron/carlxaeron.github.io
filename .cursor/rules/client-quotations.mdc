@@ -16,7 +16,7 @@ Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-net
 - URL: `https://carlmanuel.com/?preview={hostname}`
 - Whitelist: `*.netlify.app` OR explicit `PREVIEW_SITES` in [`previewWhitelist.js`](../../src/v3/config/previewWhitelist.js)
 - Component: [`PreviewShowcase.js`](../../src/v3/containers/PreviewShowcase/PreviewShowcase.js)
-- UI: desktop monitor + mobile phone mockups; **Back to portfolio** only (no live-site link)
+- UI: desktop monitor + mobile phone mockups; iframes render at **1280×800** (desktop) and **390×844** (mobile), scaled to fit frames; **Back to portfolio** only (no live-site link)
 
 ## New client folder
 

@@ -202,10 +202,25 @@ body.v3-preview-active {
   box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.35),
     inset 0 0 0 2px rgba($white, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 
   @media (max-width: 991px) {
     margin-top: $space-2;
   }
+}
+
+.v3-preview-phone__screen {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $white;
 }
 
 .v3-preview-phone__notch {
@@ -225,8 +240,8 @@ body.v3-preview-active {
   width: 100%;
   height: 100%;
   border: 0;
-  border-radius: 28px;
   background: $white;
+  display: block;
 }
 
 .v3-preview-embed-notice {

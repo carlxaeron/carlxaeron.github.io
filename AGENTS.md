@@ -79,7 +79,7 @@ Instructions for AI agents working in this repository.
 5. Add host to `src/v3/config/previewWhitelist.js`; update `client.json`
 6. Draft outreach: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`
 7. Share preview `https://carlmanuel.com/?preview={host}` + drafts for user review (embed-only — direct Netlify URL returns 403)
-8. **Browser QA** — verify preview UI in Chrome (desktop + mobile mockups, iframe scroll, no cramped header)
+8. **Browser QA** — verify preview UI in Chrome (desktop + mobile mockups at true viewports, no overlap, iframe scroll)
 
 ## MCP servers
 

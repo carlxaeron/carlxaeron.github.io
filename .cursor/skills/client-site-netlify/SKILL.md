@@ -149,13 +149,21 @@ After Netlify deploy **and** portfolio push (if whitelist changed), verify UI in
 
 **Preview URL:** `https://carlmanuel.com/?preview={previewHost}`
 
-Applies to **every** whitelisted client site — desktop iframe renders at 1280×800 and scales to fit the monitor mockup (shared `PreviewShowcase` component, not per-client).
+Applies to **every** whitelisted client site via shared `PreviewShowcase` (not per-client):
+
+| Mockup | Viewport | Behavior |
+|--------|----------|----------|
+| Desktop monitor | 1280×800 | Scaled down to fit bezel — true desktop layout on phone |
+| Phone frame | 390×844 | Scaled down slightly to fit phone chrome — true mobile layout (hamburger, stacked sections) |
+
+Both use absolute-positioned iframe scalers so layout does not overlap on narrow screens.
 
 ```
 Browser QA checklist:
 - [ ] Preview page loads (title, hostname, Back to portfolio)
 - [ ] Desktop mockup: site visible, header/hero readable, iframe scrolls
 - [ ] **Desktop on phone** — monitor shows full 1280px layout scaled down (not mobile breakpoints)
+- [ ] **Mobile mockup** — phone shows 390px mobile layout (short logo, hamburger) scaled to fit frame
 - [ ] Mobile mockup: logo not cramped, CTA visible, iframe scrolls
 - [ ] **Mobile page scroll** — preview page scrolls past desktop mockup to mobile section (desktop iframe ignores touch on mobile so page scroll works)
 - [ ] **No overlap on mobile** — desktop monitor and phone mockup must not overlap (40px+ gap); desktop iframe uses absolute scaler so 1280px layout does not bleed into phone section

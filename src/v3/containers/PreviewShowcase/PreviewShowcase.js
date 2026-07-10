@@ -3,12 +3,80 @@ import "../../styles/sass/v3-app.scss";
 
 const IFRAME_SANDBOX = "allow-scripts allow-same-origin allow-forms allow-popups";
 const DESKTOP_VIEWPORT = { width: 1280, height: 800 };
+const MOBILE_VIEWPORT = { width: 390, height: 844 };
+
+function useViewportScale(containerRef, viewport, initialScale) {
+  const [scale, setScale] = useState(initialScale);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || typeof ResizeObserver === "undefined") return undefined;
+
+    const updateScale = () => {
+      const { width, height } = container.getBoundingClientRect();
+      if (width <= 0 || height <= 0) return;
+
+      setScale(Math.min(width / viewport.width, height / viewport.height));
+    };
+
+    updateScale();
+    const observer = new ResizeObserver(updateScale);
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [containerRef, viewport.width, viewport.height]);
+
+  return scale;
+}
+
+function ViewportIframe({
+  viewport,
+  scale,
+  previewUrl,
+  title,
+  className,
+  loading,
+  onError,
+}) {
+  return (
+    <div
+      className="v3-preview-iframe-scaler"
+      style={{
+        width: Math.round(viewport.width * scale),
+        height: Math.round(viewport.height * scale),
+      }}
+    >
+      <div
+        className="v3-preview-iframe-scaler__inner"
+        style={{
+          width: viewport.width,
+          height: viewport.height,
+          transform: `scale(${scale})`,
+        }}
+      >
+        <iframe
+          title={title}
+          src={previewUrl}
+          className={className}
+          sandbox={IFRAME_SANDBOX}
+          scrolling="yes"
+          width={viewport.width}
+          height={viewport.height}
+          loading={loading}
+          onError={onError}
+        />
+      </div>
+    </div>
+  );
+}
 
 function PreviewShowcase({ previewUrl, host, label }) {
   const [desktopBlocked, setDesktopBlocked] = useState(false);
   const [mobileBlocked, setMobileBlocked] = useState(false);
-  const [desktopScale, setDesktopScale] = useState(0.25);
-  const bezelRef = useRef(null);
+  const desktopBezelRef = useRef(null);
+  const phoneScreenRef = useRef(null);
+
+  const desktopScale = useViewportScale(desktopBezelRef, DESKTOP_VIEWPORT, 0.25);
+  const mobileScale = useViewportScale(phoneScreenRef, MOBILE_VIEWPORT, 0.65);
 
   const displayLabel = label || host;
 
@@ -19,27 +87,6 @@ function PreviewShowcase({ previewUrl, host, label }) {
       document.documentElement.classList.remove("v3-preview-active");
       document.body.classList.remove("v3-preview-active");
     };
-  }, []);
-
-  useEffect(() => {
-    const bezel = bezelRef.current;
-    if (!bezel || typeof ResizeObserver === "undefined") return undefined;
-
-    const updateScale = () => {
-      const { width, height } = bezel.getBoundingClientRect();
-      if (width <= 0 || height <= 0) return;
-
-      const scale = Math.min(
-        width / DESKTOP_VIEWPORT.width,
-        height / DESKTOP_VIEWPORT.height
-      );
-      setDesktopScale(scale);
-    };
-
-    updateScale();
-    const observer = new ResizeObserver(updateScale);
-    observer.observe(bezel);
-    return () => observer.disconnect();
   }, []);
 
   const handleBack = useCallback(() => {
@@ -77,34 +124,15 @@ function PreviewShowcase({ previewUrl, host, label }) {
           <section className="v3-preview-device v3-preview-device--desktop" aria-label="Desktop preview">
             <h2 className="v3-preview-device__label">Desktop</h2>
             <div className="v3-preview-monitor">
-              <div className="v3-preview-monitor__bezel" ref={bezelRef}>
-                <div
-                  className="v3-preview-iframe-scaler"
-                  style={{
-                    width: Math.round(DESKTOP_VIEWPORT.width * desktopScale),
-                    height: Math.round(DESKTOP_VIEWPORT.height * desktopScale),
-                  }}
-                >
-                  <div
-                    className="v3-preview-iframe-scaler__inner"
-                    style={{
-                      width: DESKTOP_VIEWPORT.width,
-                      height: DESKTOP_VIEWPORT.height,
-                      transform: `scale(${desktopScale})`,
-                    }}
-                  >
-                    <iframe
-                      title={`Desktop preview of ${displayLabel}`}
-                      src={previewUrl}
-                      className="v3-preview-iframe v3-preview-iframe--desktop"
-                      sandbox={IFRAME_SANDBOX}
-                      scrolling="yes"
-                      width={DESKTOP_VIEWPORT.width}
-                      height={DESKTOP_VIEWPORT.height}
-                      onError={() => setDesktopBlocked(true)}
-                    />
-                  </div>
-                </div>
+              <div className="v3-preview-monitor__bezel" ref={desktopBezelRef}>
+                <ViewportIframe
+                  viewport={DESKTOP_VIEWPORT}
+                  scale={desktopScale}
+                  previewUrl={previewUrl}
+                  title={`Desktop preview of ${displayLabel}`}
+                  className="v3-preview-iframe v3-preview-iframe--desktop"
+                  onError={() => setDesktopBlocked(true)}
+                />
               </div>
               <div className="v3-preview-monitor__stand" aria-hidden="true" />
             </div>
@@ -115,15 +143,17 @@ function PreviewShowcase({ previewUrl, host, label }) {
             <h2 className="v3-preview-device__label">Mobile</h2>
             <div className="v3-preview-phone">
               <div className="v3-preview-phone__notch" aria-hidden="true" />
-              <iframe
-                title={`Mobile preview of ${displayLabel}`}
-                src={previewUrl}
-                className="v3-preview-iframe v3-preview-iframe--mobile"
-                sandbox={IFRAME_SANDBOX}
-                scrolling="yes"
-                loading="lazy"
-                onError={() => setMobileBlocked(true)}
-              />
+              <div className="v3-preview-phone__screen" ref={phoneScreenRef}>
+                <ViewportIframe
+                  viewport={MOBILE_VIEWPORT}
+                  scale={mobileScale}
+                  previewUrl={previewUrl}
+                  title={`Mobile preview of ${displayLabel}`}
+                  className="v3-preview-iframe v3-preview-iframe--mobile"
+                  loading="lazy"
+                  onError={() => setMobileBlocked(true)}
+                />
+              </div>
             </div>
             {embedNotice(mobileBlocked)}
           </section>
