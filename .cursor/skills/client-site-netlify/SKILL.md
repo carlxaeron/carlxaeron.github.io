@@ -162,6 +162,7 @@ Both use absolute-positioned iframe scalers so layout does not overlap on narrow
 Browser QA checklist:
 - [ ] Preview page loads (title, hostname, Back to portfolio)
 - [ ] Desktop mockup: site visible, header/hero readable, iframe scrolls
+- [ ] Scroll hints visible (intro + per-device); native `title` on hover for screen areas
 - [ ] **Desktop on phone** — monitor shows full 1280px layout scaled down (not mobile breakpoints)
 - [ ] **Mobile mockup** — phone shows 390px mobile layout (short logo, hamburger) scaled to fit frame
 - [ ] Mobile mockup: logo not cramped, CTA visible, iframe scrolls

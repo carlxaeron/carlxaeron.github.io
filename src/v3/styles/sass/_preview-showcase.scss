@@ -91,6 +91,68 @@ body.v3-preview-active {
   padding: $space-6 $space-4 $space-8;
 }
 
+.v3-preview-scroll-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  margin: 0 0 $space-4;
+  padding: $space-2 $space-3;
+  border-radius: 999px;
+  border: 1px solid rgba($green-accent, 0.35);
+  background: rgba($green-dark, 0.55);
+  color: rgba($green-light, 0.92);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  max-width: 36ch;
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: rgba($green-accent, 0.18);
+    color: $green-accent;
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  &--intro {
+    max-width: none;
+    margin-bottom: $space-6;
+  }
+
+  &--desktop {
+    margin-top: -$space-2;
+    margin-bottom: $space-3;
+
+    @media (max-width: 991px) {
+      display: none;
+    }
+  }
+
+  &--mobile {
+    margin-top: -$space-2;
+    margin-bottom: $space-3;
+  }
+}
+
+.v3-preview-device--desktop,
+.v3-preview-device--mobile {
+  .v3-preview-monitor__screen,
+  .v3-preview-phone__screen {
+    cursor: help;
+  }
+}
+
+@media (max-width: 991px) {
+  .v3-preview-scroll-hint--intro {
+    margin-bottom: $space-4;
+  }
+}
+
 .v3-preview-devices {
   display: grid;
   grid-template-columns: 1fr;

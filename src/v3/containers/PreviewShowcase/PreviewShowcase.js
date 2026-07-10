@@ -69,6 +69,17 @@ function ViewportIframe({
   );
 }
 
+function ScrollHint({ children, className = "" }) {
+  return (
+    <p className={`v3-preview-scroll-hint ${className}`.trim()} role="note">
+      <span className="v3-preview-scroll-hint__icon" aria-hidden="true">
+        ↕
+      </span>
+      {children}
+    </p>
+  );
+}
+
 function PreviewShowcase({ previewUrl, host, label }) {
   const [desktopBlocked, setDesktopBlocked] = useState(false);
   const [mobileBlocked, setMobileBlocked] = useState(false);
@@ -120,12 +131,21 @@ function PreviewShowcase({ previewUrl, host, label }) {
       </header>
 
       <main className="v3-preview-main">
+        <p className="v3-preview-scroll-hint v3-preview-scroll-hint--intro" role="note">
+          <span className="v3-preview-scroll-hint__icon" aria-hidden="true">
+            ↕
+          </span>
+          Scroll inside each preview to explore the sample site.
+        </p>
         <div className="v3-preview-devices">
           <section className="v3-preview-device v3-preview-device--desktop" aria-label="Desktop preview">
             <h2 className="v3-preview-device__label">Desktop</h2>
+            <ScrollHint className="v3-preview-scroll-hint--desktop">
+              Scroll inside the monitor to explore the site.
+            </ScrollHint>
             <div className="v3-preview-monitor">
               <div className="v3-preview-monitor__bezel">
-                <div className="v3-preview-monitor__screen" ref={desktopScreenRef}>
+                <div className="v3-preview-monitor__screen" ref={desktopScreenRef} title="Scroll inside the monitor to explore the site">
                   <ViewportIframe
                     viewport={DESKTOP_VIEWPORT}
                     scale={desktopScale}
@@ -143,9 +163,16 @@ function PreviewShowcase({ previewUrl, host, label }) {
 
           <section className="v3-preview-device v3-preview-device--mobile" aria-label="Mobile preview">
             <h2 className="v3-preview-device__label">Mobile</h2>
+            <ScrollHint className="v3-preview-scroll-hint--mobile">
+              Scroll inside the phone to explore the site.
+            </ScrollHint>
             <div className="v3-preview-phone">
               <div className="v3-preview-phone__notch" aria-hidden="true" />
-              <div className="v3-preview-phone__screen" ref={phoneScreenRef}>
+              <div
+                className="v3-preview-phone__screen"
+                ref={phoneScreenRef}
+                title="Scroll inside the phone to explore the site"
+              >
                 <ViewportIframe
                   viewport={MOBILE_VIEWPORT}
                   scale={mobileScale}
