@@ -27,6 +27,6 @@ describe("V3Blog", () => {
     );
 
     expect(screen.getByRole("dialog")).toBeInTheDocument();
-    expect(screen.getByText(/Starter websites for local businesses/i)).toBeInTheDocument();
+    expect(screen.getByText(/starter websites for local businesses/i)).toBeInTheDocument();
   });
 });

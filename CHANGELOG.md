@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.20] — 2026-07-10
+
+### Changed
+- Sanitized **News & Blog** posts — removed pricing, full addresses, preview URLs, and outreach workflow details from public copy
+
 ## [3.0.19] — 2026-07-10
 
 ### Added
