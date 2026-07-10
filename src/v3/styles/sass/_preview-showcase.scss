@@ -25,9 +25,12 @@ body.v3-preview-active {
 }
 
 .v3-preview-header {
-  padding: $space-6 $space-4 $space-4;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: $space-4 $space-4 $space-3;
   border-bottom: 1px solid rgba($green-light, 0.12);
-  background: rgba($green-dark, 0.55);
+  background: rgba($green-dark, 0.92);
   backdrop-filter: blur(8px);
 }
 
@@ -35,10 +38,24 @@ body.v3-preview-active {
   max-width: 1280px;
   margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: $space-4;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.v3-preview-header__copy {
+  min-width: 0;
+}
+
+@media (min-width: 992px) {
+  .v3-preview-header__inner {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .v3-preview-actions {
+    flex-shrink: 0;
+  }
 }
 
 .v3-preview-eyebrow {
@@ -69,6 +86,8 @@ body.v3-preview-active {
 }
 
 .v3-preview-main {
+  max-width: 1280px;
+  margin: 0 auto;
   padding: $space-6 $space-4 $space-8;
 }
 
@@ -134,7 +153,10 @@ body.v3-preview-active {
   border: 0;
   border-radius: 4px;
   background: $white;
-  overflow: auto;
+
+  @media (max-width: 991px) {
+    pointer-events: none;
+  }
 }
 
 // Phone frame
@@ -170,7 +192,6 @@ body.v3-preview-active {
   border: 0;
   border-radius: 28px;
   background: $white;
-  overflow: auto;
 }
 
 .v3-preview-embed-notice {
@@ -180,32 +201,6 @@ body.v3-preview-active {
 
   a {
     color: $green-accent;
-  }
-}
-
-.v3-preview-interact-toggle {
-  display: none;
-  margin-top: $space-3;
-  width: 100%;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: $space-2 $space-3;
-  border-radius: 999px;
-  border: 1px solid rgba($green-light, 0.35);
-  background: rgba($green-dark, 0.45);
-  color: rgba($green-light, 0.95);
-  font-size: 0.78rem;
-  font-weight: 500;
-  cursor: pointer;
-  text-align: center;
-
-  @media (max-width: 991px) {
-    display: block;
-  }
-
-  .v3-preview-device--mobile & {
-    max-width: 280px;
   }
 }
 
