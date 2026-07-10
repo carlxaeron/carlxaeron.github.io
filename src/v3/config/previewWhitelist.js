@@ -28,6 +28,12 @@ export const PREVIEW_SITES = [
     label: "Suyat Notary Public",
     netlifySite: "suyat-notary-public",
   },
+  {
+    id: "rg-decals",
+    host: "rg-decals-printing.netlify.app",
+    label: "RG Decals and Printing Shop",
+    netlifySite: "rg-decals-printing",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

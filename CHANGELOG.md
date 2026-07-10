@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.18] — 2026-07-10
+
+### Added
+- **RG Decals and Printing Shop** client site (`client-sites/rg-decals/`) — decals, signs, banners, and printing demo with outreach drafts
+- Portfolio preview whitelist entry for `rg-decals-printing.netlify.app`
+
 ## [3.0.17] — 2026-07-10
 
 ### Added
