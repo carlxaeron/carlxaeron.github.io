@@ -16,6 +16,7 @@ import V3Blog from "./Blog";
 import V3Contact from "./Contact";
 import V3Quote from "./Quote";
 import ProjectDetailModal from "../../components/ProjectDetailModal";
+import BlogPostModal from "../../components/BlogPostModal";
 import { getProjectDetails } from "../../data/projectDetails";
 
 // Module-level constant: stable identity across renders, no remount resets
@@ -41,6 +42,10 @@ function V3PortfolioScroll() {
     company: null,
     project: null,
     details: null,
+  });
+  const [blogModal, setBlogModal] = useState({
+    show: false,
+    post: null,
   });
   const isAnyModalOpen = useCallback(
     () => document.body.classList.contains("v3-modal-open"),
@@ -231,6 +236,14 @@ function V3PortfolioScroll() {
     setProjectModal((prev) => ({ ...prev, show: false }));
   }, []);
 
+  const openBlogPost = useCallback((post) => {
+    setBlogModal({ show: true, post });
+  }, []);
+
+  const closeBlogPost = useCallback(() => {
+    setBlogModal((prev) => ({ ...prev, show: false }));
+  }, []);
+
   return (
     <>
       {/* Fixed header / brand */}
@@ -303,6 +316,7 @@ function V3PortfolioScroll() {
                 sectionIndex={index}
                 totalSections={SECTIONS_CONFIG.length}
                 onOpenProject={section.id === "projects" ? openProjectModal : undefined}
+                onOpenBlogPost={section.id === "blog" ? openBlogPost : undefined}
               />
             </div>
           );
@@ -353,6 +367,12 @@ function V3PortfolioScroll() {
         company={projectModal.company}
         project={projectModal.project}
         details={projectModal.details}
+      />
+
+      <BlogPostModal
+        show={blogModal.show}
+        onHide={closeBlogPost}
+        post={blogModal.post}
       />
 
       {/* AI Chat assistant */}

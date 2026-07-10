@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.21] — 2026-07-10
+
+### Changed
+- **News & Blog** reuses shared `V3DetailModal` shell (same dark modal as project details) with working header × and footer Close
+- Blog section styling aligned with Projects (`#00473e` background, standard filter buttons)
+- Blog modal lifted to portfolio root (same pattern as project detail modal)
+
+### Added
+- `V3DetailModal` shared component; `ProjectDetailModal` refactored to use it
+- `BlogPostModal` unit tests
+
 ## [3.0.20] — 2026-07-10
 
 ### Changed

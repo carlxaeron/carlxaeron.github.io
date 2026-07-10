@@ -19,14 +19,16 @@ describe("V3Blog", () => {
     expect(screen.queryByText(/Portfolio preview showcase/i)).not.toBeInTheDocument();
   });
 
-  test("opens modal when a post is clicked", () => {
-    render(<V3Blog isActive={true} />);
+  test("calls onOpenBlogPost when a post is clicked", () => {
+    const onOpenBlogPost = jest.fn();
+    render(<V3Blog isActive={true} onOpenBlogPost={onOpenBlogPost} />);
 
     fireEvent.click(
       screen.getByRole("button", { name: /Read article: Launching a local business website sideline/i })
     );
 
-    expect(screen.getByRole("dialog")).toBeInTheDocument();
-    expect(screen.getByText(/starter websites for local businesses/i)).toBeInTheDocument();
+    expect(onOpenBlogPost).toHaveBeenCalledWith(
+      expect.objectContaining({ id: "client-quotation-sideline" })
+    );
   });
 });

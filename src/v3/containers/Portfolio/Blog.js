@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import SectionTitle from "../../components/SectionTitle";
-import BlogPostModal from "../../components/BlogPostModal";
 import { BLOG_CATEGORIES, BLOG_POSTS, formatBlogDate } from "../../data/blogPosts";
 
 function BlogCard({ post, isActive, index, onOpen }) {
@@ -51,9 +50,8 @@ function BlogCard({ post, isActive, index, onOpen }) {
   );
 }
 
-function V3Blog({ isActive }) {
+function V3Blog({ isActive, onOpenBlogPost }) {
   const [filter, setFilter] = useState("All");
-  const [modal, setModal] = useState({ show: false, post: null });
 
   const headerSpring = useSpring({
     from: { opacity: 0, y: -20 },
@@ -67,14 +65,17 @@ function V3Blog({ isActive }) {
       ? BLOG_POSTS
       : BLOG_POSTS.filter((post) => post.category === filter);
 
-  const handleOpen = (post) => setModal({ show: true, post });
-  const handleClose = () => setModal({ show: false, post: null });
+  const handleOpen = (post) => {
+    if (typeof onOpenBlogPost === "function") {
+      onOpenBlogPost(post);
+    }
+  };
 
   return (
     <section
       id="blog"
       className="v3-section-body"
-      style={{ background: "#D4E9E2", height: "100vh", overflow: "hidden" }}
+      style={{ background: "#00473e", height: "100vh", overflow: "hidden" }}
     >
       <div className="v3-inner v3-scrollable v3-section-scroll">
         <animated.div style={headerSpring}>
@@ -83,7 +84,7 @@ function V3Blog({ isActive }) {
           </SectionTitle>
         </animated.div>
 
-        <div className="v3-filter-btns v3-filter-btns--blog">
+        <div className="v3-filter-btns">
           {BLOG_CATEGORIES.map((category) => (
             <button
               key={category}
@@ -111,8 +112,6 @@ function V3Blog({ isActive }) {
           ))}
         </div>
       </div>
-
-      <BlogPostModal show={modal.show} onHide={handleClose} post={modal.post} />
     </section>
   );
 }
