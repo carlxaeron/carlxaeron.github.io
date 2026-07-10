@@ -1,0 +1,30 @@
+{
+  "businessName": "Suyat Notary Public",
+  "slug": "suyat",
+  "previewHost": "suyat-notary-public.netlify.app",
+  "industry": "Notary public / legal document services",
+  "deployedAt": "2026-07-10",
+  "contact": {
+    "name": "Suyat Law Office",
+    "email": null,
+    "phone": null
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive site (services, about, contact, maps link), mobile-friendly, Facebook integration",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront, 50% on delivery",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=suyat-notary-public.netlify.app"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt"
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/suyatlawoffice/",
+    "googleMaps": "https://www.google.com/maps/place/Suyat+Notary+Public/@14.7470042,121.1309309,17z",
+    "address": "2nd Floor, JRS Building, Kanlaon Street, Amityville, Barangay San Jose, Rodriguez, Rizal"
+  }
+}

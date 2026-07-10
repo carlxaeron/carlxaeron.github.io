@@ -123,6 +123,7 @@ CORS: `carlmanuel.com`, `www.carlmanuel.com`, `carlxaeron.github.io`, `localhost
 | Sample demo | `client-sites/quotation/` (Bamboo Grove Café) |
 | Extra Rice 8 Trading | `client-sites/extra-rice/` → `extra-rice-trading.netlify.app` |
 | Ohana Business Solutions | `client-sites/ohana/` → `ohana-business-solutions.netlify.app` |
+| Suyat Notary Public | `client-sites/suyat/` → `suyat-notary-public.netlify.app` |
 | Embed security | `embed-guard.js` + `netlify/edge-functions/embed-only.js` |
 | Outreach drafts | `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt` |
 | Cursor skill | `.cursor/skills/client-site-netlify/SKILL.md` |

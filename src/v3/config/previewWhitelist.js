@@ -22,6 +22,12 @@ export const PREVIEW_SITES = [
     label: "Ohana Business Solutions Inc",
     netlifySite: "ohana-business-solutions",
   },
+  {
+    id: "suyat",
+    host: "suyat-notary-public.netlify.app",
+    label: "Suyat Notary Public",
+    netlifySite: "suyat-notary-public",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
