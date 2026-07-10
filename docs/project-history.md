@@ -130,6 +130,8 @@ CORS: `carlmanuel.com`, `www.carlmanuel.com`, `carlxaeron.github.io`, `localhost
 | Outreach drafts | `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt` |
 | Cursor skill | `.cursor/skills/client-site-netlify/SKILL.md` |
 
+**Blog (v3.0.19):** `#blog` section — `src/v3/data/blogPosts.js`, `Blog.js`, posts on sideline workflow and each client demo.
+
 **Preview URL:** `https://carlmanuel.com/?preview=bamboo-grove-cafe.netlify.app`
 
 Hosts must match `*.netlify.app` or explicit `PREVIEW_SITES` list. Client Netlify URLs are **embed-only** (direct access returns 403). Preview UI has no “open live site” link.

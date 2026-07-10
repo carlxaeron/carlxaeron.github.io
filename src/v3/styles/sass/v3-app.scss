@@ -1178,6 +1178,212 @@ body.v3-modal-open {
       border-color: $green-accent;
     }
   }
+
+  &--blog button {
+    border-color: rgba($green-dark, 0.2);
+    color: $green-dark;
+
+    &.active, &:hover {
+      background: $green-dark;
+      color: $white;
+      border-color: $green-dark;
+    }
+  }
+}
+
+// =============================================================
+// Blog / news
+// =============================================================
+#blog {
+  .v3-title {
+    color: $green-dark;
+  }
+
+  .v3-subtitle {
+    color: $green-mid;
+  }
+}
+
+.v3-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-4;
+  padding-bottom: $space-8;
+
+  @media (max-width: #{$bp-mobile}) {
+    grid-template-columns: 1fr;
+    gap: $space-3;
+  }
+}
+
+.v3-blog-empty {
+  grid-column: 1 / -1;
+  color: $green-mid;
+  text-align: center;
+  padding: $space-8 $space-4;
+  margin: 0;
+}
+
+.v3-blog-card {
+  height: 100%;
+
+  &__button {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    padding: $space-5;
+    border: none;
+    border-radius: $border-radius;
+    background: $white;
+    box-shadow: 0 12px 40px rgba($green-dark, 0.08);
+    text-align: left;
+    cursor: pointer;
+    transition: transform $transition-base, box-shadow $transition-base;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba($green-dark, 0.12);
+    }
+  }
+
+  &__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $space-2;
+    width: 100%;
+    margin-bottom: $space-3;
+  }
+
+  &__category {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: rgba($green-accent, 0.12);
+    color: $green-dark;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  &__date {
+    font-size: 0.78rem;
+    color: rgba($text-dark, 0.55);
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    color: $green-dark;
+    margin-bottom: $space-2;
+    line-height: 1.35;
+  }
+
+  &__excerpt {
+    flex: 1;
+    font-size: 0.9rem;
+    color: rgba($text-dark, 0.78);
+    line-height: 1.65;
+    margin-bottom: $space-3;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: $space-3;
+  }
+
+  &__tag {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: $green-light;
+    color: $green-mid;
+  }
+
+  &__read {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: $green-accent;
+  }
+}
+
+.v3-blog-modal {
+  &__content {
+    background: $white;
+    border: none;
+    border-radius: $border-radius;
+    overflow: hidden;
+  }
+
+  &__header {
+    border-bottom: 1px solid rgba($green-dark, 0.08);
+    padding: $space-5 $space-6 $space-4;
+    align-items: flex-start;
+
+    .modal-title {
+      font-family: $font-display;
+      font-size: clamp(1.25rem, 3vw, 1.6rem);
+      color: $green-dark;
+      line-height: 1.3;
+      margin-top: $space-2;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $space-2;
+    margin: 0;
+    font-size: 0.78rem;
+    color: rgba($text-dark, 0.6);
+  }
+
+  &__body {
+    padding: $space-5 $space-6 $space-6;
+    max-height: min(70vh, 640px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    p {
+      color: rgba($text-dark, 0.85);
+      line-height: 1.75;
+      margin-bottom: $space-4;
+      font-size: 0.95rem;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: $space-4;
+    margin-bottom: $space-4;
+  }
+
+  &__preview-link {
+    display: inline-block;
+    margin-top: $space-2;
+    padding: 10px 18px;
+    border-radius: 100px;
+    background: $green-accent;
+    color: $white !important;
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: filter $transition-base;
+
+    &:hover {
+      filter: brightness(1.05);
+      text-decoration: none;
+    }
+  }
 }
 
 // =============================================================

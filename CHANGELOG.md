@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.19] — 2026-07-10
+
+### Added
+- **News & Blog** portfolio section (`#blog`) — updates on sideline client-site work and portfolio tooling
+- Seven launch posts: workflow overview, preview showcase, Tailwind client stack, and four client demos (RG Decals, Suyat, Ohana, Extra Rice)
+- Blog post modal with category filters and portfolio preview links
+
+### Fixed
+- Restored missing Sass spacing tokens (`$space-4`, `$space-6`) for V3 stylesheet compile
+
 ## [3.0.18] — 2026-07-10
 
 ### Added
