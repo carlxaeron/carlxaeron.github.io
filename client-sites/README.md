@@ -22,6 +22,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Sonyoba Marketing](#sonyoba-marketing) | `sonyoba-marketing` | Office equipment | [Preview](https://carlmanuel.com/?preview=sonyoba-marketing) | 2026-07-13 |
 | [JK Construction Services](#jk-construction-services) | `jk-construction` | Construction / renovation | [Preview](https://carlmanuel.com/?preview=jk-construction) | 2026-07-13 |
 | [Machinemate Mainteneering Services](#machinemate-mainteneering-services) | `machinemate` | Industrial fans / ventilation | [Preview](https://carlmanuel.com/?preview=machinemate) | 2026-07-13 |
+| [Jazz1 Airconditioning Services](#jazz1-airconditioning-services) | `jazz1-aircon` | Air conditioning / HVAC | [Preview](https://carlmanuel.com/?preview=jazz1-aircon) | 2026-07-13 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -153,6 +154,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Location** | Rodriguez, Philippines |
 | **Source** | [Facebook](https://www.facebook.com/machinemate/) |
 | **Products** | SS/MS centrifugal fans, axial fans, roof exhaust; export & maintenance engineering |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days |
+| **Outreach** | `quotation-email.md` · `quotation-sms.txt` · `quotation-messenger.txt` |
+
+---
+
+### Jazz1 Airconditioning Services
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/jazz1-aircon/` |
+| **Netlify site** | `jazz1-aircon-services` |
+| **Preview host** | `jazz1-aircon-services.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=jazz1-aircon |
+| **Contact** | +63 931 763 9752 (Facebook primary) |
+| **Location** | Rodriguez (Montalban), Rizal, Philippines |
+| **Trade name** | JMAES Airconditioning Services |
+| **Source** | [Facebook](https://www.facebook.com/profile.php?id=100088680976545) |
+| **Services** | Aircon sales, installation, general cleaning, chemical wash, repair |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days |
 | **Outreach** | `quotation-email.md` · `quotation-sms.txt` · `quotation-messenger.txt` |
 

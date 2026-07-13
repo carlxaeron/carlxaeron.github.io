@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.31] — 2026-07-13
+
+### Added
+- **Jazz1 Airconditioning Services** client quotation site (`jazz1-aircon`) — HVAC sales, installation, cleaning, repair in Rodriguez (Montalban), Rizal
+- Portfolio preview: `?preview=jazz1-aircon` → `jazz1-aircon-services.netlify.app`
+
 ## [3.0.30] — 2026-07-13
 
 ### Changed

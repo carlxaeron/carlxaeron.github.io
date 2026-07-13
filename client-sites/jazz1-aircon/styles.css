@@ -1,0 +1,57 @@
+/* Jazz1 Airconditioning Services — hero, reveal, HVAC accents */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-header] {
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+[data-header].is-scrolled {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.hero-bg {
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-bg--jazz1 {
+  background-image:
+    linear-gradient(135deg, rgba(12, 74, 110, 0.95) 0%, rgba(3, 105, 161, 0.82) 50%, rgba(6, 182, 212, 0.35) 100%),
+    radial-gradient(ellipse at 80% 20%, rgba(6, 182, 212, 0.25) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 90%, rgba(224, 242, 254, 0.12) 0%, transparent 45%);
+}
+
+.trust-strip {
+  background: linear-gradient(90deg, #0c4a6e 0%, #0369a1 50%, #0c4a6e 100%);
+}
+
+.service-card__icon {
+  font-size: 2rem;
+  line-height: 1;
+}

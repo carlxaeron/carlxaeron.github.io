@@ -53,6 +53,12 @@ export const PREVIEW_SITES = [
     label: "Machinemate Mainteneering Services",
     netlifySite: "machinemate-engineering",
   },
+  {
+    id: "jazz1-aircon",
+    host: "jazz1-aircon-services.netlify.app",
+    label: "Jazz1 Airconditioning Services",
+    netlifySite: "jazz1-aircon-services",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
