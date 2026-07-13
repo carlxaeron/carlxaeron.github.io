@@ -15,7 +15,7 @@ I noticed **Ohana Business Solutions Inc** (Rizal Branch) is active on Facebook 
 I prepared a **sample one-page website** so you can preview how it looks on **desktop and mobile** before deciding:
 
 **Preview (desktop + mobile):**  
-https://carlmanuel.com/?preview=ohana-business-solutions.netlify.app
+https://carlmanuel.com/?preview=ohana
 
 ### Proposed package — Starter Business Website
 

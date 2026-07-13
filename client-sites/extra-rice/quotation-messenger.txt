@@ -2,7 +2,7 @@ Hi! 👋
 
 I'm Carl Louis Manuel, web developer from the area. I noticed Extra Rice 8 Trading is active on Facebook but doesn't have a website yet — so I built a **sample preview** for you (phone + desktop view):
 
-🔗 https://carlmanuel.com/?preview=extra-rice-trading.netlify.app
+🔗 https://carlmanuel.com/?preview=extra-rice
 
 📦 Starter Business Website
 • Products, services, both Rodriguez locations, contact section

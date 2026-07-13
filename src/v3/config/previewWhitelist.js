@@ -1,6 +1,7 @@
 /**
  * Whitelist for ?preview= portfolio showcase iframes.
- * Only *.netlify.app hosts or explicit PREVIEW_SITES entries are allowed.
+ * Public URLs use short slugs: ?preview=jk-construction
+ * Legacy full hostnames (?preview=*.netlify.app) still resolve for backward compatibility.
  */
 
 export const PREVIEW_SITES = [
@@ -49,6 +50,7 @@ export const PREVIEW_SITES = [
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
+const PREVIEW_SLUG_PATTERN = /^[a-z0-9][a-z0-9-]*$/i;
 
 function normalizeHostname(raw) {
   if (!raw || typeof raw !== "string") return null;
@@ -76,31 +78,72 @@ function isNetlifyAppHost(host) {
   return NETLIFY_HOST_PATTERN.test(host);
 }
 
-function findPreviewSite(host) {
+function findPreviewSiteByHost(host) {
   return PREVIEW_SITES.find((site) => site.host.toLowerCase() === host) ?? null;
 }
 
-export function isPreviewHostAllowed(host) {
-  const normalized = normalizeHostname(host);
-  if (!normalized) return false;
-  return isNetlifyAppHost(normalized) || Boolean(findPreviewSite(normalized));
+function findPreviewSiteByKey(key) {
+  if (!key || typeof key !== "string") return null;
+  const normalized = key.trim().toLowerCase();
+  if (!normalized) return null;
+
+  return (
+    PREVIEW_SITES.find(
+      (site) =>
+        site.id.toLowerCase() === normalized ||
+        site.netlifySite.toLowerCase() === normalized ||
+        site.host.toLowerCase() === normalized
+    ) ?? null
+  );
+}
+
+export function buildPreviewPortfolioUrl(slugOrSite) {
+  const site = findPreviewSiteByKey(slugOrSite);
+  const slug = site?.id ?? String(slugOrSite || "").trim().toLowerCase();
+  if (!slug) return null;
+  return `https://carlmanuel.com/?preview=${slug}`;
+}
+
+export function isPreviewHostAllowed(raw) {
+  return Boolean(resolvePreviewUrl(raw));
 }
 
 /**
- * @param {string} rawQueryValue - value of ?preview=
- * @returns {{ url: string, host: string, site: object | null } | null}
+ * @param {string} rawQueryValue - value of ?preview= (slug or legacy hostname)
+ * @returns {{ url: string, host: string, slug: string, site: object | null } | null}
  */
 export function resolvePreviewUrl(rawQueryValue) {
-  const host = normalizeHostname(rawQueryValue);
-  if (!host || !isPreviewHostAllowed(host)) {
-    return null;
+  const raw = rawQueryValue?.trim();
+  if (!raw) return null;
+
+  const asHost = normalizeHostname(raw);
+  if (asHost && isPreviewHostAllowedInternal(asHost)) {
+    const site = findPreviewSiteByHost(asHost);
+    return {
+      url: `https://${asHost}`,
+      host: asHost,
+      slug: site?.id ?? asHost.replace(/\.netlify\.app$/i, ""),
+      site,
+    };
   }
 
-  return {
-    url: `https://${host}`,
-    host,
-    site: findPreviewSite(host),
-  };
+  if (PREVIEW_SLUG_PATTERN.test(raw)) {
+    const site = findPreviewSiteByKey(raw);
+    if (site) {
+      return {
+        url: `https://${site.host}`,
+        host: site.host,
+        slug: site.id,
+        site,
+      };
+    }
+  }
+
+  return null;
+}
+
+function isPreviewHostAllowedInternal(host) {
+  return isNetlifyAppHost(host) || Boolean(findPreviewSiteByHost(host));
 }
 
 export function getPreviewQueryFromSearch(search = "") {

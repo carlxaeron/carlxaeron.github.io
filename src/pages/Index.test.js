@@ -31,6 +31,14 @@ describe("Index preview routing", () => {
     expect(screen.queryByTestId("portfolio-mock")).not.toBeInTheDocument();
   });
 
+  test("renders preview showcase for short slug", () => {
+    mockSearch("?preview=jk-construction");
+    render(<Index />);
+    expect(screen.getByTestId("preview-showcase")).toBeInTheDocument();
+    expect(screen.getByText(/JK Construction Services/i)).toBeInTheDocument();
+    expect(screen.queryByText(/\.netlify\.app/i)).not.toBeInTheDocument();
+  });
+
   test("renders error for disallowed host", () => {
     mockSearch("?preview=evil.com");
     render(<Index />);

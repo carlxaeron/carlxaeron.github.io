@@ -15,7 +15,7 @@ I came across **RG Decals and Printing Shop** on Google Maps and Facebook — yo
 I prepared a **sample one-page website** so you can preview how it looks on **desktop and mobile** before deciding:
 
 **Preview (desktop + mobile):**  
-https://carlmanuel.com/?preview=rg-decals-printing.netlify.app
+https://carlmanuel.com/?preview=rg-decals
 
 ### Proposed package — Starter Business Website
 

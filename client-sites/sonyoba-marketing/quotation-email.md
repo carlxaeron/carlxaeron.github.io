@@ -13,7 +13,7 @@ Good day! I'm **Carl Louis Manuel**, a full-stack web developer based in the Phi
 I prepared a **sample redesigned website** for **Sonyoba Marketing** — a cleaner, mobile-first layout that showcases your best-selling office equipment with real product photos, category filters, client reviews, and clear contact CTAs.
 
 **Preview (desktop + mobile):**  
-https://carlmanuel.com/?preview=sonyoba-marketing.netlify.app
+https://carlmanuel.com/?preview=sonyoba-marketing
 
 ### Proposed package — Business Website Redesign
 

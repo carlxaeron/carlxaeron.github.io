@@ -2,7 +2,7 @@ Hi! 👋
 
 I'm Carl Louis Manuel, web developer from the area. I saw RG Decals and Printing Shop on Facebook and built a **sample website preview** (phone + desktop):
 
-🔗 https://carlmanuel.com/?preview=rg-decals-printing.netlify.app
+🔗 https://carlmanuel.com/?preview=rg-decals
 
 📦 Starter Business Website
 • Decals, signs, printing, contact — mobile-friendly

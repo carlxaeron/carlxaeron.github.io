@@ -2,7 +2,7 @@ Hi! 👋
 
 I'm Carl Louis Manuel, web developer from the area. I saw Ohana Biz Rizal Branch on Facebook — great tagline *"Your family in doing business"* — and built a **sample website preview** (phone + desktop):
 
-🔗 https://carlmanuel.com/?preview=ohana-business-solutions.netlify.app
+🔗 https://carlmanuel.com/?preview=ohana
 
 📦 Starter Business Website
 • Services, about, contact — mobile-friendly

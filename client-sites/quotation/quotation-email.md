@@ -13,7 +13,7 @@ Good day! I'm **Carl Louis Manuel**, a full-stack web developer based in the Phi
 I prepared a **sample one-page website** for **Bamboo Grove Café** so you can see how your café could look online on desktop and mobile — before you commit to anything.
 
 **Preview (desktop + mobile):**  
-https://carlmanuel.com/?preview=bamboo-grove-cafe.netlify.app
+https://carlmanuel.com/?preview=quotation
 
 ### Proposed package — Starter Business Website
 

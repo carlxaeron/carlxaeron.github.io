@@ -2,7 +2,7 @@ Hi Maria! 👋
 
 I'm Carl Louis Manuel, web developer. I put together a **sample website** for Bamboo Grove Café so you can see how it looks on phone and desktop before deciding.
 
-🔗 Preview: https://carlmanuel.com/?preview=bamboo-grove-cafe.netlify.app
+🔗 Preview: https://carlmanuel.com/?preview=quotation
 
 📦 Starter Business Website
 • One-page site: menu, story, contact — mobile-friendly

@@ -80,7 +80,7 @@ function ScrollHint({ children, className = "" }) {
   );
 }
 
-function PreviewShowcase({ previewUrl, host, label }) {
+function PreviewShowcase({ previewUrl, label }) {
   const [desktopBlocked, setDesktopBlocked] = useState(false);
   const [mobileBlocked, setMobileBlocked] = useState(false);
   const desktopScreenRef = useRef(null);
@@ -89,7 +89,7 @@ function PreviewShowcase({ previewUrl, host, label }) {
   const desktopScale = useViewportScale(desktopScreenRef, DESKTOP_VIEWPORT, 0.25);
   const mobileScale = useViewportScale(phoneScreenRef, MOBILE_VIEWPORT, 0.65);
 
-  const displayLabel = label || host;
+  const displayLabel = label || "Client site preview";
 
   useEffect(() => {
     document.documentElement.classList.add("v3-preview-active");
@@ -125,7 +125,6 @@ function PreviewShowcase({ previewUrl, host, label }) {
           <div className="v3-preview-header__copy">
             <p className="v3-preview-eyebrow">Client site preview</p>
             <h1 className="v3-preview-title">{displayLabel}</h1>
-            <p className="v3-preview-host">{host}</p>
           </div>
         </div>
       </header>
@@ -192,7 +191,7 @@ function PreviewShowcase({ previewUrl, host, label }) {
   );
 }
 
-export function PreviewShowcaseError({ host }) {
+export function PreviewShowcaseError({ previewKey }) {
   useEffect(() => {
     document.documentElement.classList.add("v3-preview-active");
     document.body.classList.add("v3-preview-active");
@@ -211,9 +210,9 @@ export function PreviewShowcaseError({ host }) {
       <div className="v3-preview-error">
         <h1 className="v3-preview-title">Preview not available</h1>
         <p className="v3-preview-error__text">
-          {host
-            ? `"${host}" is not on the allowed preview list. Only approved Netlify client sites can be embedded.`
-            : "Missing or invalid preview parameter. Use ?preview=your-site.netlify.app"}
+          {previewKey
+            ? `"${previewKey}" is not on the allowed preview list.`
+            : "Missing or invalid preview parameter. Use ?preview=client-slug (for example ?preview=jk-construction)."}
         </p>
         <button type="button" className="v3-btn v3-btn--primary" onClick={handleBack}>
           Back to portfolio

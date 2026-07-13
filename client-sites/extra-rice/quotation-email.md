@@ -15,7 +15,7 @@ I noticed **Extra Rice 8 Trading, OPC** is active on Facebook (1.3K+ followers) 
 I prepared a **sample one-page website** for your business so you can preview how it looks on **desktop and mobile** before deciding:
 
 **Preview (desktop + mobile):**  
-https://carlmanuel.com/?preview=extra-rice-trading.netlify.app
+https://carlmanuel.com/?preview=extra-rice
 
 ### Proposed package — Starter Business Website
 

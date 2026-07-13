@@ -2,7 +2,7 @@ Hi! 👋
 
 I'm Carl Louis Manuel, web developer from the area. I saw Suyat Law Office on Facebook and built a **sample website preview** for Suyat Notary Public (phone + desktop):
 
-🔗 https://carlmanuel.com/?preview=suyat-notary-public.netlify.app
+🔗 https://carlmanuel.com/?preview=suyat
 
 📦 Starter Business Website
 • Notary services, about, contact — mobile-friendly

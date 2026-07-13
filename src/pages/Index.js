@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import Portfolio from "../v3/containers/Portfolio/Portfolio";
 import PreviewShowcase, { PreviewShowcaseError } from "../v3/containers/PreviewShowcase/PreviewShowcase";
 import { getPreviewQueryFromSearch, resolvePreviewUrl } from "../v3/config/previewWhitelist";
@@ -13,10 +13,18 @@ function Index() {
   const previewRaw = previewQuery?.trim() || null;
   const previewResolved = previewRaw ? resolvePreviewUrl(previewRaw) : null;
 
+  useEffect(() => {
+    if (!previewResolved?.slug || previewRaw === previewResolved.slug) return undefined;
+    const next = new URL(window.location.href);
+    next.searchParams.set("preview", previewResolved.slug);
+    window.history.replaceState(null, "", next.pathname + next.search + next.hash);
+    return undefined;
+  }, [previewRaw, previewResolved]);
+
   if (previewRaw && !previewResolved) {
     return (
       <div className="App">
-        <PreviewShowcaseError host={previewRaw} />
+        <PreviewShowcaseError previewKey={previewRaw} />
       </div>
     );
   }
@@ -26,7 +34,6 @@ function Index() {
       <div className="App">
         <PreviewShowcase
           previewUrl={previewResolved.url}
-          host={previewResolved.host}
           label={previewResolved.site?.label}
         />
       </div>

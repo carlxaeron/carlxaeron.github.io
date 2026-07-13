@@ -5,8 +5,10 @@ description: Scaffold, build, and deploy local-business quotation websites under
 
 # Client site + Netlify deploy
 
-**Preview URL format:** `https://carlmanuel.com/?preview={host}`  
+**Preview URL format:** `https://carlmanuel.com/?preview={slug}` (e.g. `?preview=jk-construction`)  
+**Legacy:** full `*.netlify.app` hostnames in `?preview=` still resolve but the URL bar is normalized to the slug.  
 **Whitelist:** [src/v3/config/previewWhitelist.js](../../src/v3/config/previewWhitelist.js)  
+**Site catalog:** [client-sites/README.md](../../client-sites/README.md) — list of all clients, preview links, contact, packages  
 **Template:** [client-sites/_template/](../../client-sites/_template/)
 
 ## Prerequisites
@@ -26,6 +28,7 @@ Client site progress:
 - [ ] client.json updated (contact + quotation fields)
 - [ ] Draft outreach written (email, SMS, messenger)
 - [ ] PREVIEW_SITES entry added
+- [ ] client-sites/README.md catalog updated (table + detail section)
 - [ ] Portfolio preview link + drafts shared with user for review
 ```
 
@@ -112,7 +115,9 @@ Record hostname (e.g. `bamboo-grove-cafe.netlify.app`).
 { id: "slug", host: "slug.netlify.app", label: "Business Name", netlifySite: "slug" }
 ```
 
-3. Share: `https://carlmanuel.com/?preview={previewHost}`
+3. Share: `https://carlmanuel.com/?preview={slug}` (use `client.json` → `slug`, not the Netlify hostname)
+
+4. **Update the site catalog:** add a row and detail section in [`client-sites/README.md`](../../client-sites/README.md) (preview link, contact, package, sources, outreach paths).
 
 **Preview UI:** `PreviewShowcase` shows desktop + mobile mockups only — there is **no “Open live site”** link (client URLs are embed-only by design).
 
@@ -147,7 +152,7 @@ Follow [deploy-portfolio/SKILL.md](../deploy-portfolio/SKILL.md) — bump versio
 
 After Netlify deploy **and** portfolio push (if whitelist changed), verify UI in a real browser before sharing outreach drafts.
 
-**Preview URL:** `https://carlmanuel.com/?preview={previewHost}`
+**Preview URL:** `https://carlmanuel.com/?preview={slug}`
 
 Applies to **every** whitelisted client site via shared `PreviewShowcase` (not per-client):
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.23] — 2026-07-13
+
+### Changed
+- **Preview showcase** — `?preview=` uses short slugs (e.g. `?preview=jk-construction`); legacy `*.netlify.app` URLs still resolve and normalize to slug
+- Preview header no longer displays Netlify hostnames
+- Client preview links in `client.json`, outreach drafts, and `client-sites/README.md` updated to slug format
+
+### Added
+- **`client-sites/README.md`** — full site catalog (preview links, contact, packages, outreach paths)
+- Cursor skill/rules/AGENTS updated to maintain catalog and slug preview URLs
+
 ## [3.0.22] — 2026-07-13
 
 ### Added

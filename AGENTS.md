@@ -74,12 +74,15 @@ Instructions for AI agents working in this repository.
 1. Copy `client-sites/_template/` → `client-sites/{slug}/`
 2. Customize HTML with **Tailwind CDN** + supplemental `styles.css`; keep `site.js` for interactivity
 3. **Keep** `embed-guard.js` + edge `embed-only` + CSP headers
-3. Fill `client.json` (`contact`, `quotation` package/price/timeline)
-4. Deploy via Netlify MCP or CLI (`netlify.toml`: `command = ""`)
-5. Add host to `src/v3/config/previewWhitelist.js`; update `client.json`
-6. Draft outreach: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`
-7. Share preview `https://carlmanuel.com/?preview={host}` + drafts for user review (embed-only — direct Netlify URL returns 403)
-8. **Browser QA** — verify preview UI in Chrome (desktop + mobile mockups at true viewports, no overlap, iframe scroll)
+4. Fill `client.json` (`contact`, `quotation` package/price/timeline)
+5. Deploy via Netlify MCP or CLI (`netlify.toml`: `command = ""`)
+6. Add host to `src/v3/config/previewWhitelist.js`; update `client.json`
+7. **Update [`client-sites/README.md`](client-sites/README.md)** — catalog table + per-client detail section
+8. Draft outreach: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`
+9. Share preview `https://carlmanuel.com/?preview={slug}` + drafts for user review (embed-only — direct client URL returns 403)
+10. **Browser QA** — verify preview UI in Chrome (desktop + mobile mockups at true viewports, no overlap, iframe scroll)
+
+Full catalog: [`client-sites/README.md`](client-sites/README.md)
 
 ## MCP servers
 

@@ -13,7 +13,7 @@ Good day! I'm **Carl Louis Manuel**, a full-stack web developer based in the Phi
 I prepared a **sample one-page website** for **JK Construction Services** — a professional layout with your services, project gallery, service area, FAQ, and easy contact buttons linked to your Facebook page.
 
 **Preview (desktop + mobile):**  
-https://carlmanuel.com/?preview=jk-construction-services.netlify.app
+https://carlmanuel.com/?preview=jk-construction
 
 ### Proposed package — Starter Business Website
 

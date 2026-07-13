@@ -15,7 +15,7 @@ I noticed **Suyat Notary Public** (Suyat Law Office) on Google Maps and Facebook
 I prepared a **sample one-page website** so you can preview how it looks on **desktop and mobile** before deciding:
 
 **Preview (desktop + mobile):**  
-https://carlmanuel.com/?preview=suyat-notary-public.netlify.app
+https://carlmanuel.com/?preview=suyat
 
 ### Proposed package — Starter Business Website
 

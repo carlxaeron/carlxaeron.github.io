@@ -9,11 +9,12 @@ alwaysApply: false
 
 # Client quotation sites
 
-Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-netlify/SKILL.md)
+Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-netlify/SKILL.md)  
+**Catalog:** [`client-sites/README.md`](../../client-sites/README.md) — all deployed clients, preview links, contact, packages, outreach paths
 
 ## Preview showcase
 
-- URL: `https://carlmanuel.com/?preview={hostname}`
+- URL: `https://carlmanuel.com/?preview={slug}` (short id from `PREVIEW_SITES`, e.g. `jk-construction`)
 - Whitelist: `*.netlify.app` OR explicit `PREVIEW_SITES` in [`previewWhitelist.js`](../../src/v3/config/previewWhitelist.js)
 - Component: [`PreviewShowcase.js`](../../src/v3/containers/PreviewShowcase/PreviewShowcase.js)
 - UI: desktop monitor + mobile phone mockups; iframes render at **1280×800** (desktop) and **390×844** (mobile), scaled to fit frames; **Back to portfolio** only (no live-site link)
@@ -26,6 +27,7 @@ Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-net
 4. Deploy to Netlify; set `previewHost`, `deployedAt`, and `quotation.previewUrl` in `client.json`
 5. Write outreach drafts: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`
 6. Register in `PREVIEW_SITES`
+7. **Update [`client-sites/README.md`](../../client-sites/README.md)** — add catalog table row + per-client detail section
 
 ## Outreach drafts (required per client)
 
