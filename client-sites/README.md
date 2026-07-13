@@ -173,7 +173,7 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Tagline** | Your No.1 TRUSTED in Aircon Company |
 | **Reviews** | 100% recommend (15 Reviews) · 12K followers · Always open |
 | **Source** | [Facebook](https://www.facebook.com/people/Jazz1-Airconditioning-Services-Montalban-Rizal/100088680976545/) |
-| **Assets** | Hero + 4 gallery JPGs scraped via Chrome DevTools MCP |
+| **Assets** | Hero + 4 gallery JPGs downloaded via Chrome DevTools MCP (network response) |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days |
 | **Outreach** | `quotation-email.md` · `quotation-sms.txt` · `quotation-messenger.txt` |
 
@@ -192,7 +192,7 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Service area** | Rizal, Philippines |
 | **Tagline** | Simple but innovative industrial fan solutions |
 | **Source** | [Facebook](https://www.facebook.com/cloverindustrialfan) |
-| **Assets** | Hero + 4 gallery JPGs scraped via Chrome DevTools MCP |
+| **Assets** | Hero + 4 gallery JPGs downloaded via Chrome DevTools MCP (network response) |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days |
 | **Outreach** | `quotation-email.md` · `quotation-sms.txt` · `quotation-messenger.txt` |
 

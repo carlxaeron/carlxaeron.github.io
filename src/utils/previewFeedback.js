@@ -2,6 +2,7 @@ import { mapping } from "../mapping";
 import {
   getVisitorContext,
   hasSubmittedFeedback,
+  isAnalyticsExcluded,
   markFeedbackSubmitted,
 } from "./visitTracker";
 
@@ -9,6 +10,11 @@ export async function submitPreviewFeedback({ previewSlug, previewLabel, sentime
   if (process.env.NODE_ENV === "development") {
     markFeedbackSubmitted(previewSlug);
     return { status: 200, message: "Feedback recorded (dev)" };
+  }
+
+  if (isAnalyticsExcluded()) {
+    markFeedbackSubmitted(previewSlug);
+    return { status: 200, message: "Feedback skipped (owner exclude)" };
   }
 
   const endpoint = mapping.previewFeedback;

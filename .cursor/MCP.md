@@ -6,7 +6,7 @@
 |--------|---------|
 | `onlinejobs-apify` | OnlineJobs.ph search, apply, CV upload |
 | `netlify` | Create/deploy client sites under `client-sites/` — see [site catalog](../client-sites/README.md). Preview links use `?preview={slug}`; tests in `previewWhitelist.test.js`.
-| `chrome-devtools` (user) | Scrape client Facebook pages (About, Photos) and save hero/gallery images when building quotation sites |
+| `chrome-devtools` (user) | Scrape client Facebook pages (About, Photos); inspect + download hero/gallery images via network responses when building quotation sites |
 
 Set `APIFY_API_TOKEN` in Cursor MCP env for onlinejobs. Restart Cursor after changes.
 
@@ -16,9 +16,12 @@ Use for **client-site-netlify** when the prospect link is Facebook:
 
 - `new_page` / `navigate_page` → Facebook URL
 - `take_snapshot` → intro, contact, address, reviews
-- **Photos** tab → `take_screenshot` (`uid` + `filePath`) → `client-sites/{slug}/assets/*.jpg`
+- **Photos** tab → `evaluate_script` to inspect images (dimensions, alt) → pick best assets
+- `list_network_requests` (`resourceTypes: ["image"]`) → match `fbcdn.net` URLs
+- `get_network_request` (`reqid` + `responseFilePath`) → download full JPEG to `client-sites/{slug}/assets/`
+- Shell `file` on saved files to verify resolution before commit
 
-Do not use `WebFetch` or `curl` on Facebook CDN for images — use browser screenshots instead.
+Do **not** use `take_screenshot` for client `assets/` (low-res crops). Do **not** use `WebFetch` or `curl` on Facebook CDN — returns 403 without browser session. See skill Step 1b for full workflow.
 
 ## Netlify MCP
 

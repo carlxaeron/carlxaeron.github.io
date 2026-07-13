@@ -3,9 +3,14 @@ import Portfolio from "../v3/containers/Portfolio/Portfolio";
 import PreviewShowcase, { PreviewShowcaseError } from "../v3/containers/PreviewShowcase/PreviewShowcase";
 import { getPreviewQueryFromSearch, resolvePreviewUrl } from "../v3/config/previewWhitelist";
 import VisitTracker from "../components/VisitTracker";
+import { applyOwnerExcludeFromUrl } from "../utils/visitTracker";
 import "./../styles/App.css";
 
 function Index() {
+  useEffect(() => {
+    applyOwnerExcludeFromUrl();
+  }, []);
+
   const previewQuery = useMemo(
     () => getPreviewQueryFromSearch(typeof window !== "undefined" ? window.location.search : ""),
     []

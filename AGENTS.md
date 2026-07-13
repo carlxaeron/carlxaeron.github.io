@@ -72,7 +72,7 @@ Instructions for AI agents working in this repository.
 
 ### Client site + Netlify preview
 1. Copy `client-sites/_template/` → `client-sites/{slug}/`
-2. **Scrape client Facebook** via Chrome DevTools MCP (About + Photos → `assets/`); see client-site-netlify skill Step 1b
+2. **Scrape client Facebook** via Chrome DevTools MCP (About + Photos → inspect + download to `assets/`); see client-site-netlify skill Step 1b
 3. Customize HTML with **Tailwind CDN** + supplemental `styles.css`; keep `site.js` for interactivity
 4. **Keep** `embed-guard.js` + edge `embed-only` + CSP headers
 5. Fill `client.json` (`contact`, `quotation` package/price/timeline)
@@ -92,7 +92,7 @@ Preview tests: `src/v3/config/previewWhitelist.test.js`, `src/pages/Index.test.j
 |--------|--------|---------|
 | `onlinejobs-apify` | `.cursor/mcp.json` | Job search & apply |
 | `netlify` | `.cursor/mcp.json` | Client site deploy (required for client-site-netlify skill) |
-| `chrome-devtools` | user MCP | Facebook page brief + photo screenshots for client sites |
+| `chrome-devtools` | user MCP | Facebook page brief + photo inspect/download for client sites |
 
 ## Tests
 

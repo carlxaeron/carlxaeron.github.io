@@ -11,8 +11,13 @@ const {onRequest} = require("firebase-functions/v2/https");
 const {onSchedule} = require("firebase-functions/v2/scheduler");
 const logger = require("firebase-functions/logger");
 const admin = require("firebase-admin");
-const crypto = require("crypto");
 const { sendError, sendSuccess } = require("./helper");
+const {
+  getClientIp,
+  hashIp,
+  isExcludedAnalyticsRequest,
+  isExcludedVisitRecord,
+} = require("./analyticsExclusion");
 const { SKILLS, PROJECTS_DESCRIPTION, COMPANIES, EXPERIENCES, PROJECTS_DESCRIPTION2 } = require("./external-config");
 const https = require('https');
 
@@ -140,19 +145,6 @@ function applyCorsHeaders(request, response, options = {}) {
   response.setHeader("Access-Control-Allow-Headers", "Content-Type");
 }
 
-function getClientIp(request) {
-  const forwarded = request.headers["x-forwarded-for"];
-  if (typeof forwarded === "string" && forwarded.length) {
-    return forwarded.split(",")[0].trim();
-  }
-  return request.ip || "";
-}
-
-function hashIp(ip) {
-  if (!ip) return null;
-  return crypto.createHash("sha256").update(`${ip}:carlxaeron-portfolio`).digest("hex").slice(0, 16);
-}
-
 function parseDevice(userAgent = "") {
   const ua = String(userAgent).toLowerCase();
   if (/mobile|android|iphone|ipad/.test(ua)) return "Mobile";
@@ -199,7 +191,7 @@ function buildWeeklyVisitReportPayload(stats) {
     <ul>${formatTopList(stats.topReferrers)}</ul>
     <h3>Devices</h3>
     <ul>${formatTopList(stats.devices)}</ul>
-    <p style="margin-top:24px;color:#666;font-size:12px;">Visit records include visitor IP for your admin review in Firestore.</p>
+    <p style="margin-top:24px;color:#666;font-size:12px;">Excluded owner IPs and visitor IDs are omitted from reports.</p>
   `.trim();
 
   const text = [
@@ -266,6 +258,7 @@ async function buildAnalyticsSummary() {
 
   recentVisitsSnap.forEach((doc) => {
     const data = doc.data();
+    if (isExcludedVisitRecord(data)) return;
     if (data.eventType !== "preview_view") return;
     if (data.visitorId) visitors.add(data.visitorId);
     if (data.date) visitDates.push(data.date);
@@ -274,6 +267,7 @@ async function buildAnalyticsSummary() {
 
   feedbackSnap.forEach((doc) => {
     const data = doc.data();
+    if (isExcludedVisitRecord(data)) return;
     if (!data.previewSlug) return;
     if (data.sentiment === "like") incrementCount(previewLikes, data.previewSlug);
     if (data.sentiment === "dislike") incrementCount(previewDislikes, data.previewSlug);
@@ -319,6 +313,7 @@ async function aggregateWeeklyVisitStats(weekAgo, now) {
 
   snapshot.forEach((doc) => {
     const data = doc.data();
+    if (isExcludedVisitRecord(data)) return;
     if (data.visitorId) visitors.add(data.visitorId);
     if (data.sessionId) sessions.add(data.sessionId);
 
@@ -344,6 +339,7 @@ async function aggregateWeeklyVisitStats(weekAgo, now) {
   let totalDislikes = 0;
   feedbackSnap.forEach((doc) => {
     const data = doc.data();
+    if (isExcludedVisitRecord(data)) return;
     if (data.sentiment === "like") totalLikes += 1;
     if (data.sentiment === "dislike") totalDislikes += 1;
   });
@@ -730,6 +726,11 @@ exports.trackVisit = onRequest((request, response) => {
     return;
   }
 
+  if (isExcludedAnalyticsRequest(request, { visitorId })) {
+    sendSuccess({ response }, { message: "Visit skipped (excluded)" });
+    return;
+  }
+
   const normalizedEvent = String(eventType || "pageview").trim().slice(0, 32);
   const clientIp = getClientIp(request);
   const visitRef = admin.firestore().collection("visits").doc();
@@ -748,7 +749,6 @@ exports.trackVisit = onRequest((request, response) => {
       screen: screen || null,
       viewport: viewport || null,
       device: parseDevice(userAgent),
-      ipAddress: clientIp ? String(clientIp).slice(0, 45) : null,
       ipHash: hashIp(clientIp),
       date: new Date(),
     })
@@ -855,6 +855,11 @@ exports.previewFeedback = onRequest(async (request, response) => {
   const slug = String(previewSlug).slice(0, 64);
   const vid = String(visitorId).slice(0, 64);
 
+  if (isExcludedAnalyticsRequest(request, { visitorId: vid })) {
+    sendSuccess({ response }, { message: "Feedback skipped (excluded)" });
+    return;
+  }
+
   const existing = await admin.firestore()
     .collection("preview_feedback")
     .where("visitorId", "==", vid)
@@ -877,7 +882,6 @@ exports.previewFeedback = onRequest(async (request, response) => {
       previewLabel: previewLabel ? String(previewLabel).slice(0, 128) : null,
       sentiment: normalizedSentiment,
       comment: trimmedComment ? trimmedComment.slice(0, 1000) : null,
-      ipAddress: clientIp ? String(clientIp).slice(0, 45) : null,
       ipHash: hashIp(clientIp),
       date: new Date(),
     });

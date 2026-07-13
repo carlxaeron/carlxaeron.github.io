@@ -24,7 +24,7 @@ Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-net
 ## New client folder
 
 1. Copy `client-sites/_template/` → `client-sites/{slug}/`
-2. **Gather brief** from client Facebook via Chrome DevTools MCP (About + Photos); save images to `assets/`
+2. **Gather brief** from client Facebook via Chrome DevTools MCP (About + Photos); **inspect** images (dimensions, alt), **download** via `get_network_request` → `assets/` (not screenshots)
 3. Customize `index.html` (Tailwind utilities), `styles.css` (hero/reveal only), `client.json`
 3. Keep `site.js`, `embed-guard.js`, `netlify/edge-functions/embed-only.js`, and `netlify.toml` security headers
 4. Deploy to Netlify; set `previewHost`, `deployedAt`, and `quotation.previewUrl` in `client.json`

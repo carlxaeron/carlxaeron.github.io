@@ -2,7 +2,32 @@ import { mapping } from "../mapping";
 
 const VISITOR_KEY = "cm_visitor_id";
 const SESSION_KEY = "cm_session_id";
+const EXCLUDE_KEY = "cm_analytics_exclude";
 const lastSent = new Map();
+
+/** Permanent owner opt-out — set via ?no_track=1 once per browser. */
+export function isAnalyticsExcluded() {
+  if (typeof window === "undefined") return false;
+  return localStorage.getItem(EXCLUDE_KEY) === "1";
+}
+
+export function enableAnalyticsExclude() {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(EXCLUDE_KEY, "1");
+}
+
+/** Visit carlmanuel.com/?no_track=1 once to stop preview analytics on this browser. */
+export function applyOwnerExcludeFromUrl() {
+  if (typeof window === "undefined") return;
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("no_track") !== "1") return;
+
+  enableAnalyticsExclude();
+  params.delete("no_track");
+  const qs = params.toString();
+  const next = `${window.location.pathname}${qs ? `?${qs}` : ""}${window.location.hash}`;
+  window.history.replaceState(null, "", next);
+}
 
 function createId() {
   if (typeof crypto !== "undefined" && crypto.randomUUID) {
@@ -83,6 +108,7 @@ function shouldSkipDuplicate(key) {
 
 export function trackVisit({ eventType, section = null, previewSlug = null } = {}) {
   if (process.env.NODE_ENV === "development") return;
+  if (isAnalyticsExcluded()) return;
 
   const endpoint = mapping.trackVisit;
   if (!endpoint || typeof window === "undefined") return;

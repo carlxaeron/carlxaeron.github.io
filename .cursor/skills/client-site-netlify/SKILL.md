@@ -23,7 +23,7 @@ description: Scaffold, build, and deploy local-business quotation websites under
 
 ```
 Client site progress:
-- [ ] Brief gathered via Chrome DevTools MCP (Facebook page + Photos tab)
+- [ ] Brief gathered via Chrome DevTools MCP (Facebook About + Photos; assets inspected and downloaded)
 - [ ] Folder scaffolded from _template
 - [ ] Site content + styles customized
 - [ ] Deployed to Netlify (capture previewHost)
@@ -51,18 +51,48 @@ Edit `client.json`: `businessName`, `slug`, `industry`, `contact`, `quotation` (
 2. Dismiss login modal if shown (`take_snapshot` → click **Close**).
 3. Scrape from **Posts** intro: tagline, phone, services, follower count.
 4. Open **About** tab: full address, email, hours, category, review score.
-5. Open **Photos** tab: `take_screenshot` with `uid` of each `image` node → save under `client-sites/{slug}/assets/` as `hero-aircon.jpg`, `project-01.jpg`, …
-6. Open cover photo link for hero (`take_screenshot` → `hero-aircon.jpg`).
+5. Open **Photos** tab — **inspect** then **download** images (see below).
+6. Open cover photo for hero — same download workflow → `hero-*.jpg`.
 7. Record canonical Facebook URL + scraped fields in `client.json` → `sources` and `contact`.
 
-**Do not** rely on `curl` against `fbcdn.net` URLs — CDN returns 403 without browser session. **Do** commit downloaded/screenshot assets to the repo (not hotlinked FB URLs).
+### Facebook photos — inspect, then download (not screenshots)
+
+**Do not** use `take_screenshot` for client `assets/` — viewport crops are lower quality and may clip UI chrome. **Do** download full JPEG bytes from the browser session.
+
+| Step | MCP tool | Purpose |
+|------|----------|---------|
+| Inspect | `evaluate_script` | List `<img>` nodes: `src`, `naturalWidth`, `naturalHeight`, `alt` |
+| Pick | (judgment) | One image per unique FB asset; prefer largest resolution; skip junk alts (phone screenshots, “Galaxy S25”, unrelated memes) |
+| Map | `list_network_requests` | `resourceTypes: ["image"]` — match `fbcdn.net` URLs to chosen images |
+| Download | `get_network_request` | `reqid` + `responseFilePath` → saves full response body (e.g. 2000×1414 JPEG) |
+| Verify | shell `file` | Confirm `JPEG image data` and expected dimensions before commit |
+| Rename | move into `assets/` | `hero-*.jpg`, `project-01.jpg` … `project-04.jpg` |
+
+Example inspect script (Photos tab, after images load):
+
+```js
+() => [...document.querySelectorAll('img[src*="fbcdn"]')]
+  .map((img, i) => ({
+    i,
+    w: img.naturalWidth,
+    h: img.naturalHeight,
+    alt: (img.alt || '').slice(0, 80),
+    src: img.src.split('?')[0].slice(-40),
+  }))
+  .filter((x) => x.w >= 400)
+  .sort((a, b) => b.w * b.h - a.w * a.h)
+```
+
+After `get_network_request`, rename `.network-response` to `.jpg` (or save with a `.jpg` path if the tool allows). Commit assets to the repo — **never** hotlink live `fbcdn.net` URLs in HTML.
+
+**Do not** use `curl` against `fbcdn.net` outside the browser — CDN returns 403 without session cookies. Canvas/`fetch` in-page also fail (CORS / tainted canvas).
 
 Fallback only if browser unavailable: stock photos + note in `client.json` → `sources.notes`.
 
 ## Step 2 — Build site
 
 - **Tailwind-first** static HTML — load via CDN (`https://cdn.tailwindcss.com`) with per-client `tailwind.config` inline for brand colors.
-- **`assets/`** — logo, hero, and 3–6 gallery JPGs from Facebook (Chrome DevTools MCP screenshots); never ship emoji-only galleries when FB photos are available.
+- **`assets/`** — logo, hero, and 3–6 gallery JPGs from Facebook (Chrome DevTools MCP: inspect + `get_network_request` download); never ship emoji-only galleries when FB photos are available.
 - **Supplemental `styles.css`** only for hero backgrounds, scroll-reveal, and effects Tailwind cannot express cleanly.
 - **Interactive `site.js`** (copy from `_template/site.js`) — required on every client site:
   - Mobile hamburger nav (`data-nav-toggle`, `data-mobile-nav`)

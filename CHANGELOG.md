@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.33] — 2026-07-13
+
+### Added
+- **Owner analytics opt-out** — `?no_track=1` permanently excludes your browser from preview visit logging and feedback; server-side IP/visitor ID exclusion lists in `functions/.env`
+
+### Changed
+- Preview analytics no longer stores raw IP addresses (hash only for new events)
+- **Jazz1** and **Clover** gallery assets re-downloaded at full resolution via Chrome DevTools network responses (not screenshots)
+- Client-site Cursor docs: Facebook photos via inspect + `get_network_request` download
+
 ## [3.0.32] — 2026-07-13
 
 ### Added

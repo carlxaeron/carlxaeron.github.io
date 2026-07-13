@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { hasSubmittedFeedback, submitPreviewFeedback } from "../utils/previewFeedback";
+import { isAnalyticsExcluded } from "../utils/visitTracker";
 
 export default function PreviewFeedback({ previewSlug, previewLabel }) {
   const [submitted, setSubmitted] = useState(() => hasSubmittedFeedback(previewSlug));
@@ -10,7 +11,7 @@ export default function PreviewFeedback({ previewSlug, previewLabel }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  if (!previewSlug || submitted) {
+  if (!previewSlug || isAnalyticsExcluded() || submitted) {
     return submitted ? (
       <div className="v3-preview-feedback v3-preview-feedback--done" data-testid="preview-feedback-thanks">
         <p>Thanks for your feedback on this sample site.</p>
