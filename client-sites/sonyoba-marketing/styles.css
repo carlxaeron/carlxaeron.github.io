@@ -1,0 +1,68 @@
+/* Sonyoba Marketing — hero, reveal, product cards */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-header] {
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+[data-header].is-scrolled {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.tab-active,
+.filter-active {
+  font-weight: 700;
+}
+
+.tab-inactive,
+.filter-inactive {
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.hero-bg {
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-bg--sonyoba {
+  background-image:
+    linear-gradient(135deg, rgba(16, 52, 68, 0.92) 0%, rgba(16, 132, 116, 0.78) 55%, rgba(10, 40, 50, 0.9) 100%),
+    url("assets/hero-products.png");
+}
+
+.product-card__img {
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: linear-gradient(180deg, #f8fafb 0%, #eef3f2 100%);
+}
+
+.trust-strip {
+  background: linear-gradient(90deg, #0d3d4a 0%, #108474 50%, #0d3d4a 100%);
+}

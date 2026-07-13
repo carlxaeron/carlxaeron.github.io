@@ -34,6 +34,12 @@ export const PREVIEW_SITES = [
     label: "RG Decals and Printing Shop",
     netlifySite: "rg-decals-printing",
   },
+  {
+    id: "sonyoba-marketing",
+    host: "sonyoba-marketing.netlify.app",
+    label: "Sonyoba Marketing",
+    netlifySite: "sonyoba-marketing",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
