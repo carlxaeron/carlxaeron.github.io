@@ -6,6 +6,7 @@ import HamburgerMenu from "../../components/HamburgerMenu";
 import useSwipeHandler from "../../components/SwipeHandler";
 import { Button, Modal } from "react-bootstrap";
 import ChatAgent from "../../../components/ChatAgent";
+import { trackVisit } from "../../../utils/visitTracker";
 
 import V3Home from "./Home";
 import V3About from "./About";
@@ -193,6 +194,14 @@ function V3PortfolioScroll() {
     const idx = SECTIONS_CONFIG.findIndex((s) => s.id === hash);
     if (idx !== -1) setCurrentSection(idx);
   }, []);
+
+  // Anonymous section analytics (Firestore via trackVisit function)
+  useEffect(() => {
+    const section = SECTIONS_CONFIG[currentSection];
+    if (!section) return undefined;
+    trackVisit({ eventType: "section_view", section: section.id });
+    return undefined;
+  }, [currentSection]);
 
   // Keep a stable viewport unit for fixed-slide transforms.
   useEffect(() => {

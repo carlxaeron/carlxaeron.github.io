@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.26] — 2026-07-13
+
+### Added
+- **Anonymous visit tracking** — page views, section navigation, and client preview views sent to Firestore via `trackVisit` Cloud Function
+- **`weeklyVisitReport`** scheduled function — Monday 8:00 AM (Asia/Manila) email summary to admin inboxes
+- `VisitTracker` component, `visitTracker.js` utility, and unit test
+
+### Changed
+- Firestore rules lock down direct client writes (Admin SDK / functions only)
+- `firestore.indexes.json` index for visit queries
+
 ## [3.0.25] — 2026-07-13
 
 ### Added

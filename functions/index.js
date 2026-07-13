@@ -8,8 +8,10 @@
  */
 
 const {onRequest} = require("firebase-functions/v2/https");
+const {onSchedule} = require("firebase-functions/v2/scheduler");
 const logger = require("firebase-functions/logger");
 const admin = require("firebase-admin");
+const crypto = require("crypto");
 const { sendError, sendSuccess } = require("./helper");
 const { SKILLS, PROJECTS_DESCRIPTION, COMPANIES, EXPERIENCES, PROJECTS_DESCRIPTION2 } = require("./external-config");
 const https = require('https');
@@ -135,6 +137,146 @@ function applyCorsHeaders(request, response) {
 
   response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+}
+
+function getClientIp(request) {
+  const forwarded = request.headers["x-forwarded-for"];
+  if (typeof forwarded === "string" && forwarded.length) {
+    return forwarded.split(",")[0].trim();
+  }
+  return request.ip || "";
+}
+
+function hashIp(ip) {
+  if (!ip) return null;
+  return crypto.createHash("sha256").update(`${ip}:carlxaeron-portfolio`).digest("hex").slice(0, 16);
+}
+
+function parseDevice(userAgent = "") {
+  const ua = String(userAgent).toLowerCase();
+  if (/mobile|android|iphone|ipad/.test(ua)) return "Mobile";
+  if (/tablet|ipad/.test(ua)) return "Tablet";
+  return "Desktop";
+}
+
+function incrementCount(map, key, amount = 1) {
+  const normalized = key || "—";
+  map.set(normalized, (map.get(normalized) || 0) + amount);
+}
+
+function topEntries(map, limit = 8) {
+  return [...map.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit);
+}
+
+function formatTopList(entries) {
+  if (!entries.length) return "<li>No data yet</li>";
+  return entries.map(([label, count]) => `<li><strong>${escapeHtml(label)}</strong> — ${count}</li>`).join("");
+}
+
+function buildWeeklyVisitReportPayload(stats) {
+  const subject = `Weekly portfolio visit report — ${stats.weekLabel}`;
+  const html = `
+    <h2>Portfolio weekly visit report</h2>
+    <p><strong>Period:</strong> ${escapeHtml(stats.weekLabel)}</p>
+    <ul>
+      <li><strong>Total events:</strong> ${stats.totalEvents}</li>
+      <li><strong>Page views:</strong> ${stats.pageViews}</li>
+      <li><strong>Section views:</strong> ${stats.sectionViews}</li>
+      <li><strong>Preview views:</strong> ${stats.previewViews}</li>
+      <li><strong>Unique visitors:</strong> ${stats.uniqueVisitors}</li>
+      <li><strong>Unique sessions:</strong> ${stats.uniqueSessions}</li>
+    </ul>
+    <h3>Top sections</h3>
+    <ul>${formatTopList(stats.topSections)}</ul>
+    <h3>Top preview slugs</h3>
+    <ul>${formatTopList(stats.topPreviews)}</ul>
+    <h3>Top referrers</h3>
+    <ul>${formatTopList(stats.topReferrers)}</ul>
+    <h3>Devices</h3>
+    <ul>${formatTopList(stats.devices)}</ul>
+    <p style="margin-top:24px;color:#666;font-size:12px;">Anonymous analytics — no personal identity stored. IP is hashed server-side.</p>
+  `.trim();
+
+  const text = [
+    "Portfolio weekly visit report",
+    "",
+    `Period: ${stats.weekLabel}`,
+    `Total events: ${stats.totalEvents}`,
+    `Page views: ${stats.pageViews}`,
+    `Section views: ${stats.sectionViews}`,
+    `Preview views: ${stats.previewViews}`,
+    `Unique visitors: ${stats.uniqueVisitors}`,
+    `Unique sessions: ${stats.uniqueSessions}`,
+    "",
+    "Top sections:",
+    ...topEntries(stats.topSectionsMap || new Map()).map(([k, v]) => `- ${k}: ${v}`),
+    "",
+    "Top preview slugs:",
+    ...topEntries(stats.topPreviewsMap || new Map()).map(([k, v]) => `- ${k}: ${v}`),
+    "",
+    "Top referrers:",
+    ...topEntries(stats.topReferrersMap || new Map()).map(([k, v]) => `- ${k}: ${v}`),
+  ].join("\n");
+
+  return {
+    replyTo: "info@carlmanuel.com",
+    message: { subject, html, text },
+  };
+}
+
+async function aggregateWeeklyVisitStats(weekAgo, now) {
+  const snapshot = await admin.firestore()
+    .collection("visits")
+    .where("date", ">=", weekAgo)
+    .where("date", "<", now)
+    .get();
+
+  const visitors = new Set();
+  const sessions = new Set();
+  const topSections = new Map();
+  const topPreviews = new Map();
+  const topReferrers = new Map();
+  const devices = new Map();
+
+  let pageViews = 0;
+  let sectionViews = 0;
+  let previewViews = 0;
+
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+    if (data.visitorId) visitors.add(data.visitorId);
+    if (data.sessionId) sessions.add(data.sessionId);
+
+    if (data.eventType === "pageview") pageViews += 1;
+    if (data.eventType === "section_view") sectionViews += 1;
+    if (data.eventType === "preview_view") previewViews += 1;
+
+    if (data.section) incrementCount(topSections, data.section);
+    if (data.previewSlug) incrementCount(topPreviews, data.previewSlug);
+    incrementCount(topReferrers, data.referrer || "Direct / none");
+    incrementCount(devices, data.device || "Unknown");
+  });
+
+  const weekLabel = `${weekAgo.toISOString().slice(0, 10)} → ${now.toISOString().slice(0, 10)}`;
+
+  return {
+    weekLabel,
+    totalEvents: snapshot.size,
+    pageViews,
+    sectionViews,
+    previewViews,
+    uniqueVisitors: visitors.size,
+    uniqueSessions: sessions.size,
+    topSections: topEntries(topSections),
+    topPreviews: topEntries(topPreviews),
+    topReferrers: topEntries(topReferrers),
+    devices: topEntries(devices),
+    topSectionsMap: topSections,
+    topPreviewsMap: topPreviews,
+    topReferrersMap: topReferrers,
+  };
 }
 
 function buildMailDocuments(mailContent) {
@@ -466,6 +608,119 @@ exports.quotation = onRequest((request, response) => {
       sendError({ response }, { message: "Error saving quote request" });
     });
 });
+
+exports.trackVisit = onRequest((request, response) => {
+  applyCorsHeaders(request, response);
+
+  if (request.method === "OPTIONS") {
+    response.status(204).send("");
+    return;
+  }
+
+  if (request.method !== "POST") {
+    sendError({ response }, { message: "Method not allowed" });
+    return;
+  }
+
+  const {
+    visitorId,
+    sessionId,
+    eventType,
+    section,
+    previewSlug,
+    path,
+    referrer,
+    userAgent,
+    language,
+    screen,
+    viewport,
+  } = request.body || {};
+
+  if (!visitorId || !sessionId) {
+    sendError({ response }, { message: "Missing required fields" });
+    return;
+  }
+
+  const normalizedEvent = String(eventType || "pageview").trim().slice(0, 32);
+  const visitRef = admin.firestore().collection("visits").doc();
+
+  visitRef
+    .set({
+      visitorId: String(visitorId).slice(0, 64),
+      sessionId: String(sessionId).slice(0, 64),
+      eventType: normalizedEvent,
+      section: section ? String(section).slice(0, 32) : null,
+      previewSlug: previewSlug ? String(previewSlug).slice(0, 64) : null,
+      path: path ? String(path).slice(0, 512) : null,
+      referrer: referrer ? String(referrer).slice(0, 512) : null,
+      userAgent: userAgent ? String(userAgent).slice(0, 512) : null,
+      language: language ? String(language).slice(0, 32) : null,
+      screen: screen || null,
+      viewport: viewport || null,
+      device: parseDevice(userAgent),
+      ipHash: hashIp(getClientIp(request)),
+      date: new Date(),
+    })
+    .then(() => {
+      logger.info("Visit tracked in Firestore", { structuredData: true, eventType: normalizedEvent });
+      sendSuccess({ response }, { message: "Visit recorded" });
+    })
+    .catch((error) => {
+      logger.error("Error saving visit to Firestore", { structuredData: true, error });
+      sendError({ response }, { message: "Error saving visit data" });
+    });
+});
+
+exports.weeklyVisitReport = onSchedule(
+  {
+    schedule: "0 8 * * 1",
+    timeZone: "Asia/Manila",
+  },
+  async () => {
+    const now = new Date();
+    const weekAgo = new Date(now);
+    weekAgo.setDate(weekAgo.getDate() - 7);
+
+    const reportId = weekAgo.toISOString().slice(0, 10);
+    const reportRef = admin.firestore().collection("analytics_reports").doc(reportId);
+    const existing = await reportRef.get();
+    if (existing.exists) {
+      logger.info("Weekly visit report already sent", { reportId });
+      return;
+    }
+
+    const stats = await aggregateWeeklyVisitStats(weekAgo, now);
+    const mailPayload = buildWeeklyVisitReportPayload(stats);
+
+    try {
+      await queueMailDocuments(mailPayload);
+      logger.info("Weekly visit report queued in mail collection", { structuredData: true, reportId });
+    } catch (queueError) {
+      logger.error("Failed to queue weekly visit report", { structuredData: true, error: queueError });
+      throw queueError;
+    }
+
+    try {
+      await sendContactEmailDirect(mailPayload);
+      logger.info("Weekly visit report sent via SMTP", { structuredData: true, reportId });
+    } catch (smtpError) {
+      logger.error("Failed to send weekly visit report via SMTP", { structuredData: true, error: smtpError });
+    }
+
+    await reportRef.set({
+      reportId,
+      sentAt: new Date(),
+      stats: {
+        totalEvents: stats.totalEvents,
+        uniqueVisitors: stats.uniqueVisitors,
+        uniqueSessions: stats.uniqueSessions,
+        pageViews: stats.pageViews,
+        sectionViews: stats.sectionViews,
+        previewViews: stats.previewViews,
+      },
+    });
+  }
+);
 
 exports.license = onRequest((request, response) => {
   console.log(request.body);

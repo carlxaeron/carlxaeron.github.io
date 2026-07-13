@@ -2,6 +2,7 @@ import { useEffect, useMemo } from "react";
 import Portfolio from "../v3/containers/Portfolio/Portfolio";
 import PreviewShowcase, { PreviewShowcaseError } from "../v3/containers/PreviewShowcase/PreviewShowcase";
 import { getPreviewQueryFromSearch, resolvePreviewUrl } from "../v3/config/previewWhitelist";
+import VisitTracker from "../components/VisitTracker";
 import "./../styles/App.css";
 
 function Index() {
@@ -24,6 +25,7 @@ function Index() {
   if (previewRaw && !previewResolved) {
     return (
       <div className="App">
+        <VisitTracker eventType="preview_error" previewSlug={previewRaw} />
         <PreviewShowcaseError previewKey={previewRaw} />
       </div>
     );
@@ -32,6 +34,7 @@ function Index() {
   if (previewResolved) {
     return (
       <div className="App">
+        <VisitTracker eventType="preview_view" previewSlug={previewResolved.slug} />
         <PreviewShowcase
           previewUrl={previewResolved.url}
           label={previewResolved.site?.label}
@@ -42,6 +45,7 @@ function Index() {
 
   return (
     <div className="App">
+      <VisitTracker eventType="pageview" />
       <Portfolio />
     </div>
   );
