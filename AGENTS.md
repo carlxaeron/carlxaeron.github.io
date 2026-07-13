@@ -76,13 +76,14 @@ Instructions for AI agents working in this repository.
 3. **Keep** `embed-guard.js` + edge `embed-only` + CSP headers
 4. Fill `client.json` (`contact`, `quotation` package/price/timeline)
 5. Deploy via Netlify MCP or CLI (`netlify.toml`: `command = ""`)
-6. Add host to `src/v3/config/previewWhitelist.js`; update `client.json`
+6. Add host to `src/v3/config/previewWhitelist.js`; update `client.json` (`quotation.previewUrl` uses `?preview={slug}`)
 7. **Update [`client-sites/README.md`](client-sites/README.md)** — catalog table + per-client detail section
 8. Draft outreach: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`
 9. Share preview `https://carlmanuel.com/?preview={slug}` + drafts for user review (embed-only — direct client URL returns 403)
 10. **Browser QA** — verify preview UI in Chrome (desktop + mobile mockups at true viewports, no overlap, iframe scroll)
 
-Full catalog: [`client-sites/README.md`](client-sites/README.md)
+Full catalog: [`client-sites/README.md`](client-sites/README.md)  
+Preview tests: `src/v3/config/previewWhitelist.test.js`, `src/pages/Index.test.js`, `PreviewShowcase.test.js`
 
 ## MCP servers
 

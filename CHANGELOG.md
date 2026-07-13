@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.0.24] — 2026-07-13
+
+### Added
+- **Preview slug tests** — `previewWhitelist.test.js` covers all `PREVIEW_SITES` slugs, legacy hostnames, `buildPreviewPortfolioUrl()`, and rejections
+- Expanded `PreviewShowcase.test.js` and `Index.test.js` (URL normalization, slug-friendly errors)
+
+### Changed
+- Cursor skill/rules/AGENTS and `client-sites/README.md` document slug preview URLs, catalog maintenance, and test locations
+
 ## [3.0.23] — 2026-07-13
 
 ### Changed

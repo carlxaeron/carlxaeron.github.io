@@ -6,8 +6,10 @@ description: Scaffold, build, and deploy local-business quotation websites under
 # Client site + Netlify deploy
 
 **Preview URL format:** `https://carlmanuel.com/?preview={slug}` (e.g. `?preview=jk-construction`)  
+**Helper:** `buildPreviewPortfolioUrl(slug)` in [`previewWhitelist.js`](../../src/v3/config/previewWhitelist.js)  
 **Legacy:** full `*.netlify.app` hostnames in `?preview=` still resolve but the URL bar is normalized to the slug.  
 **Whitelist:** [src/v3/config/previewWhitelist.js](../../src/v3/config/previewWhitelist.js)  
+**Tests:** [previewWhitelist.test.js](../../src/v3/config/previewWhitelist.test.js), PreviewShowcase + Index preview routing tests  
 **Site catalog:** [client-sites/README.md](../../client-sites/README.md) — list of all clients, preview links, contact, packages  
 **Template:** [client-sites/_template/](../../client-sites/_template/)
 
@@ -29,6 +31,7 @@ Client site progress:
 - [ ] Draft outreach written (email, SMS, messenger)
 - [ ] PREVIEW_SITES entry added
 - [ ] client-sites/README.md catalog updated (table + detail section)
+- [ ] Preview slug tests pass (`previewWhitelist.test.js`)
 - [ ] Portfolio preview link + drafts shared with user for review
 ```
 
@@ -114,6 +117,8 @@ Record hostname (e.g. `bamboo-grove-cafe.netlify.app`).
 ```js
 { id: "slug", host: "slug.netlify.app", label: "Business Name", netlifySite: "slug" }
 ```
+
+Use `buildPreviewPortfolioUrl("slug")` for outreach `previewUrl` values.
 
 3. Share: `https://carlmanuel.com/?preview={slug}` (use `client.json` → `slug`, not the Netlify hostname)
 

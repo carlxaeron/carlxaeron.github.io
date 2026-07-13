@@ -5,7 +5,7 @@
 | Server | Purpose |
 |--------|---------|
 | `onlinejobs-apify` | OnlineJobs.ph search, apply, CV upload |
-| `netlify` | Create/deploy client sites under `client-sites/` — see [site catalog](../client-sites/README.md) |
+| `netlify` | Create/deploy client sites under `client-sites/` — see [site catalog](../client-sites/README.md). Preview links use `?preview={slug}`; tests in `previewWhitelist.test.js`.
 
 Set `APIFY_API_TOKEN` in Cursor MCP env for onlinejobs. Restart Cursor after changes.
 

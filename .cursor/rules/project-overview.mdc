@@ -24,7 +24,7 @@ alwaysApply: true
 ## Portfolio modes
 
 - **Default:** 7-section slide deck (`home` … `quote`)
-- **Preview:** `?preview=host.netlify.app` → device showcase (desktop 1280×800 + mobile 390×844 iframes, scaled to mockups)
+- **Preview:** `?preview={slug}` (e.g. `?preview=jk-construction`) → device showcase (desktop 1280×800 + mobile 390×844 iframes, scaled to mockups). Legacy `*.netlify.app` hostnames still resolve and normalize to slug.
 - **Client demos:** embed-only on Netlify — direct URL blocked; view via portfolio preview only · [site catalog](client-sites/README.md)
 - **Client stack:** Tailwind CDN + `site.js` interactivity (mobile nav, accordions, scroll reveal)
 - **Outreach:** each `client-sites/{slug}/` includes draft email, SMS, and messenger quotations

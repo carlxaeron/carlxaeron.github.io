@@ -14,7 +14,9 @@ Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-net
 
 ## Preview showcase
 
-- URL: `https://carlmanuel.com/?preview={slug}` (short id from `PREVIEW_SITES`, e.g. `jk-construction`)
+- URL: `https://carlmanuel.com/?preview={slug}` (short id from `PREVIEW_SITES` / `client.json` → `slug`, e.g. `jk-construction`)
+- Helper: `buildPreviewPortfolioUrl(slug)` in [`previewWhitelist.js`](../../src/v3/config/previewWhitelist.js)
+- Tests: [`previewWhitelist.test.js`](../../src/v3/config/previewWhitelist.js), [`PreviewShowcase.test.js`](../../src/v3/containers/PreviewShowcase/PreviewShowcase.test.js), [`Index.test.js`](../../src/pages/Index.test.js)
 - Whitelist: `*.netlify.app` OR explicit `PREVIEW_SITES` in [`previewWhitelist.js`](../../src/v3/config/previewWhitelist.js)
 - Component: [`PreviewShowcase.js`](../../src/v3/containers/PreviewShowcase/PreviewShowcase.js)
 - UI: desktop monitor + mobile phone mockups; iframes render at **1280×800** (desktop) and **390×844** (mobile), scaled to fit frames; **Back to portfolio** only (no live-site link)
@@ -41,7 +43,7 @@ Pull package/price/contact from `client.json`. Present drafts to user for review
 
 ## Post-deploy browser QA
 
-After deploy, open `https://carlmanuel.com/?preview={hostname}` and verify desktop + mobile mockups (scroll iframes, check header/hero at narrow width). Fix client `styles.css` and redeploy if layout breaks. See skill Step 7.
+After deploy, open `https://carlmanuel.com/?preview={slug}` and verify desktop + mobile mockups (scroll iframes, check header/hero at narrow width). Fix client `styles.css` and redeploy if layout breaks. See skill Step 7.
 
 ## Content guidelines
 

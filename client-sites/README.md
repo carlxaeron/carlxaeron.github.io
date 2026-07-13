@@ -214,6 +214,8 @@ client-sites/
 | Skill | [`.cursor/skills/client-site-netlify/SKILL.md`](../.cursor/skills/client-site-netlify/SKILL.md) |
 | Rule | [`.cursor/rules/client-quotations.mdc`](../.cursor/rules/client-quotations.mdc) |
 | Whitelist | [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) |
+| Preview helper | `buildPreviewPortfolioUrl(slug)` in `previewWhitelist.js` |
+| Preview tests | [`previewWhitelist.test.js`](../src/v3/config/previewWhitelist.test.js), [`Index.test.js`](../src/pages/Index.test.js), [`PreviewShowcase.test.js`](../src/v3/containers/PreviewShowcase/PreviewShowcase.test.js) |
 | Preview UI | [`src/v3/containers/PreviewShowcase/`](../src/v3/containers/PreviewShowcase/) |
 
 ## Security
