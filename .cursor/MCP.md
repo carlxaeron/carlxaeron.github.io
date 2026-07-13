@@ -6,8 +6,19 @@
 |--------|---------|
 | `onlinejobs-apify` | OnlineJobs.ph search, apply, CV upload |
 | `netlify` | Create/deploy client sites under `client-sites/` — see [site catalog](../client-sites/README.md). Preview links use `?preview={slug}`; tests in `previewWhitelist.test.js`.
+| `chrome-devtools` (user) | Scrape client Facebook pages (About, Photos) and save hero/gallery images when building quotation sites |
 
 Set `APIFY_API_TOKEN` in Cursor MCP env for onlinejobs. Restart Cursor after changes.
+
+## Chrome DevTools MCP (Facebook briefs)
+
+Use for **client-site-netlify** when the prospect link is Facebook:
+
+- `new_page` / `navigate_page` → Facebook URL
+- `take_snapshot` → intro, contact, address, reviews
+- **Photos** tab → `take_screenshot` (`uid` + `filePath`) → `client-sites/{slug}/assets/*.jpg`
+
+Do not use `WebFetch` or `curl` on Facebook CDN for images — use browser screenshots instead.
 
 ## Netlify MCP
 

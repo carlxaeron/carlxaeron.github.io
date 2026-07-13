@@ -23,7 +23,7 @@ description: Scaffold, build, and deploy local-business quotation websites under
 
 ```
 Client site progress:
-- [ ] Brief gathered (business, contact, services, CTA, location, colors, budget)
+- [ ] Brief gathered via Chrome DevTools MCP (Facebook page + Photos tab)
 - [ ] Folder scaffolded from _template
 - [ ] Site content + styles customized
 - [ ] Deployed to Netlify (capture previewHost)
@@ -43,9 +43,26 @@ cp -R client-sites/_template client-sites/{slug}
 
 Edit `client.json`: `businessName`, `slug`, `industry`, `contact`, `quotation` (package, amount, timeline).
 
+## Step 1b — Gather brief from Facebook (Chrome DevTools MCP)
+
+`WebFetch` and web search often **fail or time out** on Facebook. Use the **Chrome DevTools MCP** (`user-chrome-devtools`) instead:
+
+1. `new_page` → client Facebook URL (profile or page link from user).
+2. Dismiss login modal if shown (`take_snapshot` → click **Close**).
+3. Scrape from **Posts** intro: tagline, phone, services, follower count.
+4. Open **About** tab: full address, email, hours, category, review score.
+5. Open **Photos** tab: `take_screenshot` with `uid` of each `image` node → save under `client-sites/{slug}/assets/` as `hero-aircon.jpg`, `project-01.jpg`, …
+6. Open cover photo link for hero (`take_screenshot` → `hero-aircon.jpg`).
+7. Record canonical Facebook URL + scraped fields in `client.json` → `sources` and `contact`.
+
+**Do not** rely on `curl` against `fbcdn.net` URLs — CDN returns 403 without browser session. **Do** commit downloaded/screenshot assets to the repo (not hotlinked FB URLs).
+
+Fallback only if browser unavailable: stock photos + note in `client.json` → `sources.notes`.
+
 ## Step 2 — Build site
 
 - **Tailwind-first** static HTML — load via CDN (`https://cdn.tailwindcss.com`) with per-client `tailwind.config` inline for brand colors.
+- **`assets/`** — logo, hero, and 3–6 gallery JPGs from Facebook (Chrome DevTools MCP screenshots); never ship emoji-only galleries when FB photos are available.
 - **Supplemental `styles.css`** only for hero backgrounds, scroll-reveal, and effects Tailwind cannot express cleanly.
 - **Interactive `site.js`** (copy from `_template/site.js`) — required on every client site:
   - Mobile hamburger nav (`data-nav-toggle`, `data-mobile-nav`)

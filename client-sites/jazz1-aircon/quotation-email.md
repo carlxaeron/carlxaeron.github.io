@@ -1,7 +1,7 @@
 # Email quotation — Jazz1 Airconditioning Services
 
 **Status:** Draft — review before sending  
-**To:** (Facebook message — no public email found)  
+**To:** jrairconditioningservices@gmail.com  
 **Subject:** Website proposal for Jazz1 Aircon — preview your sample site
 
 ---

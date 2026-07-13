@@ -42,15 +42,20 @@ html {
 
 .hero-bg--jazz1 {
   background-image:
-    linear-gradient(135deg, rgba(12, 74, 110, 0.95) 0%, rgba(3, 105, 161, 0.82) 50%, rgba(6, 182, 212, 0.35) 100%),
-    radial-gradient(ellipse at 80% 20%, rgba(6, 182, 212, 0.25) 0%, transparent 55%),
-    radial-gradient(ellipse at 10% 90%, rgba(224, 242, 254, 0.12) 0%, transparent 45%);
+    linear-gradient(135deg, rgba(12, 74, 110, 0.92) 0%, rgba(3, 105, 161, 0.78) 50%, rgba(14, 116, 144, 0.88) 100%),
+    url("assets/hero-aircon.jpg");
 }
 
 .trust-strip {
   background: linear-gradient(90deg, #0c4a6e 0%, #0369a1 50%, #0c4a6e 100%);
 }
 
+.gallery-card__img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.product-card__icon,
 .service-card__icon {
   font-size: 2rem;
   line-height: 1;

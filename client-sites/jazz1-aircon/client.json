@@ -1,17 +1,18 @@
 {
-  "businessName": "Jazz1 Airconditioning Services",
+  "businessName": "Jazz1 Airconditioning Services - Montalban Rizal",
   "slug": "jazz1-aircon",
   "previewHost": "jazz1-aircon-services.netlify.app",
-  "industry": "HVAC / air conditioning sales, installation & maintenance",
+  "industry": "Heating, ventilating & air conditioning service",
   "deployedAt": "2026-07-13",
   "contact": {
     "name": "Jazz1 team",
+    "email": "jrairconditioningservices@gmail.com",
     "phone": "+63 931 763 9752",
-    "facebook": "https://www.facebook.com/profile.php?id=100088680976545"
+    "facebook": "https://www.facebook.com/people/Jazz1-Airconditioning-Services-Montalban-Rizal/100088680976545/"
   },
   "quotation": {
     "packageName": "Starter Business Website",
-    "packageScope": "One-page responsive site (services, about, FAQ, contact), mobile-friendly, Facebook integration",
+    "packageScope": "One-page responsive site (services, gallery, pricing guide, FAQ, contact), mobile-friendly, Facebook integration",
     "quotedAmount": "₱15,000",
     "paymentTerms": "50% upfront, 50% on delivery",
     "timeline": "5–7 business days after content approval",
@@ -23,8 +24,11 @@
     "messengerDraft": "quotation-messenger.txt"
   },
   "sources": {
-    "facebook": "https://www.facebook.com/profile.php?id=100088680976545",
-    "address": "Rodriguez (Montalban), Rizal, Philippines",
-    "notes": "Also known as JMAES Airconditioning. Phone unverified — confirm before outreach."
+    "facebook": "https://www.facebook.com/people/Jazz1-Airconditioning-Services-Montalban-Rizal/100088680976545/",
+    "address": "No. 14 F. Rodriguez St. (Crossing), Brgy. San Jose, Rodriguez Rizal 1860",
+    "tagline": "Your No.1 TRUSTED in Aircon Company",
+    "reviews": "100% recommend (15 Reviews)",
+    "followers": "12K",
+    "hours": "Always open"
   }
 }

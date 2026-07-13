@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Clover Industrial Fan">
+  <defs>
+    <linearGradient id="cl-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14532d"/>
+      <stop offset="100%" stop-color="#166534"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="20" fill="url(#cl-bg)"/>
+  <circle cx="60" cy="42" r="10" fill="#4ade80"/>
+  <ellipse cx="42" cy="58" rx="14" ry="10" fill="#22c55e" transform="rotate(-35 42 58)"/>
+  <ellipse cx="78" cy="58" rx="14" ry="10" fill="#22c55e" transform="rotate(35 78 58)"/>
+  <ellipse cx="60" cy="72" rx="14" ry="10" fill="#22c55e"/>
+  <text x="60" y="102" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="700" fill="#ffffff">CLOVER</text>
+</svg>

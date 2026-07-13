@@ -23,6 +23,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [JK Construction Services](#jk-construction-services) | `jk-construction` | Construction / renovation | [Preview](https://carlmanuel.com/?preview=jk-construction) | 2026-07-13 |
 | [Machinemate Mainteneering Services](#machinemate-mainteneering-services) | `machinemate` | Industrial fans / ventilation | [Preview](https://carlmanuel.com/?preview=machinemate) | 2026-07-13 |
 | [Jazz1 Airconditioning Services](#jazz1-airconditioning-services) | `jazz1-aircon` | Air conditioning / HVAC | [Preview](https://carlmanuel.com/?preview=jazz1-aircon) | 2026-07-13 |
+| [Clover Industrial Fan and Blower Inc.](#clover-industrial-fan-and-blower-inc) | `clover-industrial-fan` | Industrial fans & blowers | [Preview](https://carlmanuel.com/?preview=clover-industrial-fan) | 2026-07-13 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -167,11 +168,31 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Netlify site** | `jazz1-aircon-services` |
 | **Preview host** | `jazz1-aircon-services.netlify.app` |
 | **Preview URL** | https://carlmanuel.com/?preview=jazz1-aircon |
-| **Contact** | +63 931 763 9752 (Facebook primary) |
-| **Location** | Rodriguez (Montalban), Rizal, Philippines |
-| **Trade name** | JMAES Airconditioning Services |
-| **Source** | [Facebook](https://www.facebook.com/profile.php?id=100088680976545) |
-| **Services** | Aircon sales, installation, general cleaning, chemical wash, repair |
+| **Contact** | jrairconditioningservices@gmail.com · +63 931 763 9752 |
+| **Address** | No. 14 F. Rodriguez St. (Crossing), Brgy. San Jose, Rodriguez Rizal 1860 |
+| **Tagline** | Your No.1 TRUSTED in Aircon Company |
+| **Reviews** | 100% recommend (15 Reviews) · 12K followers · Always open |
+| **Source** | [Facebook](https://www.facebook.com/people/Jazz1-Airconditioning-Services-Montalban-Rizal/100088680976545/) |
+| **Assets** | Hero + 4 gallery JPGs scraped via Chrome DevTools MCP |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days |
+| **Outreach** | `quotation-email.md` · `quotation-sms.txt` · `quotation-messenger.txt` |
+
+---
+
+### Clover Industrial Fan and Blower Inc.
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/clover-industrial-fan/` |
+| **Netlify site** | `clover-industrial-fan` |
+| **Preview host** | `clover-industrial-fan.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=clover-industrial-fan |
+| **Contact** | cloverindustrial@gmail.com · +63 908 157 4707 |
+| **Address** | 2181 L. Sumulong Memorial Circle, Antipolo, Philippines 1870 |
+| **Service area** | Rizal, Philippines |
+| **Tagline** | Simple but innovative industrial fan solutions |
+| **Source** | [Facebook](https://www.facebook.com/cloverindustrialfan) |
+| **Assets** | Hero + 4 gallery JPGs scraped via Chrome DevTools MCP |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days |
 | **Outreach** | `quotation-email.md` · `quotation-sms.txt` · `quotation-messenger.txt` |
 

@@ -1,0 +1,34 @@
+{
+  "businessName": "Clover Industrial Fan and Blower Inc.",
+  "slug": "clover-industrial-fan",
+  "previewHost": "clover-industrial-fan.netlify.app",
+  "industry": "Industrial fans & blowers",
+  "deployedAt": "2026-07-13",
+  "contact": {
+    "name": "Clover team",
+    "email": "cloverindustrial@gmail.com",
+    "phone": "+63 908 157 4707",
+    "facebook": "https://www.facebook.com/cloverindustrialfan"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive site (services, capabilities, project gallery, FAQ, contact), mobile-friendly, Facebook integration",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront, 50% on delivery",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=clover-industrial-fan"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt"
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/cloverindustrialfan",
+    "address": "2181 L. Sumulong Memorial Circle, Antipolo, Philippines 1870",
+    "serviceArea": "Rizal, Philippines",
+    "tagline": "Simple but innovative industrial fan solutions",
+    "followers": "2.9K",
+    "hours": "Always open"
+  }
+}

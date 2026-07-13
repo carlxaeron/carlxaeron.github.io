@@ -72,15 +72,16 @@ Instructions for AI agents working in this repository.
 
 ### Client site + Netlify preview
 1. Copy `client-sites/_template/` → `client-sites/{slug}/`
-2. Customize HTML with **Tailwind CDN** + supplemental `styles.css`; keep `site.js` for interactivity
-3. **Keep** `embed-guard.js` + edge `embed-only` + CSP headers
-4. Fill `client.json` (`contact`, `quotation` package/price/timeline)
-5. Deploy via Netlify MCP or CLI (`netlify.toml`: `command = ""`)
-6. Add host to `src/v3/config/previewWhitelist.js`; update `client.json` (`quotation.previewUrl` uses `?preview={slug}`)
-7. **Update [`client-sites/README.md`](client-sites/README.md)** — catalog table + per-client detail section
-8. Draft outreach: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`
-9. Share preview `https://carlmanuel.com/?preview={slug}` + drafts for user review (embed-only — direct client URL returns 403)
-10. **Browser QA** — verify preview UI in Chrome (desktop + mobile mockups at true viewports, no overlap, iframe scroll)
+2. **Scrape client Facebook** via Chrome DevTools MCP (About + Photos → `assets/`); see client-site-netlify skill Step 1b
+3. Customize HTML with **Tailwind CDN** + supplemental `styles.css`; keep `site.js` for interactivity
+4. **Keep** `embed-guard.js` + edge `embed-only` + CSP headers
+5. Fill `client.json` (`contact`, `quotation` package/price/timeline)
+6. Deploy via Netlify MCP or CLI (`netlify.toml`: `command = ""`)
+7. Add host to `src/v3/config/previewWhitelist.js`; update `client.json` (`quotation.previewUrl` uses `?preview={slug}`)
+8. **Update [`client-sites/README.md`](client-sites/README.md)** — catalog table + per-client detail section
+9. Draft outreach: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`
+10. Share preview `https://carlmanuel.com/?preview={slug}` + drafts for user review (embed-only — direct client URL returns 403)
+11. **Browser QA** — verify preview UI in Chrome (desktop + mobile mockups at true viewports, no overlap, iframe scroll)
 
 Full catalog: [`client-sites/README.md`](client-sites/README.md)  
 Preview tests: `src/v3/config/previewWhitelist.test.js`, `src/pages/Index.test.js`, `PreviewShowcase.test.js`
@@ -91,6 +92,7 @@ Preview tests: `src/v3/config/previewWhitelist.test.js`, `src/pages/Index.test.j
 |--------|--------|---------|
 | `onlinejobs-apify` | `.cursor/mcp.json` | Job search & apply |
 | `netlify` | `.cursor/mcp.json` | Client site deploy (required for client-site-netlify skill) |
+| `chrome-devtools` | user MCP | Facebook page brief + photo screenshots for client sites |
 
 ## Tests
 

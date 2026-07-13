@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Jazz1 Airconditioning">
+  <defs>
+    <linearGradient id="j1-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c4a6e"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="20" fill="url(#j1-bg)"/>
+  <circle cx="60" cy="48" r="18" fill="none" stroke="#38bdf8" stroke-width="3"/>
+  <path d="M60 30 L60 66 M44 48 L76 48" stroke="#7dd3fc" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M48 58 Q60 72 72 58" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="60" y="98" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="700" fill="#ffffff">JAZZ1</text>
+</svg>

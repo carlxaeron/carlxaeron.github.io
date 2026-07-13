@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.32] — 2026-07-13
+
+### Added
+- **Clover Industrial Fan and Blower Inc.** client site (`clover-industrial-fan`) — Antipolo industrial fans & blowers with Facebook-scraped photos
+- Portfolio preview: `?preview=clover-industrial-fan` → `clover-industrial-fan.netlify.app`
+
+### Changed
+- **Jazz1 Aircon** updated with real Facebook brief, contact info, and gallery assets
+- Client-site skill/docs: Facebook brief gathering via **Chrome DevTools MCP** (Step 1b)
+
 ## [3.0.31] — 2026-07-13
 
 ### Added

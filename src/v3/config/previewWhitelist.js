@@ -59,6 +59,12 @@ export const PREVIEW_SITES = [
     label: "Jazz1 Airconditioning Services",
     netlifySite: "jazz1-aircon-services",
   },
+  {
+    id: "clover-industrial-fan",
+    host: "clover-industrial-fan.netlify.app",
+    label: "Clover Industrial Fan and Blower Inc.",
+    netlifySite: "clover-industrial-fan",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
