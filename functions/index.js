@@ -250,11 +250,11 @@ async function buildAnalyticsSummary() {
 
   const previewVisitsQuery = db.collection("visits").where("eventType", "==", "preview_view");
 
-  const [totalPreviewViews, totalLikes, totalDislikes, recentPreviewSnap, feedbackSnap] = await Promise.all([
+  const [totalPreviewViews, totalLikes, totalDislikes, recentVisitsSnap, feedbackSnap] = await Promise.all([
     countQuery(previewVisitsQuery),
     countQuery(db.collection("preview_feedback").where("sentiment", "==", "like")),
     countQuery(db.collection("preview_feedback").where("sentiment", "==", "dislike")),
-    previewVisitsQuery.where("date", ">=", weekAgo).get(),
+    db.collection("visits").where("date", ">=", weekAgo).get(),
     db.collection("preview_feedback").get(),
   ]);
 
@@ -264,8 +264,9 @@ async function buildAnalyticsSummary() {
   const previewDislikes = new Map();
   const visitDates = [];
 
-  recentPreviewSnap.forEach((doc) => {
+  recentVisitsSnap.forEach((doc) => {
     const data = doc.data();
+    if (data.eventType !== "preview_view") return;
     if (data.visitorId) visitors.add(data.visitorId);
     if (data.date) visitDates.push(data.date);
     if (data.previewSlug) incrementCount(previewViews, data.previewSlug);
