@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.28] — 2026-07-13
+
+### Fixed
+- Restore `trackVisit` production URL to `cloudfunctions.net` endpoint (Cloud Run URL caused CORS failures in browser)
+
 ## [3.0.27] — 2026-07-13
 
 ### Added

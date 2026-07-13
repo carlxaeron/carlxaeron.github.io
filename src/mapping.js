@@ -6,7 +6,7 @@ export const mapping = {
     : 'https://us-central1-carllouismanuel-1e3a9.cloudfunctions.net/quotation',
   trackVisit: process.env.NODE_ENV === 'development'
     ? 'http://127.0.0.1:5001/carllouismanuel-1e3a9/us-central1/trackVisit'
-    : 'https://trackvisit-fjb46y5zza-uc.a.run.app',
+    : 'https://us-central1-carllouismanuel-1e3a9.cloudfunctions.net/trackVisit',
   previewFeedback: process.env.NODE_ENV === 'development'
     ? 'http://127.0.0.1:5001/carllouismanuel-1e3a9/us-central1/previewFeedback'
     : 'https://us-central1-carllouismanuel-1e3a9.cloudfunctions.net/previewFeedback',
