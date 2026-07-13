@@ -127,12 +127,12 @@ function V3Insights({ isActive }) {
   return (
     <section
       id="insights"
-      className="v3-section-body v3-insights-section"
-      style={{ background: "#D4E9E2", height: "100vh", overflow: "hidden" }}
+      className="v3-section-body"
+      style={{ background: "#00473e", height: "100vh", overflow: "hidden" }}
     >
       <div className="v3-inner v3-scrollable v3-section-scroll">
         <animated.div style={headerSpring}>
-          <SectionTitle subtitle="Preview-only metrics from ?preview= client demos — refreshes every 30 seconds" accent="Stats">
+          <SectionTitle subtitle="Preview-only metrics from client demos — refreshes every 30 seconds" accent="Stats">
             Portfolio Insights
           </SectionTitle>
         </animated.div>
@@ -153,10 +153,13 @@ function V3Insights({ isActive }) {
         </div>
 
         {updatedAt && (
-          <p className="v3-insights-updated">Last updated {updatedAt} · auto-refresh every 30s</p>
+          <p className="v3-insights-meta">
+            <span className="v3-insights-meta__badge">Live</span>
+            Last updated {updatedAt} · auto-refresh every 30s
+          </p>
         )}
 
-        {error && <p className="v3-insights-error" role="alert">{error}</p>}
+        {error && <p className="v3-insights-empty" role="alert">{error}</p>}
 
         <div className="v3-insights-charts">
           <BarChart title="Preview views — last 7 days" rows={visitsByDay} />

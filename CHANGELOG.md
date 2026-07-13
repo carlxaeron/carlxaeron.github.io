@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.30] — 2026-07-13
+
+### Changed
+- **Portfolio Insights** restyled to match V3 dark sections — `#00473e` background, white cards, green-accent stat values, blog-style shadows and hover lift
+
 ## [3.0.29] — 2026-07-13
 
 ### Changed
