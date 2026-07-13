@@ -14,6 +14,7 @@ import V3Skills from "./Skills";
 import V3Experience from "./Experience";
 import V3Projects from "./Projects";
 import V3Blog from "./Blog";
+import V3Insights from "./Insights";
 import V3Contact from "./Contact";
 import V3Quote from "./Quote";
 import ProjectDetailModal from "../../components/ProjectDetailModal";
@@ -28,6 +29,7 @@ const SECTIONS_CONFIG = [
   { id: "experience", component: V3Experience, title: "Experience" },
   { id: "projects",   component: V3Projects,   title: "Projects" },
   { id: "blog",       component: V3Blog,       title: "News & Blog" },
+  { id: "insights",   component: V3Insights,   title: "Insights" },
   { id: "contact",    component: V3Contact,    title: "Contact" },
   { id: "quote",      component: V3Quote,      title: "Get a Quote" },
 ];

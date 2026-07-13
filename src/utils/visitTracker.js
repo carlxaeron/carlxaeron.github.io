@@ -21,6 +21,30 @@ function getOrCreateId(storageKey, useSession) {
   return id;
 }
 
+export function getVisitorContext() {
+  if (typeof window === "undefined") {
+    return { visitorId: "", sessionId: "" };
+  }
+  return {
+    visitorId: getOrCreateId(VISITOR_KEY, false),
+    sessionId: getOrCreateId(SESSION_KEY, true),
+  };
+}
+
+export function feedbackStorageKey(previewSlug) {
+  return `cm_feedback_${previewSlug}`;
+}
+
+export function hasSubmittedFeedback(previewSlug) {
+  if (typeof window === "undefined" || !previewSlug) return false;
+  return localStorage.getItem(feedbackStorageKey(previewSlug)) === "1";
+}
+
+export function markFeedbackSubmitted(previewSlug) {
+  if (typeof window === "undefined" || !previewSlug) return;
+  localStorage.setItem(feedbackStorageKey(previewSlug), "1");
+}
+
 export function getVisitClientMeta() {
   if (typeof window === "undefined") {
     return {
@@ -67,8 +91,7 @@ export function trackVisit({ eventType, section = null, previewSlug = null } = {
   if (shouldSkipDuplicate(dedupeKey)) return;
 
   const payload = {
-    visitorId: getOrCreateId(VISITOR_KEY, false),
-    sessionId: getOrCreateId(SESSION_KEY, true),
+    ...getVisitorContext(),
     eventType: eventType || "pageview",
     section,
     previewSlug,

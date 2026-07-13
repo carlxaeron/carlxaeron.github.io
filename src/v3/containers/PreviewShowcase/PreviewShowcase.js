@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import PreviewFeedback from "../../../components/PreviewFeedback";
 import "../../styles/sass/v3-app.scss";
 
 const IFRAME_SANDBOX = "allow-scripts allow-same-origin allow-forms allow-popups";
@@ -80,7 +81,7 @@ function ScrollHint({ children, className = "" }) {
   );
 }
 
-function PreviewShowcase({ previewUrl, label }) {
+function PreviewShowcase({ previewUrl, label, previewSlug }) {
   const [desktopBlocked, setDesktopBlocked] = useState(false);
   const [mobileBlocked, setMobileBlocked] = useState(false);
   const desktopScreenRef = useRef(null);
@@ -186,6 +187,9 @@ function PreviewShowcase({ previewUrl, label }) {
             {embedNotice(mobileBlocked)}
           </section>
         </div>
+        {previewSlug && (
+          <PreviewFeedback previewSlug={previewSlug} previewLabel={displayLabel} />
+        )}
       </main>
     </div>
   );

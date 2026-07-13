@@ -38,6 +38,7 @@ function Index() {
         <PreviewShowcase
           previewUrl={previewResolved.url}
           label={previewResolved.site?.label}
+          previewSlug={previewResolved.slug}
         />
       </div>
     );

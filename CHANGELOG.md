@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.27] — 2026-07-13
+
+### Added
+- **Visitor IP address** stored on each `visits` record (alongside hashed IP)
+- **Preview like/dislike** on all client preview pages — dislike requires a comment
+- **`previewFeedback`** Cloud Function → Firestore `preview_feedback` collection
+- **`analyticsSummary`** API + **Portfolio Insights** section with live stat cards and bar charts (sites, visits, likes, 7-day trends)
+- Preview feedback UI tests
+
+### Changed
+- `trackVisit` production URL updated to Cloud Run endpoint
+- Weekly email report includes preview like/dislike totals
+
 ## [3.0.26] — 2026-07-13
 
 ### Added

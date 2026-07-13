@@ -120,7 +120,7 @@ function buildQuotationMailPayload({
   };
 }
 
-function applyCorsHeaders(request, response) {
+function applyCorsHeaders(request, response, options = {}) {
   const allowedOrigins = [
     "https://carlxaeron.github.io",
     "https://carlmanuel.com",
@@ -128,6 +128,7 @@ function applyCorsHeaders(request, response) {
     "http://localhost:3000",
   ];
   const origin = request.headers.origin;
+  const methods = options.methods || "POST, OPTIONS";
 
   if (allowedOrigins.includes(origin)) {
     response.setHeader("Access-Control-Allow-Origin", origin);
@@ -135,7 +136,7 @@ function applyCorsHeaders(request, response) {
     response.setHeader("Access-Control-Allow-Origin", "*");
   }
 
-  response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  response.setHeader("Access-Control-Allow-Methods", methods);
   response.setHeader("Access-Control-Allow-Headers", "Content-Type");
 }
 
@@ -187,6 +188,8 @@ function buildWeeklyVisitReportPayload(stats) {
       <li><strong>Preview views:</strong> ${stats.previewViews}</li>
       <li><strong>Unique visitors:</strong> ${stats.uniqueVisitors}</li>
       <li><strong>Unique sessions:</strong> ${stats.uniqueSessions}</li>
+      <li><strong>Preview likes:</strong> ${stats.totalLikes || 0}</li>
+      <li><strong>Preview dislikes:</strong> ${stats.totalDislikes || 0}</li>
     </ul>
     <h3>Top sections</h3>
     <ul>${formatTopList(stats.topSections)}</ul>
@@ -196,7 +199,7 @@ function buildWeeklyVisitReportPayload(stats) {
     <ul>${formatTopList(stats.topReferrers)}</ul>
     <h3>Devices</h3>
     <ul>${formatTopList(stats.devices)}</ul>
-    <p style="margin-top:24px;color:#666;font-size:12px;">Anonymous analytics — no personal identity stored. IP is hashed server-side.</p>
+    <p style="margin-top:24px;color:#666;font-size:12px;">Visit records include visitor IP for your admin review in Firestore.</p>
   `.trim();
 
   const text = [
@@ -204,25 +207,92 @@ function buildWeeklyVisitReportPayload(stats) {
     "",
     `Period: ${stats.weekLabel}`,
     `Total events: ${stats.totalEvents}`,
-    `Page views: ${stats.pageViews}`,
-    `Section views: ${stats.sectionViews}`,
-    `Preview views: ${stats.previewViews}`,
-    `Unique visitors: ${stats.uniqueVisitors}`,
-    `Unique sessions: ${stats.uniqueSessions}`,
-    "",
-    "Top sections:",
-    ...topEntries(stats.topSectionsMap || new Map()).map(([k, v]) => `- ${k}: ${v}`),
+    `Preview likes: ${stats.totalLikes || 0}`,
+    `Preview dislikes: ${stats.totalDislikes || 0}`,
     "",
     "Top preview slugs:",
     ...topEntries(stats.topPreviewsMap || new Map()).map(([k, v]) => `- ${k}: ${v}`),
-    "",
-    "Top referrers:",
-    ...topEntries(stats.topReferrersMap || new Map()).map(([k, v]) => `- ${k}: ${v}`),
   ].join("\n");
 
   return {
     replyTo: "info@carlmanuel.com",
     message: { subject, html, text },
+  };
+}
+
+async function countQuery(query) {
+  const snap = await query.count().get();
+  return snap.data().count;
+}
+
+function bucketByDay(dates, days = 7) {
+  const buckets = [];
+  const now = new Date();
+  for (let i = days - 1; i >= 0; i -= 1) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    const key = d.toISOString().slice(0, 10);
+    buckets.push({ date: key, count: 0 });
+  }
+  const index = new Map(buckets.map((b, i) => [b.date, i]));
+  dates.forEach((dateValue) => {
+    const d = dateValue?.toDate ? dateValue.toDate() : new Date(dateValue);
+    const key = d.toISOString().slice(0, 10);
+    if (index.has(key)) buckets[index.get(key)].count += 1;
+  });
+  return buckets;
+}
+
+async function buildAnalyticsSummary() {
+  const db = admin.firestore();
+  const weekAgo = new Date();
+  weekAgo.setDate(weekAgo.getDate() - 7);
+
+  const [totalVisits, totalLikes, totalDislikes, recentVisitsSnap, feedbackSnap] = await Promise.all([
+    countQuery(db.collection("visits")),
+    countQuery(db.collection("preview_feedback").where("sentiment", "==", "like")),
+    countQuery(db.collection("preview_feedback").where("sentiment", "==", "dislike")),
+    db.collection("visits").where("date", ">=", weekAgo).get(),
+    db.collection("preview_feedback").get(),
+  ]);
+
+  const visitors = new Set();
+  const previewViews = new Map();
+  const previewLikes = new Map();
+  const previewDislikes = new Map();
+  const visitDates = [];
+
+  recentVisitsSnap.forEach((doc) => {
+    const data = doc.data();
+    if (data.visitorId) visitors.add(data.visitorId);
+    if (data.date) visitDates.push(data.date);
+    if (data.previewSlug) incrementCount(previewViews, data.previewSlug);
+  });
+
+  feedbackSnap.forEach((doc) => {
+    const data = doc.data();
+    if (!data.previewSlug) return;
+    if (data.sentiment === "like") incrementCount(previewLikes, data.previewSlug);
+    if (data.sentiment === "dislike") incrementCount(previewDislikes, data.previewSlug);
+  });
+
+  const previewSlugs = new Set([...previewViews.keys(), ...previewLikes.keys(), ...previewDislikes.keys()]);
+  const previewStats = [...previewSlugs].map((slug) => ({
+    slug,
+    views: previewViews.get(slug) || 0,
+    likes: previewLikes.get(slug) || 0,
+    dislikes: previewDislikes.get(slug) || 0,
+  })).sort((a, b) => b.views - a.views);
+
+  return {
+    clientSites: 8,
+    totalVisits,
+    uniqueVisitorsWeek: visitors.size,
+    totalLikes,
+    totalDislikes,
+    visitsByDay: bucketByDay(visitDates),
+    previewStats,
+    generatedAt: new Date().toISOString(),
   };
 }
 
@@ -261,6 +331,20 @@ async function aggregateWeeklyVisitStats(weekAgo, now) {
 
   const weekLabel = `${weekAgo.toISOString().slice(0, 10)} → ${now.toISOString().slice(0, 10)}`;
 
+  const feedbackSnap = await admin.firestore()
+    .collection("preview_feedback")
+    .where("date", ">=", weekAgo)
+    .where("date", "<", now)
+    .get();
+
+  let totalLikes = 0;
+  let totalDislikes = 0;
+  feedbackSnap.forEach((doc) => {
+    const data = doc.data();
+    if (data.sentiment === "like") totalLikes += 1;
+    if (data.sentiment === "dislike") totalDislikes += 1;
+  });
+
   return {
     weekLabel,
     totalEvents: snapshot.size,
@@ -269,6 +353,8 @@ async function aggregateWeeklyVisitStats(weekAgo, now) {
     previewViews,
     uniqueVisitors: visitors.size,
     uniqueSessions: sessions.size,
+    totalLikes,
+    totalDislikes,
     topSections: topEntries(topSections),
     topPreviews: topEntries(topPreviews),
     topReferrers: topEntries(topReferrers),
@@ -642,6 +728,7 @@ exports.trackVisit = onRequest((request, response) => {
   }
 
   const normalizedEvent = String(eventType || "pageview").trim().slice(0, 32);
+  const clientIp = getClientIp(request);
   const visitRef = admin.firestore().collection("visits").doc();
 
   visitRef
@@ -658,7 +745,8 @@ exports.trackVisit = onRequest((request, response) => {
       screen: screen || null,
       viewport: viewport || null,
       device: parseDevice(userAgent),
-      ipHash: hashIp(getClientIp(request)),
+      ipAddress: clientIp ? String(clientIp).slice(0, 45) : null,
+      ipHash: hashIp(clientIp),
       date: new Date(),
     })
     .then(() => {
@@ -721,6 +809,105 @@ exports.weeklyVisitReport = onSchedule(
     });
   }
 );
+
+exports.previewFeedback = onRequest(async (request, response) => {
+  applyCorsHeaders(request, response);
+
+  if (request.method === "OPTIONS") {
+    response.status(204).send("");
+    return;
+  }
+
+  if (request.method !== "POST") {
+    sendError({ response }, { message: "Method not allowed" });
+    return;
+  }
+
+  const {
+    visitorId,
+    sessionId,
+    previewSlug,
+    sentiment,
+    comment,
+    previewLabel,
+  } = request.body || {};
+
+  if (!visitorId || !sessionId || !previewSlug || !sentiment) {
+    sendError({ response }, { message: "Missing required fields" });
+    return;
+  }
+
+  const normalizedSentiment = String(sentiment).trim().toLowerCase();
+  if (normalizedSentiment !== "like" && normalizedSentiment !== "dislike") {
+    sendError({ response }, { message: "Invalid sentiment" });
+    return;
+  }
+
+  const trimmedComment = comment ? String(comment).trim() : "";
+  if (normalizedSentiment === "dislike" && !trimmedComment) {
+    sendError({ response }, { message: "Comment is required when disliking" });
+    return;
+  }
+
+  const slug = String(previewSlug).slice(0, 64);
+  const vid = String(visitorId).slice(0, 64);
+
+  const existing = await admin.firestore()
+    .collection("preview_feedback")
+    .where("visitorId", "==", vid)
+    .where("previewSlug", "==", slug)
+    .limit(1)
+    .get();
+
+  if (!existing.empty) {
+    sendError({ response }, { message: "You already submitted feedback for this preview" });
+    return;
+  }
+
+  const clientIp = getClientIp(request);
+
+  try {
+    await admin.firestore().collection("preview_feedback").add({
+      visitorId: vid,
+      sessionId: String(sessionId).slice(0, 64),
+      previewSlug: slug,
+      previewLabel: previewLabel ? String(previewLabel).slice(0, 128) : null,
+      sentiment: normalizedSentiment,
+      comment: trimmedComment ? trimmedComment.slice(0, 1000) : null,
+      ipAddress: clientIp ? String(clientIp).slice(0, 45) : null,
+      ipHash: hashIp(clientIp),
+      date: new Date(),
+    });
+
+    logger.info("Preview feedback saved", { structuredData: true, previewSlug: slug, sentiment: normalizedSentiment });
+    sendSuccess({ response }, { message: "Feedback recorded" });
+  } catch (error) {
+    logger.error("Error saving preview feedback", { structuredData: true, error });
+    sendError({ response }, { message: "Error saving feedback" });
+  }
+});
+
+exports.analyticsSummary = onRequest(async (request, response) => {
+  applyCorsHeaders(request, response, { methods: "GET, OPTIONS" });
+
+  if (request.method === "OPTIONS") {
+    response.status(204).send("");
+    return;
+  }
+
+  if (request.method !== "GET") {
+    sendError({ response }, { message: "Method not allowed" });
+    return;
+  }
+
+  try {
+    const summary = await buildAnalyticsSummary();
+    sendSuccess({ response }, { message: "OK", data: summary });
+  } catch (error) {
+    logger.error("Error building analytics summary", { structuredData: true, error });
+    sendError({ response }, { message: "Error loading analytics" });
+  }
+});
 
 exports.license = onRequest((request, response) => {
   console.log(request.body);

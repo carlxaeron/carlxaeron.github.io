@@ -7,6 +7,22 @@
         { "fieldPath": "date", "order": "ASCENDING" },
         { "fieldPath": "eventType", "order": "ASCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "preview_feedback",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "visitorId", "order": "ASCENDING" },
+        { "fieldPath": "previewSlug", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "preview_feedback",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "sentiment", "order": "ASCENDING" },
+        { "fieldPath": "date", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

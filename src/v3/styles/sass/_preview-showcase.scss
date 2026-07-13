@@ -380,3 +380,72 @@ body.v3-preview-active {
     color: $white;
   }
 }
+
+.v3-preview-feedback {
+  margin-top: $space-8;
+  padding: $space-6 $space-4 $space-8;
+  border-top: 1px solid rgba($green-light, 0.15);
+
+  &--done {
+    text-align: center;
+    color: rgba($green-light, 0.9);
+    font-size: 0.95rem;
+  }
+}
+
+.v3-preview-feedback__inner {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.v3-preview-feedback__prompt {
+  font-size: 1.05rem;
+  color: $white;
+  margin-bottom: $space-4;
+}
+
+.v3-preview-feedback__actions {
+  display: flex;
+  gap: $space-3;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.v3-preview-feedback__btn {
+  min-width: 120px;
+  padding: $space-3 $space-5;
+  border-radius: 999px;
+  border: 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &--like {
+    background: $green-accent;
+    color: $green-dark;
+  }
+
+  &--dislike {
+    background: transparent;
+    color: $white;
+    border: 1.5px solid rgba($white, 0.45);
+  }
+}
+
+.v3-preview-feedback__error {
+  margin-top: $space-3;
+  color: #ffb4b4;
+  font-size: 0.875rem;
+}
+
+.v3-preview-feedback__modal-copy {
+  margin-bottom: $space-4;
+  color: rgba($green-light, 0.85);
+  font-size: 0.95rem;
+}

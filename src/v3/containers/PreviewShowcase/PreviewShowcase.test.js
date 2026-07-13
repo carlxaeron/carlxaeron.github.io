@@ -7,10 +7,12 @@ describe("PreviewShowcase", () => {
       <PreviewShowcase
         previewUrl="https://bamboo-grove-cafe.netlify.app"
         label="Sample Business Quotation Site"
+        previewSlug="quotation"
       />
     );
 
     expect(screen.getByTestId("preview-showcase")).toBeInTheDocument();
+    expect(screen.getByTestId("preview-feedback")).toBeInTheDocument();
     expect(screen.getByText("Sample Business Quotation Site")).toBeInTheDocument();
     expect(screen.queryByText(/\.netlify\.app/i)).not.toBeInTheDocument();
     expect(screen.getByLabelText(/Desktop preview/i)).toBeInTheDocument();
