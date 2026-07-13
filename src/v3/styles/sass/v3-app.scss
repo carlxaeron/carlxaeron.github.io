@@ -1666,6 +1666,12 @@ body.v3-modal-open {
   margin-bottom: $space-4;
 }
 
+.v3-insights-updated {
+  font-size: 0.8rem;
+  color: rgba($text-dark, 0.6);
+  margin: 0 0 $space-4;
+}
+
 .v3-insights-charts {
   display: grid;
   gap: $space-5;

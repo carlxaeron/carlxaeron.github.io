@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.29] — 2026-07-13
+
+### Changed
+- Visit logging removed from main portfolio — **preview pages only** (`?preview=`)
+- **Insights** polls every 30s while open; shows last-updated time
+- Insights counts **preview views/likes only** (excludes old main-site pageview noise)
+
+### Fixed
+- `analyticsSummary` filters `eventType: preview_view` for accurate preview metrics
+
 ## [3.0.28] — 2026-07-13
 
 ### Fixed

@@ -248,11 +248,13 @@ async function buildAnalyticsSummary() {
   const weekAgo = new Date();
   weekAgo.setDate(weekAgo.getDate() - 7);
 
-  const [totalVisits, totalLikes, totalDislikes, recentVisitsSnap, feedbackSnap] = await Promise.all([
-    countQuery(db.collection("visits")),
+  const previewVisitsQuery = db.collection("visits").where("eventType", "==", "preview_view");
+
+  const [totalPreviewViews, totalLikes, totalDislikes, recentPreviewSnap, feedbackSnap] = await Promise.all([
+    countQuery(previewVisitsQuery),
     countQuery(db.collection("preview_feedback").where("sentiment", "==", "like")),
     countQuery(db.collection("preview_feedback").where("sentiment", "==", "dislike")),
-    db.collection("visits").where("date", ">=", weekAgo).get(),
+    previewVisitsQuery.where("date", ">=", weekAgo).get(),
     db.collection("preview_feedback").get(),
   ]);
 
@@ -262,7 +264,7 @@ async function buildAnalyticsSummary() {
   const previewDislikes = new Map();
   const visitDates = [];
 
-  recentVisitsSnap.forEach((doc) => {
+  recentPreviewSnap.forEach((doc) => {
     const data = doc.data();
     if (data.visitorId) visitors.add(data.visitorId);
     if (data.date) visitDates.push(data.date);
@@ -286,8 +288,8 @@ async function buildAnalyticsSummary() {
 
   return {
     clientSites: 8,
-    totalVisits,
-    uniqueVisitorsWeek: visitors.size,
+    totalPreviewViews,
+    uniquePreviewVisitorsWeek: visitors.size,
     totalLikes,
     totalDislikes,
     visitsByDay: bucketByDay(visitDates),

@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import SectionTitle from "../../components/SectionTitle";
 import { PREVIEW_SITES } from "../../config/previewWhitelist";
 import { mapping } from "../../../mapping";
+
+const REFRESH_MS = 30000;
 
 function StatCard({ label, value, hint }) {
   return (
@@ -15,11 +17,13 @@ function StatCard({ label, value, hint }) {
 }
 
 function BarChart({ title, rows, valueKey = "count", labelKey = "label" }) {
-  if (!rows?.length) {
+  const hasData = rows?.some((row) => (row[valueKey] || 0) > 0);
+
+  if (!rows?.length || !hasData) {
     return (
       <div className="v3-insights-chart">
         <h3 className="v3-insights-chart__title">{title}</h3>
-        <p className="v3-insights-chart__empty">No data yet — stats appear as visitors browse previews.</p>
+        <p className="v3-insights-chart__empty">No preview data yet — open a client preview link to generate stats.</p>
       </div>
     );
   }
@@ -47,6 +51,15 @@ function BarChart({ title, rows, valueKey = "count", labelKey = "label" }) {
   );
 }
 
+function formatUpdatedAt(iso) {
+  if (!iso) return null;
+  try {
+    return new Date(iso).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+  } catch {
+    return null;
+  }
+}
+
 function V3Insights({ isActive }) {
   const [summary, setSummary] = useState(null);
   const [error, setError] = useState("");
@@ -59,34 +72,33 @@ function V3Insights({ isActive }) {
     config: { tension: 220, friction: 28 },
   });
 
-  useEffect(() => {
-    if (!isActive || summary || loading) return undefined;
-
-    let cancelled = false;
-    setLoading(true);
+  const loadSummary = useCallback(async (isInitial = false) => {
+    if (isInitial) setLoading(true);
     setError("");
 
-    fetch(mapping.analyticsSummary)
-      .then((res) => res.json())
-      .then((json) => {
-        if (cancelled) return;
-        if (json.status === 200) {
-          setSummary(json.data || null);
-        } else {
-          setError("Could not load live stats right now.");
-        }
-      })
-      .catch(() => {
-        if (!cancelled) setError("Could not load live stats right now.");
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
+    try {
+      const res = await fetch(mapping.analyticsSummary, { cache: "no-store" });
+      const json = await res.json();
+      if (json.status === 200 && json.data) {
+        setSummary(json.data);
+      } else {
+        setError("Could not load preview stats right now.");
+      }
+    } catch {
+      setError("Could not load preview stats right now.");
+    } finally {
+      if (isInitial) setLoading(false);
+    }
+  }, []);
 
-    return () => {
-      cancelled = true;
-    };
-  }, [isActive, summary, loading]);
+  useEffect(() => {
+    if (!isActive) return undefined;
+
+    loadSummary(true);
+    const interval = window.setInterval(() => loadSummary(false), REFRESH_MS);
+
+    return () => window.clearInterval(interval);
+  }, [isActive, loadSummary]);
 
   const clientSites = PREVIEW_SITES.length;
   const visitsByDay = (summary?.visitsByDay || []).map((row) => ({
@@ -103,11 +115,14 @@ function V3Insights({ isActive }) {
     }));
 
   const previewViews = (summary?.previewStats || [])
+    .filter((row) => row.views > 0)
     .slice(0, 6)
     .map((row) => ({
       label: row.slug,
       count: row.views,
     }));
+
+  const updatedAt = formatUpdatedAt(summary?.generatedAt);
 
   return (
     <section
@@ -117,23 +132,34 @@ function V3Insights({ isActive }) {
     >
       <div className="v3-inner v3-scrollable v3-section-scroll">
         <animated.div style={headerSpring}>
-          <SectionTitle subtitle="Live sideline demo metrics — client sites, visitors, and preview feedback" accent="Stats">
+          <SectionTitle subtitle="Preview-only metrics from ?preview= client demos — refreshes every 30 seconds" accent="Stats">
             Portfolio Insights
           </SectionTitle>
         </animated.div>
 
         <div className="v3-insights-grid">
           <StatCard label="Client demo sites" value={clientSites} hint="Netlify quotation samples" />
-          <StatCard label="Total visits" value={summary?.totalVisits ?? (loading ? "…" : "0")} />
-          <StatCard label="Visitors (7 days)" value={summary?.uniqueVisitorsWeek ?? (loading ? "…" : "0")} />
-          <StatCard label="Preview likes" value={summary?.totalLikes ?? (loading ? "…" : "0")} />
-          <StatCard label="Preview dislikes" value={summary?.totalDislikes ?? (loading ? "…" : "0")} />
+          <StatCard
+            label="Preview views"
+            value={summary?.totalPreviewViews ?? (loading ? "…" : "0")}
+            hint="All-time ?preview= opens"
+          />
+          <StatCard
+            label="Preview visitors (7 days)"
+            value={summary?.uniquePreviewVisitorsWeek ?? (loading ? "…" : "0")}
+          />
+          <StatCard label="Likes" value={summary?.totalLikes ?? (loading ? "…" : "0")} />
+          <StatCard label="Dislikes" value={summary?.totalDislikes ?? (loading ? "…" : "0")} />
         </div>
+
+        {updatedAt && (
+          <p className="v3-insights-updated">Last updated {updatedAt} · auto-refresh every 30s</p>
+        )}
 
         {error && <p className="v3-insights-error" role="alert">{error}</p>}
 
         <div className="v3-insights-charts">
-          <BarChart title="Visits — last 7 days" rows={visitsByDay} />
+          <BarChart title="Preview views — last 7 days" rows={visitsByDay} />
           <BarChart title="Preview views by client slug" rows={previewViews} />
           <BarChart title="Likes by client slug" rows={likesBySite} />
         </div>

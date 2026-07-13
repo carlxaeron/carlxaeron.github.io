@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { trackVisit } from "../utils/visitTracker";
 
 /**
- * Fires anonymous visit events to Firestore via the trackVisit Cloud Function.
+ * Fires anonymous visit events on client preview pages only (via trackVisit Cloud Function).
  */
 export default function VisitTracker({ eventType = "pageview", section = null, previewSlug = null }) {
   useEffect(() => {

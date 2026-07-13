@@ -25,7 +25,6 @@ function Index() {
   if (previewRaw && !previewResolved) {
     return (
       <div className="App">
-        <VisitTracker eventType="preview_error" previewSlug={previewRaw} />
         <PreviewShowcaseError previewKey={previewRaw} />
       </div>
     );
@@ -46,7 +45,6 @@ function Index() {
 
   return (
     <div className="App">
-      <VisitTracker eventType="pageview" />
       <Portfolio />
     </div>
   );
