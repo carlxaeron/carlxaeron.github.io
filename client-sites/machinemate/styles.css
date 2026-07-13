@@ -1,0 +1,72 @@
+/* Machinemate Mainteneering Services — hero, reveal, gallery */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-header] {
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+[data-header].is-scrolled {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.tab-active,
+.filter-active {
+  font-weight: 700;
+}
+
+.tab-inactive,
+.filter-inactive {
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.hero-bg {
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-bg--machinemate {
+  background-image:
+    linear-gradient(135deg, rgba(12, 35, 64, 0.93) 0%, rgba(12, 35, 64, 0.78) 45%, rgba(15, 23, 42, 0.9) 100%),
+    url("assets/hero-fans.jpg");
+}
+
+.gallery-card__img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.trust-strip {
+  background: linear-gradient(90deg, #0c2340 0%, #1e4976 50%, #0c2340 100%);
+}
+
+.product-card__icon {
+  font-size: 2rem;
+  line-height: 1;
+}

@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.25] — 2026-07-13
+
+### Added
+- **Machinemate Mainteneering Services** client demo (`client-sites/machinemate/`) — industrial fans & ventilation site; Netlify `machinemate-engineering.netlify.app`
+- Portfolio preview whitelist entry for `?preview=machinemate`
+- Outreach drafts (email, SMS, messenger) and README catalog entry
+
 ## [3.0.24] — 2026-07-13
 
 ### Added

@@ -21,6 +21,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [RG Decals and Printing Shop](#rg-decals-and-printing-shop) | `rg-decals` | Printing / signs & decals | [Preview](https://carlmanuel.com/?preview=rg-decals) | 2026-07-10 |
 | [Sonyoba Marketing](#sonyoba-marketing) | `sonyoba-marketing` | Office equipment | [Preview](https://carlmanuel.com/?preview=sonyoba-marketing) | 2026-07-13 |
 | [JK Construction Services](#jk-construction-services) | `jk-construction` | Construction / renovation | [Preview](https://carlmanuel.com/?preview=jk-construction) | 2026-07-13 |
+| [Machinemate Mainteneering Services](#machinemate-mainteneering-services) | `machinemate` | Industrial fans / ventilation | [Preview](https://carlmanuel.com/?preview=machinemate) | 2026-07-13 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -135,6 +136,23 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Location** | Caloocan, Philippines 1422 |
 | **Service area** | Metro Manila, Quezon City, Novaliches, Meycauayan, Caloocan, San Jose del Monte |
 | **Source** | [Facebook](https://www.facebook.com/JKConstrSvcs/) |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days |
+| **Outreach** | `quotation-email.md` · `quotation-sms.txt` · `quotation-messenger.txt` |
+
+---
+
+### Machinemate Mainteneering Services
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/machinemate/` |
+| **Netlify site** | `machinemate-engineering` |
+| **Preview host** | `machinemate-engineering.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=machinemate |
+| **Contact** | mms_fans@yahoo.com · +63 917 776 1418 |
+| **Location** | Rodriguez, Philippines |
+| **Source** | [Facebook](https://www.facebook.com/machinemate/) |
+| **Products** | SS/MS centrifugal fans, axial fans, roof exhaust; export & maintenance engineering |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days |
 | **Outreach** | `quotation-email.md` · `quotation-sms.txt` · `quotation-messenger.txt` |
 

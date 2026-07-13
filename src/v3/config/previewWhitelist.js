@@ -47,6 +47,12 @@ export const PREVIEW_SITES = [
     label: "JK Construction Services",
     netlifySite: "jk-construction-services",
   },
+  {
+    id: "machinemate",
+    host: "machinemate-engineering.netlify.app",
+    label: "Machinemate Mainteneering Services",
+    netlifySite: "machinemate-engineering",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
