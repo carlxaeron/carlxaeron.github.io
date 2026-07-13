@@ -40,6 +40,12 @@ export const PREVIEW_SITES = [
     label: "Sonyoba Marketing",
     netlifySite: "sonyoba-marketing",
   },
+  {
+    id: "jk-construction",
+    host: "jk-construction-services.netlify.app",
+    label: "JK Construction Services",
+    netlifySite: "jk-construction-services",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

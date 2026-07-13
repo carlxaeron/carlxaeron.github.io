@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.22] — 2026-07-13
+
+### Added
+- **Sonyoba Marketing** client demo (`client-sites/sonyoba-marketing/`) — office equipment catalog with product images, reviews, FAQ; Netlify `sonyoba-marketing.netlify.app`
+- **JK Construction Services** client demo (`client-sites/jk-construction/`) — Caloocan construction/renovation site with services, gallery, FAQ; Netlify `jk-construction-services.netlify.app`
+- Portfolio preview whitelist entries for both hosts
+
 ## [3.0.21] — 2026-07-10
 
 ### Changed

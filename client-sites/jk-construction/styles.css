@@ -1,0 +1,67 @@
+/* JK Construction Services — hero, reveal, gallery */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-header] {
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+[data-header].is-scrolled {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.tab-active,
+.filter-active {
+  font-weight: 700;
+}
+
+.tab-inactive,
+.filter-inactive {
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.hero-bg {
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-bg--jk {
+  background-image:
+    linear-gradient(135deg, rgba(26, 45, 74, 0.92) 0%, rgba(26, 45, 74, 0.75) 45%, rgba(15, 23, 42, 0.88) 100%),
+    url("assets/hero-renovation.jpg");
+}
+
+.gallery-card__img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.trust-strip {
+  background: linear-gradient(90deg, #1a2d4a 0%, #243b5e 50%, #1a2d4a 100%);
+}
