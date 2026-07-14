@@ -1,0 +1,42 @@
+---
+description: Laravel 12 portfolio API (api-carlxaeron) — contracts, env, MySQL, SMTP, hosting deploy
+globs:
+  - api-carlxaeron/**
+  - src/mapping.js
+alwaysApply: false
+---
+
+# api-carlxaeron (Laravel API)
+
+Skill: [`.cursor/skills/api-carlxaeron/SKILL.md`](../skills/api-carlxaeron/SKILL.md)  
+Hosting deploy: [`.cursor/skills/hosting-ssh/SKILL.md`](../skills/hosting-ssh/SKILL.md)
+
+## Contracts
+
+Keep Firebase-shaped JSON and **unprefixed** paths: `/health`, `/trackVisit`, `/previewFeedback`, `/analyticsSummary`, `/contact`, `/quotation`.
+
+Do not move routes under `/api/` without updating `src/mapping.js` and CORS.
+
+## Stack
+
+- Laravel 12 · PHP 8.2+ · MySQL on Stellar
+- Mail: Laravel SMTP (`MAIL_*`; legacy `SMTP_*` still resolved in config)
+- Analytics exclusion salt: `:carlxaeron-portfolio` (must match frontend hash)
+
+## Layout
+
+App root on hosting = Laravel project; **document root** = `public/` only.
+
+Migrations skip-create if `visits` / `preview_feedback` / `contact` / `quotations` already exist.
+
+## Tests
+
+```bash
+cd api-carlxaeron && php artisan test
+```
+
+## Do not
+
+- Commit `api-carlxaeron/.env`
+- Deploy `api-carlxaeron-legacy-php/`
+- Break CORS origins listed in `config/cors.php`

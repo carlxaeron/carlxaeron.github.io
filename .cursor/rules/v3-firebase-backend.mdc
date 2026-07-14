@@ -1,8 +1,7 @@
 ---
-description: Firebase Functions, Firestore forms, email, and API mapping for portfolio backend
+description: Remaining Firebase Functions (assistant, weekly report, license). Forms/analytics → api-carlxaeron.
 globs:
   - functions/**
-  - src/mapping.js
   - extensions/**
   - firebase.json
   - firestore.rules
@@ -10,45 +9,42 @@ globs:
 alwaysApply: false
 ---
 
-# Firebase backend
+# Firebase backend (remaining)
 
 Skill: [`.cursor/skills/firebase-backend/SKILL.md`](../skills/firebase-backend/SKILL.md)
 
-## Functions (`functions/index.js`)
+**Moved off Firebase:** contact, quotation, trackVisit, previewFeedback, analyticsSummary → Laravel on **`https://api.carlmanuel.com`** ([`api-carlxaeron/`](../../api-carlxaeron/), skill **api-carlxaeron**).
 
-| Export | Collection | Email |
-|--------|------------|-------|
-| `contact` | `contact` | Yes |
-| `quotation` | `quotations` | Yes |
-| `assistant` | — | OpenAI proxy |
-| `license` | — | Client WHMCS |
+## Still on Firebase (`functions/index.js`)
 
-## Email path
-
-1. Save to Firestore → 2. `mail` collection doc → 3. Trigger Email extension → 4. optional direct SMTP
-
-Recipients: `info@carlmanuel.com`, `carllouismanuel09@gmail.com`
-
-**SMTP:** Gmail App Password only — `smtps://user:APP_PASSWORD@smtp.gmail.com:465` in `functions/.env` and extension config.
+| Export | Purpose |
+|--------|---------|
+| `assistant` | Chat agent (OpenAI) |
+| `license` | Client WHMCS |
+| `weeklyVisitReport` | Scheduled email report |
 
 ## `src/mapping.js`
 
-Add prod + dev emulator URLs for every new HTTPS function. After deploy, verify prod URL from `firebase deploy` output.
+- Forms / analytics → `api.carlmanuel.com`
+- Assistant → Firebase HTTPS function
 
-## Deploy
+## Deploy (Firebase only)
 
 ```bash
 cd functions && npm run deploy
 ```
 
-Syncs `src/external-config.js` into `functions/` automatically.
+## Email
 
-## CORS (`applyCorsHeaders` / per-function origins)
+- **Forms:** hosting API `.env` (`MAIL_*` / `SMTP_*`) — not Trigger Email
+- **Weekly report:** still `functions/.env` + Trigger Email / SMTP URI as needed
+
+## CORS (assistant)
 
 Must include: `carlmanuel.com`, `www.carlmanuel.com`, `carlxaeron.github.io`, `localhost:3000`.
 
 ## Do not
 
-- Commit `functions/.env` or extension `*.env` with secrets
-- Leave temporary admin/export endpoints deployed without auth
-- Use Gmail login password in SMTP URI (requires App Password)
+- Commit `functions/.env` or app passwords
+- Assume new form traffic writes to Firestore (historical data only)
+- Redeploy legacy `contact` / `quotation` Cloud Functions as the portfolio source of truth

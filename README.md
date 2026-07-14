@@ -1,6 +1,6 @@
 # Carl Louis Manuel — Portfolio & Dev Tooling
 
-Personal portfolio ([carlmanuel.com](https://carlmanuel.com)) built with Create React App, V3 design system, Firebase, and GitHub Pages.
+Personal portfolio ([carlmanuel.com](https://carlmanuel.com)) built with Create React App, V3 design system, Laravel API on Namecheap, Firebase (assistant), and GitHub Pages.
 
 ---
 
@@ -43,6 +43,7 @@ Full pipeline for **OnlineJobs.ph** remote job search, tailored CVs, apply track
 | Agent guide | [AGENTS.md](AGENTS.md) |
 | MCP + env setup | [OnlineJobs-MCP-Server/README.md](OnlineJobs-MCP-Server/README.md) |
 | Deploy portfolio | [.cursor/skills/deploy-portfolio/SKILL.md](.cursor/skills/deploy-portfolio/SKILL.md) |
+| Laravel API (forms/analytics) | [.cursor/skills/api-carlxaeron/SKILL.md](.cursor/skills/api-carlxaeron/SKILL.md) · [api-carlxaeron/README.md](api-carlxaeron/README.md) |
 
 ---
 
@@ -50,14 +51,15 @@ Full pipeline for **OnlineJobs.ph** remote job search, tailored CVs, apply track
 
 ```text
 src/v3/                    # Portfolio V3 (active UI)
+api-carlxaeron/            # Laravel 12 API → api.carlmanuel.com
 OnlineJobs-MCP-Server/     # MCP server + FastAPI dashboard + dashboard-ui/
 Office-Word-MCP-Server/    # CV Word doc generator (Canva-style)
 client-sites/              # Netlify client quotation demos
 job-applications/          # Generated apply folders (gitignored)
 docs/                      # GitHub Pages build + workflow docs
-functions/                 # Firebase Cloud Functions (contact, chat)
-.cursor/skills/            # Cursor agent skills (deploy, onlinejobs, firebase, client-site-netlify)
-.cursor/rules/             # Agent rules (v3 design, deploy, firebase, onlinejobs)
+functions/                 # Firebase (assistant, license, weekly report)
+.cursor/skills/            # Cursor agent skills (deploy, api-carlxaeron, hosting-ssh, …)
+.cursor/rules/             # Agent rules (v3 design, api-carlxaeron, firebase, …)
 AGENTS.md                  # Agent entry point
 docs/project-history.md    # What the repo has now + version timeline
 ```
@@ -88,9 +90,13 @@ See [Create React App documentation](https://github.com/facebook/create-react-ap
 
 Build output and static assets for GitHub Pages.
 
+### `api-carlxaeron`
+
+Laravel 12 API for contact, quotation, visits, preview feedback, analytics → [api.carlmanuel.com](https://api.carlmanuel.com).
+
 ### `functions`
 
-Firebase Cloud Functions — contact form, chat API.
+Firebase Cloud Functions — assistant, license, weeklyVisitReport (forms/analytics moved to Laravel).
 
 ### `public`
 
@@ -116,7 +122,8 @@ Generates `CARLLOUISMANUEL-CV.docx` from portfolio data with per-job tagline ove
 |------|---------|
 | `OnlineJobs-MCP-Server/.env` | `APIFY_API_TOKEN`, CV upload tokens, `DASHBOARD_PORT` |
 | `.cursor/mcp.json` | Cursor MCP server config (gitignored or local) |
-| `functions/.env` | Firebase function secrets |
+| `api-carlxaeron/.env` | MySQL + SMTP for forms/analytics API |
+| `functions/.env` | Firebase secrets (assistant / weekly report) |
 
 Never commit tokens or `job-applications/` folders.
 

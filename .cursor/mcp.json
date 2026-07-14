@@ -15,6 +15,16 @@
     "netlify": {
       "command": "npx",
       "args": ["-y", "@netlify/mcp"]
+    },
+    "namecheap": {
+      "command": "/Users/carllouismanuel/CARL MANUEL/DEV/carlxaeron.github.io/Namecheap-MCP-Server/start-mcp.sh",
+      "args": []
+    },
+    "hosting-ssh": {
+      "command": "node",
+      "args": [
+        "/Users/carllouismanuel/CARL MANUEL/DEV/carlxaeron.github.io/Hosting-SSH-MCP-Server/dist/index.js"
+      ]
     }
   }
 }

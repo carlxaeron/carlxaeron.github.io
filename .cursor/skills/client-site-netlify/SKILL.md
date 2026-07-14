@@ -108,6 +108,14 @@ Fallback only if browser unavailable: stock photos + note in `client.json` → `
   - Do **not** put `data-reveal` on hero children — Motion owns the first-section entrance
   - Respect `prefers-reduced-motion` (skip animation; show final state)
   - Keep motion calm: stagger ~0.1s, ease-out / cubic-bezier, 0.6–1.2s duration — premium, not flashy
+- **Hero Three.js (ambient canvas)** — required for new sites / preferred on first section **behind** copy:
+  - Load `hero-three.js` as ESM after `hero-motion.js`
+  - CDN: pin `three@0.172.0` (`import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js"`)
+  - Markup: `<canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>` inside `[data-hero]`; optional `data-hero-three="blueprint"` (wireframe planes + nodes) or `"particles"`
+  - Place canvas above photo/gradient (`z-index: 1`), content wrapper `z-index: 2`, `pointer-events: none`
+  - Calm only: slow drift, low opacity, `powerPreference: "low-power"`, pause via `IntersectionObserver` when off-screen
+  - Skip / remove canvas when `prefers-reduced-motion: reduce`
+  - Do **not** put interactive 3D UI, heavy models, or full-screen WebGL products in the hero — ambient presence only
 - Mobile-first; default brand palette from V3 greens (`#00473e`, `#00A862`) unless client has brand colors.
 - One-page layout: hero, services, about, FAQ, contact.
 - `netlify.toml`: `publish = "."`, `command = ""` (static site — do not run portfolio CRA build).
@@ -120,6 +128,7 @@ Fallback only if browser unavailable: stock photos + note in `client.json` → `
   ```html
   <script src="site.js"></script>
   <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
   ```
 
 ### Tailwind + interactive stack
@@ -127,19 +136,23 @@ Fallback only if browser unavailable: stock photos + note in `client.json` → `
 | File | Role |
 |------|------|
 | `index.html` | Mostly Tailwind utility classes; brand tokens in inline `tailwind.config` |
-| `styles.css` | Hero bg images, `[data-reveal]`, header scroll — not full layout |
+| `styles.css` | Hero bg images, `[data-reveal]`, header scroll, `.hero-three-canvas` — not full layout |
 | `site.js` | Mobile nav, accordions, tabs, filters, below-fold scroll reveal |
 | `hero-motion.js` | Motion (Framer Motion) hero entrance + CTA hover — first section only |
+| `hero-three.js` | Three.js ambient canvas in the hero (behind copy) |
 
-Do **not** add a CRA/webpack build to client folders — Tailwind CDN + Motion ESM CDN keep deploys zero-config on Netlify.
+Do **not** add a CRA/webpack build to client folders — Tailwind CDN + Motion/Three ESM CDNs keep deploys zero-config on Netlify.
 
-**Reference sample:** `client-sites/quotation/` (Bamboo Grove Café) — hero uses Motion; later sections keep `data-reveal`.
+**Reference samples:**
+- Motion: `client-sites/quotation/` (Bamboo Grove Café)
+- Motion + Three.js blueprint: `client-sites/g3k-cad/`
 
-### Hero Motion markup (copy pattern)
+### Hero Motion + Three.js markup (copy pattern)
 
 ```html
-<section data-hero class="relative overflow-hidden …">
+<section data-hero data-hero-three="blueprint" class="relative overflow-hidden …">
   <div data-hero-bg class="hero-bg absolute inset-0 …"></div>
+  <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
   <div class="relative …">
     <p data-hero-animate class="opacity-0">…</p>
     <h1 data-hero-animate class="opacity-0">…</h1>
@@ -152,7 +165,7 @@ Do **not** add a CRA/webpack build to client folders — Tailwind CDN + Motion E
 </section>
 ```
 
-Pin the Motion CDN major version in `hero-motion.js` (e.g. `@12.23.12`) so demos do not break on breaking CDN releases.
+Pin Motion and Three.js CDN versions in the hero scripts so demos do not break on breaking CDN releases.
 
 ### Embed-only security (required)
 

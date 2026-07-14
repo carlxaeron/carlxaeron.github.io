@@ -33,6 +33,20 @@ extensions/*.env
 
 OnlineJobs-MCP-Server/.env
 OnlineJobs-MCP-Server/google_drive_credentials.json
+Namecheap-MCP-Server/.env
+Namecheap-MCP-Server/node_modules/
+Hosting-SSH-MCP-Server/.env
+Hosting-SSH-MCP-Server/.ssh/
+Hosting-SSH-MCP-Server/node_modules/
+Hosting-SSH-MCP-Server/dist/
+api-carlxaeron/.env
+api-carlxaeron/vendor/
+api-carlxaeron/node_modules/
+api-carlxaeron/storage/logs/
+api-carlxaeron/storage/framework/
+api-carlxaeron/bootstrap/cache/*.php
+api-carlxaeron-legacy-php/.env
+
 
 job-applications/
 exports/

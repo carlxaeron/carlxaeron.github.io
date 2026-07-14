@@ -6,7 +6,8 @@ Instructions for AI agents working in this repository.
 
 - **Portfolio V3** (active): `src/v3/` → [carlmanuel.com](https://carlmanuel.com)
 - **Version:** see `package.json` (currently `3.0.x`)
-- **Backend:** Firebase Functions + Firestore (`functions/`)
+- **Forms / analytics API:** Laravel 12 [`api-carlxaeron/`](api-carlxaeron/) → [api.carlmanuel.com](https://api.carlmanuel.com)
+- **Firebase (remaining):** assistant, license, weeklyVisitReport (`functions/`)
 - **Job tooling:** `OnlineJobs-MCP-Server/`, `job-applications/` (local)
 - **Full history:** [docs/project-history.md](docs/project-history.md)
 
@@ -22,9 +23,12 @@ Instructions for AI agents working in this repository.
 | Skill | Use when |
 |-------|----------|
 | [.cursor/skills/deploy-portfolio/SKILL.md](.cursor/skills/deploy-portfolio/SKILL.md) | Deploy, release, tag, verify carlmanuel.com, CI failures |
+| [.cursor/skills/api-carlxaeron/SKILL.md](.cursor/skills/api-carlxaeron/SKILL.md) | Laravel API: contact, quote, visits, feedback, analytics, contracts |
+| [.cursor/skills/hosting-ssh/SKILL.md](.cursor/skills/hosting-ssh/SKILL.md) | Namecheap Stellar SSH/SFTP — deploy `api-carlxaeron` / api.carlmanuel.com |
+| [.cursor/skills/firebase-backend/SKILL.md](.cursor/skills/firebase-backend/SKILL.md) | Remaining Firebase: assistant, weekly report, license |
+| [.cursor/skills/namecheap-browser/SKILL.md](.cursor/skills/namecheap-browser/SKILL.md) | Namecheap DNS via browser (when API access unavailable) |
 | [.cursor/skills/onlinejobs-apify/SKILL.md](.cursor/skills/onlinejobs-apify/SKILL.md) | OnlineJobs.ph search, apply, CV, dashboard |
-| [.cursor/skills/firebase-backend/SKILL.md](.cursor/skills/firebase-backend/SKILL.md) | Contact/quote forms, email, Firestore, functions deploy |
-| [.cursor/skills/client-site-netlify/SKILL.md](.cursor/skills/client-site-netlify/SKILL.md) | Local business sites, Netlify deploy, portfolio `?preview=` links, quotation email/SMS drafts |
+| [.cursor/skills/client-site-netlify/SKILL.md](.cursor/skills/client-site-netlify/SKILL.md) | Client landing sites, Netlify, `?preview=` |
 
 ## Rules (auto-attached by glob)
 
@@ -35,7 +39,8 @@ Instructions for AI agents working in this repository.
 | `v3-content-data.mdc` | `external-config.js`, section data |
 | `v3-copy.mdc` | Marketing copy tone |
 | `v3-deploy.mdc` | Build, GitHub Pages, releases |
-| `v3-firebase-backend.mdc` | `functions/`, `mapping.js`, email |
+| `api-carlxaeron.mdc` | `api-carlxaeron/`, `src/mapping.js` — Laravel API contracts |
+| `v3-firebase-backend.mdc` | Remaining `functions/` (assistant / weekly report) |
 | `onlinejobs-workflow.mdc` | OJP MCP, job-applications |
 | `client-quotations.mdc` | `client-sites/`, Netlify previews |
 | `project-overview.mdc` | Always-on repo map |
@@ -52,18 +57,19 @@ Instructions for AI agents working in this repository.
 - Register in `SECTIONS_CONFIG` in `Portfolio.js`
 - Follow `v3-design-system.mdc`
 
-### Contact / quote / email
-- Frontend: `Contact.js`, `Quote.js` → `src/mapping.js`
-- Backend: `functions/index.js` (`contact`, `quotation`)
-- Deploy: `cd functions && npm run deploy`
-- SMTP: Gmail **App Password** in `functions/.env` + Trigger Email extension
+### Contact / quote / visits API
+- Frontend: `Contact.js`, `Quote.js`, analytics → `src/mapping.js` → `https://api.carlmanuel.com`
+- Backend: Laravel [`api-carlxaeron/`](api-carlxaeron/) (skill **api-carlxaeron**)
+- Deploy: hosting-ssh to Stellar; `composer install --no-dev` + `php artisan migrate --force` + `config:cache`
+- SMTP / MySQL: `api-carlxaeron/.env` (never commit)
+- Still Firebase: assistant, license, weeklyVisitReport only
 
 ### Release portfolio
 1. `CI=true npm test` + `CI=true npm run build`
 2. Bump `package.json` + `CHANGELOG.md`
 3. Push `main`, tag `vX.Y.Z`
-4. Deploy functions if backend changed
-5. Verify carlmanuel.com
+4. Deploy Laravel API and/or Firebase if those backends changed
+5. Verify carlmanuel.com (+ `curl https://api.carlmanuel.com/health` if API changed)
 
 ### OnlineJobs apply
 1. MCP search → user picks row
@@ -73,7 +79,7 @@ Instructions for AI agents working in this repository.
 ### Client site + Netlify preview
 1. Copy `client-sites/_template/` → `client-sites/{slug}/`
 2. **Scrape client Facebook** via Chrome DevTools MCP (About + Photos → inspect + download to `assets/`); see client-site-netlify skill Step 1b
-3. Customize HTML with **Tailwind CDN** + supplemental `styles.css`; keep `site.js` + **`hero-motion.js`** (Motion / Framer Motion on the first section)
+3. Customize HTML with **Tailwind CDN** + supplemental `styles.css`; keep `site.js` + **`hero-motion.js`** (Motion) + **`hero-three.js`** (Three.js ambient canvas on the first section)
 4. **Keep** `embed-guard.js` + edge `embed-only` + CSP headers
 5. Fill `client.json` (`contact`, `quotation` package/price/timeline)
 6. Deploy via Netlify MCP or CLI (`netlify.toml`: `command = ""`)
@@ -92,12 +98,20 @@ Preview tests: `src/v3/config/previewWhitelist.test.js`, `src/pages/Index.test.j
 |--------|--------|---------|
 | `onlinejobs-apify` | `.cursor/mcp.json` | Job search & apply |
 | `netlify` | `.cursor/mcp.json` | Client site deploy (required for client-site-netlify skill) |
-| `chrome-devtools` | user MCP | Facebook page brief + photo inspect/download for client sites |
+| `namecheap` | `.cursor/mcp.json` → `Namecheap-MCP-Server/` | Domains + DNS **API** (blocked until Namecheap eligibility) |
+| `hosting-ssh` (`project-0-carlxaeron.github.io-hosting-ssh`) | `.cursor/mcp.json` → `Hosting-SSH-MCP-Server/` (`node dist/index.js`) | Stellar SSH/SFTP + deploy Laravel `api-carlxaeron` |
+| `chrome-devtools` | user MCP | Facebook briefs + **Namecheap dashboard DNS** (no API) — skill `namecheap-browser` |
 
 ## Tests
+
+**Portfolio (CRA):**
 
 ```bash
 CI=true npm test -- --watchAll=false --passWithNoTests
 ```
 
-10 suites, 43 tests — run before release.
+**Laravel API:**
+
+```bash
+cd api-carlxaeron && php artisan test
+```

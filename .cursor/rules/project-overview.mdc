@@ -17,7 +17,8 @@ alwaysApply: true
 | Subsystem | Path | Deploy |
 |-----------|------|--------|
 | Portfolio V3 | `src/v3/` | GitHub Pages (`docs/`) |
-| Firebase backend | `functions/` | `cd functions && npm run deploy` |
+| Laravel API (forms/analytics) | `api-carlxaeron/` | Namecheap Stellar → `https://api.carlmanuel.com` (hosting-ssh) |
+| Firebase backend | `functions/` | `cd functions && npm run deploy` (assistant / weekly report) |
 | Job applications | `OnlineJobs-MCP-Server/`, `job-applications/` | Local only |
 | Client quotation sites | `client-sites/` | Netlify per folder · [catalog](client-sites/README.md) |
 
@@ -26,7 +27,7 @@ alwaysApply: true
 - **Default:** 7-section slide deck (`home` … `quote`)
 - **Preview:** `?preview={slug}` (e.g. `?preview=jk-construction`) → device showcase (desktop 1280×800 + mobile 390×844 iframes, scaled to mockups). Legacy `*.netlify.app` hostnames still resolve and normalize to slug.
 - **Client demos:** embed-only on Netlify — direct URL blocked; view via portfolio preview only · [site catalog](client-sites/README.md)
-- **Client stack:** Tailwind CDN + `site.js` (nav/accordions/reveal) + **Motion** (`hero-motion.js`, Framer Motion family) on the first-section hero
+- **Client stack:** Tailwind CDN + `site.js` (nav/accordions/reveal) + **Motion** (`hero-motion.js`) + **Three.js** (`hero-three.js` ambient canvas) on the first-section hero
 - **Outreach:** each `client-sites/{slug}/` includes draft email, SMS, and messenger quotations
 
 `home` → `about` → `skills` → `experience` → `projects` → `contact` → `quote`
@@ -37,10 +38,13 @@ Config: `src/v3/containers/Portfolio/Portfolio.js` · Content: `src/external-con
 
 | Task | Skill |
 |------|--------|
-| Deploy / release | `.cursor/skills/deploy-portfolio/` |
-| Contact / quote / email | `.cursor/skills/firebase-backend/` |
+| Deploy / release portfolio | `.cursor/skills/deploy-portfolio/` |
+| Contact / quote / visits API | `.cursor/skills/api-carlxaeron/` |
+| Deploy API to Stellar | `.cursor/skills/hosting-ssh/` |
+| Assistant / weekly report (Firebase) | `.cursor/skills/firebase-backend/` |
 | OnlineJobs search & apply | `.cursor/skills/onlinejobs-apify/` |
 | Client site + Netlify | `.cursor/skills/client-site-netlify/` |
+| Namecheap DNS (browser) | `.cursor/skills/namecheap-browser/` |
 
 ## Hard rules
 

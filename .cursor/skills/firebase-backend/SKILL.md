@@ -1,6 +1,6 @@
 ---
 name: firebase-backend
-description: Firebase Cloud Functions, Firestore forms, and email delivery for the carlxaeron.github.io portfolio (contact, quotation, assistant, Trigger Email). Use when the user asks about contact form, quote form, Firestore leads, SMTP, Gmail app password, functions deploy, or mapping.js API endpoints.
+description: Firebase Cloud Functions remaining endpoints (assistant, weekly report, license) and email troubleshooting. Contact/quotation/analytics moved to api.carlmanuel.com (api-carlxaeron). Use when the user asks about assistant, Trigger Email, functions deploy, or legacy Firestore.
 ---
 
 # Firebase backend (portfolio)
@@ -8,26 +8,32 @@ description: Firebase Cloud Functions, Firestore forms, and email delivery for t
 **Project:** `carllouismanuel-1e3a9`  
 **History:** [docs/project-history.md](../../../docs/project-history.md)
 
-## Architecture
+## Migrated off Firebase (hosting)
+
+Logging + contact/quotation now live on **`https://api.carlmanuel.com`** (Namecheap Stellar, **Laravel 12** repo [`api-carlxaeron/`](../../../api-carlxaeron/)). Skills: **api-carlxaeron** (code/contracts) + **hosting-ssh** (deploy).
+
+Still on Firebase: **assistant**, **license**, **weeklyVisitReport**.
+
+## Architecture (remaining Firebase)
 
 ```text
-Contact.js / Quote.js  →  axios POST  →  mapping.js endpoints
-  →  functions/index.js (contact | quotation)
-  →  Firestore (contact | quotations)
-  →  mail collection  →  Trigger Email extension
-  →  optional direct SMTP (nodemailer)
-  →  info@carlmanuel.com + carllouismanuel09@gmail.com
+ChatAgent → mapping.assistant → functions/index.js (assistant)
+  → OpenAI (optional)
+Weekly cron → weeklyVisitReport → mail / SMTP (still Cloud Functions)
 ```
+
+Contact / quote / visits → **api-carlxaeron** (not Firestore).
 
 ## Key files
 
 | File | Role |
 |------|------|
-| `functions/index.js` | `contact`, `quotation`, `assistant`, `license` |
-| `functions/.env` | `OPENAI_API_KEY`, `SMTP_CONNECTION_URI`, `DEFAULT_FROM` |
-| `extensions/firestore-send-email.env` | Trigger Email SMTP (mirror App Password) |
-| `src/mapping.js` | Prod/dev API URLs |
-| `firebase.json` | Functions + Trigger Email extension |
+| `functions/index.js` | `assistant`, `license`, `weeklyVisitReport` (+ legacy handlers) |
+| `api-carlxaeron/` | Laravel 12 — contact, quotation, trackVisit, previewFeedback, analyticsSummary |
+| `src/mapping.js` | Prod URLs for forms/analytics → api.carlmanuel.com; assistant → Firebase |
+| `functions/.env` | `OPENAI_API_KEY`, SMTP (weekly report / assistant if needed) |
+
+Forms SMTP: skill **api-carlxaeron** (`MAIL_*` / legacy `SMTP_*` on hosting `.env`).
 
 ## Deploy functions
 
@@ -35,22 +41,22 @@ Contact.js / Quote.js  →  axios POST  →  mapping.js endpoints
 cd functions && npm run deploy
 ```
 
-Copies `src/external-config.js` → `functions/external-config.js`, then `firebase deploy --only functions`.
+Only required when changing Firebase-hosted endpoints (assistant / weekly report).
 
 ## SMTP / email troubleshooting
+
+Forms SMTP is configured on the hosting API `.env` (`SMTP_*`). Weekly report still uses `functions/.env` `SMTP_CONNECTION_URI`.
 
 | Gmail error | Fix |
 |-------------|-----|
 | `535 BadCredentials` | Wrong password or malformed URI |
 | `534 Application-specific password required` | Use 16-char **App Password**, not login password |
 
-**Correct URI format:**
+**Correct URI format (Firebase):**
 
 ```text
 smtps://carllouismanuel09@gmail.com:YOUR_16_CHAR_APP_PASSWORD@smtp.gmail.com:465
 ```
-
-Update **both** `functions/.env` and Firebase Console → Extensions → Trigger Email, then redeploy functions.
 
 ## CORS origins (must include)
 
@@ -59,32 +65,23 @@ Update **both** `functions/.env` and Firebase Console → Extensions → Trigger
 - `https://carlxaeron.github.io`
 - `http://localhost:3000`
 
-## Firestore collections
+## Firestore collections (legacy / remaining)
 
-| Collection | Fields (main) |
+| Collection | Notes |
 |------------|----------------|
-| `contact` | name, email, message, date |
-| `quotations` | name, company, email, phone, projectType, budgetRange, timeline, services[], details, date |
-| `mail` | to, replyTo, message{subject,html,text}, delivery |
+| `contact` / `quotations` / `visits` | Historical — new writes go to MySQL on hosting |
+| `mail` | Still used by weekly report / Trigger Email if enabled |
 
 ## Check logs
 
 ```bash
-firebase functions:log --only contact,quotation -n 20
+firebase functions:log --only assistant,weeklyVisitReport -n 20
 ```
 
-Look for: `written to Firestore`, `queued in mail collection`, `sent via SMTP`.
-
-## Adding a new form endpoint
-
-1. Mirror `exports.contact` / `exports.quotation` pattern in `functions/index.js`
-2. Add `mapping.js` key (dev emulator + prod URL)
-3. Build V3 form component; use zustand modal on success (see `Contact.js`)
-4. Deploy functions; test with curl + check inbox
-5. Update `docs/project-history.md` and `CHANGELOG.md` on release
+Hosting API: curl `https://api.carlmanuel.com/health` or hosting-ssh `hosting_exec`.
 
 ## Security
 
-- Never commit `functions/.env` or app passwords
+- Never commit `functions/.env`, `api-carlxaeron/.env`, or app passwords
 - Do not expose maintenance/export endpoints in production without auth
 - `job-applications/` and `exports/` are local/gitignored
