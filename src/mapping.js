@@ -1,16 +1,20 @@
 export const mapping = {
-  contact: process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:5001/carllouismanuel-1e3a9/us-central1/contact' : 'https://contact-fjb46y5zza-uc.a.run.app',
-  assistant: process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:5001/carllouismanuel-1e3a9/us-central1/assistant' : 'https://assistant-fjb46y5zza-uc.a.run.app',
+  contact: process.env.NODE_ENV === 'development'
+    ? 'http://127.0.0.1:5001/carllouismanuel-1e3a9/us-central1/contact'
+    : 'https://api.carlmanuel.com/contact',
+  assistant: process.env.NODE_ENV === 'development'
+    ? 'http://127.0.0.1:5001/carllouismanuel-1e3a9/us-central1/assistant'
+    : 'https://assistant-fjb46y5zza-uc.a.run.app',
   quotation: process.env.NODE_ENV === 'development'
     ? 'http://127.0.0.1:5001/carllouismanuel-1e3a9/us-central1/quotation'
-    : 'https://us-central1-carllouismanuel-1e3a9.cloudfunctions.net/quotation',
+    : 'https://api.carlmanuel.com/quotation',
   trackVisit: process.env.NODE_ENV === 'development'
     ? 'http://127.0.0.1:5001/carllouismanuel-1e3a9/us-central1/trackVisit'
-    : 'https://us-central1-carllouismanuel-1e3a9.cloudfunctions.net/trackVisit',
+    : 'https://api.carlmanuel.com/trackVisit',
   previewFeedback: process.env.NODE_ENV === 'development'
     ? 'http://127.0.0.1:5001/carllouismanuel-1e3a9/us-central1/previewFeedback'
-    : 'https://us-central1-carllouismanuel-1e3a9.cloudfunctions.net/previewFeedback',
+    : 'https://api.carlmanuel.com/previewFeedback',
   analyticsSummary: process.env.NODE_ENV === 'development'
     ? 'http://127.0.0.1:5001/carllouismanuel-1e3a9/us-central1/analyticsSummary'
-    : 'https://us-central1-carllouismanuel-1e3a9.cloudfunctions.net/analyticsSummary',
+    : 'https://api.carlmanuel.com/analyticsSummary',
 }

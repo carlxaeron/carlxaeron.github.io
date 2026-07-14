@@ -1,0 +1,47 @@
+{
+  "name": "mcp-namecheap",
+  "version": "1.0.0",
+  "description": "Comprehensive MCP server for Namecheap — domains, DNS records, nameservers, registration, and pricing",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "mcp-namecheap": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "namecheap",
+    "domain",
+    "dns",
+    "model-context-protocol",
+    "claude",
+    "ai",
+    "registrar"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.18.2",
+    "axios": "^1.7.2",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/xml2js": "^0.4.14",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}
