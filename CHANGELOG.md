@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.34] — 2026-07-14
+
+### Added
+- **G3k Cad Plotting & Blueprinting Services** client site (`g3k-cad`) — Rodriguez, Rizal CAD plotting / blueprint printing with Facebook-scraped assets and Motion hero
+- Portfolio preview: `?preview=g3k-cad` → `g3k-cad-plotting.netlify.app`
+- Client sites: **Motion** (Framer Motion family) hero entrance via `hero-motion.js` (template + Bamboo Grove sample)
+
 ## [3.0.33] — 2026-07-13
 
 ### Added

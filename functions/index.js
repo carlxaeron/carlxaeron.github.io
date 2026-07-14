@@ -282,7 +282,7 @@ async function buildAnalyticsSummary() {
   })).sort((a, b) => b.views - a.views);
 
   return {
-    clientSites: 8,
+    clientSites: 9,
     totalPreviewViews,
     uniquePreviewVisitorsWeek: visitors.size,
     totalLikes,

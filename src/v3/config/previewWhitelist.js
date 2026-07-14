@@ -65,6 +65,12 @@ export const PREVIEW_SITES = [
     label: "Clover Industrial Fan and Blower Inc.",
     netlifySite: "clover-industrial-fan",
   },
+  {
+    id: "g3k-cad",
+    host: "g3k-cad-plotting.netlify.app",
+    label: "G3k Cad Plotting & Blueprinting Services",
+    netlifySite: "g3k-cad-plotting",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

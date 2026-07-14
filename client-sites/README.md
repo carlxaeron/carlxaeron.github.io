@@ -24,6 +24,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Machinemate Mainteneering Services](#machinemate-mainteneering-services) | `machinemate` | Industrial fans / ventilation | [Preview](https://carlmanuel.com/?preview=machinemate) | 2026-07-13 |
 | [Jazz1 Airconditioning Services](#jazz1-airconditioning-services) | `jazz1-aircon` | Air conditioning / HVAC | [Preview](https://carlmanuel.com/?preview=jazz1-aircon) | 2026-07-13 |
 | [Clover Industrial Fan and Blower Inc.](#clover-industrial-fan-and-blower-inc) | `clover-industrial-fan` | Industrial fans & blowers | [Preview](https://carlmanuel.com/?preview=clover-industrial-fan) | 2026-07-13 |
+| [G3k Cad Plotting & Blueprinting Services](#g3k-cad-plotting--blueprinting-services) | `g3k-cad` | CAD plotting / blueprint printing | [Preview](https://carlmanuel.com/?preview=g3k-cad) | 2026-07-14 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -193,6 +194,25 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Tagline** | Simple but innovative industrial fan solutions |
 | **Source** | [Facebook](https://www.facebook.com/cloverindustrialfan) |
 | **Assets** | Hero + 4 gallery JPGs downloaded via Chrome DevTools MCP (network response) |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days |
+| **Outreach** | `quotation-email.md` · `quotation-sms.txt` · `quotation-messenger.txt` |
+
+---
+
+### G3k Cad Plotting & Blueprinting Services
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/g3k-cad/` |
+| **Netlify site** | `g3k-cad-plotting` |
+| **Preview host** | `g3k-cad-plotting.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=g3k-cad |
+| **Contact** | +63 928 353 4491 (no public email on FB) |
+| **Address** | 3rd Floor Blk.30 Lot.12 Badjao St. cor. Ivatan, Amity Village Phase 2, San Jose, Rodriguez, Rizal 1860 |
+| **Service area** | Rodriguez, Rizal |
+| **Category** | Printing Service · CAD plotting & blueprinting |
+| **Source** | [Facebook](https://www.facebook.com/p/G3k-Cad-Plotting-Blueprinting-Services-61553203343584/) |
+| **Assets** | Logo, hero + 4 gallery JPGs via Chrome DevTools MCP (network response); Motion hero |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days |
 | **Outreach** | `quotation-email.md` · `quotation-sms.txt` · `quotation-messenger.txt` |
 
