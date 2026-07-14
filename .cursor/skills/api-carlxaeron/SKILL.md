@@ -52,7 +52,7 @@ Never commit `.env`. Prefer Laravel names; legacy keys still work via config fal
 | Laravel | Legacy fallback |
 |---------|-----------------|
 | `DB_DATABASE` / `DB_USERNAME` / `DB_PASSWORD` | `DB_NAME` / `DB_USER` / `DB_PASS` |
-| `MAIL_HOST` / `MAIL_PORT` / `MAIL_USERNAME` / `MAIL_PASSWORD` / `MAIL_SCHEME=smtps` | `SMTP_*` + `SMTP_ENCRYPTION=ssl` |
+| `MAIL_HOST` / `MAIL_PORT` / `MAIL_USERNAME` / `MAIL_PASSWORD` / `MAIL_SCHEME=smtps` | `SMTP_*` + `SMTP_ENCRYPTION=ssl` (Private Email: `mail.privateemail.com:465`) |
 | `MAIL_FROM_ADDRESS` | `DEFAULT_FROM` |
 | `MAIL_TO` | (same) |
 | `ANALYTICS_EXCLUDE_IP_HASHES` / `ANALYTICS_EXCLUDE_VISITOR_IDS` | (same) |
