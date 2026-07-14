@@ -10,7 +10,8 @@ Living record of what this repository contains, how it evolved, and where things
 | Area | Summary |
 |------|---------|
 | **Portfolio V3** | Full-screen slide UI (CRA + React 18), Starbucks-inspired design |
-| **Backend** | Firebase Cloud Functions + Firestore + Trigger Email extension |
+| **Forms / analytics API** | Laravel 12 [`api-carlxaeron/`](../api-carlxaeron/) → [api.carlmanuel.com](https://api.carlmanuel.com) (Namecheap Stellar) |
+| **Firebase (remaining)** | Assistant, license, weeklyVisitReport Cloud Functions |
 | **Deploy** | GitHub Pages (`docs/`) via GitHub Actions; custom domain `carlmanuel.com` |
 | **Job tooling** | OnlineJobs.ph MCP server, local dashboard, CV generator, `job-applications/` |
 | **Client demos** | `client-sites/` — static sites deployed to Netlify; portfolio preview via `?preview=` |
@@ -29,8 +30,8 @@ Living record of what this repository contains, how it evolved, and where things
 | 3 | `skills` | Skills | From `src/external-config.js` |
 | 4 | `experience` | Experience | Jobs with impact lines |
 | 5 | `projects` | Projects | Client + Side Projects filter; scrollable case-study modal |
-| 6 | `contact` | Contact | Message form → Firebase |
-| 7 | `quote` | Get a Quote | Project brief form → Firebase (v3.0.16) |
+| 6 | `contact` | Contact | Message form → api.carlmanuel.com |
+| 7 | `quote` | Get a Quote | Project brief form → api.carlmanuel.com |
 
 **Navigation:** hash routes (`#about`, `#quote`), nav dots, hamburger, keyboard, swipe.  
 **Entry:** `src/pages/Index.js` → Portfolio or `?preview=host` → PreviewShowcase.
@@ -55,7 +56,18 @@ Living record of what this repository contains, how it evolved, and where things
 
 ---
 
-## Firebase backend
+## Laravel API (`api-carlxaeron/`)
+
+**Live:** [api.carlmanuel.com](https://api.carlmanuel.com) · **Stack:** Laravel 12 + MySQL on Namecheap Stellar  
+**Contracts:** Firebase-shaped JSON; unprefixed routes `/health`, `/trackVisit`, `/previewFeedback`, `/analyticsSummary`, `/contact`, `/quotation`  
+**Skill:** `.cursor/skills/api-carlxaeron/` · **Deploy:** hosting-ssh  
+**Legacy PHP backup:** `api-carlxaeron-legacy-php/` (local only)
+
+Frontend mapping: `src/mapping.js` → production `https://api.carlmanuel.com/...`
+
+---
+
+## Firebase backend (remaining)
 
 **Project:** `carllouismanuel-1e3a9`
 
@@ -63,38 +75,32 @@ Living record of what this repository contains, how it evolved, and where things
 
 | Export | Purpose |
 |--------|---------|
-| `contact` | Contact form → Firestore `contact` + email |
-| `quotation` | Quote form → Firestore `quotations` + email |
 | `assistant` | Chat agent (OpenAI GPT-3.5, portfolio context) |
 | `license` | WHMCS license validation (client site) |
+| `weeklyVisitReport` | Scheduled visit email report |
 
-### Email (working Jul 2026)
+Historical Firestore collections (`contact`, `quotations`, `visits`) are no longer the write path for the portfolio UI.
 
-1. Form saves to Firestore  
-2. Doc queued in `mail` collection  
-3. **Trigger Email** extension (`firestore-send-email`) sends via Gmail App Password  
-4. Cloud Function also sends direct SMTP (same credentials in `functions/.env`)  
-5. Recipients: `info@carlmanuel.com`, `carllouismanuel09@gmail.com`
+### Email
 
-**SMTP format:** `smtps://USER:APP_PASSWORD@smtp.gmail.com:465` (16-char Gmail App Password, not login password).
+- **Contact / quote:** Laravel SMTP on hosting (`.env` `MAIL_*` / legacy `SMTP_*`)
+- **Weekly report:** still Cloud Functions / Trigger Email as configured
 
 ### API endpoints (`src/mapping.js`)
 
 | Key | Production |
 |-----|------------|
-| `contact` | `https://contact-fjb46y5zza-uc.a.run.app` |
-| `quotation` | `https://us-central1-carllouismanuel-1e3a9.cloudfunctions.net/quotation` |
-| `assistant` | `https://assistant-fjb46y5zza-uc.a.run.app` |
+| `contact` / `quotation` / visits / feedback / analytics | `https://api.carlmanuel.com/...` (Laravel) |
+| `assistant` | Firebase HTTPS function |
 
 CORS: `carlmanuel.com`, `www.carlmanuel.com`, `carlxaeron.github.io`, `localhost:3000`.
 
-### Firestore collections (forms)
+### Firestore collections
 
-| Collection | Written by |
-|------------|------------|
-| `contact` | Contact form |
-| `quotations` | Quote form |
-| `mail` | Email queue (Trigger Email extension) |
+| Collection | Notes |
+|------------|-------|
+| `contact` / `quotations` / `visits` | Historical only — new writes go to MySQL on hosting |
+| `mail` | Weekly report / Trigger Email if enabled |
 
 **Jul 7, 2026:** Historical leads exported to local `exports/` (gitignored) and collections cleared for a clean slate.
 
@@ -186,9 +192,9 @@ Tag releases: `v3.0.x` · Update `CHANGELOG.md` + `package.json`.
 | Asset | Path |
 |-------|------|
 | Agent guide | `AGENTS.md` |
-| Skills | `.cursor/skills/` — deploy-portfolio, onlinejobs-apify, firebase-backend, client-site-netlify |
-| Rules | `.cursor/rules/` — V3 design, deploy, content, OnlineJobs, Firebase, client-quotations |
-| MCP (project) | `.cursor/mcp.json` — `onlinejobs-apify`, `netlify` |
+| Skills | `.cursor/skills/` — deploy-portfolio, **api-carlxaeron**, hosting-ssh, firebase-backend, client-site-netlify, namecheap-browser, onlinejobs-apify |
+| Rules | `.cursor/rules/` — V3 design/deploy/content, **api-carlxaeron**, Firebase (remaining), OnlineJobs, client-quotations |
+| MCP (project) | `.cursor/mcp.json` — `onlinejobs-apify`, `netlify`, `hosting-ssh`, `namecheap` |
 
 ---
 
@@ -196,7 +202,8 @@ Tag releases: `v3.0.x` · Update `CHANGELOG.md` + `package.json`.
 
 - `job-applications/` — apply folders
 - `exports/` — Firestore lead exports
-- `functions/.env` — secrets (OpenAI, SMTP)
+- `functions/.env` — secrets (OpenAI, SMTP for weekly report)
+- `api-carlxaeron/.env` — MySQL + SMTP for forms/analytics API
 - `extensions/*.env` — Trigger Email SMTP
 
 ---
@@ -205,5 +212,7 @@ Tag releases: `v3.0.x` · Update `CHANGELOG.md` + `package.json`.
 
 - After `npm run build`, restore `docs/job-applications-workflow.md` from git if wiped
 - Portfolio tests: `CI=true npm test -- --watchAll=false --passWithNoTests`
+- Laravel API tests: `cd api-carlxaeron && php artisan test`
 - Do not re-add broken npm deps: `react-particles`, `tsparticles-preset-firefly`
 - Regenerate CV after `external-config.js` content changes
+- Do not deploy `api-carlxaeron-legacy-php/`

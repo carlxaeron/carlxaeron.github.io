@@ -64,8 +64,9 @@
   </header>
 
   <main>
-    <section data-hero class="relative overflow-hidden bg-brand-dark text-white">
+    <section data-hero data-hero-three="blueprint" class="relative overflow-hidden bg-brand-dark text-white">
       <div data-hero-bg class="hero-bg hero-bg--g3k absolute inset-0 origin-center will-change-transform"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
       <div class="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
         <p data-hero-animate class="mb-3 text-xs font-semibold uppercase tracking-widest text-brand-cyan opacity-0">Rodriguez, Rizal · Printing service</p>
         <h1 data-hero-animate class="font-display max-w-3xl text-4xl font-bold leading-tight sm:text-5xl opacity-0">CAD plotting &amp; blueprinting you can count on</h1>
@@ -206,5 +207,6 @@
   </footer>
   <script src="site.js"></script>
   <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
 </body>
 </html>

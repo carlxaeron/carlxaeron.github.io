@@ -212,7 +212,7 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Service area** | Rodriguez, Rizal |
 | **Category** | Printing Service · CAD plotting & blueprinting |
 | **Source** | [Facebook](https://www.facebook.com/p/G3k-Cad-Plotting-Blueprinting-Services-61553203343584/) |
-| **Assets** | Logo, hero + 4 gallery JPGs via Chrome DevTools MCP (network response); Motion hero |
+| **Assets** | Logo, hero + 4 gallery JPGs via Chrome DevTools MCP (network response); Motion + Three.js blueprint hero |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days |
 | **Outreach** | `quotation-email.md` · `quotation-sms.txt` · `quotation-messenger.txt` |
 
@@ -229,6 +229,7 @@ client-sites/
     styles.css        # Hero bg, reveal animations
     site.js           # Mobile nav, accordions, filters, scroll reveal
     hero-motion.js    # Motion (Framer Motion) — first-section hero entrance
+    hero-three.js     # Three.js ambient canvas — first-section background
     assets/           # Logos, photos (optional)
     netlify.toml
     client.json       # business, contact, quotation, preview URL
@@ -239,7 +240,7 @@ client-sites/
     netlify/edge-functions/embed-only.js
 ```
 
-**Motion on hero:** wrap the first section in `[data-hero]`, animate children with `[data-hero-animate]` / `[data-hero-bg]` / `[data-hero-cta]`. Load `<script type="module" src="hero-motion.js"></script>` after `site.js`. Reference: `quotation/` sample.
+**Motion + Three.js on hero:** wrap the first section in `[data-hero]`, animate copy with `[data-hero-animate]` / `[data-hero-bg]` / `[data-hero-cta]`, add `<canvas data-hero-canvas>`. Themes: `data-hero-three="blueprint"` or `"particles"`. Load `hero-motion.js` then `hero-three.js` as modules after `site.js`. Reference: `g3k-cad/` (Motion + Three.js), `quotation/` (Motion).
 
 ## `client.json` schema
 
@@ -279,7 +280,7 @@ client-sites/
 ## New client workflow
 
 1. `cp -R client-sites/_template client-sites/{slug}`
-2. Customize `index.html`, `styles.css`, `site.js`, `hero-motion.js`, `client.json`, assets
+2. Customize `index.html`, `styles.css`, `site.js`, `hero-motion.js`, `hero-three.js`, `client.json`, assets
 3. Deploy: `cd client-sites/{slug} && npx netlify deploy --prod --create-site {netlify-site-name}`
 4. Set `previewHost`, `deployedAt`, and `quotation.previewUrl` in `client.json` (`previewUrl` uses `?preview={slug}`, not the Netlify hostname)
 5. Draft outreach: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`
