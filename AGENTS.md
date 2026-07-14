@@ -73,7 +73,7 @@ Instructions for AI agents working in this repository.
 ### Client site + Netlify preview
 1. Copy `client-sites/_template/` → `client-sites/{slug}/`
 2. **Scrape client Facebook** via Chrome DevTools MCP (About + Photos → inspect + download to `assets/`); see client-site-netlify skill Step 1b
-3. Customize HTML with **Tailwind CDN** + supplemental `styles.css`; keep `site.js` for interactivity
+3. Customize HTML with **Tailwind CDN** + supplemental `styles.css`; keep `site.js` + **`hero-motion.js`** (Motion / Framer Motion on the first section)
 4. **Keep** `embed-guard.js` + edge `embed-only` + CSP headers
 5. Fill `client.json` (`contact`, `quotation` package/price/timeline)
 6. Deploy via Netlify MCP or CLI (`netlify.toml`: `command = ""`)

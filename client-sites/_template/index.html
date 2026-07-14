@@ -54,15 +54,15 @@
   </header>
 
   <main>
-    <section class="relative overflow-hidden bg-brand-dark text-white">
-      <div class="hero-bg absolute inset-0 opacity-30" style="background-image: linear-gradient(135deg, #00473e, #1e3932);"></div>
+    <section data-hero class="relative overflow-hidden bg-brand-dark text-white">
+      <div data-hero-bg class="hero-bg absolute inset-0 origin-center opacity-30 will-change-transform" style="background-image: linear-gradient(135deg, #00473e, #1e3932);"></div>
       <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-        <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-brand-gold" data-reveal>Serving your neighborhood</p>
-        <h1 class="font-display max-w-2xl text-4xl font-bold leading-tight sm:text-5xl" data-reveal>Quality service your customers can trust</h1>
-        <p class="mt-5 max-w-xl text-lg text-brand-light/90" data-reveal>Replace this hero with the client's value proposition — hours, location, and what makes them different.</p>
-        <div class="mt-8 flex flex-wrap gap-3" data-reveal>
-          <a href="#contact" class="rounded-full bg-brand-accent px-6 py-3 font-semibold text-white hover:brightness-105 transition">Get a quote</a>
-          <a href="tel:+639000000000" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Call now</a>
+        <p data-hero-animate class="mb-3 text-xs font-semibold uppercase tracking-widest text-brand-gold opacity-0">Serving your neighborhood</p>
+        <h1 data-hero-animate class="font-display max-w-2xl text-4xl font-bold leading-tight sm:text-5xl opacity-0">Quality service your customers can trust</h1>
+        <p data-hero-animate class="mt-5 max-w-xl text-lg text-brand-light/90 opacity-0">Replace this hero with the client's value proposition — hours, location, and what makes them different.</p>
+        <div data-hero-animate class="mt-8 flex flex-wrap gap-3 opacity-0">
+          <a data-hero-cta href="#contact" class="inline-block rounded-full bg-brand-accent px-6 py-3 font-semibold text-white hover:brightness-105 transition will-change-transform">Get a quote</a>
+          <a data-hero-cta href="tel:+639000000000" class="inline-block rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition will-change-transform">Call now</a>
         </div>
       </div>
     </section>
@@ -119,5 +119,6 @@
     <p>&copy; <span data-year></span> Your Business Name. All rights reserved.</p>
   </footer>
   <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
 </body>
 </html>

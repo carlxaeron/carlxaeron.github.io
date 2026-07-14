@@ -45,15 +45,15 @@
   </header>
 
   <main>
-    <section class="relative overflow-hidden bg-brand-dark text-white">
-      <div class="hero-bg hero-bg--bamboo absolute inset-0"></div>
+    <section data-hero class="relative overflow-hidden bg-brand-dark text-white">
+      <div data-hero-bg class="hero-bg hero-bg--bamboo absolute inset-0 origin-center will-change-transform"></div>
       <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-        <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-brand-gold" data-reveal>Quezon City · Open daily 7am–9pm</p>
-        <h1 class="font-display max-w-2xl text-4xl font-bold leading-tight sm:text-5xl" data-reveal>Fresh coffee, honest meals, neighborhood warmth</h1>
-        <p class="mt-5 max-w-xl text-lg text-brand-light/90" data-reveal>A sample quotation site for nearby businesses — swap copy, photos, and colors for each client pitch.</p>
-        <div class="mt-8 flex flex-wrap gap-3" data-reveal>
-          <a href="#contact" class="rounded-full bg-brand-accent px-6 py-3 font-semibold text-white hover:brightness-105 transition">Book a table</a>
-          <a href="tel:+639171234567" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Call +63 917 123 4567</a>
+        <p data-hero-animate class="mb-3 text-xs font-semibold uppercase tracking-widest text-brand-gold opacity-0">Quezon City · Open daily 7am–9pm</p>
+        <h1 data-hero-animate class="font-display max-w-2xl text-4xl font-bold leading-tight sm:text-5xl opacity-0">Fresh coffee, honest meals, neighborhood warmth</h1>
+        <p data-hero-animate class="mt-5 max-w-xl text-lg text-brand-light/90 opacity-0">A sample quotation site for nearby businesses — swap copy, photos, and colors for each client pitch.</p>
+        <div data-hero-animate class="mt-8 flex flex-wrap gap-3 opacity-0">
+          <a data-hero-cta href="#contact" class="inline-block rounded-full bg-brand-accent px-6 py-3 font-semibold text-white hover:brightness-105 transition will-change-transform">Book a table</a>
+          <a data-hero-cta href="tel:+639171234567" class="inline-block rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition will-change-transform">Call +63 917 123 4567</a>
         </div>
       </div>
     </section>
@@ -141,5 +141,6 @@
     <p>&copy; <span data-year></span> Bamboo Grove Café (demo). Built by Carl Louis Manuel.</p>
   </footer>
   <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
 </body>
 </html>

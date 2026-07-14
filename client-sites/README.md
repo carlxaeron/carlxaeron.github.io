@@ -43,7 +43,7 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days |
 | **Outreach** | `quotation-email.md` · `quotation-sms.txt` · `quotation-messenger.txt` |
 
-*Fictitious demo business for quotation template workflow.*
+*Fictitious demo business for quotation template workflow. Hero uses **Motion** (Framer Motion family) via `hero-motion.js`.*
 
 ---
 
@@ -208,6 +208,7 @@ client-sites/
     index.html        # Tailwind CDN (primary layout)
     styles.css        # Hero bg, reveal animations
     site.js           # Mobile nav, accordions, filters, scroll reveal
+    hero-motion.js    # Motion (Framer Motion) — first-section hero entrance
     assets/           # Logos, photos (optional)
     netlify.toml
     client.json       # business, contact, quotation, preview URL
@@ -217,6 +218,8 @@ client-sites/
     embed-guard.js
     netlify/edge-functions/embed-only.js
 ```
+
+**Motion on hero:** wrap the first section in `[data-hero]`, animate children with `[data-hero-animate]` / `[data-hero-bg]` / `[data-hero-cta]`. Load `<script type="module" src="hero-motion.js"></script>` after `site.js`. Reference: `quotation/` sample.
 
 ## `client.json` schema
 
@@ -256,7 +259,7 @@ client-sites/
 ## New client workflow
 
 1. `cp -R client-sites/_template client-sites/{slug}`
-2. Customize `index.html`, `styles.css`, `site.js`, `client.json`, assets
+2. Customize `index.html`, `styles.css`, `site.js`, `hero-motion.js`, `client.json`, assets
 3. Deploy: `cd client-sites/{slug} && npx netlify deploy --prod --create-site {netlify-site-name}`
 4. Set `previewHost`, `deployedAt`, and `quotation.previewUrl` in `client.json` (`previewUrl` uses `?preview={slug}`, not the Netlify hostname)
 5. Draft outreach: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`

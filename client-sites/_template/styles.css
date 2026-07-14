@@ -14,6 +14,12 @@ html {
     transform: none !important;
     transition: none !important;
   }
+
+  [data-hero-animate],
+  [data-hero-bg] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 [data-reveal] {

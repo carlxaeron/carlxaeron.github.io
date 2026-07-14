@@ -98,9 +98,16 @@ Fallback only if browser unavailable: stock photos + note in `client.json` → `
   - Mobile hamburger nav (`data-nav-toggle`, `data-mobile-nav`)
   - Sticky header shadow on scroll (`data-header`)
   - Smooth anchor scroll
-  - Scroll-reveal animations (`data-reveal`)
+  - Scroll-reveal animations (`data-reveal`) for sections **below** the hero
   - FAQ accordions (`data-accordion`)
   - Optional tabs (`data-tabs` / `data-tab`) or filters (`data-filter` / `data-filter-btn`)
+- **Hero Motion (Framer Motion family)** — required for new sites / preferred on first section:
+  - Load `hero-motion.js` as an ESM module after `site.js`
+  - CDN: `motion@12` from jsDelivr (`import { animate, stagger, hover } from "https://cdn.jsdelivr.net/npm/motion@12.23.12/+esm"`)
+  - Markup: wrap hero in `[data-hero]`; mark copy/CTAs with `[data-hero-animate]`; optional `[data-hero-bg]` for Ken Burns–style zoom-in; CTAs use `[data-hero-cta]` for hover scale
+  - Do **not** put `data-reveal` on hero children — Motion owns the first-section entrance
+  - Respect `prefers-reduced-motion` (skip animation; show final state)
+  - Keep motion calm: stagger ~0.1s, ease-out / cubic-bezier, 0.6–1.2s duration — premium, not flashy
 - Mobile-first; default brand palette from V3 greens (`#00473e`, `#00A862`) unless client has brand colors.
 - One-page layout: hero, services, about, FAQ, contact.
 - `netlify.toml`: `publish = "."`, `command = ""` (static site — do not run portfolio CRA build).
@@ -109,7 +116,11 @@ Fallback only if browser unavailable: stock photos + note in `client.json` → `
   - `netlify/edge-functions/embed-only.js` — server-side 403 on direct access
   - CSP `frame-ancestors` in `netlify.toml` — only portfolio domains may embed
 - Load guard in `<head>` before body: `<script src="embed-guard.js"></script>`
-- Load interactivity at end of `<body>`: `<script src="site.js"></script>`
+- Load interactivity at end of `<body>`:
+  ```html
+  <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
+  ```
 
 ### Tailwind + interactive stack
 
@@ -117,9 +128,31 @@ Fallback only if browser unavailable: stock photos + note in `client.json` → `
 |------|------|
 | `index.html` | Mostly Tailwind utility classes; brand tokens in inline `tailwind.config` |
 | `styles.css` | Hero bg images, `[data-reveal]`, header scroll — not full layout |
-| `site.js` | Mobile nav, accordions, tabs, filters, scroll reveal |
+| `site.js` | Mobile nav, accordions, tabs, filters, below-fold scroll reveal |
+| `hero-motion.js` | Motion (Framer Motion) hero entrance + CTA hover — first section only |
 
-Do **not** add a CRA/webpack build to client folders — Tailwind CDN keeps deploys zero-config on Netlify.
+Do **not** add a CRA/webpack build to client folders — Tailwind CDN + Motion ESM CDN keep deploys zero-config on Netlify.
+
+**Reference sample:** `client-sites/quotation/` (Bamboo Grove Café) — hero uses Motion; later sections keep `data-reveal`.
+
+### Hero Motion markup (copy pattern)
+
+```html
+<section data-hero class="relative overflow-hidden …">
+  <div data-hero-bg class="hero-bg absolute inset-0 …"></div>
+  <div class="relative …">
+    <p data-hero-animate class="opacity-0">…</p>
+    <h1 data-hero-animate class="opacity-0">…</h1>
+    <p data-hero-animate class="opacity-0">…</p>
+    <div data-hero-animate class="opacity-0">
+      <a data-hero-cta href="#contact">…</a>
+      <a data-hero-cta href="tel:…">…</a>
+    </div>
+  </div>
+</section>
+```
+
+Pin the Motion CDN major version in `hero-motion.js` (e.g. `@12.23.12`) so demos do not break on breaking CDN releases.
 
 ### Embed-only security (required)
 
