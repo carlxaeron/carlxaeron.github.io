@@ -71,6 +71,12 @@ export const PREVIEW_SITES = [
     label: "G3k Cad Plotting & Blueprinting Services",
     netlifySite: "g3k-cad-plotting",
   },
+  {
+    id: "kubling-tago-resort",
+    host: "kubling-tago-resort.netlify.app",
+    label: "Kubling Tago Resort",
+    netlifySite: "kubling-tago-resort",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

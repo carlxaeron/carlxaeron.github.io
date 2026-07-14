@@ -25,6 +25,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Jazz1 Airconditioning Services](#jazz1-airconditioning-services) | `jazz1-aircon` | Air conditioning / HVAC | [Preview](https://carlmanuel.com/?preview=jazz1-aircon) | 2026-07-13 |
 | [Clover Industrial Fan and Blower Inc.](#clover-industrial-fan-and-blower-inc) | `clover-industrial-fan` | Industrial fans & blowers | [Preview](https://carlmanuel.com/?preview=clover-industrial-fan) | 2026-07-13 |
 | [G3k Cad Plotting & Blueprinting Services](#g3k-cad-plotting--blueprinting-services) | `g3k-cad` | CAD plotting / blueprint printing | [Preview](https://carlmanuel.com/?preview=g3k-cad) | 2026-07-14 |
+| [Kubling Tago Resort](#kubling-tago-resort) | `kubling-tago-resort` | Day resort / hospitality | [Preview](https://carlmanuel.com/?preview=kubling-tago-resort) | 2026-07-15 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -215,6 +216,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | Logo, hero + 4 gallery JPGs via Chrome DevTools MCP (network response); Motion + Three.js blueprint hero |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days |
 | **Outreach** | `quotation-email.md` · `quotation-sms.txt` · `quotation-messenger.txt` |
+
+---
+
+### Kubling Tago Resort
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/kubling-tago-resort/` |
+| **Netlify site** | `kubling-tago-resort` |
+| **Preview host** | `kubling-tago-resort.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=kubling-tago-resort |
+| **Contact** | Globe 0954 385 8881 · Smart 0985 243 6620 (**no public email** on FB) |
+| **Address** | Villa Maria 2 Subd., Cupang, Antipolo City |
+| **Category** | Local business · Day resort (infinity pools, cottages, private rooms, function hall) |
+| **Source** | [Facebook](https://www.facebook.com/KublingTagoResort/) · ~25K followers |
+| **Assets** | Logo, cover, pool hero + gallery (pool, garden, entrance sign, poolside); Motion + Three.js particles; sample rates from FB sheet |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days |
+| **Outreach** | Messenger/SMS preferred · `quotation-messenger.txt` · `quotation-sms.txt` · email draft held (no address) |
 
 ---
 

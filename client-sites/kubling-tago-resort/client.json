@@ -1,0 +1,42 @@
+{
+  "businessName": "Kubling Tago Resort",
+  "slug": "kubling-tago-resort",
+  "previewHost": "kubling-tago-resort.netlify.app",
+  "industry": "Day resort / hospitality",
+  "deployedAt": "2026-07-15",
+  "contact": {
+    "name": "Kubling Tago Resort team",
+    "email": null,
+    "phone": "+63 954 385 8881"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive site (amenities, gallery, about, FAQ, contact), mobile-friendly, Facebook integration",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront, 50% on delivery",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=kubling-tago-resort"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "draft",
+    "cadence": null,
+    "emailFound": false,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "No public email on Facebook — outreach via Messenger/SMS only. Ask before any email send if email appears later."
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/KublingTagoResort/",
+    "address": "Villa Maria 2 Subd., Cupang, Antipolo City",
+    "phones": ["(0954) 385 8881 (Globe)", "(0985) 243 6620 (Smart)", "546-2523 (landline on logo)"],
+    "followers": "~25K",
+    "notes": "Amenities: public infinity pool (adults/kids), private infinity pool + jacuzzi, videoke, cottages, private rooms, function hall, gazebo. Rates from FB sheet on site. Always open."
+  }
+}

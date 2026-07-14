@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.35] — 2026-07-15
+
+### Added
+- **Kubling Tago Resort** client site (`kubling-tago-resort`) — Antipolo day resort with Facebook assets, sample rates, Motion + Three.js particles hero
+- Portfolio preview: `?preview=kubling-tago-resort` → `kubling-tago-resort.netlify.app`
+
 ## [3.0.34] — 2026-07-14
 
 ### Added
