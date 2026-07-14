@@ -14,6 +14,12 @@ html {
     transform: none !important;
     transition: none !important;
   }
+
+  [data-hero-animate],
+  [data-hero-bg] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 [data-reveal] {
@@ -49,6 +55,7 @@ html {
 .hero-bg {
   background-size: cover;
   background-position: center;
+  z-index: 0;
 }
 
 .hero-bg--sonyoba {
@@ -65,4 +72,38 @@ html {
 
 .trust-strip {
   background: linear-gradient(90deg, #0d3d4a 0%, #108474 50%, #0d3d4a 100%);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  [data-hero-animate],
+  [data-hero-bg] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+.hero-bg {
+  z-index: 0;
+}
+
+.hero-three-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.78;
+  mix-blend-mode: screen;
+}
+
+[data-hero] > .relative {
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-three-canvas {
+    display: none;
+  }
 }

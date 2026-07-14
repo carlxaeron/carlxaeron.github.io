@@ -12,15 +12,25 @@
   "quotation": {
     "packageName": "Starter Business Website",
     "packageScope": "One-page responsive site (services, project gallery, service area, FAQ, contact), mobile-friendly, Facebook integration",
-    "quotedAmount": "₱15,000",
+    "quotedAmount": "\u20b115,000",
     "paymentTerms": "50% upfront, 50% on delivery",
-    "timeline": "5–7 business days after content approval",
+    "timeline": "5\u20137 business days after content approval",
     "previewUrl": "https://carlmanuel.com/?preview=jk-construction"
   },
   "outreach": {
     "emailDraft": "quotation-email.md",
     "smsDraft": "quotation-sms.txt",
-    "messengerDraft": "quotation-messenger.txt"
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "followup_sent",
+    "cadence": "1w",
+    "emailFound": true,
+    "sentAt": "2026-07-14T05:51:53.214473+00:00",
+    "lastFollowUpAt": "2026-07-14T05:51:53.214473+00:00",
+    "nextFollowUpAt": "2026-07-21T05:51:53.214473+00:00",
+    "followUpCount": 1,
+    "notes": "Follow-up sent 2026-07-14 via hosting Private Email (hero Motion/Three refresh check-in)."
   },
   "sources": {
     "facebook": "https://www.facebook.com/JKConstrSvcs/",
