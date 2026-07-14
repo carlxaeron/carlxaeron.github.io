@@ -21,10 +21,14 @@ Still on Firebase (skill **firebase-backend**): assistant, license, weeklyVisitR
 |--------|------|-------|
 | GET | `/health` | `{ ok, service: "api-carlxaeron" }` |
 | POST | `/trackVisit` | Analytics |
-| POST | `/previewFeedback` | Like / dislike (unique per visitor+slug) |
+| POST | `/previewFeedback` | Like / dislike |
 | GET | `/analyticsSummary` | Insights panel |
-| POST | `/contact` | Persist + SMTP (success even if mail fails) |
-| POST | `/quotation` | Persist + SMTP |
+| POST | `/contact` | Form + SMTP |
+| POST | `/quotation` | Form + SMTP |
+| POST | `/outreachSchedule` | **Secret** — send initial quotation (after user OK) + queue auto follow-ups |
+| POST | `/outreachPause` | **Secret** — stop auto follow-ups for a slug |
+
+Live hosting (until full Laravel cutover) uses PHP under `hosting-php/` synced to Stellar. Daily cron: `scripts/cron-outreach-followups.php`.
 
 Response shape (Firebase-compatible):
 

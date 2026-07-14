@@ -54,23 +54,20 @@ Hosting SSH:
 
 ## Portfolio API
 
-Self-hosted **Laravel 12** API lives in repo [`api-carlxaeron/`](../../../api-carlxaeron/) and on disk under `public_html/api-carlxaeron`. Public base: `https://api.carlmanuel.com`. DNS `A` for `api.carlmanuel.com` → hosting IP (edit via **namecheap-browser** until Namecheap API unlocks). Document root must point at `public_html/api-carlxaeron/public`.
+Self-hosted **PHP API** (Laravel app in repo; live Stellar tree currently custom PHP + `hosting-php/` outreach) under `public_html/api-carlxaeron`. Public base: `https://api.carlmanuel.com`. Document root → `public_html/api-carlxaeron/public`.
 
-Full endpoint/env/test details: skill **api-carlxaeron**.
-
-### Deploy checklist
+### Outreach cron (offline follow-ups)
 
 ```
-Laravel API deploy:
-- [ ] Sync app root (not only public/) — keep remote .env
-- [ ] composer install --no-dev on server (or sync vendor)
-- [ ] php artisan migrate --force
-- [ ] php artisan config:cache
-- [ ] storage/ + bootstrap/cache writable
-- [ ] curl https://api.carlmanuel.com/health
+Outreach / follow-ups:
+- [ ] OUTREACH_SECRET set in hosting .env
+- [ ] crontab: daily scripts/cron-outreach-followups.php
+- [ ] Initial send only via /outreachSchedule after user approval in Cursor
+- [ ] Follow-ups auto-send when due (Private Email SMTP)
+- [ ] Pause via /outreachPause when prospect opts out
 ```
 
-Do not deploy `api-carlxaeron-legacy-php/`.
+Full details: skill **api-carlxaeron** + **client-site-netlify** Step 5.
 
 ## Troubleshooting
 

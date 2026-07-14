@@ -236,6 +236,8 @@ client-sites/
     quotation-email.md
     quotation-sms.txt
     quotation-messenger.txt
+    quotation-followup-3d.md
+    quotation-followup-1w.md
     embed-guard.js
     netlify/edge-functions/embed-only.js
 ```
@@ -267,7 +269,17 @@ client-sites/
   "outreach": {
     "emailDraft": "quotation-email.md",
     "smsDraft": "quotation-sms.txt",
-    "messengerDraft": "quotation-messenger.txt"
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "draft",
+    "cadence": null,
+    "emailFound": false,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": ""
   },
   "sources": {
     "facebook": "https://www.facebook.com/…",
@@ -283,11 +295,12 @@ client-sites/
 2. Customize `index.html`, `styles.css`, `site.js`, `hero-motion.js`, `hero-three.js`, `client.json`, assets
 3. Deploy: `cd client-sites/{slug} && npx netlify deploy --prod --create-site {netlify-site-name}`
 4. Set `previewHost`, `deployedAt`, and `quotation.previewUrl` in `client.json` (`previewUrl` uses `?preview={slug}`, not the Netlify hostname)
-5. Draft outreach: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`
-6. Add entry to `src/v3/config/previewWhitelist.js` (`PREVIEW_SITES`)
-7. **Add a row + detail section to this README**
-8. Portfolio release if whitelist changed (see deploy skill)
-9. Browser QA: open preview link on desktop + mobile mockups
+5. Draft outreach (email / SMS / messenger + **3d** and **1w** follow-ups)
+6. **If email found** → ask before send (Private Email `info@carlmanuel.com`); after send pick **3 days** or **1 week** follow-up
+7. Add entry to `src/v3/config/previewWhitelist.js` (`PREVIEW_SITES`)
+8. **Add a row + detail section to this README**
+9. Portfolio release if whitelist changed (see deploy skill)
+10. Browser QA: open preview link on desktop + mobile mockups
 
 ## Agent skill & rules
 

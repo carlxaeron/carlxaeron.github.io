@@ -1,6 +1,6 @@
 ---
 name: client-site-netlify
-description: Scaffold, build, and deploy local-business quotation websites under client-sites/ to Netlify, register portfolio preview URLs, draft email/SMS/messenger quotations, and share carlmanuel.com/?preview= links. Use when the user asks to create a client website, business landing page, Netlify deploy, quotation demo, sales outreach drafts, or portfolio device preview for a prospect.
+description: Scaffold, build, and deploy local-business quotation websites under client-sites/ to Netlify, register portfolio preview URLs, draft email/SMS/messenger quotations, ask before sending when email is found, schedule 3-day or 1-week follow-ups, and share carlmanuel.com/?preview= links. Use when the user asks to create a client website, business landing page, Netlify deploy, quotation demo, sales outreach, send quotation, or follow up with a prospect.
 ---
 
 # Client site + Netlify deploy
@@ -28,7 +28,9 @@ Client site progress:
 - [ ] Site content + styles customized
 - [ ] Deployed to Netlify (capture previewHost)
 - [ ] client.json updated (contact + quotation fields)
-- [ ] Draft outreach written (email, SMS, messenger)
+- [ ] Draft outreach written (email, SMS, messenger + 3d/1w follow-ups)
+- [ ] If email found → ASK user before any send (send now vs not yet)
+- [ ] If sent → ask 3-day vs 1-week follow-up cadence; set nextFollowUpAt
 - [ ] PREVIEW_SITES entry added
 - [ ] client-sites/README.md catalog updated (table + detail section)
 - [ ] Preview slug tests pass (`previewWhitelist.test.js`)
@@ -221,23 +223,100 @@ Use `buildPreviewPortfolioUrl("slug")` for outreach `previewUrl` values.
 
 ## Step 5 — Draft outreach quotations (required)
 
-After the site is built and `previewUrl` is known, customize the three draft files in `client-sites/{slug}/`:
+After the site is built and `previewUrl` is known, customize the draft files in `client-sites/{slug}/`:
 
 | File | Channel | Notes |
 |------|---------|-------|
 | `quotation-email.md` | Email | Subject line + full proposal with package table |
 | `quotation-sms.txt` | SMS | Short; aim for one text (~300 chars) |
 | `quotation-messenger.txt` | Messenger / Viber / Telegram | Friendly tone; preview link + package summary |
+| `quotation-followup-3d.md` | Email follow-up (~3 days) | “Did you like the preview?” soft check-in |
+| `quotation-followup-1w.md` | Email follow-up (~1 week) | Still interested? like / revise / not now |
 
-**Template placeholders** (replace in all three): `{{contactName}}`, `{{businessName}}`, `{{previewUrl}}`, `{{packageName}}`, `{{packageScope}}`, `{{quotedAmount}}`, `{{paymentTerms}}`, `{{timeline}}`, `{{industry}}`.
+**Template placeholders** (replace in all drafts): `{{contactName}}`, `{{contactEmail}}`, `{{businessName}}`, `{{previewUrl}}`, `{{packageName}}`, `{{packageScope}}`, `{{quotedAmount}}`, `{{paymentTerms}}`, `{{timeline}}`, `{{industry}}`.
 
 **Tone:** professional, warm, Philippine business context (₱, salamat OK in messenger). Sign off as **Carl Louis Manuel** with carlmanuel.com and info@carlmanuel.com.
+
+### Email found → prepare send → **ask first** (mandatory for initial only)
+
+```
+Outreach gate:
+- [ ] contact.email found? (Facebook About / client.json / user)
+- [ ] If NO email → messenger/SMS drafts only; ask user how to reach them
+- [ ] If YES email → fill quotation-email.md + follow-up drafts; set outreach.emailFound=true
+- [ ] STOP and ask user explicitly (do not send yet):
+      "Email found: {email}. Send the quotation now via Private Email, and enable auto follow-ups (3 days or 1 week)?"
+- [ ] Wait for clear approval: send / yes — OR not yet / hold / edit first
+- [ ] Ask cadence: "3 days or 1 week?" → cadence = "3d" | "1w"
+- [ ] Only after approval → POST https://api.carlmanuel.com/outreachSchedule (see below)
+- [ ] Mirror status into client.json → outreach.*
+```
+
+**Never** send the **initial** quotation without an explicit yes in the same conversation turn.
+
+### Hosting send + offline auto follow-ups (Namecheap cron)
+
+Runs on Stellar even when Cursor/laptop are offline.
+
+| Piece | Location |
+|-------|----------|
+| API | `POST /outreachSchedule`, `POST /outreachPause` on `api.carlmanuel.com` |
+| Code | `api-carlxaeron/hosting-php/` (synced to `public_html/api-carlxaeron/`) |
+| Secret | `OUTREACH_SECRET` in hosting `.env` (also local `api-carlxaeron/.outreach_secret`, gitignored) |
+| Cron | Daily `0 1 * * *` → `scripts/cron-outreach-followups.php` |
+| Mail | Private Email SMTP (`mail.privateemail.com`) as `info@carlmanuel.com` |
+
+**After user approves send**, call (agent via curl/hosting-ssh; never commit the secret):
+
+```bash
+curl -sS -X POST 'https://api.carlmanuel.com/outreachSchedule' \
+  -H 'Content-Type: application/json' \
+  -d "{
+    \"secret\": \"$OUTREACH_SECRET\",
+    \"slug\": \"{slug}\",
+    \"businessName\": \"…\",
+    \"contactName\": \"…\",
+    \"contactEmail\": \"…\",
+    \"previewUrl\": \"https://carlmanuel.com/?preview={slug}\",
+    \"packageName\": \"…\",
+    \"quotedAmount\": \"…\",
+    \"timeline\": \"…\",
+    \"cadence\": \"3d\",
+    \"sendInitial\": true,
+    \"autoFollowUp\": true,
+    \"maxFollowUps\": 2
+  }"
+```
+
+- `sendInitial: true` → sends the proposal now, then queues follow-ups.
+- Hosting cron auto-sends follow-ups when `next_follow_up_at` is due (asks like / revise / proceed). Max **2** follow-ups unless raised.
+- Pause anytime: `POST /outreachPause` with `{ secret, slug }` (or slug+contactEmail).
+
+Also update `client.json` → `outreach` (`status=sent`, `cadence`, `sentAt`, `nextFollowUpAt`).
+
+### Follow-ups (automatic on hosting)
+
+1. User picks **`3d`** or **`1w`** once at initial approval.
+2. Cron sends follow-ups **without Cursor** while offline.
+3. Draft files (`quotation-followup-3d.md` / `1w`) remain the human-readable templates; server builds equivalent HTML for SMTP.
+4. To stop: user says pause → `outreachPause`, set `outreach.status=paused`.
+
+### `client.json` → `outreach` tracking
+
+| Field | Values / meaning |
+|-------|------------------|
+| `status` | `draft` → `ready` → `sent` → `followup_due` → `followup_sent` → `won` / `lost` / `paused` |
+| `emailFound` | `true` when a real prospect email exists |
+| `cadence` | `"3d"` or `"1w"` or `null` |
+| `sentAt` / `nextFollowUpAt` / `lastFollowUpAt` | ISO dates |
+| `followUpCount` | number of follow-ups sent |
+| `notes` | short agent/user notes |
 
 **Workflow:**
 
 1. Fill `client.json` → `contact` and `quotation` blocks first.
-2. Copy values from `client.json` into the three draft files (replace placeholders).
-3. Present all drafts to the user for review — **do not send** without explicit approval.
+2. Copy values into draft files (replace placeholders).
+3. Present drafts + gate question (send now?).
 4. Use fictitious contact details only for portfolio demos (see `quotation/` sample).
 
 **SMS length:** keep under ~320 characters when possible; shorten package line if needed.
@@ -299,7 +378,9 @@ curl -sI -H "Sec-Fetch-Dest: iframe" \
 - Keep `embed-guard.js` + edge `embed-only` on every client folder — do not ship browsable public demos.
 - No secrets in `client-sites/` — use Netlify env for forms later.
 - Demo copy OK; mark fictitious businesses and contacts clearly.
-- Draft email/SMS/messenger for every client site — user reviews before any send.
+- Draft email/SMS/messenger + follow-ups for every client site.
+- **Always ask before initial send** when an email is found.
+- After approval: `outreachSchedule` on hosting; **cron auto-sends** 3d/1w follow-ups offline.
 - Do not add client sites to portfolio Side Projects without user approval.
 
 ## Rule reference

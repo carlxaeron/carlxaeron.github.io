@@ -13,9 +13,9 @@ Hosting deploy: [`.cursor/skills/hosting-ssh/SKILL.md`](../skills/hosting-ssh/SK
 
 ## Contracts
 
-Keep Firebase-shaped JSON and **unprefixed** paths: `/health`, `/trackVisit`, `/previewFeedback`, `/analyticsSummary`, `/contact`, `/quotation`.
+Keep Firebase-shaped JSON and **unprefixed** paths: `/health`, `/trackVisit`, `/previewFeedback`, `/analyticsSummary`, `/contact`, `/quotation`, `/outreachSchedule`, `/outreachPause`.
 
-Do not move routes under `/api/` without updating `src/mapping.js` and CORS.
+Live Stellar may still run **hosting-php** (custom PHP) until Laravel is fully deployed — outreach cron lives there.
 
 ## Stack
 

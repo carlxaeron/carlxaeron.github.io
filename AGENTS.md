@@ -28,7 +28,7 @@ Instructions for AI agents working in this repository.
 | [.cursor/skills/firebase-backend/SKILL.md](.cursor/skills/firebase-backend/SKILL.md) | Remaining Firebase: assistant, weekly report, license |
 | [.cursor/skills/namecheap-browser/SKILL.md](.cursor/skills/namecheap-browser/SKILL.md) | Namecheap DNS via browser (when API access unavailable) |
 | [.cursor/skills/onlinejobs-apify/SKILL.md](.cursor/skills/onlinejobs-apify/SKILL.md) | OnlineJobs.ph search, apply, CV, dashboard |
-| [.cursor/skills/client-site-netlify/SKILL.md](.cursor/skills/client-site-netlify/SKILL.md) | Client landing sites, Netlify, `?preview=` |
+| [.cursor/skills/client-site-netlify/SKILL.md](.cursor/skills/client-site-netlify/SKILL.md) | Client sites, Netlify, `?preview=`, ask-before-send quotations + 3d/1w follow-ups |
 
 ## Rules (auto-attached by glob)
 
@@ -85,9 +85,12 @@ Instructions for AI agents working in this repository.
 6. Deploy via Netlify MCP or CLI (`netlify.toml`: `command = ""`)
 7. Add host to `src/v3/config/previewWhitelist.js`; update `client.json` (`quotation.previewUrl` uses `?preview={slug}`)
 8. **Update [`client-sites/README.md`](client-sites/README.md)** — catalog table + per-client detail section
-9. Draft outreach: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`
-10. Share preview `https://carlmanuel.com/?preview={slug}` + drafts for user review (embed-only — direct client URL returns 403)
-11. **Browser QA** — verify preview UI in Chrome (desktop + mobile mockups at true viewports, no overlap, iframe scroll)
+9. Draft outreach: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`, plus `quotation-followup-3d.md` / `quotation-followup-1w.md`
+10. **If email found** → ask: send quotation now + enable hosting auto follow-ups (**3 days** or **1 week**)? **Never send initial without a clear yes**
+11. After approval → `POST https://api.carlmanuel.com/outreachSchedule` (`sendInitial` + `autoFollowUp`); cron on Stellar sends follow-ups while offline
+12. Pause anytime via `POST /outreachPause` if prospect asks to stop
+13. Share preview `https://carlmanuel.com/?preview={slug}` + drafts for user review (embed-only — direct client URL returns 403)
+14. **Browser QA** — verify preview UI in Chrome (desktop + mobile mockups at true viewports, no overlap, iframe scroll)
 
 Full catalog: [`client-sites/README.md`](client-sites/README.md)  
 Preview tests: `src/v3/config/previewWhitelist.test.js`, `src/pages/Index.test.js`, `PreviewShowcase.test.js`

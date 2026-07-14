@@ -40,6 +40,7 @@ Hosting-SSH-MCP-Server/.ssh/
 Hosting-SSH-MCP-Server/node_modules/
 Hosting-SSH-MCP-Server/dist/
 api-carlxaeron/.env
+api-carlxaeron/.outreach_secret
 api-carlxaeron/vendor/
 api-carlxaeron/node_modules/
 api-carlxaeron/storage/logs/

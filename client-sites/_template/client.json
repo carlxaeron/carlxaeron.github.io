@@ -20,6 +20,16 @@
   "outreach": {
     "emailDraft": "quotation-email.md",
     "smsDraft": "quotation-sms.txt",
-    "messengerDraft": "quotation-messenger.txt"
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "draft",
+    "cadence": null,
+    "emailFound": false,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": ""
   }
 }
