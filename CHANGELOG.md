@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.36] — 2026-07-15
+
+### Added
+- **Regan Industrial Sales Inc.** client site (`regan-industrial`) — steel supplier redesign landing sample (products, services, Motion + Three.js blueprint hero)
+- Portfolio preview: `?preview=regan-industrial` → `regan-industrial.netlify.app`
+
 ## [3.0.35] — 2026-07-15
 
 ### Added

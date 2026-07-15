@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Regan Industrial Sales Inc. — trusted steel supplier since 1968. Structural steel, pipes, bars, processing & nationwide delivery from Quezon City." />
+  <title>Regan Industrial Sales Inc. — Steel Solutions Philippines</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: "#1a1a1a",
+              mid: "#2c2c2c",
+              accent: "#c41e3a",
+              light: "#f5f5f5",
+              steel: "#8a8f98",
+            },
+          },
+          fontFamily: {
+            display: ["Playfair Display", "Georgia", "serif"],
+            sans: ["Inter", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="embed-guard.js"></script>
+</head>
+<body class="font-sans text-gray-900 antialiased">
+  <div class="trust-strip py-2 text-center text-xs font-semibold tracking-wide text-white sm:text-sm">
+    Since 1968 · Quezon City · Nationwide steel delivery · 80K+ Facebook followers
+  </div>
+
+  <header data-header class="sticky top-0 z-50 border-b border-brand-dark/10 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#" class="flex min-w-0 items-center gap-2 font-display text-lg font-bold text-brand-dark">
+        <img src="assets/logo.png" alt="" width="120" height="57" class="h-9 w-auto shrink-0 object-contain" />
+        <span class="hidden truncate sm:inline">Regan Industrial</span>
+      </a>
+      <nav class="hidden items-center gap-5 text-sm font-medium text-brand-dark/80 md:flex" aria-label="Main">
+        <a href="#products" class="hover:text-brand-accent transition-colors">Products</a>
+        <a href="#services" class="hover:text-brand-accent transition-colors">Services</a>
+        <a href="#about" class="hover:text-brand-accent transition-colors">About</a>
+        <a href="#faq" class="hover:text-brand-accent transition-colors">FAQ</a>
+        <a href="#contact" class="rounded-full bg-brand-accent px-4 py-2 font-semibold text-white hover:brightness-110 transition">Get a quote</a>
+      </nav>
+      <button type="button" data-nav-toggle class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-dark/15 text-brand-dark md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="hidden flex-col border-t border-brand-dark/10 bg-white px-4 py-4 md:hidden">
+      <a href="#products" class="rounded-lg px-3 py-3 hover:bg-brand-light">Products</a>
+      <a href="#services" class="rounded-lg px-3 py-3 hover:bg-brand-light">Services</a>
+      <a href="#about" class="rounded-lg px-3 py-3 hover:bg-brand-light">About</a>
+      <a href="#faq" class="rounded-lg px-3 py-3 hover:bg-brand-light">FAQ</a>
+      <a href="#contact" class="mt-2 rounded-full bg-brand-accent px-4 py-3 text-center font-semibold text-white">Get a quote</a>
+    </div>
+  </header>
+
+  <main>
+    <section data-hero data-hero-three="blueprint" class="relative overflow-hidden bg-brand-dark text-white">
+      <div data-hero-bg class="hero-bg hero-bg--regan absolute inset-0 origin-center will-change-transform"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
+      <div class="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+        <p data-hero-animate class="opacity-0 mb-3 text-xs font-semibold uppercase tracking-widest text-brand-accent">Steel solution for your success · Est. 1968</p>
+        <h1 data-hero-animate class="opacity-0 font-display max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-[3.25rem]">Regan Industrial Sales Inc.</h1>
+        <p data-hero-animate class="opacity-0 mt-5 max-w-2xl text-lg text-white/85">Quality steel products and end-to-end processing for contractors, engineers, and developers — beams, pipes, plates, bars, and nationwide delivery from Quezon City.</p>
+        <div data-hero-animate class="opacity-0 mt-8 flex flex-wrap gap-3">
+          <a data-hero-cta href="#contact" class="rounded-full bg-brand-accent px-6 py-3 font-semibold text-white hover:brightness-110 transition">Request a quote</a>
+          <a data-hero-cta href="tel:+639988434711" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Call 0998 843 4711</a>
+        </div>
+        <div data-hero-animate class="opacity-0 mt-10 grid gap-4 sm:grid-cols-3">
+          <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <p class="text-2xl font-bold text-brand-accent">55+</p>
+            <p class="mt-1 text-sm text-white/80">Years as a trusted steel supplier</p>
+          </div>
+          <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <p class="text-2xl font-bold text-brand-accent">Nationwide</p>
+            <p class="mt-1 text-sm text-white/80">Pickup &amp; door-to-door delivery</p>
+          </div>
+          <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <p class="text-2xl font-bold text-brand-accent">100%</p>
+            <p class="mt-1 text-sm text-white/80">Recommend · 15 Facebook reviews</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Quality steel for every need</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal">Structural sections, bars, pipes, flats, and specialty solutions for construction and industrial projects.</p>
+        <div data-filter class="mt-8">
+          <div class="flex flex-wrap gap-2">
+            <button type="button" data-filter-btn="all" class="filter-active rounded-full bg-brand-accent px-4 py-2 text-sm text-white" aria-pressed="true">All</button>
+            <button type="button" data-filter-btn="struct" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Structural</button>
+            <button type="button" data-filter-btn="pipe" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Pipe</button>
+            <button type="button" data-filter-btn="other" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Other</button>
+          </div>
+          <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <article data-filter-item data-categories="struct,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Sections &amp; shapes</h3>
+              <p class="mt-2 text-sm text-gray-600">H-beams, I-beams, channels, angles, and structural shapes for frameworks and heavy builds.</p>
+            </article>
+            <article data-filter-item data-categories="struct,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Bars &amp; rods</h3>
+              <p class="mt-2 text-sm text-gray-600">Deformed bars, round bars, and rods stocked for construction and fabrication.</p>
+            </article>
+            <article data-filter-item data-categories="pipe,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Pipe &amp; tubings</h3>
+              <p class="mt-2 text-sm text-gray-600">GI pipes, tubings, and related lines for plumbing, scaffolding, and industrial use.</p>
+            </article>
+            <article data-filter-item data-categories="struct,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Steel flats &amp; plates</h3>
+              <p class="mt-2 text-sm text-gray-600">Flats and plates for fabrication, foundations, and custom cutting jobs.</p>
+            </article>
+            <article data-filter-item data-categories="other,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Innovative solutions</h3>
+              <p class="mt-2 text-sm text-gray-600">Specialty and new steel product lines when standard stock is not enough.</p>
+            </article>
+            <article data-filter-item data-categories="other,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Other products</h3>
+              <p class="mt-2 text-sm text-gray-600">Additional inventory for multi-sector projects — ask sales for availability.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>End-to-end support</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal">Beyond supply — processing and logistics so materials arrive project-ready.</p>
+        <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <article data-reveal class="rounded-2xl bg-white p-6 shadow-sm">
+            <h3 class="font-semibold text-brand-dark">Pipe &amp; structural bending</h3>
+            <p class="mt-2 text-sm text-gray-600">Forming for infrastructure and architectural applications.</p>
+          </article>
+          <article data-reveal class="rounded-2xl bg-white p-6 shadow-sm">
+            <h3 class="font-semibold text-brand-dark">Steel cutting</h3>
+            <p class="mt-2 text-sm text-gray-600">Cut-to-length and plate/sheet processing for faster fab.</p>
+          </article>
+          <article data-reveal class="rounded-2xl bg-white p-6 shadow-sm">
+            <h3 class="font-semibold text-brand-dark">Galvanizing &amp; coating</h3>
+            <p class="mt-2 text-sm text-gray-600">Corrosion protection including spiral pipe coating options.</p>
+          </article>
+          <article data-reveal class="rounded-2xl bg-white p-6 shadow-sm">
+            <h3 class="font-semibold text-brand-dark">Build-up fabrication</h3>
+            <p class="mt-2 text-sm text-gray-600">Heavy beams and custom build-ups for structural demand.</p>
+          </article>
+          <article data-reveal class="rounded-2xl bg-white p-6 shadow-sm">
+            <h3 class="font-semibold text-brand-dark">Sandblasting &amp; perforation</h3>
+            <p class="mt-2 text-sm text-gray-600">Surface prep and plate/sheet perforation services.</p>
+          </article>
+          <article data-reveal class="rounded-2xl bg-white p-6 shadow-sm">
+            <h3 class="font-semibold text-brand-dark">Logistics</h3>
+            <p class="mt-2 text-sm text-gray-600">Warehouse pickup in QC or door-to-door nationwide delivery.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal">From warehouse to site</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal">Sample visuals from Regan Industrial’s brand assets — steel, facilities, and field delivery.</p>
+        <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-brand-light shadow-sm">
+            <img src="assets/project-01.jpg" alt="Regan Industrial steel products" width="549" height="734" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Quality steel stock</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-brand-light shadow-sm">
+            <img src="assets/project-02.jpg" alt="Regan Industrial processing" width="549" height="734" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Processing &amp; prep</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-brand-light shadow-sm">
+            <img src="assets/project-03.jpg" alt="Regan Industrial delivery" width="549" height="733" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Ready for delivery</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-brand-light shadow-sm">
+            <img src="assets/project-04.jpg" alt="Regan Industrial project highlight" width="1024" height="683" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Project highlight</figcaption>
+          </figure>
+        </div>
+        <p class="mt-6 text-center">
+          <a href="https://reganindustrial.com/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-accent hover:underline">Visit reganindustrial.com →</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="about" class="bg-brand-dark py-16 text-white sm:py-20">
+      <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2">
+        <img src="assets/hero-steel.jpg" alt="Regan Industrial steel yard" width="1296" height="874" loading="lazy" class="rounded-2xl shadow-lg ring-1 ring-white/10 object-cover" data-reveal />
+        <div data-reveal>
+          <h2 class="font-display text-3xl font-bold">Trusted since 1968</h2>
+          <p class="mt-4 text-white/85"><strong>Regan Industrial Sales, Inc. (RISI)</strong> started in Tondo, Manila and now operates from Grace Village, Quezon City — supplying steel plates, sections, pipes, bars, and rods nationwide.</p>
+          <p class="mt-3 text-white/85">Tagline: <em>Steel Solution for your Success | Creating Value through Innovation</em>. Over <strong>80K Facebook followers</strong> and <strong>100% recommend</strong> from Facebook reviews.</p>
+          <p class="mt-4 font-display italic text-brand-accent">“Basta bakal, Regan.”</p>
+          <p class="mt-4 text-sm text-white/70">#5 Harmony Street, Grace Village, Brgy. Balingasa, Balintawak, Quezon City</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <h2 class="font-display text-center text-3xl font-bold text-brand-dark" data-reveal>Common questions</h2>
+        <div data-accordion class="mt-10 space-y-3">
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Do you deliver nationwide?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Yes — warehouse pickup in Quezon City or door-to-door delivery across the Philippines. Sales will confirm lead time and terms for your site.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">What processing can you do in-house?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Cutting, bending, galvanizing, fabrication build-ups, perforation, sandblasting, coil shearing/slitting, spiral pipe coating, and logistics support.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">How do I request a quotation?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Email <a href="mailto:inquiry@reganindustrial.com.ph" class="font-semibold text-brand-accent hover:underline">inquiry@reganindustrial.com.ph</a> or call <a href="tel:+639988434711" class="font-semibold text-brand-accent hover:underline">0998 843 4711</a> with sizes, quantities, and destination.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Where is the main warehouse?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">#5 Harmony Street, Grace Village, Brgy. Balingasa, Balintawak, Quezon City 1106 — also listed on Facebook and reganindustrial.com.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="overflow-hidden rounded-3xl bg-brand-dark text-white shadow-xl">
+          <div class="grid gap-0 lg:grid-cols-2">
+            <div class="p-8 sm:p-10 lg:p-12">
+              <h2 class="font-display text-3xl font-bold" data-reveal">Source steel for your next project</h2>
+              <p class="mt-4 text-white/80" data-reveal">Send requirements for availability, pricing, processing, and delivery options.</p>
+              <ul class="mt-8 space-y-4 text-sm sm:text-base" data-reveal>
+                <li><span class="font-semibold text-brand-accent">Mobile</span><br /><a href="tel:+639988434711" class="hover:underline">0998 843 4711</a></li>
+                <li><span class="font-semibold text-brand-accent">Inquiry</span><br /><a href="mailto:inquiry@reganindustrial.com.ph" class="hover:underline">inquiry@reganindustrial.com.ph</a></li>
+                <li><span class="font-semibold text-brand-accent">Customer service</span><br /><a href="mailto:regancustomerservice@gmail.com" class="hover:underline">regancustomerservice@gmail.com</a></li>
+                <li><span class="font-semibold text-brand-accent">Landline</span><br />(02) 361-8734 · Fax (02) 361-8215</li>
+                <li><span class="font-semibold text-brand-accent">Address</span><br />#5 Harmony St., Grace Village, Balintawak, Quezon City 1106</li>
+                <li><span class="font-semibold text-brand-accent">Web / Facebook</span><br /><a href="https://reganindustrial.com/" target="_blank" rel="noopener noreferrer" class="hover:underline">reganindustrial.com</a> · <a href="https://www.facebook.com/reganindustrialph/" target="_blank" rel="noopener noreferrer" class="hover:underline">facebook.com/reganindustrialph</a></li>
+              </ul>
+            </div>
+            <div class="flex flex-col justify-center gap-4 bg-brand-mid/60 p-8 sm:p-10 lg:p-12" data-reveal>
+              <a href="mailto:inquiry@reganindustrial.com.ph" class="rounded-full bg-brand-accent px-6 py-4 text-center font-semibold text-white hover:brightness-110 transition">Email inquiry</a>
+              <a href="tel:+639988434711" class="rounded-full border border-white/40 px-6 py-4 text-center font-semibold hover:bg-white/10 transition">Call sales</a>
+              <a href="https://www.facebook.com/reganindustrialph/" target="_blank" rel="noopener noreferrer" class="rounded-full border border-white/40 px-6 py-4 text-center font-semibold hover:bg-white/10 transition">Message on Facebook</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-brand-dark/10 bg-white py-8 text-center text-sm text-gray-500">
+    <p class="font-display text-brand-dark">Regan Industrial Sales Inc.</p>
+    <p class="mt-1">Sample redesign for quotation · Quezon City steel supplier</p>
+    <p class="mt-3">&copy; <span id="year"></span> · Sample site by <a href="https://carlmanuel.com" class="text-brand-accent hover:underline">Carl Louis Manuel</a></p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
+</body>
+</html>

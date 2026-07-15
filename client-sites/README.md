@@ -26,6 +26,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Clover Industrial Fan and Blower Inc.](#clover-industrial-fan-and-blower-inc) | `clover-industrial-fan` | Industrial fans & blowers | [Preview](https://carlmanuel.com/?preview=clover-industrial-fan) | 2026-07-13 |
 | [G3k Cad Plotting & Blueprinting Services](#g3k-cad-plotting--blueprinting-services) | `g3k-cad` | CAD plotting / blueprint printing | [Preview](https://carlmanuel.com/?preview=g3k-cad) | 2026-07-14 |
 | [Kubling Tago Resort](#kubling-tago-resort) | `kubling-tago-resort` | Day resort / hospitality | [Preview](https://carlmanuel.com/?preview=kubling-tago-resort) | 2026-07-15 |
+| [Regan Industrial Sales Inc.](#regan-industrial-sales-inc) | `regan-industrial` | Steel supplier / industrial metals | [Preview](https://carlmanuel.com/?preview=regan-industrial) | 2026-07-15 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -234,6 +235,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | Logo, cover, pool hero + gallery (pool, garden, entrance sign, poolside); Motion + Three.js particles; sample rates from FB sheet |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days |
 | **Outreach** | Messenger/SMS preferred · `quotation-messenger.txt` · `quotation-sms.txt` · email draft held (no address) |
+
+---
+
+### Regan Industrial Sales Inc.
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/regan-industrial/` |
+| **Netlify site** | `regan-industrial` |
+| **Preview host** | `regan-industrial.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=regan-industrial |
+| **Contact** | inquiry@reganindustrial.com.ph · 0998 843 4711 |
+| **Address** | #5 Harmony Street, Grace Village, Brgy. Balingasa, Balintawak, Quezon City 1106 |
+| **Category** | Metal / steel supplier · Est. 1968 · ~80K FB followers |
+| **Source** | [Facebook](https://www.facebook.com/reganindustrialph/) · [reganindustrial.com](https://reganindustrial.com/) · [mail portal](https://mail.reganindustrial.com/#/home) |
+| **Assets** | Logo + hero + gallery from live site (browser fetch); Motion + Three.js blueprint hero |
+| **Package** | Business Website Redesign (landing sample) · **₱18,000** · 7–10 days |
+| **Outreach** | Email found — **ask before send** · `quotation-email.md` |
 
 ---
 

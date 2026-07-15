@@ -77,6 +77,12 @@ export const PREVIEW_SITES = [
     label: "Kubling Tago Resort",
     netlifySite: "kubling-tago-resort",
   },
+  {
+    id: "regan-industrial",
+    host: "regan-industrial.netlify.app",
+    label: "Regan Industrial Sales Inc.",
+    netlifySite: "regan-industrial",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
