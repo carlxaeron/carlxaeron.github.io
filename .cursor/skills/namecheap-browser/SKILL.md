@@ -11,8 +11,13 @@ Namecheap API requires account balance / domain / purchase thresholds. When API 
 
 ## Prerequisites
 
-- User can log into Namecheap in the Chrome DevTools browser (or already is)
 - Chrome DevTools MCP available
+- Login either already done in that Chrome tab, **or** fill gitignored [`.namecheap-browser.env`](../../../.namecheap-browser.env) (copy from [`.namecheap-browser.env.example`](../../../.namecheap-browser.env.example)):
+  - `NAMECHEAP_USERNAME` / `NAMECHEAP_PASSWORD` for https://www.namecheap.com/myaccount/login/
+  - Optional `PRIVATEEMAIL_USERNAME` / `PRIVATEEMAIL_PASSWORD` for https://privateemail.com/
+- If 2FA/captcha appears: pause and let the user finish in the tab
+
+**Mailboxes known present:** `info@carlmanuel.com`, `sales@carlmanuel.com` (Private Email). Do not recreate without asking.
 
 ## Workflow checklist
 
@@ -117,7 +122,7 @@ Allow TTL (often 5–30 minutes; can be hours).
 
 - Never delete all Host Records without an explicit undo plan
 - Never register / renew / transfer / change Whois without user approval
-- Never store Namecheap password in repo or `.env`
+- Never commit passwords — only use gitignored `.namecheap-browser.env` (never `git add` it)
 - If 2FA / captcha blocks automation: stop and hand the tab to the user
 - Prefer smallest change set (one record at a time)
 

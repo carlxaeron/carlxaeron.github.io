@@ -35,6 +35,10 @@ OnlineJobs-MCP-Server/.env
 OnlineJobs-MCP-Server/google_drive_credentials.json
 Namecheap-MCP-Server/.env
 Namecheap-MCP-Server/node_modules/
+# Browser login for Namecheap / Private Email (never commit filled values)
+.namecheap-browser.env
+!.namecheap-browser.env.example
+
 Hosting-SSH-MCP-Server/.env
 Hosting-SSH-MCP-Server/.ssh/
 Hosting-SSH-MCP-Server/node_modules/
