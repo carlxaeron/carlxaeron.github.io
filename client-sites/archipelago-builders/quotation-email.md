@@ -1,6 +1,6 @@
 # Email quotation — Archipelago Builders Corporation
 
-**Status:** Draft — **ask before sending**  
+**Status:** Sent 2026-07-15 — auto follow-ups 3d→7d×3 (max 4)  
 **To:** abcorpinfo@archipelagobuilders.com  
 **Subject:** Website rebuild sample for Archipelago Builders — preview on carlmanuel.com
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.44] — 2026-07-15
+
+### Changed
+- **Insights:** mask client slug labels on public charts (`g3k-cad` → `g3****ad`) for privacy
+- **Outreach mailer (hosting-php):** display-name From, Message-ID, List-Unsubscribe; unit coverage for mail helpers
+
 ## [3.0.43] — 2026-07-15
 
 ### Added

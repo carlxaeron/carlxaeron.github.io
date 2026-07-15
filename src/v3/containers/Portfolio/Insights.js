@@ -6,6 +6,13 @@ import { mapping } from "../../../mapping";
 
 const REFRESH_MS = 30000;
 
+/** Public-facing label: keep first/last 2 chars, obscure the middle (e.g. g3k-cad → g3****ad). */
+export function maskClientSlug(slug) {
+  const s = String(slug || "").trim();
+  if (s.length <= 4) return "*".repeat(Math.max(s.length, 4));
+  return `${s.slice(0, 2)}****${s.slice(-2)}`;
+}
+
 function StatCard({ label, value, hint }) {
   return (
     <article className="v3-insights-stat">
@@ -35,7 +42,7 @@ function BarChart({ title, rows, valueKey = "count", labelKey = "label" }) {
       <h3 className="v3-insights-chart__title">{title}</h3>
       <div className="v3-insights-chart__rows">
         {rows.map((row) => (
-          <div className="v3-insights-chart__row" key={row[labelKey]}>
+          <div className="v3-insights-chart__row" key={row.key || row[labelKey]}>
             <span className="v3-insights-chart__label">{row[labelKey]}</span>
             <div className="v3-insights-chart__track" aria-hidden="true">
               <div
@@ -110,16 +117,18 @@ function V3Insights({ isActive }) {
     .filter((row) => row.likes > 0 || row.dislikes > 0)
     .slice(0, 6)
     .map((row) => ({
-      label: row.slug,
+      label: maskClientSlug(row.slug),
       count: row.likes,
+      key: row.slug,
     }));
 
   const previewViews = (summary?.previewStats || [])
     .filter((row) => row.views > 0)
     .slice(0, 6)
     .map((row) => ({
-      label: row.slug,
+      label: maskClientSlug(row.slug),
       count: row.views,
+      key: row.slug,
     }));
 
   const updatedAt = formatUpdatedAt(summary?.generatedAt);

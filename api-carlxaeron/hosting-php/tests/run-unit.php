@@ -3,15 +3,16 @@
 declare(strict_types=1);
 
 /**
- * Unit tests for outreach cadence / follow-up helpers.
+ * Unit tests for outreach cadence helpers + mail header helpers.
  * No DB or SMTP — pure functions only.
  *
- * Run (required before deploying hosting-php outreach):
+ * Run (required before deploying hosting-php outreach/mail):
  *   php api-carlxaeron/hosting-php/tests/run-unit.php
  */
 
 $root = dirname(__DIR__);
 require_once $root . '/src/outreach.php';
+require_once $root . '/src/mail.php';
 
 $failed = 0;
 $passed = 0;
@@ -73,6 +74,17 @@ for ($sent = 0; $sent < outreach_default_max_followups(); $sent++) {
     $delays[] = outreach_days_until_next('3d1w', $sent);
 }
 assert_same([3, 7, 7, 7], $delays, 'full sequence 3d→7d→7d→7d');
+
+echo "\nMail header helpers\n";
+assert_same('info@carlmanuel.com', mail_bare_address('info@carlmanuel.com'), 'bare stays bare');
+assert_same('info@carlmanuel.com', mail_bare_address('"Carl Louis Manuel" <info@carlmanuel.com>'), 'strip display name');
+assert_same('info@carlmanuel.com', mail_bare_address('  <info@carlmanuel.com>  '), 'strip brackets + trim');
+assert_same('info@carlmanuel.com', mail_format_mailbox('info@carlmanuel.com', null), 'format no name');
+assert_same('info@carlmanuel.com', mail_format_mailbox('info@carlmanuel.com', ''), 'format empty name');
+assert_same('"Carl Louis Manuel" <info@carlmanuel.com>', mail_format_mailbox('info@carlmanuel.com', 'Carl Louis Manuel'), 'format with name');
+assert_same('"Quote \\"Me\\"" <a@b.c>', mail_format_mailbox('a@b.c', 'Quote "Me"'), 'escape quotes in name');
+$mid = mail_message_id('carlmanuel.com');
+assert_true((bool) preg_match('/^<[0-9a-f]+\.[0-9a-f]+@carlmanuel\.com>$/', $mid), 'Message-ID shape');
 
 echo "\n";
 if ($failed > 0) {

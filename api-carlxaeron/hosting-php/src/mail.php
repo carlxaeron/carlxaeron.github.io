@@ -9,6 +9,35 @@ declare(strict_types=1);
  *                            (default info@carlmanuel.com) for outreach copies.
  *                            Pass '' to disable BCC for a given send.
  */
+
+/** Strip display-name / brackets → bare address for SMTP envelope. */
+function mail_bare_address(string $addr): string
+{
+    $addr = trim($addr);
+    if (preg_match('/<([^>]+)>/', $addr, $m)) {
+        return trim($m[1]);
+    }
+    return $addr;
+}
+
+/** RFC 5322 From / Reply-To: "Display Name" <email@domain>. */
+function mail_format_mailbox(string $email, ?string $name = null): string
+{
+    $email = mail_bare_address($email);
+    $name = $name !== null ? trim($name) : '';
+    if ($name === '') {
+        return $email;
+    }
+    // Escape quotes in display name; keep ASCII-simple for deliverability.
+    $safe = str_replace(['\\', '"'], ['\\\\', '\\"'], $name);
+    return "\"{$safe}\" <{$email}>";
+}
+
+function mail_message_id(string $domain = 'carlmanuel.com'): string
+{
+    return sprintf('<%s.%s@%s>', bin2hex(random_bytes(8)), bin2hex(random_bytes(4)), $domain);
+}
+
 function send_smtp_mail(
     string $toCsv,
     string $subject,
@@ -21,7 +50,9 @@ function send_smtp_mail(
     $port = (int) env('SMTP_PORT', '465');
     $user = env('SMTP_USER');
     $pass = env('SMTP_PASS');
-    $from = env('DEFAULT_FROM', $user ?: 'noreply@carlmanuel.com');
+    $fromRaw = env('DEFAULT_FROM', $user ?: 'info@carlmanuel.com') ?: 'info@carlmanuel.com';
+    $fromEmail = mail_bare_address($fromRaw);
+    $fromName = trim((string) (env('DEFAULT_FROM_NAME') ?: env('MAIL_FROM_NAME') ?: 'Carl Louis Manuel'));
 
     if (!$user || !$pass) {
         throw new RuntimeException('SMTP not configured');
@@ -74,27 +105,31 @@ function send_smtp_mail(
     $cmd($fp, 'AUTH LOGIN', [334]);
     $cmd($fp, base64_encode($user), [334]);
     $cmd($fp, base64_encode($pass), [235]);
-    $cmd($fp, "MAIL FROM:<{$from}>", [250]);
+    // Envelope sender must be bare address (Private Email / SPF).
+    $cmd($fp, "MAIL FROM:<{$fromEmail}>", [250]);
     foreach ($recipients as $to) {
-        $cmd($fp, "RCPT TO:<{$to}>", [250, 251]);
+        $cmd($fp, 'RCPT TO:<' . mail_bare_address($to) . '>', [250, 251]);
     }
     // Envelope BCC — not listed in To: so the client does not see them
     foreach ($bccList as $bcc) {
-        $cmd($fp, "RCPT TO:<{$bcc}>", [250, 251]);
+        $cmd($fp, 'RCPT TO:<' . mail_bare_address($bcc) . '>', [250, 251]);
     }
     $cmd($fp, 'DATA', [354]);
 
     $boundary = 'b_' . bin2hex(random_bytes(8));
     $headers = [];
-    $headers[] = "From: {$from}";
+    $headers[] = 'From: ' . mail_format_mailbox($fromEmail, $fromName);
     $headers[] = 'To: ' . implode(', ', $recipients);
     if ($replyTo) {
-        $headers[] = "Reply-To: {$replyTo}";
+        $headers[] = 'Reply-To: ' . mail_format_mailbox(mail_bare_address($replyTo));
     }
     $headers[] = "Subject: {$subject}";
+    $headers[] = 'Message-ID: ' . mail_message_id();
+    $headers[] = 'Date: ' . date('r');
     $headers[] = 'MIME-Version: 1.0';
     $headers[] = "Content-Type: multipart/alternative; boundary=\"{$boundary}\"";
-    $headers[] = 'Date: ' . date('r');
+    // Mailto unsubscribe hint for filters (no HTTPS one-click endpoint yet).
+    $headers[] = 'List-Unsubscribe: <mailto:' . $fromEmail . '?subject=unsubscribe>';
 
     $payload = implode("\r\n", $headers) . "\r\n\r\n";
     $payload .= "--{$boundary}\r\nContent-Type: text/plain; charset=UTF-8\r\n\r\n{$text}\r\n";

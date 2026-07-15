@@ -66,9 +66,16 @@ Never commit `.env`. Prefer Laravel names; legacy keys still work via config fal
 | `DB_DATABASE` / `DB_USERNAME` / `DB_PASSWORD` | `DB_NAME` / `DB_USER` / `DB_PASS` |
 | `MAIL_HOST` / `MAIL_PORT` / `MAIL_USERNAME` / `MAIL_PASSWORD` / `MAIL_SCHEME=smtps` | `SMTP_*` + `SMTP_ENCRYPTION=ssl` (Private Email: `mail.privateemail.com:465`) |
 | `MAIL_FROM_ADDRESS` | `DEFAULT_FROM` |
+| `MAIL_FROM_NAME` / — | `DEFAULT_FROM_NAME` / `MAIL_FROM_NAME` (hosting-php: display name, default `Carl Louis Manuel`) |
 | `MAIL_TO` | (same) — inbound contact/quote recipients |
 | `MAIL_BCC` | BCC on **outbound** client outreach (`info@carlmanuel.com` by default; hidden from To) |
 | `ANALYTICS_EXCLUDE_IP_HASHES` / `ANALYTICS_EXCLUDE_VISITOR_IDS` | (same) |
+
+### Deliverability (outreach / Private Email)
+
+- **SPF + DKIM:** Private Email for `carlmanuel.com` (already on domain).
+- **DMARC:** TXT `_dmarc` → `v=DMARC1; p=none; rua=mailto:info@carlmanuel.com; fo=1` (Namecheap Advanced DNS; skill `namecheap-browser`).
+- **hosting-php `mail.php`:** From `"Name" <email>`, bare envelope `MAIL FROM`, `Message-ID`, `List-Unsubscribe` mailto — deploy with unit tests before upload.
 
 ## Local
 
@@ -97,11 +104,11 @@ Details: [`api-carlxaeron/README.md`](../../../api-carlxaeron/README.md).
 # Laravel
 cd api-carlxaeron && php artisan test
 
-# Hosting-php outreach (cadence / max follow-ups) — required before Stellar upload
+# Hosting-php outreach + mail helpers — required before Stellar upload
 php api-carlxaeron/hosting-php/tests/run-unit.php
 ```
 
-Unit: `ApiResponse`, `AnalyticsExclusion`, `PortfolioMailer`, **`hosting-php/tests/run-unit.php`** (outreach sequence).  
+Unit: `ApiResponse`, `AnalyticsExclusion`, `PortfolioMailer`, **`hosting-php/tests/run-unit.php`** (outreach cadence + `mail_*` helpers).  
 Feature: full endpoint contracts + exclusion / dedupe / mail.
 
 **Deploy gate:** never upload `hosting-php/src/outreach.php` (or cron scripts) if outreach unit tests fail. Never deploy Laravel without `php artisan test` green.

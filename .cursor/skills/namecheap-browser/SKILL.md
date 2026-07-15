@@ -77,6 +77,14 @@ Prefer Netlify’s Domain management → “Verify DNS configuration” values w
 
 **TXT** (verification / SPF): paste exact string Namecheap / Netlify / Google provides — no spaces truncation.
 
+**DMARC for outreach deliverability (`carlmanuel.com`):**
+
+| Type | Host | Value | TTL |
+|------|------|-------|-----|
+| TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:info@carlmanuel.com; fo=1` | Automatic |
+
+Monitor-only (`p=none`) — does not reject mail; reports go to `info@`. Verify: `dig +short TXT _dmarc.carlmanuel.com`. Requires SPF + DKIM already aligned (Private Email).
+
 **Portfolio API subdomain (`api.carlmanuel.com`):**
 
 | Type | Host | Value |
@@ -100,6 +108,7 @@ Moving to Cloudflare unlocks Cloudflare’s free API later — only change NS if
 dig +short {domain} A
 dig +short www.{domain} CNAME
 dig +short {domain} NS
+dig +short TXT _dmarc.{domain}
 ```
 
 Allow TTL (often 5–30 minutes; can be hours).
