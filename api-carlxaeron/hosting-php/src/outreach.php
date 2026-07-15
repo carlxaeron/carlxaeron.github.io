@@ -19,15 +19,34 @@ function outreach_require_secret(array $body): void
     }
 }
 
-function outreach_cadence_days(string $cadence): int
-{
-    return $cadence === '3d' ? 3 : 7;
-}
-
+/**
+ * Default sequence: 3d → 7d → 7d → 7d (up to 4 follow-ups).
+ * Legacy single intervals (`3d` / `1w`) still work if explicitly set.
+ */
 function outreach_normalize_cadence(string $cadence): string
 {
     $c = strtolower(trim($cadence));
-    return $c === '3d' ? '3d' : '1w';
+    if ($c === '3d' || $c === '1w') {
+        return $c;
+    }
+    // 3d1w | seq | empty | anything else → fixed sequence
+    return '3d1w';
+}
+
+/** Days until the *next* follow-up, given how many follow-ups already sent. */
+function outreach_days_until_next(string $cadence, int $followUpsAlreadySent): int
+{
+    $cadence = outreach_normalize_cadence($cadence);
+    if ($cadence === '3d1w') {
+        // 1st wait = 3d; all later waits = 7d (→ 3d, 7d, 7d, 7d with max 4)
+        return $followUpsAlreadySent === 0 ? 3 : 7;
+    }
+    return $cadence === '3d' ? 3 : 7;
+}
+
+function outreach_default_max_followups(): int
+{
+    return 4;
 }
 
 /** Default payment terms — never imply full package is due upfront. */
@@ -56,9 +75,9 @@ function outreach_ensure_table(): void
           package_name VARCHAR(255) NULL,
           quoted_amount VARCHAR(64) NULL,
           timeline VARCHAR(255) NULL,
-          cadence VARCHAR(8) NOT NULL DEFAULT '1w',
+          cadence VARCHAR(8) NOT NULL DEFAULT '3d1w',
           auto_followup TINYINT(1) NOT NULL DEFAULT 1,
-          max_followups TINYINT UNSIGNED NOT NULL DEFAULT 2,
+          max_followups TINYINT UNSIGNED NOT NULL DEFAULT 4,
           follow_up_count TINYINT UNSIGNED NOT NULL DEFAULT 0,
           status VARCHAR(32) NOT NULL DEFAULT 'sent',
           initial_sent_at DATETIME NULL,
@@ -120,7 +139,8 @@ function outreach_build_followup_email(array $job): array
     $amount = (string) ($job['quoted_amount'] ?: '');
     $payment = outreach_payment_terms($job);
     $count = (int) ($job['follow_up_count'] ?? 0);
-    $isWeek = (($job['cadence'] ?? '1w') === '1w') || $count >= 1;
+    // Sequence copy: 1st FU = soft 3d check-in; 2nd+ = 1w “still interested?”
+    $isWeekFollowUp = $count >= 1;
     $priceNote = $amount !== ''
         ? ' (' . h($amount) . ' total · ' . h($payment) . ')'
         : ' (' . h($payment) . ')';
@@ -128,7 +148,7 @@ function outreach_build_followup_email(array $job): array
         ? " ({$amount} total · {$payment})"
         : " ({$payment})";
 
-    if ($isWeek && $count >= 1) {
+    if ($isWeekFollowUp) {
         $subject = "Still interested? {$biz} website proposal";
         $ask = 'Did you <strong>like</strong> the sample, want <strong>revisions</strong>, or is it <strong>not a fit right now</strong>?'
             . '<br><br><strong>Reminder:</strong> package total'
@@ -201,10 +221,10 @@ function route_outreach_schedule(): void
     if ($paymentTerms === '') {
         $paymentTerms = outreach_default_payment_terms();
     }
-    $cadence = outreach_normalize_cadence((string) ($body['cadence'] ?? '1w'));
+    $cadence = outreach_normalize_cadence((string) ($body['cadence'] ?? '3d1w'));
     $sendInitial = !empty($body['sendInitial']);
     $autoFollowUp = array_key_exists('autoFollowUp', $body) ? (bool) $body['autoFollowUp'] : true;
-    $maxFollowUps = max(0, min(5, (int) ($body['maxFollowUps'] ?? 2)));
+    $maxFollowUps = max(0, min(8, (int) ($body['maxFollowUps'] ?? outreach_default_max_followups())));
 
     if ($slug === '' || $businessName === '' || $contactName === '' || $contactEmail === '' || $previewUrl === '') {
         send_error('Missing required fields');
@@ -239,11 +259,11 @@ function route_outreach_schedule(): void
         $initialSentAt = $now->format('Y-m-d H:i:s');
         $status = 'sent';
         if ($autoFollowUp && $maxFollowUps > 0) {
-            $days = outreach_cadence_days($cadence);
+            $days = outreach_days_until_next($cadence, 0);
             $nextFollowUp = $now->modify("+{$days} days")->format('Y-m-d H:i:s');
         }
     } elseif ($autoFollowUp && $maxFollowUps > 0) {
-        $days = outreach_cadence_days($cadence);
+        $days = outreach_days_until_next($cadence, 0);
         $nextFollowUp = $now->modify("+{$days} days")->format('Y-m-d H:i:s');
         $status = 'waiting_followup';
     }
@@ -370,7 +390,8 @@ function outreach_process_due_followups(): array
         $next = null;
         $status = 'followup_sent';
         if ($count < $max) {
-            $days = outreach_cadence_days($cadence);
+            // After FU #1 (count=1) wait 1w; legacy 3d/1w keep constant interval
+            $days = outreach_days_until_next($cadence, $count);
             $next = (new DateTimeImmutable('now'))->modify("+{$days} days")->format('Y-m-d H:i:s');
         } else {
             $status = 'completed';

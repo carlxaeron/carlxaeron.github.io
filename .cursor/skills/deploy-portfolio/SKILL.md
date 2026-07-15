@@ -76,11 +76,21 @@ Adjust tag message and release notes to match the CHANGELOG entry.
 
 ## Step 5 — Firebase functions (conditional)
 
-Run **only** if `functions/index.js`, contact/quotation/assistant logic, email, or CORS origins changed:
+Run **only** if `functions/index.js`, assistant / license / weekly report, or CORS origins changed.
+
+**Gate first:**
+
+```bash
+cd functions && npm test
+```
+
+Then:
 
 ```bash
 cd functions && npm run deploy
 ```
+
+(Contact/quotation live on api.carlmanuel.com — deploy those via hosting-ssh after `php artisan test` / `hosting-php/tests/run-unit.php` as applicable.)
 
 Allowed origins must include:
 

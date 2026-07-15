@@ -6,10 +6,12 @@ Synced to `~/public_html/api-carlxaeron/` while production still runs the custom
 
 1. After you approve a client quotation in Cursor, agent calls `POST /outreachSchedule` with `OUTREACH_SECRET`.
 2. Initial proposal email sends immediately via Private Email.
-3. cPanel/cron runs daily: `scripts/cron-outreach-followups.php` and sends due follow-ups (3d or 1w, max 2).
+3. cPanel/cron runs daily: `scripts/cron-outreach-followups.php` and sends due follow-ups (**3d → 7d → 7d → 7d**, max 4).
 4. Pause: `POST /outreachPause`.
 
 ## Install / refresh on server
+
+**Before upload:** `php api-carlxaeron/hosting-php/tests/run-unit.php` (must exit 0).
 
 Upload `src/outreach.php`, `scripts/cron-outreach-followups.php`, patched `public/index.php` + `src/bootstrap.php`, run SQL or let `outreach_ensure_table()` create `outreach_jobs`.
 

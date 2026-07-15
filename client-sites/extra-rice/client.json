@@ -12,9 +12,9 @@
   "quotation": {
     "packageName": "Starter Business Website",
     "packageScope": "One-page responsive site (products, services, locations, contact), mobile-friendly, Facebook integration",
-    "quotedAmount": "₱15,000",
-    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
-    "timeline": "5–7 business days after content approval",
+    "quotedAmount": "\u20b115,000",
+    "paymentTerms": "50% upfront to begin \u00b7 50% on delivery (not the full amount upfront)",
+    "timeline": "5\u20137 business days after content approval",
     "previewUrl": "https://carlmanuel.com/?preview=extra-rice"
   },
   "outreach": {
@@ -24,13 +24,13 @@
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
     "status": "followup_sent",
-    "cadence": "1w",
+    "cadence": "3d1w",
     "emailFound": true,
     "sentAt": null,
     "nextFollowUpAt": "2026-07-22T01:38:33+00:00",
     "lastFollowUpAt": "2026-07-15T01:38:33+00:00",
     "followUpCount": 1,
-    "notes": "Updated-format follow-up sent 2026-07-15 (payment 50% upfront clarified); auto follow-ups 1w continue (max 2 total, count=1). BCC info@carlmanuel.com."
+    "notes": "Updated-format follow-up sent 2026-07-15 (payment 50% upfront clarified); auto follow-ups 1w continue ( total, count=1). BCC info@carlmanuel.com. Follow-ups: 3d\u21927d\u21927d\u21927d (max 4)."
   },
   "sources": {
     "facebook": "https://www.facebook.com/p/Extra-Rice-8-Trading-OPC-100085354996870/",

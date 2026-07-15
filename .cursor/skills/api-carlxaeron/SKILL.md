@@ -25,10 +25,18 @@ Still on Firebase (skill **firebase-backend**): assistant, license, weeklyVisitR
 | GET | `/analyticsSummary` | Insights panel |
 | POST | `/contact` | Form + SMTP |
 | POST | `/quotation` | Form + SMTP |
-| POST | `/outreachSchedule` | **Secret** — after user yes: send initial + queue auto follow-ups (`autoFollowUp: true`, default cadence `1w`) |
+| POST | `/outreachSchedule` | **Secret** — after user yes: send initial + queue auto follow-ups (`autoFollowUp: true`, cadence `3d1w` = **3d→7d→7d→7d**, `maxFollowUps: 4`) |
 | POST | `/outreachPause` | **Secret** — stop auto follow-ups for a slug |
 
 Live hosting (until full Laravel cutover) uses PHP under `hosting-php/` synced to Stellar. Daily cron: `scripts/cron-outreach-followups.php`. Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).
+
+**Before deploying `hosting-php` outreach changes**, run:
+
+```bash
+php api-carlxaeron/hosting-php/tests/run-unit.php
+```
+
+Must pass (exit 0). See rule **test-before-deploy**.
 
 Response shape (Firebase-compatible):
 
@@ -86,11 +94,17 @@ Details: [`api-carlxaeron/README.md`](../../../api-carlxaeron/README.md).
 ## Tests
 
 ```bash
+# Laravel
 cd api-carlxaeron && php artisan test
+
+# Hosting-php outreach (cadence / max follow-ups) — required before Stellar upload
+php api-carlxaeron/hosting-php/tests/run-unit.php
 ```
 
-Unit: `ApiResponse`, `AnalyticsExclusion`, `PortfolioMailer`.  
+Unit: `ApiResponse`, `AnalyticsExclusion`, `PortfolioMailer`, **`hosting-php/tests/run-unit.php`** (outreach sequence).  
 Feature: full endpoint contracts + exclusion / dedupe / mail.
+
+**Deploy gate:** never upload `hosting-php/src/outreach.php` (or cron scripts) if outreach unit tests fail. Never deploy Laravel without `php artisan test` green.
 
 ## Do not
 
@@ -98,3 +112,4 @@ Feature: full endpoint contracts + exclusion / dedupe / mail.
 - Point apex `carlmanuel.com` nameservers at hosting (GitHub Pages only)
 - Commit `.env` / secrets
 - Deploy `api-carlxaeron-legacy-php/`
+- Change outreach cadence/max without updating and passing `hosting-php/tests/run-unit.php`

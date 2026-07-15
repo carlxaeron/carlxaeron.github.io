@@ -1,6 +1,6 @@
 ---
 name: client-site-netlify
-description: Scaffold, build, and deploy local-business quotation websites under client-sites/ to Netlify, register portfolio preview URLs, draft email/SMS/messenger quotations, ask before initial send (yes = send + auto 1w follow-ups), and share carlmanuel.com/?preview= links. Use when the user asks to create a client website, business landing page, Netlify deploy, quotation demo, sales outreach, send quotation, or follow up with a prospect.
+description: Scaffold, build, and deploy local-business quotation websites under client-sites/ to Netlify, register portfolio preview URLs, draft email/SMS/messenger quotations, ask before initial send (yes = send + auto 3d→7d×3 follow-ups), and share carlmanuel.com/?preview= links. Use when the user asks to create a client website, business landing page, Netlify deploy, quotation demo, sales outreach, send quotation, or follow up with a prospect.
 ---
 
 # Client site + Netlify deploy
@@ -30,7 +30,7 @@ Client site progress:
 - [ ] client.json updated (contact + quotation fields)
 - [ ] Draft outreach written (email, SMS, messenger + 3d/1w follow-ups)
 - [ ] If email found → ASK user before any send (send now vs not yet)
-- [ ] If sent → auto follow-ups on (default 1w); set nextFollowUpAt — no second cadence ask unless user named 3d/1w
+- [ ] If sent → auto follow-ups on (**3d → 7d → 7d → 7d**, max 4); set nextFollowUpAt — do not ask cadence
 - [ ] PREVIEW_SITES entry added
 - [ ] client-sites/README.md catalog updated (table + detail section)
 - [ ] Preview slug tests pass (`previewWhitelist.test.js`)
@@ -245,17 +245,17 @@ Outreach gate:
 - [ ] If NO email → messenger/SMS drafts only; ask user how to reach them
 - [ ] If YES email → fill quotation-email.md + follow-up drafts; set outreach.emailFound=true
 - [ ] STOP and ask user explicitly (do not send yet):
-      "Email found: {email}. Send the quotation now via Private Email? (Auto follow-ups enabled on yes.)"
+      "Email found: {email}. Send the quotation now via Private Email? (Auto follow-ups: 3d → 7d × 3, max 4.)"
 - [ ] Wait for clear approval: send / yes — OR not yet / hold / edit first
-- [ ] On yes → do NOT ask a second cadence question unless user already named one
-- [ ] Default cadence: **1w** (override to 3d only if user said "3 days" / "3d" in the same turn)
+- [ ] On yes → do NOT ask a separate cadence question
+- [ ] Default cadence: **3d1w** — **3d → 7d → 7d → 7d** (max **4** follow-ups)
 - [ ] Immediately POST https://api.carlmanuel.com/outreachSchedule with
-      sendInitial: true, autoFollowUp: true, cadence: "1w"|"3d", maxFollowUps: 2
+      sendInitial: true, autoFollowUp: true, cadence: "3d1w", maxFollowUps: 4
 - [ ] Mirror status into client.json → outreach.*
 ```
 
 **Never** send the **initial** quotation without an explicit yes in the same conversation turn.  
-**Yes to send = auto follow-ups on** — do not wait for a separate follow-up confirmation.
+**Yes to send = auto follow-ups on (3d → 7d → 7d → 7d, max 4)** — do not wait for a separate follow-up confirmation.
 
 ### Hosting send + offline auto follow-ups (Namecheap cron)
 
@@ -285,24 +285,24 @@ curl -sS -X POST 'https://api.carlmanuel.com/outreachSchedule' \
     \"quotedAmount\": \"…\",
     \"paymentTerms\": \"50% upfront to begin · 50% on delivery (not the full amount upfront)\",
     \"timeline\": \"…\",
-    \"cadence\": \"1w\",
+    \"cadence\": \"3d1w\",
     \"sendInitial\": true,
     \"autoFollowUp\": true,
-    \"maxFollowUps\": 2
+    \"maxFollowUps\": 4
   }"
 ```
 
 - `sendInitial: true` → sends the proposal now, then queues follow-ups.
-- Hosting cron auto-sends follow-ups when `next_follow_up_at` is due (asks like / revise / proceed). Max **2** follow-ups unless raised.
+- Hosting cron auto-sends when due: **1st ~3d** (soft), then **up to 3 more at ~7d each** (max **4**). Copy strengthens after the first.
 - Pause anytime: `POST /outreachPause` with `{ secret, slug }` (or slug+contactEmail).
 
-Also update `client.json` → `outreach` (`status=sent`, `cadence`, `sentAt`, `nextFollowUpAt`).
+Also update `client.json` → `outreach` (`status=sent`, `cadence: "3d1w"`, `sentAt`, `nextFollowUpAt`).
 
 ### Follow-ups (automatic on hosting)
 
-1. On **yes send**, auto-enable follow-ups (`autoFollowUp: true`). Default cadence **`1w`** unless the user specified **`3d`** in the approval turn.
+1. On **yes send**, auto-enable follow-ups (`autoFollowUp: true`) with cadence **`3d1w`**, **`maxFollowUps: 4`**.
 2. Cron sends follow-ups **without Cursor** while offline.
-3. Draft files (`quotation-followup-3d.md` / `1w`) remain the human-readable templates; server builds equivalent HTML for SMTP.
+3. Draft files (`quotation-followup-3d.md` / `1w`) remain the human-readable templates; server builds equivalent HTML for SMTP (soft first, stronger later).
 4. To stop: user says pause → `outreachPause`, set `outreach.status=paused`.
 
 ### `client.json` → `outreach` tracking
@@ -311,9 +311,9 @@ Also update `client.json` → `outreach` (`status=sent`, `cadence`, `sentAt`, `n
 |-------|------------------|
 | `status` | `draft` → `ready` → `sent` → `followup_due` → `followup_sent` → `won` / `lost` / `paused` |
 | `emailFound` | `true` when a real prospect email exists |
-| `cadence` | `"3d"` or `"1w"` or `null` |
+| `cadence` | **`"3d1w"`** = 3d → 7d → 7d → 7d · legacy `"3d"` / `"1w"` only if forced |
 | `sentAt` / `nextFollowUpAt` / `lastFollowUpAt` | ISO dates |
-| `followUpCount` | number of follow-ups sent |
+| `followUpCount` | number of follow-ups sent (max 4) |
 | `notes` | short agent/user notes |
 
 **Workflow:**
@@ -384,8 +384,9 @@ curl -sI -H "Sec-Fetch-Dest: iframe" \
 - Demo copy OK; mark fictitious businesses and contacts clearly.
 - Draft email/SMS/messenger + follow-ups for every client site.
 - **Always ask before initial send** when an email is found.
-- **Yes to send** → `outreachSchedule` with `autoFollowUp: true` immediately (default cadence **1w**; **3d** only if named in that approval). Do not ask cadence separately.
+- **Yes to send** → `outreachSchedule` with `autoFollowUp: true` immediately (cadence **`3d1w`**: **3d → 7d → 7d → 7d**, max **4**). Do not ask cadence separately.
 - Hosting **cron auto-sends** follow-ups offline.
+- **Changing outreach PHP:** run `php api-carlxaeron/hosting-php/tests/run-unit.php` (exit 0) **before** any Stellar upload — see rule `test-before-deploy`.
 - Do not add client sites to portfolio Side Projects without user approval.
 
 ## Rule reference

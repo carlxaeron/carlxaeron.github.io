@@ -63,10 +63,25 @@ Outreach / follow-ups:
 - [ ] OUTREACH_SECRET set in hosting .env
 - [ ] crontab: daily scripts/cron-outreach-followups.php
 - [ ] Initial send only via /outreachSchedule after user approval in Cursor
-- [ ] On yes-to-send: always set autoFollowUp true (default cadence 1w)
+- [ ] On yes-to-send: autoFollowUp true, cadence 3d1w, maxFollowUps 4 (3d→7d→7d→7d)
 - [ ] Follow-ups auto-send when due (Private Email SMTP)
 - [ ] Pause via /outreachPause when prospect opts out
 ```
+
+### Deploy gate (required)
+
+Before uploading `hosting-php` / Laravel API files to Stellar:
+
+```bash
+# Outreach / cadence changes
+php api-carlxaeron/hosting-php/tests/run-unit.php
+
+# Laravel app changes
+cd api-carlxaeron && php artisan test
+```
+
+**Do not** `hosting_upload` until the matching tests exit 0.  
+Rule: [`.cursor/rules/test-before-deploy.mdc`](../../rules/test-before-deploy.mdc).
 
 Full details: skill **api-carlxaeron** + **client-site-netlify** Step 5.
 

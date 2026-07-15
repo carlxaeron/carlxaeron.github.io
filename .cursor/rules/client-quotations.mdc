@@ -1,5 +1,5 @@
 ---
-description: Client quotation websites — client-sites/, Netlify, ?preview=, ask-before-send; yes = send + auto 1w follow-ups
+description: Client quotation websites — client-sites/, Netlify, ?preview=, ask-before-send; yes = send + auto 3d→7d×3 (max 4) follow-ups
 globs:
   - client-sites/**
   - src/v3/config/previewWhitelist.js
@@ -31,16 +31,26 @@ Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-net
 
 | Situation | Agent action |
 |-----------|--------------|
-| Email found | Prepare drafts; **ask** send now? (**Yes** → send + auto follow-ups; default `1w`) |
-| User says **send** | `POST https://api.carlmanuel.com/outreachSchedule` (`sendInitial: true`, `autoFollowUp: true`) using `OUTREACH_SECRET` |
+| Email found | Prepare drafts; **ask** send now? (**Yes** → send + auto follow-ups: **3d → 7d → 7d → 7d**, max 4) |
+| User says **send** | `POST https://api.carlmanuel.com/outreachSchedule` (`sendInitial: true`, `autoFollowUp: true`, `cadence: "3d1w"`, `maxFollowUps: 4`) using `OUTREACH_SECRET` |
 | User says **not yet** | Do not call API |
 | Offline follow-ups | **Namecheap cron** sends automatically (no Cursor) |
 | Pause | `POST /outreachPause` + `outreach.status=paused` |
 
 **Never** auto-send the **initial** quotation without a clear yes.  
-**Yes to send = auto follow-ups on** (default `1w`; `3d` only if named in the same approval). No second cadence question.
+**Yes to send = auto follow-ups on** (`3d1w`, max 4). No second cadence question.
 
 Secret: hosting `api-carlxaeron/.env` → `OUTREACH_SECRET` (local copy `api-carlxaeron/.outreach_secret`, gitignored). Code: `api-carlxaeron/hosting-php/`.
+
+### Changing outreach code
+
+If you edit `hosting-php/src/outreach.php` (or cron/migrate scripts), **run unit tests before deploy**:
+
+```bash
+php api-carlxaeron/hosting-php/tests/run-unit.php
+```
+
+Rule: [`.cursor/rules/test-before-deploy.mdc`](test-before-deploy.mdc).
 
 ## Draft files (required)
 
@@ -50,7 +60,7 @@ Secret: hosting `api-carlxaeron/.env` → `OUTREACH_SECRET` (local copy `api-car
 | `quotation-sms.txt` | SMS |
 | `quotation-messenger.txt` | FB Messenger / Viber / Telegram |
 | `quotation-followup-3d.md` | ~3-day check-in |
-| `quotation-followup-1w.md` | ~1-week check-in |
+| `quotation-followup-1w.md` | ~1-week (and later weekly) check-in |
 
 ## Security
 
@@ -60,7 +70,8 @@ Secret: hosting `api-carlxaeron/.env` → `OUTREACH_SECRET` (local copy `api-car
 ## Do not
 
 - Auto-send the **initial** quotation without a clear yes
-- Ask a second cadence question after the user already said yes to send (default to `1w` + `autoFollowUp: true`)
+- Ask a second cadence question after the user already said yes to send (default `3d1w` + `autoFollowUp: true` + `maxFollowUps: 4`)
 - Commit `OUTREACH_SECRET` / `.outreach_secret` / `.env`
 - Skip `autoFollowUp` when scheduling after a yes-to-send
+- Deploy outreach.php without passing `hosting-php/tests/run-unit.php`
 - Commit Netlify tokens / bypass embed-only guards

@@ -28,7 +28,7 @@ Instructions for AI agents working in this repository.
 | [.cursor/skills/firebase-backend/SKILL.md](.cursor/skills/firebase-backend/SKILL.md) | Remaining Firebase: assistant, weekly report, license |
 | [.cursor/skills/namecheap-browser/SKILL.md](.cursor/skills/namecheap-browser/SKILL.md) | Namecheap DNS via browser (when API access unavailable) |
 | [.cursor/skills/onlinejobs-apify/SKILL.md](.cursor/skills/onlinejobs-apify/SKILL.md) | OnlineJobs.ph search, apply, CV, dashboard |
-| [.cursor/skills/client-site-netlify/SKILL.md](.cursor/skills/client-site-netlify/SKILL.md) | Client sites, Netlify, `?preview=`, ask-before-send quotations + 3d/1w follow-ups |
+| [.cursor/skills/client-site-netlify/SKILL.md](.cursor/skills/client-site-netlify/SKILL.md) | Client sites, Netlify, `?preview=`, ask-before-send quotations + 3d→7d×3 follow-ups (max 4) |
 
 ## Rules (auto-attached by glob)
 
@@ -40,6 +40,7 @@ Instructions for AI agents working in this repository.
 | `v3-copy.mdc` | Marketing copy tone |
 | `v3-deploy.mdc` | Build, GitHub Pages, releases |
 | `api-carlxaeron.mdc` | `api-carlxaeron/`, `src/mapping.js` — Laravel API contracts |
+| `test-before-deploy.mdc` | **Must pass unit/feature tests before deploying hosting-php / Laravel / Firebase** |
 | `v3-firebase-backend.mdc` | Remaining `functions/` (assistant / weekly report) |
 | `onlinejobs-workflow.mdc` | OJP MCP, job-applications |
 | `client-quotations.mdc` | `client-sites/`, Netlify previews |
@@ -60,9 +61,10 @@ Instructions for AI agents working in this repository.
 ### Contact / quote / visits API
 - Frontend: `Contact.js`, `Quote.js`, analytics → `src/mapping.js` → `https://api.carlmanuel.com`
 - Backend: Laravel [`api-carlxaeron/`](api-carlxaeron/) (skill **api-carlxaeron**)
+- **Before deploy:** `cd api-carlxaeron && php artisan test` (and `php api-carlxaeron/hosting-php/tests/run-unit.php` if outreach changed)
 - Deploy: hosting-ssh to Stellar; `composer install --no-dev` + `php artisan migrate --force` + `config:cache`
 - SMTP / MySQL: `api-carlxaeron/.env` (never commit)
-- Still Firebase: assistant, license, weeklyVisitReport only
+- Still Firebase: assistant, license, weeklyVisitReport only — **`cd functions && npm test` before `npm run deploy`**
 
 ### Release portfolio
 1. `CI=true npm test` + `CI=true npm run build`

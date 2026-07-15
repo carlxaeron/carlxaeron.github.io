@@ -1,0 +1,59 @@
+---
+description: Hard gate — run unit/feature tests before deploying hosting-php outreach, api-carlxaeron, or Firebase functions
+globs:
+  - api-carlxaeron/hosting-php/**
+  - api-carlxaeron/app/**
+  - api-carlxaeron/routes/**
+  - functions/**
+alwaysApply: false
+---
+
+# Test before deploy (API / outreach / functions)
+
+**Never upload or deploy backend changes until the matching tests pass locally.**
+
+## Hosting outreach (`api-carlxaeron/hosting-php/`)
+
+Any edit to `src/outreach.php`, mail helpers, cron scripts, or cadence/max-follow-up logic:
+
+```bash
+php api-carlxaeron/hosting-php/tests/run-unit.php
+```
+
+Must exit **0**. Only then `hosting_upload` / sync to Stellar.
+
+Sequence under test: **3d → 7d → 7d → 7d**, max **4** follow-ups (`cadence: 3d1w`).
+
+## Laravel API (`api-carlxaeron/`)
+
+```bash
+cd api-carlxaeron && php artisan test
+```
+
+Required before deploying Laravel app files to `public_html/api-carlxaeron/`.
+
+## Firebase Cloud Functions (`functions/`)
+
+```bash
+cd functions && npm test
+```
+
+If no test script exists yet, run at least a syntax/load check (`node -c` / require smoke) and say so — then add tests when touching non-trivial logic. Prefer `npm test` once defined.
+
+Required before `firebase deploy --only functions` / `npm run deploy`.
+
+## Agent checklist
+
+```
+Backend deploy gate:
+- [ ] Identify which surface changed (hosting-php / Laravel / functions)
+- [ ] Run the matching unit/feature tests — all green
+- [ ] Only then deploy (hosting-ssh upload or Firebase)
+- [ ] Smoke: curl https://api.carlmanuel.com/health (API) or functions smoke the agent already uses
+```
+
+## Do not
+
+- Deploy broken cadence/maxFollowUps changes without updating `tests/run-unit.php` expectations
+- Skip outreach unit tests “just for a small fix” on `outreach.php`
+- Ship hosting cron script changes without re-running unit tests

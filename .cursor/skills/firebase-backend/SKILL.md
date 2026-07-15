@@ -37,11 +37,20 @@ Forms SMTP: skill **api-carlxaeron** (`MAIL_*` / legacy `SMTP_*` on hosting `.en
 
 ## Deploy functions
 
+**Gate — run tests first (must pass):**
+
+```bash
+cd functions && npm test
+```
+
+Then:
+
 ```bash
 cd functions && npm run deploy
 ```
 
-Only required when changing Firebase-hosted endpoints (assistant / weekly report).
+Only required when changing Firebase-hosted endpoints (assistant / weekly report / license).  
+Rule: [`.cursor/rules/test-before-deploy.mdc`](../../rules/test-before-deploy.mdc).
 
 ## SMTP / email troubleshooting
 

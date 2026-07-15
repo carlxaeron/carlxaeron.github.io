@@ -30,9 +30,19 @@ Skill: [`.cursor/skills/firebase-backend/SKILL.md`](../skills/firebase-backend/S
 
 ## Deploy (Firebase only)
 
+**Gate — tests first:**
+
+```bash
+cd functions && npm test
+```
+
+Must pass before:
+
 ```bash
 cd functions && npm run deploy
 ```
+
+See [`.cursor/rules/test-before-deploy.mdc`](test-before-deploy.mdc).
 
 ## Email
 
@@ -48,3 +58,4 @@ Must include: `carlmanuel.com`, `www.carlmanuel.com`, `carlxaeron.github.io`, `l
 - Commit `functions/.env` or app passwords
 - Assume new form traffic writes to Firestore (historical data only)
 - Redeploy legacy `contact` / `quotation` Cloud Functions as the portfolio source of truth
+- Deploy functions without `npm test` passing

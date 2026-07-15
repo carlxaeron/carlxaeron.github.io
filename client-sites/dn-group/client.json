@@ -12,9 +12,9 @@
   "quotation": {
     "packageName": "Business Website Redesign (landing sample)",
     "packageScope": "Elevated one-page redesign (product mosaic, about since 1983, projects, FAQ, contact), mobile-first, industrial brand system",
-    "quotedAmount": "₱18,000",
-    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
-    "timeline": "7–10 business days after content approval",
+    "quotedAmount": "\u20b118,000",
+    "paymentTerms": "50% upfront to begin \u00b7 50% on delivery (not the full amount upfront)",
+    "timeline": "7\u201310 business days after content approval",
     "previewUrl": "https://carlmanuel.com/?preview=dn-group"
   },
   "outreach": {
@@ -24,21 +24,25 @@
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
     "status": "sent",
-    "cadence": "1w",
+    "cadence": "3d1w",
     "emailFound": true,
     "sentAt": "2026-07-15T02:35:35+00:00",
-    "nextFollowUpAt": "2026-07-22T02:35:35+00:00",
+    "nextFollowUpAt": "2026-07-18T02:35:35+00:00",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "Initial quotation sent 2026-07-15 via outreachSchedule to dncreativegroup@gmail.com; auto follow-ups 1w enabled (max 2). BCC info@carlmanuel.com."
+    "notes": "Initial quotation sent 2026-07-15 via outreachSchedule to dncreativegroup@gmail.com; auto follow-ups 1w enabled (). BCC info@carlmanuel.com. Follow-ups: 3d\u21927d\u21927d\u21927d (max 4)."
   },
   "sources": {
     "facebook": "https://www.facebook.com/dngroup.ph/",
     "website": "https://www.dngroup.com.ph/",
     "address": "1388 Quezon Avenue, DN Corporate Center, Brgy. South Triangle, Quezon City",
-    "phones": ["0998 846 2400", "0977 846 2400", "283678335"],
+    "phones": [
+      "0998 846 2400",
+      "0977 846 2400",
+      "283678335"
+    ],
     "followers": "~5.5K",
     "tagline": "Trusted partner of architects, engineers, and contractors in the building industry",
-    "notes": "Est. 1983 (DN Steel). Affiliates: DN Steel, Architecks, IMAC, Ultra, DYD, SOP. Full WP site live — elevated redesign sample. Assets from dngroup.com.ph."
+    "notes": "Est. 1983 (DN Steel). Affiliates: DN Steel, Architecks, IMAC, Ultra, DYD, SOP. Full WP site live \u2014 elevated redesign sample. Assets from dngroup.com.ph."
   }
 }

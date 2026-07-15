@@ -1,6 +1,6 @@
 # Email quotation — Alibaton Construction Inc.
 
-**Status:** Draft — **ask before sending**  
+**Status:** Sent 2026-07-15 — auto follow-ups 1w  
 **To:** info@alibaton.com.ph  
 **Subject:** Website rebuild sample for Alibaton Construction — preview on carlmanuel.com
 
