@@ -23,14 +23,14 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "draft",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "3d1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-15T03:08:54+00:00",
+    "nextFollowUpAt": "2026-07-18T03:08:54+00:00",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "FB vanity URL facebook.com/ltfrbphilippines resolves to Fastpoint PH (Fastpoint Enterprises Incorporated), not LTFRB agency."
+    "notes": "Initial quotation sent 2026-07-15 via outreachSchedule to biodriver@gmail.com; auto follow-ups 3d→7d×3 (max 4). BCC info@carlmanuel.com. FB vanity ltfrbphilippines = Fastpoint PH."
   },
   "sources": {
     "facebook": "https://www.facebook.com/ltfrbphilippines/",

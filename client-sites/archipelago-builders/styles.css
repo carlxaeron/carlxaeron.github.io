@@ -1,0 +1,98 @@
+/* Archipelago Builders — AAA contractor rebuild */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  [data-hero-animate],
+  [data-hero-bg] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-three-canvas {
+    display: none;
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-header] {
+  transition: box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
+
+[data-header].is-scrolled {
+  background-color: rgba(12, 26, 46, 0.96);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.hero-bg {
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.hero-bg--abc {
+  background-image:
+    linear-gradient(115deg, rgba(12, 26, 46, 0.92) 0%, rgba(12, 26, 46, 0.72) 48%, rgba(12, 26, 46, 0.5) 100%),
+    url("assets/hero-bg.jpg");
+}
+
+.hero-three-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.32;
+  mix-blend-mode: screen;
+}
+
+[data-hero] > .relative {
+  z-index: 2;
+}
+
+.service-card__shade {
+  background: linear-gradient(180deg, rgba(12, 26, 46, 0.2) 0%, rgba(12, 26, 46, 0.9) 100%);
+}
+
+.filter-active {
+  background: #0c1a2e;
+  color: #fff;
+  font-weight: 700;
+}
+
+.filter-inactive {
+  font-weight: 500;
+  color: #0c1a2e;
+}
+
+.contact-bg {
+  background-image:
+    linear-gradient(180deg, rgba(12, 26, 46, 0.88), rgba(12, 26, 46, 0.96)),
+    url("assets/about.jpg");
+  background-size: cover;
+  background-position: center;
+}

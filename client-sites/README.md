@@ -33,6 +33,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [DN Group of Companies](#dn-group-of-companies) | `dn-group` | Building materials / roofing / metal systems | [Preview](https://carlmanuel.com/?preview=dn-group) | 2026-07-15 |
 | [Alibaton Construction Inc.](#alibaton-construction-inc) | `alibaton-construction` | Tower crane rental / sales / service | [Preview](https://carlmanuel.com/?preview=alibaton-construction) | 2026-07-15 |
 | [Fastpoint PH](#fastpoint-ph) | `fastpoint-ph` | Fleet supply / commercial tires | [Preview](https://carlmanuel.com/?preview=fastpoint-ph) | 2026-07-15 |
+| [Archipelago Builders Corporation](#archipelago-builders-corporation) | `archipelago-builders` | General building contractor (AAA) | [Preview](https://carlmanuel.com/?preview=archipelago-builders) | 2026-07-15 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -365,6 +366,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Source** | [Facebook](https://www.facebook.com/ltfrbphilippines/) — vanity URL says LTFRB but page is **Fastpoint PH** (Fastpoint Enterprises Incorporated) |
 | **Assets** | Joyall tire container hero, EcoVadis badge; Motion + Three.js particles hero |
 | **Package** | Business Website Redesign (landing) · **₱18,000** · 7–10 days · 50% upfront |
+| **Outreach** | Email found — **ask before send** · `quotation-email.md` |
+
+---
+
+### Archipelago Builders Corporation
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/archipelago-builders/` |
+| **Netlify site** | `archipelago-builders` |
+| **Preview host** | `archipelago-builders.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=archipelago-builders |
+| **Contact** | abcorpinfo@archipelagobuilders.com |
+| **Address** | Archipelago Building, 29 North Avenue, Brgy. Pag-asa, Quezon City |
+| **Category** | Category AAA general building contractor · Est. 1965 · ~2.6K FB followers |
+| **Source** | [Facebook](https://www.facebook.com/p/Archipelago-Builders-Corporation-100086010290289/) · [archipelagobuilderscorporation.com](http://www.archipelagobuilderscorporation.com/) (unreachable at build; Wayback assets) |
+| **Assets** | Logo, intro/about/portfolio from Wayback + FB affiliates strip; Motion + Three.js blueprint hero |
+| **Package** | Business Website Rebuild (landing) · **₱18,000** · 7–10 days · 50% upfront |
 | **Outreach** | Email found — **ask before send** · `quotation-email.md` |
 
 ---

@@ -1,6 +1,6 @@
 # Email quotation — Fastpoint PH
 
-**Status:** Draft — **ask before sending**  
+**Status:** Sent 2026-07-15 — auto follow-ups 3d→7d×3 (max 4)  
 **To:** biodriver@gmail.com  
 **Subject:** Website redesign sample for Fastpoint PH — preview on carlmanuel.com
 

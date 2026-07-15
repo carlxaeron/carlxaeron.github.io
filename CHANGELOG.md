@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.43] — 2026-07-15
+
+### Added
+- **Archipelago Builders Corporation** client site (`archipelago-builders`) — Category AAA contractor rebuild sample (since 1965, H+V services, Motion + Three.js blueprint hero); pitch for unreachable corporate site
+- Portfolio preview: `?preview=archipelago-builders` → `archipelago-builders.netlify.app`
+
 ## [3.0.42] — 2026-07-15
 
 ### Added

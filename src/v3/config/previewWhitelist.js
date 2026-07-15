@@ -119,6 +119,12 @@ export const PREVIEW_SITES = [
     label: "Fastpoint PH",
     netlifySite: "fastpoint-ph",
   },
+  {
+    id: "archipelago-builders",
+    host: "archipelago-builders.netlify.app",
+    label: "Archipelago Builders Corporation",
+    netlifySite: "archipelago-builders",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

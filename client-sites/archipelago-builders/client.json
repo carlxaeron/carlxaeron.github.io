@@ -1,0 +1,44 @@
+{
+  "businessName": "Archipelago Builders Corporation",
+  "slug": "archipelago-builders",
+  "previewHost": "archipelago-builders.netlify.app",
+  "industry": "General building contractor (Category AAA)",
+  "deployedAt": "2026-07-15",
+  "contact": {
+    "name": "Archipelago Builders Corporation",
+    "email": "abcorpinfo@archipelagobuilders.com",
+    "phone": null
+  },
+  "quotation": {
+    "packageName": "Business Website Rebuild (landing)",
+    "packageScope": "Elevated one-page rebuild (services, about since 1965, projects, affiliates, FAQ, contact), mobile-first, navy AAA brand — replacement for unreachable archipelagobuilderscorporation.com",
+    "quotedAmount": "₱18,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "7–10 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=archipelago-builders"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "draft",
+    "cadence": null,
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "Live site ERR_ADDRESS_UNREACHABLE at scrape; Wayback has Dec 2025 snapshot of aging Bootstrap site. Strong rebuild pitch."
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/p/Archipelago-Builders-Corporation-100086010290289/",
+    "website": "http://www.archipelagobuilderscorporation.com/",
+    "address": "Archipelago Building, 29 North Avenue, Brgy. Pag-asa, Quezon City",
+    "phones": [],
+    "followers": "~2.6K",
+    "tagline": "General Building Contractor - Category AAA engaged in both horizontal and vertical constructions",
+    "notes": "Est. 1965. Affiliates: Archiwall, Archi Cast, Resilient Services, White Equipment. Assets from FB + Wayback (about/intro/portfolio/logo)."
+  }
+}
