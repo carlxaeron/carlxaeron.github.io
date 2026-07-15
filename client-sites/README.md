@@ -34,6 +34,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Alibaton Construction Inc.](#alibaton-construction-inc) | `alibaton-construction` | Tower crane rental / sales / service | [Preview](https://carlmanuel.com/?preview=alibaton-construction) | 2026-07-15 |
 | [Fastpoint PH](#fastpoint-ph) | `fastpoint-ph` | Fleet supply / commercial tires | [Preview](https://carlmanuel.com/?preview=fastpoint-ph) | 2026-07-15 |
 | [Archipelago Builders Corporation](#archipelago-builders-corporation) | `archipelago-builders` | General building contractor (AAA) | [Preview](https://carlmanuel.com/?preview=archipelago-builders) | 2026-07-15 |
+| [H Vill Hospital](#h-vill-hospital) | `hvill-hospital` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=hvill-hospital) | 2026-07-15 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -384,6 +385,23 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Source** | [Facebook](https://www.facebook.com/p/Archipelago-Builders-Corporation-100086010290289/) · [archipelagobuilderscorporation.com](http://www.archipelagobuilderscorporation.com/) (unreachable at build; Wayback assets) |
 | **Assets** | Logo, intro/about/portfolio from Wayback + FB affiliates strip; Motion + Three.js blueprint hero |
 | **Package** | Business Website Rebuild (landing) · **₱18,000** · 7–10 days · 50% upfront |
+| **Outreach** | Email found — **ask before send** · `quotation-email.md` |
+
+---
+
+### H Vill Hospital
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/hvill-hospital/` |
+| **Netlify site** | `hvill-hospital` |
+| **Preview host** | `hvill-hospital.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=hvill-hospital |
+| **Contact** | hvill.hospital@yahoo.com · (02) 8997 8949 / (02) 8997 9627 |
+| **Address** | 82 J.P. Rizal St., Manggahan, Rodriguez (Montalban), Rizal 1860 |
+| **Source** | [Facebook](https://www.facebook.com/hvill.hospital.9/) · public listings (ClinicFinderPH / OneCebu) |
+| **Assets** | FB cover + logo + 3 gallery photos; Motion + Three.js particles hero |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
 | **Outreach** | Email found — **ask before send** · `quotation-email.md` |
 
 ---

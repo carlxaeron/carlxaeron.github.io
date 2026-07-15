@@ -1,0 +1,41 @@
+{
+  "businessName": "H Vill Hospital",
+  "slug": "hvill-hospital",
+  "previewHost": "hvill-hospital.netlify.app",
+  "industry": "Hospital / healthcare",
+  "deployedAt": "2026-07-15",
+  "sources": {
+    "facebook": "https://www.facebook.com/hvill.hospital.9/",
+    "notes": "Logged-out FB About sparse; address/phone/email from public directories (ClinicFinderPH, OneCebu, Mapcarta). Gallery from Facebook Photos."
+  },
+  "contact": {
+    "name": "H Vill Hospital",
+    "email": "hvill.hospital@yahoo.com",
+    "phone": "+63 2 8997 8949",
+    "phoneAlt": "+63 2 8997 9627",
+    "address": "82 J.P. Rizal St., Manggahan, Rodriguez (Montalban), Rizal 1860"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive hospital site, services & contact, basic SEO, Netlify hosting setup",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=hvill-hospital"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "ready",
+    "cadence": null,
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "Email from public directory listing (yahoo.com)."
+  }
+}

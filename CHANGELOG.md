@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.46] — 2026-07-15
+
+### Added
+- **H Vill Hospital** client site (`hvill-hospital`) — Rodriguez/Montalban hospital sample (services, FB gallery, Motion + Three.js particles hero); PhilHealth-accredited positioning
+- Portfolio preview: `?preview=hvill-hospital` → `hvill-hospital.netlify.app`
+
 ## [3.0.45] — 2026-07-15
 
 ### Changed

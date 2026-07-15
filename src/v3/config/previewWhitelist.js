@@ -125,6 +125,12 @@ export const PREVIEW_SITES = [
     label: "Archipelago Builders Corporation",
     netlifySite: "archipelago-builders",
   },
+  {
+    id: "hvill-hospital",
+    host: "hvill-hospital.netlify.app",
+    label: "H Vill Hospital",
+    netlifySite: "hvill-hospital",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
