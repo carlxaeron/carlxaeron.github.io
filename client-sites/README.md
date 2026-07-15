@@ -32,6 +32,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Trumed Pharmaceuticals](#trumed-pharmaceuticals) | `trumed-pharma` | Pharmaceutical marketing / distribution | [Preview](https://carlmanuel.com/?preview=trumed-pharma) | 2026-07-15 |
 | [DN Group of Companies](#dn-group-of-companies) | `dn-group` | Building materials / roofing / metal systems | [Preview](https://carlmanuel.com/?preview=dn-group) | 2026-07-15 |
 | [Alibaton Construction Inc.](#alibaton-construction-inc) | `alibaton-construction` | Tower crane rental / sales / service | [Preview](https://carlmanuel.com/?preview=alibaton-construction) | 2026-07-15 |
+| [Fastpoint PH](#fastpoint-ph) | `fastpoint-ph` | Fleet supply / commercial tires | [Preview](https://carlmanuel.com/?preview=fastpoint-ph) | 2026-07-15 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -347,6 +348,23 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Source** | [Facebook](https://www.facebook.com/alibatoncons/) · [alibaton.com.ph](https://alibaton.com.ph/) (suspended at build time) |
 | **Assets** | Logo, cover hero, team & gallery from Facebook; industrial Motion + Three.js blueprint hero |
 | **Package** | Business Website Rebuild (landing) · **₱18,000** · 7–10 days · 50% upfront |
+| **Outreach** | Email found — **ask before send** · `quotation-email.md` |
+
+---
+
+### Fastpoint PH
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/fastpoint-ph/` |
+| **Netlify site** | `fastpoint-ph` |
+| **Preview host** | `fastpoint-ph.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=fastpoint-ph |
+| **Contact** | biodriver@gmail.com · 0917 821 2009 |
+| **Category** | Fleet supply / commercial tires (Joyall) · EcoVadis Committed · ~500 FB followers |
+| **Source** | [Facebook](https://www.facebook.com/ltfrbphilippines/) — vanity URL says LTFRB but page is **Fastpoint PH** (Fastpoint Enterprises Incorporated) |
+| **Assets** | Joyall tire container hero, EcoVadis badge; Motion + Three.js particles hero |
+| **Package** | Business Website Redesign (landing) · **₱18,000** · 7–10 days · 50% upfront |
 | **Outreach** | Email found — **ask before send** · `quotation-email.md` |
 
 ---

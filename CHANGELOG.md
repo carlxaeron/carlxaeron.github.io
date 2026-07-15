@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.42] — 2026-07-15
+
+### Added
+- **Fastpoint PH** client site (`fastpoint-ph`) — fleet/tire supply redesign sample (Joyall, EcoVadis, Motion + Three.js particles hero); FB vanity `ltfrbphilippines` resolves to Fastpoint
+- Portfolio preview: `?preview=fastpoint-ph` → `fastpoint-ph.netlify.app`
+
 ## [3.0.41] — 2026-07-15
 
 ### Added

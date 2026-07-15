@@ -113,6 +113,12 @@ export const PREVIEW_SITES = [
     label: "Alibaton Construction Inc.",
     netlifySite: "alibaton-construction",
   },
+  {
+    id: "fastpoint-ph",
+    host: "fastpoint-ph.netlify.app",
+    label: "Fastpoint PH",
+    netlifySite: "fastpoint-ph",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

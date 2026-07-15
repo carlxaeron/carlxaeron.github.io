@@ -1,0 +1,44 @@
+{
+  "businessName": "Fastpoint PH",
+  "slug": "fastpoint-ph",
+  "previewHost": "fastpoint-ph.netlify.app",
+  "industry": "Fleet supply / commercial tires",
+  "deployedAt": "2026-07-15",
+  "contact": {
+    "name": "Fastpoint Enterprises Incorporated",
+    "email": "biodriver@gmail.com",
+    "phone": "+63 917 821 2009"
+  },
+  "quotation": {
+    "packageName": "Business Website Redesign (landing sample)",
+    "packageScope": "Elevated one-page redesign (services, about, supply gallery, FAQ, contact), mobile-first, fleet/navy brand — Joyall tires + EcoVadis highlight",
+    "quotedAmount": "₱18,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "7–10 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=fastpoint-ph"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "draft",
+    "cadence": null,
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "FB vanity URL facebook.com/ltfrbphilippines resolves to Fastpoint PH (Fastpoint Enterprises Incorporated), not LTFRB agency."
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/ltfrbphilippines/",
+    "website": null,
+    "address": "Service areas: Bicol, Metro Manila, Tuguegarao, Batangas, Cebu, Davao, Bacolod, Central Luzon, Lucena, Cabuyao",
+    "phones": ["0917 821 2009"],
+    "followers": "~504",
+    "tagline": "Preferred supplier of the Philippines' biggest fleets to make them more transparent and understandable",
+    "notes": "Category Product/service. Joyall commercial tires. EcoVadis Committed Sep 2025. Email biodriver@gmail.com. Play Store link on page returned 404 at scrape time."
+  }
+}
