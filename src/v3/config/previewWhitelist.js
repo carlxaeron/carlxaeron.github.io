@@ -107,6 +107,12 @@ export const PREVIEW_SITES = [
     label: "DN Group of Companies",
     netlifySite: "dn-group",
   },
+  {
+    id: "alibaton-construction",
+    host: "alibaton-construction.netlify.app",
+    label: "Alibaton Construction Inc.",
+    netlifySite: "alibaton-construction",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

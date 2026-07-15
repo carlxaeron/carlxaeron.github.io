@@ -23,14 +23,14 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "draft",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-15T02:35:35+00:00",
+    "nextFollowUpAt": "2026-07-22T02:35:35+00:00",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": ""
+    "notes": "Initial quotation sent 2026-07-15 via outreachSchedule to dncreativegroup@gmail.com; auto follow-ups 1w enabled (max 2). BCC info@carlmanuel.com."
   },
   "sources": {
     "facebook": "https://www.facebook.com/dngroup.ph/",

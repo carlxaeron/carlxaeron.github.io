@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.41] — 2026-07-15
+
+### Added
+- **Alibaton Construction Inc.** client site (`alibaton-construction`) — tower crane rebuild sample (services, gallery, Motion + Three.js blueprint hero); pitch for suspended alibaton.com.ph
+- Portfolio preview: `?preview=alibaton-construction` → `alibaton-construction.netlify.app`
+
 ## [3.0.40] — 2026-07-15
 
 ### Added

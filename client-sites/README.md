@@ -31,6 +31,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [SV More Group of Companies](#sv-more-group-of-companies) | `sv-more-group` | Pharmaceuticals / health products | [Preview](https://carlmanuel.com/?preview=sv-more-group) | 2026-07-15 |
 | [Trumed Pharmaceuticals](#trumed-pharmaceuticals) | `trumed-pharma` | Pharmaceutical marketing / distribution | [Preview](https://carlmanuel.com/?preview=trumed-pharma) | 2026-07-15 |
 | [DN Group of Companies](#dn-group-of-companies) | `dn-group` | Building materials / roofing / metal systems | [Preview](https://carlmanuel.com/?preview=dn-group) | 2026-07-15 |
+| [Alibaton Construction Inc.](#alibaton-construction-inc) | `alibaton-construction` | Tower crane rental / sales / service | [Preview](https://carlmanuel.com/?preview=alibaton-construction) | 2026-07-15 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -328,6 +329,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Source** | [Facebook](https://www.facebook.com/dngroup.ph/) · [dngroup.com.ph](https://www.dngroup.com.ph/) |
 | **Assets** | Logo, hero, product & project gallery from live site; industrial Motion + Three.js blueprint hero |
 | **Package** | Business Website Redesign (elevated landing) · **₱18,000** · 7–10 days · 50% upfront |
+| **Outreach** | Email found — **ask before send** · `quotation-email.md` |
+
+---
+
+### Alibaton Construction Inc.
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/alibaton-construction/` |
+| **Netlify site** | `alibaton-construction` |
+| **Preview host** | `alibaton-construction.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=alibaton-construction |
+| **Contact** | info@alibaton.com.ph · 0917 542 0415 · (02) 8253 6817 |
+| **Address** | Unit 3-J, Edificio Enriqueta Bldg, 422 N.S. Amoranto St. cor D. Tuazon Ave, Quezon City |
+| **Category** | Tower crane rental / sales / service · ISO 9001:2015 · ~7.2K FB followers |
+| **Source** | [Facebook](https://www.facebook.com/alibatoncons/) · [alibaton.com.ph](https://alibaton.com.ph/) (suspended at build time) |
+| **Assets** | Logo, cover hero, team & gallery from Facebook; industrial Motion + Three.js blueprint hero |
+| **Package** | Business Website Rebuild (landing) · **₱18,000** · 7–10 days · 50% upfront |
 | **Outreach** | Email found — **ask before send** · `quotation-email.md` |
 
 ---
