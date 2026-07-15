@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Trumed Pharmaceuticals — fulfilling better healthcare. Pharmaceutical marketing and distribution in the Philippines. Cardiovascular, anti-infectives, and nutritionals." />
+  <title>Trumed Pharmaceuticals — Fulfilling Better Healthcare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: "#0b2545",
+              mid: "#13315c",
+              accent: "#1d6fb8",
+              soft: "#e8f1f8",
+            },
+          },
+          fontFamily: {
+            display: ["Libre Baskerville", "Georgia", "serif"],
+            sans: ["Nunito Sans", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="embed-guard.js"></script>
+</head>
+<body class="font-sans text-gray-900 antialiased">
+  <div class="trust-strip py-2 text-center text-xs font-semibold tracking-wide text-white sm:text-sm">
+    Quezon City · Pharmaceutical marketing · Cardiovascular · Anti-infectives · Nutritionals
+  </div>
+
+  <header data-header class="sticky top-0 z-50 border-b border-brand-dark/10 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#" class="flex min-w-0 items-center">
+        <img src="assets/logo.png" alt="Trumed Pharmaceuticals" width="160" height="85" class="h-10 w-auto max-w-[160px] object-contain" />
+      </a>
+      <nav class="hidden items-center gap-5 text-sm font-medium text-brand-dark/80 md:flex" aria-label="Main">
+        <a href="#products" class="hover:text-brand-accent transition-colors">Products</a>
+        <a href="#about" class="hover:text-brand-accent transition-colors">About</a>
+        <a href="#responsibility" class="hover:text-brand-accent transition-colors">Responsibility</a>
+        <a href="#faq" class="hover:text-brand-accent transition-colors">FAQ</a>
+        <a href="#contact" class="rounded-full bg-brand-accent px-4 py-2 font-semibold text-white hover:brightness-110 transition">Contact</a>
+      </nav>
+      <button type="button" data-nav-toggle class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-dark/15 text-brand-dark md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="hidden flex-col border-t border-brand-dark/10 bg-white px-4 py-4 md:hidden">
+      <a href="#products" class="rounded-lg px-3 py-3 hover:bg-brand-soft">Products</a>
+      <a href="#about" class="rounded-lg px-3 py-3 hover:bg-brand-soft">About</a>
+      <a href="#responsibility" class="rounded-lg px-3 py-3 hover:bg-brand-soft">Responsibility</a>
+      <a href="#faq" class="rounded-lg px-3 py-3 hover:bg-brand-soft">FAQ</a>
+      <a href="#contact" class="mt-2 rounded-full bg-brand-accent px-4 py-3 text-center font-semibold text-white">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <section data-hero data-hero-three="particles" class="relative overflow-hidden bg-brand-dark text-white">
+      <div data-hero-bg class="hero-bg hero-bg--trumed absolute inset-0 origin-center will-change-transform"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
+      <div class="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+        <p data-hero-animate class="opacity-0 mb-3 text-xs font-semibold uppercase tracking-widest text-sky-200">Fulfilling better healthcare</p>
+        <h1 data-hero-animate class="opacity-0 font-display max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-[3.1rem]">Trumed Pharmaceuticals</h1>
+        <p data-hero-animate class="opacity-0 mt-5 max-w-2xl text-lg text-white/85">A healthcare marketing company connecting quality pharmaceutical solutions with the people who need them — through partnerships, distribution, and excellence across the Philippines.</p>
+        <div data-hero-animate class="opacity-0 mt-8 flex flex-wrap gap-3">
+          <a data-hero-cta href="#contact" class="rounded-full bg-brand-accent px-6 py-3 font-semibold text-white hover:brightness-110 transition">Contact us</a>
+          <a data-hero-cta href="tel:+63286971754" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Call +63 (2) 8697-1754</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Our products</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal">Therapeutic focus areas for heart health, infections, and everyday nutrition — marketed and distributed nationwide.</p>
+        <div data-filter class="mt-8">
+          <div class="flex flex-wrap gap-2">
+            <button type="button" data-filter-btn="all" class="filter-active rounded-full bg-brand-accent px-4 py-2 text-sm text-white" aria-pressed="true">All</button>
+            <button type="button" data-filter-btn="cardio" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Cardiovascular</button>
+            <button type="button" data-filter-btn="infect" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Anti-infectives</button>
+            <button type="button" data-filter-btn="nutri" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Nutritionals</button>
+          </div>
+          <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <article data-filter-item data-categories="cardio,all" data-reveal class="overflow-hidden rounded-2xl border border-brand-dark/10 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <img src="assets/project-01.jpg" alt="Cardiovascular product line" width="1022" height="685" loading="lazy" class="gallery-card__img w-full" />
+              <div class="p-5">
+                <h3 class="font-semibold text-brand-dark">Cardiovascular</h3>
+                <p class="mt-2 text-sm text-gray-600">Medications supporting heart health and metabolic care management.</p>
+              </div>
+            </article>
+            <article data-filter-item data-categories="infect,all" data-reveal class="overflow-hidden rounded-2xl border border-brand-dark/10 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <img src="assets/project-02.jpg" alt="Anti-infectives product line" width="1092" height="830" loading="lazy" class="gallery-card__img w-full" />
+              <div class="p-5">
+                <h3 class="font-semibold text-brand-dark">Anti-infectives</h3>
+                <p class="mt-2 text-sm text-gray-600">Solutions for treating infections and supporting recovery.</p>
+              </div>
+            </article>
+            <article data-filter-item data-categories="nutri,all" data-reveal class="overflow-hidden rounded-2xl border border-brand-dark/10 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <img src="assets/project-03.jpg" alt="Nutritionals and food supplements" width="1274" height="1018" loading="lazy" class="gallery-card__img w-full" />
+              <div class="p-5">
+                <h3 class="font-semibold text-brand-dark">Nutritionals</h3>
+                <p class="mt-2 text-sm text-gray-600">Essential supplements and OTC nutrition for everyday wellness.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <p class="mt-8 text-center text-sm text-gray-600" data-reveal>
+          Product listing also referenced on <a href="https://www.mims.com/philippines/company/info/trumed/about" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-accent hover:underline">MIMS Philippines</a>.
+        </p>
+      </div>
+    </section>
+
+    <section id="about" class="bg-brand-soft py-16 sm:py-20">
+      <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2">
+        <img src="assets/hero-team.jpg" alt="Trumed Pharmaceuticals team" width="1993" height="736" loading="lazy" class="rounded-2xl shadow-lg ring-1 ring-brand-dark/10 object-cover aspect-[21/9] lg:aspect-[16/10]" data-reveal />
+        <div data-reveal>
+          <h2 class="font-display text-3xl font-bold text-brand-dark">About Trumed</h2>
+          <p class="mt-4 text-gray-700"><strong>Trumed Pharmaceutical</strong> is a healthcare marketing company committed to bringing innovative pharmaceutical solutions to market — connecting quality products with patients and providers across the country.</p>
+          <p class="mt-3 text-gray-700">Part of the Hexagon Group ecosystem, Trumed focuses on purposeful partnerships that create shared value and improve stakeholders’ quality of life.</p>
+          <ul class="mt-6 space-y-3 text-sm text-gray-700">
+            <li><span class="font-semibold text-brand-accent">Vision</span> — Be a prominent contributor in sustainable nation-building.</li>
+            <li><span class="font-semibold text-brand-accent">Mission</span> — Build purposeful partnerships that empower industries and improve quality of life.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="responsibility" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Our responsibility</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal">Healthcare impact beyond the product — communities, stewardship, and access.</p>
+        <div class="mt-10 grid gap-6 lg:grid-cols-2">
+          <figure data-reveal class="overflow-hidden rounded-2xl bg-brand-soft shadow-sm">
+            <img src="assets/project-04.jpg" alt="Trumed community Christmas love drive" width="800" height="600" loading="lazy" class="gallery-card__img w-full" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Community impact &amp; giving back</figcaption>
+          </figure>
+          <div class="grid gap-4 sm:grid-cols-1 content-start">
+            <article data-reveal class="rounded-2xl border border-brand-dark/10 p-5">
+              <h3 class="font-semibold text-brand-dark">Environmental stewardship</h3>
+              <p class="mt-2 text-sm text-gray-600">Committed to more sustainable ways of working as the business grows.</p>
+            </article>
+            <article data-reveal class="rounded-2xl border border-brand-dark/10 p-5">
+              <h3 class="font-semibold text-brand-dark">Community impact</h3>
+              <p class="mt-2 text-sm text-gray-600">Local outreach and programs that support the communities we serve.</p>
+            </article>
+            <article data-reveal class="rounded-2xl border border-brand-dark/10 p-5">
+              <h3 class="font-semibold text-brand-dark">Healthcare access</h3>
+              <p class="mt-2 text-sm text-gray-600">Improving access to quality medicines through marketing and distribution.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-brand-soft py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <h2 class="font-display text-center text-3xl font-bold text-brand-dark" data-reveal>Common questions</h2>
+        <div data-accordion class="mt-10 space-y-3">
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Where is Trumed located?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">12th Floor, Hexagon Corporate Center, 1471 Quezon Avenue, Brgy. West Triangle, Quezon City 1104, Philippines.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">How do I contact the office?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Email <a href="mailto:info@trumedpharma.com" class="font-semibold text-brand-accent hover:underline">info@trumedpharma.com</a> or call <a href="tel:+63286971754" class="font-semibold text-brand-accent hover:underline">+63 (2) 8697-1754</a> / 8514-9873.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">What therapeutic areas do you cover?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Cardiovascular, anti-infectives, and nutritionals — with branded lines listed on MIMS Philippines under Trumed Pharmaceuticals.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Are you hiring?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Careers and opportunities are listed on <a href="https://www.trumedpharma.com/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-accent hover:underline">trumedpharma.com</a> and via Hexagon Group channels.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="overflow-hidden rounded-3xl bg-brand-dark text-white shadow-xl">
+          <div class="grid gap-0 lg:grid-cols-2">
+            <div class="p-8 sm:p-10 lg:p-12">
+              <h2 class="font-display text-3xl font-bold" data-reveal">Let’s talk healthcare</h2>
+              <p class="mt-4 text-white/80" data-reveal">Partnerships, product inquiries, or careers — reach the Quezon City team.</p>
+              <ul class="mt-8 space-y-4 text-sm sm:text-base" data-reveal>
+                <li><span class="font-semibold text-sky-300">Email</span><br /><a href="mailto:info@trumedpharma.com" class="hover:underline">info@trumedpharma.com</a></li>
+                <li><span class="font-semibold text-sky-300">Phone</span><br /><a href="tel:+63286971754" class="hover:underline">+63 (2) 8697-1754</a> · 8514-9873</li>
+                <li><span class="font-semibold text-sky-300">Also listed (MIMS)</span><br />(+63-2) 8781-5835 · 8781-1447</li>
+                <li><span class="font-semibold text-sky-300">Address</span><br />12F Hexagon Corporate Center, 1471 Quezon Ave, West Triangle, Quezon City 1104</li>
+                <li><span class="font-semibold text-sky-300">Web</span><br /><a href="https://www.trumedpharma.com/" target="_blank" rel="noopener noreferrer" class="hover:underline">trumedpharma.com</a> · <a href="https://www.mims.com/philippines/company/info/trumed/about" target="_blank" rel="noopener noreferrer" class="hover:underline">MIMS company profile</a></li>
+              </ul>
+            </div>
+            <div class="flex flex-col justify-center gap-4 bg-brand-mid/80 p-8 sm:p-10 lg:p-12" data-reveal>
+              <a href="mailto:info@trumedpharma.com" class="rounded-full bg-brand-accent px-6 py-4 text-center font-semibold text-white hover:brightness-110 transition">Email info@trumedpharma.com</a>
+              <a href="tel:+63286971754" class="rounded-full border border-white/40 px-6 py-4 text-center font-semibold hover:bg-white/10 transition">Call head office</a>
+              <a href="https://www.trumedpharma.com/" target="_blank" rel="noopener noreferrer" class="rounded-full border border-white/40 px-6 py-4 text-center font-semibold hover:bg-white/10 transition">Visit trumedpharma.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-brand-dark/10 bg-white py-8 text-center text-sm text-gray-500">
+    <p class="font-display text-brand-dark">Trumed Pharmaceuticals</p>
+    <p class="mt-1">Sample redesign for quotation · Healthcare marketing</p>
+    <p class="mt-3">&copy; <span id="year"></span> · Sample site by <a href="https://carlmanuel.com" class="text-brand-accent hover:underline">Carl Louis Manuel</a></p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
+</body>
+</html>

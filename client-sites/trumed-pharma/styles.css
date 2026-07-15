@@ -1,0 +1,92 @@
+/* Trumed Pharmaceuticals — hero, reveal, healthcare accents */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  [data-hero-animate],
+  [data-hero-bg] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-three-canvas {
+    display: none;
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-header] {
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+[data-header].is-scrolled {
+  box-shadow: 0 4px 24px rgba(11, 37, 69, 0.1);
+}
+
+.hero-bg {
+  background-size: cover;
+  background-position: center 30%;
+  z-index: 0;
+}
+
+.hero-bg--trumed {
+  background-image:
+    linear-gradient(135deg, rgba(11, 37, 69, 0.92) 0%, rgba(19, 49, 92, 0.86) 50%, rgba(11, 37, 69, 0.9) 100%),
+    url("assets/hero-team.jpg");
+}
+
+.trust-strip {
+  background: linear-gradient(90deg, #0b2545 0%, #13315c 40%, #1d6fb8 50%, #13315c 60%, #0b2545 100%);
+}
+
+.gallery-card__img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #e8f1f8;
+}
+
+.filter-active {
+  background-color: #1d6fb8;
+  color: #fff;
+}
+
+.filter-inactive {
+  background-color: transparent;
+}
+
+.hero-three-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.4;
+  mix-blend-mode: screen;
+}
+
+[data-hero] > .relative {
+  z-index: 2;
+}

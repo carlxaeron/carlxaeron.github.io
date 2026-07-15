@@ -29,6 +29,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Regan Industrial Sales Inc.](#regan-industrial-sales-inc) | `regan-industrial` | Steel supplier / industrial metals | [Preview](https://carlmanuel.com/?preview=regan-industrial) | 2026-07-15 |
 | [IntelliSmart Technology Inc.](#intellismart-technology-inc) | `intellismart` | System integration / AV / security / BMS | [Preview](https://carlmanuel.com/?preview=intellismart) | 2026-07-15 |
 | [SV More Group of Companies](#sv-more-group-of-companies) | `sv-more-group` | Pharmaceuticals / health products | [Preview](https://carlmanuel.com/?preview=sv-more-group) | 2026-07-15 |
+| [Trumed Pharmaceuticals](#trumed-pharmaceuticals) | `trumed-pharma` | Pharmaceutical marketing / distribution | [Preview](https://carlmanuel.com/?preview=trumed-pharma) | 2026-07-15 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -289,6 +290,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Category** | Pharmaceuticals / health products · Est. 1987 · ~17K FB followers |
 | **Source** | [Facebook](https://www.facebook.com/SVMoreGroupPH/) · [svmoregroup.com](https://svmoregroup.com/) |
 | **Assets** | Logo + hero + product gallery from live site; Motion + Three.js particles hero |
+| **Package** | Business Website Redesign (landing sample) · **₱18,000** · 7–10 days · 50% upfront |
+| **Outreach** | Email found — **ask before send** · `quotation-email.md` |
+
+---
+
+### Trumed Pharmaceuticals
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/trumed-pharma/` |
+| **Netlify site** | `trumed-pharma` |
+| **Preview host** | `trumed-pharma.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=trumed-pharma |
+| **Contact** | info@trumedpharma.com · +63 (2) 8697-1754 |
+| **Address** | 12F Hexagon Corporate Center, 1471 Quezon Ave, West Triangle, Quezon City 1104 |
+| **Category** | Pharmaceutical marketing / distribution (Hexagon Group) |
+| **Source** | [trumedpharma.com](https://www.trumedpharma.com/) · [MIMS About](https://www.mims.com/philippines/company/info/trumed/about) |
+| **Assets** | Logo + team hero + product/community gallery from live site; Motion + Three.js particles hero |
 | **Package** | Business Website Redesign (landing sample) · **₱18,000** · 7–10 days · 50% upfront |
 | **Outreach** | Email found — **ask before send** · `quotation-email.md` |
 

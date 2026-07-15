@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.39] — 2026-07-15
+
+### Added
+- **Trumed Pharmaceuticals** client site (`trumed-pharma`) — pharmaceutical marketing redesign landing sample (products, about, responsibility, Motion + Three.js particles hero)
+- Portfolio preview: `?preview=trumed-pharma` → `trumed-pharma.netlify.app`
+
 ## [3.0.38] — 2026-07-15
 
 ### Added

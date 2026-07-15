@@ -95,6 +95,12 @@ export const PREVIEW_SITES = [
     label: "SV More Group of Companies",
     netlifySite: "sv-more-group",
   },
+  {
+    id: "trumed-pharma",
+    host: "trumed-pharma.netlify.app",
+    label: "Trumed Pharmaceuticals",
+    netlifySite: "trumed-pharma",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
