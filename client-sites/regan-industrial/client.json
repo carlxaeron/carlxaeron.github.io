@@ -12,9 +12,9 @@
   "quotation": {
     "packageName": "Business Website Redesign (landing sample)",
     "packageScope": "Modern one-page redesign sample (products, services, about, FAQ, contact CTAs), mobile-first, aligned to existing brand",
-    "quotedAmount": "₱18,000",
+    "quotedAmount": "\u20b118,000",
     "paymentTerms": "50% upfront, 50% on delivery",
-    "timeline": "7–10 business days after content approval",
+    "timeline": "7\u201310 business days after content approval",
     "previewUrl": "https://carlmanuel.com/?preview=regan-industrial"
   },
   "outreach": {
@@ -23,21 +23,26 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "draft",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-15T00:09:07.053866+00:00",
+    "nextFollowUpAt": "2026-07-22T00:08:55+00:00",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "Emails: inquiry@reganindustrial.com.ph (primary); also reganind12@gmail.com, regancustomerservice@gmail.com from mail.reganindustrial.com. They already have reganindustrial.com — pitch redesign/landing sample. ASK before send."
+    "notes": "Initial quotation sent 2026-07-15 via outreachSchedule to inquiry@reganindustrial.com.ph; auto follow-ups 1w enabled (max 2)."
   },
   "sources": {
     "facebook": "https://www.facebook.com/reganindustrialph/",
     "website": "https://reganindustrial.com/",
     "mailPortal": "https://mail.reganindustrial.com/#/home",
     "address": "#5 Harmony Street, Grace Village, Brgy. Balingasa, Balintawak, Quezon City 1106",
-    "phones": ["0998 843 4711", "(+632) 361-8734", "Fax (+632) 361-8215", "Mobile (+63) 925 860 5734"],
+    "phones": [
+      "0998 843 4711",
+      "(+632) 361-8734",
+      "Fax (+632) 361-8215",
+      "Mobile (+63) 925 860 5734"
+    ],
     "followers": "~80K",
     "tagline": "Steel Solution for your Success | Creating Value through Innovation",
     "notes": "Est. 1968. 100% recommend (15 FB reviews). Metal supplier. Asset images from live site via browser fetch."

@@ -1,0 +1,53 @@
+{
+  "businessName": "IntelliSmart Technology Inc.",
+  "slug": "intellismart",
+  "previewHost": "intellismartinc.netlify.app",
+  "industry": "System integration / AV / security / BMS / ICT",
+  "deployedAt": "2026-07-15",
+  "contact": {
+    "name": "IntelliSmart sales team",
+    "email": "sales@intellismartinc.com",
+    "phone": "+632 8350 5986"
+  },
+  "quotation": {
+    "packageName": "Business Website Redesign (landing sample)",
+    "packageScope": "Modern one-page redesign sample (solutions, projects, about, FAQ, contact CTAs), mobile-first, aligned to existing brand",
+    "quotedAmount": "₱18,000",
+    "paymentTerms": "50% upfront, 50% on delivery",
+    "timeline": "7–10 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=intellismart"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "draft",
+    "cadence": null,
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": ""
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/Intellismartinc/",
+    "website": "https://intellismartinc.com/",
+    "address": "12 Catanduanes St., Brgy Paltok, West Ave., Quezon City 1105",
+    "phones": [
+      "+632 8350 5986 (loc 348)",
+      "+632 8352 0377",
+      "0917 876 7889",
+      "+63 917 893 8889"
+    ],
+    "emails": [
+      "sales@intellismartinc.com",
+      "cebusales@intellismartinc.com"
+    ],
+    "followers": "~8.5K",
+    "tagline": "Intelligent Innovations, Smart Solutions",
+    "notes": "Full WP site already live — pitch redesign/landing sample. Assets from intellismartinc.com via curl+referer."
+  }
+}

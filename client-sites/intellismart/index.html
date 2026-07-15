@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="IntelliSmart Technology Inc. — intelligent innovations and smart solutions. AV, security, BMS, ICT, automation, and integrated systems across the Philippines." />
+  <title>IntelliSmart Technology Inc. — Intelligent Innovations, Smart Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: "#061525",
+              mid: "#0a2744",
+              accent: "#00b4d8",
+              bright: "#48cae4",
+              light: "#e8f6fa",
+            },
+          },
+          fontFamily: {
+            display: ["Outfit", "system-ui", "sans-serif"],
+            sans: ["Manrope", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="embed-guard.js"></script>
+</head>
+<body class="font-sans text-gray-900 antialiased">
+  <div class="trust-strip py-2 text-center text-xs font-semibold tracking-wide text-white sm:text-sm">
+    Quezon City · Cebu · System integration · AV · Security · BMS · ICT
+  </div>
+
+  <header data-header class="sticky top-0 z-50 border-b border-brand-dark/10 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#" class="flex min-w-0 items-center gap-3 font-display text-lg font-bold text-brand-dark">
+        <img src="assets/logo.png" alt="IntelliSmart" width="200" height="26" class="h-7 w-auto max-w-[200px] shrink-0 object-contain sm:h-8" />
+      </a>
+      <nav class="hidden items-center gap-5 text-sm font-medium text-brand-dark/80 md:flex" aria-label="Main">
+        <a href="#solutions" class="hover:text-brand-accent transition-colors">Solutions</a>
+        <a href="#projects" class="hover:text-brand-accent transition-colors">Projects</a>
+        <a href="#about" class="hover:text-brand-accent transition-colors">About</a>
+        <a href="#faq" class="hover:text-brand-accent transition-colors">FAQ</a>
+        <a href="#contact" class="rounded-full bg-brand-accent px-4 py-2 font-semibold text-brand-dark hover:brightness-110 transition">Talk to sales</a>
+      </nav>
+      <button type="button" data-nav-toggle class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-dark/15 text-brand-dark md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="hidden flex-col border-t border-brand-dark/10 bg-white px-4 py-4 md:hidden">
+      <a href="#solutions" class="rounded-lg px-3 py-3 hover:bg-brand-light">Solutions</a>
+      <a href="#projects" class="rounded-lg px-3 py-3 hover:bg-brand-light">Projects</a>
+      <a href="#about" class="rounded-lg px-3 py-3 hover:bg-brand-light">About</a>
+      <a href="#faq" class="rounded-lg px-3 py-3 hover:bg-brand-light">FAQ</a>
+      <a href="#contact" class="mt-2 rounded-full bg-brand-accent px-4 py-3 text-center font-semibold text-brand-dark">Talk to sales</a>
+    </div>
+  </header>
+
+  <main>
+    <section data-hero data-hero-three="blueprint" class="relative overflow-hidden bg-brand-dark text-white">
+      <div data-hero-bg class="hero-bg hero-bg--intel absolute inset-0 origin-center will-change-transform"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
+      <div class="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+        <p data-hero-animate class="opacity-0 mb-3 text-xs font-semibold uppercase tracking-widest text-brand-bright">Intelligent innovations · Smart solutions</p>
+        <h1 data-hero-animate class="opacity-0 font-display max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-[3.25rem]">IntelliSmart Technology Inc.</h1>
+        <p data-hero-animate class="opacity-0 mt-5 max-w-2xl text-lg text-white/85">Diversified system integration for buildings and businesses — audio-visual, security, BMS, ICT, automation, and more — designed, installed, and supported nationwide.</p>
+        <div data-hero-animate class="opacity-0 mt-8 flex flex-wrap gap-3">
+          <a data-hero-cta href="#contact" class="rounded-full bg-brand-accent px-6 py-3 font-semibold text-brand-dark hover:brightness-110 transition">Request a consultation</a>
+          <a data-hero-cta href="tel:+63283505986" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Call (+632) 8350 5986</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="solutions" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Integrated solutions</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal">One partner for the systems that make modern venues, offices, and facilities run smarter.</p>
+        <div data-filter class="mt-8">
+          <div class="flex flex-wrap gap-2">
+            <button type="button" data-filter-btn="all" class="filter-active rounded-full bg-brand-accent px-4 py-2 text-sm text-brand-dark" aria-pressed="true">All</button>
+            <button type="button" data-filter-btn="av" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">AV &amp; ICT</button>
+            <button type="button" data-filter-btn="secure" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Security</button>
+            <button type="button" data-filter-btn="build" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Building systems</button>
+          </div>
+          <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <article data-filter-item data-categories="av,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Audio-visual systems</h3>
+              <p class="mt-2 text-sm text-gray-600">Professional AV for ballrooms, theaters, conference rooms, and public venues.</p>
+            </article>
+            <article data-filter-item data-categories="secure,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Security solutions</h3>
+              <p class="mt-2 text-sm text-gray-600">Surveillance, access control, and integrated security for facilities of all scales.</p>
+            </article>
+            <article data-filter-item data-categories="build,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Building management (BMS)</h3>
+              <p class="mt-2 text-sm text-gray-600">Centralized monitoring and control for HVAC, lighting, and facility operations.</p>
+            </article>
+            <article data-filter-item data-categories="av,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">ICT &amp; structured cabling</h3>
+              <p class="mt-2 text-sm text-gray-600">Network infrastructure, wiring, and connectivity ready for growth.</p>
+            </article>
+            <article data-filter-item data-categories="build,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Automation &amp; lighting</h3>
+              <p class="mt-2 text-sm text-gray-600">Smart controls, lighting design, and automation for efficient spaces.</p>
+            </article>
+            <article data-filter-item data-categories="secure,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">QSR &amp; commercial fit-outs</h3>
+              <p class="mt-2 text-sm text-gray-600">Technology packages tailored for quick-service and commercial environments.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal">Project highlights</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal">Landmark venues and infrastructure where IntelliSmart delivered integrated technology.</p>
+        <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-white shadow-sm">
+            <img src="assets/project-01.jpg" alt="Okada Manila Ballroom professional AV" width="960" height="284" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Okada Manila — Ballroom AV</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-white shadow-sm">
+            <img src="assets/project-02.jpg" alt="Mactan-Cebu International Airport project" width="960" height="284" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Mactan-Cebu International Airport</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-white shadow-sm">
+            <img src="assets/project-03.jpg" alt="New Clark City project" width="960" height="284" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">New Clark City</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-white shadow-sm">
+            <img src="assets/project-04.jpg" alt="Hotel 101 Building Management System" width="960" height="284" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Hotel 101 — BMS</figcaption>
+          </figure>
+        </div>
+        <p class="mt-6 text-center">
+          <a href="https://intellismartinc.com/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-mid hover:underline">Visit intellismartinc.com →</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="about" class="bg-brand-dark py-16 text-white sm:py-20">
+      <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2">
+        <img src="assets/hero-av.jpg" alt="IntelliSmart integrated building technology" width="1920" height="567" loading="lazy" class="rounded-2xl shadow-lg ring-1 ring-white/10 object-cover aspect-[16/9]" data-reveal />
+        <div data-reveal>
+          <h2 class="font-display text-3xl font-bold">Built for complex environments</h2>
+          <p class="mt-4 text-white/85"><strong>IntelliSmart Technology Inc.</strong> delivers intelligent innovations and smart solutions — bridging audio-visual, security, building management, ICT, air-conditioning interfaces, wiring, automation, and lighting under one integration partner.</p>
+          <p class="mt-3 text-white/85">Head office in Quezon City with Cebu sales support — serving hotels, airports, commercial developments, and enterprise facilities across the Philippines.</p>
+          <p class="mt-4 font-display text-brand-bright">Intelligent Innovations, Smart Solutions</p>
+          <p class="mt-4 text-sm text-white/70">12 Catanduanes St., Brgy Paltok, West Ave., Quezon City 1105</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <h2 class="font-display text-center text-3xl font-bold text-brand-dark" data-reveal>Common questions</h2>
+        <div data-accordion class="mt-10 space-y-3">
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">What industries do you serve?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Hospitality, aviation, commercial developments, QSR, and enterprise facilities needing AV, security, BMS, ICT, and related systems integration.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Do you cover Visayas / Cebu?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Yes — contact Cebu sales at <a href="mailto:cebusales@intellismartinc.com" class="font-semibold text-brand-mid hover:underline">cebusales@intellismartinc.com</a> in addition to the Quezon City head office.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">How do I request a proposal?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Email <a href="mailto:sales@intellismartinc.com" class="font-semibold text-brand-mid hover:underline">sales@intellismartinc.com</a> or call <a href="tel:+63283505986" class="font-semibold text-brand-mid hover:underline">(+632) 8350 5986</a> (loc 348) with your site type and scope.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Where is the head office?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">12 Catanduanes St., Brgy Paltok, West Ave., Quezon City 1105 — also listed on intellismartinc.com and Facebook.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="overflow-hidden rounded-3xl bg-brand-dark text-white shadow-xl">
+          <div class="grid gap-0 lg:grid-cols-2">
+            <div class="p-8 sm:p-10 lg:p-12">
+              <h2 class="font-display text-3xl font-bold" data-reveal">Plan your next integration</h2>
+              <p class="mt-4 text-white/80" data-reveal">Tell us about the venue or facility — sales will help scope AV, security, BMS, ICT, and related systems.</p>
+              <ul class="mt-8 space-y-4 text-sm sm:text-base" data-reveal>
+                <li><span class="font-semibold text-brand-bright">Sales</span><br /><a href="mailto:sales@intellismartinc.com" class="hover:underline">sales@intellismartinc.com</a></li>
+                <li><span class="font-semibold text-brand-bright">Cebu sales</span><br /><a href="mailto:cebusales@intellismartinc.com" class="hover:underline">cebusales@intellismartinc.com</a></li>
+                <li><span class="font-semibold text-brand-bright">Phone</span><br /><a href="tel:+63283505986" class="hover:underline">(+632) 8350 5986</a> loc 348 · <a href="tel:+63283520377" class="hover:underline">(+632) 8352 0377</a></li>
+                <li><span class="font-semibold text-brand-bright">Mobile</span><br /><a href="tel:+639178767889" class="hover:underline">0917 876 7889</a> · <a href="tel:+639178938889" class="hover:underline">0917 893 8889</a></li>
+                <li><span class="font-semibold text-brand-bright">Address</span><br />12 Catanduanes St., Brgy Paltok, West Ave., Quezon City 1105</li>
+                <li><span class="font-semibold text-brand-bright">Web / Facebook</span><br /><a href="https://intellismartinc.com/" target="_blank" rel="noopener noreferrer" class="hover:underline">intellismartinc.com</a> · <a href="https://www.facebook.com/Intellismartinc/" target="_blank" rel="noopener noreferrer" class="hover:underline">facebook.com/Intellismartinc</a></li>
+              </ul>
+            </div>
+            <div class="flex flex-col justify-center gap-4 bg-brand-mid/80 p-8 sm:p-10 lg:p-12" data-reveal>
+              <a href="mailto:sales@intellismartinc.com" class="rounded-full bg-brand-accent px-6 py-4 text-center font-semibold text-brand-dark hover:brightness-110 transition">Email sales</a>
+              <a href="tel:+63283505986" class="rounded-full border border-white/40 px-6 py-4 text-center font-semibold hover:bg-white/10 transition">Call head office</a>
+              <a href="https://www.facebook.com/Intellismartinc/" target="_blank" rel="noopener noreferrer" class="rounded-full border border-white/40 px-6 py-4 text-center font-semibold hover:bg-white/10 transition">Message on Facebook</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-brand-dark/10 bg-white py-8 text-center text-sm text-gray-500">
+    <p class="font-display text-brand-dark">IntelliSmart Technology Inc.</p>
+    <p class="mt-1">Sample redesign for quotation · System integration</p>
+    <p class="mt-3">&copy; <span id="year"></span> · Sample site by <a href="https://carlmanuel.com" class="text-brand-mid hover:underline">Carl Louis Manuel</a></p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
+</body>
+</html>

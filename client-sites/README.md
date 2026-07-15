@@ -27,6 +27,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [G3k Cad Plotting & Blueprinting Services](#g3k-cad-plotting--blueprinting-services) | `g3k-cad` | CAD plotting / blueprint printing | [Preview](https://carlmanuel.com/?preview=g3k-cad) | 2026-07-14 |
 | [Kubling Tago Resort](#kubling-tago-resort) | `kubling-tago-resort` | Day resort / hospitality | [Preview](https://carlmanuel.com/?preview=kubling-tago-resort) | 2026-07-15 |
 | [Regan Industrial Sales Inc.](#regan-industrial-sales-inc) | `regan-industrial` | Steel supplier / industrial metals | [Preview](https://carlmanuel.com/?preview=regan-industrial) | 2026-07-15 |
+| [IntelliSmart Technology Inc.](#intellismart-technology-inc) | `intellismart` | System integration / AV / security / BMS | [Preview](https://carlmanuel.com/?preview=intellismart) | 2026-07-15 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -256,6 +257,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 
 ---
 
+### IntelliSmart Technology Inc.
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/intellismart/` |
+| **Netlify site** | `intellismartinc` |
+| **Preview host** | `intellismartinc.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=intellismart |
+| **Contact** | sales@intellismartinc.com · (+632) 8350 5986 |
+| **Address** | 12 Catanduanes St., Brgy Paltok, West Ave., Quezon City 1105 |
+| **Category** | System integration · AV / security / BMS / ICT · ~8.5K FB followers |
+| **Source** | [Facebook](https://www.facebook.com/Intellismartinc/) · [intellismartinc.com](https://intellismartinc.com/) |
+| **Assets** | Logo + hero + gallery from live site; Motion + Three.js blueprint hero |
+| **Package** | Business Website Redesign (landing sample) · **₱18,000** · 7–10 days |
+| **Outreach** | Email found — **ask before send** · `quotation-email.md` |
+
+---
+
 ## Folder layout
 
 ```text
@@ -334,7 +353,7 @@ client-sites/
 3. Deploy: `cd client-sites/{slug} && npx netlify deploy --prod --create-site {netlify-site-name}`
 4. Set `previewHost`, `deployedAt`, and `quotation.previewUrl` in `client.json` (`previewUrl` uses `?preview={slug}`, not the Netlify hostname)
 5. Draft outreach (email / SMS / messenger + **3d** and **1w** follow-ups)
-6. **If email found** → ask before send (Private Email `info@carlmanuel.com`); after send pick **3 days** or **1 week** follow-up
+6. **If email found** → ask before send (Private Email `info@carlmanuel.com`); **yes** → send + auto follow-ups (default **1 week**; **3 days** only if said in the same reply)
 7. Add entry to `src/v3/config/previewWhitelist.js` (`PREVIEW_SITES`)
 8. **Add a row + detail section to this README**
 9. Portfolio release if whitelist changed (see deploy skill)

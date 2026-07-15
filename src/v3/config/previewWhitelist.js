@@ -83,6 +83,12 @@ export const PREVIEW_SITES = [
     label: "Regan Industrial Sales Inc.",
     netlifySite: "regan-industrial",
   },
+  {
+    id: "intellismart",
+    host: "intellismartinc.netlify.app",
+    label: "IntelliSmart Technology Inc.",
+    netlifySite: "intellismartinc",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

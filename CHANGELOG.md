@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.37] — 2026-07-15
+
+### Added
+- **IntelliSmart Technology Inc.** client site (`intellismart`) — system integration redesign landing sample (solutions, projects, Motion + Three.js blueprint hero)
+- Portfolio preview: `?preview=intellismart` → `intellismartinc.netlify.app`
+
 ## [3.0.36] — 2026-07-15
 
 ### Added

@@ -63,6 +63,7 @@ Outreach / follow-ups:
 - [ ] OUTREACH_SECRET set in hosting .env
 - [ ] crontab: daily scripts/cron-outreach-followups.php
 - [ ] Initial send only via /outreachSchedule after user approval in Cursor
+- [ ] On yes-to-send: always set autoFollowUp true (default cadence 1w)
 - [ ] Follow-ups auto-send when due (Private Email SMTP)
 - [ ] Pause via /outreachPause when prospect opts out
 ```

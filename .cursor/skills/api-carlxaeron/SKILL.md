@@ -25,10 +25,10 @@ Still on Firebase (skill **firebase-backend**): assistant, license, weeklyVisitR
 | GET | `/analyticsSummary` | Insights panel |
 | POST | `/contact` | Form + SMTP |
 | POST | `/quotation` | Form + SMTP |
-| POST | `/outreachSchedule` | **Secret** — send initial quotation (after user OK) + queue auto follow-ups |
+| POST | `/outreachSchedule` | **Secret** — after user yes: send initial + queue auto follow-ups (`autoFollowUp: true`, default cadence `1w`) |
 | POST | `/outreachPause` | **Secret** — stop auto follow-ups for a slug |
 
-Live hosting (until full Laravel cutover) uses PHP under `hosting-php/` synced to Stellar. Daily cron: `scripts/cron-outreach-followups.php`.
+Live hosting (until full Laravel cutover) uses PHP under `hosting-php/` synced to Stellar. Daily cron: `scripts/cron-outreach-followups.php`. Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).
 
 Response shape (Firebase-compatible):
 

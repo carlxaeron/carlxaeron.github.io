@@ -1,5 +1,5 @@
 ---
-description: Client quotation websites — client-sites/, Netlify, ?preview=, ask-before-send outreach + 3d/1w follow-ups
+description: Client quotation websites — client-sites/, Netlify, ?preview=, ask-before-send; yes = send + auto 1w follow-ups
 globs:
   - client-sites/**
   - src/v3/config/previewWhitelist.js
@@ -31,13 +31,14 @@ Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-net
 
 | Situation | Agent action |
 |-----------|--------------|
-| Email found | Prepare drafts; **ask** send now + cadence `3d`/`1w`? |
+| Email found | Prepare drafts; **ask** send now? (**Yes** → send + auto follow-ups; default `1w`) |
 | User says **send** | `POST https://api.carlmanuel.com/outreachSchedule` (`sendInitial: true`, `autoFollowUp: true`) using `OUTREACH_SECRET` |
 | User says **not yet** | Do not call API |
 | Offline follow-ups | **Namecheap cron** sends automatically (no Cursor) |
 | Pause | `POST /outreachPause` + `outreach.status=paused` |
 
-**Never** auto-send the **initial** quotation without a clear yes. Follow-ups after approval run on hosting.
+**Never** auto-send the **initial** quotation without a clear yes.  
+**Yes to send = auto follow-ups on** (default `1w`; `3d` only if named in the same approval). No second cadence question.
 
 Secret: hosting `api-carlxaeron/.env` → `OUTREACH_SECRET` (local copy `api-carlxaeron/.outreach_secret`, gitignored). Code: `api-carlxaeron/hosting-php/`.
 
@@ -59,6 +60,7 @@ Secret: hosting `api-carlxaeron/.env` → `OUTREACH_SECRET` (local copy `api-car
 ## Do not
 
 - Auto-send the **initial** quotation without a clear yes
+- Ask a second cadence question after the user already said yes to send (default to `1w` + `autoFollowUp: true`)
 - Commit `OUTREACH_SECRET` / `.outreach_secret` / `.env`
-- Skip registering `autoFollowUp` on hosting if user asked for scheduled follow-ups
+- Skip `autoFollowUp` when scheduling after a yes-to-send
 - Commit Netlify tokens / bypass embed-only guards

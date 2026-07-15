@@ -1,6 +1,6 @@
 ---
 name: client-site-netlify
-description: Scaffold, build, and deploy local-business quotation websites under client-sites/ to Netlify, register portfolio preview URLs, draft email/SMS/messenger quotations, ask before sending when email is found, schedule 3-day or 1-week follow-ups, and share carlmanuel.com/?preview= links. Use when the user asks to create a client website, business landing page, Netlify deploy, quotation demo, sales outreach, send quotation, or follow up with a prospect.
+description: Scaffold, build, and deploy local-business quotation websites under client-sites/ to Netlify, register portfolio preview URLs, draft email/SMS/messenger quotations, ask before initial send (yes = send + auto 1w follow-ups), and share carlmanuel.com/?preview= links. Use when the user asks to create a client website, business landing page, Netlify deploy, quotation demo, sales outreach, send quotation, or follow up with a prospect.
 ---
 
 # Client site + Netlify deploy
@@ -30,7 +30,7 @@ Client site progress:
 - [ ] client.json updated (contact + quotation fields)
 - [ ] Draft outreach written (email, SMS, messenger + 3d/1w follow-ups)
 - [ ] If email found → ASK user before any send (send now vs not yet)
-- [ ] If sent → ask 3-day vs 1-week follow-up cadence; set nextFollowUpAt
+- [ ] If sent → auto follow-ups on (default 1w); set nextFollowUpAt — no second cadence ask unless user named 3d/1w
 - [ ] PREVIEW_SITES entry added
 - [ ] client-sites/README.md catalog updated (table + detail section)
 - [ ] Preview slug tests pass (`previewWhitelist.test.js`)
@@ -245,14 +245,17 @@ Outreach gate:
 - [ ] If NO email → messenger/SMS drafts only; ask user how to reach them
 - [ ] If YES email → fill quotation-email.md + follow-up drafts; set outreach.emailFound=true
 - [ ] STOP and ask user explicitly (do not send yet):
-      "Email found: {email}. Send the quotation now via Private Email, and enable auto follow-ups (3 days or 1 week)?"
+      "Email found: {email}. Send the quotation now via Private Email? (Auto follow-ups enabled on yes.)"
 - [ ] Wait for clear approval: send / yes — OR not yet / hold / edit first
-- [ ] Ask cadence: "3 days or 1 week?" → cadence = "3d" | "1w"
-- [ ] Only after approval → POST https://api.carlmanuel.com/outreachSchedule (see below)
+- [ ] On yes → do NOT ask a second cadence question unless user already named one
+- [ ] Default cadence: **1w** (override to 3d only if user said "3 days" / "3d" in the same turn)
+- [ ] Immediately POST https://api.carlmanuel.com/outreachSchedule with
+      sendInitial: true, autoFollowUp: true, cadence: "1w"|"3d", maxFollowUps: 2
 - [ ] Mirror status into client.json → outreach.*
 ```
 
-**Never** send the **initial** quotation without an explicit yes in the same conversation turn.
+**Never** send the **initial** quotation without an explicit yes in the same conversation turn.  
+**Yes to send = auto follow-ups on** — do not wait for a separate follow-up confirmation.
 
 ### Hosting send + offline auto follow-ups (Namecheap cron)
 
@@ -281,7 +284,7 @@ curl -sS -X POST 'https://api.carlmanuel.com/outreachSchedule' \
     \"packageName\": \"…\",
     \"quotedAmount\": \"…\",
     \"timeline\": \"…\",
-    \"cadence\": \"3d\",
+    \"cadence\": \"1w\",
     \"sendInitial\": true,
     \"autoFollowUp\": true,
     \"maxFollowUps\": 2
@@ -296,7 +299,7 @@ Also update `client.json` → `outreach` (`status=sent`, `cadence`, `sentAt`, `n
 
 ### Follow-ups (automatic on hosting)
 
-1. User picks **`3d`** or **`1w`** once at initial approval.
+1. On **yes send**, auto-enable follow-ups (`autoFollowUp: true`). Default cadence **`1w`** unless the user specified **`3d`** in the approval turn.
 2. Cron sends follow-ups **without Cursor** while offline.
 3. Draft files (`quotation-followup-3d.md` / `1w`) remain the human-readable templates; server builds equivalent HTML for SMTP.
 4. To stop: user says pause → `outreachPause`, set `outreach.status=paused`.
@@ -380,7 +383,8 @@ curl -sI -H "Sec-Fetch-Dest: iframe" \
 - Demo copy OK; mark fictitious businesses and contacts clearly.
 - Draft email/SMS/messenger + follow-ups for every client site.
 - **Always ask before initial send** when an email is found.
-- After approval: `outreachSchedule` on hosting; **cron auto-sends** 3d/1w follow-ups offline.
+- **Yes to send** → `outreachSchedule` with `autoFollowUp: true` immediately (default cadence **1w**; **3d** only if named in that approval). Do not ask cadence separately.
+- Hosting **cron auto-sends** follow-ups offline.
 - Do not add client sites to portfolio Side Projects without user approval.
 
 ## Rule reference
