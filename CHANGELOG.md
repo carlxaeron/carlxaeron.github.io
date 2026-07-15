@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.38] — 2026-07-15
+
+### Added
+- **SV More Group of Companies** client site (`sv-more-group`) — pharmaceutical/health products redesign landing sample (products, about, Motion + Three.js particles hero)
+- Portfolio preview: `?preview=sv-more-group` → `sv-more-group.netlify.app`
+
 ## [3.0.37] — 2026-07-15
 
 ### Added

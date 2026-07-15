@@ -28,6 +28,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Kubling Tago Resort](#kubling-tago-resort) | `kubling-tago-resort` | Day resort / hospitality | [Preview](https://carlmanuel.com/?preview=kubling-tago-resort) | 2026-07-15 |
 | [Regan Industrial Sales Inc.](#regan-industrial-sales-inc) | `regan-industrial` | Steel supplier / industrial metals | [Preview](https://carlmanuel.com/?preview=regan-industrial) | 2026-07-15 |
 | [IntelliSmart Technology Inc.](#intellismart-technology-inc) | `intellismart` | System integration / AV / security / BMS | [Preview](https://carlmanuel.com/?preview=intellismart) | 2026-07-15 |
+| [SV More Group of Companies](#sv-more-group-of-companies) | `sv-more-group` | Pharmaceuticals / health products | [Preview](https://carlmanuel.com/?preview=sv-more-group) | 2026-07-15 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -271,6 +272,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Source** | [Facebook](https://www.facebook.com/Intellismartinc/) · [intellismartinc.com](https://intellismartinc.com/) |
 | **Assets** | Logo + hero + gallery from live site; Motion + Three.js blueprint hero |
 | **Package** | Business Website Redesign (landing sample) · **₱18,000** · 7–10 days |
+| **Outreach** | Email found — **ask before send** · `quotation-email.md` |
+
+---
+
+### SV More Group of Companies
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/sv-more-group/` |
+| **Netlify site** | `sv-more-group` |
+| **Preview host** | `sv-more-group.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=sv-more-group |
+| **Contact** | reply@svmoregroup.net · (632) 8373-6240 |
+| **Address** | #16 Scout Tuazon corner Roces Avenue, Quezon City 1103 |
+| **Category** | Pharmaceuticals / health products · Est. 1987 · ~17K FB followers |
+| **Source** | [Facebook](https://www.facebook.com/SVMoreGroupPH/) · [svmoregroup.com](https://svmoregroup.com/) |
+| **Assets** | Logo + hero + product gallery from live site; Motion + Three.js particles hero |
+| **Package** | Business Website Redesign (landing sample) · **₱18,000** · 7–10 days · 50% upfront |
 | **Outreach** | Email found — **ask before send** · `quotation-email.md` |
 
 ---

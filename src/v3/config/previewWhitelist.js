@@ -89,6 +89,12 @@ export const PREVIEW_SITES = [
     label: "IntelliSmart Technology Inc.",
     netlifySite: "intellismartinc",
   },
+  {
+    id: "sv-more-group",
+    host: "sv-more-group.netlify.app",
+    label: "SV More Group of Companies",
+    netlifySite: "sv-more-group",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

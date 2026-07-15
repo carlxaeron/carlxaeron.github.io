@@ -1,0 +1,92 @@
+/* SV More Group — hero, reveal, health accents */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  [data-hero-animate],
+  [data-hero-bg] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-three-canvas {
+    display: none;
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-header] {
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+[data-header].is-scrolled {
+  box-shadow: 0 4px 24px rgba(12, 61, 58, 0.1);
+}
+
+.hero-bg {
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.hero-bg--svmore {
+  background-image:
+    linear-gradient(135deg, rgba(12, 61, 58, 0.92) 0%, rgba(20, 92, 87, 0.85) 50%, rgba(12, 61, 58, 0.9) 100%),
+    url("assets/hero-health.jpg");
+}
+
+.trust-strip {
+  background: linear-gradient(90deg, #0c3d3a 0%, #145c57 40%, #2a9d8f 50%, #145c57 60%, #0c3d3a 100%);
+}
+
+.gallery-card__img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #e8f5f3;
+}
+
+.filter-active {
+  background-color: #2a9d8f;
+  color: #fff;
+}
+
+.filter-inactive {
+  background-color: transparent;
+}
+
+.hero-three-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.45;
+  mix-blend-mode: screen;
+}
+
+[data-hero] > .relative {
+  z-index: 2;
+}
