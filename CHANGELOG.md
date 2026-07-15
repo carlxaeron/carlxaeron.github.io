@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.40] — 2026-07-15
+
+### Added
+- **DN Group of Companies** client site (`dn-group`) — elevated building-materials redesign (product mosaic, projects, Motion + Three.js blueprint hero)
+- Portfolio preview: `?preview=dn-group` → `dn-group.netlify.app`
+
 ## [3.0.39] — 2026-07-15
 
 ### Added

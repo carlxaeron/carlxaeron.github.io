@@ -101,6 +101,12 @@ export const PREVIEW_SITES = [
     label: "Trumed Pharmaceuticals",
     netlifySite: "trumed-pharma",
   },
+  {
+    id: "dn-group",
+    host: "dn-group.netlify.app",
+    label: "DN Group of Companies",
+    netlifySite: "dn-group",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

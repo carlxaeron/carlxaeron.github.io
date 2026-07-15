@@ -30,6 +30,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [IntelliSmart Technology Inc.](#intellismart-technology-inc) | `intellismart` | System integration / AV / security / BMS | [Preview](https://carlmanuel.com/?preview=intellismart) | 2026-07-15 |
 | [SV More Group of Companies](#sv-more-group-of-companies) | `sv-more-group` | Pharmaceuticals / health products | [Preview](https://carlmanuel.com/?preview=sv-more-group) | 2026-07-15 |
 | [Trumed Pharmaceuticals](#trumed-pharmaceuticals) | `trumed-pharma` | Pharmaceutical marketing / distribution | [Preview](https://carlmanuel.com/?preview=trumed-pharma) | 2026-07-15 |
+| [DN Group of Companies](#dn-group-of-companies) | `dn-group` | Building materials / roofing / metal systems | [Preview](https://carlmanuel.com/?preview=dn-group) | 2026-07-15 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -309,6 +310,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Source** | [trumedpharma.com](https://www.trumedpharma.com/) · [MIMS About](https://www.mims.com/philippines/company/info/trumed/about) |
 | **Assets** | Logo + team hero + product/community gallery from live site; Motion + Three.js particles hero |
 | **Package** | Business Website Redesign (landing sample) · **₱18,000** · 7–10 days · 50% upfront |
+| **Outreach** | Email found — **ask before send** · `quotation-email.md` |
+
+---
+
+### DN Group of Companies
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/dn-group/` |
+| **Netlify site** | `dn-group` |
+| **Preview host** | `dn-group.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=dn-group |
+| **Contact** | dncreativegroup@gmail.com · 0998 846 2400 |
+| **Address** | 1388 Quezon Avenue, DN Corporate Center, Brgy. South Triangle, Quezon City |
+| **Category** | Building materials / roofing / metals · Est. 1983 · ~5.5K FB followers |
+| **Source** | [Facebook](https://www.facebook.com/dngroup.ph/) · [dngroup.com.ph](https://www.dngroup.com.ph/) |
+| **Assets** | Logo, hero, product & project gallery from live site; industrial Motion + Three.js blueprint hero |
+| **Package** | Business Website Redesign (elevated landing) · **₱18,000** · 7–10 days · 50% upfront |
 | **Outreach** | Email found — **ask before send** · `quotation-email.md` |
 
 ---
