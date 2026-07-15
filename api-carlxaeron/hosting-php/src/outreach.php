@@ -62,6 +62,104 @@ function outreach_payment_terms(array $job): string
     return $terms !== '' ? $terms : outreach_default_payment_terms();
 }
 
+/**
+ * Additive % off original quoted amount per follow-up index (0-based).
+ * FU1 3d: +10% · FU2 7d: +10% · FU3 7d: +10% · FU4 7d: +20% → max 50%.
+ *
+ * @return list<int>
+ */
+function outreach_followup_discount_steps(): array
+{
+    return [10, 10, 10, 20];
+}
+
+/** Percent added by the follow-up about to send (given how many already sent). */
+function outreach_followup_discount_step(int $followUpsAlreadySent): int
+{
+    $steps = outreach_followup_discount_steps();
+    return $steps[$followUpsAlreadySent] ?? 0;
+}
+
+/** Cumulative discount % after including the follow-up about to send (capped at 50). */
+function outreach_followup_discount_total(int $followUpsAlreadySent): int
+{
+    $steps = outreach_followup_discount_steps();
+    $total = 0;
+    $upto = min($followUpsAlreadySent + 1, count($steps));
+    for ($i = 0; $i < $upto; $i++) {
+        $total += $steps[$i];
+    }
+    return min(50, $total);
+}
+
+function outreach_parse_amount_pesos(string $amount): ?int
+{
+    if (!preg_match('/(\d[\d,]*)/', $amount, $m)) {
+        return null;
+    }
+    return (int) str_replace(',', '', $m[1]);
+}
+
+function outreach_format_pesos(int $n): string
+{
+    return '₱' . number_format($n);
+}
+
+/**
+ * Build discount + optional commission block for a follow-up.
+ *
+ * @param array<string,mixed> $job
+ * @return array{html:string,text:string,totalPct:int,stepPct:int,discounted:?string}
+ */
+function outreach_followup_offer_copy(array $job, int $followUpsAlreadySent): array
+{
+    $stepPct = outreach_followup_discount_step($followUpsAlreadySent);
+    $totalPct = outreach_followup_discount_total($followUpsAlreadySent);
+    $amountRaw = trim((string) ($job['quoted_amount'] ?? ''));
+    $pesos = $amountRaw !== '' ? outreach_parse_amount_pesos($amountRaw) : null;
+    $discounted = null;
+    if ($pesos !== null && $totalPct > 0) {
+        $discounted = outreach_format_pesos((int) round($pesos * (100 - $totalPct) / 100));
+    }
+
+    $priceHtml = '';
+    $priceText = '';
+    if ($totalPct > 0) {
+        $priceHtml = 'This check-in includes a <strong>' . h((string) $totalPct) . '% discount</strong>'
+            . ($stepPct > 0 && $followUpsAlreadySent > 0
+                ? ' (another <strong>' . h((string) $stepPct) . '%</strong> off)'
+                : '')
+            . ' from the original package'
+            . ($amountRaw !== '' ? ' of ' . h($amountRaw) : '')
+            . ($discounted !== null ? ' — now <strong>' . h($discounted) . '</strong> total' : '')
+            . '. Maximum goodwill discount is 50% off.';
+        $priceText = "This check-in includes a {$totalPct}% discount"
+            . ($stepPct > 0 && $followUpsAlreadySent > 0 ? " (another {$stepPct}% off)" : '')
+            . ' from the original package'
+            . ($amountRaw !== '' ? " of {$amountRaw}" : '')
+            . ($discounted !== null ? " — now {$discounted} total" : '')
+            . '. Maximum goodwill discount is 50% off.';
+    }
+
+    $commissionHtml = 'I can also offer a <strong>commission</strong> if you refer clients or want a partner arrangement — '
+        . 'just message me and we can discuss a fair split.';
+    $commissionText = 'I can also offer a commission if you refer clients or want a partner arrangement — '
+        . 'just message me and we can discuss a fair split.';
+
+    $html = ($priceHtml !== '' ? '<p>' . $priceHtml . '</p>' : '')
+        . '<p>' . $commissionHtml . '</p>';
+    $text = ($priceText !== '' ? $priceText . "\n\n" : '')
+        . $commissionText;
+
+    return [
+        'html' => $html,
+        'text' => $text,
+        'totalPct' => $totalPct,
+        'stepPct' => $stepPct,
+        'discounted' => $discounted,
+    ];
+}
+
 function outreach_ensure_table(): void
 {
     db()->exec(
@@ -136,43 +234,51 @@ function outreach_build_followup_email(array $job): array
     $biz = (string) $job['business_name'];
     $preview = (string) $job['preview_url'];
     $pkg = (string) ($job['package_name'] ?: 'Starter Business Website');
-    $amount = (string) ($job['quoted_amount'] ?: '');
     $payment = outreach_payment_terms($job);
     $count = (int) ($job['follow_up_count'] ?? 0);
-    // Sequence copy: 1st FU = soft 3d check-in; 2nd+ = 1w “still interested?”
+    // Sequence: 1st FU = soft 3d; 2nd+ = 1w “still interested?” + stacking discounts
     $isWeekFollowUp = $count >= 1;
-    $priceNote = $amount !== ''
-        ? ' (' . h($amount) . ' total · ' . h($payment) . ')'
-        : ' (' . h($payment) . ')';
-    $priceNoteText = $amount !== ''
-        ? " ({$amount} total · {$payment})"
-        : " ({$payment})";
+    $offer = outreach_followup_offer_copy($job, $count);
+    $totalPct = $offer['totalPct'];
+    $discounted = $offer['discounted'];
 
     if ($isWeekFollowUp) {
-        $subject = "Still interested? {$biz} website proposal";
+        $subject = $totalPct > 0
+            ? "Still interested? {$totalPct}% off — {$biz} website proposal"
+            : "Still interested? {$biz} website proposal";
         $ask = 'Did you <strong>like</strong> the sample, want <strong>revisions</strong>, or is it <strong>not a fit right now</strong>?'
-            . '<br><br><strong>Reminder:</strong> package total'
-            . ($amount !== '' ? ' is ' . h($amount) : '')
-            . ' — payment is <strong>' . h($payment) . '</strong>. Only the upfront half is due to start.';
+            . '<br><br>Payment stays <strong>' . h($payment) . '</strong>'
+            . ($discounted !== null
+                ? ' on the discounted total of <strong>' . h($discounted) . '</strong>'
+                : '')
+            . '. Only the upfront half is due to start.';
         $askText = 'Did you like the sample, want revisions, or is it not a fit right now?'
-            . "\n\nReminder: payment is {$payment}. Only the upfront half is due to start"
-            . ($amount !== '' ? " (total {$amount})" : '') . '.';
+            . "\n\nPayment stays {$payment}"
+            . ($discounted !== null ? " on the discounted total of {$discounted}" : '')
+            . '. Only the upfront half is due to start.';
     } else {
-        $subject = "Quick check-in — your {$biz} website preview";
+        $subject = $totalPct > 0
+            ? "Quick check-in + {$totalPct}% off — your {$biz} website preview"
+            : "Quick check-in — your {$biz} website preview";
         $ask = 'Did the desktop + mobile preview look useful? Anything to change? Ready to proceed with <strong>'
-            . h($pkg) . '</strong>' . $priceNote . '? Only the upfront portion is due to begin — not the full amount.';
+            . h($pkg) . '</strong>'
+            . ($discounted !== null ? ' at <strong>' . h($discounted) . '</strong>' : '')
+            . '? Only the upfront portion is due to begin — not the full amount.';
         $askText = "Did the preview look useful? Anything to change? Ready to proceed with {$pkg}"
-            . $priceNoteText . '? Only the upfront portion is due to begin — not the full amount.';
+            . ($discounted !== null ? " at {$discounted}" : '')
+            . '? Only the upfront portion is due to begin — not the full amount.';
     }
 
     $html = '<p>Hi ' . h($name) . ',</p>'
         . '<p>Checking in about the sample website for <strong>' . h($biz) . '</strong>.</p>'
         . '<p><strong>Preview:</strong> <a href="' . h($preview) . '">' . h($preview) . '</a></p>'
         . '<p>' . $ask . '</p>'
+        . $offer['html']
         . '<p>No pressure — a short reply is enough.</p>'
         . '<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
         . '<a href="https://carlmanuel.com">carlmanuel.com</a> · info@carlmanuel.com</p>';
     $text = "Hi {$name},\n\nChecking in about {$biz}.\nPreview: {$preview}\n\n{$askText}\n\n"
+        . $offer['text'] . "\n\n"
         . "Carl Louis Manuel\ncarlmanuel.com · info@carlmanuel.com";
 
     return [$subject, $html, $text];

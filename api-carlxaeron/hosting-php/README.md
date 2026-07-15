@@ -26,7 +26,7 @@ Uploads `data/assistant-context.json` with the PHP sources.
 
 1. After you approve a client quotation in Cursor, agent calls `POST /outreachSchedule` with `OUTREACH_SECRET`.
 2. Initial proposal email sends immediately via Private Email.
-3. cPanel/cron runs daily: `scripts/cron-outreach-followups.php` (**3d → 7d → 7d → 7d**, max 4).
+3. cPanel/cron runs daily: `scripts/cron-outreach-followups.php` (**3d → 7d → 7d → 7d**, max 4). Follow-up copy stacks goodwill discount **10% → 20% → 30% → 50%** (off quoted amount) plus a commission/partner invite.
 4. Pause: `POST /outreachPause`.
 
 ## Weekly visit report cron

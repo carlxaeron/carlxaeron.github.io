@@ -230,8 +230,8 @@ After the site is built and `previewUrl` is known, customize the draft files in 
 | `quotation-email.md` | Email | Subject line + full proposal with package table |
 | `quotation-sms.txt` | SMS | Short; aim for one text (~300 chars) |
 | `quotation-messenger.txt` | Messenger / Viber / Telegram | Friendly tone; preview link + package summary |
-| `quotation-followup-3d.md` | Email follow-up (~3 days) | “Did you like the preview?” soft check-in |
-| `quotation-followup-1w.md` | Email follow-up (~1 week) | Still interested? like / revise / not now |
+| `quotation-followup-3d.md` | Email follow-up (~3 days) | Soft check-in + **10%** off + commission offer |
+| `quotation-followup-1w.md` | Email follow-ups (~7d×3) | Stacking discounts: +10% → +10% → +20% (max **50%**) + commission |
 
 **Template placeholders** (replace in all drafts): `{{contactName}}`, `{{contactEmail}}`, `{{businessName}}`, `{{previewUrl}}`, `{{packageName}}`, `{{packageScope}}`, `{{quotedAmount}}`, `{{paymentTerms}}`, `{{timeline}}`, `{{industry}}`.
 
@@ -293,7 +293,7 @@ curl -sS -X POST 'https://api.carlmanuel.com/outreachSchedule' \
 ```
 
 - `sendInitial: true` → sends the proposal now, then queues follow-ups.
-- Hosting cron auto-sends when due: **1st ~3d** (soft), then **up to 3 more at ~7d each** (max **4**). Copy strengthens after the first.
+- Hosting cron auto-sends when due: **1st ~3d** (soft + **10%** off + commission offer), then **up to 3 more at ~7d each** (max **4**) with stacking discounts **+10% → +10% → +20%** (cumulative max **50%** off quoted amount). Server HTML in `outreach_build_followup_email`.
 - Pause anytime: `POST /outreachPause` with `{ secret, slug }` (or slug+contactEmail).
 
 Also update `client.json` → `outreach` (`status=sent`, `cadence: "3d1w"`, `sentAt`, `nextFollowUpAt`).

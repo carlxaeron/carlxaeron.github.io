@@ -26,7 +26,7 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 | POST | `/contact` | Form + SMTP |
 | POST | `/quotation` | Form + SMTP |
 | POST | `/assistant` | ChatAgent — browser Origin + OpenAI (`OPENAI_API_KEY`) |
-| POST | `/outreachSchedule` | **Secret** — after user yes: send initial + queue auto follow-ups (`autoFollowUp: true`, cadence `3d1w` = **3d→7d→7d→7d**, `maxFollowUps: 4`) |
+| POST | `/outreachSchedule` | **Secret** — after user yes: send initial + queue auto follow-ups (`autoFollowUp: true`, cadence `3d1w` = **3d→7d→7d→7d**, `maxFollowUps: 4`). Follow-up emails stack goodwill discount **10%→20%→30%→50%** + commission invite |
 | POST | `/outreachPause` | **Secret** — stop auto follow-ups for a slug |
 
 Live hosting (until full Laravel cutover) uses PHP under `hosting-php/` synced to Stellar. Crons: daily `cron-outreach-followups.php`; **Monday 08:00** `cron-weekly-visit-report.php` (MySQL). Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).

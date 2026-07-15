@@ -89,6 +89,41 @@ for ($sent = 0; $sent < outreach_default_max_followups(); $sent++) {
 }
 assert_same([3, 7, 7, 7], $delays, 'full sequence 3d→7d→7d→7d');
 
+echo "\nfollow-up discount stack (10 → 20 → 30 → 50)\n";
+assert_same([10, 10, 10, 20], outreach_followup_discount_steps(), 'step ladder');
+assert_same(10, outreach_followup_discount_step(0), '3d FU step 10%');
+assert_same(10, outreach_followup_discount_step(1), '1st 7d step 10%');
+assert_same(10, outreach_followup_discount_step(2), '2nd 7d step 10%');
+assert_same(20, outreach_followup_discount_step(3), '3rd 7d step 20%');
+assert_same(10, outreach_followup_discount_total(0), 'after 3d total 10%');
+assert_same(20, outreach_followup_discount_total(1), 'after 1st 7d total 20%');
+assert_same(30, outreach_followup_discount_total(2), 'after 2nd 7d total 30%');
+assert_same(50, outreach_followup_discount_total(3), 'after 3rd 7d total 50%');
+assert_same(15000, outreach_parse_amount_pesos('₱15,000'), 'parse ₱15,000');
+assert_same('₱13,500', outreach_format_pesos(13500), 'format 10% off 15k');
+$offer3d = outreach_followup_offer_copy([
+    'quoted_amount' => '₱15,000',
+], 0);
+assert_same(10, $offer3d['totalPct'], '3d offer totalPct');
+assert_same('₱13,500', $offer3d['discounted'], '3d discounted amount');
+assert_true(str_contains($offer3d['text'], 'commission'), '3d offers commission');
+assert_true(str_contains($offer3d['text'], '10%'), '3d mentions 10%');
+$offerLast = outreach_followup_offer_copy(['quoted_amount' => '₱15,000'], 3);
+assert_same(50, $offerLast['totalPct'], 'last FU total 50%');
+assert_same('₱7,500', $offerLast['discounted'], '50% of 15k');
+[$fuSubject, $fuHtml, $fuText] = outreach_build_followup_email([
+    'contact_name' => 'Test',
+    'business_name' => 'Demo Biz',
+    'preview_url' => 'https://carlmanuel.com/?preview=demo',
+    'package_name' => 'Starter Business Website',
+    'quoted_amount' => '₱15,000',
+    'payment_terms' => '',
+    'follow_up_count' => 0,
+]);
+assert_true(str_contains($fuSubject, '10%'), '3d subject has discount');
+assert_true(str_contains($fuHtml, 'commission'), '3d HTML has commission');
+assert_true(str_contains($fuText, '₱13,500'), '3d text has discounted price');
+
 echo "\nMail header helpers\n";
 assert_same('info@carlmanuel.com', mail_bare_address('info@carlmanuel.com'), 'bare stays bare');
 assert_same('info@carlmanuel.com', mail_bare_address('"Carl Louis Manuel" <info@carlmanuel.com>'), 'strip display name');

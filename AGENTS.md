@@ -48,7 +48,7 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 | [.cursor/skills/firebase-backend/SKILL.md](.cursor/skills/firebase-backend/SKILL.md) | Firebase Analytics + leftover legacy functions (assistant/weekly/license moved/deleted) |
 | [.cursor/skills/namecheap-browser/SKILL.md](.cursor/skills/namecheap-browser/SKILL.md) | Namecheap DNS via browser (when API access unavailable) |
 | [.cursor/skills/onlinejobs-apify/SKILL.md](.cursor/skills/onlinejobs-apify/SKILL.md) | OnlineJobs.ph search, apply, CV, dashboard |
-| [.cursor/skills/client-site-netlify/SKILL.md](.cursor/skills/client-site-netlify/SKILL.md) | Client sites, Netlify, `?preview=`, ask-before-send quotations + 3d→7d×3 follow-ups (max 4) |
+| [.cursor/skills/client-site-netlify/SKILL.md](.cursor/skills/client-site-netlify/SKILL.md) | Client sites, Netlify, `?preview=`, ask-before-send + 3d→7d×3 follow-ups (discount stack to 50% + commission) |
 
 ## Rules (auto-attached by glob)
 

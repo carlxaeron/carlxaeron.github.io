@@ -1,8 +1,8 @@
-# Follow-up (1 week) — {{businessName}}
+# Follow-up (1 week cadence) — {{businessName}}
 
-**Status:** Draft — send only after user approval  
+**Status:** Draft — auto-sent by hosting cron (stacking discounts)  
 **To:** {{contactEmail}}  
-**Subject:** Still interested? {{businessName}} website proposal
+**Subject:** Still interested? (discounted) — {{businessName}} website proposal
 
 ---
 
@@ -11,15 +11,20 @@ Hi {{contactName}},
 Hope you’re doing well. Circling back on the **website proposal** for **{{businessName}}**.
 
 **Preview:** {{previewUrl}}  
-**Package:** {{packageName}} — **{{quotedAmount}}** · {{timeline}}
+**Original package:** {{packageName}} — **{{quotedAmount}}** · {{timeline}}
 
-I’d love to know if:
+Hosting follow-ups stack a goodwill discount (max **50%** off):
 
-- You **liked** the sample and want to move forward  
-- You want **revisions** before deciding  
-- Or it’s **not a fit right now** (totally fine — just say the word)
+| Follow-up | Added | Cumulative |
+|-----------|-------|------------|
+| ~3 days | 10% | 10% |
+| 1st ~7 days | +10% | 20% |
+| 2nd ~7 days | +10% | 30% |
+| 3rd ~7 days | +20% | **50%** |
 
-If timing is better later, I can hold the quote and check in again next month.
+I can also offer a **commission** / partner arrangement — just message me.
+
+I’d love to know if you **liked** the sample, want **revisions**, or it’s **not a fit right now**.
 
 Salamat,  
 **Carl Louis Manuel**  
