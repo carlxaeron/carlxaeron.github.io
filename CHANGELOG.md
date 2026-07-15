@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.47] — 2026-07-15
+
+### Added
+- **San Mateo Medical Center** client site (`san-mateo-medical-center`) — private hospital sample (Ampid 2, San Mateo; trunk lines, Motion + Three.js particles hero)
+- Portfolio preview: `?preview=san-mateo-medical-center` → `san-mateo-medical-center.netlify.app`
+
 ## [3.0.46] — 2026-07-15
 
 ### Added

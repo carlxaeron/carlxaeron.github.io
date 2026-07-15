@@ -131,6 +131,12 @@ export const PREVIEW_SITES = [
     label: "H Vill Hospital",
     netlifySite: "hvill-hospital",
   },
+  {
+    id: "san-mateo-medical-center",
+    host: "san-mateo-medical-center.netlify.app",
+    label: "San Mateo Medical Center",
+    netlifySite: "san-mateo-medical-center",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

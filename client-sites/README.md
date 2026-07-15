@@ -35,6 +35,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Fastpoint PH](#fastpoint-ph) | `fastpoint-ph` | Fleet supply / commercial tires | [Preview](https://carlmanuel.com/?preview=fastpoint-ph) | 2026-07-15 |
 | [Archipelago Builders Corporation](#archipelago-builders-corporation) | `archipelago-builders` | General building contractor (AAA) | [Preview](https://carlmanuel.com/?preview=archipelago-builders) | 2026-07-15 |
 | [H Vill Hospital](#h-vill-hospital) | `hvill-hospital` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=hvill-hospital) | 2026-07-15 |
+| [San Mateo Medical Center](#san-mateo-medical-center) | `san-mateo-medical-center` | Private hospital / healthcare | [Preview](https://carlmanuel.com/?preview=san-mateo-medical-center) | 2026-07-15 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -403,6 +404,23 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | FB cover + logo + 3 gallery photos; Motion + Three.js particles hero |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
 | **Outreach** | Email found — **ask before send** · `quotation-email.md` |
+
+---
+
+### San Mateo Medical Center
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/san-mateo-medical-center/` |
+| **Netlify site** | `san-mateo-medical-center` |
+| **Preview host** | `san-mateo-medical-center.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=san-mateo-medical-center |
+| **Contact** | Trunk 8-539-1400 · Information 0921-605-2365 · **no public email on FB** |
+| **Address** | Gen. Luna Avenue, Ampid 2, San Mateo, Rizal 1850 |
+| **Source** | [Facebook](https://www.facebook.com/SMMC.2016.Official/) (~21K followers) |
+| **Assets** | FB cover (2048×779) + logo + gallery thumbs; Motion + Three.js particles hero |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
+| **Outreach** | No email — Messenger/SMS drafts · ask how to reach |
 
 ---
 

@@ -29,13 +29,13 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "ready",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-15T13:45:22+08:00",
+    "nextFollowUpAt": "2026-07-22T13:45:22+08:00",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "Email from public directory listing (yahoo.com)."
+    "notes": "Initial sent via outreachSchedule; auto follow-ups weekly (max 4)."
   }
 }

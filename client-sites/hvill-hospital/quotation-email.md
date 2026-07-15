@@ -1,6 +1,6 @@
 # Email quotation — H Vill Hospital
 
-**Status:** Draft — ASK before send  
+**Status:** Sent 2026-07-15 — auto follow-ups 1w × 4  
 **To:** hvill.hospital@yahoo.com  
 **Subject:** Website sample for H Vill Hospital — preview on carlmanuel.com
 
