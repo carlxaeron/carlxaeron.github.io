@@ -283,6 +283,7 @@ curl -sS -X POST 'https://api.carlmanuel.com/outreachSchedule' \
     \"previewUrl\": \"https://carlmanuel.com/?preview={slug}\",
     \"packageName\": \"…\",
     \"quotedAmount\": \"…\",
+    \"paymentTerms\": \"50% upfront to begin · 50% on delivery (not the full amount upfront)\",
     \"timeline\": \"…\",
     \"cadence\": \"1w\",
     \"sendInitial\": true,

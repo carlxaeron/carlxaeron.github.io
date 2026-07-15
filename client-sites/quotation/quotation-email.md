@@ -21,7 +21,8 @@ https://carlmanuel.com/?preview=quotation
 |------|---------|
 | **Scope** | One-page responsive site (menu highlights, story, visit & contact), mobile-friendly layout, basic SEO |
 | **Timeline** | 5–7 business days after content approval |
-| **Investment** | **₱15,000** (50% upfront, 50% on delivery) |
+| **Investment (total)** | **₱15,000** |
+| **Payment** | 50% upfront to begin · 50% on delivery (**not** the full amount upfront) |
 
 **Includes:** responsive layout, contact section, basic SEO setup, and deployment. Menu copy, photos, and hours can be updated to match your brand.
 

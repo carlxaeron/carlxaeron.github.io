@@ -22,7 +22,8 @@ https://carlmanuel.com/?preview=intellismart
 |------|---------|
 | **Scope** | Modern one-page redesign sample (solutions, projects, about, FAQ, contact), mobile-first, brand-aligned |
 | **Timeline** | 7–10 business days after content approval |
-| **Investment** | **₱18,000** (50% upfront, 50% on delivery) |
+| **Investment (total)** | **₱18,000** |
+| **Payment** | 50% upfront to begin · 50% on delivery (**not** the full amount upfront) |
 
 **Includes:** responsive layout, solutions/projects sections, contact CTAs (email/phone/Facebook), basic SEO setup, and deployment. Can be adapted as a campaign landing page or homepage refresh direction for your existing site.
 

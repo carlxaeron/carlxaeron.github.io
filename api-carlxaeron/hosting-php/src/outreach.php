@@ -30,6 +30,19 @@ function outreach_normalize_cadence(string $cadence): string
     return $c === '3d' ? '3d' : '1w';
 }
 
+/** Default payment terms — never imply full package is due upfront. */
+function outreach_default_payment_terms(): string
+{
+    return '50% upfront to begin · 50% on delivery (not the full amount upfront)';
+}
+
+/** @param array<string,mixed> $job */
+function outreach_payment_terms(array $job): string
+{
+    $terms = trim((string) ($job['payment_terms'] ?? ''));
+    return $terms !== '' ? $terms : outreach_default_payment_terms();
+}
+
 function outreach_ensure_table(): void
 {
     db()->exec(
@@ -69,6 +82,7 @@ function outreach_build_initial_email(array $job): array
     $pkg = (string) ($job['package_name'] ?: 'Starter Business Website');
     $amount = (string) ($job['quoted_amount'] ?: '');
     $timeline = (string) ($job['timeline'] ?: '');
+    $payment = outreach_payment_terms($job);
 
     $subject = "Website proposal for {$biz} — preview your sample site";
     $html = '<h2>Website proposal for ' . h($biz) . '</h2>'
@@ -77,13 +91,19 @@ function outreach_build_initial_email(array $job): array
         . 'so you can see how your business could look online on desktop and mobile.</p>'
         . '<p><strong>Preview:</strong> <a href="' . h($preview) . '">' . h($preview) . '</a></p>'
         . '<p><strong>Package:</strong> ' . h($pkg) . '<br>'
-        . '<strong>Investment:</strong> ' . h($amount) . '<br>'
+        . ($amount !== '' ? '<strong>Investment (total):</strong> ' . h($amount) . '<br>' : '')
+        . '<strong>Payment:</strong> ' . h($payment) . '<br>'
         . '<strong>Timeline:</strong> ' . h($timeline) . '</p>'
+        . '<p><em>To start, only the upfront portion is due — not the full package amount.</em></p>'
         . '<p>Reply if you like the preview, want changes, or want to proceed.</p>'
         . '<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
         . '<a href="https://carlmanuel.com">carlmanuel.com</a> · info@carlmanuel.com</p>';
     $text = "Hi {$name},\n\nSample website for {$biz}:\n{$preview}\n\n"
-        . "Package: {$pkg}\nInvestment: {$amount}\nTimeline: {$timeline}\n\n"
+        . "Package: {$pkg}\n"
+        . ($amount !== '' ? "Investment (total): {$amount}\n" : '')
+        . "Payment: {$payment}\n"
+        . "To start, only the upfront portion is due — not the full package amount.\n"
+        . "Timeline: {$timeline}\n\n"
         . "Reply if you like it, want changes, or want to proceed.\n\n"
         . "Carl Louis Manuel\ncarlmanuel.com · info@carlmanuel.com";
 
@@ -98,19 +118,31 @@ function outreach_build_followup_email(array $job): array
     $preview = (string) $job['preview_url'];
     $pkg = (string) ($job['package_name'] ?: 'Starter Business Website');
     $amount = (string) ($job['quoted_amount'] ?: '');
+    $payment = outreach_payment_terms($job);
     $count = (int) ($job['follow_up_count'] ?? 0);
     $isWeek = (($job['cadence'] ?? '1w') === '1w') || $count >= 1;
+    $priceNote = $amount !== ''
+        ? ' (' . h($amount) . ' total · ' . h($payment) . ')'
+        : ' (' . h($payment) . ')';
+    $priceNoteText = $amount !== ''
+        ? " ({$amount} total · {$payment})"
+        : " ({$payment})";
 
     if ($isWeek && $count >= 1) {
         $subject = "Still interested? {$biz} website proposal";
-        $ask = 'Did you <strong>like</strong> the sample, want <strong>revisions</strong>, or is it <strong>not a fit right now</strong>?';
-        $askText = 'Did you like the sample, want revisions, or is it not a fit right now?';
+        $ask = 'Did you <strong>like</strong> the sample, want <strong>revisions</strong>, or is it <strong>not a fit right now</strong>?'
+            . '<br><br><strong>Reminder:</strong> package total'
+            . ($amount !== '' ? ' is ' . h($amount) : '')
+            . ' — payment is <strong>' . h($payment) . '</strong>. Only the upfront half is due to start.';
+        $askText = 'Did you like the sample, want revisions, or is it not a fit right now?'
+            . "\n\nReminder: payment is {$payment}. Only the upfront half is due to start"
+            . ($amount !== '' ? " (total {$amount})" : '') . '.';
     } else {
         $subject = "Quick check-in — your {$biz} website preview";
         $ask = 'Did the desktop + mobile preview look useful? Anything to change? Ready to proceed with <strong>'
-            . h($pkg) . '</strong>' . ($amount !== '' ? ' (' . h($amount) . ')' : '') . '?';
+            . h($pkg) . '</strong>' . $priceNote . '? Only the upfront portion is due to begin — not the full amount.';
         $askText = "Did the preview look useful? Anything to change? Ready to proceed with {$pkg}"
-            . ($amount !== '' ? " ({$amount})" : '') . '?';
+            . $priceNoteText . '? Only the upfront portion is due to begin — not the full amount.';
     }
 
     $html = '<p>Hi ' . h($name) . ',</p>'
@@ -165,6 +197,10 @@ function route_outreach_schedule(): void
     $packageName = trim((string) ($body['packageName'] ?? ''));
     $quotedAmount = trim((string) ($body['quotedAmount'] ?? ''));
     $timeline = trim((string) ($body['timeline'] ?? ''));
+    $paymentTerms = trim((string) ($body['paymentTerms'] ?? ''));
+    if ($paymentTerms === '') {
+        $paymentTerms = outreach_default_payment_terms();
+    }
     $cadence = outreach_normalize_cadence((string) ($body['cadence'] ?? '1w'));
     $sendInitial = !empty($body['sendInitial']);
     $autoFollowUp = array_key_exists('autoFollowUp', $body) ? (bool) $body['autoFollowUp'] : true;
@@ -189,6 +225,7 @@ function route_outreach_schedule(): void
         'package_name' => $packageName,
         'quoted_amount' => $quotedAmount,
         'timeline' => $timeline,
+        'payment_terms' => $paymentTerms,
         'contact_email' => $contactEmail,
         'cadence' => $cadence,
         'follow_up_count' => 0,

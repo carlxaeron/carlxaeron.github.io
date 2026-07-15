@@ -23,7 +23,8 @@ https://carlmanuel.com/?preview=extra-rice
 |------|---------|
 | **Scope** | One-page site: featured rice/products, services (walk-in, delivery, wholesale), both Rodriguez locations, contact & Facebook link |
 | **Timeline** | 5–7 business days after you approve content and photos |
-| **Investment** | **₱15,000** (50% upfront, 50% on delivery) |
+| **Investment (total)** | **₱15,000** |
+| **Payment** | 50% upfront to begin · 50% on delivery (**not** the full amount upfront) |
 
 **Includes:** mobile-responsive layout, product section, location info, contact buttons (call / email / Facebook), basic SEO, and hosting setup.
 

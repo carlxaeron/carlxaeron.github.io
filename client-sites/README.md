@@ -319,7 +319,7 @@ client-sites/
     "packageName": "Starter Business Website",
     "packageScope": "One-page responsive site…",
     "quotedAmount": "₱15,000",
-    "paymentTerms": "50% upfront, 50% on delivery",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
     "timeline": "5–7 business days",
     "previewUrl": "https://carlmanuel.com/?preview=business-slug"
   },

@@ -13,7 +13,7 @@
     "packageName": "Business Website Redesign (landing sample)",
     "packageScope": "Modern one-page redesign sample (solutions, projects, about, FAQ, contact CTAs), mobile-first, aligned to existing brand",
     "quotedAmount": "₱18,000",
-    "paymentTerms": "50% upfront, 50% on delivery",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
     "timeline": "7–10 business days after content approval",
     "previewUrl": "https://carlmanuel.com/?preview=intellismart"
   },
@@ -23,14 +23,14 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "draft",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-15T01:03:50+00:00",
+    "nextFollowUpAt": "2026-07-22T01:03:50+00:00",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": ""
+    "notes": "Initial quotation sent 2026-07-15 via outreachSchedule to sales@intellismartinc.com; auto follow-ups 1w enabled (max 2). Payment-terms clarification email sent 2026-07-15 (50% upfront, not full amount)."
   },
   "sources": {
     "facebook": "https://www.facebook.com/Intellismartinc/",

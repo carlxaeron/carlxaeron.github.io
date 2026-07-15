@@ -21,7 +21,8 @@ https://carlmanuel.com/?preview=jazz1-aircon
 |------|---------|
 | **Scope** | One-page responsive site (services, pricing guide, FAQ, contact), mobile-friendly, Facebook integration |
 | **Timeline** | 5–7 business days after content approval |
-| **Investment** | **₱15,000** (50% upfront, 50% on delivery) |
+| **Investment (total)** | **₱15,000** |
+| **Payment** | 50% upfront to begin · 50% on delivery (**not** the full amount upfront) |
 
 **Includes:** responsive layout, service & pricing sections, contact buttons, basic SEO setup, and deployment. We can swap in your real Facebook photos and updated rates when you're ready.
 

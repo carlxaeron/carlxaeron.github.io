@@ -12,7 +12,7 @@ Following up on the **sample redesigned landing page** for **Regan Industrial Sa
 
 **Preview:** https://carlmanuel.com/?preview=regan-industrial
 
-**Package:** Business Website Redesign (landing sample) · **₱18,000** · 7–10 business days after content approval (50% / 50%).
+**Package:** Business Website Redesign (landing sample) · **₱18,000** · 7–10 business days after content approval (50% upfront to begin · 50% on delivery).
 
 If timing isn’t right, no worries — happy to revisit when you’re planning a homepage or campaign page refresh.
 

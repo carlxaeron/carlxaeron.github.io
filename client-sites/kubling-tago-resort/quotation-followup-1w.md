@@ -12,7 +12,7 @@ Following up on the **sample website** I built for **Kubling Tago Resort** — i
 
 **Preview:** https://carlmanuel.com/?preview=kubling-tago-resort
 
-**Package:** Starter Business Website · **₱15,000** · 5–7 business days after content approval (50% / 50%).
+**Package:** Starter Business Website · **₱15,000** · 5–7 business days after content approval (50% upfront to begin · 50% on delivery).
 
 If timing isn’t right, no worries — just reply when you want to revisit. Happy to tweak the design around your peak season or rates sheet.
 

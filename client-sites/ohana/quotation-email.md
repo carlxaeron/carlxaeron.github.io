@@ -23,7 +23,8 @@ https://carlmanuel.com/?preview=ohana
 |------|---------|
 | **Scope** | One-page site: services (registration, tax, documents, consulting), about, contact, Facebook link |
 | **Timeline** | 5–7 business days after you approve content |
-| **Investment** | **₱15,000** (50% upfront, 50% on delivery) |
+| **Investment (total)** | **₱15,000** |
+| **Payment** | 50% upfront to begin · 50% on delivery (**not** the full amount upfront) |
 
 **Includes:** mobile-responsive layout, service sections, contact & email CTAs, basic SEO, and hosting setup.
 

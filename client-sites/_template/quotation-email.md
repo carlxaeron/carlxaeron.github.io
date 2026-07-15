@@ -21,7 +21,8 @@ I prepared a **sample one-page website** for **{{businessName}}** so you can see
 |------|---------|
 | **Scope** | {{packageScope}} |
 | **Timeline** | {{timeline}} |
-| **Investment** | **{{quotedAmount}}** {{paymentTerms}} |
+| **Investment (total)** | **{{quotedAmount}}** |
+| **Payment** | {{paymentTerms}} |
 
 **Includes:** responsive layout, contact section, basic SEO setup, and deployment. Copy and photos can be updated to match your brand.
 

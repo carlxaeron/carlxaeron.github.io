@@ -23,7 +23,8 @@ https://carlmanuel.com/?preview=suyat
 |------|---------|
 | **Scope** | One-page site: services (notarization, affidavits, deeds, consultations), about, contact, Facebook & Maps links |
 | **Timeline** | 5–7 business days after you approve content |
-| **Investment** | **₱15,000** (50% upfront, 50% on delivery) |
+| **Investment (total)** | **₱15,000** |
+| **Payment** | 50% upfront to begin · 50% on delivery (**not** the full amount upfront) |
 
 **Includes:** mobile-responsive layout, service sections, contact CTAs, basic SEO, and hosting setup.
 

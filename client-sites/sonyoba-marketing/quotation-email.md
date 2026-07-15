@@ -21,7 +21,8 @@ https://carlmanuel.com/?preview=sonyoba-marketing
 |------|---------|
 | **Scope** | Modern one-page site with product showcase, category filters, testimonials, FAQ, and contact CTAs — mobile-first, linked to your existing shop |
 | **Timeline** | 7–10 business days after content approval |
-| **Investment** | **₱18,000** (50% upfront, 50% on delivery) |
+| **Investment (total)** | **₱18,000** |
+| **Payment** | 50% upfront to begin · 50% on delivery (**not** the full amount upfront) |
 
 **Includes:** responsive layout, product catalog section, trust badges (COD, free MM delivery), contact integration, basic SEO, and deployment. Can connect to your Shopify catalog or domain when you're ready.
 

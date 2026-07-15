@@ -21,7 +21,8 @@ https://carlmanuel.com/?preview=g3k-cad
 |------|---------|
 | **Scope** | One-page responsive site (services, gallery, FAQ, contact), mobile-friendly, Facebook integration |
 | **Timeline** | 5–7 business days after content approval |
-| **Investment** | **₱15,000** (50% upfront, 50% on delivery) |
+| **Investment (total)** | **₱15,000** |
+| **Payment** | 50% upfront to begin · 50% on delivery (**not** the full amount upfront) |
 
 **Includes:** responsive layout, project gallery, contact section, basic SEO setup, and deployment. We can swap in additional Facebook photos when you're ready.
 

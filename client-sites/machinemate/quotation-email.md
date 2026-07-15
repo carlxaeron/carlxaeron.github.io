@@ -21,7 +21,8 @@ https://carlmanuel.com/?preview=machinemate
 |------|---------|
 | **Scope** | One-page responsive site (services, capabilities, project gallery, FAQ, contact), mobile-friendly, Facebook integration |
 | **Timeline** | 5–7 business days after content approval |
-| **Investment** | **₱15,000** (50% upfront, 50% on delivery) |
+| **Investment (total)** | **₱15,000** |
+| **Payment** | 50% upfront to begin · 50% on delivery (**not** the full amount upfront) |
 
 **Includes:** responsive layout, contact section, project gallery, basic SEO setup, and deployment. We can swap in your real Facebook project photos when you're ready.
 

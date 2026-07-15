@@ -22,7 +22,8 @@ https://carlmanuel.com/?preview=kubling-tago-resort
 |------|---------|
 | **Scope** | One-page responsive site (amenities, gallery, about, FAQ, contact), mobile-friendly, Facebook integration |
 | **Timeline** | 5–7 business days after content approval |
-| **Investment** | **₱15,000** (50% upfront, 50% on delivery) |
+| **Investment (total)** | **₱15,000** |
+| **Payment** | 50% upfront to begin · 50% on delivery (**not** the full amount upfront) |
 
 **Includes:** responsive layout, amenity & gallery sections, contact buttons, basic SEO setup, and deployment. We can update rates, menus, and booking notes when you're ready.
 
