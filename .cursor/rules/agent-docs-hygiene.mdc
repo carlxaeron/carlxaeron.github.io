@@ -1,0 +1,29 @@
+---
+description: Standing permission — proactively update skills/rules/AGENTS.md when workflows change or docs go stale (user need not ask)
+alwaysApply: true
+---
+
+# Agent docs hygiene
+
+The user allows agents to update **`.cursor/skills/`**, **`.cursor/rules/`**, and **`AGENTS.md`** without waiting for an explicit “update the skill” command.
+
+## When to update (do it)
+
+- A workflow the agent just changed or learned (e.g. outreach cadence, test-before-deploy, MCP server ids, preview security)
+- Skills/rules contradict live code or hosting behavior
+- A missing “do not” / checklist would stop a repeated mistake
+- New required commands (unit tests, deploy gates) agents must run
+
+## How
+
+- Prefer a **tight patch** to the existing skill/rule
+- Mirror reality: cadence, max follow-ups, paths, secrets handling, MCPs
+- Mention in the same turn only briefly if useful (“updated skill X so this sticks”)
+- Full detail: [AGENTS.md](../../AGENTS.md) → “Keep agent docs current”
+
+## When not to
+
+- Do **not** edit `.cursor/plans/`
+- Do **not** write speculative process docs or fluff
+- Do **not** expand scope into unrelated skills “while we’re here”
+- Do **not** commit secrets or invent product changelog entries just for doc tweaks

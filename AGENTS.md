@@ -18,6 +18,26 @@ Instructions for AI agents working in this repository.
 3. **Do not edit** `.cursor/plans/` or user plan files.
 4. **Do not commit** `job-applications/`, `exports/`, or `.env` secrets.
 
+## Keep agent docs current (no wait for a command)
+
+You **may and should** update `.cursor/skills/`, `.cursor/rules/`, and `AGENTS.md` on your own when it helps future agents — the user does **not** need to ask each time.
+
+Do it when you:
+
+- Change a real workflow (outreach cadence, deploy gate, MCP ids, preview/security, API paths)
+- Find skills/rules that are **stale or wrong** vs what the code/hosting actually does
+- Add a reusable checklist or “do not” that would prevent a repeat mistake
+- Ship a new test command or deploy prerequisite agents must run
+
+Keep updates **small and useful**:
+
+- Prefer patching the existing skill/rule over new files unless the topic is clearly separate
+- Stay accurate (match code, cron, and live hosting behavior)
+- Skip fluff, speculative process, or large docs that don’t change agent behavior
+- Still **never** edit `.cursor/plans/` or commit secrets
+
+Product commits are separate — don’t invent changelog noise; doc-only agent-guidance fixes can ship with the related change or alone when clearly helpful.
+
 ## Skills (read when task matches)
 
 | Skill | Use when |
@@ -41,6 +61,7 @@ Instructions for AI agents working in this repository.
 | `v3-deploy.mdc` | Build, GitHub Pages, releases |
 | `api-carlxaeron.mdc` | `api-carlxaeron/`, `src/mapping.js` — Laravel API contracts |
 | `test-before-deploy.mdc` | **Must pass unit/feature tests before deploying hosting-php / Laravel / Firebase** |
+| `agent-docs-hygiene.mdc` | Always-on — proactively keep skills/rules/AGENTS accurate (no wait for a command) |
 | `v3-firebase-backend.mdc` | Remaining `functions/` (assistant / weekly report) |
 | `onlinejobs-workflow.mdc` | OJP MCP, job-applications |
 | `client-quotations.mdc` | `client-sites/`, Netlify previews |
