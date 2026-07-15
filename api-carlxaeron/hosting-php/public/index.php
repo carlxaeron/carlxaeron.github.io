@@ -49,6 +49,9 @@ try {
         case '/quotation':
             route_quotation();
             break;
+        case '/assistant':
+            route_assistant();
+            break;
         case '/outreachSchedule':
             route_outreach_schedule();
             break;

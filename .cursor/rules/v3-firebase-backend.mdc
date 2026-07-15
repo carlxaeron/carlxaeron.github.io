@@ -1,5 +1,5 @@
 ---
-description: Remaining Firebase Functions (assistant, weekly report, license). Forms/analytics → api-carlxaeron.
+description: Firebase Analytics client + leftover legacy Cloud Functions. Assistant/weekly on hosting-php; license deleted.
 globs:
   - functions/**
   - extensions/**
@@ -13,22 +13,20 @@ alwaysApply: false
 
 Skill: [`.cursor/skills/firebase-backend/SKILL.md`](../skills/firebase-backend/SKILL.md)
 
-**Moved off Firebase:** contact, quotation, trackVisit, previewFeedback, analyticsSummary → Laravel on **`https://api.carlmanuel.com`** ([`api-carlxaeron/`](../../api-carlxaeron/), skill **api-carlxaeron**).
+**On hosting-php (`api.carlmanuel.com`):** contact, quotation, trackVisit, previewFeedback, analyticsSummary, **assistant**, weekly visit report cron. **license** deleted.
 
-## Still on Firebase (`functions/index.js`)
+## Still Firebase
 
-| Export | Purpose |
+| Piece | Purpose |
 |--------|---------|
-| `assistant` | Chat agent (OpenAI) |
-| `license` | Client WHMCS |
-| `weeklyVisitReport` | Scheduled email report |
+| Analytics client (`src/config.js`) | `logEvent` page/chat metrics |
+| Optional legacy handlers in `functions/index.js` | Unused by prod mapping; emulator / rollback only |
 
 ## `src/mapping.js`
 
-- Forms / analytics → `api.carlmanuel.com`
-- Assistant → Firebase HTTPS function
+All forms / analytics / **assistant** → `https://api.carlmanuel.com/...`
 
-## Deploy (Firebase only)
+## Deploy (legacy functions only)
 
 **Gate — tests first:**
 
@@ -42,20 +40,4 @@ Must pass before:
 cd functions && npm run deploy
 ```
 
-See [`.cursor/rules/test-before-deploy.mdc`](test-before-deploy.mdc).
-
-## Email
-
-- **Forms:** hosting API `.env` (`MAIL_*` / `SMTP_*`) — not Trigger Email
-- **Weekly report:** still `functions/.env` + Trigger Email / SMTP URI as needed
-
-## CORS (assistant)
-
-Must include: `carlmanuel.com`, `www.carlmanuel.com`, `carlxaeron.github.io`, `localhost:3000`.
-
-## Do not
-
-- Commit `functions/.env` or app passwords
-- Assume new form traffic writes to Firestore (historical data only)
-- Redeploy legacy `contact` / `quotation` Cloud Functions as the portfolio source of truth
-- Deploy functions without `npm test` passing
+Assistant / weekly report / forms: skill **api-carlxaeron** + **hosting-ssh** (not this deploy).

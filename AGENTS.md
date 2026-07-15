@@ -7,7 +7,7 @@ Instructions for AI agents working in this repository.
 - **Portfolio V3** (active): `src/v3/` → [carlmanuel.com](https://carlmanuel.com)
 - **Version:** see `package.json` (currently `3.0.x`)
 - **Forms / analytics API:** Laravel 12 [`api-carlxaeron/`](api-carlxaeron/) → [api.carlmanuel.com](https://api.carlmanuel.com)
-- **Firebase (remaining):** assistant, license, weeklyVisitReport (`functions/`)
+- **Firebase (remaining):** Analytics client SDK (`src/config.js`); optional unused legacy handlers in `functions/`
 - **Job tooling:** `OnlineJobs-MCP-Server/`, `job-applications/` (local)
 - **Full history:** [docs/project-history.md](docs/project-history.md)
 
@@ -45,7 +45,7 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 | [.cursor/skills/deploy-portfolio/SKILL.md](.cursor/skills/deploy-portfolio/SKILL.md) | Deploy, release, tag, verify carlmanuel.com, CI failures |
 | [.cursor/skills/api-carlxaeron/SKILL.md](.cursor/skills/api-carlxaeron/SKILL.md) | Laravel API: contact, quote, visits, feedback, analytics, contracts |
 | [.cursor/skills/hosting-ssh/SKILL.md](.cursor/skills/hosting-ssh/SKILL.md) | Namecheap Stellar SSH/SFTP — deploy `api-carlxaeron` / api.carlmanuel.com |
-| [.cursor/skills/firebase-backend/SKILL.md](.cursor/skills/firebase-backend/SKILL.md) | Remaining Firebase: assistant, weekly report, license |
+| [.cursor/skills/firebase-backend/SKILL.md](.cursor/skills/firebase-backend/SKILL.md) | Firebase Analytics + leftover legacy functions (assistant/weekly/license moved/deleted) |
 | [.cursor/skills/namecheap-browser/SKILL.md](.cursor/skills/namecheap-browser/SKILL.md) | Namecheap DNS via browser (when API access unavailable) |
 | [.cursor/skills/onlinejobs-apify/SKILL.md](.cursor/skills/onlinejobs-apify/SKILL.md) | OnlineJobs.ph search, apply, CV, dashboard |
 | [.cursor/skills/client-site-netlify/SKILL.md](.cursor/skills/client-site-netlify/SKILL.md) | Client sites, Netlify, `?preview=`, ask-before-send quotations + 3d→7d×3 follow-ups (max 4) |
@@ -62,7 +62,7 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 | `api-carlxaeron.mdc` | `api-carlxaeron/`, `src/mapping.js` — Laravel API contracts |
 | `test-before-deploy.mdc` | **Must pass unit/feature tests before deploying hosting-php / Laravel / Firebase** |
 | `agent-docs-hygiene.mdc` | Always-on — proactively keep skills/rules/AGENTS accurate (no wait for a command) |
-| `v3-firebase-backend.mdc` | Remaining `functions/` (assistant / weekly report) |
+| `v3-firebase-backend.mdc` | Remaining `functions/` / Analytics |
 | `onlinejobs-workflow.mdc` | OJP MCP, job-applications |
 | `client-quotations.mdc` | `client-sites/`, Netlify previews |
 | `project-overview.mdc` | Always-on repo map |
@@ -79,19 +79,20 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 - Register in `SECTIONS_CONFIG` in `Portfolio.js`
 - Follow `v3-design-system.mdc`
 
-### Contact / quote / visits API
-- Frontend: `Contact.js`, `Quote.js`, analytics → `src/mapping.js` → `https://api.carlmanuel.com`
-- Backend: Laravel [`api-carlxaeron/`](api-carlxaeron/) (skill **api-carlxaeron**)
-- **Before deploy:** `cd api-carlxaeron && php artisan test` (and `php api-carlxaeron/hosting-php/tests/run-unit.php` if outreach changed)
-- Deploy: hosting-ssh to Stellar; `composer install --no-dev` + `php artisan migrate --force` + `config:cache`
+### Contact / quote / visits / assistant API
+- Frontend: `Contact.js`, `Quote.js`, analytics, ChatAgent → `src/mapping.js` → `https://api.carlmanuel.com`
+- Backend: hosting-php / Laravel [`api-carlxaeron/`](api-carlxaeron/) (skill **api-carlxaeron**)
+- **Before deploy:** `cd api-carlxaeron && php artisan test` (and `php api-carlxaeron/hosting-php/tests/run-unit.php`)
+- Deploy: hosting-ssh to Stellar; set `OPENAI_API_KEY` for ChatAgent
+- Weekly report: Mon 08:00 cron `cron-weekly-visit-report.php` (MySQL)
 - SMTP / MySQL: `api-carlxaeron/.env` (never commit)
-- Still Firebase: assistant, license, weeklyVisitReport only — **`cd functions && npm test` before `npm run deploy`**
+- Firebase remaining: Analytics `logEvent` only — **`cd functions && npm test` before any `npm run deploy`** of leftover handlers
 
 ### Release portfolio
 1. `CI=true npm test` + `CI=true npm run build`
 2. Bump `package.json` + `CHANGELOG.md`
 3. Push `main`, tag `vX.Y.Z`
-4. Deploy Laravel API and/or Firebase if those backends changed
+4. Deploy hosting API if backends changed
 5. Verify carlmanuel.com (+ `curl https://api.carlmanuel.com/health` if API changed)
 
 ### OnlineJobs apply

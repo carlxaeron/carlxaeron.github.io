@@ -3,16 +3,30 @@
 declare(strict_types=1);
 
 /**
- * Unit tests for outreach cadence helpers + mail header helpers.
- * No DB or SMTP — pure functions only.
+ * Unit tests for outreach cadence, mail helpers, CORS allowlist, browser origin gate,
+ * slug masking, rate limit.
+ * No DB or SMTP — pure / file-local only.
  *
- * Run (required before deploying hosting-php outreach/mail):
+ * Run (required before deploying hosting-php):
  *   php api-carlxaeron/hosting-php/tests/run-unit.php
  */
 
 $root = dirname(__DIR__);
+
+if (!function_exists('env')) {
+    function env(string $key, ?string $default = null): ?string
+    {
+        return $default;
+    }
+}
+
+require_once $root . '/src/cors.php';
+require_once $root . '/src/rate_limit.php';
+require_once $root . '/src/analytics.php';
 require_once $root . '/src/outreach.php';
 require_once $root . '/src/mail.php';
+require_once $root . '/src/assistant.php';
+require_once $root . '/src/weekly_report.php';
 
 $failed = 0;
 $passed = 0;
@@ -85,6 +99,112 @@ assert_same('"Carl Louis Manuel" <info@carlmanuel.com>', mail_format_mailbox('in
 assert_same('"Quote \\"Me\\"" <a@b.c>', mail_format_mailbox('a@b.c', 'Quote "Me"'), 'escape quotes in name');
 $mid = mail_message_id('carlmanuel.com');
 assert_true((bool) preg_match('/^<[0-9a-f]+\.[0-9a-f]+@carlmanuel\.com>$/', $mid), 'Message-ID shape');
+
+echo "\nCORS allowlist (no * fallback)\n";
+assert_true(is_allowed_origin('https://carlmanuel.com'), 'portfolio origin allowed');
+assert_true(is_allowed_origin('http://localhost:3000'), 'local origin allowed');
+assert_true(!is_allowed_origin('https://evil.example'), 'unknown origin denied');
+assert_true(!is_allowed_origin(''), 'empty origin not allowlisted');
+assert_true(!in_array('*', allowed_origins(), true), 'allowlist has no wildcard');
+$corsSrc = file_get_contents($root . '/src/cors.php') ?: '';
+assert_true(!str_contains($corsSrc, "Access-Control-Allow-Origin: *"), 'cors.php must not set ACAO *');
+assert_true(str_contains($corsSrc, 'X-Outreach-Secret'), 'preflight allows X-Outreach-Secret');
+assert_true(str_contains($corsSrc, 'require_browser_origin'), 'cors.php defines require_browser_origin');
+
+echo "\nbrowser origin / referer gate\n";
+assert_same('https://carlmanuel.com', normalize_origin_url('https://carlmanuel.com/insights'), 'normalize strips path');
+assert_same('http://localhost:3000', normalize_origin_url('http://localhost:3000/#quote'), 'normalize keeps port');
+$prevOrigin = $_SERVER['HTTP_ORIGIN'] ?? null;
+$prevReferer = $_SERVER['HTTP_REFERER'] ?? null;
+unset($_SERVER['HTTP_ORIGIN'], $_SERVER['HTTP_REFERER']);
+assert_true(!request_has_allowed_browser_origin(), 'no origin/referer → denied');
+$_SERVER['HTTP_ORIGIN'] = 'https://evil.example';
+assert_true(!request_has_allowed_browser_origin(), 'evil Origin denied');
+$_SERVER['HTTP_ORIGIN'] = 'https://carlmanuel.com';
+assert_true(request_has_allowed_browser_origin(), 'portfolio Origin allowed');
+unset($_SERVER['HTTP_ORIGIN']);
+$_SERVER['HTTP_REFERER'] = 'https://www.carlmanuel.com/some/path';
+assert_true(request_has_allowed_browser_origin(), 'portfolio Referer allowed');
+$_SERVER['HTTP_REFERER'] = 'https://evil.example/page';
+assert_true(!request_has_allowed_browser_origin(), 'evil Referer denied');
+if ($prevOrigin !== null) {
+    $_SERVER['HTTP_ORIGIN'] = $prevOrigin;
+} else {
+    unset($_SERVER['HTTP_ORIGIN']);
+}
+if ($prevReferer !== null) {
+    $_SERVER['HTTP_REFERER'] = $prevReferer;
+} else {
+    unset($_SERVER['HTTP_REFERER']);
+}
+$handlersSrc = file_get_contents($root . '/routes/handlers.php') ?: '';
+assert_true(substr_count($handlersSrc, 'require_browser_origin()') >= 5, 'public data routes require browser origin (except health)');
+assert_true(str_contains($handlersSrc, 'mask_client_slug'), 'analyticsSummary masks preview slugs');
+assert_true(!preg_match('/function route_health\(\): void\s*\{[^}]*require_browser_origin/', $handlersSrc), 'health stays open without browser origin gate');
+
+echo "\nmask_client_slug\n";
+assert_same('g3****ad', mask_client_slug('g3k-cad'), 'g3k-cad → g3****ad');
+assert_same('jk****on', mask_client_slug('jk-construction'), 'jk-construction → jk****on');
+assert_same('ku****an', mask_client_slug('kubling-tahanan'), 'kubling-tahanan → ku****an');
+assert_same('****', mask_client_slug('ab'), 'short slug fully masked');
+assert_same('****', mask_client_slug('abcd'), 'len 4 fully masked');
+
+echo "\nRate limit (temp dir)\n";
+$tmpdir = sys_get_temp_dir() . '/api-rl-' . bin2hex(random_bytes(4));
+assert_true(rate_limit_check('t', 2, 60, '1.2.3.4', $tmpdir), '1st allow');
+assert_true(rate_limit_check('t', 2, 60, '1.2.3.4', $tmpdir), '2nd allow');
+assert_true(!rate_limit_check('t', 2, 60, '1.2.3.4', $tmpdir), '3rd blocked');
+assert_true(rate_limit_check('t', 2, 60, '9.9.9.9', $tmpdir), 'other IP still allowed');
+assert_same([8, 3600], rate_limit_config('contact'), 'contact default 8/hour');
+assert_same([120, 60], rate_limit_config('trackVisit'), 'trackVisit default 120/min');
+assert_same([30, 3600], rate_limit_config('assistant'), 'assistant default 30/hour');
+foreach (glob($tmpdir . '/*') ?: [] as $f) {
+    @unlink($f);
+}
+@rmdir($tmpdir);
+
+echo "\nAssistant helpers\n";
+$ctx = assistant_load_context();
+assert_true(isset($ctx['SKILLS']) && is_array($ctx['SKILLS']), 'context has SKILLS');
+assert_true(isset($ctx['COMPANIES']) && is_array($ctx['COMPANIES']), 'context has COMPANIES');
+$prompt = assistant_system_prompt($ctx);
+assert_true(str_contains($prompt, 'Carl Louis Manuel'), 'system prompt names Carl');
+$norm = assistant_normalize_messages([
+    ['role' => 'user', 'content' => 'Hello'],
+    ['role' => 'bad', 'content' => 'x'],
+    ['role' => 'assistant', 'content' => ''],
+]);
+assert_same(1, count($norm), 'normalizes one valid message');
+assert_same('user', $norm[0]['role'], 'role preserved');
+$indexSrc = file_get_contents($root . '/public/index.php') ?: '';
+assert_true(str_contains($indexSrc, "case '/assistant'"), 'index routes /assistant');
+
+echo "\nWeekly report helpers\n";
+$map = [];
+weekly_report_inc($map, 'home');
+weekly_report_inc($map, 'home');
+weekly_report_inc($map, 'about');
+$top = weekly_report_top($map, 8);
+assert_same([['home', 2], ['about', 1]], $top, 'top sorts by count');
+$mail = weekly_report_build_mail([
+    'weekLabel' => '2026-07-08 → 2026-07-15',
+    'totalEvents' => 10,
+    'pageViews' => 4,
+    'sectionViews' => 3,
+    'previewViews' => 3,
+    'uniqueVisitors' => 2,
+    'uniqueSessions' => 2,
+    'totalLikes' => 1,
+    'totalDislikes' => 0,
+    'topSections' => [['home', 2]],
+    'topPreviews' => [['jk-construction', 3]],
+    'topReferrers' => [['Direct / none', 5]],
+    'devices' => [['Desktop', 4]],
+]);
+assert_true(str_contains($mail['subject'], 'Weekly portfolio visit report'), 'mail subject');
+assert_true(str_contains($mail['html'], 'jk-construction'), 'admin mail keeps raw slug');
+assert_true(str_contains($mail['text'], 'jk-construction'), 'text keeps raw slug');
+assert_same('info@carlmanuel.com', $mail['replyTo'], 'reply-to');
 
 echo "\n";
 if ($failed > 0) {

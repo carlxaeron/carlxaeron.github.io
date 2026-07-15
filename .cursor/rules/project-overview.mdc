@@ -18,7 +18,7 @@ alwaysApply: true
 |-----------|------|--------|
 | Portfolio V3 | `src/v3/` | GitHub Pages (`docs/`) |
 | Laravel API (forms/analytics) | `api-carlxaeron/` | Namecheap Stellar → `https://api.carlmanuel.com` (hosting-ssh) |
-| Firebase backend | `functions/` | `cd functions && npm run deploy` (assistant / weekly report) |
+| Firebase (Analytics + leftover handlers) | `functions/` / `src/config.js` | Assistant + weekly on hosting-php; license deleted |
 | Job applications | `OnlineJobs-MCP-Server/`, `job-applications/` | Local only |
 | Client quotation sites | `client-sites/` | Netlify per folder · [catalog](client-sites/README.md) |
 
@@ -39,9 +39,9 @@ Config: `src/v3/containers/Portfolio/Portfolio.js` · Content: `src/external-con
 | Task | Skill |
 |------|--------|
 | Deploy / release portfolio | `.cursor/skills/deploy-portfolio/` |
-| Contact / quote / visits API | `.cursor/skills/api-carlxaeron/` |
+| Contact / quote / visits / assistant API | `.cursor/skills/api-carlxaeron/` |
 | Deploy API to Stellar | `.cursor/skills/hosting-ssh/` |
-| Assistant / weekly report (Firebase) | `.cursor/skills/firebase-backend/` |
+| Firebase Analytics / leftover functions | `.cursor/skills/firebase-backend/` |
 | OnlineJobs search & apply | `.cursor/skills/onlinejobs-apify/` |
 | Client site + Netlify | `.cursor/skills/client-site-netlify/` |
 | Quotation send / follow-up (ask first; **yes** → auto **3d→7d×3** max 4) | `.cursor/skills/client-site-netlify/` (Step 5 outreach gate) |

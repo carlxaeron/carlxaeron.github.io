@@ -1,6 +1,7 @@
 /**
  * Minimal smoke checks before `npm run deploy`.
- * Does not init Firebase — only verifies expected export names stay present.
+ * Does not init Firebase — verifies migrated endpoints were removed
+ * and remaining legacy handlers still export.
  */
 'use strict';
 
@@ -10,16 +11,27 @@ const path = require('path');
 const indexPath = path.join(__dirname, '..', 'index.js');
 const src = fs.readFileSync(indexPath, 'utf8');
 
-const requiredExports = ['assistant', 'license', 'weeklyVisitReport'];
 let failed = 0;
 
-for (const name of requiredExports) {
+const removed = ['assistant', 'license', 'weeklyVisitReport'];
+for (const name of removed) {
   const re = new RegExp(`exports\\.${name}\\s*=`);
-  if (!re.test(src)) {
-    console.error(`FAIL missing export: ${name}`);
+  if (re.test(src)) {
+    console.error(`FAIL export should be removed: ${name}`);
     failed += 1;
   } else {
-    console.log(`PASS export present: ${name}`);
+    console.log(`PASS export removed: ${name}`);
+  }
+}
+
+const remaining = ['contact', 'quotation', 'trackVisit', 'previewFeedback', 'analyticsSummary'];
+for (const name of remaining) {
+  const re = new RegExp(`exports\\.${name}\\s*=`);
+  if (!re.test(src)) {
+    console.error(`FAIL missing legacy export: ${name}`);
+    failed += 1;
+  } else {
+    console.log(`PASS legacy export present: ${name}`);
   }
 }
 

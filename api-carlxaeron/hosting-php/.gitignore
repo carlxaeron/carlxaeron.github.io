@@ -1,0 +1,5 @@
+# Runtime rate-limit counters (keep directory)
+storage/rate-limit/*
+!storage/rate-limit/.gitkeep
+
+.env

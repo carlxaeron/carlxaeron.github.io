@@ -15,8 +15,8 @@ Reference rule: [`.cursor/rules/v3-deploy.mdc`](../../rules/v3-deploy.mdc). Do *
 - **Build:** `npm run build` → copies `build/*` to `docs/`
 - **Deploy:** push to `main` → `.github/workflows/static.yml`
 - **Domain:** `public/CNAME` → `carlmanuel.com`
-- **Backend:** contact, quotation, assistant URLs in `src/mapping.js`; CORS in `functions/index.js`
-- **Email:** Trigger Email extension + `functions/.env` SMTP (Gmail App Password)
+- **Backend:** contact, quotation, analytics, assistant URLs in `src/mapping.js` → `https://api.carlmanuel.com`
+- **Email / weekly report:** Private Email SMTP + hosting crons (not Firebase Trigger Email for forms)
 - **History:** [docs/project-history.md](../../../docs/project-history.md)
 
 ## Release checklist
@@ -30,7 +30,7 @@ Deploy progress:
 - [ ] CHANGELOG + version bumped
 - [ ] Merged to main and pushed
 - [ ] Tag + GitHub Release created
-- [ ] Firebase functions deployed (if CORS/backend/forms/email changed)
+- [ ] Hosting API deployed (if forms/analytics/assistant/outreach changed)
 - [ ] Contact + quote forms submit; email received at info@carlmanuel.com
 - [ ] carlmanuel.com verified
 ```
@@ -74,30 +74,10 @@ gh release create vX.Y.Z --title "vX.Y.Z" --notes "Summary from CHANGELOG"
 
 Adjust tag message and release notes to match the CHANGELOG entry.
 
-## Step 5 — Firebase functions (conditional)
+## Step 5 — Hosting API / Firebase (conditional)
 
-Run **only** if `functions/index.js`, assistant / license / weekly report, or CORS origins changed.
-
-**Gate first:**
-
-```bash
-cd functions && npm test
-```
-
-Then:
-
-```bash
-cd functions && npm run deploy
-```
-
-(Contact/quotation live on api.carlmanuel.com — deploy those via hosting-ssh after `php artisan test` / `hosting-php/tests/run-unit.php` as applicable.)
-
-Allowed origins must include:
-
-- `https://carlmanuel.com`
-- `https://www.carlmanuel.com`
-- `https://carlxaeron.github.io`
-- `http://localhost:3000`
+- **Forms, analytics, assistant, outreach, weekly cron:** hosting-ssh after `php api-carlxaeron/hosting-php/tests/run-unit.php` (and `php artisan test` if Laravel changed). Skill **api-carlxaeron**.
+- **Legacy Cloud Functions only:** `cd functions && npm test && npm run deploy` — rarely needed; assistant/weekly/license are off Firebase.
 
 ## Step 6 — Verify production
 

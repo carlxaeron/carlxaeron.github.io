@@ -1,6 +1,6 @@
 ---
 name: api-carlxaeron
-description: Laravel 12 portfolio API on Namecheap (api.carlmanuel.com) — contact, quotation, visits, preview feedback, analytics. Use when changing api-carlxaeron, deploying the hosting API, SMTP/MySQL for forms, or Firebase-compatible response contracts.
+description: Laravel/PHP portfolio API on Namecheap (api.carlmanuel.com) — contact, quotation, visits, analytics, ChatAgent assistant, weekly report cron. Use when changing api-carlxaeron, deploying the hosting API, SMTP/MySQL, or Firebase-compatible response contracts.
 ---
 
 # api-carlxaeron (Laravel 12)
@@ -13,7 +13,7 @@ description: Laravel 12 portfolio API on Namecheap (api.carlmanuel.com) — cont
 
 Portfolio frontend URLs: [`src/mapping.js`](../../../src/mapping.js) → `https://api.carlmanuel.com/...`
 
-Still on Firebase (skill **firebase-backend**): assistant, license, weeklyVisitReport.
+Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ optional unused legacy handlers). Assistant + weekly report are hosting-php; **license** deleted.
 
 ## Endpoints (unprefixed — not `/api/...`)
 
@@ -25,18 +25,32 @@ Still on Firebase (skill **firebase-backend**): assistant, license, weeklyVisitR
 | GET | `/analyticsSummary` | Insights panel |
 | POST | `/contact` | Form + SMTP |
 | POST | `/quotation` | Form + SMTP |
+| POST | `/assistant` | ChatAgent — browser Origin + OpenAI (`OPENAI_API_KEY`) |
 | POST | `/outreachSchedule` | **Secret** — after user yes: send initial + queue auto follow-ups (`autoFollowUp: true`, cadence `3d1w` = **3d→7d→7d→7d**, `maxFollowUps: 4`) |
 | POST | `/outreachPause` | **Secret** — stop auto follow-ups for a slug |
 
-Live hosting (until full Laravel cutover) uses PHP under `hosting-php/` synced to Stellar. Daily cron: `scripts/cron-outreach-followups.php`. Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).
+Live hosting (until full Laravel cutover) uses PHP under `hosting-php/` synced to Stellar. Crons: daily `cron-outreach-followups.php`; **Monday 08:00** `cron-weekly-visit-report.php` (MySQL). Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).
 
-**Before deploying `hosting-php` outreach changes**, run:
+### Public security layer (hosting-php)
+
+| Control | Detail |
+|---------|--------|
+| CORS | Allowlist only — **never** `Access-Control-Allow-Origin: *` (`src/cors.php`) |
+| Browser gate | Public data routes (`analyticsSummary`, contact, quotation, trackVisit, previewFeedback) require allowlisted **Origin** or **Referer** (`require_browser_origin`); bare curl / address-bar → **403**. `/health` stays open. Outreach still `OUTREACH_SECRET` |
+| Slug mask | `analyticsSummary` `previewStats[].slug` masked server-side (`mask_client_slug`: `g3k-cad` → `g3****ad`) — no raw client slugs in JSON |
+| Rate limits | Per-IP file counters in `storage/rate-limit/` (`src/rate_limit.php`); env `RATE_LIMIT_*` |
+| Headers | `nosniff`, `X-Frame-Options: DENY`, `no-store`, CSP `default-src 'none'` |
+| Outreach | `OUTREACH_SECRET` + outreach rate bucket |
+
+Forms / Insights stay public to the SPA (browser sends Origin). Defaults: contact/quote 8/h, visits 120/min, feedback 30/h, summary 60/min, outreach 60/h.
+
+**Before deploying `hosting-php` changes**, run:
 
 ```bash
 php api-carlxaeron/hosting-php/tests/run-unit.php
 ```
 
-Must pass (exit 0). See rule **test-before-deploy**.
+Must pass (exit 0). See rule **test-before-deploy**. On server: `mkdir -p storage/rate-limit`.
 
 Response shape (Firebase-compatible):
 
@@ -108,7 +122,7 @@ cd api-carlxaeron && php artisan test
 php api-carlxaeron/hosting-php/tests/run-unit.php
 ```
 
-Unit: `ApiResponse`, `AnalyticsExclusion`, `PortfolioMailer`, **`hosting-php/tests/run-unit.php`** (outreach cadence + `mail_*` helpers).  
+Unit: `ApiResponse`, `AnalyticsExclusion`, `PortfolioMailer`, **`hosting-php/tests/run-unit.php`** (outreach cadence + `mail_*` + CORS + browser origin gate + `mask_client_slug` + rate limit).  
 Feature: full endpoint contracts + exclusion / dedupe / mail.
 
 **Deploy gate:** never upload `hosting-php/src/outreach.php` (or cron scripts) if outreach unit tests fail. Never deploy Laravel without `php artisan test` green.

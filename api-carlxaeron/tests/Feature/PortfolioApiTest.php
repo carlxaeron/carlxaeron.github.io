@@ -138,13 +138,13 @@ class PortfolioApiTest extends TestCase
             'visitor_id' => 'v1',
             'session_id' => 's1',
             'event_type' => 'preview_view',
-            'preview_slug' => 'demo',
+            'preview_slug' => 'jk-construction',
             'created_at' => now(),
         ]);
         PreviewFeedback::query()->create([
             'visitor_id' => 'v1',
             'session_id' => 's1',
-            'preview_slug' => 'demo',
+            'preview_slug' => 'jk-construction',
             'sentiment' => 'like',
             'created_at' => now(),
         ]);
@@ -153,6 +153,7 @@ class PortfolioApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('data.totalPreviewViews', 1)
             ->assertJsonPath('data.totalLikes', 1)
+            ->assertJsonPath('data.previewStats.0.slug', 'jk****on')
             ->assertJsonStructure([
                 'status',
                 'message',

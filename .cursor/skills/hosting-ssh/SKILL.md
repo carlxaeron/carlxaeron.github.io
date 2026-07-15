@@ -56,16 +56,16 @@ Hosting SSH:
 
 Self-hosted **PHP API** (Laravel app in repo; live Stellar tree currently custom PHP + `hosting-php/` outreach) under `public_html/api-carlxaeron`. Public base: `https://api.carlmanuel.com`. Document root → `public_html/api-carlxaeron/public`.
 
-### Outreach cron (offline follow-ups)
+### Outreach + weekly report crons
 
 ```
-Outreach / follow-ups:
-- [ ] OUTREACH_SECRET set in hosting .env
-- [ ] crontab: daily scripts/cron-outreach-followups.php
-- [ ] Initial send only via /outreachSchedule after user approval in Cursor
-- [ ] On yes-to-send: autoFollowUp true, cadence 3d1w, maxFollowUps 4 (3d→7d→7d→7d)
-- [ ] Follow-ups auto-send when due (Private Email SMTP)
-- [ ] Pause via /outreachPause when prospect opts out
+Crons on Stellar:
+- [ ] OUTREACH_SECRET (and optional CRON_SECRET) in hosting .env
+- [ ] crontab daily: scripts/cron-outreach-followups.php
+- [ ] crontab Mon 08:00 Asia/Manila: scripts/cron-weekly-visit-report.php
+- [ ] OPENAI_API_KEY for POST /assistant (ChatAgent)
+- [ ] Never wipe crontab — merge when adding jobs
+- [ ] Pause outreach via /outreachPause when prospect opts out
 ```
 
 ### Deploy gate (required)

@@ -76,4 +76,16 @@ final class AnalyticsExclusion
 
         return 'Desktop';
     }
+
+    /** Public Insights slug mask — mirrors hosting-php mask_client_slug / frontend maskClientSlug. */
+    public function maskClientSlug(?string $slug): string
+    {
+        $s = trim((string) $slug);
+        $len = strlen($s);
+        if ($len <= 4) {
+            return str_repeat('*', max($len, 4));
+        }
+
+        return substr($s, 0, 2) . '****' . substr($s, -2);
+    }
 }

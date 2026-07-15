@@ -204,6 +204,7 @@ function route_outreach_schedule(): void
     if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
         send_error('Method not allowed');
     }
+    rate_limit_route('outreach');
 
     $body = json_body();
     outreach_require_secret($body);
@@ -323,6 +324,7 @@ function route_outreach_pause(): void
     if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
         send_error('Method not allowed');
     }
+    rate_limit_route('outreach');
     $body = json_body();
     outreach_require_secret($body);
     outreach_ensure_table();

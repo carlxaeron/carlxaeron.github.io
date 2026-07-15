@@ -60,4 +60,12 @@ class AnalyticsExclusionTest extends TestCase
 
         $this->assertSame('9.9.9.9', $this->analytics->clientIp());
     }
+
+    public function test_mask_client_slug_matches_insights_pattern(): void
+    {
+        $this->assertSame('g3****ad', $this->analytics->maskClientSlug('g3k-cad'));
+        $this->assertSame('jk****on', $this->analytics->maskClientSlug('jk-construction'));
+        $this->assertSame('****', $this->analytics->maskClientSlug('demo'));
+        $this->assertSame('****', $this->analytics->maskClientSlug('ab'));
+    }
 }

@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.45] — 2026-07-15
+
+### Changed
+- **ChatAgent:** `assistant` URL → `https://api.carlmanuel.com/assistant` (off Firebase)
+- **Weekly visit email + license:** weekly report on hosting MySQL cron; Firebase `assistant` / `weeklyVisitReport` / `license` removed
+
 ## [3.0.44] — 2026-07-15
 
 ### Changed

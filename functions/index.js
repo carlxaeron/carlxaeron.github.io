@@ -8,7 +8,6 @@
  */
 
 const {onRequest} = require("firebase-functions/v2/https");
-const {onSchedule} = require("firebase-functions/v2/scheduler");
 const logger = require("firebase-functions/logger");
 const admin = require("firebase-admin");
 const { sendError, sendSuccess } = require("./helper");
@@ -18,8 +17,6 @@ const {
   isExcludedAnalyticsRequest,
   isExcludedVisitRecord,
 } = require("./analyticsExclusion");
-const { SKILLS, PROJECTS_DESCRIPTION, COMPANIES, EXPERIENCES, PROJECTS_DESCRIPTION2 } = require("./external-config");
-const https = require('https');
 
 admin.initializeApp();
 
@@ -409,100 +406,6 @@ async function sendContactEmailDirect(mailContent) {
   });
 }
 
-// add new function for API for my AI assistant
-exports.assistant = onRequest((request, response) => {
-  // Allow these origins
-  const allowedOrigins = [
-    'https://carlxaeron.github.io',
-    'https://carlmanuel.com',
-    'https://www.carlmanuel.com',
-    'http://localhost:3000',
-  ];
-  const origin = request.headers.origin;
-
-  if (allowedOrigins.includes(origin)) {
-    response.setHeader('Access-Control-Allow-Origin', origin);
-  } else {
-    response.setHeader('Access-Control-Allow-Origin', '*');
-  }
-
-  response.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  // Handle preflight requests
-  if (request.method === 'OPTIONS') {
-    response.status(204).send('');
-    return;
-  }
-
-  const { messages } = request.body;
-
-  // Perform validation on the request body
-  if (!messages) {
-    sendError({ response }, { message: "Missing required fields" });
-    return;
-  }
-
-  const data = {
-    model: 'gpt-3.5-turbo',
-    messages: [
-      { role: 'system', content: 'You are Carl Louis Manuel assistant and you will only answer from these data and answer it professionally: ' + JSON.stringify({
-        ...SKILLS,
-        'DESCRIPTION': PROJECTS_DESCRIPTION,
-        'DESCRIPTIONAI': PROJECTS_DESCRIPTION2,
-        ...COMPANIES,
-        ...EXPERIENCES,
-      }) },
-      ...messages,
-    ],
-  };
-
-  // Send message to AI assistant
-  const options = {
-    hostname: 'api.openai.com',
-    path: '/v1/chat/completions',
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    // i want to add payload
-    body: {
-      "model": "gpt-3.5-turbo",
-      "messages": messages,
-    },
-  };
-
-  const req = https.request(options, (res) => {
-    let data = '';
-
-    res.on('data', (chunk) => {
-      data += chunk;
-    });
-
-    res.on('end', () => {
-      const json = JSON.parse(data);
-
-      if(json.choices) {
-        logger.info("AI assistant response", { structuredData: true, response: json });
-        // Send success response to the client
-        sendSuccess({ response }, { message: "", data: json.choices });
-      } else {
-        logger.error("Error sending request to AI assistant", { structuredData: true, error: json, data: process.env });
-        sendError({ response }, { message: "Error sending request to AI assistant" });
-      }
-    });
-  });
-
-  req.on('error', (error) => {
-    logger.error("Error sending request to AI assistant", { structuredData: true, error, data: process.env });
-    sendError({ response }, { message: "Error sending request to AI assistant" });
-  });
-
-  req.write(JSON.stringify(data));
-  req.end();
-});
-
 exports.contact = onRequest((request, response) => {
   // Allow these origins
   const allowedOrigins = [
@@ -762,57 +665,6 @@ exports.trackVisit = onRequest((request, response) => {
     });
 });
 
-exports.weeklyVisitReport = onSchedule(
-  {
-    schedule: "0 8 * * 1",
-    timeZone: "Asia/Manila",
-  },
-  async () => {
-    const now = new Date();
-    const weekAgo = new Date(now);
-    weekAgo.setDate(weekAgo.getDate() - 7);
-
-    const reportId = weekAgo.toISOString().slice(0, 10);
-    const reportRef = admin.firestore().collection("analytics_reports").doc(reportId);
-    const existing = await reportRef.get();
-    if (existing.exists) {
-      logger.info("Weekly visit report already sent", { reportId });
-      return;
-    }
-
-    const stats = await aggregateWeeklyVisitStats(weekAgo, now);
-    const mailPayload = buildWeeklyVisitReportPayload(stats);
-
-    try {
-      await queueMailDocuments(mailPayload);
-      logger.info("Weekly visit report queued in mail collection", { structuredData: true, reportId });
-    } catch (queueError) {
-      logger.error("Failed to queue weekly visit report", { structuredData: true, error: queueError });
-      throw queueError;
-    }
-
-    try {
-      await sendContactEmailDirect(mailPayload);
-      logger.info("Weekly visit report sent via SMTP", { structuredData: true, reportId });
-    } catch (smtpError) {
-      logger.error("Failed to send weekly visit report via SMTP", { structuredData: true, error: smtpError });
-    }
-
-    await reportRef.set({
-      reportId,
-      sentAt: new Date(),
-      stats: {
-        totalEvents: stats.totalEvents,
-        uniqueVisitors: stats.uniqueVisitors,
-        uniqueSessions: stats.uniqueSessions,
-        pageViews: stats.pageViews,
-        sectionViews: stats.sectionViews,
-        previewViews: stats.previewViews,
-      },
-    });
-  }
-);
-
 exports.previewFeedback = onRequest(async (request, response) => {
   applyCorsHeaders(request, response);
 
@@ -914,23 +766,4 @@ exports.analyticsSummary = onRequest(async (request, response) => {
     logger.error("Error building analytics summary", { structuredData: true, error });
     sendError({ response }, { message: "Error loading analytics" });
   }
-});
-
-exports.license = onRequest((request, response) => {
-  console.log(request.body);
-  const requestBody = request.body;
-
-  const allowedDomains = ['https://vivawellnessdripdotcom.test', 'https://vivawellnessdrip.com', 'https://staging.vivawellnessdrip.com']
-
-  let valid = false;
-  if (requestBody.license_key === 'carlxaeron09@gmail.com' && allowedDomains.includes(requestBody.domain)) {
-    valid = true;
-  }
-
-  if (valid) return sendSuccess({ response, request }, { message: "License validated", data: {
-    status: 'valid',
-  } });
-  else return sendError({ response, request }, { message: "License invalid", data: {
-    status: 'invalid',
-  } });
 });

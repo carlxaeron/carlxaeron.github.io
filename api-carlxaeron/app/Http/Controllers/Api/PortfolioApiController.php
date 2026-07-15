@@ -199,7 +199,7 @@ class PortfolioApiController extends Controller
         $previewStats = [];
         foreach ($slugs as $slug) {
             $previewStats[] = [
-                'slug' => $slug,
+                'slug' => $this->analytics->maskClientSlug($slug),
                 'views' => $previewViews[$slug] ?? 0,
                 'likes' => $previewLikes[$slug] ?? 0,
                 'dislikes' => $previewDislikes[$slug] ?? 0,
