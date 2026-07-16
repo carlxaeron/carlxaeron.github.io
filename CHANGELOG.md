@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.54] — 2026-07-17
+
+### Added
+- **SEO prerender** — static HTML injected into `index.html` at build time (`#seo-prerender` with `<h1>Carl Louis Manuel</h1>`, section headings, JSON-LD) for crawlers that do not execute JavaScript
+- **SeoHead** — `react-helmet` meta tags (title, description, canonical, Open Graph, Twitter) wired in `Index.js`
+- **Build** — `scripts/inject-seo-prerender.cjs` runs after CRA build; `sitemap.xml` lastmod updated
+- **Tests** — `portfolioSeo.test.js`, `inject-seo-prerender.test.js`, `Index.test.js` SeoHead coverage
+
 ## [3.0.53] — 2026-07-17
 
 ### Added

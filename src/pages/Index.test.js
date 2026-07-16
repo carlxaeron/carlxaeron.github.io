@@ -3,6 +3,9 @@ import Index from "./Index";
 import { ADMIN_TOKEN_KEY } from "../v3/admin/adminAuth";
 
 jest.mock("../components/ChatAgent", () => () => null);
+jest.mock("react-helmet", () => ({
+  Helmet: ({ children }) => <>{children}</>,
+}));
 jest.mock("../v3/containers/Portfolio/Portfolio", () => () => (
   <div data-testid="portfolio-mock">Portfolio</div>
 ));
@@ -95,6 +98,18 @@ describe("Index preview routing", () => {
     expect(screen.getByTestId("preview-showcase-error")).toBeInTheDocument();
     expect(screen.getByText(/evil-slug/i)).toBeInTheDocument();
   });
+
+  test("does not add noindex robots meta in portfolio mode", () => {
+    mockSearch("");
+    render(<Index />);
+    expect(document.querySelector('meta[name="robots"][content="noindex, nofollow"]')).toBeNull();
+  });
+
+  test("adds noindex robots meta for preview mode", () => {
+    mockSearch("?preview=jk-construction");
+    render(<Index />);
+    expect(document.querySelector('meta[name="robots"][content="noindex, nofollow"]')).toBeTruthy();
+  });
 });
 
 describe("Index admin routing", () => {
@@ -113,6 +128,7 @@ describe("Index admin routing", () => {
     render(<Index />);
     expect(screen.getByTestId("admin-login-mock")).toBeInTheDocument();
     expect(screen.queryByTestId("portfolio-mock")).not.toBeInTheDocument();
+    expect(document.querySelector('meta[name="robots"][content="noindex, nofollow"]')).toBeTruthy();
   });
 
   test("renders dashboard for #admin when token present", () => {

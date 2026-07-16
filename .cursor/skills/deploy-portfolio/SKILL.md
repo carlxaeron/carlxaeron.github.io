@@ -12,7 +12,7 @@ Reference rule: [`.cursor/rules/v3-deploy.mdc`](../../rules/v3-deploy.mdc). Do *
 ## Architecture (quick)
 
 - **Active app:** `src/v3/` via `src/pages/Index.js`
-- **Build:** `npm run build` → copies `build/*` to `docs/`
+- **Build:** `npm run build` → `react-scripts build` → `scripts/inject-seo-prerender.cjs` (static HTML in `#root` for crawlers) → copies `build/*` to `docs/`
 - **Deploy:** push to `main` → `.github/workflows/static.yml`
 - **Domain:** `public/CNAME` → `carlmanuel.com`
 - **Backend:** contact, quotation, analytics, assistant URLs in `src/mapping.js` → `https://api.carlmanuel.com`

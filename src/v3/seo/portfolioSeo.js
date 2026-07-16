@@ -1,0 +1,162 @@
+/**
+ * SEO helpers and static prerender HTML for the main portfolio landing page.
+ * Used at build time (scripts/inject-seo-prerender.cjs) and runtime (SeoHead).
+ */
+
+const { SKILLS, EXPERIENCES, COMPANIES } = require("../../external-config");
+
+const SITE_URL = "https://carlmanuel.com";
+
+const PORTFOLIO_SEO = {
+  siteUrl: SITE_URL,
+  title:
+    "Carl Louis Manuel — Building AI-Powered Applications | Full-Stack Engineer & SaaS Builder",
+  description:
+    "Building AI-powered enterprise applications and SaaS products. 12+ years across banks, media companies & enterprises — ReactJS, Laravel, OpenAI API, Flutter, Firebase. Senior Full-Stack Engineer based in the Philippines.",
+  hero: {
+    eyebrow: "Building AI-Powered Enterprise Applications",
+    nameLine1: "Carl Louis",
+    nameLine2: "Manuel",
+    subheadline:
+      "12+ years architecting production-grade systems for banks, media companies & enterprises — with AI built in. ReactJS · Laravel · OpenAI API · Firebase · Flutter",
+  },
+  about: {
+    heading: "I'm Carl Louis Manuel",
+    intro:
+      "I build AI-powered applications and automation workflows that enterprises actually ship. With 12+ years across banking, media, and technology — I've led full-stack delivery at Metrobank, ABS-CBN, and GoAutoDial.",
+  },
+  contact: {
+    email: "info@carlmanuel.com",
+    github: "https://github.com/carlxaeron",
+    linkedin: "https://linkedin.com/in/carlxaeron",
+  },
+  sections: [
+    { id: "home", title: "Home" },
+    { id: "about", title: "About" },
+    { id: "skills", title: "Skills" },
+    { id: "experience", title: "Experience" },
+    { id: "projects", title: "Projects" },
+    { id: "contact", title: "Contact" },
+    { id: "quote", title: "Get a Quote" },
+  ],
+};
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function topSkillNames(limit = 12) {
+  return SKILLS.filter((skill) => !skill.parent)
+    .slice(0, limit)
+    .map((skill) => skill.name);
+}
+
+function topExperienceEntries(limit = 5) {
+  return EXPERIENCES.slice(0, limit).map((entry) => ({
+    company: entry.companyName || entry.company || "",
+    role: entry.jobTitle || entry.position || "",
+  }));
+}
+
+function topProjectNames(limit = 6) {
+  const names = [];
+  for (const group of COMPANIES) {
+    if (group.title) names.push(group.title);
+    for (const project of group.projects || []) {
+      if (project.title) names.push(project.title);
+      if (names.length >= limit) break;
+    }
+    if (names.length >= limit) break;
+  }
+  return names.slice(0, limit);
+}
+
+/**
+ * @param {{ appMode?: string, previewQuery?: string | null }} options
+ * @returns {boolean}
+ */
+function shouldNoIndex({ appMode = "portfolio", previewQuery = null } = {}) {
+  if (appMode === "login" || appMode === "admin") return true;
+  if (previewQuery && String(previewQuery).trim()) return true;
+  return false;
+}
+
+function buildPrerenderHtml() {
+  const { hero, about, contact, sections } = PORTFOLIO_SEO;
+  const skillItems = topSkillNames()
+    .map((name) => `<li>${escapeHtml(name)}</li>`)
+    .join("\n        ");
+  const experienceItems = topExperienceEntries()
+    .map(
+      (entry) =>
+        `<li><strong>${escapeHtml(entry.company)}</strong>${entry.role ? ` — ${escapeHtml(entry.role)}` : ""}</li>`
+    )
+    .join("\n        ");
+  const projectItems = topProjectNames()
+    .map((name) => `<li>${escapeHtml(name)}</li>`)
+    .join("\n        ");
+  const navLinks = sections
+    .map(
+      (section) =>
+        `<a href="${SITE_URL}/#${escapeHtml(section.id)}">${escapeHtml(section.title)}</a>`
+    )
+    .join("\n      ");
+
+  return `<main id="seo-prerender" aria-label="Carl Louis Manuel — portfolio">
+    <header id="home">
+      <p>${escapeHtml(hero.eyebrow)}</p>
+      <h1>${escapeHtml(hero.nameLine1)} ${escapeHtml(hero.nameLine2)}</h1>
+      <p>${escapeHtml(hero.subheadline)}</p>
+    </header>
+    <section id="about">
+      <h2>${escapeHtml(about.heading)}</h2>
+      <p>${escapeHtml(about.intro)}</p>
+    </section>
+    <section id="skills">
+      <h2>Skills</h2>
+      <ul>
+        ${skillItems}
+      </ul>
+    </section>
+    <section id="experience">
+      <h2>Experience</h2>
+      <ul>
+        ${experienceItems}
+      </ul>
+    </section>
+    <section id="projects">
+      <h2>Projects</h2>
+      <ul>
+        ${projectItems}
+      </ul>
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:${escapeHtml(contact.email)}">${escapeHtml(contact.email)}</a></p>
+      <p>GitHub: <a href="${escapeHtml(contact.github)}">${escapeHtml(contact.github)}</a></p>
+      <p>LinkedIn: <a href="${escapeHtml(contact.linkedin)}">${escapeHtml(contact.linkedin)}</a></p>
+    </section>
+    <section id="quote">
+      <h2>Get a Quote</h2>
+      <p>Request a project quote for enterprise web development, AI integration, or SaaS builds.</p>
+    </section>
+    <nav aria-label="Portfolio sections">
+      ${navLinks}
+    </nav>
+  </main>`;
+}
+
+module.exports = {
+  PORTFOLIO_SEO,
+  SITE_URL,
+  escapeHtml,
+  topSkillNames,
+  topExperienceEntries,
+  topProjectNames,
+  shouldNoIndex,
+  buildPrerenderHtml,
+};
