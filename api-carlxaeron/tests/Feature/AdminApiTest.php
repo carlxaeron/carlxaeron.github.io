@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\OutreachJob;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
@@ -94,5 +95,51 @@ class AdminApiTest extends TestCase
             ->postJson('/admin/logout')
             ->assertOk()
             ->assertJsonPath('message', 'Logged out');
+    }
+
+    public function test_outreach_pause_updates_job(): void
+    {
+        Sanctum::actingAs(
+            User::query()->where('email', self::ADMIN_EMAIL)->firstOrFail(),
+            ['*']
+        );
+
+        OutreachJob::query()->create([
+            'slug' => 'demo-client',
+            'business_name' => 'Demo Client',
+            'contact_name' => 'Demo Contact',
+            'contact_email' => 'client@example.com',
+            'preview_url' => 'https://carlmanuel.com/?preview=demo-client',
+            'auto_followup' => true,
+            'status' => 'active',
+            'next_follow_up_at' => now()->addDays(3),
+        ]);
+
+        $this->postJson('/admin/outreachPause', [
+            'slug' => 'demo-client',
+            'contactEmail' => 'client@example.com',
+        ])
+            ->assertOk()
+            ->assertJsonPath('data.slug', 'demo-client')
+            ->assertJsonPath('data.updated', 1);
+
+        $this->assertDatabaseHas('outreach_jobs', [
+            'slug' => 'demo-client',
+            'auto_followup' => false,
+            'status' => 'paused',
+            'next_follow_up_at' => null,
+        ]);
+    }
+
+    public function test_outreach_pause_requires_slug(): void
+    {
+        Sanctum::actingAs(
+            User::query()->where('email', self::ADMIN_EMAIL)->firstOrFail(),
+            ['*']
+        );
+
+        $this->postJson('/admin/outreachPause', ['slug' => ''])
+            ->assertStatus(400)
+            ->assertJsonPath('message', 'Missing slug');
     }
 }

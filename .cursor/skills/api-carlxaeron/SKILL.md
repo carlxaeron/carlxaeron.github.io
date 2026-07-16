@@ -140,18 +140,20 @@ Details: [`api-carlxaeron/README.md`](../../../api-carlxaeron/README.md).
 
 ## Tests
 
+**Add tests with every API change.** New routes, CMS sections, admin ops, or contract tweaks need Feature/Unit tests in `api-carlxaeron/tests/` in the same commit.
+
 ```bash
-# Laravel
+# Laravel — required before any Laravel deploy
 cd api-carlxaeron && php artisan test
 
-# Hosting-php outreach + mail helpers — required before Stellar upload
+# Hosting-php outreach + mail helpers — required before Stellar upload when hosting-php changed
 php api-carlxaeron/hosting-php/tests/run-unit.php
 ```
 
 Unit: `ApiResponse`, `AnalyticsExclusion`, `PortfolioMailer`, **`hosting-php/tests/run-unit.php`** (outreach cadence + `mail_*` + CORS + browser origin gate + `mask_client_slug` + rate limit).  
-Feature: full endpoint contracts + exclusion / dedupe / mail.
+Feature: full endpoint contracts + admin auth/CMS/outreach + exclusion / dedupe / mail.
 
-**Deploy gate:** never upload `hosting-php/src/outreach.php` (or cron scripts) if outreach unit tests fail. Never deploy Laravel without `php artisan test` green.
+**Deploy gate:** never upload `hosting-php/src/outreach.php` (or cron scripts) if outreach unit tests fail. Never deploy Laravel without `php artisan test` green. Do not ship admin/API behavior without matching tests.
 
 ## Do not
 

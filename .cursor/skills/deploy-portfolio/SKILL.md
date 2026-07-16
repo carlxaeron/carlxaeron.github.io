@@ -37,6 +37,8 @@ Deploy progress:
 
 ## Step 1 — Validate locally
 
+**Tests ship with the change.** If the release includes new or changed behavior, add or extend unit tests under `src/**/*.test.js` in the same commit — do not tag without coverage for what you shipped.
+
 From repo root:
 
 ```bash
@@ -44,7 +46,7 @@ CI=true npm test -- --watchAll=false --passWithNoTests
 CI=true npm run build
 ```
 
-Fix all ESLint issues before continuing (`CI=true` promotes warnings to errors).
+Fix all ESLint issues before continuing (`CI=true` promotes warnings to errors). **Do not proceed** if tests fail or new behavior has no tests.
 
 ## Step 2 — Prepare release notes
 

@@ -51,7 +51,7 @@ Config: `src/v3/containers/Portfolio/Portfolio.js` · Content: `src/external-con
 
 - Do **not** edit plan files in `.cursor/plans/`
 - Do **not** commit `job-applications/`, `exports/`, `.env` secrets
-- **Test before deploy:** hosting-php / Laravel / Firebase — see `.cursor/rules/test-before-deploy.mdc`
+- **Tests with every change + test before deploy:** add unit/feature tests for new behavior; run matching suites (portfolio `npm test`, Laravel `php artisan test`, hosting-php unit runner, Firebase `npm test`) — see `.cursor/rules/test-before-deploy.mdc`
 - **Proactively keep `.cursor/skills/`, `.cursor/rules/`, and `AGENTS.md` accurate** when workflows change or docs are stale — user need not ask; keep diffs small and helpful (see AGENTS.md “Keep agent docs current”)
 - Side project copy: **short**; client projects: **long** case studies
 - Never mention **Tahanan** in OnlineJobs `submission.txt`

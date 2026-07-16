@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.52] — 2026-07-16
+
+### Added
+- **Tests** — `v3-admin-active` scroll shell toggle in `Index.test.js`; admin `outreachPause` Feature tests in Laravel
+- **Agent docs** — tests ship with every change; deploy gates reinforced in `AGENTS.md`, `test-before-deploy.mdc`, deploy-portfolio and api-carlxaeron skills
+
 ## [3.0.51] — 2026-07-16
 
 ### Fixed

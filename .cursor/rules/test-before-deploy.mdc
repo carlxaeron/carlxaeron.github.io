@@ -1,6 +1,7 @@
 ---
-description: Hard gate — run unit/feature tests before deploying hosting-php outreach, api-carlxaeron, or Firebase functions
+description: Hard gate — add tests with every change; run matching suites before deploying portfolio, API, or Firebase
 globs:
+  - src/**
   - api-carlxaeron/hosting-php/**
   - api-carlxaeron/app/**
   - api-carlxaeron/routes/**
@@ -8,9 +9,19 @@ globs:
 alwaysApply: false
 ---
 
-# Test before deploy (API / outreach / functions)
+# Test before deploy
 
-**Never upload or deploy backend changes until the matching tests pass locally.**
+**Ship tests with the change.** New or changed behavior must have unit/feature tests in the same PR/commit. **Never deploy until the matching suite is green locally.**
+
+## Portfolio frontend (`src/`)
+
+Any edit to React components, routing, admin shell, CMS consumers, or portfolio logic:
+
+```bash
+CI=true npm test -- --watchAll=false --passWithNoTests
+```
+
+Add or extend tests under `src/**/*.test.js` (e.g. `src/pages/Index.test.js`, `src/v3/admin/*.test.js`). Release/deploy also requires `CI=true npm run build` — see skill **deploy-portfolio**.
 
 ## Hosting outreach (`api-carlxaeron/hosting-php/`)
 
@@ -30,7 +41,7 @@ Sequence under test: **3d → 7d → 7d → 7d**, max **4** follow-ups (`cadence
 cd api-carlxaeron && php artisan test
 ```
 
-Required before deploying Laravel app files to `public_html/api-carlxaeron/`.
+Required before deploying Laravel app files to `public_html/api-carlxaeron/`. Add Feature/Unit tests for new admin routes, CMS sections, and API contracts.
 
 ## Firebase Cloud Functions (`functions/`)
 
@@ -45,15 +56,18 @@ Required before `firebase deploy --only functions` / `npm run deploy`.
 ## Agent checklist
 
 ```
-Backend deploy gate:
-- [ ] Identify which surface changed (hosting-php / Laravel / functions)
+Change + deploy gate:
+- [ ] New/changed behavior has tests in the same change set
+- [ ] Identify which surface changed (src / hosting-php / Laravel / functions)
 - [ ] Run the matching unit/feature tests — all green
-- [ ] Only then deploy (hosting-ssh upload or Firebase)
-- [ ] Smoke: curl https://api.carlmanuel.com/health (API) or functions smoke the agent already uses
+- [ ] Only then deploy (push main / hosting-ssh upload / Firebase)
+- [ ] Smoke: carlmanuel.com (portfolio) or curl https://api.carlmanuel.com/health (API)
 ```
 
 ## Do not
 
+- Ship behavior without tests “to save time” — add focused tests with the change
 - Deploy broken cadence/maxFollowUps changes without updating `tests/run-unit.php` expectations
 - Skip outreach unit tests “just for a small fix” on `outreach.php`
 - Ship hosting cron script changes without re-running unit tests
+- Release portfolio v3 without `CI=true npm test` green

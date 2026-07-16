@@ -90,7 +90,7 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 - Firebase remaining: Analytics `logEvent` only — **`cd functions && npm test` before any `npm run deploy`** of leftover handlers
 
 ### Release portfolio
-1. `CI=true npm test` + `CI=true npm run build`
+1. Tests cover the change set; then `CI=true npm test` + `CI=true npm run build`
 2. Bump `package.json` + `CHANGELOG.md`
 3. Push `main`, tag `vX.Y.Z`
 4. Deploy hosting API if backends changed
@@ -132,14 +132,24 @@ Preview tests: `src/v3/config/previewWhitelist.test.js`, `src/pages/Index.test.j
 
 ## Tests
 
-**Portfolio (CRA):**
+**Every code update should include tests** for new or changed behavior (same commit/PR). Deploy gates require green suites — never release portfolio, Laravel, hosting-php, or Firebase without running the matching tests.
+
+**Portfolio (CRA)** — `src/**/*.test.js`:
 
 ```bash
 CI=true npm test -- --watchAll=false --passWithNoTests
 ```
 
-**Laravel API:**
+Add tests when changing routing, admin shell, CMS consumers, preview whitelist, or V3 components. Examples: `src/pages/Index.test.js`, `src/v3/admin/*.test.js`.
+
+**Laravel API** — `api-carlxaeron/tests/`:
 
 ```bash
 cd api-carlxaeron && php artisan test
 ```
+
+Add Feature tests for new admin routes, CMS sections, and JSON contracts. When `hosting-php/` outreach/mail changes: `php api-carlxaeron/hosting-php/tests/run-unit.php`.
+
+**Firebase functions** (if touched): `cd functions && npm test` before deploy.
+
+Rule: [`.cursor/rules/test-before-deploy.mdc`](.cursor/rules/test-before-deploy.mdc)

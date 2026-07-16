@@ -128,3 +128,50 @@ describe("Index admin routing", () => {
     expect(screen.queryByTestId("admin-dashboard-mock")).not.toBeInTheDocument();
   });
 });
+
+describe("Index admin scroll shell", () => {
+  beforeEach(() => {
+    document.documentElement.classList.remove("v3-admin-active");
+    document.body.classList.remove("v3-admin-active");
+    window.history.replaceState = jest.fn();
+    sessionStorage.clear();
+  });
+
+  afterEach(() => {
+    window.location = originalLocation;
+    window.history.replaceState = originalReplaceState;
+    document.documentElement.classList.remove("v3-admin-active");
+    document.body.classList.remove("v3-admin-active");
+  });
+
+  test("adds v3-admin-active on html and body for #login", () => {
+    mockLocation({ hash: "#login" });
+    render(<Index />);
+    expect(document.documentElement.classList.contains("v3-admin-active")).toBe(true);
+    expect(document.body.classList.contains("v3-admin-active")).toBe(true);
+  });
+
+  test("adds v3-admin-active on html and body for #admin with token", () => {
+    sessionStorage.setItem(ADMIN_TOKEN_KEY, "test-token");
+    mockLocation({ hash: "#admin" });
+    render(<Index />);
+    expect(document.documentElement.classList.contains("v3-admin-active")).toBe(true);
+    expect(document.body.classList.contains("v3-admin-active")).toBe(true);
+  });
+
+  test("does not add v3-admin-active in portfolio mode", () => {
+    mockSearch("");
+    render(<Index />);
+    expect(document.documentElement.classList.contains("v3-admin-active")).toBe(false);
+    expect(document.body.classList.contains("v3-admin-active")).toBe(false);
+  });
+
+  test("removes v3-admin-active on unmount", () => {
+    mockLocation({ hash: "#login" });
+    const { unmount } = render(<Index />);
+    expect(document.body.classList.contains("v3-admin-active")).toBe(true);
+    unmount();
+    expect(document.documentElement.classList.contains("v3-admin-active")).toBe(false);
+    expect(document.body.classList.contains("v3-admin-active")).toBe(false);
+  });
+});
