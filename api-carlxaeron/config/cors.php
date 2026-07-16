@@ -15,10 +15,13 @@ return [
         'analyticsSummary',
         'contact',
         'quotation',
+        'assistant',
+        'content/*',
+        'admin/*',
         'up',
     ],
 
-    'allowed_methods' => ['GET', 'POST', 'OPTIONS'],
+    'allowed_methods' => ['GET', 'POST', 'PUT', 'OPTIONS'],
 
     'allowed_origins' => [
         'https://carlxaeron.github.io',
@@ -29,7 +32,7 @@ return [
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['Content-Type', 'Accept', 'Origin'],
+    'allowed_headers' => ['Content-Type', 'Accept', 'Origin', 'Authorization'],
 
     'exposed_headers' => [],
 
