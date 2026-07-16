@@ -77,6 +77,7 @@ Adjust tag message and release notes to match the CHANGELOG entry.
 ## Step 5 — Hosting API / Firebase (conditional)
 
 - **Forms, analytics, assistant, outreach, weekly cron:** hosting-ssh after `php api-carlxaeron/hosting-php/tests/run-unit.php` (and `php artisan test` if Laravel changed). Skill **api-carlxaeron**.
+- **Admin dashboard + CMS:** Laravel Sanctum on `api.carlmanuel.com`; SPA at `carlmanuel.com/#login` and `#admin` (see `src/v3/admin/`, `src/mapping.js`).
 - **Legacy Cloud Functions only:** `cd functions && npm test && npm run deploy` — rarely needed; assistant/weekly/license are off Firebase.
 
 ## Step 6 — Verify production

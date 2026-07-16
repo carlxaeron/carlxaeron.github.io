@@ -15,4 +15,13 @@ export const mapping = {
   analyticsSummary: process.env.NODE_ENV === 'development'
     ? 'http://127.0.0.1:5001/carllouismanuel-1e3a9/us-central1/analyticsSummary'
     : 'https://api.carlmanuel.com/analyticsSummary',
+  adminLogin: 'https://api.carlmanuel.com/admin/login',
+  adminLogout: 'https://api.carlmanuel.com/admin/logout',
+  adminSummary: 'https://api.carlmanuel.com/admin/summary',
+  adminContacts: 'https://api.carlmanuel.com/admin/contacts',
+  adminQuotations: 'https://api.carlmanuel.com/admin/quotations',
+  adminOutreach: 'https://api.carlmanuel.com/admin/outreach',
+  adminOutreachPause: 'https://api.carlmanuel.com/admin/outreachPause',
+  adminContent: 'https://api.carlmanuel.com/admin/content',
+  portfolioContent: 'https://api.carlmanuel.com/content',
 }

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { SKILLS } from "../../../external-config";
 import SectionTitle from "../../components/SectionTitle";
+import { usePortfolioSection } from "../../config/PortfolioContentContext";
 
-// Split SKILLS into groups based on `parent: true` entries
 function groupSkills(skills) {
   const groups = [];
   let current = null;
@@ -14,7 +14,6 @@ function groupSkills(skills) {
     } else if (current) {
       current.skills.push(skill);
     } else {
-      // Skills before any parent — put in "Other"
       if (!groups.length || groups[groups.length - 1].name !== "Other") {
         current = { name: "Other", skills: [] };
         groups.push(current);
@@ -24,8 +23,6 @@ function groupSkills(skills) {
   });
   return groups;
 }
-
-const SKILL_GROUPS = groupSkills(SKILLS);
 
 function SkillBar({ skill, delay, show }) {
   const fillSpring = useSpring({
@@ -56,6 +53,8 @@ function SkillBar({ skill, delay, show }) {
 }
 
 function V3Skills({ isActive }) {
+  const skills = usePortfolioSection("skills") || SKILLS;
+  const skillGroups = useMemo(() => groupSkills(skills), [skills]);
   const [show, setShow] = useState(false);
   const [activeGroup, setActiveGroup] = useState(0);
 
@@ -65,7 +64,6 @@ function V3Skills({ isActive }) {
     return () => clearTimeout(t);
   }, [isActive]);
 
-  // Reset animation when switching groups
   const [groupKey, setGroupKey] = useState(0);
   const handleGroupChange = (idx) => {
     if (idx === activeGroup) return;
@@ -82,7 +80,7 @@ function V3Skills({ isActive }) {
     config: { tension: 220, friction: 28 },
   });
 
-  const group = SKILL_GROUPS[activeGroup];
+  const group = skillGroups[activeGroup];
 
   return (
     <section
@@ -95,9 +93,8 @@ function V3Skills({ isActive }) {
           <SectionTitle subtitle="Technologies I work with">Skills</SectionTitle>
         </animated.div>
 
-        {/* Group tabs */}
         <div className="v3-filter-btns" style={{ marginBottom: "1.5rem" }}>
-          {SKILL_GROUPS.map((g, i) => (
+          {skillGroups.map((g, i) => (
             <button
               key={g.name}
               type="button"
@@ -110,7 +107,6 @@ function V3Skills({ isActive }) {
           ))}
         </div>
 
-        {/* Skill bars grid */}
         <div key={groupKey} className="row">
           {group?.skills.map((skill, i) => (
             <div key={`${skill.name}-${i}`} className="col-md-6">

@@ -56,7 +56,20 @@ Hosting SSH:
 
 Self-hosted **PHP API** (Laravel app in repo; live Stellar tree currently custom PHP + `hosting-php/` outreach) under `public_html/api-carlxaeron`. Public base: `https://api.carlmanuel.com`. Document root → `public_html/api-carlxaeron/public`.
 
-### Outreach + weekly report crons
+### Laravel admin + CMS (api.carlxaeron)
+
+Sanctum admin routes and portfolio CMS live in the **Laravel app** (`api-carlxaeron/`), not `hosting-php/`. Deploy/sync Laravel to `public_html/api-carlxaeron/`; docroot → `public/`.
+
+```
+Laravel on Stellar:
+- [ ] php artisan test green before upload
+- [ ] composer install --no-dev && php artisan migrate --force && config:cache
+- [ ] ADMIN_EMAIL + ADMIN_PASSWORD in server .env (never commit)
+- [ ] Smoke: curl POST /admin/login + GET /admin/summary (Bearer token)
+- [ ] CMS: GET/PUT /admin/content/{section}; public GET /content/{section}
+```
+
+Outreach **cron** may still use `hosting-php/scripts/` until ported to Artisan; admin pause updates the same MySQL `outreach_jobs` rows.
 
 ```
 Crons on Stellar:

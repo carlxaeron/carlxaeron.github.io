@@ -4,12 +4,24 @@ import PreviewShowcase, { PreviewShowcaseError } from "../v3/containers/PreviewS
 import { getPreviewQueryFromSearch, resolvePreviewUrl } from "../v3/config/previewWhitelist";
 import VisitTracker from "../components/VisitTracker";
 import { applyOwnerExcludeFromUrl } from "../utils/visitTracker";
+import AdminLogin from "../v3/admin/AdminLogin";
+import AdminDashboard from "../v3/admin/AdminDashboard";
+import { getAdminToken } from "../v3/admin/adminAuth";
+import { useAppMode } from "../v3/admin/useAppMode";
 import "./../styles/App.css";
 
 function Index() {
+  const appMode = useAppMode();
+
   useEffect(() => {
     applyOwnerExcludeFromUrl();
   }, []);
+
+  useEffect(() => {
+    if (appMode === "admin" && !getAdminToken()) {
+      window.location.hash = "login";
+    }
+  }, [appMode]);
 
   const previewQuery = useMemo(
     () => getPreviewQueryFromSearch(typeof window !== "undefined" ? window.location.search : ""),
@@ -26,6 +38,22 @@ function Index() {
     window.history.replaceState(null, "", next.pathname + next.search + next.hash);
     return undefined;
   }, [previewRaw, previewResolved]);
+
+  if (appMode === "login") {
+    return (
+      <div className="App">
+        <AdminLogin />
+      </div>
+    );
+  }
+
+  if (appMode === "admin" && getAdminToken()) {
+    return (
+      <div className="App">
+        <AdminDashboard />
+      </div>
+    );
+  }
 
   if (previewRaw && !previewResolved) {
     return (

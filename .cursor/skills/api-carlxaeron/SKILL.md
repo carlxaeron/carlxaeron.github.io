@@ -27,7 +27,26 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 | POST | `/quotation` | Form + SMTP |
 | POST | `/assistant` | ChatAgent — browser Origin + OpenAI (`OPENAI_API_KEY`) |
 | POST | `/outreachSchedule` | **Secret** — after user yes: send initial + queue auto follow-ups (`autoFollowUp: true`, cadence `3d1w` = **3d→7d→7d→7d**, `maxFollowUps: 4`). Follow-up emails stack goodwill discount **10%→20%→30%→50%** + commission invite |
-| POST | `/outreachPause` | **Secret** — stop auto follow-ups for a slug |
+| POST | `/outreachPause` | **Secret** — stop auto follow-ups for a slug (hosting-php cron still reads same MySQL rows) |
+
+### Admin (Sanctum Bearer token — Laravel only)
+
+| Method | Path | Auth | Role |
+|--------|------|------|------|
+| POST | `/admin/login` | public + throttle 5/min | email/password → `{ token, user }` |
+| POST | `/admin/logout` | `auth:sanctum` | revoke current token |
+| GET | `/admin/summary` | sanctum | unmasked analytics (raw preview slugs) |
+| GET | `/admin/contacts` | sanctum | paginated `contact` (`?perPage=25`) |
+| GET | `/admin/quotations` | sanctum | paginated `quotations` |
+| GET | `/admin/outreach` | sanctum | list `outreach_jobs` |
+| POST | `/admin/outreachPause` | sanctum | pause by `slug` + optional `contactEmail` |
+| GET | `/admin/content/{section}` | sanctum | read CMS payload (`hero`, `about`, `header`, `skills`, `experiences`, `companies`, `projectDetails`) |
+| PUT | `/admin/content/{section}` | sanctum | save CMS payload `{ content: ... }` |
+| GET | `/content/{section}` | public | portfolio read with `source: static|cms` |
+
+Seed admin user: `ADMIN_EMAIL` + `ADMIN_PASSWORD` in server `.env` → `php artisan db:seed --class=AdminSeeder --force`. Never commit password.
+
+**Admin SPA:** `carlmanuel.com/#login` → Sanctum token → `#admin` dashboard (Overview, Inbox, Outreach, Clients, CMS). URLs in [`src/mapping.js`](../../../src/mapping.js) (`adminLogin`, `adminSummary`, `adminContent`, etc.).
 
 Live hosting (until full Laravel cutover) uses PHP under `hosting-php/` synced to Stellar. Crons: daily `cron-outreach-followups.php`; **Monday 08:00** `cron-weekly-visit-report.php` (MySQL). Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).
 
@@ -64,7 +83,12 @@ CORS origins: `carlmanuel.com`, `www`, `carlxaeron.github.io`, `localhost:3000` 
 | Path | Role |
 |------|------|
 | `routes/api.php` | Route table (`apiPrefix: ''` in `bootstrap/app.php`) |
-| `app/Http/Controllers/Api/PortfolioApiController.php` | Handlers |
+| `app/Http/Controllers/Api/PortfolioApiController.php` | Public handlers |
+| `app/Http/Controllers/Api/AdminController.php` | Admin auth + ops + CMS |
+| `app/Services/PortfolioContentService.php` | CMS section read/write |
+| `app/Models/PortfolioContent.php` | `portfolio_content_sections` table |
+| `app/Services/AnalyticsSummaryService.php` | Shared analytics (masked public / raw admin) |
+| `app/Models/OutreachJob.php` | Eloquent on existing `outreach_jobs` table |
 | `app/Support/ApiResponse.php` | Envelope helpers |
 | `app/Services/AnalyticsExclusion.php` | IP hash salt `:carlxaeron-portfolio` |
 | `app/Services/PortfolioMailer.php` | Contact / quotation mail |
@@ -84,6 +108,7 @@ Never commit `.env`. Prefer Laravel names; legacy keys still work via config fal
 | `MAIL_TO` | (same) — inbound contact/quote recipients |
 | `MAIL_BCC` | BCC on **outbound** client outreach (`info@carlmanuel.com` by default; hidden from To) |
 | `ANALYTICS_EXCLUDE_IP_HASHES` / `ANALYTICS_EXCLUDE_VISITOR_IDS` | (same) |
+| `ADMIN_EMAIL` / `ADMIN_PASSWORD` | Sanctum admin seeder (server only) |
 
 ### Deliverability (outreach / Private Email)
 

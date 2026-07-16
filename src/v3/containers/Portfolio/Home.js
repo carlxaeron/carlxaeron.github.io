@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useSpring, animated, to } from "@react-spring/web";
 import { AnimationDown, AnimationFade, AnimationUp } from "../../components/Animations";
+import { usePortfolioSection } from "../../config/PortfolioContentContext";
+import { HERO_DEFAULTS } from "../../config/portfolioContentDefaults";
 
 function prefersReducedMotion() {
   if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
@@ -172,6 +174,7 @@ function HomeShapes({ px, py }) {
 function V3Home({ onNavigate }) {
   const sectionRef = useRef(null);
   const { px, py } = useParallax(sectionRef);
+  const hero = usePortfolioSection("hero") || HERO_DEFAULTS;
 
   return (
     <section
@@ -212,7 +215,7 @@ function V3Home({ onNavigate }) {
             fontWeight: 600,
             marginBottom: "1rem",
           }}>
-            Building AI-Powered Enterprise Applications
+            {hero.eyebrow || HERO_DEFAULTS.eyebrow}
           </p>
         </AnimationFade>
 
@@ -228,8 +231,9 @@ function V3Home({ onNavigate }) {
               letterSpacing: "-0.02em",
             }}
           >
-            Carl Louis<br />
-            <span style={{ color: "#00A862" }}>Manuel</span>
+            {hero.nameLine1 || "Carl Louis"}
+            <br />
+            <span style={{ color: "#00A862" }}>{hero.nameAccent || hero.nameLine2 || "Manuel"}</span>
           </h1>
         </AnimationDown>
 
@@ -243,8 +247,7 @@ function V3Home({ onNavigate }) {
               marginBottom: "2.5rem",
             }}
           >
-            12+ years architecting production-grade systems for banks, media companies &amp; enterprises — with AI built in.
-            ReactJS · Laravel · OpenAI API · Firebase · Flutter
+            {hero.subheadline}
           </p>
         </AnimationUp>
 
@@ -255,14 +258,14 @@ function V3Home({ onNavigate }) {
               className="v3-btn v3-btn--primary"
               onClick={() => onNavigate?.(1)}
             >
-              View My Work
+              {hero.ctaPrimary || "View My Work"}
             </button>
             <button
               type="button"
               className="v3-btn v3-btn--ghost"
               onClick={() => onNavigate?.(5)}
             >
-              Get In Touch
+              {hero.ctaSecondary || "Get In Touch"}
             </button>
           </div>
         </AnimationUp>

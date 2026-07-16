@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import { EXPERIENCES } from "../../../external-config";
 import SectionTitle from "../../components/SectionTitle";
+import { usePortfolioSection } from "../../config/PortfolioContentContext";
 
 function ExperienceItem({ exp, index, isActive }) {
   const [show, setShow] = useState(false);
@@ -104,6 +105,7 @@ function ExperienceItem({ exp, index, isActive }) {
 }
 
 function V3Experience({ isActive }) {
+  const experiences = usePortfolioSection("experiences") || EXPERIENCES;
   const containerSpring = useSpring({
     from: { opacity: 0 },
     to: { opacity: isActive ? 1 : 0 },
@@ -130,7 +132,7 @@ function V3Experience({ isActive }) {
             paddingBottom: "1rem",
           }}
         >
-          {EXPERIENCES.map((exp, i) => (
+          {experiences.map((exp, i) => (
             <ExperienceItem
               key={`${exp.companyName}-${i}`}
               exp={exp}

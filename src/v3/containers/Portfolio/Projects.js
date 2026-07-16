@@ -4,7 +4,7 @@ import { COMPANIES } from "../../../external-config";
 import { logEvent, analytics } from "../../../config";
 import SectionTitle from "../../components/SectionTitle";
 import ProjectDetailModal from "../../components/ProjectDetailModal";
-import { getProjectDetails } from "../../data/projectDetails";
+import { usePortfolioContent, usePortfolioSection } from "../../config/PortfolioContentContext";
 
 function ProjectThumb({ company, project, img, index, isActive, onOpen, animationKey }) {
   const [show, setShow] = useState(false);
@@ -85,10 +85,12 @@ function buildProjectList(companies) {
 }
 
 function V3Projects({ isActive, onOpenProject }) {
+  const { getProjectDetails } = usePortfolioContent();
+  const companies = usePortfolioSection("companies") || COMPANIES;
   const [filter, setFilter] = useState("all");
   const [modal, setModal] = useState({ show: false, company: null, project: null, details: null });
 
-  const allProjects = buildProjectList(COMPANIES);
+  const allProjects = buildProjectList(companies);
 
   const headerSpring = useSpring({
     from: { opacity: 0, y: -20 },
@@ -138,7 +140,7 @@ function V3Projects({ isActive, onOpenProject }) {
           >
             All
           </button>
-          {COMPANIES.map((company) => (
+          {companies.map((company) => (
             <button
               key={company.title}
               type="button"

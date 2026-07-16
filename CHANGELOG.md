@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.49] — 2026-07-16
+
+### Added
+- **Admin dashboard** on `carlmanuel.com/#login` and `#admin` — Sanctum auth, ops hub (Overview, Inbox, Outreach, Clients)
+- **Portfolio CMS (Phase 2)** — Laravel `GET/PUT /admin/content/{section}` + public `GET /content/{section}` with static fallback; CMS tab in admin with JSON editors
+- CMS sections: `hero`, `about`, `header`, `skills`, `experiences`, `companies`, `projectDetails`
+
 ## [3.0.48] — 2026-07-16
 
 ### Added

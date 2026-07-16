@@ -18,7 +18,10 @@ import V3Contact from "./Contact";
 import V3Quote from "./Quote";
 import ProjectDetailModal from "../../components/ProjectDetailModal";
 import BlogPostModal from "../../components/BlogPostModal";
-import { getProjectDetails } from "../../data/projectDetails";
+import {
+  PortfolioContentProvider,
+  usePortfolioContent,
+} from "../../config/PortfolioContentContext";
 
 // Module-level constant: stable identity across renders, no remount resets
 const SECTIONS_CONFIG = [
@@ -34,6 +37,7 @@ const SECTIONS_CONFIG = [
 ];
 
 function V3PortfolioScroll() {
+  const { getProjectDetails } = usePortfolioContent();
   const { value, setValue } = useStore();
   const [currentSection, setCurrentSection] = useState(0);
   const isTransitioningRef = useRef(false);
@@ -232,7 +236,7 @@ function V3PortfolioScroll() {
       project,
       details: getProjectDetails(project?.id),
     });
-  }, []);
+  }, [getProjectDetails]);
 
   const closeProjectModal = useCallback(() => {
     setProjectModal((prev) => ({ ...prev, show: false }));
@@ -386,7 +390,9 @@ function V3PortfolioScroll() {
 function V3Portfolio() {
   return (
     <ThemeProvider>
-      <V3PortfolioScroll />
+      <PortfolioContentProvider>
+        <V3PortfolioScroll />
+      </PortfolioContentProvider>
     </ThemeProvider>
   );
 }

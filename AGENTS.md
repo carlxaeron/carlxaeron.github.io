@@ -82,6 +82,7 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 ### Contact / quote / visits / assistant API
 - Frontend: `Contact.js`, `Quote.js`, analytics, ChatAgent → `src/mapping.js` → `https://api.carlmanuel.com`
 - Backend: hosting-php / Laravel [`api-carlxaeron/`](api-carlxaeron/) (skill **api-carlxaeron**)
+- **Admin ops + CMS:** `carlmanuel.com/#login` → Sanctum → `#admin` (Overview, Inbox, Outreach, Clients, CMS); Laravel `/admin/*` only
 - **Before deploy:** `cd api-carlxaeron && php artisan test` (and `php api-carlxaeron/hosting-php/tests/run-unit.php`)
 - Deploy: hosting-ssh to Stellar; set `OPENAI_API_KEY` for ChatAgent
 - Weekly report: Mon 08:00 cron `cron-weekly-visit-report.php` (MySQL)

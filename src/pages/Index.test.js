@@ -1,34 +1,40 @@
 import { render, screen } from "@testing-library/react";
 import Index from "./Index";
+import { ADMIN_TOKEN_KEY } from "../v3/admin/adminAuth";
 
 jest.mock("../components/ChatAgent", () => () => null);
 jest.mock("../v3/containers/Portfolio/Portfolio", () => () => (
   <div data-testid="portfolio-mock">Portfolio</div>
 ));
+jest.mock("../v3/admin/AdminLogin", () => () => (
+  <div data-testid="admin-login-mock">Admin Login</div>
+));
+jest.mock("../v3/admin/AdminDashboard", () => () => (
+  <div data-testid="admin-dashboard-mock">Admin Dashboard</div>
+));
 
 const originalLocation = window.location;
 const originalReplaceState = window.history.replaceState;
 
-function mockSearch(search) {
+function mockLocation({ search = "", pathname = "/", hash = "" }) {
   delete window.location;
   window.location = {
     ...originalLocation,
     search,
-    href: `http://localhost/${search.replace(/^\?/, "")}${search ? "" : ""}`.replace(
-      /\/$/,
-      search ? `/?${search.replace(/^\?/, "")}` : "/"
-    ),
+    pathname,
+    hash,
+    href: `http://localhost${pathname}${search}${hash}`,
   };
-  if (!search) {
-    window.location.href = "http://localhost/";
-  } else {
-    window.location.href = `http://localhost${search.startsWith("?") ? search : `?${search}`}`;
-  }
+}
+
+function mockSearch(search) {
+  mockLocation({ search, pathname: "/", hash: "" });
 }
 
 describe("Index preview routing", () => {
   beforeEach(() => {
     window.history.replaceState = jest.fn();
+    sessionStorage.clear();
   });
 
   afterEach(() => {
@@ -88,5 +94,37 @@ describe("Index preview routing", () => {
     render(<Index />);
     expect(screen.getByTestId("preview-showcase-error")).toBeInTheDocument();
     expect(screen.getByText(/evil-slug/i)).toBeInTheDocument();
+  });
+});
+
+describe("Index admin routing", () => {
+  beforeEach(() => {
+    window.history.replaceState = jest.fn();
+    sessionStorage.clear();
+  });
+
+  afterEach(() => {
+    window.location = originalLocation;
+    window.history.replaceState = originalReplaceState;
+  });
+
+  test("renders login for #login hash", () => {
+    mockLocation({ hash: "#login" });
+    render(<Index />);
+    expect(screen.getByTestId("admin-login-mock")).toBeInTheDocument();
+    expect(screen.queryByTestId("portfolio-mock")).not.toBeInTheDocument();
+  });
+
+  test("renders dashboard for #admin when token present", () => {
+    sessionStorage.setItem(ADMIN_TOKEN_KEY, "test-token");
+    mockLocation({ hash: "#admin" });
+    render(<Index />);
+    expect(screen.getByTestId("admin-dashboard-mock")).toBeInTheDocument();
+  });
+
+  test("does not render dashboard for #admin without token", () => {
+    mockLocation({ hash: "#admin" });
+    render(<Index />);
+    expect(screen.queryByTestId("admin-dashboard-mock")).not.toBeInTheDocument();
   });
 });

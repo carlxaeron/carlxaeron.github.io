@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import SectionTitle from "../../components/SectionTitle";
-
-const STATS = [
-  { value: "12+", label: "Years Experience" },
-  { value: "10+", label: "Companies" },
-  { value: "50+", label: "Projects" },
-  { value: "2", label: "Side Projects Shipped" },
-];
+import { usePortfolioSection } from "../../config/PortfolioContentContext";
+import { ABOUT_DEFAULTS } from "../../config/portfolioContentDefaults";
 
 function V3About({ isActive }) {
   const [show, setShow] = useState(false);
+  const about = usePortfolioSection("about") || ABOUT_DEFAULTS;
+  const paragraphs = about.paragraphs || ABOUT_DEFAULTS.paragraphs;
+  const skillTags = about.skillTags || ABOUT_DEFAULTS.skillTags;
+  const stats = about.stats || ABOUT_DEFAULTS.stats;
 
   useEffect(() => {
     if (!isActive) return;
@@ -48,7 +47,6 @@ function V3About({ isActive }) {
         <SectionTitle accent="Us">About</SectionTitle>
 
         <div className="row align-items-center">
-          {/* Profile image */}
           <div className="col-md-4 text-center mb-4 mb-md-0">
             <animated.div style={imgSpring}>
               <div className="v3-profile-avatar">
@@ -62,7 +60,6 @@ function V3About({ isActive }) {
             </animated.div>
           </div>
 
-          {/* Bio */}
           <div className="col-md-8">
             <animated.div style={textSpring}>
               <h3
@@ -73,30 +70,28 @@ function V3About({ isActive }) {
                   marginBottom: "1rem",
                 }}
               >
-                I&apos;m Carl Louis Manuel
+                {about.heading || ABOUT_DEFAULTS.heading}
               </h3>
-              <p style={{ color: "rgba(212,233,226,0.85)", lineHeight: 1.8, fontSize: "0.95rem", marginBottom: "1rem" }}>
-                I build AI-powered applications and automation workflows that enterprises actually ship.
-                With 12+ years across banking, media, and technology — I&apos;ve led full-stack delivery at
-                Metrobank, ABS-CBN, and GoAutoDial, integrating AI features and MCP-powered tooling that solve real business problems.
-              </p>
-              <p style={{ color: "rgba(212,233,226,0.75)", lineHeight: 1.8, fontSize: "0.9rem", marginBottom: "1rem" }}>
-                My stack spans pixel-perfect ReactJS frontends, secure PHP/Laravel backends, Firebase real-time
-                systems, and OpenAI API integrations in live client-facing products. At Metrobank I helped
-                deliver secure banking interfaces across multiple modules. At GoAutoDial I led a full
-                legacy-to-modern migration — jQuery/PHP rewritten into a React/Laravel platform — that cut
-                bug reports and improved agent productivity. At ABS-CBN I built 3 complete web properties
-                from scratch serving millions of visitors.
-              </p>
-              <p style={{ color: "rgba(212,233,226,0.65)", lineHeight: 1.8, fontSize: "0.875rem", marginBottom: "1.5rem" }}>
-                Beyond client work, I ship independently — including{" "}
-                <strong style={{ color: "#D4E9E2" }}>Tahanan</strong>, a community SaaS live in the
-                Philippines. Whether you need
-                enterprise-grade engineering or AI woven into your product, I bring the depth and
-                discipline to do it right.
-              </p>
+              {paragraphs.map((paragraph, index) => (
+                <p
+                  key={index}
+                  style={{
+                    color:
+                      index === 0
+                        ? "rgba(212,233,226,0.85)"
+                        : index === 1
+                          ? "rgba(212,233,226,0.75)"
+                          : "rgba(212,233,226,0.65)",
+                    lineHeight: 1.8,
+                    fontSize: index === 2 ? "0.875rem" : index === 0 ? "0.95rem" : "0.9rem",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  {paragraph}
+                </p>
+              ))}
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                {["AI Automation", "MCP", "Prompt Engineering", "OpenAI API", "AI Integration", "LLM Apps", "SaaS", "ReactJS", "Laravel", "Flutter", "Firebase", "Vue", "PHP", "Node.js"].map((tech) => (
+                {skillTags.map((tech) => (
                   <span
                     key={tech}
                     style={{
@@ -116,9 +111,8 @@ function V3About({ isActive }) {
           </div>
         </div>
 
-        {/* Stats bar */}
         <animated.div style={statsSpring} className="v3-stats mt-4 mt-md-5">
-          {STATS.map((stat) => (
+          {stats.map((stat) => (
             <div key={stat.label}>
               <div className="v3-stats__value">{stat.value}</div>
               <div className="v3-stats__label">{stat.label}</div>
