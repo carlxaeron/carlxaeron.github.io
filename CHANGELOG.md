@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.56] — 2026-07-17
+
+### Fixed
+- **Hero CTAs** — "View My Work" and "Get In Touch" navigate by section id (`projects`, `contact`) instead of hardcoded indices, fixing scroll targets after blog/insights sections shifted indices
+- **Tests** — `Home.test.js`, `Portfolio.test.js` section id navigation coverage
+
 ## [3.0.55] — 2026-07-17
 
 ### Fixed

@@ -111,8 +111,12 @@ function V3PortfolioScroll() {
     return findScrollableWithOverflow(activeSlide);
   }, [findScrollableWithOverflow]);
 
-  // Navigate to section by index
-  const navigateToSection = useCallback((index) => {
+  // Navigate to section by index or section id (e.g. "projects", "contact")
+  const navigateToSection = useCallback((indexOrId) => {
+    const index =
+      typeof indexOrId === "string"
+        ? sections.findIndex((s) => s.id === indexOrId)
+        : indexOrId;
     if (index < 0 || index >= sections.length) return;
     if (isTransitioningRef.current) return;
     isTransitioningRef.current = true;

@@ -123,3 +123,34 @@ describe("V3Portfolio touch navigation", () => {
     expect(window.location.hash).toBe("#about");
   });
 });
+
+describe("V3Portfolio section id navigation", () => {
+  beforeEach(() => {
+    window.location.hash = "";
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.runOnlyPendingTimers();
+    jest.useRealTimers();
+    delete window.__v3Navigate;
+  });
+
+  test("navigateToSection accepts section ids for hero CTAs", () => {
+    render(<V3Portfolio />);
+
+    act(() => {
+      window.__v3Navigate("projects");
+    });
+    expect(window.location.hash).toBe("#projects");
+
+    act(() => {
+      jest.advanceTimersByTime(900);
+    });
+
+    act(() => {
+      window.__v3Navigate("contact");
+    });
+    expect(window.location.hash).toBe("#contact");
+  });
+});

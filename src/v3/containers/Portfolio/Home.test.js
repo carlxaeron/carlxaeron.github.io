@@ -20,14 +20,14 @@ describe('V3Home', () => {
     expect(document.querySelector('.v3-shape--hex svg')).toBeInTheDocument();
   });
 
-  test('CTAs call onNavigate with correct section indices', () => {
+  test('CTAs call onNavigate with correct section ids', () => {
     const onNavigate = jest.fn();
     render(<V3Home onNavigate={onNavigate} />);
 
     fireEvent.click(screen.getByRole('button', { name: /View My Work/i }));
-    expect(onNavigate).toHaveBeenCalledWith(1);
+    expect(onNavigate).toHaveBeenCalledWith('projects');
 
     fireEvent.click(screen.getByRole('button', { name: /Get In Touch/i }));
-    expect(onNavigate).toHaveBeenCalledWith(5);
+    expect(onNavigate).toHaveBeenCalledWith('contact');
   });
 });

@@ -256,14 +256,14 @@ function V3Home({ onNavigate }) {
             <button
               type="button"
               className="v3-btn v3-btn--primary"
-              onClick={() => onNavigate?.(1)}
+              onClick={() => onNavigate?.("projects")}
             >
               {hero.ctaPrimary || "View My Work"}
             </button>
             <button
               type="button"
               className="v3-btn v3-btn--ghost"
-              onClick={() => onNavigate?.(5)}
+              onClick={() => onNavigate?.("contact")}
             >
               {hero.ctaSecondary || "Get In Touch"}
             </button>
