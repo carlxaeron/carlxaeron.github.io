@@ -63,7 +63,8 @@ Sanctum admin routes and portfolio CMS live in the **Laravel app** (`api-carlxae
 ```
 Laravel on Stellar:
 - [ ] php artisan test green before upload
-- [ ] composer install --no-dev && php artisan migrate --force && config:cache
+- [ ] `.env` has `DB_CONNECTION=mysql` (+ `DB_DATABASE`/`DB_USERNAME`/`DB_PASSWORD` or legacy `DB_NAME`/`DB_USER`/`DB_PASS`)
+- [ ] composer install --no-dev && php artisan migrate --force && php artisan db:seed --class=Database\\Seeders\\AdminSeeder --force && config:cache
 - [ ] ADMIN_EMAIL + ADMIN_PASSWORD in server .env (never commit)
 - [ ] Smoke: curl POST /admin/login + GET /admin/summary (Bearer token)
 - [ ] CMS: GET/PUT /admin/content/{section}; public GET /content/{section}

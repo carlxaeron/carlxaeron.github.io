@@ -10,4 +10,8 @@ return [
 
     'analytics_exclude_visitor_ids' => env('ANALYTICS_EXCLUDE_VISITOR_IDS', ''),
 
+    'admin_email' => env('ADMIN_EMAIL', ''),
+
+    'admin_password' => env('ADMIN_PASSWORD', ''),
+
 ];

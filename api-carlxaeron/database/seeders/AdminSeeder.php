@@ -9,8 +9,8 @@ class AdminSeeder extends Seeder
 {
     public function run(): void
     {
-        $email = trim((string) env('ADMIN_EMAIL', ''));
-        $password = (string) env('ADMIN_PASSWORD', '');
+        $email = trim((string) config('portfolio.admin_email', ''));
+        $password = (string) config('portfolio.admin_password', '');
 
         if ($email === '' || $password === '') {
             return;

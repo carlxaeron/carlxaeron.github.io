@@ -130,10 +130,11 @@ php artisan serve --port=8080
 ## Deploy (Stellar)
 
 1. Rsync/sync app root to `~/public_html/api-carlxaeron/` (keep server `.env`; exclude local `.env`).
-2. Subdomain docroot → `…/public` only.
-3. On server: `composer install --no-dev`, `php artisan migrate --force`, `php artisan config:cache`.
-4. Writable: `storage/`, `bootstrap/cache/`.
-5. Smoke: `curl https://api.carlmanuel.com/health`.
+2. **Required `.env` DB keys for Laravel:** `DB_CONNECTION=mysql`, `DB_DATABASE` / `DB_USERNAME` / `DB_PASSWORD` (legacy `DB_NAME` / `DB_USER` / `DB_PASS` still work for the mysql connection array). Missing `DB_CONNECTION` defaults to sqlite and analytics will look empty.
+3. Subdomain docroot → `…/public` only.
+4. On server: `composer install --no-dev`, `php artisan migrate --force`, `php artisan db:seed --class=Database\\Seeders\\AdminSeeder --force` (needs `ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env`; seeder reads via `config/portfolio.php`), `php artisan config:cache`.
+5. Writable: `storage/`, `bootstrap/cache/`.
+6. Smoke: `curl https://api.carlmanuel.com/health` + `POST /admin/login`.
 
 Details: [`api-carlxaeron/README.md`](../../../api-carlxaeron/README.md).
 
