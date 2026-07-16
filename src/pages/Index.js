@@ -23,6 +23,18 @@ function Index() {
     }
   }, [appMode]);
 
+  useEffect(() => {
+    if (appMode !== "login" && appMode !== "admin") {
+      return undefined;
+    }
+    document.documentElement.classList.add("v3-admin-active");
+    document.body.classList.add("v3-admin-active");
+    return () => {
+      document.documentElement.classList.remove("v3-admin-active");
+      document.body.classList.remove("v3-admin-active");
+    };
+  }, [appMode]);
+
   const previewQuery = useMemo(
     () => getPreviewQueryFromSearch(typeof window !== "undefined" ? window.location.search : ""),
     []

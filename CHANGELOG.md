@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.51] — 2026-07-16
+
+### Fixed
+- **Admin scroll** — login and admin dashboard scroll correctly; `v3-admin-active` toggles full-height flex shell on html/body outside the slide deck
+
 ## [3.0.50] — 2026-07-16
 
 ### Added
