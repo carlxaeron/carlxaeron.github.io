@@ -160,6 +160,7 @@ class PortfolioApiController extends Controller
         $phone = trim((string) $request->input('phone', ''));
         $projectType = trim((string) $request->input('projectType', ''));
         $budgetRange = trim((string) $request->input('budgetRange', ''));
+        $currency = $this->normalizeQuoteCurrency($request->input('currency'));
         $timeline = trim((string) $request->input('timeline', ''));
         $services = is_array($request->input('services'))
             ? array_values(array_filter(array_map(
@@ -175,6 +176,7 @@ class PortfolioApiController extends Controller
             'phone' => $phone,
             'project_type' => $projectType,
             'budget_range' => $budgetRange,
+            'currency' => $currency,
             'timeline' => $timeline,
             'services_json' => $services,
             'details' => $details,
@@ -188,6 +190,7 @@ class PortfolioApiController extends Controller
             'phone' => $phone,
             'projectType' => $projectType,
             'budgetRange' => $budgetRange,
+            'currency' => $currency,
             'timeline' => $timeline,
             'services' => $services,
             'details' => $details,
@@ -208,6 +211,16 @@ class PortfolioApiController extends Controller
         }
 
         return ApiResponse::success('OK', $this->portfolioContent->read($section));
+    }
+
+    private function normalizeQuoteCurrency(mixed $value): ?string
+    {
+        $code = strtoupper(trim((string) $value));
+        if ($code === '') {
+            return null;
+        }
+
+        return in_array($code, ['PHP', 'USD'], true) ? $code : null;
     }
 
     private function nullableString(mixed $value, int $max): ?string

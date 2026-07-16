@@ -10,6 +10,17 @@ declare(strict_types=1);
  *                            Pass '' to disable BCC for a given send.
  */
 
+/** Normalize portfolio quote currency to PHP or USD; unknown/empty → null. */
+function normalize_quote_currency(mixed $value): ?string
+{
+    $code = strtoupper(trim((string) $value));
+    if ($code === '') {
+        return null;
+    }
+
+    return in_array($code, ['PHP', 'USD'], true) ? $code : null;
+}
+
 /** Strip display-name / brackets → bare address for SMTP envelope. */
 function mail_bare_address(string $addr): string
 {
@@ -176,6 +187,7 @@ function send_quotation_email(array $q): void
         . '<p><strong>Phone:</strong> ' . h($q['phone'] ?: '—') . '</p>'
         . '<p><strong>Project type:</strong> ' . h($q['projectType'] ?: '—') . '</p>'
         . '<p><strong>Services:</strong> ' . h($services) . '</p>'
+        . '<p><strong>Currency:</strong> ' . h($q['currency'] ?: '—') . '</p>'
         . '<p><strong>Budget:</strong> ' . h($q['budgetRange'] ?: '—') . '</p>'
         . '<p><strong>Timeline:</strong> ' . h($q['timeline'] ?: '—') . '</p>'
         . '<p><strong>Project details:</strong></p><p>' . nl2br(h($q['details'])) . '</p>';
@@ -183,6 +195,7 @@ function send_quotation_email(array $q): void
         . "Name: {$q['name']}\nCompany: " . ($q['company'] ?: '—') . "\n"
         . "Email: {$q['email']}\nPhone: " . ($q['phone'] ?: '—') . "\n"
         . "Project type: " . ($q['projectType'] ?: '—') . "\nServices: {$services}\n"
+        . "Currency: " . ($q['currency'] ?: '—') . "\n"
         . "Budget: " . ($q['budgetRange'] ?: '—') . "\nTimeline: " . ($q['timeline'] ?: '—') . "\n\n"
         . "Project details:\n{$q['details']}";
     send_smtp_mail(mail_recipients(), $subject, $html, $text, $q['email'], '');

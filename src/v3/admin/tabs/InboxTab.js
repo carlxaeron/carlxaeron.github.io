@@ -109,7 +109,11 @@ function InboxTab() {
     {
       key: "budget",
       label: "Budget",
-      render: (row) => row.budget || row.budget_range || "—",
+      render: (row) => {
+        const range = row.budget || row.budget_range || "—";
+        const code = row.currency;
+        return code ? `${range} (${code})` : range;
+      },
     },
     { key: "created_at", label: "Received", render: (row) => formatDate(row.created_at) },
   ];

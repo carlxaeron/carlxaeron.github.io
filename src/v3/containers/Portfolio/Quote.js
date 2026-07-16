@@ -4,6 +4,12 @@ import { useSpring, animated } from "@react-spring/web";
 import { useStore } from "./theme-provider";
 import { mapping } from "../../../mapping";
 import SectionTitle from "../../components/SectionTitle";
+import {
+  DEFAULT_QUOTE_CURRENCY,
+  QUOTE_CURRENCIES,
+  getBudgetRangesForCurrency,
+  normalizeQuoteCurrency,
+} from "../../config/quoteConfig";
 
 const PROJECT_TYPES = [
   "Web App",
@@ -24,14 +30,6 @@ const SERVICE_OPTIONS = [
   "Full Project",
 ];
 
-const BUDGET_RANGES = [
-  "< ₱50k",
-  "₱50k–₱150k",
-  "₱150k–₱500k",
-  "₱500k+",
-  "Discuss",
-];
-
 const TIMELINES = [
   "ASAP",
   "1 month",
@@ -45,6 +43,10 @@ function V3Quote({ isActive }) {
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
+  const [currency, setCurrency] = useState(DEFAULT_QUOTE_CURRENCY);
+  const [budgetRange, setBudgetRange] = useState("");
+
+  const budgetRanges = getBudgetRangesForCurrency(currency);
 
   const spring = useSpring({
     from: { opacity: 0, y: 30 },
@@ -61,28 +63,37 @@ function V3Quote({ isActive }) {
     );
   };
 
+  const handleCurrencyChange = (nextCurrency) => {
+    const normalized = normalizeQuoteCurrency(nextCurrency);
+    setCurrency(normalized);
+    setBudgetRange("");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
 
     const form = e.target;
+    const getValue = (fieldName) => form.elements.namedItem(fieldName)?.value ?? "";
 
     axios
       .post(mapping.quotation, {
-        name: form.name.value,
-        company: form.company.value,
-        email: form.email.value,
-        phone: form.phone.value,
-        projectType: form.projectType.value,
-        budgetRange: form.budgetRange.value,
-        timeline: form.timeline.value,
+        name: getValue("name"),
+        company: getValue("company"),
+        email: getValue("email"),
+        phone: getValue("phone"),
+        projectType: getValue("projectType"),
+        currency,
+        budgetRange,
+        timeline: getValue("timeline"),
         services: selectedServices,
-        details: form.details.value,
+        details: getValue("details"),
       })
       .then(() => {
         setSent(true);
         setLoading(false);
         setSelectedServices([]);
+        setBudgetRange("");
         form.reset();
         setValue((prev) => ({
           ...prev,
@@ -118,6 +129,18 @@ function V3Quote({ isActive }) {
     fontFamily: "'Inter', sans-serif",
     fontSize: "16px",
   };
+
+  const currencyButtonStyle = (active) => ({
+    padding: "8px 16px",
+    borderRadius: "100px",
+    border: `1.5px solid ${active ? "#00A862" : "rgba(0,168,98,0.25)"}`,
+    background: active ? "rgba(0,168,98,0.2)" : "rgba(255,255,255,0.05)",
+    color: active ? "#D4E9E2" : "rgba(212,233,226,0.85)",
+    fontSize: "0.85rem",
+    fontFamily: "'Inter', sans-serif",
+    cursor: loading || sent ? "not-allowed" : "pointer",
+    opacity: loading || sent ? 0.5 : 1,
+  });
 
   return (
     <section
@@ -215,24 +238,50 @@ function V3Quote({ isActive }) {
               </div>
               <div className="col-sm-6">
                 <div className="v3-form__group">
-                  <label htmlFor="v3-quote-budget" className="v3-form__label">Budget range</label>
-                  <select
-                    id="v3-quote-budget"
-                    name="budgetRange"
-                    className="v3-form__control"
-                    style={selectStyle}
-                    disabled={loading || sent}
-                    defaultValue=""
+                  <span className="v3-form__label" id="v3-quote-currency-label">Budget currency</span>
+                  <div
+                    role="group"
+                    aria-labelledby="v3-quote-currency-label"
+                    style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}
                   >
-                    <option value="" disabled>Select budget</option>
-                    {BUDGET_RANGES.map((range) => (
-                      <option key={range} value={range} style={{ color: "#1A1A1A" }}>
-                        {range}
-                      </option>
-                    ))}
-                  </select>
+                    {QUOTE_CURRENCIES.map((item) => {
+                      const active = currency === item.code;
+                      return (
+                        <button
+                          key={item.code}
+                          type="button"
+                          aria-pressed={active}
+                          onClick={() => handleCurrencyChange(item.code)}
+                          disabled={loading || sent}
+                          style={currencyButtonStyle(active)}
+                        >
+                          {item.label}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
+            </div>
+
+            <div className="v3-form__group">
+              <label htmlFor="v3-quote-budget" className="v3-form__label">Budget range ({currency})</label>
+              <select
+                id="v3-quote-budget"
+                name="budgetRange"
+                className="v3-form__control"
+                style={selectStyle}
+                disabled={loading || sent}
+                value={budgetRange}
+                onChange={(e) => setBudgetRange(e.target.value)}
+              >
+                <option value="" disabled>Select budget</option>
+                {budgetRanges.map((range) => (
+                  <option key={`${currency}-${range}`} value={range} style={{ color: "#1A1A1A" }}>
+                    {range}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="v3-form__group">

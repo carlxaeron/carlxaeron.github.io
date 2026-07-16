@@ -70,6 +70,7 @@ return new class extends Migration
                 $table->string('phone', 64)->nullable();
                 $table->string('project_type', 128)->nullable();
                 $table->string('budget_range', 128)->nullable();
+                $table->string('currency', 3)->nullable();
                 $table->string('timeline', 128)->nullable();
                 $table->json('services_json')->nullable();
                 $table->text('details');

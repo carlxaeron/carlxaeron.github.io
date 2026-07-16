@@ -15,6 +15,7 @@ class Quotation extends Model
         'phone',
         'project_type',
         'budget_range',
+        'currency',
         'timeline',
         'services_json',
         'details',

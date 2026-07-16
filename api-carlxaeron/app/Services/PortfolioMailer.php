@@ -28,7 +28,7 @@ final class PortfolioMailer
         Mail::to($to)->send(new ContactReceived($name, $email, $message));
     }
 
-    /** @param array{name:string,company:string,email:string,phone:string,projectType:string,budgetRange:string,timeline:string,services:list<string>,details:string} $quote */
+    /** @param array{name:string,company:string,email:string,phone:string,projectType:string,budgetRange:string,currency:?string,timeline:string,services:list<string>,details:string} $quote */
     public function sendQuotation(array $quote): void
     {
         $to = $this->recipients();

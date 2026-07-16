@@ -132,6 +132,31 @@ class PortfolioApiTest extends TestCase
         ]);
     }
 
+    public function test_quotation_persists_currency(): void
+    {
+        Mail::fake();
+
+        $this->postJson('/quotation', [
+            'name' => 'Ben',
+            'email' => 'ben@example.com',
+            'details' => 'Need an app',
+            'currency' => 'USD',
+            'budgetRange' => '$3k–$10k',
+        ])
+            ->assertOk();
+
+        $this->assertDatabaseHas('quotations', [
+            'email' => 'ben@example.com',
+            'currency' => 'USD',
+            'budget_range' => '$3k–$10k',
+        ]);
+
+        Mail::assertSent(\App\Mail\QuotationReceived::class, function (\App\Mail\QuotationReceived $mail) {
+            return $mail->quote['currency'] === 'USD'
+                && $mail->quote['budgetRange'] === '$3k–$10k';
+        });
+    }
+
     public function test_analytics_summary_shape_and_counts(): void
     {
         Visit::query()->create([

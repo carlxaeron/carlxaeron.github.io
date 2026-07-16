@@ -13,7 +13,7 @@ class QuotationReceived extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /** @param array{name:string,company:string,email:string,phone:string,projectType:string,budgetRange:string,timeline:string,services:list<string>,details:string} $quote */
+    /** @param array{name:string,company:string,email:string,phone:string,projectType:string,budgetRange:string,currency:?string,timeline:string,services:list<string>,details:string} $quote */
     public function __construct(public array $quote) {}
 
     public function envelope(): Envelope
@@ -36,6 +36,7 @@ class QuotationReceived extends Mailable
             . '<p><strong>Phone:</strong> ' . e($q['phone'] ?: '—') . '</p>'
             . '<p><strong>Project type:</strong> ' . e($q['projectType'] ?: '—') . '</p>'
             . '<p><strong>Services:</strong> ' . e($services) . '</p>'
+            . '<p><strong>Currency:</strong> ' . e($q['currency'] ?: '—') . '</p>'
             . '<p><strong>Budget:</strong> ' . e($q['budgetRange'] ?: '—') . '</p>'
             . '<p><strong>Timeline:</strong> ' . e($q['timeline'] ?: '—') . '</p>'
             . '<p><strong>Project details:</strong></p><p>' . nl2br(e($q['details'])) . '</p>';

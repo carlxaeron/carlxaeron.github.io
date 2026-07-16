@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.53] — 2026-07-17
+
+### Added
+- **Get a Quote multi-currency** — PHP/USD toggle on quote form with currency-specific budget ranges; `currency` field persisted on `quotations` and shown in admin Inbox
+- **API** — `POST /quotation` accepts optional `currency` (`PHP`|`USD`); Laravel migration + hosting-php migration script for `quotations.currency`
+- **Tests** — `quoteConfig.test.js`, `Quote.test.js`; Laravel `quotation persists currency`; hosting-php currency helper unit tests
+
 ## [3.0.52] — 2026-07-16
 
 ### Added

@@ -241,6 +241,12 @@ assert_true(str_contains($mail['html'], 'jk-construction'), 'admin mail keeps ra
 assert_true(str_contains($mail['text'], 'jk-construction'), 'text keeps raw slug');
 assert_same('info@carlmanuel.com', $mail['replyTo'], 'reply-to');
 
+echo "\nQuote currency helper\n";
+assert_same(null, normalize_quote_currency(''), 'empty → null');
+assert_same('USD', normalize_quote_currency('usd'), 'usd → USD');
+assert_same('PHP', normalize_quote_currency('PHP'), 'PHP stays');
+assert_same(null, normalize_quote_currency('EUR'), 'unsupported → null');
+
 echo "\n";
 if ($failed > 0) {
     echo "RESULT: {$failed} failed, {$passed} passed\n";

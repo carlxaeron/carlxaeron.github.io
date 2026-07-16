@@ -295,6 +295,7 @@ function route_quotation(): void
     $phone = trim((string) ($body['phone'] ?? ''));
     $projectType = trim((string) ($body['projectType'] ?? ''));
     $budgetRange = trim((string) ($body['budgetRange'] ?? ''));
+    $currency = normalize_quote_currency($body['currency'] ?? null);
     $timeline = trim((string) ($body['timeline'] ?? ''));
     $services = is_array($body['services'] ?? null)
         ? array_values(array_filter(array_map(static fn ($s) => trim((string) $s), $body['services'])))
@@ -302,8 +303,8 @@ function route_quotation(): void
 
     $stmt = db()->prepare(
         'INSERT INTO quotations
-        (name, company, email, phone, project_type, budget_range, timeline, services_json, details)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        (name, company, email, phone, project_type, budget_range, currency, timeline, services_json, details)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
     );
     $stmt->execute([
         $name,
@@ -312,6 +313,7 @@ function route_quotation(): void
         $phone,
         $projectType,
         $budgetRange,
+        $currency,
         $timeline,
         json_encode($services),
         $details,
@@ -325,6 +327,7 @@ function route_quotation(): void
             'phone' => $phone,
             'projectType' => $projectType,
             'budgetRange' => $budgetRange,
+            'currency' => $currency,
             'timeline' => $timeline,
             'services' => $services,
             'details' => $details,

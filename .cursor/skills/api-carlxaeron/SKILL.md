@@ -63,6 +63,8 @@ Live hosting (until full Laravel cutover) uses PHP under `hosting-php/` synced t
 
 Forms / Insights stay public to the SPA (browser sends Origin). Defaults: contact/quote 8/h, visits 120/min, feedback 30/h, summary 60/min, outreach 60/h.
 
+**`POST /quotation` body** (portfolio Get a Quote): `name`, `email`, `details` required; optional `company`, `phone`, `projectType`, `budgetRange`, `currency` (`PHP`|`USD`), `timeline`, `services[]`. Persisted to `quotations.currency` (nullable). Before first deploy with currency: run `php hosting-php/scripts/migrate-quotations-currency.php` on Stellar and `php artisan migrate` for Laravel.
+
 **Before deploying `hosting-php` changes**, run:
 
 ```bash
