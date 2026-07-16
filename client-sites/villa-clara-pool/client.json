@@ -29,13 +29,13 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "draft",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-16T11:08:48+08:00",
+    "nextFollowUpAt": "2026-07-23T11:08:48+08:00",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": ""
+    "notes": "Initial sent via outreachSchedule; auto follow-ups weekly (max 4)."
   }
 }
