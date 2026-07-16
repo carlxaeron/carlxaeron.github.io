@@ -4,17 +4,34 @@ import { useSpring, animated } from "@react-spring/web";
 import { useStore } from "./theme-provider";
 import { mapping } from "../../../mapping";
 import SectionTitle from "../../components/SectionTitle";
-
-const CONTACT_INFO = [
-  { icon: "✉️", label: "Email", value: "info@carlmanuel.com", href: "mailto:info@carlmanuel.com" },
-  { icon: "💻", label: "GitHub", value: "github.com/carlxaeron", href: "https://github.com/carlxaeron" },
-  { icon: "💼", label: "LinkedIn", value: "linkedin.com/in/carlxaeron", href: "https://linkedin.com/in/carlxaeron" },
-];
+import { usePortfolioSettings } from "../../config/PortfolioContentContext";
 
 function V3Contact({ isActive }) {
   const { setValue } = useStore();
+  const settings = usePortfolioSettings();
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+
+  const contactInfo = [
+    {
+      icon: "✉️",
+      label: "Email",
+      value: settings.contactEmailLabel || settings.contactEmail,
+      href: `mailto:${settings.contactEmail || "info@carlmanuel.com"}`,
+    },
+    {
+      icon: "💻",
+      label: "GitHub",
+      value: settings.githubLabel,
+      href: settings.githubUrl,
+    },
+    {
+      icon: "💼",
+      label: "LinkedIn",
+      value: settings.linkedinLabel,
+      href: settings.linkedinUrl,
+    },
+  ].filter((item) => item.href && item.value);
 
   const spring = useSpring({
     from: { opacity: 0, y: 30 },
@@ -68,10 +85,9 @@ function V3Contact({ isActive }) {
       style={{ background: "linear-gradient(160deg, #1E3932 0%, #00473e 100%)", height: "100%", overflow: "hidden" }}
     >
       <div className="v3-inner v3-scrollable v3-section-scroll">
-        <SectionTitle subtitle="Looking to build an enterprise-grade platform or integrate AI into your product? Let's talk.">Contact</SectionTitle>
+        <SectionTitle subtitle={settings.contactSubtitle || ""}>Contact</SectionTitle>
 
         <animated.div style={spring} className="row">
-          {/* Contact info */}
           <div className="col-md-4 mb-4 mb-md-0">
             <h4
               style={{
@@ -84,7 +100,7 @@ function V3Contact({ isActive }) {
               Get In Touch
             </h4>
             <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-              {CONTACT_INFO.map((item) => (
+              {contactInfo.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
@@ -114,7 +130,6 @@ function V3Contact({ isActive }) {
             </div>
           </div>
 
-          {/* Contact form */}
           <div className="col-md-8">
             <form className="v3-form" onSubmit={handleSubmit} noValidate>
               <div className="row">
