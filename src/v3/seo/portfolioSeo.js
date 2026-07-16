@@ -7,6 +7,11 @@ const { SKILLS, EXPERIENCES, COMPANIES } = require("../../external-config");
 
 const SITE_URL = "https://carlmanuel.com";
 
+const V3_GREEN_DARK = "#00473e";
+const V3_GREEN_MID = "#1E3932";
+const V3_GREEN_ACCENT = "#00A862";
+const V3_GREEN_LIGHT = "#D4E9E2";
+
 const PORTFOLIO_SEO = {
   siteUrl: SITE_URL,
   title:
@@ -85,6 +90,61 @@ function shouldNoIndex({ appMode = "portfolio", previewQuery = null } = {}) {
   return false;
 }
 
+/**
+ * Inline boot styles — must live in index.html (not the CSS bundle) so slow networks
+ * hide #seo-prerender before React/CSS hydrate.
+ */
+function buildPrerenderBootStyles() {
+  return `<style id="seo-prerender-boot">
+html, body {
+  margin: 0;
+  background: ${V3_GREEN_DARK};
+  overflow: hidden;
+}
+#seo-prerender {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+#app-boot-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(165deg, ${V3_GREEN_DARK} 0%, ${V3_GREEN_MID} 55%, ${V3_GREEN_DARK} 100%);
+  color: ${V3_GREEN_LIGHT};
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+#app-boot-shell .boot-accent {
+  color: ${V3_GREEN_ACCENT};
+}
+html.v3-app-ready #app-boot-shell {
+  opacity: 0;
+  visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  #app-boot-shell { transition: none; }
+}
+</style>`;
+}
+
+function buildBootShellHtml() {
+  return `<div id="app-boot-shell" aria-hidden="true">Carl <span class="boot-accent">Manuel</span></div>`;
+}
+
 function buildPrerenderHtml() {
   const { hero, about, contact, sections } = PORTFOLIO_SEO;
   const skillItems = topSkillNames()
@@ -153,10 +213,14 @@ function buildPrerenderHtml() {
 module.exports = {
   PORTFOLIO_SEO,
   SITE_URL,
+  V3_GREEN_DARK,
+  V3_GREEN_MID,
   escapeHtml,
   topSkillNames,
   topExperienceEntries,
   topProjectNames,
   shouldNoIndex,
+  buildPrerenderBootStyles,
+  buildBootShellHtml,
   buildPrerenderHtml,
 };

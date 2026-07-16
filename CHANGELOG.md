@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.55] — 2026-07-17
+
+### Fixed
+- **SEO prerender FOUC** — hide `#seo-prerender` visually (clip) while keeping crawler-visible markup; branded `#app-boot-shell` until React marks `html.v3-app-ready`
+
 ## [3.0.54] — 2026-07-17
 
 ### Added

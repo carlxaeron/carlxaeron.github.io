@@ -6,7 +6,11 @@
 
 const fs = require("fs");
 const path = require("path");
-const { buildPrerenderHtml } = require("../src/v3/seo/portfolioSeo");
+const {
+  buildPrerenderHtml,
+  buildPrerenderBootStyles,
+  buildBootShellHtml,
+} = require("../src/v3/seo/portfolioSeo");
 
 const targetArg = process.argv[2] || "build/index.html";
 const indexPath = path.resolve(process.cwd(), targetArg);
@@ -18,6 +22,14 @@ if (!fs.existsSync(indexPath)) {
 
 const prerenderHtml = buildPrerenderHtml();
 let html = fs.readFileSync(indexPath, "utf8");
+
+if (!html.includes('id="seo-prerender-boot"')) {
+  html = html.replace("</head>", `  ${buildPrerenderBootStyles()}\n</head>`);
+}
+
+if (!html.includes('id="app-boot-shell"')) {
+  html = html.replace(/<div id="root">/, `${buildBootShellHtml()}\n  <div id="root">`);
+}
 
 const rootPattern = /<div id="root">\s*<\/div>/;
 const rootWithContentPattern = /<div id="root">[\s\S]*?<\/div>\s*(?=<script|<\/body)/;
