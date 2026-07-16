@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.48] — 2026-07-16
+
+### Added
+- **Villa Clara Pool & Venue** client site (`villa-clara-pool`) — private pool/day venue sample (San Rafael, Rodriguez; HD FB gallery, Motion + Three.js particles hero)
+- Portfolio preview: `?preview=villa-clara-pool` → `villa-clara-pool.netlify.app`
+
 ## [3.0.47] — 2026-07-15
 
 ### Added

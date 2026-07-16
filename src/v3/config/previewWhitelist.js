@@ -137,6 +137,12 @@ export const PREVIEW_SITES = [
     label: "San Mateo Medical Center",
     netlifySite: "san-mateo-medical-center",
   },
+  {
+    id: "villa-clara-pool",
+    host: "villa-clara-pool.netlify.app",
+    label: "Villa Clara Pool & Venue",
+    netlifySite: "villa-clara-pool",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

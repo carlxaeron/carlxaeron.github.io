@@ -36,6 +36,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Archipelago Builders Corporation](#archipelago-builders-corporation) | `archipelago-builders` | General building contractor (AAA) | [Preview](https://carlmanuel.com/?preview=archipelago-builders) | 2026-07-15 |
 | [H Vill Hospital](#h-vill-hospital) | `hvill-hospital` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=hvill-hospital) | 2026-07-15 |
 | [San Mateo Medical Center](#san-mateo-medical-center) | `san-mateo-medical-center` | Private hospital / healthcare | [Preview](https://carlmanuel.com/?preview=san-mateo-medical-center) | 2026-07-15 |
+| [Villa Clara Pool & Venue](#villa-clara-pool--venue) | `villa-clara-pool` | Private pool / day venue | [Preview](https://carlmanuel.com/?preview=villa-clara-pool) | 2026-07-16 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -421,6 +422,23 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | FB cover (2048×779) + logo + gallery thumbs; Motion + Three.js particles hero |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
 | **Outreach** | No email — Messenger/SMS drafts · ask how to reach |
+
+---
+
+### Villa Clara Pool & Venue
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/villa-clara-pool/` |
+| **Netlify site** | `villa-clara-pool` |
+| **Preview host** | `villa-clara-pool.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=villa-clara-pool |
+| **Contact** | coco.mountain@yahoo.com · 0915 001 4133 · 0998 882 3670 |
+| **Address** | 50 P. Rodriguez St., San Rafael, Rodriguez (Montalban), Rizal 1860 |
+| **Source** | [Facebook](https://www.facebook.com/VillaClaraPoolVenue/) (~15K followers) |
+| **Assets** | HD gallery 2048px + logo 2048×2034 + cover 960×542; daytime only |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
+| **Outreach** | Email found — ask before send · drafts ready |
 
 ---
 
