@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.50] — 2026-07-16
+
+### Added
+- **Admin Settings** tab — brand, announcement banner, section visibility, contact/social links, chat toggle; portfolio reads `/content/settings` with static defaults
+
 ## [3.0.49] — 2026-07-16
 
 ### Added

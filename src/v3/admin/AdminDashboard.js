@@ -6,6 +6,7 @@ import InboxTab from "./tabs/InboxTab";
 import OutreachTab from "./tabs/OutreachTab";
 import ClientsTab from "./tabs/ClientsTab";
 import CmsTab from "./tabs/CmsTab";
+import SettingsTab from "./tabs/SettingsTab";
 import "../styles/sass/v3-app.scss";
 
 const TABS = [
@@ -14,6 +15,7 @@ const TABS = [
   { id: "outreach", label: "Outreach" },
   { id: "clients", label: "Clients" },
   { id: "cms", label: "CMS" },
+  { id: "settings", label: "Settings" },
 ];
 
 function AdminDashboard() {
@@ -43,6 +45,8 @@ function AdminDashboard() {
         return <ClientsTab />;
       case "cms":
         return <CmsTab />;
+      case "settings":
+        return <SettingsTab />;
       default:
         return <OverviewTab />;
     }

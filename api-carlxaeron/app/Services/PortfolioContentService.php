@@ -16,6 +16,7 @@ class PortfolioContentService
         'experiences',
         'companies',
         'projectDetails',
+        'settings',
     ];
 
     public function isAllowedSection(string $section): bool
@@ -75,7 +76,7 @@ class PortfolioContentService
         }
 
         $listSections = ['skills', 'experiences', 'companies'];
-        $objectSections = ['hero', 'about', 'header', 'projectDetails'];
+        $objectSections = ['hero', 'about', 'header', 'projectDetails', 'settings'];
 
         if (in_array($section, $listSections, true)) {
             if (! is_array($content) || ! array_is_list($content)) {

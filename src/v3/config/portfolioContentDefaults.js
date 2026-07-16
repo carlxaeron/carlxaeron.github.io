@@ -48,6 +48,34 @@ export const ABOUT_DEFAULTS = {
   ],
 };
 
+/** Site-wide settings consumed by the portfolio shell (sections, contact, chat, banner). */
+export const SETTINGS_DEFAULTS = {
+  brandName: "Carl.Manuel",
+  brandAccent: "Manuel",
+  announcementEnabled: false,
+  announcement: "",
+  showChatAgent: true,
+  contactSubtitle:
+    "Looking to build an enterprise-grade platform or integrate AI into your product? Let's talk.",
+  contactEmail: "info@carlmanuel.com",
+  contactEmailLabel: "info@carlmanuel.com",
+  githubUrl: "https://github.com/carlxaeron",
+  githubLabel: "github.com/carlxaeron",
+  linkedinUrl: "https://linkedin.com/in/carlxaeron",
+  linkedinLabel: "linkedin.com/in/carlxaeron",
+  sections: {
+    home: true,
+    about: true,
+    skills: true,
+    experience: true,
+    projects: true,
+    blog: true,
+    insights: true,
+    contact: true,
+    quote: true,
+  },
+};
+
 export const PORTFOLIO_CONTENT_DEFAULTS = {
   hero: HERO_DEFAULTS,
   about: ABOUT_DEFAULTS,
@@ -56,4 +84,5 @@ export const PORTFOLIO_CONTENT_DEFAULTS = {
   experiences: EXPERIENCES,
   companies: COMPANIES,
   projectDetails: PROJECT_DETAILS,
+  settings: SETTINGS_DEFAULTS,
 };

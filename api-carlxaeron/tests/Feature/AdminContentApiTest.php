@@ -85,15 +85,31 @@ class AdminContentApiTest extends TestCase
             ->assertUnauthorized();
     }
 
-    public function test_skills_must_be_array(): void
+    public function test_settings_section_accepts_object(): void
     {
         Sanctum::actingAs(
             User::query()->where('email', self::ADMIN_EMAIL)->firstOrFail(),
             ['*']
         );
 
-        $this->putJson('/admin/content/skills', ['content' => ['not' => 'list']])
-            ->assertStatus(400)
-            ->assertJsonPath('message', 'skills must be a JSON array');
+        $payload = [
+            'brandName' => 'Carl.Test',
+            'showChatAgent' => false,
+            'sections' => [
+                'home' => true,
+                'blog' => false,
+            ],
+        ];
+
+        $this->putJson('/admin/content/settings', ['content' => $payload])
+            ->assertOk()
+            ->assertJsonPath('data.section', 'settings')
+            ->assertJsonPath('data.content.brandName', 'Carl.Test')
+            ->assertJsonPath('data.content.showChatAgent', false);
+
+        $this->getJson('/content/settings')
+            ->assertOk()
+            ->assertJsonPath('data.content.brandName', 'Carl.Test')
+            ->assertJsonPath('data.source', 'cms');
     }
 }

@@ -1,10 +1,26 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { CMS_SECTION_IDS } from "./portfolioContentSections";
-import { PORTFOLIO_CONTENT_DEFAULTS } from "./portfolioContentDefaults";
+import { CMS_SECTION_IDS, SETTINGS_SECTION_ID } from "./portfolioContentSections";
+import {
+  PORTFOLIO_CONTENT_DEFAULTS,
+  SETTINGS_DEFAULTS,
+} from "./portfolioContentDefaults";
 import { fetchContentSection } from "./portfolioContentLoader";
 import { getProjectDetails as getStaticProjectDetails } from "../data/projectDetails";
 
 const PortfolioContentContext = createContext(null);
+
+function mergeSettings(partial) {
+  const base = SETTINGS_DEFAULTS;
+  if (!partial || typeof partial !== "object") return { ...base, sections: { ...base.sections } };
+  return {
+    ...base,
+    ...partial,
+    sections: {
+      ...base.sections,
+      ...(partial.sections && typeof partial.sections === "object" ? partial.sections : {}),
+    },
+  };
+}
 
 export function PortfolioContentProvider({ children }) {
   const [overrides, setOverrides] = useState({});
@@ -14,8 +30,9 @@ export function PortfolioContentProvider({ children }) {
     let cancelled = false;
 
     (async () => {
+      const sectionIds = [...CMS_SECTION_IDS, SETTINGS_SECTION_ID];
       const results = await Promise.all(
-        CMS_SECTION_IDS.map(async (section) => {
+        sectionIds.map(async (section) => {
           const content = await fetchContentSection(section);
           return [section, content];
         })
@@ -45,6 +62,11 @@ export function PortfolioContentProvider({ children }) {
     [overrides]
   );
 
+  const settings = useMemo(
+    () => mergeSettings(overrides[SETTINGS_SECTION_ID]),
+    [overrides]
+  );
+
   const getProjectDetails = useCallback(
     (projectId) => {
       const cmsDetails = overrides.projectDetails;
@@ -60,10 +82,11 @@ export function PortfolioContentProvider({ children }) {
     () => ({
       ready,
       overrides,
+      settings,
       getSection,
       getProjectDetails,
     }),
-    [ready, overrides, getSection, getProjectDetails]
+    [ready, overrides, settings, getSection, getProjectDetails]
   );
 
   return (
@@ -79,6 +102,7 @@ export function usePortfolioContent() {
     return {
       ready: true,
       overrides: {},
+      settings: mergeSettings(null),
       getSection: (sectionId) => PORTFOLIO_CONTENT_DEFAULTS[sectionId] ?? null,
       getProjectDetails: getStaticProjectDetails,
     };
@@ -89,4 +113,9 @@ export function usePortfolioContent() {
 export function usePortfolioSection(sectionId) {
   const { getSection } = usePortfolioContent();
   return getSection(sectionId);
+}
+
+export function usePortfolioSettings() {
+  const { settings } = usePortfolioContent();
+  return settings;
 }

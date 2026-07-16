@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import "../../styles/sass/v3-app.scss";
 import { ThemeProvider, useStore } from "./theme-provider";
 import NavDots from "../../components/NavDots";
@@ -23,8 +23,7 @@ import {
   usePortfolioContent,
 } from "../../config/PortfolioContentContext";
 
-// Module-level constant: stable identity across renders, no remount resets
-const SECTIONS_CONFIG = [
+const ALL_SECTIONS = [
   { id: "home",       component: V3Home,       title: "Home" },
   { id: "about",      component: V3About,      title: "About" },
   { id: "skills",     component: V3Skills,     title: "Skills" },
@@ -37,7 +36,7 @@ const SECTIONS_CONFIG = [
 ];
 
 function V3PortfolioScroll() {
-  const { getProjectDetails } = usePortfolioContent();
+  const { getProjectDetails, settings } = usePortfolioContent();
   const { value, setValue } = useStore();
   const [currentSection, setCurrentSection] = useState(0);
   const isTransitioningRef = useRef(false);
@@ -58,11 +57,23 @@ function V3PortfolioScroll() {
     []
   );
 
+  const sections = useMemo(() => {
+    const flags = settings?.sections || {};
+    const visible = ALL_SECTIONS.filter((s) => flags[s.id] !== false);
+    return visible.length > 0 ? visible : ALL_SECTIONS.filter((s) => s.id === "home");
+  }, [settings]);
+
+  useEffect(() => {
+    if (currentSection >= sections.length) {
+      setCurrentSection(Math.max(0, sections.length - 1));
+    }
+  }, [sections, currentSection]);
+
   const getActiveSlide = useCallback(() => {
-    const activeSectionId = SECTIONS_CONFIG[currentSection]?.id;
+    const activeSectionId = sections[currentSection]?.id;
     if (!activeSectionId) return null;
     return document.getElementById(`v3-section-${activeSectionId}`);
-  }, [currentSection]);
+  }, [currentSection, sections]);
 
   const canScrollableMove = useCallback((scrollableEl, deltaY) => {
     if (!scrollableEl) return false;
@@ -102,15 +113,15 @@ function V3PortfolioScroll() {
 
   // Navigate to section by index
   const navigateToSection = useCallback((index) => {
-    if (index < 0 || index >= SECTIONS_CONFIG.length) return;
+    if (index < 0 || index >= sections.length) return;
     if (isTransitioningRef.current) return;
     isTransitioningRef.current = true;
     setCurrentSection(index);
-    window.location.hash = `#${SECTIONS_CONFIG[index].id}`;
+    window.location.hash = `#${sections[index].id}`;
     setTimeout(() => {
       isTransitioningRef.current = false;
     }, 850);
-  }, []);
+  }, [sections]);
 
   const trySectionNavigate = useCallback(
     (deltaY, target, { throttleRef, throttleMs, preventDefault } = {}) => {
@@ -172,17 +183,17 @@ function V3PortfolioScroll() {
       if (e.key === "ArrowDown" || e.key === "PageDown") navigateToSection(currentSection + 1);
       if (e.key === "ArrowUp"   || e.key === "PageUp")   navigateToSection(currentSection - 1);
       if (e.key === "Home") navigateToSection(0);
-      if (e.key === "End")  navigateToSection(SECTIONS_CONFIG.length - 1);
+      if (e.key === "End")  navigateToSection(sections.length - 1);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [currentSection, navigateToSection, isAnyModalOpen]);
+  }, [currentSection, navigateToSection, isAnyModalOpen, sections.length]);
 
   // Hash change (browser back/forward)
   useEffect(() => {
     const onHashChange = () => {
       const hash = window.location.hash.replace("#", "");
-      const idx = SECTIONS_CONFIG.findIndex((s) => s.id === hash);
+      const idx = sections.findIndex((s) => s.id === hash);
       if (idx !== -1 && idx !== currentSection) {
         isTransitioningRef.current = true;
         setCurrentSection(idx);
@@ -191,14 +202,14 @@ function V3PortfolioScroll() {
     };
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
-  }, [currentSection]);
+  }, [currentSection, sections]);
 
-  // Initial hash resolution on mount
+  // Initial hash resolution on mount / when visible sections change
   useEffect(() => {
     const hash = window.location.hash.replace("#", "");
-    const idx = SECTIONS_CONFIG.findIndex((s) => s.id === hash);
+    const idx = sections.findIndex((s) => s.id === hash);
     if (idx !== -1) setCurrentSection(idx);
-  }, []);
+  }, [sections]);
 
   // Keep a stable viewport unit for fixed-slide transforms.
   useEffect(() => {
@@ -252,16 +263,39 @@ function V3PortfolioScroll() {
 
   return (
     <>
+      {settings.announcementEnabled && settings.announcement ? (
+        <div className="v3-announcement" role="status">
+          {settings.announcement}
+        </div>
+      ) : null}
+
       {/* Fixed header / brand */}
-      <header className="v3-header">
+      <header
+        className={`v3-header${
+          settings.announcementEnabled && settings.announcement ? " v3-header--with-banner" : ""
+        }`}
+      >
         <a className="v3-brand" href="#home">
-          Carl<span>.</span>Manuel
+          {(() => {
+            const brand = settings.brandName || "Carl.Manuel";
+            const parts = brand.split(".");
+            if (parts.length === 2) {
+              return (
+                <>
+                  {parts[0]}
+                  <span>.</span>
+                  {parts[1]}
+                </>
+              );
+            }
+            return brand;
+          })()}
         </a>
         {/* Desktop nav links — hidden on mobile (hamburger takes over) */}
         {!value.isMobile && (
           <nav aria-label="Main navigation">
             <ul style={{ display: "flex", gap: "1.5rem", listStyle: "none", margin: 0, padding: 0 }}>
-              {SECTIONS_CONFIG.map((s, i) => (
+              {sections.map((s, i) => (
                 <li key={s.id}>
                   <button
                     type="button"
@@ -290,7 +324,7 @@ function V3PortfolioScroll() {
 
       {/* Mobile hamburger menu */}
       <HamburgerMenu
-        sections={SECTIONS_CONFIG}
+        sections={sections}
         currentSection={currentSection}
         onNavigate={navigateToSection}
       />
@@ -302,7 +336,7 @@ function V3PortfolioScroll() {
         aria-live="polite"
         data-testid="portfolio-root"
       >
-        {SECTIONS_CONFIG.map((section, index) => {
+        {sections.map((section, index) => {
           const SectionComponent = section.component;
           const offset = index - currentSection;
           return (
@@ -320,7 +354,7 @@ function V3PortfolioScroll() {
                 isActive={currentSection === index}
                 onNavigate={navigateToSection}
                 sectionIndex={index}
-                totalSections={SECTIONS_CONFIG.length}
+                totalSections={sections.length}
                 onOpenProject={section.id === "projects" ? openProjectModal : undefined}
                 onOpenBlogPost={section.id === "blog" ? openBlogPost : undefined}
               />
@@ -331,7 +365,7 @@ function V3PortfolioScroll() {
 
       {/* Section navigation dots */}
       <NavDots
-        sections={SECTIONS_CONFIG}
+        sections={sections}
         currentSection={currentSection}
         onNavigate={navigateToSection}
       />
@@ -350,7 +384,7 @@ function V3PortfolioScroll() {
         type="button"
         className="v3-arrow v3-arrow--down"
         onClick={() => navigateToSection(currentSection + 1)}
-        disabled={currentSection === SECTIONS_CONFIG.length - 1}
+        disabled={currentSection === sections.length - 1}
         aria-label="Next section"
       >
         ↓
@@ -382,7 +416,7 @@ function V3PortfolioScroll() {
       />
 
       {/* AI Chat assistant */}
-      <ChatAgent />
+      {settings.showChatAgent !== false ? <ChatAgent /> : null}
     </>
   );
 }
