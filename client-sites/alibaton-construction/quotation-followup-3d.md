@@ -18,4 +18,4 @@ Happy to tweak copy, photos, or sections if you’d like a closer fit.
 
 Best regards,  
 **Carl Louis Manuel**  
-[carlmanuel.com](https://carlmanuel.com) · info@carlmanuel.com
+[carlmanuel.com](https://carlmanuel.com) · [Facebook](https://www.facebook.com/profile.php?id=61557195950694) · info@carlmanuel.com

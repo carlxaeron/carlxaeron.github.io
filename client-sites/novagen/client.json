@@ -6,7 +6,7 @@
   "deployedAt": "2026-07-17",
   "contact": {
     "name": "NovaGen Admissions / Trunkline",
-    "email": null,
+    "email": "info@novagen.com.ph",
     "phone": "(02) 8426-8888"
   },
   "quotation": {
@@ -23,14 +23,14 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "draft",
-    "cadence": null,
-    "emailFound": false,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "status": "sent",
+    "cadence": "1w",
+    "emailFound": true,
+    "sentAt": "2026-07-17T04:07:14+00:00",
+    "nextFollowUpAt": "2026-07-24T04:07:14+00:00",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "No current public email confirmed on Facebook/About. Older directories list novagenhospital@yahoo.com alongside outdated phone numbers ((02)936-1817) — likely stale. Trunkline (02) 8426-8888 is the current verified contact. Messenger/SMS/call recommended; ask user before trying the legacy email."
+    "notes": "Initial quotation sent 2026-07-17 via Laravel API to info@novagen.com.ph; auto follow-ups 1w enabled (max 4)."
   },
   "sources": {
     "facebook": "https://www.facebook.com/novagen.ph/",

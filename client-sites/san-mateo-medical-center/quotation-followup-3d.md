@@ -15,4 +15,4 @@ Happy to adjust services, hours, or photos. A quick “like / revise / not now�
 
 Best regards,  
 **Carl Louis Manuel**  
-carlmanuel.com · info@carlmanuel.com
+carlmanuel.com · facebook.com/profile.php?id=61557195950694 · info@carlmanuel.com

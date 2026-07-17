@@ -35,6 +35,7 @@ https://carlmanuel.com/?preview=air-alex-resort
 Best regards,
 **Carl Louis Manuel**
 [carlmanuel.com](https://carlmanuel.com)
+[Facebook](https://www.facebook.com/profile.php?id=61557195950694)
 info@carlmanuel.com
 
 ---

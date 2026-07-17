@@ -16,4 +16,4 @@ Happy to adjust sections, copy, or CTAs to match how your sales team prefers to 
 
 Best regards,  
 **Carl Louis Manuel**  
-[carlmanuel.com](https://carlmanuel.com) · info@carlmanuel.com
+[carlmanuel.com](https://carlmanuel.com) · [Facebook](https://www.facebook.com/profile.php?id=61557195950694) · info@carlmanuel.com

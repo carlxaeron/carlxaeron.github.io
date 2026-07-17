@@ -214,7 +214,8 @@ function outreach_build_initial_email(array $job): array
         . '<p><em>To start, only the upfront portion is due — not the full package amount.</em></p>'
         . '<p>Reply if you like the preview, want changes, or want to proceed.</p>'
         . '<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
-        . '<a href="https://carlmanuel.com">carlmanuel.com</a> · info@carlmanuel.com</p>';
+        . '<a href="https://carlmanuel.com">carlmanuel.com</a> · '
+        . '<a href="https://www.facebook.com/profile.php?id=61557195950694">Facebook</a> · info@carlmanuel.com</p>';
     $text = "Hi {$name},\n\nSample website for {$biz}:\n{$preview}\n\n"
         . "Package: {$pkg}\n"
         . ($amount !== '' ? "Investment (total): {$amount}\n" : '')
@@ -222,7 +223,7 @@ function outreach_build_initial_email(array $job): array
         . "To start, only the upfront portion is due — not the full package amount.\n"
         . "Timeline: {$timeline}\n\n"
         . "Reply if you like it, want changes, or want to proceed.\n\n"
-        . "Carl Louis Manuel\ncarlmanuel.com · info@carlmanuel.com";
+        . "Carl Louis Manuel\ncarlmanuel.com · facebook.com/profile.php?id=61557195950694 · info@carlmanuel.com";
 
     return [$subject, $html, $text];
 }
@@ -276,10 +277,11 @@ function outreach_build_followup_email(array $job): array
         . $offer['html']
         . '<p>No pressure — a short reply is enough.</p>'
         . '<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
-        . '<a href="https://carlmanuel.com">carlmanuel.com</a> · info@carlmanuel.com</p>';
+        . '<a href="https://carlmanuel.com">carlmanuel.com</a> · '
+        . '<a href="https://www.facebook.com/profile.php?id=61557195950694">Facebook</a> · info@carlmanuel.com</p>';
     $text = "Hi {$name},\n\nChecking in about {$biz}.\nPreview: {$preview}\n\n{$askText}\n\n"
         . $offer['text'] . "\n\n"
-        . "Carl Louis Manuel\ncarlmanuel.com · info@carlmanuel.com";
+        . "Carl Louis Manuel\ncarlmanuel.com · facebook.com/profile.php?id=61557195950694 · info@carlmanuel.com";
 
     return [$subject, $html, $text];
 }

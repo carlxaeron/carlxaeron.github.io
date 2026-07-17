@@ -48,7 +48,7 @@ Seed admin user: `ADMIN_EMAIL` + `ADMIN_PASSWORD` in server `.env` → `php arti
 
 **Admin SPA:** `carlmanuel.com/#login` → Sanctum token → `#admin` dashboard (Overview, Inbox, Outreach, Clients, CMS). URLs in [`src/mapping.js`](../../../src/mapping.js) (`adminLogin`, `adminSummary`, `adminContent`, etc.).
 
-Live hosting (until full Laravel cutover) uses PHP under `hosting-php/` synced to Stellar. Crons: daily `cron-outreach-followups.php`; **Monday 08:00** `cron-weekly-visit-report.php` (MySQL). Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).
+Live Stellar: **Laravel** serves public API routes including `POST /outreachSchedule` and `POST /outreachPause`. **Follow-up cron** still runs `hosting-php/scripts/cron-outreach-followups.php` (reads same MySQL `outreach_jobs`). Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).
 
 ### Public security layer (hosting-php)
 
@@ -86,7 +86,12 @@ CORS origins: `carlmanuel.com`, `www`, `carlxaeron.github.io`, `localhost:3000` 
 |------|------|
 | `routes/api.php` | Route table (`apiPrefix: ''` in `bootstrap/app.php`) |
 | `app/Http/Controllers/Api/PortfolioApiController.php` | Public handlers |
+| `app/Http/Controllers/Api/OutreachController.php` | Secret-gated `outreachSchedule` / `outreachPause` |
 | `app/Http/Controllers/Api/AdminController.php` | Admin auth + ops + CMS |
+| `app/Services/OutreachScheduler.php` | Schedule initial send + queue follow-ups |
+| `app/Services/OutreachCadence.php` | Cadence normalize, discount ladder (mirrors hosting-php) |
+| `app/Services/OutreachMailer.php` | Prospect outreach SMTP (+ `MAIL_BCC`) |
+| `app/Mail/OutreachProspectMail.php` | Initial / follow-up HTML bodies |
 | `app/Services/PortfolioContentService.php` | CMS section read/write |
 | `app/Models/PortfolioContent.php` | `portfolio_content_sections` table |
 | `app/Services/AnalyticsSummaryService.php` | Shared analytics (masked public / raw admin) |
@@ -108,7 +113,8 @@ Never commit `.env`. Prefer Laravel names; legacy keys still work via config fal
 | `MAIL_FROM_ADDRESS` | `DEFAULT_FROM` |
 | `MAIL_FROM_NAME` / — | `DEFAULT_FROM_NAME` / `MAIL_FROM_NAME` (hosting-php: display name, default `Carl Louis Manuel`) |
 | `MAIL_TO` | (same) — inbound contact/quote recipients |
-| `MAIL_BCC` | BCC on **outbound** client outreach (`info@carlmanuel.com` by default; hidden from To) |
+| `MAIL_BCC` | BCC on **outbound** client outreach (`info@carlmanuel.com` by default) |
+| `OUTREACH_SECRET` | `POST /outreachSchedule` + `/outreachPause` (body `secret` or `X-Outreach-Secret` header) |
 | `ANALYTICS_EXCLUDE_IP_HASHES` / `ANALYTICS_EXCLUDE_VISITOR_IDS` | (same) |
 | `ADMIN_EMAIL` / `ADMIN_PASSWORD` | Sanctum admin seeder (server only) |
 

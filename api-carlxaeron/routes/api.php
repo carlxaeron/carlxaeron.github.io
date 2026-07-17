@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\OutreachController;
 use App\Http\Controllers\Api\PortfolioApiController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,10 @@ Route::post('/contact', [PortfolioApiController::class, 'contact'])
     ->middleware('throttle:8,60');
 Route::post('/quotation', [PortfolioApiController::class, 'quotation'])
     ->middleware('throttle:8,60');
+Route::post('/outreachSchedule', [OutreachController::class, 'schedule'])
+    ->middleware('throttle:60,60');
+Route::post('/outreachPause', [OutreachController::class, 'pause'])
+    ->middleware('throttle:60,60');
 
 Route::post('/admin/login', [AdminController::class, 'login'])
     ->middleware('throttle:5,1');

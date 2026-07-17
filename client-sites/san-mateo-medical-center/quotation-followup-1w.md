@@ -17,4 +17,4 @@ If now isn’t the right time, reply “not now.” If you’d like changes firs
 
 Best regards,  
 **Carl Louis Manuel**  
-carlmanuel.com · info@carlmanuel.com
+carlmanuel.com · facebook.com/profile.php?id=61557195950694 · info@carlmanuel.com

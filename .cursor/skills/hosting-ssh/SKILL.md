@@ -54,7 +54,7 @@ Hosting SSH:
 
 ## Portfolio API
 
-Self-hosted **PHP API** (Laravel app in repo; live Stellar tree currently custom PHP + `hosting-php/` outreach) under `public_html/api-carlxaeron`. Public base: `https://api.carlmanuel.com`. Document root → `public_html/api-carlxaeron/public`.
+Self-hosted **Laravel API** under `public_html/api-carlxaeron`. Public routes (contact, quotation, outreach) live in Laravel; **follow-up cron** still uses `hosting-php/scripts/`. Public base: `https://api.carlmanuel.com`. Document root → `public_html/api-carlxaeron/public`.
 
 ### Laravel admin + CMS (api.carlxaeron)
 

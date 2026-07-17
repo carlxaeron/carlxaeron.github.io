@@ -235,7 +235,7 @@ After the site is built and `previewUrl` is known, customize the draft files in 
 
 **Template placeholders** (replace in all drafts): `{{contactName}}`, `{{contactEmail}}`, `{{businessName}}`, `{{previewUrl}}`, `{{packageName}}`, `{{packageScope}}`, `{{quotedAmount}}`, `{{paymentTerms}}`, `{{timeline}}`, `{{industry}}`.
 
-**Tone:** professional, warm, Philippine business context (₱, salamat OK in messenger). Sign off as **Carl Louis Manuel** with carlmanuel.com and info@carlmanuel.com.
+**Tone:** professional, warm, Philippine business context (₱, salamat OK in messenger). Sign off as **Carl Louis Manuel** with [carlmanuel.com](https://carlmanuel.com), [Facebook](https://www.facebook.com/profile.php?id=61557195950694), and info@carlmanuel.com (see `_template/` drafts).
 
 ### Email found → prepare send → **ask first** (mandatory for initial only)
 
@@ -263,9 +263,9 @@ Runs on Stellar even when Cursor/laptop are offline.
 
 | Piece | Location |
 |-------|----------|
-| API | `POST /outreachSchedule`, `POST /outreachPause` on `api.carlmanuel.com` |
-| Code | `api-carlxaeron/hosting-php/` (synced to `public_html/api-carlxaeron/`) |
-| Secret | `OUTREACH_SECRET` in hosting `.env` (also local `api-carlxaeron/.outreach_secret`, gitignored) |
+| API | `POST /outreachSchedule`, `POST /outreachPause` on `api.carlmanuel.com` (**Laravel** — `OutreachController`) |
+| Follow-up cron | `hosting-php/scripts/cron-outreach-followups.php` (daily on Stellar; same MySQL rows) |
+| Secret | `OUTREACH_SECRET` in server `.env` (also local `api-carlxaeron/.outreach_secret`, gitignored) |
 | Cron | Daily `0 1 * * *` → `scripts/cron-outreach-followups.php` |
 | Mail | Private Email SMTP (`mail.privateemail.com`) as `info@carlmanuel.com` |
 

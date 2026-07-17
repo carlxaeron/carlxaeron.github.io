@@ -713,4 +713,4 @@ curl -sI -H "Sec-Fetch-Dest: iframe" \
 
 Each client folder includes three **draft** files. Pull package/price/contact from `client.json`. Present to the user for review — **never auto-send**.
 
-Sign-off: **Carl Louis Manuel** · [carlmanuel.com](https://carlmanuel.com) · info@carlmanuel.com
+Sign-off: **Carl Louis Manuel** · [carlmanuel.com](https://carlmanuel.com) · [Facebook](https://www.facebook.com/profile.php?id=61557195950694) · info@carlmanuel.com

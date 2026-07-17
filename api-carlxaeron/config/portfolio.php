@@ -14,4 +14,8 @@ return [
 
     'admin_password' => env('ADMIN_PASSWORD', ''),
 
+    'outreach_secret' => env('OUTREACH_SECRET', ''),
+
+    'mail_bcc' => env('MAIL_BCC', 'info@carlmanuel.com'),
+
 ];

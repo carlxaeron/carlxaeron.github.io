@@ -23,4 +23,4 @@ If timing is better later, I can hold the quote and check in again next month.
 
 Salamat,  
 **Carl Louis Manuel**  
-[carlmanuel.com](https://carlmanuel.com) · info@carlmanuel.com
+[carlmanuel.com](https://carlmanuel.com) · [Facebook](https://www.facebook.com/profile.php?id=61557195950694) · info@carlmanuel.com

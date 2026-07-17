@@ -122,7 +122,9 @@ assert_same('₱7,500', $offerLast['discounted'], '50% of 15k');
 ]);
 assert_true(str_contains($fuSubject, '10%'), '3d subject has discount');
 assert_true(str_contains($fuHtml, 'commission'), '3d HTML has commission');
+assert_true(str_contains($fuHtml, '61557195950694'), '3d HTML has Facebook link');
 assert_true(str_contains($fuText, '₱13,500'), '3d text has discounted price');
+assert_true(str_contains($fuText, '61557195950694'), '3d text has Facebook link');
 
 echo "\nMail header helpers\n";
 assert_same('info@carlmanuel.com', mail_bare_address('info@carlmanuel.com'), 'bare stays bare');

@@ -17,4 +17,4 @@ Happy to adjust copy, photos, or sections based on your feedback.
 
 Best regards,
 **Carl Louis Manuel**
-[carlmanuel.com](https://carlmanuel.com) · info@carlmanuel.com
+[carlmanuel.com](https://carlmanuel.com) · [Facebook](https://www.facebook.com/profile.php?id=61557195950694) · info@carlmanuel.com

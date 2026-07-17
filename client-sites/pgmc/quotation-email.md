@@ -1,7 +1,7 @@
 # Email quotation — Pacific Global Medical Center
 
-**Status:** Draft — held, no email found on Facebook. Use Messenger/SMS/call, or send this once an email address is provided.
-**To:** (no public email on Facebook About — ask client or use Messenger)
+**Status:** Ready to send
+**To:** pgmccareers@gmail.com
 **Subject:** Website proposal for Pacific Global Medical Center — preview your sample site
 
 ---
@@ -34,6 +34,7 @@ https://carlmanuel.com/?preview=pgmc
 Best regards,
 **Carl Louis Manuel**
 [carlmanuel.com](https://carlmanuel.com)
+[Facebook](https://www.facebook.com/profile.php?id=61557195950694)
 info@carlmanuel.com
 
 ---

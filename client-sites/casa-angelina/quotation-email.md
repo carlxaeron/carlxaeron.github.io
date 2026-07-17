@@ -36,6 +36,7 @@ Reply on Facebook Messenger if you have questions — happy to adjust the scope 
 Best regards,
 **Carl Louis Manuel**
 [carlmanuel.com](https://carlmanuel.com)
+[Facebook](https://www.facebook.com/profile.php?id=61557195950694)
 info@carlmanuel.com
 
 ---

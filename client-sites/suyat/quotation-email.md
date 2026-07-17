@@ -44,6 +44,7 @@ Reply on Facebook Messenger or email me — happy to adjust scope or quote.
 Best regards,  
 **Carl Louis Manuel**  
 [carlmanuel.com](https://carlmanuel.com)  
+[Facebook](https://www.facebook.com/profile.php?id=61557195950694)
 info@carlmanuel.com
 
 ---

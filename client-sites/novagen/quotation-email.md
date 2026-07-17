@@ -1,7 +1,7 @@
 # Email quotation — Novaliches General Hospital and Medical Center (NovaGen)
 
-**Status:** Draft — held (no confirmed current email; see note below)
-**To:** (unconfirmed — older directories list `novagenhospital@yahoo.com` alongside outdated phone numbers, likely stale)
+**Status:** Ready to send
+**To:** info@novagen.com.ph
 **Subject:** Website proposal for NovaGen — preview your sample site
 
 ---
@@ -36,6 +36,7 @@ Reply to this email or message me if you have questions — happy to adjust the 
 Best regards,
 **Carl Louis Manuel**
 [carlmanuel.com](https://carlmanuel.com)
+[Facebook](https://www.facebook.com/profile.php?id=61557195950694)
 info@carlmanuel.com
 
 ---

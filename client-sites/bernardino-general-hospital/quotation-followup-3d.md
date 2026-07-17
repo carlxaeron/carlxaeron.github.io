@@ -17,4 +17,4 @@ As a thank-you for a quick reply, I can also apply **10% off** the quoted packag
 
 Best regards,
 **Carl Louis Manuel**
-carlmanuel.com · info@carlmanuel.com
+carlmanuel.com · facebook.com/profile.php?id=61557195950694 · info@carlmanuel.com

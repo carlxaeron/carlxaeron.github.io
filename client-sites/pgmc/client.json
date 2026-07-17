@@ -10,7 +10,7 @@
   },
   "contact": {
     "name": "Pacific Global Medical Center",
-    "email": null,
+    "email": "pgmccareers@gmail.com",
     "phone": "(02) 8248-7400",
     "emergencyPhone": "(02) 8248-7400 loc. 1017",
     "address": "Lot 2B Mindanao Avenue, Novaliches, Quezon City, Philippines 1116"
@@ -29,13 +29,13 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "ready",
-    "cadence": null,
-    "emailFound": false,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "status": "sent",
+    "cadence": "1w",
+    "emailFound": true,
+    "sentAt": "2026-07-17T04:07:14+00:00",
+    "nextFollowUpAt": "2026-07-24T04:07:14+00:00",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "No public email on FB About tab. Use Messenger/SMS/call — ask user how they want to reach PGMC before sending anything."
+    "notes": "Initial quotation sent 2026-07-17 via Laravel API to pgmccareers@gmail.com; auto follow-ups 1w enabled (max 4)."
   }
 }

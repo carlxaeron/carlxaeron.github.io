@@ -40,6 +40,7 @@ Reply to this email or message me if you have questions — happy to adjust the 
 Best regards,
 **Carl Louis Manuel**
 [carlmanuel.com](https://carlmanuel.com)
+[Facebook](https://www.facebook.com/profile.php?id=61557195950694)
 info@carlmanuel.com · +63 917 000 0000
 
 ---
