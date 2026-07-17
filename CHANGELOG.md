@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.63] — 2026-07-17
+
+### Fixed
+- **Admin Web Push** — Test ping endpoint renamed to `POST /admin/push/sendPing` (hosting WAF blocked `/test` paths); mapping and delivery hardening shipped with API commit `097e839`
+
 ## [3.0.62] — 2026-07-17
 
 ### Added
