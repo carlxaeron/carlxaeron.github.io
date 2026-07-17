@@ -28,13 +28,14 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "draft",
+    "status": "sms-pending",
     "cadence": null,
     "emailFound": false,
     "sentAt": null,
+    "smsSentAt": null,
     "nextFollowUpAt": null,
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "No email on Facebook About — Messenger/SMS/call preferred. Ask user how they'd like to reach out before sending anything."
+    "notes": "2026-07-17: SMS dual-SIM blocked (Continuity AppleScript sent from wrong line, delivery failed) — user cannot send SMS right now. Pending user action; no SMS actually sent. No email on Facebook — hold until user can send manually or picks another channel."
   }
 }

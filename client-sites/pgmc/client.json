@@ -1,0 +1,41 @@
+{
+  "businessName": "Pacific Global Medical Center",
+  "slug": "pgmc",
+  "previewHost": "pacific-global-medical-center.netlify.app",
+  "industry": "Hospital / healthcare",
+  "deployedAt": "2026-07-17",
+  "sources": {
+    "facebook": "https://www.facebook.com/pgmc2013/",
+    "notes": "19K followers, 3 following. Tagline \"We Care. We Can.\" Founded 2010 (per logo). Category Hospital, Price Range $$, Always open. About tab has no public email or phone. Phone (02) 8248-7400 and Emergency 24/7 loc. 1017 found on official promo graphics/reels (Pulmonary Function Test ad, All Saints' Day emergency banner) — not on the About tab. Photos tab has no real interior/exterior gallery beyond the cover — mostly text-heavy marketing graphics (hiring ads, service promos, health-awareness campaigns) plus one real photo of a lobby rollup banner. HD assets downloaded via Chrome DevTools MCP inspect + curl with matching signed fbcdn query params and browser User-Agent/Referer headers (get_network_request file save blocked by sandbox path restrictions, response body evicted from cache — replicated request via curl instead): cover/hero 1640x720 PNG→JPG (building exterior with signage) and profile logo 480x480 JPG (globe + caduceus emblem). Real services observed in posts: Pulmonology diagnostics (pulmonary function test / spirometry, ABG/VBG, ventilation, chest physiotherapy, nebulization), immunization/vaccination, cardiology/heart-health awareness, blood donation partnership, 24/7 emergency."
+  },
+  "contact": {
+    "name": "Pacific Global Medical Center",
+    "email": null,
+    "phone": "(02) 8248-7400",
+    "emergencyPhone": "(02) 8248-7400 loc. 1017",
+    "address": "Lot 2B Mindanao Avenue, Novaliches, Quezon City, Philippines 1116"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive hospital site, services & departments, community programs, FAQ, contact/emergency section, basic SEO, Netlify hosting setup",
+    "quotedAmount": "\u20b115,000",
+    "paymentTerms": "50% upfront to begin \u00b7 50% on delivery (not the full amount upfront)",
+    "timeline": "5\u20137 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=pgmc"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "ready",
+    "cadence": null,
+    "emailFound": false,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "No public email on FB About tab. Use Messenger/SMS/call — ask user how they want to reach PGMC before sending anything."
+  }
+}

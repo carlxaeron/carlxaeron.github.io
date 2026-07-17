@@ -30,13 +30,14 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "draft",
+    "status": "sms-pending",
     "cadence": null,
     "emailFound": false,
     "sentAt": null,
+    "smsSentAt": null,
     "nextFollowUpAt": null,
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "No public email on Facebook — outreach via Messenger/SMS to 0916 266 6266. Ask user how to reach before any send."
+    "notes": "2026-07-17: SMS dual-SIM blocked (Continuity AppleScript sent from wrong line, delivery failed) — user cannot send SMS right now. Pending user action; no SMS actually sent. No public email — hold until user can send manually or picks another channel."
   }
 }

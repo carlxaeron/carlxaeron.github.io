@@ -23,14 +23,15 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "draft",
+    "status": "sms-pending",
     "cadence": null,
     "emailFound": false,
     "sentAt": null,
+    "smsSentAt": null,
     "nextFollowUpAt": null,
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "No public email or phone on Facebook — page only takes inquiries via Messenger. Outreach via Messenger draft only; ask user how to reach them (no auto-send channel available)."
+    "notes": "No public email or phone on Facebook — Messenger-only inquiries, so SMS was never applicable here. 2026-07-17: grouped with the other 3 clients as SMS dual-SIM blocked / pending user action — user cannot send SMS right now for any of these; hold until user can send manually (Messenger) or picks another channel."
   },
   "sources": {
     "facebook": "https://www.facebook.com/casaangelina.resort/",

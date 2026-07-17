@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pacific Global Medical Center — hospital in Novaliches, Quezon City. We Care. We Can. Trunkline (02) 8248-7400 · Emergency 24/7." />
+  <title>Pacific Global Medical Center — Novaliches, Quezon City</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: "#0a2540",
+              mid: "#145091",
+              accent: "#2f80ed",
+              light: "#eef5fb",
+              soft: "#d7e8fb",
+              red: "#c0392b",
+            },
+          },
+          fontFamily: {
+            display: ["Fraunces", "Georgia", "serif"],
+            sans: ["DM Sans", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="embed-guard.js"></script>
+</head>
+<body class="font-sans text-gray-900 antialiased">
+  <div class="trust-strip bg-brand-dark py-2 text-center text-xs font-semibold tracking-wide text-brand-soft sm:text-sm">
+    Hospital · Emergency 24/7 · Novaliches, Quezon City · 19K Facebook followers
+  </div>
+
+  <header data-header class="sticky top-0 z-50 border-b border-brand-dark/10 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#" class="flex min-w-0 items-center gap-2 font-display text-lg font-bold text-brand-dark">
+        <img src="assets/logo.jpg" alt="" width="40" height="40" class="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-brand-mid/25" />
+        <span class="hidden truncate sm:inline">Pacific Global Medical Center</span>
+        <span class="sm:hidden">PGMC</span>
+      </a>
+      <nav class="hidden items-center gap-5 text-sm font-medium text-brand-dark/80 md:flex" aria-label="Main">
+        <a href="#services" class="hover:text-brand-mid transition-colors">Services</a>
+        <a href="#programs" class="hover:text-brand-mid transition-colors">Programs</a>
+        <a href="#about" class="hover:text-brand-mid transition-colors">About</a>
+        <a href="#faq" class="hover:text-brand-mid transition-colors">FAQ</a>
+        <a href="#contact" class="rounded-full bg-brand-red px-4 py-2 font-semibold text-white hover:brightness-110 transition">Emergency &amp; Contact</a>
+      </nav>
+      <button type="button" data-nav-toggle class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-dark/15 text-brand-dark md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="hidden flex-col border-t border-brand-dark/10 bg-white px-4 py-4 md:hidden">
+      <a href="#services" class="rounded-lg px-3 py-3 hover:bg-brand-light">Services</a>
+      <a href="#programs" class="rounded-lg px-3 py-3 hover:bg-brand-light">Programs</a>
+      <a href="#about" class="rounded-lg px-3 py-3 hover:bg-brand-light">About</a>
+      <a href="#faq" class="rounded-lg px-3 py-3 hover:bg-brand-light">FAQ</a>
+      <a href="#contact" class="mt-2 rounded-full bg-brand-red px-4 py-3 text-center font-semibold text-white">Emergency &amp; Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <section data-hero data-hero-three="blueprint" class="relative overflow-hidden bg-brand-dark text-white">
+      <div data-hero-bg class="hero-bg hero-bg--pgmc absolute inset-0 origin-center will-change-transform"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
+      <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+        <p data-hero-animate class="opacity-0 mb-3 text-xs font-semibold uppercase tracking-widest text-brand-soft">Novaliches · Quezon City · Since 2010</p>
+        <h1 data-hero-animate class="opacity-0 font-display max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-[3.25rem]">Pacific Global Medical Center</h1>
+        <p data-hero-animate class="opacity-0 mt-5 max-w-xl text-lg text-white/88">"We Care. We Can." — a full-service hospital on Mindanao Avenue offering diagnostics, emergency care, immunization, and community health programs for Novaliches families.</p>
+        <div data-hero-animate class="opacity-0 mt-8 flex flex-wrap gap-3">
+          <a data-hero-cta href="#contact" class="rounded-full bg-brand-accent px-6 py-3 font-semibold text-white hover:brightness-110 transition">Get directions &amp; contact</a>
+          <a data-hero-cta href="tel:+63282487400" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Trunkline (02) 8248-7400</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Departments &amp; services</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>Care areas PGMC has featured on its official page — confirm specialty schedules and rates when you call.</p>
+        <div data-filter class="mt-8">
+          <div class="flex flex-wrap gap-2">
+            <button type="button" data-filter-btn="all" class="filter-active rounded-full bg-brand-mid px-4 py-2 text-sm text-white" aria-pressed="true">All</button>
+            <button type="button" data-filter-btn="care" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Care</button>
+            <button type="button" data-filter-btn="access" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Access</button>
+          </div>
+          <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <article data-filter-item data-categories="care,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/70 p-6">
+              <h3 class="font-semibold text-brand-dark">Emergency Room</h3>
+              <p class="mt-2 text-sm text-gray-600">Open 24/7 — call the trunkline and ask for the ER, or head straight to Mindanao Avenue.</p>
+            </article>
+            <article data-filter-item data-categories="care,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/70 p-6">
+              <h3 class="font-semibold text-brand-dark">Pulmonology &amp; diagnostics</h3>
+              <p class="mt-2 text-sm text-gray-600">Pulmonary function test (spirometry), arterial/venous blood gas, ventilation support, chest physiotherapy, and nebulization. Ask for current rates.</p>
+            </article>
+            <article data-filter-item data-categories="care,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/70 p-6">
+              <h3 class="font-semibold text-brand-dark">Immunization &amp; preventive care</h3>
+              <p class="mt-2 text-sm text-gray-600">Vaccination programs for infants, children, pregnant women, and elderly patients.</p>
+            </article>
+            <article data-filter-item data-categories="care,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/70 p-6">
+              <h3 class="font-semibold text-brand-dark">Heart &amp; wellness guidance</h3>
+              <p class="mt-2 text-sm text-gray-600">Cardiology-linked health education — heart-healthy habits, checkups, and lifestyle screening.</p>
+            </article>
+            <article data-filter-item data-categories="access,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/70 p-6">
+              <h3 class="font-semibold text-brand-dark">Always open</h3>
+              <p class="mt-2 text-sm text-gray-600">Facebook lists the hospital as always open — confirm the clinic or specialist you need when you call ahead.</p>
+            </article>
+            <article data-filter-item data-categories="access,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/70 p-6">
+              <h3 class="font-semibold text-brand-dark">Trunkline &amp; emergency line</h3>
+              <p class="mt-2 text-sm text-gray-600">Reach operators via (02) 8248-7400 for admissions, billing, and general inquiries — same line, loc. 1017 for Emergency.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="programs" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Community programs</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>Outreach PGMC has run for the Novaliches community, based on its official Facebook posts.</p>
+        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-reveal>
+          <div class="bg-white p-6 shadow-sm">
+            <p class="text-xs font-semibold uppercase tracking-wider text-brand-red">Community drive</p>
+            <h3 class="mt-2 font-semibold text-brand-dark">Blood donation partnership</h3>
+            <p class="mt-2 text-sm text-gray-600">Blood drives held with the Philippine Blood Center — watch the Facebook page for the next schedule.</p>
+          </div>
+          <div class="bg-white p-6 shadow-sm">
+            <p class="text-xs font-semibold uppercase tracking-wider text-brand-red">Awareness</p>
+            <h3 class="mt-2 font-semibold text-brand-dark">Health education campaigns</h3>
+            <p class="mt-2 text-sm text-gray-600">Seasonal tips on heart health, immunization, and everyday wellness shared with patients and followers.</p>
+          </div>
+          <div class="bg-white p-6 shadow-sm">
+            <p class="text-xs font-semibold uppercase tracking-wider text-brand-red">Careers</p>
+            <h3 class="mt-2 font-semibold text-brand-dark">We are hiring</h3>
+            <p class="mt-2 text-sm text-gray-600">PGMC regularly posts openings for medical and office staff — follow the page for current listings.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
+        <div>
+          <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>About PGMC</h2>
+          <p class="mt-4 text-gray-600" data-reveal>
+            Pacific Global Medical Center has served Novaliches, Quezon City since 2010 from its Mindanao Avenue location — offering emergency, diagnostic, and outpatient care to the surrounding community.
+          </p>
+          <p class="mt-4 text-gray-600" data-reveal>
+            With nearly 19,000 Facebook followers and the motto "We Care. We Can.," this sample site gives patients a clean landing page for contact numbers, location, and hospital identity — easier to find than scrolling a news feed.
+          </p>
+        </div>
+        <div data-reveal class="relative overflow-hidden bg-brand-dark">
+          <img src="assets/hero-hospital.jpg" alt="Pacific Global Medical Center building exterior" width="1640" height="720" class="h-64 w-full object-cover opacity-90 sm:h-80" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/85 to-transparent"></div>
+          <p class="absolute bottom-4 left-4 right-4 text-sm font-medium text-white">Lot 2B Mindanao Avenue, Novaliches, Quezon City</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>FAQ</h2>
+        <div class="mt-8 space-y-3" data-accordion>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              Where is Pacific Global Medical Center?
+              <span class="text-brand-mid" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              Lot 2B Mindanao Avenue, Novaliches, Quezon City, Philippines 1116.
+            </div>
+          </div>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              How do I call the hospital?
+              <span class="text-brand-mid" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              Trunkline: (02) 8248-7400. For Emergency, use the same number, loc. 1017.
+            </div>
+          </div>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              Is the Emergency Room open 24 hours?
+              <span class="text-brand-mid" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              Yes — the Facebook page lists the hospital as always open, with Emergency Room service 24/7. For a specific clinic or specialist, call ahead to confirm today's availability.
+            </div>
+          </div>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              Where can I follow updates?
+              <span class="text-brand-mid" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              Official Facebook: facebook.com/pgmc2013 — health tips, community programs, and hiring posts are shared there.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-brand-dark py-16 text-white sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold" data-reveal>Contact &amp; Emergency</h2>
+        <p class="mt-2 max-w-xl text-white/80" data-reveal>Call the trunkline for admissions, billing, and general inquiries — or head to the Emergency Room any time, day or night.</p>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div class="space-y-4 text-sm sm:text-base" data-reveal>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-red">Trunkline</span>
+              <a href="tel:+63282487400" class="text-lg font-semibold hover:underline">(02) 8248-7400</a>
+            </p>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-red">Emergency 24/7</span>
+              <a href="tel:+63282487400" class="text-lg font-semibold hover:underline">(02) 8248-7400 loc. 1017</a>
+            </p>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-red">Address</span>
+              Lot 2B Mindanao Avenue, Novaliches<br />
+              Quezon City, Philippines 1116
+            </p>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-red">Facebook</span>
+              <a href="https://www.facebook.com/pgmc2013/" class="hover:underline" rel="noopener noreferrer" target="_blank">facebook.com/pgmc2013</a>
+            </p>
+          </div>
+          <div data-reveal class="border border-white/15 bg-white/5 p-6">
+            <p class="font-display text-xl font-semibold">We Care. We Can.</p>
+            <p class="mt-3 text-sm text-white/80">This quotation sample gives patients a clean landing page for phone, map, and hospital identity alongside your active Facebook page.</p>
+            <a href="https://www.facebook.com/pgmc2013/" class="mt-6 inline-flex rounded-full bg-brand-accent px-5 py-3 text-sm font-semibold text-white hover:brightness-110 transition" rel="noopener noreferrer" target="_blank">Message on Facebook</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-brand-dark/10 bg-white py-8 text-center text-sm text-gray-500">
+    <p>© <span id="y"></span> Pacific Global Medical Center · Novaliches, Quezon City</p>
+    <p class="mt-1">Quotation sample by <a href="https://carlmanuel.com" class="text-brand-mid hover:underline">Carl Louis Manuel</a></p>
+  </footer>
+
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+  <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
+</body>
+</html>

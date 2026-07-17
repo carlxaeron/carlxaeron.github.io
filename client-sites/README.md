@@ -42,6 +42,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Casa De Gloria Private Resort](#casa-de-gloria-private-resort) | `casa-de-gloria` | Private pool / staycation resort | [Preview](https://carlmanuel.com/?preview=casa-de-gloria) | 2026-07-17 |
 | [Casa Angelina Resort](#casa-angelina-resort) | `casa-angelina` | Vacation home rental / private pool venue | [Preview](https://carlmanuel.com/?preview=casa-angelina) | 2026-07-17 |
 | [Bernardino General Hospital](#bernardino-general-hospital) | `bernardino-general-hospital` | Hospital / healthcare / rehab medicine | [Preview](https://carlmanuel.com/?preview=bernardino-general-hospital) | 2026-07-17 |
+| [Pacific Global Medical Center](#pacific-global-medical-center) | `pgmc` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=pgmc) | 2026-07-17 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -532,6 +533,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | Cover graphic (1280×721) + 3 gallery photos (1448×2048, 1080×1350 ×2) via Chrome DevTools MCP inspect + `get_network_request`-identified signed fbcdn URLs, curl-downloaded at native resolution (`get_network_request` file-save blocked by shared-session workspace roots); Motion + Three.js particles hero |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
 | **Outreach** | Email found — **ask before send** · `quotation-email.md` |
+
+---
+
+### Pacific Global Medical Center
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/pgmc/` |
+| **Netlify site** | `pacific-global-medical-center` |
+| **Preview host** | `pacific-global-medical-center.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=pgmc |
+| **Contact** | **no public email** on FB — trunkline (02) 8248-7400 (Emergency loc. 1017) found on promo graphics, not the About tab |
+| **Address** | Lot 2B Mindanao Avenue, Novaliches, Quezon City 1116 |
+| **Category** | Hospital · Always open · Founded 2010 · ~19K FB followers · Price Range $$ |
+| **Source** | [Facebook](https://www.facebook.com/pgmc2013/) |
+| **Assets** | Cover/hero 1640×720 (building exterior) + 480×480 profile logo via Chrome DevTools MCP inspect + curl with matching signed fbcdn query params and browser headers (`get_network_request` file-save blocked by sandbox path restrictions, response body evicted from cache); Photos tab had no real interior/exterior gallery beyond the cover — mostly text-heavy marketing graphics, so Services/Programs sections use icon cards instead of a photo gallery; Motion + Three.js blueprint hero |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
+| **Outreach** | No public email — Messenger/SMS/call · ask how to reach them |
 
 ---
 

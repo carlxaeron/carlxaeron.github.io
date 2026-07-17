@@ -173,6 +173,12 @@ export const PREVIEW_SITES = [
     label: "Bernardino General Hospital",
     netlifySite: "bernardino-general-hospital",
   },
+  {
+    id: "pgmc",
+    host: "pacific-global-medical-center.netlify.app",
+    label: "Pacific Global Medical Center",
+    netlifySite: "pacific-global-medical-center",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
