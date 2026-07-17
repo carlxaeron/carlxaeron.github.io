@@ -161,6 +161,12 @@ export const PREVIEW_SITES = [
     label: "Casa De Gloria Private Resort",
     netlifySite: "casa-de-gloria",
   },
+  {
+    id: "casa-angelina",
+    host: "casa-angelina.netlify.app",
+    label: "Casa Angelina Resort",
+    netlifySite: "casa-angelina",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

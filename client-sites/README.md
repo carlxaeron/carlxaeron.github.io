@@ -40,6 +40,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Costa Abril Resort](#costa-abril-resort) | `costa-abril` | Water park / day resort | [Preview](https://carlmanuel.com/?preview=costa-abril) | 2026-07-17 |
 | [Airalex Private Lodge & Resort](#airalex-private-lodge--resort) | `air-alex-resort` | Day resort / private lodge | [Preview](https://carlmanuel.com/?preview=air-alex-resort) | 2026-07-17 |
 | [Casa De Gloria Private Resort](#casa-de-gloria-private-resort) | `casa-de-gloria` | Private pool / staycation resort | [Preview](https://carlmanuel.com/?preview=casa-de-gloria) | 2026-07-17 |
+| [Casa Angelina Resort](#casa-angelina-resort) | `casa-angelina` | Vacation home rental / private pool venue | [Preview](https://carlmanuel.com/?preview=casa-angelina) | 2026-07-17 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -494,6 +495,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | Logo (718×720), hero + 3 pool/waterfall gallery photos (1542×2047) + 1 patio/event photo (2048×1536) via Chrome DevTools MCP inspect (`evaluate_script`/`list_network_requests`) + curl download with the signed fbcdn params (MCP `get_network_request` file-save was blocked by shared-session workspace roots); Motion + Three.js particles hero |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
 | **Outreach** | No email — Messenger/SMS/call drafts · ask how to reach |
+
+---
+
+### Casa Angelina Resort
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/casa-angelina/` |
+| **Netlify site** | `casa-angelina` |
+| **Preview host** | `casa-angelina.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=casa-angelina |
+| **Contact** | **no public email or phone** on FB — Messenger only |
+| **Address** | Block 10 Lot 1, Phase 2, Congress Village, Manggahan, Rodriguez (Montalban), Rizal 1860 |
+| **Category** | Vacation Home Rental · ~6.5K FB followers · 88% recommend (12 reviews) · Always open |
+| **Source** | [Facebook](https://www.facebook.com/casaangelina.resort/) |
+| **Assets** | Cover (960×956) + 6 gallery photos (1260×1260–1878×1878) via Chrome DevTools MCP inspect + in-page `fetch()`/base64 download (upsized `ctp` to match `cstp` max); Motion + Three.js particles hero |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
+| **Outreach** | No email/phone — Messenger draft only · ask how to reach |
 
 ---
 
