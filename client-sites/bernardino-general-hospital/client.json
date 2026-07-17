@@ -1,0 +1,43 @@
+{
+  "businessName": "Bernardino General Hospital",
+  "slug": "bernardino-general-hospital",
+  "previewHost": "bernardino-general-hospital.netlify.app",
+  "industry": "Hospital / healthcare",
+  "deployedAt": "2026-07-17",
+  "sources": {
+    "facebook": "https://www.facebook.com/p/Bernardino-General-Hospital-1-100063548425478/",
+    "notes": "28K followers · Category: Hospital · Always open · Price range $$. Tagline from FB cover graphic: 'We constantly strive to give YOU quality care.' Rehabilitation Medicine unit posts list separate contact bghirehab@gmail.com / 0992-895-3006. Legacy domain bernardinogeneralhospital.com is expired (Squarespace) — not linked on site. Cover + gallery photos downloaded via Chrome DevTools MCP (network response, signed fbcdn params) at native resolution."
+  },
+  "contact": {
+    "name": "Bernardino General Hospital",
+    "email": "bghcorpone@yahoo.com",
+    "emailAlt": "bernardino.hosp@gmail.com",
+    "phone": "+63 2 8935 5264",
+    "phoneAlt": "+63 2 8936 6050",
+    "phoneAlt2": "+63 2 8935 7213",
+    "address": "680 Quirino Highway, Brgy. San Bartolome, Quezon City 1116"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive hospital site, services & contact, basic SEO, Netlify hosting setup",
+    "quotedAmount": "\u20b115,000",
+    "paymentTerms": "50% upfront to begin \u00b7 50% on delivery (not the full amount upfront)",
+    "timeline": "5\u20137 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=bernardino-general-hospital"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "ready",
+    "cadence": null,
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "Email found on FB About (bghcorpone@yahoo.com) + cover graphic (bernardino.hosp@gmail.com). Ask before sending initial quotation."
+  }
+}

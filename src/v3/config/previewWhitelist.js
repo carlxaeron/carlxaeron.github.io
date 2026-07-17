@@ -167,6 +167,12 @@ export const PREVIEW_SITES = [
     label: "Casa Angelina Resort",
     netlifySite: "casa-angelina",
   },
+  {
+    id: "bernardino-general-hospital",
+    host: "bernardino-general-hospital.netlify.app",
+    label: "Bernardino General Hospital",
+    netlifySite: "bernardino-general-hospital",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

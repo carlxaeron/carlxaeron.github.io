@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.59] — 2026-07-17
+
+### Added
+- **Client site** — Bernardino General Hospital (`bernardino-general-hospital`) added to portfolio preview whitelist and `client-sites/README.md` catalog
+- **Tests** — `previewWhitelist.test.js` coverage confirms the new slug resolves
+
 ## [3.0.58] — 2026-07-17
 
 ### Added

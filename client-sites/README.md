@@ -41,6 +41,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Airalex Private Lodge & Resort](#airalex-private-lodge--resort) | `air-alex-resort` | Day resort / private lodge | [Preview](https://carlmanuel.com/?preview=air-alex-resort) | 2026-07-17 |
 | [Casa De Gloria Private Resort](#casa-de-gloria-private-resort) | `casa-de-gloria` | Private pool / staycation resort | [Preview](https://carlmanuel.com/?preview=casa-de-gloria) | 2026-07-17 |
 | [Casa Angelina Resort](#casa-angelina-resort) | `casa-angelina` | Vacation home rental / private pool venue | [Preview](https://carlmanuel.com/?preview=casa-angelina) | 2026-07-17 |
+| [Bernardino General Hospital](#bernardino-general-hospital) | `bernardino-general-hospital` | Hospital / healthcare / rehab medicine | [Preview](https://carlmanuel.com/?preview=bernardino-general-hospital) | 2026-07-17 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -513,6 +514,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | Cover (960×956) + 6 gallery photos (1260×1260–1878×1878) via Chrome DevTools MCP inspect + in-page `fetch()`/base64 download (upsized `ctp` to match `cstp` max); Motion + Three.js particles hero |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
 | **Outreach** | No email/phone — Messenger draft only · ask how to reach |
+
+---
+
+### Bernardino General Hospital
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/bernardino-general-hospital/` |
+| **Netlify site** | `bernardino-general-hospital` |
+| **Preview host** | `bernardino-general-hospital.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=bernardino-general-hospital |
+| **Contact** | bghcorpone@yahoo.com (alt bernardino.hosp@gmail.com) · 8935-5264 / 8936-6050 / 8935-7213 |
+| **Address** | 680 Quirino Highway, Brgy. San Bartolome, Quezon City 1116 |
+| **Category** | Hospital · Always open · Rehabilitation Medicine unit · ~28K FB followers |
+| **Source** | [Facebook](https://www.facebook.com/p/Bernardino-General-Hospital-1-100063548425478/) (legacy domain bernardinogeneralhospital.com expired, not linked) |
+| **Assets** | Cover graphic (1280×721) + 3 gallery photos (1448×2048, 1080×1350 ×2) via Chrome DevTools MCP inspect + `get_network_request`-identified signed fbcdn URLs, curl-downloaded at native resolution (`get_network_request` file-save blocked by shared-session workspace roots); Motion + Three.js particles hero |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
+| **Outreach** | Email found — **ask before send** · `quotation-email.md` |
 
 ---
 
