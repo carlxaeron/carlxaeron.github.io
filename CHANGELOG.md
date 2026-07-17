@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.57] — 2026-07-17
+
+### Added
+- **Client sites** — Costa Abril Resort (`costa-abril`), Airalex Private Lodge & Resort (`air-alex-resort`), and Casa De Gloria Private Resort (`casa-de-gloria`) added to portfolio preview whitelist and `client-sites/README.md` catalog
+- **Tests** — `previewWhitelist.test.js` coverage confirms all three new slugs resolve
+
 ## [3.0.56] — 2026-07-17
 
 ### Fixed

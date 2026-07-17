@@ -1,0 +1,42 @@
+{
+  "businessName": "Casa De Gloria Private Resort",
+  "slug": "casa-de-gloria",
+  "previewHost": "casa-de-gloria.netlify.app",
+  "industry": "Private pool / staycation resort",
+  "deployedAt": "2026-07-17",
+  "sources": {
+    "facebook": "https://www.facebook.com/p/Casa-De-Gloria-Private-Resort-61558497461861/",
+    "notes": "About + Photos scraped logged-out. HD photos via photo lightbox og:image / t39.30808-6 assets (1427-2048px); logo via t39.30808-1 profile photo (718x720). No public email or full street address on FB (only 'Block 6 Lot 10' + phone) — exact address shared on booking per FAQ. 4.2K followers, 84% recommend (5 reviews), Price Range $. Comment thread suggests overnight/22-hr group packages (12-15 pax)."
+  },
+  "contact": {
+    "name": "Casa De Gloria Private Resort",
+    "email": null,
+    "phone": "+63 916 266 6266",
+    "facebook": "https://www.facebook.com/p/Casa-De-Gloria-Private-Resort-61558497461861/",
+    "messengerHandle": "casadegloriaprivateresort",
+    "address": "Block 6 Lot 10 (exact address shared upon booking)"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive private-pool resort site, HD gallery, packages & FAQ, contact/booking section, basic SEO, Netlify hosting setup",
+    "quotedAmount": "\u20b115,000",
+    "paymentTerms": "50% upfront to begin \u00b7 50% on delivery (not the full amount upfront)",
+    "timeline": "5\u20137 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=casa-de-gloria"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "draft",
+    "cadence": null,
+    "emailFound": false,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "No public email on Facebook — outreach via Messenger/SMS to 0916 266 6266. Ask user how to reach before any send."
+  }
+}

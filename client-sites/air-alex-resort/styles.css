@@ -1,0 +1,95 @@
+/* Airalex Private Lodge & Resort — hero, reveal, pool accents */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  [data-hero-animate],
+  [data-hero-bg] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-three-canvas {
+    display: none;
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-header] {
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+[data-header].is-scrolled {
+  box-shadow: 0 4px 24px rgba(6, 58, 78, 0.1);
+}
+
+.hero-bg {
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.hero-bg--airalex {
+  background-image:
+    linear-gradient(135deg, rgba(6, 58, 78, 0.92) 0%, rgba(8, 145, 178, 0.8) 45%, rgba(6, 58, 78, 0.9) 100%),
+    url("assets/hero-resort.jpg");
+}
+
+.trust-strip {
+  background: linear-gradient(90deg, #063a4e 0%, #0891b2 50%, #063a4e 100%);
+}
+
+.gallery-card__img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.gallery-card__img--wide {
+  aspect-ratio: 3 / 2;
+}
+
+.filter-active {
+  background-color: #0891b2;
+  color: #fff;
+}
+
+.filter-inactive {
+  background-color: transparent;
+}
+
+.hero-three-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.72;
+  mix-blend-mode: screen;
+}
+
+[data-hero] > .relative {
+  z-index: 2;
+}

@@ -1,0 +1,43 @@
+{
+  "businessName": "Airalex Private Lodge & Resort",
+  "slug": "air-alex-resort",
+  "previewHost": "air-alex-resort.netlify.app",
+  "industry": "Day resort / private lodge",
+  "deployedAt": "2026-07-17",
+  "contact": {
+    "name": "Airalex Private Lodge & Resort team",
+    "email": null,
+    "phone": "+63 962 903 5321"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive site (private lodges, pools, rates, about, FAQ, contact), mobile-friendly, Facebook integration",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=air-alex-resort"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "draft",
+    "cadence": null,
+    "emailFound": false,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "No public email on Facebook — outreach via Messenger/SMS only. Ask before any email send if email appears later."
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/airalexresort/",
+    "category": "Hotel resort · Public swimming pool",
+    "intro": "A place where you can relax and enjoy. Budget friendly!",
+    "priceRange": "$",
+    "followers": "~14K",
+    "notes": "Budget-friendly private lodge/day resort with public and private pools, cottages, and 24/7 stay options. Rate card graphics on Facebook are low-res text overlays (OCR garbled) — site shows real photo + FB rate images with a disclaimer instead of invented numbers."
+  }
+}

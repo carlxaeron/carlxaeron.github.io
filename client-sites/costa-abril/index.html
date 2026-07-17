@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Costa Abril Resort — water park in San Jose, Rodriguez, Rizal. Wave pool, giant slide, kiddie slide, cottages, and function hall packages for family day outings and celebrations." />
+  <title>Costa Abril Resort — Rodriguez, Rizal Water Park</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: "#063a4b",
+              mid: "#0e7490",
+              accent: "#22d3ee",
+              light: "#e0f7fa",
+              soft: "#a5e6ef",
+              sun: "#f6ad55",
+            },
+          },
+          fontFamily: {
+            display: ["Baloo 2", "system-ui", "sans-serif"],
+            sans: ["Inter", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="embed-guard.js"></script>
+</head>
+<body class="font-sans text-gray-900 antialiased">
+  <div class="trust-strip py-2 text-center text-xs font-semibold tracking-wide text-white sm:text-sm">
+    Water park · San Jose, Rodriguez, Rizal · Always open · 104K+ Facebook followers
+  </div>
+
+  <header data-header class="sticky top-0 z-50 border-b border-brand-dark/10 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#" class="flex min-w-0 items-center gap-2 font-display text-lg font-bold text-brand-dark">
+        <img src="assets/logo.jpg" alt="" width="40" height="40" class="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-brand-accent/40" />
+        <span class="hidden truncate sm:inline">Costa Abril Resort</span>
+        <span class="sm:hidden">Costa Abril</span>
+      </a>
+      <nav class="hidden items-center gap-5 text-sm font-medium text-brand-dark/80 md:flex" aria-label="Main">
+        <a href="#amenities" class="hover:text-brand-mid transition-colors">Amenities</a>
+        <a href="#gallery" class="hover:text-brand-mid transition-colors">Gallery</a>
+        <a href="#rates" class="hover:text-brand-mid transition-colors">Rates</a>
+        <a href="#faq" class="hover:text-brand-mid transition-colors">FAQ</a>
+        <a href="#contact" class="rounded-full bg-brand-mid px-4 py-2 font-semibold text-white hover:brightness-110 transition">Book a visit</a>
+      </nav>
+      <button type="button" data-nav-toggle class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-dark/15 text-brand-dark md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="hidden flex-col border-t border-brand-dark/10 bg-white px-4 py-4 md:hidden">
+      <a href="#amenities" class="rounded-lg px-3 py-3 hover:bg-brand-light">Amenities</a>
+      <a href="#gallery" class="rounded-lg px-3 py-3 hover:bg-brand-light">Gallery</a>
+      <a href="#rates" class="rounded-lg px-3 py-3 hover:bg-brand-light">Rates</a>
+      <a href="#faq" class="rounded-lg px-3 py-3 hover:bg-brand-light">FAQ</a>
+      <a href="#contact" class="mt-2 rounded-full bg-brand-mid px-4 py-3 text-center font-semibold text-white">Book a visit</a>
+    </div>
+  </header>
+
+  <main>
+    <section data-hero data-hero-three="particles" class="relative overflow-hidden bg-brand-dark text-white">
+      <div data-hero-bg class="hero-bg hero-bg--costa absolute inset-0 origin-center will-change-transform"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
+      <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+        <p data-hero-animate class="opacity-0 mb-3 text-xs font-semibold uppercase tracking-widest text-brand-accent">San Jose · Rodriguez · Rizal</p>
+        <h1 data-hero-animate class="opacity-0 font-display max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-[3.4rem]">Costa Abril Resort</h1>
+        <p data-hero-animate class="opacity-0 mt-5 max-w-xl text-lg text-white/88">Wave pool, giant slide, and kiddie slide for a full day of family fun — plus cottages, air-conditioned rooms, and a function hall for celebrations.</p>
+        <div data-hero-animate class="opacity-0 mt-8 flex flex-wrap gap-3">
+          <a data-hero-cta href="#contact" class="rounded-full bg-brand-accent px-6 py-3 font-semibold text-brand-dark hover:brightness-105 transition">Ask about rates</a>
+          <a data-hero-cta href="tel:+639178021966" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Call 0917 802 1966</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="amenities" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>What you get</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>A water park built for family outings, barangay trips, and celebrations — swim, slide, and relax under the sun.</p>
+        <div data-filter class="mt-8">
+          <div class="flex flex-wrap gap-2">
+            <button type="button" data-filter-btn="all" class="filter-active rounded-full bg-brand-mid px-4 py-2 text-sm text-white" aria-pressed="true">All</button>
+            <button type="button" data-filter-btn="pool" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Pools &amp; Slides</button>
+            <button type="button" data-filter-btn="stay" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Cottages &amp; Rooms</button>
+            <button type="button" data-filter-btn="events" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Events</button>
+          </div>
+          <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <article data-filter-item data-categories="pool,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/60 p-6">
+              <h3 class="font-semibold text-brand-dark">Wave pool</h3>
+              <p class="mt-2 text-sm text-gray-600">The park's main draw — a wave pool sized for groups, families, and barangay outings.</p>
+            </article>
+            <article data-filter-item data-categories="pool,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/60 p-6">
+              <h3 class="font-semibold text-brand-dark">Giant slide</h3>
+              <p class="mt-2 text-sm text-gray-600">A tall, fast slide for the thrill-seekers in your group.</p>
+            </article>
+            <article data-filter-item data-categories="pool,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/60 p-6">
+              <h3 class="font-semibold text-brand-dark">Kiddie slide</h3>
+              <p class="mt-2 text-sm text-gray-600">A shallower, gentler slide and pool area built for the little ones.</p>
+            </article>
+            <article data-filter-item data-categories="stay,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/60 p-6">
+              <h3 class="font-semibold text-brand-dark">Cottages &amp; gazebos</h3>
+              <p class="mt-2 text-sm text-gray-600">Umbrella, gazebo, and cottage options for daytime or overnight stays.</p>
+            </article>
+            <article data-filter-item data-categories="stay,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/60 p-6">
+              <h3 class="font-semibold text-brand-dark">Air-conditioned &amp; villa rooms</h3>
+              <p class="mt-2 text-sm text-gray-600">Air-conditioned rooms, a dormitory, and a semi-private villa room for bigger groups.</p>
+            </article>
+            <article data-filter-item data-categories="events,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/60 p-6">
+              <h3 class="font-semibold text-brand-dark">Function hall &amp; videoke</h3>
+              <p class="mt-2 text-sm text-gray-600">Packages with tables, chairs, and videoke for parties and celebrations.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>From the resort</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>High-resolution photos from the Costa Abril Facebook page — see the wave pool and rooms before you book.</p>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-reveal>
+          <img src="assets/project-02.jpg" alt="Costa Abril wave pool" width="1440" height="1080" class="h-52 w-full object-cover sm:h-56" loading="lazy" />
+          <img src="assets/project-01.jpg" alt="Costa Abril pool area" width="960" height="720" class="h-52 w-full object-cover sm:h-56" loading="lazy" />
+          <img src="assets/project-04.jpg" alt="Costa Abril indoor function area" width="2048" height="1536" class="h-52 w-full object-cover sm:h-56" loading="lazy" />
+          <img src="assets/project-05.jpg" alt="Costa Abril indoor lounge area" width="2048" height="1536" class="h-52 w-full object-cover sm:h-56" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <section id="rates" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div>
+            <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>2026 rates</h2>
+            <p class="mt-4 text-gray-600" data-reveal>
+              Entrance starts at <span class="font-semibold text-brand-dark">₱150 per person</span> (daytime or night), with cottage, gazebo,
+              air-conditioned room, dormitory, and villa room options on top of entrance — plus function-hall packages with videoke for parties.
+            </p>
+            <p class="mt-4 text-gray-600" data-reveal>
+              Exact cottage, room, and package pricing depends on group size and date. Message or call for the current full rate sheet and availability.
+            </p>
+            <a href="tel:+639178021966" data-reveal class="mt-6 inline-flex rounded-full bg-brand-mid px-5 py-3 text-sm font-semibold text-white hover:brightness-110 transition">Call for the full rate sheet</a>
+          </div>
+          <div data-reveal class="relative overflow-hidden bg-brand-dark">
+            <img src="assets/hero-cover.jpg" alt="Costa Abril Resort cover photo" width="960" height="838" class="h-64 w-full object-cover opacity-90 sm:h-80" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 to-transparent"></div>
+            <p class="absolute bottom-4 left-4 right-4 text-sm font-medium text-white">40 Dao Street, San Jose, Rodriguez, Rizal 1860</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>About Costa Abril</h2>
+        <p class="mt-4 max-w-3xl text-gray-600" data-reveal>
+          Costa Abril Resort is a water park in San Jose, Rodriguez (Montalban), Rizal, built around its wave pool, giant slide, and kiddie slide.
+          With over 104K Facebook followers, it's a well-known day-out destination for families and groups across Rizal and Metro Manila.
+        </p>
+        <p class="mt-4 max-w-3xl text-gray-600" data-reveal>
+          This sample site gives visitors the amenities, gallery, and a call button up front — no need to dig through Facebook posts for rates and directions.
+        </p>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>FAQ</h2>
+        <div class="mt-8 space-y-3" data-accordion>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              Where are you located?
+              <span class="text-brand-mid" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              40 Dao Street, San Jose, Rodriguez (Montalban), Rizal 1860.
+            </div>
+          </div>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              What time are you open?
+              <span class="text-brand-mid" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              Always open — daytime and overnight (night) rates are both available.
+            </div>
+          </div>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              How do I check rates and available dates?
+              <span class="text-brand-mid" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              Call or text 0917 802 1966, or message the Facebook page with your preferred date and group size.
+            </div>
+          </div>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              Can we bring our own liquor?
+              <span class="text-brand-mid" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              Outside liquor is not allowed — liquor is available for purchase inside the resort.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-brand-dark py-16 text-white sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold" data-reveal>Contact</h2>
+        <p class="mt-2 max-w-xl text-white/80" data-reveal>Ask about rates, cottages, rooms, and party packages.</p>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div class="space-y-4 text-sm sm:text-base" data-reveal>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-accent">Phone</span>
+              <a href="tel:+639178021966" class="text-lg font-semibold hover:underline">0917 802 1966</a>
+            </p>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-accent">Address</span>
+              40 Dao Street, San Jose<br />
+              Rodriguez (Montalban), Rizal 1860
+            </p>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-accent">Hours</span>
+              Always open
+            </p>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-accent">Facebook</span>
+              <a href="https://www.facebook.com/CostaAbril/" class="hover:underline" rel="noopener noreferrer" target="_blank">facebook.com/CostaAbril</a>
+            </p>
+          </div>
+          <div data-reveal class="border border-white/15 bg-white/5 p-6 backdrop-blur-sm">
+            <p class="font-display text-xl font-semibold">Ready for a clearer booking page?</p>
+            <p class="mt-3 text-sm text-white/80">This is a quotation sample. Guests can land here for amenities, rates, photos, and a call button instead of scrolling Facebook alone.</p>
+            <a href="tel:+639178021966" class="mt-6 inline-flex rounded-full bg-brand-accent px-5 py-3 text-sm font-semibold text-brand-dark hover:brightness-105 transition">Call Costa Abril</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-brand-dark/10 bg-white py-8 text-center text-sm text-gray-500">
+    <p>© <span id="y"></span> Costa Abril Resort · Rodriguez, Rizal</p>
+    <p class="mt-1">Quotation sample by <a href="https://carlmanuel.com" class="text-brand-mid hover:underline">Carl Louis Manuel</a></p>
+  </footer>
+
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+  <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
+</body>
+</html>

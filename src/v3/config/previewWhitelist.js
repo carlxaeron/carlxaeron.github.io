@@ -143,6 +143,24 @@ export const PREVIEW_SITES = [
     label: "Villa Clara Pool & Venue",
     netlifySite: "villa-clara-pool",
   },
+  {
+    id: "costa-abril",
+    host: "costa-abril.netlify.app",
+    label: "Costa Abril Resort",
+    netlifySite: "costa-abril",
+  },
+  {
+    id: "air-alex-resort",
+    host: "air-alex-resort.netlify.app",
+    label: "Airalex Private Lodge & Resort",
+    netlifySite: "air-alex-resort",
+  },
+  {
+    id: "casa-de-gloria",
+    host: "casa-de-gloria.netlify.app",
+    label: "Casa De Gloria Private Resort",
+    netlifySite: "casa-de-gloria",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

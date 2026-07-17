@@ -37,6 +37,9 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [H Vill Hospital](#h-vill-hospital) | `hvill-hospital` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=hvill-hospital) | 2026-07-15 |
 | [San Mateo Medical Center](#san-mateo-medical-center) | `san-mateo-medical-center` | Private hospital / healthcare | [Preview](https://carlmanuel.com/?preview=san-mateo-medical-center) | 2026-07-15 |
 | [Villa Clara Pool & Venue](#villa-clara-pool--venue) | `villa-clara-pool` | Private pool / day venue | [Preview](https://carlmanuel.com/?preview=villa-clara-pool) | 2026-07-16 |
+| [Costa Abril Resort](#costa-abril-resort) | `costa-abril` | Water park / day resort | [Preview](https://carlmanuel.com/?preview=costa-abril) | 2026-07-17 |
+| [Airalex Private Lodge & Resort](#airalex-private-lodge--resort) | `air-alex-resort` | Day resort / private lodge | [Preview](https://carlmanuel.com/?preview=air-alex-resort) | 2026-07-17 |
+| [Casa De Gloria Private Resort](#casa-de-gloria-private-resort) | `casa-de-gloria` | Private pool / staycation resort | [Preview](https://carlmanuel.com/?preview=casa-de-gloria) | 2026-07-17 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -439,6 +442,58 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | HD gallery 2048px + logo 2048×2034 + cover 960×542; daytime only |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
 | **Outreach** | Email found — ask before send · drafts ready |
+
+---
+
+### Costa Abril Resort
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/costa-abril/` |
+| **Netlify site** | `costa-abril` |
+| **Preview host** | `costa-abril.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=costa-abril |
+| **Contact** | 0917 802 1966 (**no public email** on FB) |
+| **Address** | 40 Dao Street, San Jose, Rodriguez (Montalban), Rizal 1860 |
+| **Source** | [Facebook](https://www.facebook.com/CostaAbril/) (~104K followers) |
+| **Assets** | Cover (960x838) + logo (770x770) + 5 gallery photos (up to 2048x1536 HD) via Chrome DevTools MCP inspect + curl download with matching signed fbcdn params; Motion + Three.js particles hero |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
+| **Outreach** | No email — Messenger/SMS/call drafts · ask how to reach |
+
+---
+
+### Airalex Private Lodge & Resort
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/air-alex-resort/` |
+| **Netlify site** | `air-alex-resort` |
+| **Preview host** | `air-alex-resort.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=air-alex-resort |
+| **Contact** | +63 962 903 5321 (**no public email** on FB) |
+| **Category** | Hotel resort · Public swimming pool · ~14K FB followers |
+| **Source** | [Facebook](https://www.facebook.com/airalexresort/) |
+| **Assets** | Real pool photo (960×640) + logo (479×480) + 2 FB rate cards via Chrome DevTools MCP inspect + in-page `fetch()`/base64 download (fbcdn allows CORS on these variants); Motion + Three.js particles hero |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
+| **Outreach** | No email — Messenger/SMS drafts · ask how to reach |
+
+---
+
+### Casa De Gloria Private Resort
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/casa-de-gloria/` |
+| **Netlify site** | `casa-de-gloria` |
+| **Preview host** | `casa-de-gloria.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=casa-de-gloria |
+| **Contact** | 0916 266 6266 (**no public email** on FB) |
+| **Address** | Block 6 Lot 10 (exact pin shared on booking) |
+| **Category** | Hotel resort · Private plunge pool · 4.2K FB followers · 84% recommend (5 reviews) |
+| **Source** | [Facebook](https://www.facebook.com/p/Casa-De-Gloria-Private-Resort-61558497461861/) |
+| **Assets** | Logo (718×720), hero + 3 pool/waterfall gallery photos (1542×2047) + 1 patio/event photo (2048×1536) via Chrome DevTools MCP inspect (`evaluate_script`/`list_network_requests`) + curl download with the signed fbcdn params (MCP `get_network_request` file-save was blocked by shared-session workspace roots); Motion + Three.js particles hero |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
+| **Outreach** | No email — Messenger/SMS/call drafts · ask how to reach |
 
 ---
 
