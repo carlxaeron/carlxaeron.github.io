@@ -45,6 +45,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Pacific Global Medical Center](#pacific-global-medical-center) | `pgmc` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=pgmc) | 2026-07-17 |
 | [NovaGen (Novaliches General Hospital and Medical Center)](#novagen-novaliches-general-hospital-and-medical-center) | `novagen` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=novagen) | 2026-07-17 |
 | [Fairview General Hospital Inc.](#fairview-general-hospital-inc) | `fairview-general-hospital` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=fairview-general-hospital) | 2026-07-17 |
+| [MPHS Mother of Perpetual Help Inc. Fairview](#mphs-mother-of-perpetual-help-inc-fairview) | `mphs-fairview` | K–12 school / nonprofit | [Preview](https://carlmanuel.com/?preview=mphs-fairview) | 2026-07-17 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -587,6 +588,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Category** | PhilHealth Level I private hospital · Est. 1984 · OPEN 24/7 · 30-bed capacity · 86% recommend (211 reviews) |
 | **Source** | [Facebook](https://www.facebook.com/p/Fairview-General-Hospital-Inc-100057044726961/) |
 | **Assets** | Cover/hero 2048×1753 JPEG + logo 480×480 JPEG + gallery 1080×1080 JPEG ×4 via Chrome DevTools MCP in-page `fetch()`/base64 (`get_network_request` file-save blocked by sandbox path); Motion + Three.js blueprint hero |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
+| **Outreach** | Email on FB About — drafts ready · **ask before send** |
+
+---
+
+### MPHS Mother of Perpetual Help Inc. Fairview
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/mphs-fairview/` |
+| **Netlify site** | `mphs-fairview` |
+| **Preview host** | `mphs-fairview.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=mphs-fairview |
+| **Contact** | mphsi.edu@gmail.com · 0966 194 6589 |
+| **Address** | Iris Street, Dahlia Avenue, Quezon City 1118 |
+| **Category** | Nonprofit K–12 school · Humility in Greatness · Est. 1990 · 978 FB followers |
+| **Source** | [Facebook](https://www.facebook.com/p/MPHS-Mother-of-Perpetual-Help-Inc-Fairview-61588929957305/) |
+| **Assets** | Hero 1500×500 + logo 1290×1290 + profile 1024×1024 + gallery JPEGs (2048×1024, 1054×1492, 1024×1536, 1402×1122) via Chrome DevTools MCP in-page fetch/base64; Motion + Three.js blueprint hero |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
 | **Outreach** | Email on FB About — drafts ready · **ask before send** |
 

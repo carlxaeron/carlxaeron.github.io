@@ -191,6 +191,12 @@ export const PREVIEW_SITES = [
     label: "Fairview General Hospital Inc.",
     netlifySite: "fairview-general-hospital",
   },
+  {
+    id: "mphs-fairview",
+    host: "mphs-fairview.netlify.app",
+    label: "MPHS Mother of Perpetual Help Inc. Fairview",
+    netlifySite: "mphs-fairview",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

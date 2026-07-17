@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.66] — 2026-07-17
+
+### Added
+- **Client site** — MPHS Mother of Perpetual Help Inc. Fairview (`mphs-fairview`) added to portfolio preview whitelist and `client-sites/README.md` catalog
+- **Tests** — `previewWhitelist.test.js` coverage confirms the new slug resolves
+
 ## [3.0.65] — 2026-07-17
 
 ### Added
