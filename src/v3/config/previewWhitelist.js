@@ -179,6 +179,18 @@ export const PREVIEW_SITES = [
     label: "Pacific Global Medical Center",
     netlifySite: "pacific-global-medical-center",
   },
+  {
+    id: "novagen",
+    host: "novagen-hospital.netlify.app",
+    label: "NovaGen — Novaliches General Hospital and Medical Center",
+    netlifySite: "novagen-hospital",
+  },
+  {
+    id: "fairview-general-hospital",
+    host: "fairview-general-hospital.netlify.app",
+    label: "Fairview General Hospital Inc.",
+    netlifySite: "fairview-general-hospital",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

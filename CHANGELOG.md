@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.61] — 2026-07-17
+
+### Added
+- **Client sites** — NovaGen (`novagen`) and Fairview General Hospital Inc. (`fairview-general-hospital`) added to portfolio preview whitelist and `client-sites/README.md` catalog
+- **Tests** — `previewWhitelist.test.js` coverage confirms the new slugs resolve
+
 ## [3.0.60] — 2026-07-17
 
 ### Added

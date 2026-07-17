@@ -1,0 +1,40 @@
+{
+  "businessName": "Fairview General Hospital Inc.",
+  "slug": "fairview-general-hospital",
+  "previewHost": "fairview-general-hospital.netlify.app",
+  "industry": "Hospital / healthcare",
+  "deployedAt": "2026-07-17",
+  "sources": {
+    "facebook": "https://www.facebook.com/p/Fairview-General-Hospital-Inc-100057044726961/",
+    "notes": "8.6K followers. Est. 1984 · OPEN 24/7 · PhilHealth Accredited Level I private hospital (30-bed capacity). Intro tagline on Posts tab. Category Hospital, Price Range $$$, Always open, 86% recommend (211 reviews). About: Lot 20 Cor Mercury St. Fairview Ave Fairview Subdivision, Quezon City 1118; mobile 289398764; email fairviewgeneralhospitalinc@gmail.com. HD assets via Chrome DevTools MCP evaluate_script fetch from fbcdn (get_network_request blocked by sandbox path): cover/hero 2048×1753 JPG, profile logo 480×480 JPG, gallery photos 1080×1080 JPG ×4 from Photos tab."
+  },
+  "contact": {
+    "name": "Fairview General Hospital Inc.",
+    "email": "fairviewgeneralhospitalinc@gmail.com",
+    "phone": "(02) 8939-8764",
+    "address": "Lot 20 Cor Mercury St. Fairview Ave, Fairview Subdivision, Quezon City, Philippines 1118"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive hospital site, departments & services, PhilHealth accreditation highlight, photo gallery, FAQ, contact/emergency section, basic SEO, Netlify hosting setup",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=fairview-general-hospital"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "ready",
+    "cadence": null,
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "Email on Facebook About tab. Ask user before initial send."
+  }
+}

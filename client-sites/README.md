@@ -43,6 +43,8 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Casa Angelina Resort](#casa-angelina-resort) | `casa-angelina` | Vacation home rental / private pool venue | [Preview](https://carlmanuel.com/?preview=casa-angelina) | 2026-07-17 |
 | [Bernardino General Hospital](#bernardino-general-hospital) | `bernardino-general-hospital` | Hospital / healthcare / rehab medicine | [Preview](https://carlmanuel.com/?preview=bernardino-general-hospital) | 2026-07-17 |
 | [Pacific Global Medical Center](#pacific-global-medical-center) | `pgmc` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=pgmc) | 2026-07-17 |
+| [NovaGen (Novaliches General Hospital and Medical Center)](#novagen-novaliches-general-hospital-and-medical-center) | `novagen` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=novagen) | 2026-07-17 |
+| [Fairview General Hospital Inc.](#fairview-general-hospital-inc) | `fairview-general-hospital` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=fairview-general-hospital) | 2026-07-17 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -551,6 +553,42 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | Cover/hero 1640×720 (building exterior) + 480×480 profile logo via Chrome DevTools MCP inspect + curl with matching signed fbcdn query params and browser headers (`get_network_request` file-save blocked by sandbox path restrictions, response body evicted from cache); Photos tab had no real interior/exterior gallery beyond the cover — mostly text-heavy marketing graphics, so Services/Programs sections use icon cards instead of a photo gallery; Motion + Three.js blueprint hero |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
 | **Outreach** | No public email — Messenger/SMS/call · ask how to reach them |
+
+---
+
+### NovaGen (Novaliches General Hospital and Medical Center)
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/novagen/` |
+| **Netlify site** | `novagen-hospital` |
+| **Preview host** | `novagen-hospital.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=novagen |
+| **Contact** | Trunkline (02) 8426-8888 · **no confirmed current email** (older directories list a stale `novagenhospital@yahoo.com`) |
+| **Address** | NGHI Building, 793 Quirino Highway, Brgy. Gulod, Novaliches, Quezon City 1117 |
+| **Category** | Private Level 1 tertiary hospital · Est. 1997 (Tan family) · `#AlagangNovaGen` |
+| **Source** | [Facebook](https://www.facebook.com/novagen.ph/) · [novagen.com.ph](https://www.novagen.com.ph) · [About microsite](https://sites.google.com/view/novagencomph/about-novagen) |
+| **Assets** | Logo (1620×1620 JPEG) + cover photo (1773×657 PNG→JPEG) via Chrome DevTools MCP inspect + in-page `fetch()`/base64 download (`get_network_request` file-save blocked by shared-session workspace roots); FB Photos tab login-walled with only text-graphic posts, so services/facilities content sourced from official novagen.com.ph / About microsite instead of a photo gallery; Motion + Three.js particles hero |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
+| **Outreach** | No confirmed email — Messenger/SMS/call drafts · ask how to reach them |
+
+---
+
+### Fairview General Hospital Inc.
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/fairview-general-hospital/` |
+| **Netlify site** | `fairview-general-hospital` |
+| **Preview host** | `fairview-general-hospital.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=fairview-general-hospital |
+| **Contact** | fairviewgeneralhospitalinc@gmail.com · (02) 8939-8764 |
+| **Address** | Lot 20 Cor Mercury St. Fairview Ave, Fairview Subdivision, Quezon City 1118 |
+| **Category** | PhilHealth Level I private hospital · Est. 1984 · OPEN 24/7 · 30-bed capacity · 86% recommend (211 reviews) |
+| **Source** | [Facebook](https://www.facebook.com/p/Fairview-General-Hospital-Inc-100057044726961/) |
+| **Assets** | Cover/hero 2048×1753 JPEG + logo 480×480 JPEG + gallery 1080×1080 JPEG ×4 via Chrome DevTools MCP in-page `fetch()`/base64 (`get_network_request` file-save blocked by sandbox path); Motion + Three.js blueprint hero |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
+| **Outreach** | Email on FB About — drafts ready · **ask before send** |
 
 ---
 

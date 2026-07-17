@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Novaliches General Hospital and Medical Center (NovaGen) — private Level 1 tertiary hospital in Novaliches, Quezon City since 1997. #AlagangNovaGen: OB-GYNE, cardiology, dialysis, eye center, and 24/7 emergency care." />
+  <title>NovaGen — Novaliches General Hospital and Medical Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: "#06332c",
+              mid: "#0f5c4c",
+              accent: "#16a06a",
+              light: "#e3f3ea",
+              gold: "#c9973f",
+            },
+          },
+          fontFamily: {
+            display: ["Playfair Display", "Georgia", "serif"],
+            sans: ["Inter", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="embed-guard.js"></script>
+</head>
+<body class="font-sans text-gray-900 antialiased">
+  <div class="trust-strip bg-brand-dark py-2 text-center text-xs font-semibold tracking-wide text-brand-light sm:text-sm">
+    Level 1 Tertiary Hospital · Novaliches, Quezon City · Serving families since 1997 · #AlagangNovaGen
+  </div>
+
+  <header data-header class="sticky top-0 z-50 border-b border-brand-dark/10 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#" class="flex min-w-0 items-center gap-2 font-display text-lg font-bold text-brand-dark">
+        <img src="assets/logo.jpg" alt="" width="40" height="40" class="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-brand-accent/30" />
+        <span class="hidden truncate sm:inline">NovaGen Hospital</span>
+        <span class="sm:hidden">NovaGen</span>
+      </a>
+      <nav class="hidden items-center gap-5 text-sm font-medium text-brand-dark/80 md:flex" aria-label="Main">
+        <a href="#services" class="hover:text-brand-accent transition-colors">Services</a>
+        <a href="#facilities" class="hover:text-brand-accent transition-colors">Facilities</a>
+        <a href="#about" class="hover:text-brand-accent transition-colors">About</a>
+        <a href="#faq" class="hover:text-brand-accent transition-colors">FAQ</a>
+        <a href="#contact" class="rounded-full bg-brand-accent px-4 py-2 font-semibold text-white hover:brightness-110 transition">Contact</a>
+      </nav>
+      <button type="button" data-nav-toggle class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-dark/15 text-brand-dark md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="hidden flex-col border-t border-brand-dark/10 bg-white px-4 py-4 md:hidden" role="dialog" aria-label="Mobile navigation">
+      <a href="#services" class="rounded-lg px-3 py-3 hover:bg-brand-light">Services</a>
+      <a href="#facilities" class="rounded-lg px-3 py-3 hover:bg-brand-light">Facilities</a>
+      <a href="#about" class="rounded-lg px-3 py-3 hover:bg-brand-light">About</a>
+      <a href="#faq" class="rounded-lg px-3 py-3 hover:bg-brand-light">FAQ</a>
+      <a href="#contact" class="mt-2 rounded-full bg-brand-accent px-4 py-3 text-center font-semibold text-white">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <section data-hero data-hero-three="particles" class="relative overflow-hidden bg-brand-dark text-white">
+      <div data-hero-bg class="hero-bg hero-bg--novagen absolute inset-0 origin-center will-change-transform"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
+      <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+        <p data-hero-animate class="opacity-0 mb-3 text-xs font-semibold uppercase tracking-widest text-brand-gold">793 Quirino Highway · Gulod, Novaliches · Quezon City</p>
+        <h1 data-hero-animate class="opacity-0 font-display max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-[3.4rem]">Novaliches General Hospital &amp; Medical Center</h1>
+        <p data-hero-animate class="opacity-0 mt-5 max-w-xl text-lg text-white/88">The Tan family's legacy of care since 1997 — accessible, affordable, and compassionate healthcare for the Novaliches community. <span class="font-semibold text-brand-gold">#AlagangNovaGen</span>: where patients are family.</p>
+        <div data-hero-animate class="opacity-0 mt-8 flex flex-wrap gap-3">
+          <a data-hero-cta href="tel:+63284268888" class="rounded-full bg-brand-accent px-6 py-3 font-semibold text-white hover:brightness-105 transition">Call trunkline (02) 8426-8888</a>
+          <a data-hero-cta href="#services" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">View services</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Services</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>From general consultations to specialty centers — confirm availability and current rates when you call the trunkline.</p>
+        <div data-filter class="mt-8">
+          <div class="flex flex-wrap gap-2">
+            <button type="button" data-filter-btn="all" class="filter-active rounded-full bg-brand-mid px-4 py-2 text-sm text-white" aria-pressed="true">All</button>
+            <button type="button" data-filter-btn="diagnostics" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Diagnostics</button>
+            <button type="button" data-filter-btn="specialty" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Specialty Centers</button>
+            <button type="button" data-filter-btn="clinical" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Clinical</button>
+          </div>
+          <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <article data-filter-item data-categories="diagnostics,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/60 p-6">
+              <h3 class="font-semibold text-brand-dark">CT Scan (Cranial, Chest, Abdomen)</h3>
+              <p class="mt-2 text-sm text-gray-600">Plain and contrast studies from ₱5,500 — CT stonogram and whole abdomen packages available.</p>
+            </article>
+            <article data-filter-item data-categories="diagnostics,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/60 p-6">
+              <h3 class="font-semibold text-brand-dark">2D Echo &amp; Ambulatory BP Monitoring</h3>
+              <p class="mt-2 text-sm text-gray-600">Cardiac imaging and 24-hour blood pressure monitoring for the Heart Unit.</p>
+            </article>
+            <article data-filter-item data-categories="diagnostics,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/60 p-6">
+              <h3 class="font-semibold text-brand-dark">Digital Mammography</h3>
+              <p class="mt-2 text-sm text-gray-600">Breast cancer screening as part of the hospital's cancer screening program.</p>
+            </article>
+            <article data-filter-item data-categories="diagnostics,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/60 p-6">
+              <h3 class="font-semibold text-brand-dark">Digestive Endoscopy</h3>
+              <p class="mt-2 text-sm text-gray-600">Video gastroscopy and colonoscopy, with combined package options.</p>
+            </article>
+            <article data-filter-item data-categories="specialty,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/60 p-6">
+              <h3 class="font-semibold text-brand-dark">NovaGen Eye Center</h3>
+              <p class="mt-2 text-sm text-gray-600">Pioneer in state-of-the-art and affordable eye treatments and surgeries.</p>
+            </article>
+            <article data-filter-item data-categories="specialty,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/60 p-6">
+              <h3 class="font-semibold text-brand-dark">Hemodialysis Center</h3>
+              <p class="mt-2 text-sm text-gray-600">Sessions available Monday to Friday for renal patients.</p>
+            </article>
+            <article data-filter-item data-categories="clinical,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/60 p-6">
+              <h3 class="font-semibold text-brand-dark">OB-GYNE &amp; Neonatal ICU</h3>
+              <p class="mt-2 text-sm text-gray-600">Maternal care and a dedicated Neonatal Intensive Care Unit.</p>
+            </article>
+            <article data-filter-item data-categories="clinical,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/60 p-6">
+              <h3 class="font-semibold text-brand-dark">Internal Medicine &amp; Cardiology</h3>
+              <p class="mt-2 text-sm text-gray-600">General surgery, internal medicine, cardiology, and geriatric care.</p>
+            </article>
+            <article data-filter-item data-categories="clinical,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/60 p-6">
+              <h3 class="font-semibold text-brand-dark">Rehab Medicine &amp; Pain Management</h3>
+              <p class="mt-2 text-sm text-gray-600">Comprehensive PT center plus medical acupuncture and pain management.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="facilities" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Facilities &amp; programs</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>Additional units and community programs run alongside the hospital's core departments.</p>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-reveal>
+          <div class="bg-white p-5 text-sm">
+            <p class="font-semibold text-brand-dark">Center for Minimally Invasive Surgery</p>
+            <p class="mt-1 text-gray-600">Laparoscopic and less-invasive surgical options.</p>
+          </div>
+          <div class="bg-white p-5 text-sm">
+            <p class="font-semibold text-brand-dark">TB DOTS Clinic</p>
+            <p class="mt-1 text-gray-600">Every Monday, 8:00 AM–4:00 PM.</p>
+          </div>
+          <div class="bg-white p-5 text-sm">
+            <p class="font-semibold text-brand-dark">Wound Care &amp; Treatment Center</p>
+            <p class="mt-1 text-gray-600">Now ready to serve — call for appointments.</p>
+          </div>
+          <div class="bg-white p-5 text-sm">
+            <p class="font-semibold text-brand-dark">Cancer Screening Program</p>
+            <p class="mt-1 text-gray-600">Early detection scheduling via the trunkline.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
+        <div>
+          <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>The Tan family's legacy</h2>
+          <p class="mt-4 text-gray-600" data-reveal>
+            Founded by Dr. Francisco "Kiko" Tan and Dr. Nena Eng Tan, NovaGen opened its doors in 1998 with one goal: bring quality medical care closer to the families of Novaliches, regardless of their economic status.
+          </p>
+          <p class="mt-4 text-gray-600" data-reveal>
+            Today, five Tan siblings — including Medical Director Dr. Ferdinand "Dodo" Tan — carry that mission forward. By 2029, NovaGen aims to be recognized as a multi-centered institution consistently delivering top-notch, affordable medical care.
+          </p>
+          <p class="mt-4 text-gray-600" data-reveal>
+            This website sample gives NovaGen's Facebook presence a modern home — so patients can find hours, services, and a clear call button without digging through posts.
+          </p>
+        </div>
+        <div data-reveal class="relative overflow-hidden bg-brand-dark">
+          <img src="assets/hero-cover.jpg" alt="Novaliches General Hospital and Medical Center" width="1773" height="657" class="h-64 w-full object-cover opacity-90 sm:h-80" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 to-transparent"></div>
+          <p class="absolute bottom-4 left-4 right-4 text-sm font-medium text-white">793 Quirino Highway, Brgy. Gulod, Novaliches, Quezon City</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>FAQ</h2>
+        <div class="mt-8 space-y-3" data-accordion>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              Where is NovaGen located?
+              <span class="text-brand-accent" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              NGHI Building, 793 Quirino Highway, Brgy. Gulod, Novaliches, Quezon City 1117 — along the main highway near SM City Novaliches.
+            </div>
+          </div>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              What are your hours?
+              <span class="text-brand-accent" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              NovaGen operates 24 hours a day for emergency and inpatient care. Specialty clinics and diagnostic services (CT scan, endoscopy, TB DOTS) follow their own schedules — call ahead to confirm.
+            </div>
+          </div>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              How do I book an appointment?
+              <span class="text-brand-accent" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              Call the trunkline at (02) 8426-8888, or the specific unit line listed under Services (e.g. video colonoscopy, NICU, Heart Unit) for direct scheduling.
+            </div>
+          </div>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              Is NovaGen a government hospital?
+              <span class="text-brand-accent" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              No — NovaGen (Novaliches General Hospital, Inc.) is a private, DOH-accredited Level 1 tertiary hospital, distinct from the government-run Novaliches District Hospital.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-brand-dark py-16 text-white sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold" data-reveal>Contact</h2>
+        <p class="mt-2 max-w-xl text-white/80" data-reveal>Reach NovaGen for appointments, services, or general inquiries.</p>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div class="space-y-4 text-sm sm:text-base" data-reveal>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-gold">Trunkline</span>
+              <a href="tel:+63284268888" class="text-lg font-semibold hover:underline">(02) 8426-8888</a>
+            </p>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-gold">Address</span>
+              NGHI Building, 793 Quirino Highway<br />
+              Brgy. Gulod, Novaliches, Quezon City 1117
+            </p>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-gold">Website</span>
+              <a href="https://www.novagen.com.ph" class="hover:underline" rel="noopener noreferrer" target="_blank">novagen.com.ph</a>
+            </p>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-gold">Facebook</span>
+              <a href="https://www.facebook.com/novagen.ph/" class="hover:underline" rel="noopener noreferrer" target="_blank">facebook.com/novagen.ph</a>
+            </p>
+          </div>
+          <div data-reveal class="border border-white/15 bg-white/5 p-6 backdrop-blur-sm">
+            <p class="font-display text-xl font-semibold">Need a clearer online presence?</p>
+            <p class="mt-3 text-sm text-white/80">This is a quotation sample site. Patients can land here for hours, services, and a direct call button instead of scrolling Facebook alone.</p>
+            <a href="tel:+63284268888" class="mt-6 inline-flex rounded-full bg-brand-accent px-5 py-3 text-sm font-semibold text-white hover:brightness-105 transition">Call the trunkline</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-brand-dark/10 bg-white py-8 text-center text-sm text-gray-500">
+    <p>&copy; <span data-year></span> Novaliches General Hospital and Medical Center (NovaGen) · Quezon City</p>
+    <p class="mt-1">Quotation sample by <a href="https://carlmanuel.com" class="text-brand-mid hover:underline">Carl Louis Manuel</a></p>
+  </footer>
+
+  <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
+</body>
+</html>

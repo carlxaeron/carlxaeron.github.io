@@ -1,0 +1,44 @@
+{
+  "businessName": "Novaliches General Hospital and Medical Center (NovaGen)",
+  "slug": "novagen",
+  "previewHost": "novagen-hospital.netlify.app",
+  "industry": "Private tertiary hospital / healthcare",
+  "deployedAt": "2026-07-17",
+  "contact": {
+    "name": "NovaGen Admissions / Trunkline",
+    "email": null,
+    "phone": "(02) 8426-8888"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive site, services & facilities overview, contact section, basic SEO, Netlify hosting setup",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=novagen"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "draft",
+    "cadence": null,
+    "emailFound": false,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "No current public email confirmed on Facebook/About. Older directories list novagenhospital@yahoo.com alongside outdated phone numbers ((02)936-1817) — likely stale. Trunkline (02) 8426-8888 is the current verified contact. Messenger/SMS/call recommended; ask user before trying the legacy email."
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/novagen.ph/",
+    "website": "https://www.novagen.com.ph",
+    "aboutMicrosite": "https://sites.google.com/view/novagencomph/about-novagen",
+    "servicesMicrosite": "https://sites.google.com/view/novagencomph/our-services",
+    "instagram": "https://www.instagram.com/novagen_ph/",
+    "address": "793 Quirino Highway, Brgy. Gulod, Novaliches, Quezon City 1117",
+    "notes": "Logo (1620x1620 JPEG) and cover photo (1773x657 PNG) downloaded HD via Chrome DevTools MCP inspect + in-page fetch()/base64 (fbcdn get_network_request file-save blocked by shared-session workspace roots, same limitation noted on prior clients). FB Photos tab is login-walled and only surfaces recent text-graphic health-tip posts (no real facility photos) when logged out — used official novagen.com.ph / About microsite copy for services, pricing, and brand story instead."
+  }
+}
