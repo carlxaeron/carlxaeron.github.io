@@ -23,5 +23,8 @@ export const mapping = {
   adminOutreach: 'https://api.carlmanuel.com/admin/outreach',
   adminOutreachPause: 'https://api.carlmanuel.com/admin/outreachPause',
   adminContent: 'https://api.carlmanuel.com/admin/content',
+  adminPushVapidPublicKey: 'https://api.carlmanuel.com/admin/push/vapidPublicKey',
+  adminPushSubscribe: 'https://api.carlmanuel.com/admin/push/subscribe',
+  adminPushTest: 'https://api.carlmanuel.com/admin/push/test',
   portfolioContent: 'https://api.carlmanuel.com/content',
 }

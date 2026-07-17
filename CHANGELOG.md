@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.62] — 2026-07-17
+
+### Added
+- **Admin Web Push** — Settings tab to enable browser notifications for new contact and quote submissions; service worker (`sw-admin-push.js`), VAPID subscribe/unsubscribe via Laravel `/admin/push/*`
+- **API** — `PushNotificationService`, `push_subscriptions` migration, push on successful `POST /contact` and `POST /quotation` (failure never breaks form response)
+- **Tests** — `pushNotifications.test.js`, `AdminPushApiTest`, `PushNotificationServiceTest`
+
 ## [3.0.61] — 2026-07-17
 
 ### Added

@@ -21,7 +21,7 @@ return [
         'up',
     ],
 
-    'allowed_methods' => ['GET', 'POST', 'PUT', 'OPTIONS'],
+    'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 
     'allowed_origins' => [
         'https://carlxaeron.github.io',

@@ -1,4 +1,5 @@
 {
+  "id": "/",
   "short_name": "Carl Manuel",
   "name": "Carl Louis Manuel — Senior Full-Stack Engineer",
   "description": "Portfolio of Carl Louis Manuel — Senior Full-Stack Engineer & AI Integration Specialist",
@@ -11,15 +12,18 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any"
     }
   ],
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "theme_color": "#1E3932",
   "background_color": "#00473e"

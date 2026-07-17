@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\AdminPushController;
 use App\Http\Controllers\Api\OutreachController;
 use App\Http\Controllers\Api\PortfolioApiController;
 use Illuminate\Support\Facades\Route;
@@ -36,4 +37,8 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::post('/admin/outreachPause', [AdminController::class, 'outreachPause']);
     Route::get('/admin/content/{section}', [AdminController::class, 'contentShow']);
     Route::put('/admin/content/{section}', [AdminController::class, 'contentUpdate']);
+    Route::get('/admin/push/vapidPublicKey', [AdminPushController::class, 'vapidPublicKey']);
+    Route::post('/admin/push/subscribe', [AdminPushController::class, 'subscribe']);
+    Route::delete('/admin/push/subscribe', [AdminPushController::class, 'unsubscribe']);
+    Route::post('/admin/push/test', [AdminPushController::class, 'test']);
 });

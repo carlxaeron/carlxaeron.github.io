@@ -108,3 +108,30 @@ export function saveAdminContent(section, content) {
     body: JSON.stringify({ content }),
   });
 }
+
+export function fetchPushVapidPublicKey() {
+  return adminFetch(mapping.adminPushVapidPublicKey, { cache: "no-store" });
+}
+
+export function savePushSubscription({ endpoint, keys, userAgent }) {
+  const body = { endpoint, keys };
+  if (userAgent) body.userAgent = userAgent;
+
+  return adminFetch(mapping.adminPushSubscribe, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+}
+
+export function removePushSubscription(endpoint) {
+  return adminFetch(mapping.adminPushSubscribe, {
+    method: "DELETE",
+    body: JSON.stringify({ endpoint }),
+  });
+}
+
+export function sendPushTest() {
+  return adminFetch(mapping.adminPushTest, {
+    method: "POST",
+  });
+}

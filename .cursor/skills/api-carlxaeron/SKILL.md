@@ -42,11 +42,17 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 | POST | `/admin/outreachPause` | sanctum | pause by `slug` + optional `contactEmail` |
 | GET | `/admin/content/{section}` | sanctum | read CMS payload (`hero`, `about`, `header`, `skills`, `experiences`, `companies`, `projectDetails`) |
 | PUT | `/admin/content/{section}` | sanctum | save CMS payload `{ content: ... }` |
+| GET | `/admin/push/vapidPublicKey` | sanctum | VAPID public key for `PushManager.subscribe` |
+| POST | `/admin/push/subscribe` | sanctum | body `{ endpoint, keys: { p256dh, auth } }` — upsert subscription for current user |
+| DELETE | `/admin/push/subscribe` | sanctum | body `{ endpoint }` — remove current user's subscription |
+| POST | `/admin/push/test` | sanctum | send test push to current user's subscriptions; `{ data: { sent } }` |
 | GET | `/content/{section}` | public | portfolio read with `source: static|cms` |
 
 Seed admin user: `ADMIN_EMAIL` + `ADMIN_PASSWORD` in server `.env` → `php artisan db:seed --class=AdminSeeder --force`. Never commit password.
 
 **Admin SPA:** `carlmanuel.com/#login` → Sanctum token → `#admin` dashboard (Overview, Inbox, Outreach, Clients, CMS). URLs in [`src/mapping.js`](../../../src/mapping.js) (`adminLogin`, `adminSummary`, `adminContent`, etc.).
+
+**Web Push (Admin Settings):** Sanctum admin subscribes via `POST /admin/push/subscribe`; Laravel stores rows in `push_subscriptions` and sends via `minishlink/web-push` when `POST /contact` or `POST /quotation` succeeds (push failure never breaks form response). Service worker + Settings UI live in the portfolio SPA. **iOS:** user must Add to Home Screen (iOS 16.4+), then open Admin and enable notifications.
 
 Live Stellar: **Laravel** serves public API routes including `POST /outreachSchedule` and `POST /outreachPause`. **Follow-up cron** still runs `hosting-php/scripts/cron-outreach-followups.php` (reads same MySQL `outreach_jobs`). Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).
 
@@ -99,7 +105,10 @@ CORS origins: `carlmanuel.com`, `www`, `carlxaeron.github.io`, `localhost:3000` 
 | `app/Support/ApiResponse.php` | Envelope helpers |
 | `app/Services/AnalyticsExclusion.php` | IP hash salt `:carlxaeron-portfolio` |
 | `app/Services/PortfolioMailer.php` | Contact / quotation mail |
-| `config/portfolio.php` | `MAIL_TO`, exclusions, `CLIENT_SITES_COUNT` |
+| `app/Services/PushNotificationService.php` | Web Push subscribe/send (VAPID) |
+| `app/Http/Controllers/Api/AdminPushController.php` | Admin push subscribe/test routes |
+| `app/Models/PushSubscription.php` | `push_subscriptions` table |
+| `config/portfolio.php` | `MAIL_TO`, exclusions, `CLIENT_SITES_COUNT`, VAPID keys |
 | `database/migrations/*_create_portfolio_api_tables.php` | Creates tables only if missing |
 
 ## Env
@@ -117,6 +126,18 @@ Never commit `.env`. Prefer Laravel names; legacy keys still work via config fal
 | `OUTREACH_SECRET` | `POST /outreachSchedule` + `/outreachPause` (body `secret` or `X-Outreach-Secret` header) |
 | `ANALYTICS_EXCLUDE_IP_HASHES` / `ANALYTICS_EXCLUDE_VISITOR_IDS` | (same) |
 | `ADMIN_EMAIL` / `ADMIN_PASSWORD` | Sanctum admin seeder (server only) |
+| `VAPID_PUBLIC_KEY` / `VAPID_PRIVATE_KEY` / `VAPID_SUBJECT` | Web Push (generate once; server only). Subject e.g. `mailto:info@carlmanuel.com` |
+
+**Generate VAPID keys (once per environment):**
+
+```bash
+cd api-carlxaeron
+npx web-push generate-vapid-keys
+# or:
+php -r "require 'vendor/autoload.php'; print_r(Minishlink\\WebPush\\VAPID::createVapidKeys());"
+```
+
+Copy `publicKey` → `VAPID_PUBLIC_KEY`, `privateKey` → `VAPID_PRIVATE_KEY`. After deploy: `php artisan migrate --force` then `php artisan config:cache`.
 
 ### Deliverability (outreach / Private Email)
 
@@ -140,7 +161,7 @@ php artisan serve --port=8080
 1. Rsync/sync app root to `~/public_html/api-carlxaeron/` (keep server `.env`; exclude local `.env`).
 2. **Required `.env` DB keys for Laravel:** `DB_CONNECTION=mysql`, `DB_DATABASE` / `DB_USERNAME` / `DB_PASSWORD` (legacy `DB_NAME` / `DB_USER` / `DB_PASS` still work for the mysql connection array). Missing `DB_CONNECTION` defaults to sqlite and analytics will look empty.
 3. Subdomain docroot → `…/public` only.
-4. On server: `composer install --no-dev`, `php artisan migrate --force`, `php artisan db:seed --class=Database\\Seeders\\AdminSeeder --force` (needs `ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env`; seeder reads via `config/portfolio.php`), `php artisan config:cache`.
+4. On server: `composer install --no-dev`, `php artisan migrate --force`, `php artisan db:seed --class=Database\\Seeders\\AdminSeeder --force` (needs `ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env`; seeder reads via `config/portfolio.php`), set `VAPID_*` keys, `php artisan config:cache`.
 5. Writable: `storage/`, `bootstrap/cache/`.
 6. Smoke: `curl https://api.carlmanuel.com/health` + `POST /admin/login`.
 

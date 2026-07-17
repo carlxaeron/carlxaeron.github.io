@@ -95,6 +95,17 @@ class PortfolioApiTest extends TestCase
         config(['portfolio.mail_to' => 'inbox@example.com']);
         Mail::fake();
 
+        $this->mock(\App\Services\PushNotificationService::class, function ($mock): void {
+            $mock->shouldReceive('sendToAdmins')
+                ->once()
+                ->with(
+                    'New contact message',
+                    'Test — test@example.com',
+                    ['type' => 'contact', 'url' => 'https://carlmanuel.com/#admin']
+                )
+                ->andReturn(0);
+        });
+
         $this->postJson('/contact', [
             'name' => 'Test',
             'email' => 'test@example.com',
@@ -114,6 +125,17 @@ class PortfolioApiTest extends TestCase
     public function test_quotation_persists(): void
     {
         Mail::fake();
+
+        $this->mock(\App\Services\PushNotificationService::class, function ($mock): void {
+            $mock->shouldReceive('sendToAdmins')
+                ->once()
+                ->with(
+                    'New quote request',
+                    'Ada (Ada Co)',
+                    ['type' => 'quotation', 'url' => 'https://carlmanuel.com/#admin']
+                )
+                ->andReturn(0);
+        });
 
         $this->postJson('/quotation', [
             'name' => 'Ada',
@@ -135,6 +157,10 @@ class PortfolioApiTest extends TestCase
     public function test_quotation_persists_currency(): void
     {
         Mail::fake();
+
+        $this->mock(\App\Services\PushNotificationService::class, function ($mock): void {
+            $mock->shouldReceive('sendToAdmins')->once()->andReturn(0);
+        });
 
         $this->postJson('/quotation', [
             'name' => 'Ben',

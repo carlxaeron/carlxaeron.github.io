@@ -1,7 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { PORTFOLIO_SECTION_TOGGLE_IDS } from "../../config/portfolioContentSections";
 import { SETTINGS_DEFAULTS } from "../../config/portfolioContentDefaults";
-import { fetchAdminContent, saveAdminContent } from "../adminApi";
+import { fetchAdminContent, saveAdminContent, sendPushTest } from "../adminApi";
+import {
+  disableAdminPush,
+  enableAdminPush,
+  getPushStatusLabel,
+  refreshPushSubscriptionState,
+} from "../pushNotifications";
 
 const SECTION_LABELS = {
   home: "Home",
@@ -34,6 +40,15 @@ function SettingsTab() {
   const [notice, setNotice] = useState("");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [pushState, setPushState] = useState({
+    supported: false,
+    permission: "default",
+    subscribed: false,
+  });
+  const [pushLoading, setPushLoading] = useState(true);
+  const [pushBusy, setPushBusy] = useState(false);
+  const [pushError, setPushError] = useState("");
+  const [pushNotice, setPushNotice] = useState("");
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -56,6 +71,77 @@ function SettingsTab() {
   useEffect(() => {
     load();
   }, [load]);
+
+  const refreshPushState = useCallback(async () => {
+    setPushLoading(true);
+    try {
+      const state = await refreshPushSubscriptionState();
+      setPushState(state);
+    } finally {
+      setPushLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    refreshPushState();
+  }, [refreshPushState]);
+
+  const handleEnablePush = async () => {
+    setPushBusy(true);
+    setPushError("");
+    setPushNotice("");
+    try {
+      await enableAdminPush();
+      await refreshPushState();
+      setPushNotice("Notifications enabled on this device.");
+    } catch (err) {
+      setPushError(err.message || "Could not enable notifications.");
+      await refreshPushState();
+    } finally {
+      setPushBusy(false);
+    }
+  };
+
+  const handleDisablePush = async () => {
+    setPushBusy(true);
+    setPushError("");
+    setPushNotice("");
+    try {
+      await disableAdminPush();
+      await refreshPushState();
+      setPushNotice("Notifications disabled on this device.");
+    } catch (err) {
+      setPushError(err.message || "Could not disable notifications.");
+    } finally {
+      setPushBusy(false);
+    }
+  };
+
+  const handlePushTest = async () => {
+    setPushBusy(true);
+    setPushError("");
+    setPushNotice("");
+    try {
+      await sendPushTest();
+      setPushNotice("Test notification sent. Check this device shortly.");
+    } catch (err) {
+      setPushError(err.message || "Test notification failed.");
+    } finally {
+      setPushBusy(false);
+    }
+  };
+
+  const pushStatusLabel = getPushStatusLabel(pushState);
+  const pushStatusClass =
+    !pushState.supported || pushState.permission === "denied"
+      ? "v3-admin-pill--muted"
+      : pushState.subscribed
+        ? "v3-admin-pill--active"
+        : "v3-admin-pill--gold";
+  const canEnablePush =
+    pushState.supported && pushState.permission !== "denied" && !pushState.subscribed;
+  const canDisablePush = pushState.supported && pushState.subscribed;
+  const canTestPush = pushState.supported && pushState.subscribed && pushState.permission === "granted";
 
   const setField = (key, value) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -233,6 +319,77 @@ function SettingsTab() {
               onChange={(e) => setField("linkedinLabel", e.target.value)}
             />
           </label>
+        </section>
+
+        <section className="v3-admin-card v3-admin-card--wide v3-admin-push-card">
+          <div className="v3-admin-push-card__head">
+            <h3 className="v3-admin-card__title">Push notifications</h3>
+            {!pushLoading && (
+              <span className={`v3-admin-pill ${pushStatusClass}`}>{pushStatusLabel}</span>
+            )}
+          </div>
+          <p className="v3-admin-muted">
+            Get alerts on this device when someone submits Contact or Get a Quote. Registration
+            happens here in Admin only — not for public portfolio visitors.
+          </p>
+          {pushLoading ? (
+            <p className="v3-admin-loading">Checking notification status…</p>
+          ) : (
+            <>
+              {pushError && (
+                <div className="v3-admin-alert v3-admin-push-card__alert" role="alert">
+                  {pushError}
+                </div>
+              )}
+              {pushNotice && (
+                <div className="v3-admin-notice v3-admin-push-card__alert" role="status">
+                  {pushNotice}
+                </div>
+              )}
+              <div className="v3-admin-push-card__actions">
+                {canEnablePush && (
+                  <button
+                    type="button"
+                    className="v3-admin-btn v3-admin-btn--primary"
+                    onClick={handleEnablePush}
+                    disabled={pushBusy}
+                  >
+                    {pushBusy ? "Working…" : "Enable notifications"}
+                  </button>
+                )}
+                {canDisablePush && (
+                  <button
+                    type="button"
+                    className="v3-admin-btn v3-admin-btn--ghost"
+                    onClick={handleDisablePush}
+                    disabled={pushBusy}
+                  >
+                    {pushBusy ? "Working…" : "Disable"}
+                  </button>
+                )}
+                {canTestPush && (
+                  <button
+                    type="button"
+                    className="v3-admin-btn v3-admin-btn--ghost"
+                    onClick={handlePushTest}
+                    disabled={pushBusy}
+                  >
+                    {pushBusy ? "Sending…" : "Send test notification"}
+                  </button>
+                )}
+              </div>
+              {pushState.permission === "denied" && (
+                <p className="v3-admin-push-card__hint">
+                  Notifications are blocked in browser settings. Allow notifications for this site,
+                  then reload Admin.
+                </p>
+              )}
+              <p className="v3-admin-push-card__hint">
+                <strong>iPhone:</strong> Share → Add to Home Screen, open the installed app, sign
+                in to Admin → Settings, then enable notifications (iOS 16.4+).
+              </p>
+            </>
+          )}
         </section>
 
         <section className="v3-admin-card v3-admin-card--wide">

@@ -11,10 +11,12 @@ use App\Services\AnalyticsExclusion;
 use App\Services\AnalyticsSummaryService;
 use App\Services\PortfolioContentService;
 use App\Services\PortfolioMailer;
+use App\Services\PushNotificationService;
 use App\Support\ApiResponse;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PortfolioApiController extends Controller
 {
@@ -23,6 +25,7 @@ class PortfolioApiController extends Controller
         private AnalyticsSummaryService $analyticsSummary,
         private PortfolioContentService $portfolioContent,
         private PortfolioMailer $mailer,
+        private PushNotificationService $push,
     ) {}
 
     public function health(): JsonResponse
@@ -144,6 +147,12 @@ class PortfolioApiController extends Controller
             'contact'
         );
 
+        $this->tryPushToAdmins(
+            'New contact message',
+            "{$name} — {$email}",
+            ['type' => 'contact', 'url' => 'https://carlmanuel.com/#admin']
+        );
+
         return ApiResponse::success('Contact request received');
     }
 
@@ -201,6 +210,13 @@ class PortfolioApiController extends Controller
             'quotation'
         );
 
+        $pushLabel = $company !== '' ? "{$name} ({$company})" : "{$name} — {$email}";
+        $this->tryPushToAdmins(
+            'New quote request',
+            $pushLabel,
+            ['type' => 'quotation', 'url' => 'https://carlmanuel.com/#admin']
+        );
+
         return ApiResponse::success('Quote request received');
     }
 
@@ -237,5 +253,17 @@ class PortfolioApiController extends Controller
         $sqlState = $e->errorInfo[0] ?? null;
 
         return $sqlState === '23000' || (int) $e->getCode() === 23000;
+    }
+
+    private function tryPushToAdmins(string $title, string $body, array $data): void
+    {
+        try {
+            $this->push->sendToAdmins($title, $body, $data);
+        } catch (\Throwable $e) {
+            Log::warning('Push notification failed', [
+                'title' => $title,
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 }
