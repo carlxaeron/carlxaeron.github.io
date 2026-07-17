@@ -46,6 +46,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [NovaGen (Novaliches General Hospital and Medical Center)](#novagen-novaliches-general-hospital-and-medical-center) | `novagen` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=novagen) | 2026-07-17 |
 | [Fairview General Hospital Inc.](#fairview-general-hospital-inc) | `fairview-general-hospital` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=fairview-general-hospital) | 2026-07-17 |
 | [MPHS Mother of Perpetual Help Inc. Fairview](#mphs-mother-of-perpetual-help-inc-fairview) | `mphs-fairview` | K–12 school / nonprofit | [Preview](https://carlmanuel.com/?preview=mphs-fairview) | 2026-07-17 |
+| [Amora Body Wellness Spa](#amora-body-wellness-spa) | `amora-body-wellness-spa` | Spa / health & beauty | [Preview](https://carlmanuel.com/?preview=amora-body-wellness-spa) | 2026-07-17 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -606,6 +607,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Category** | Nonprofit K–12 school · Humility in Greatness · Est. 1990 · 978 FB followers |
 | **Source** | [Facebook](https://www.facebook.com/p/MPHS-Mother-of-Perpetual-Help-Inc-Fairview-61588929957305/) |
 | **Assets** | Hero 1500×500 + logo 1290×1290 + profile 1024×1024 + gallery JPEGs (2048×1024, 1054×1492, 1024×1536, 1402×1122) via Chrome DevTools MCP in-page fetch/base64; Motion + Three.js blueprint hero |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
+| **Outreach** | Email on FB About — drafts ready · **ask before send** |
+
+---
+
+### Amora Body Wellness Spa
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/amora-body-wellness-spa/` |
+| **Netlify site** | `amora-body-wellness-spa` |
+| **Preview host** | `amora-body-wellness-spa.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=amora-body-wellness-spa |
+| **Contact** | sugar.stamaria@gmail.com · 0917 176 5171 |
+| **Address** | 17 Fairlane St., Fairview, Quezon City |
+| **Category** | Health/beauty spa · holistic wellness · online booking · $$ · 100% recommend (5 reviews) · 717 FB followers |
+| **Source** | [Facebook](https://www.facebook.com/p/Amora-Body-Wellness-Spa-61569071263786/) · [Instagram](https://www.instagram.com/here_at_amora) |
+| **Assets** | Logo 2048×2048 + hero/gallery 1080×1350 JPEGs via Chrome DevTools MCP in-page fetch; Motion + Three.js particles hero |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
 | **Outreach** | Email on FB About — drafts ready · **ask before send** |
 

@@ -197,6 +197,12 @@ export const PREVIEW_SITES = [
     label: "MPHS Mother of Perpetual Help Inc. Fairview",
     netlifySite: "mphs-fairview",
   },
+  {
+    id: "amora-body-wellness-spa",
+    host: "amora-body-wellness-spa.netlify.app",
+    label: "Amora Body Wellness Spa",
+    netlifySite: "amora-body-wellness-spa",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

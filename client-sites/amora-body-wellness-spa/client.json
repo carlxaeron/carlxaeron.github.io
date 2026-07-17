@@ -1,0 +1,43 @@
+{
+  "businessName": "Amora Body Wellness Spa",
+  "slug": "amora-body-wellness-spa",
+  "previewHost": "amora-body-wellness-spa.netlify.app",
+  "industry": "Spa / health & beauty / wellness",
+  "deployedAt": "2026-07-17",
+  "contact": {
+    "name": "Amora Body Wellness Spa",
+    "email": "sugar.stamaria@gmail.com",
+    "phone": "+63 917 176 5171"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive spa site (services, gallery, FAQ, contact/booking), mobile-friendly, Netlify hosting setup",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=amora-body-wellness-spa"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "ready",
+    "cadence": null,
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "Email from Facebook About tab. Ask user before initial send."
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/p/Amora-Body-Wellness-Spa-61569071263786/",
+    "instagram": "https://www.instagram.com/here_at_amora",
+    "address": "17 Fairlane St. Fairview Quezon City, Quezon City, Philippines",
+    "phones": ["0917 176 5171"],
+    "followers": "717",
+    "notes": "Category: Health/beauty. Tagline: Timeless Care, Naturally Crafted. Holistic treatments with locally-sourced organic ingredients. Online booking · Reservations. Price range $$. 100% recommend (5 reviews). HD assets from Facebook Photos (1080×1350 gallery, 2048×2048 logo)."
+  }
+}

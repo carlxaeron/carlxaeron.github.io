@@ -28,7 +28,7 @@ Route::post('/pushNotifyAdmins', [OutreachController::class, 'pushNotify'])
     ->middleware('throttle:60,60');
 
 Route::post('/admin/login', [AdminController::class, 'login'])
-    ->middleware('throttle:5,1');
+    ->middleware('throttle:20,5');
 
 Route::middleware('auth:sanctum')->group(function (): void {
     Route::post('/admin/logout', [AdminController::class, 'logout']);

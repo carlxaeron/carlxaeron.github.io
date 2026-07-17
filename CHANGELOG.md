@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.0.67] — 2026-07-17
+
+### Added
+- **Client site** — Amora Body Wellness Spa (`amora-body-wellness-spa`) added to portfolio preview whitelist and `client-sites/README.md` catalog
+- **Tests** — `previewWhitelist.test.js` coverage confirms the new slug resolves
+
+### Fixed
+- **Admin login** — Relaxed API throttle to 20 attempts per 5 minutes; clearer 429 message in admin login UI
+
 ## [3.0.66] — 2026-07-17
 
 ### Added

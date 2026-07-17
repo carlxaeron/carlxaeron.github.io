@@ -52,6 +52,9 @@ export async function adminLogin(email, password) {
 
   const json = await res.json().catch(() => ({}));
   if (!res.ok) {
+    if (res.status === 429) {
+      throw new Error("Too many sign-in attempts. Wait a few minutes and try again.");
+    }
     const message =
       json.message ||
       json.error ||
