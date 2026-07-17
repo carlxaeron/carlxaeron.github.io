@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.68] — 2026-07-17
+
+### Added
+- **Google AdSense** — Site-wide `adsbygoogle.js` loader in `public/index.html` (`ca-pub-8982621236971546`)
+
 ## [3.0.67] — 2026-07-17
 
 ### Added
