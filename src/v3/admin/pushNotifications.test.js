@@ -29,7 +29,7 @@ describe("pushNotifications helpers", () => {
     expect(mapping.adminPushSubscribe).toBe(
       "https://api.carlmanuel.com/admin/push/subscribe"
     );
-    expect(mapping.adminPushTest).toBe("https://api.carlmanuel.com/admin/push/test");
+    expect(mapping.adminPushTest).toBe("https://api.carlmanuel.com/admin/push/sendPing");
   });
 
   test("ADMIN_PUSH_SW_PATH points at public service worker", () => {

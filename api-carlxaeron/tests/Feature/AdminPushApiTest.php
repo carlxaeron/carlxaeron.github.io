@@ -45,7 +45,7 @@ class AdminPushApiTest extends TestCase
         $this->getJson('/admin/push/vapidPublicKey')->assertUnauthorized();
         $this->postJson('/admin/push/subscribe', [])->assertUnauthorized();
         $this->deleteJson('/admin/push/subscribe', [])->assertUnauthorized();
-        $this->postJson('/admin/push/test')->assertUnauthorized();
+        $this->postJson('/admin/push/sendPing')->assertUnauthorized();
     }
 
     public function test_vapid_public_key_returns_configured_key(): void
@@ -152,9 +152,44 @@ class AdminPushApiTest extends TestCase
                 ->andReturn(1);
         });
 
-        $this->postJson('/admin/push/test')
+        $this->postJson('/admin/push/sendPing')
             ->assertOk()
             ->assertJsonPath('message', 'Test sent')
             ->assertJsonPath('data.sent', 1);
+    }
+
+    public function test_test_endpoint_returns_error_when_nothing_delivered(): void
+    {
+        Sanctum::actingAs(
+            User::query()->where('email', self::ADMIN_EMAIL)->firstOrFail(),
+            ['*']
+        );
+
+        $this->mock(PushNotificationService::class, function ($mock): void {
+            $mock->shouldReceive('isConfigured')->once()->andReturn(true);
+            $mock->shouldReceive('sendToUser')->once()->andReturn(0);
+        });
+
+        $this->postJson('/admin/push/sendPing')
+            ->assertStatus(422)
+            ->assertJsonPath('message', 'No push was delivered. Enable notifications on this device first, then try again.')
+            ->assertJsonPath('data.sent', 0);
+    }
+
+    public function test_test_endpoint_returns_error_when_send_throws(): void
+    {
+        Sanctum::actingAs(
+            User::query()->where('email', self::ADMIN_EMAIL)->firstOrFail(),
+            ['*']
+        );
+
+        $this->mock(PushNotificationService::class, function ($mock): void {
+            $mock->shouldReceive('isConfigured')->once()->andReturn(true);
+            $mock->shouldReceive('sendToUser')->once()->andThrow(new \RuntimeException('missing dependency'));
+        });
+
+        $this->postJson('/admin/push/sendPing')
+            ->assertStatus(503)
+            ->assertJsonPath('message', 'Web push delivery failed. The server may be missing push dependencies — contact support or retry after deploy.');
     }
 }

@@ -45,7 +45,7 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 | GET | `/admin/push/vapidPublicKey` | sanctum | VAPID public key for `PushManager.subscribe` |
 | POST | `/admin/push/subscribe` | sanctum | body `{ endpoint, keys: { p256dh, auth } }` — upsert subscription for current user |
 | DELETE | `/admin/push/subscribe` | sanctum | body `{ endpoint }` — remove current user's subscription |
-| POST | `/admin/push/test` | sanctum | send test push to current user's subscriptions; `{ data: { sent } }` |
+| POST | `/admin/push/sendPing` | sanctum | send test push to current user's subscriptions; `{ data: { sent } }` |
 | GET | `/content/{section}` | public | portfolio read with `source: static|cms` |
 
 Seed admin user: `ADMIN_EMAIL` + `ADMIN_PASSWORD` in server `.env` → `php artisan db:seed --class=AdminSeeder --force`. Never commit password.
@@ -161,7 +161,7 @@ php artisan serve --port=8080
 1. Rsync/sync app root to `~/public_html/api-carlxaeron/` (keep server `.env`; exclude local `.env`).
 2. **Required `.env` DB keys for Laravel:** `DB_CONNECTION=mysql`, `DB_DATABASE` / `DB_USERNAME` / `DB_PASSWORD` (legacy `DB_NAME` / `DB_USER` / `DB_PASS` still work for the mysql connection array). Missing `DB_CONNECTION` defaults to sqlite and analytics will look empty.
 3. Subdomain docroot → `…/public` only.
-4. On server: `composer install --no-dev`, `php artisan migrate --force`, `php artisan db:seed --class=Database\\Seeders\\AdminSeeder --force` (needs `ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env`; seeder reads via `config/portfolio.php`), set `VAPID_*` keys, `php artisan config:cache`.
+4. On server: `composer install --no-dev`, `php artisan migrate --force`, `php artisan db:seed --class=Database\\Seeders\\AdminSeeder --force` (needs `ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env`; seeder reads via `config/portfolio.php`), set `VAPID_*` keys, `php artisan config:cache`. **Web Push:** `minishlink/web-push` pulls `web-token/jwt-library` — never rsync a partial `vendor/` tree; if push test 500s with missing `JWK.php`, run `rm -rf vendor/web-token/jwt-library && composer install --no-dev` on Stellar (Composer may not be on PATH — download to `/tmp/composer` first).
 5. Writable: `storage/`, `bootstrap/cache/`.
 6. Smoke: `curl https://api.carlmanuel.com/health` + `POST /admin/login`.
 

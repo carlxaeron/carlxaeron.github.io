@@ -40,5 +40,5 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('/admin/push/vapidPublicKey', [AdminPushController::class, 'vapidPublicKey']);
     Route::post('/admin/push/subscribe', [AdminPushController::class, 'subscribe']);
     Route::delete('/admin/push/subscribe', [AdminPushController::class, 'unsubscribe']);
-    Route::post('/admin/push/test', [AdminPushController::class, 'test']);
+    Route::post('/admin/push/sendPing', [AdminPushController::class, 'test']);
 });

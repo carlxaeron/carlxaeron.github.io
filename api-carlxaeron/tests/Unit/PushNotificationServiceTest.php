@@ -101,4 +101,32 @@ class PushNotificationServiceTest extends TestCase
 
         $this->assertSame(0, $sent);
     }
+
+    public function test_send_skips_and_removes_invalid_subscription_rows(): void
+    {
+        config([
+            'portfolio.vapid_public_key' => 'BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkrxZJjSgSnfckjBJuBkr3qBUYIHBQFLXYp5Nksh8U',
+            'portfolio.vapid_private_key' => 'UxiXIk9c0dM5kMYkbbAUYfi6yVjyuCLfBDgz0SBoP7o',
+            'portfolio.vapid_subject' => 'mailto:admin@example.com',
+        ]);
+
+        PushSubscription::query()->create([
+            'user_id' => User::query()->create([
+                'name' => 'Admin',
+                'email' => 'invalid-sub@example.com',
+                'password' => Hash::make('secret'),
+            ])->id,
+            'endpoint' => 'https://example.com/bad',
+            'public_key' => 'x',
+            'auth_token' => 'y',
+        ]);
+
+        $service = app(PushNotificationService::class);
+        $sent = $service->sendToAdmins('Title', 'Body');
+
+        $this->assertSame(0, $sent);
+        $this->assertDatabaseMissing('push_subscriptions', [
+            'endpoint' => 'https://example.com/bad',
+        ]);
+    }
 }

@@ -68,15 +68,31 @@ class AdminPushController extends Controller
             return ApiResponse::error('Web push not configured', [], 503);
         }
 
-        $sent = $this->push->sendToUser(
-            $request->user(),
-            'Test notification',
-            'Push is working from Admin Settings.',
-            [
-                'type' => 'test',
-                'url' => 'https://carlmanuel.com/#admin',
-            ]
-        );
+        try {
+            $sent = $this->push->sendToUser(
+                $request->user(),
+                'Test notification',
+                'Push is working from Admin Settings.',
+                [
+                    'type' => 'test',
+                    'url' => 'https://carlmanuel.com/#admin',
+                ]
+            );
+        } catch (\Throwable) {
+            return ApiResponse::error(
+                'Web push delivery failed. The server may be missing push dependencies — contact support or retry after deploy.',
+                [],
+                503
+            );
+        }
+
+        if ($sent === 0) {
+            return ApiResponse::error(
+                'No push was delivered. Enable notifications on this device first, then try again.',
+                ['sent' => 0],
+                422
+            );
+        }
 
         return ApiResponse::success('Test sent', ['sent' => $sent]);
     }
