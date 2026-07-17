@@ -28,13 +28,13 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "ready",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-17T07:05:33+00:00",
+    "nextFollowUpAt": "2026-07-24T07:05:33+00:00",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "Email from Facebook About — drafts ready; ask user before initial send."
+    "notes": "Initial quotation sent 2026-07-17 via outreachSchedule to mphsi.edu@gmail.com; auto follow-ups 1w enabled (max 4). BCC info@carlmanuel.com."
   }
 }
