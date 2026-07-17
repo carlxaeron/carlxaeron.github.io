@@ -21,6 +21,7 @@ alwaysApply: true
 | Firebase (Analytics + leftover handlers) | `functions/` / `src/config.js` | Assistant + weekly on hosting-php; license deleted |
 | Job applications | `OnlineJobs-MCP-Server/`, `job-applications/` | Local only |
 | Client quotation sites | `client-sites/` | Netlify per folder · [catalog](client-sites/README.md) |
+| Marketing agent pack (optional) | `agency-agents/` | Local only · gitignored · [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) |
 
 ## Portfolio modes
 

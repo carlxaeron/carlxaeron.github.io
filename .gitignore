@@ -55,6 +55,9 @@ api-carlxaeron-legacy-php/.env
 
 job-applications/
 exports/
+
+# Optional marketing agent pack (local clone; do not commit)
+agency-agents/
 OnlineJobs-MCP-Server/dashboard-ui/node_modules/
 OnlineJobs-MCP-Server/dashboard-ui/dist/
 # Local Netlify folder
