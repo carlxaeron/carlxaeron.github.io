@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.0.65] — 2026-07-17
+
+### Added
+- **Form anti-spam** — Contact and Get a Quote: honeypot field + 3s time-trap (`formOpenedAt`); bots get a silent success with no DB/mail
+- **API** — Rate limit tightened to **5/hour** per IP for contact/quotation; outreach initial + follow-up emails trigger admin Web Push (`pushNotifyAdmins`)
+
+### Tests
+- `FormAntiSpamTest`, PortfolioApi honeypot/time-trap cases, `formAntiSpam.test.js`
+
 ## [3.0.64] — 2026-07-17
 
 ### Added

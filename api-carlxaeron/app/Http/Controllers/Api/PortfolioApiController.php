@@ -13,6 +13,7 @@ use App\Services\PortfolioContentService;
 use App\Services\PortfolioMailer;
 use App\Services\PushNotificationService;
 use App\Support\ApiResponse;
+use App\Support\FormAntiSpam;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -128,6 +129,10 @@ class PortfolioApiController extends Controller
 
     public function contact(Request $request): JsonResponse
     {
+        if (FormAntiSpam::rejectReason($request) !== null) {
+            return ApiResponse::success(FormAntiSpam::silentOkMessage('contact'));
+        }
+
         $name = trim((string) $request->input('name', ''));
         $email = trim((string) $request->input('email', ''));
         $message = trim((string) $request->input('message', ''));
@@ -158,6 +163,10 @@ class PortfolioApiController extends Controller
 
     public function quotation(Request $request): JsonResponse
     {
+        if (FormAntiSpam::rejectReason($request) !== null) {
+            return ApiResponse::success(FormAntiSpam::silentOkMessage('quotation'));
+        }
+
         $name = trim((string) $request->input('name', ''));
         $email = trim((string) $request->input('email', ''));
         $details = trim((string) $request->input('details', ''));

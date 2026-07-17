@@ -9,6 +9,7 @@ final class OutreachScheduler
 {
     public function __construct(
         private OutreachMailer $mailer,
+        private PushNotificationService $push,
     ) {}
 
     /**
@@ -66,6 +67,15 @@ final class OutreachScheduler
             }
             $initialSentAt = $now;
             $status = 'sent';
+            $this->tryPush(
+                'Outreach email sent',
+                "Quotation sent to {$contactEmail} ({$businessName})",
+                [
+                    'type' => 'outreach_initial',
+                    'slug' => $slug,
+                    'url' => '/#admin',
+                ]
+            );
             if ($autoFollowUp && $maxFollowUps > 0) {
                 $days = OutreachCadence::daysUntilNext($cadence, 0);
                 $nextFollowUp = $now->copy()->addDays($days);
@@ -143,5 +153,17 @@ final class OutreachScheduler
         ]);
 
         return ['slug' => $slug, 'updated' => $updated];
+    }
+
+    /**
+     * @param  array<string, mixed>  $data
+     */
+    private function tryPush(string $title, string $body, array $data): void
+    {
+        try {
+            $this->push->sendToAdmins($title, $body, $data);
+        } catch (\Throwable) {
+            // Push must never block outreach email delivery.
+        }
     }
 }

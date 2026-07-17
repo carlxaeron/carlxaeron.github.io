@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Mail\OutreachProspectMail;
 use App\Models\OutreachJob;
+use App\Services\PushNotificationService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
@@ -18,6 +19,9 @@ class OutreachApiTest extends TestCase
     {
         parent::setUp();
         config(['portfolio.outreach_secret' => self::SECRET]);
+        $this->mock(PushNotificationService::class, function ($mock): void {
+            $mock->shouldReceive('sendToAdmins')->andReturn(0);
+        });
     }
 
     public function test_outreach_schedule_rejects_invalid_secret(): void
@@ -149,5 +153,58 @@ class OutreachApiTest extends TestCase
         ])
             ->assertStatus(401)
             ->assertJsonPath('message', 'Unauthorized');
+    }
+
+    public function test_outreach_schedule_send_initial_triggers_admin_push(): void
+    {
+        Mail::fake();
+        $this->mock(PushNotificationService::class, function ($mock): void {
+            $mock->shouldReceive('sendToAdmins')
+                ->once()
+                ->withArgs(function (string $title, string $body, array $data): bool {
+                    return $title === 'Outreach email sent'
+                        && str_contains($body, 'alex@example.com')
+                        && ($data['type'] ?? '') === 'outreach_initial';
+                })
+                ->andReturn(1);
+        });
+
+        $this->postJson('/outreachSchedule', [
+            'secret' => self::SECRET,
+            'slug' => 'push-me',
+            'businessName' => 'Push Me Co',
+            'contactName' => 'Alex',
+            'contactEmail' => 'alex@example.com',
+            'previewUrl' => 'https://carlmanuel.com/?preview=push-me',
+            'sendInitial' => true,
+            'autoFollowUp' => true,
+        ])->assertOk();
+    }
+
+    public function test_push_notify_admins_requires_secret(): void
+    {
+        $this->postJson('/pushNotifyAdmins', [
+            'title' => 'Hi',
+            'body' => 'There',
+        ])->assertStatus(401);
+    }
+
+    public function test_push_notify_admins_sends(): void
+    {
+        $this->mock(PushNotificationService::class, function ($mock): void {
+            $mock->shouldReceive('sendToAdmins')
+                ->once()
+                ->with('Follow-up sent', 'Body text', \Mockery::type('array'))
+                ->andReturn(2);
+        });
+
+        $this->postJson('/pushNotifyAdmins', [
+            'secret' => self::SECRET,
+            'title' => 'Follow-up sent',
+            'body' => 'Body text',
+            'data' => ['type' => 'outreach_followup'],
+        ])
+            ->assertOk()
+            ->assertJsonPath('data.sent', 2);
     }
 }

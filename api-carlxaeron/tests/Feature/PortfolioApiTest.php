@@ -110,6 +110,8 @@ class PortfolioApiTest extends TestCase
             'name' => 'Test',
             'email' => 'test@example.com',
             'message' => 'Hello',
+            'website' => '',
+            'formOpenedAt' => time() - 5,
         ])
             ->assertOk()
             ->assertJsonPath('message', 'Contact request received');
@@ -120,6 +122,41 @@ class PortfolioApiTest extends TestCase
         ]);
 
         Mail::assertSent(ContactReceived::class);
+    }
+
+    public function test_contact_honeypot_silently_succeeds_without_persisting(): void
+    {
+        Mail::fake();
+
+        $this->postJson('/contact', [
+            'name' => 'Bot',
+            'email' => 'bot@example.com',
+            'message' => 'Spam',
+            'website' => 'http://evil.test',
+            'formOpenedAt' => time() - 5,
+        ])
+            ->assertOk()
+            ->assertJsonPath('message', 'Contact request received');
+
+        $this->assertDatabaseCount('contact', 0);
+        Mail::assertNothingSent();
+    }
+
+    public function test_contact_too_fast_silently_succeeds_without_persisting(): void
+    {
+        Mail::fake();
+
+        $this->postJson('/contact', [
+            'name' => 'Speedy',
+            'email' => 'fast@example.com',
+            'message' => 'Hi',
+            'website' => '',
+            'formOpenedAt' => time(),
+        ])
+            ->assertOk();
+
+        $this->assertDatabaseCount('contact', 0);
+        Mail::assertNothingSent();
     }
 
     public function test_quotation_persists(): void
@@ -143,6 +180,8 @@ class PortfolioApiTest extends TestCase
             'details' => 'Need a site',
             'company' => 'Ada Co',
             'services' => ['Landing page', 'SEO'],
+            'website' => '',
+            'formOpenedAt' => time() - 5,
         ])
             ->assertOk()
             ->assertJsonPath('message', 'Quote request received');
@@ -168,6 +207,8 @@ class PortfolioApiTest extends TestCase
             'details' => 'Need an app',
             'currency' => 'USD',
             'budgetRange' => '$3k–$10k',
+            'website' => '',
+            'formOpenedAt' => time() - 5,
         ])
             ->assertOk();
 

@@ -17,12 +17,14 @@ Route::get('/analyticsSummary', [PortfolioApiController::class, 'analyticsSummar
 Route::get('/content/{section}', [PortfolioApiController::class, 'content'])
     ->middleware('throttle:120,1');
 Route::post('/contact', [PortfolioApiController::class, 'contact'])
-    ->middleware('throttle:8,60');
+    ->middleware('throttle:5,60');
 Route::post('/quotation', [PortfolioApiController::class, 'quotation'])
-    ->middleware('throttle:8,60');
+    ->middleware('throttle:5,60');
 Route::post('/outreachSchedule', [OutreachController::class, 'schedule'])
     ->middleware('throttle:60,60');
 Route::post('/outreachPause', [OutreachController::class, 'pause'])
+    ->middleware('throttle:60,60');
+Route::post('/pushNotifyAdmins', [OutreachController::class, 'pushNotify'])
     ->middleware('throttle:60,60');
 
 Route::post('/admin/login', [AdminController::class, 'login'])

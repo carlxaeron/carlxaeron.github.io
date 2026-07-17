@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import { useSpring, animated } from "@react-spring/web";
 import { useStore } from "./theme-provider";
@@ -10,6 +10,7 @@ import {
   getBudgetRangesForCurrency,
   normalizeQuoteCurrency,
 } from "../../config/quoteConfig";
+import { antiSpamPayload, createFormOpenedAt } from "../../utils/formAntiSpam";
 
 const PROJECT_TYPES = [
   "Web App",
@@ -45,6 +46,7 @@ function V3Quote({ isActive }) {
   const [selectedServices, setSelectedServices] = useState([]);
   const [currency, setCurrency] = useState(DEFAULT_QUOTE_CURRENCY);
   const [budgetRange, setBudgetRange] = useState("");
+  const formOpenedAtRef = useRef(createFormOpenedAt());
 
   const budgetRanges = getBudgetRangesForCurrency(currency);
 
@@ -88,6 +90,7 @@ function V3Quote({ isActive }) {
         timeline: getValue("timeline"),
         services: selectedServices,
         details: getValue("details"),
+        ...antiSpamPayload(form, formOpenedAtRef.current),
       })
       .then(() => {
         setSent(true);
@@ -95,6 +98,7 @@ function V3Quote({ isActive }) {
         setSelectedServices([]);
         setBudgetRange("");
         form.reset();
+        formOpenedAtRef.current = createFormOpenedAt();
         setValue((prev) => ({
           ...prev,
           modal: {
@@ -155,6 +159,17 @@ function V3Quote({ isActive }) {
 
         <animated.div style={spring}>
           <form className="v3-form" onSubmit={handleSubmit} noValidate>
+            <div className="v3-form__honeypot" aria-hidden="true">
+              <label htmlFor="v3-quote-website">Website</label>
+              <input
+                id="v3-quote-website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                defaultValue=""
+              />
+            </div>
             <div className="row">
               <div className="col-sm-6">
                 <div className="v3-form__group">

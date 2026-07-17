@@ -26,8 +26,9 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 | POST | `/contact` | Form + SMTP |
 | POST | `/quotation` | Form + SMTP |
 | POST | `/assistant` | ChatAgent — browser Origin + OpenAI (`OPENAI_API_KEY`) |
-| POST | `/outreachSchedule` | **Secret** — after user yes: send initial + queue auto follow-ups (`autoFollowUp: true`, cadence `3d1w` = **3d→7d→7d→7d**, `maxFollowUps: 4`). Follow-up emails stack goodwill discount **10%→20%→30%→50%** + commission invite |
+| POST | `/outreachSchedule` | **Secret** — after user yes: send initial + queue auto follow-ups (`autoFollowUp: true`, cadence `3d1w` = **3d→7d→7d→7d**, `maxFollowUps: 4`). Follow-up emails stack goodwill discount **10%→20%→30%→50%** + commission invite. On successful initial send → admin Web Push |
 | POST | `/outreachPause` | **Secret** — stop auto follow-ups for a slug (hosting-php cron still reads same MySQL rows) |
+| POST | `/pushNotifyAdmins` | **Secret** — `{ title, body, data? }` → push to all admin subscriptions (used by hosting-php follow-up cron) |
 
 ### Admin (Sanctum Bearer token — Laravel only)
 
@@ -52,7 +53,12 @@ Seed admin user: `ADMIN_EMAIL` + `ADMIN_PASSWORD` in server `.env` → `php arti
 
 **Admin SPA:** `carlmanuel.com/#login` → Sanctum token → `#admin` dashboard (Overview, Inbox, Outreach, Clients, CMS). URLs in [`src/mapping.js`](../../../src/mapping.js) (`adminLogin`, `adminSummary`, `adminContent`, etc.).
 
-**Web Push (Admin Settings):** Sanctum admin subscribes via `POST /admin/push/subscribe`; Laravel stores rows in `push_subscriptions` and sends via `minishlink/web-push` when `POST /contact` or `POST /quotation` succeeds (push failure never breaks form response). Service worker + Settings UI live in the portfolio SPA. **iOS:** user must Add to Home Screen (iOS 16.4+), then open Admin and enable notifications.
+**Web Push (Admin Settings):** Sanctum admin subscribes via `POST /admin/push/subscribe`; Laravel stores rows in `push_subscriptions` and sends via `minishlink/web-push` when:
+- `POST /contact` or `POST /quotation` succeeds
+- Outreach **initial** email sent (`OutreachScheduler` / `outreachSchedule`)
+- Outreach **follow-up** email sent (hosting-php cron → `POST /pushNotifyAdmins`)
+
+Push failure never breaks form/outreach responses. Service worker + Settings UI live in the portfolio SPA. **iOS:** user must Add to Home Screen (iOS 16.4+), then open Admin and enable notifications.
 
 Live Stellar: **Laravel** serves public API routes including `POST /outreachSchedule` and `POST /outreachPause`. **Follow-up cron** still runs `hosting-php/scripts/cron-outreach-followups.php` (reads same MySQL `outreach_jobs`). Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).
 

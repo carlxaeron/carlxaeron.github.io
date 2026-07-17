@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import { useSpring, animated } from "@react-spring/web";
 import { useStore } from "./theme-provider";
 import { mapping } from "../../../mapping";
 import SectionTitle from "../../components/SectionTitle";
 import { usePortfolioSettings } from "../../config/PortfolioContentContext";
+import { antiSpamPayload, createFormOpenedAt } from "../../utils/formAntiSpam";
 
 function V3Contact({ isActive }) {
   const { setValue } = useStore();
   const settings = usePortfolioSettings();
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const formOpenedAtRef = useRef(createFormOpenedAt());
 
   const contactInfo = [
     {
@@ -49,11 +51,13 @@ function V3Contact({ isActive }) {
         name: e.target.name.value,
         email: e.target.email.value,
         message: e.target.message.value,
+        ...antiSpamPayload(e.target, formOpenedAtRef.current),
       })
       .then(() => {
         setSent(true);
         setLoading(false);
         e.target.reset();
+        formOpenedAtRef.current = createFormOpenedAt();
         setValue((prev) => ({
           ...prev,
           modal: {
@@ -132,6 +136,17 @@ function V3Contact({ isActive }) {
 
           <div className="col-md-8">
             <form className="v3-form" onSubmit={handleSubmit} noValidate>
+              <div className="v3-form__honeypot" aria-hidden="true">
+                <label htmlFor="v3-contact-website">Website</label>
+                <input
+                  id="v3-contact-website"
+                  name="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  defaultValue=""
+                />
+              </div>
               <div className="row">
                 <div className="col-sm-6">
                   <div className="v3-form__group">

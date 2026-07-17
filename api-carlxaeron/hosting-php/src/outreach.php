@@ -300,9 +300,81 @@ function outreach_send_to_prospect(array $job, string $kind): array
     }
     try {
         send_smtp_mail($to, $subject, $html, $text, env('DEFAULT_FROM') ?: env('SMTP_USER'));
+        outreach_notify_admins_push($kind, $job);
         return ['ok' => true];
     } catch (Throwable $e) {
         return ['ok' => false, 'error' => $e->getMessage()];
+    }
+}
+
+/**
+ * Notify admin Web Push subscribers after a successful outreach email.
+ * Calls Laravel POST /pushNotifyAdmins (same host) with OUTREACH_SECRET.
+ *
+ * @param array<string,mixed> $job
+ */
+function outreach_notify_admins_push(string $kind, array $job): void
+{
+    $secret = env('OUTREACH_SECRET');
+    if (!$secret) {
+        return;
+    }
+
+    $business = trim((string) ($job['business_name'] ?? 'Client'));
+    $email = trim((string) ($job['contact_email'] ?? ''));
+    $slug = trim((string) ($job['slug'] ?? ''));
+    $count = (int) ($job['follow_up_count'] ?? 0);
+
+    if ($kind === 'initial') {
+        $title = 'Outreach email sent';
+        $body = "Quotation sent to {$email} ({$business})";
+        $type = 'outreach_initial';
+    } else {
+        $fuNum = $count + 1;
+        $title = 'Outreach follow-up sent';
+        $body = "Follow-up #{$fuNum} sent to {$email} ({$business})";
+        $type = 'outreach_followup';
+    }
+
+    $payload = json_encode([
+        'secret' => $secret,
+        'title' => $title,
+        'body' => $body,
+        'data' => [
+            'type' => $type,
+            'slug' => $slug,
+            'url' => '/#admin',
+        ],
+    ], JSON_UNESCAPED_SLASHES);
+    if ($payload === false) {
+        return;
+    }
+
+    $url = rtrim((string) (env('PUSH_NOTIFY_URL') ?: 'https://api.carlmanuel.com/pushNotifyAdmins'), '/');
+
+    try {
+        if (function_exists('curl_init')) {
+            $ch = curl_init($url);
+            if ($ch === false) {
+                return;
+            }
+            curl_setopt_array($ch, [
+                CURLOPT_POST => true,
+                CURLOPT_HTTPHEADER => [
+                    'Content-Type: application/json',
+                    'Accept: application/json',
+                    'X-Outreach-Secret: ' . $secret,
+                ],
+                CURLOPT_POSTFIELDS => $payload,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_TIMEOUT => 8,
+                CURLOPT_CONNECTTIMEOUT => 4,
+            ]);
+            curl_exec($ch);
+            curl_close($ch);
+        }
+    } catch (Throwable $e) {
+        // Never fail the outreach send because of push.
     }
 }
 
