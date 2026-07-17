@@ -956,6 +956,81 @@ body.v3-modal-open {
   }
 }
 
+.v3-header__nav {
+  display: flex;
+  align-items: center;
+  gap: $space-6;
+}
+
+.v3-header__links {
+  display: flex;
+  gap: $space-6;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.v3-header__link {
+  background: none;
+  border: none;
+  color: rgba($white, 0.7);
+  font-family: $font-body;
+  font-size: 0.875rem;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 4px 0;
+  transition: color $transition-base;
+  min-height: 44px;
+
+  &.is-active {
+    color: $green-accent;
+    font-weight: 600;
+  }
+
+  &:hover,
+  &:focus {
+    color: $white;
+    outline: none;
+  }
+}
+
+.v3-nav-login {
+  font-family: $font-body;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba($white, 0.45);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color $transition-base;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+
+  &:hover,
+  &:focus {
+    color: rgba($white, 0.75);
+    outline: none;
+  }
+
+  &--desktop {
+    padding-left: $space-4;
+    border-left: 1px solid rgba($white, 0.15);
+  }
+
+  &--overlay {
+    margin-top: $space-4;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    opacity: 0.55;
+
+    &:hover,
+    &:focus {
+      opacity: 0.85;
+    }
+  }
+}
+
 // =============================================================
 // Skill bars
 // =============================================================

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useStore } from "../containers/Portfolio/theme-provider";
+import NavLoginLink from "./NavLoginLink";
 
 function HamburgerMenu({ sections, currentSection, onNavigate }) {
   const [open, setOpen] = useState(false);
@@ -44,6 +45,10 @@ function HamburgerMenu({ sections, currentSection, onNavigate }) {
             {section.title}
           </button>
         ))}
+        <NavLoginLink
+          className="v3-nav-login--overlay"
+          onNavigate={() => setOpen(false)}
+        />
       </div>
     </>
   );

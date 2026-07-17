@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import "../../styles/sass/v3-app.scss";
 import { ThemeProvider, useStore } from "./theme-provider";
 import NavDots from "../../components/NavDots";
+import NavLoginLink from "../../components/NavLoginLink";
 import HamburgerMenu from "../../components/HamburgerMenu";
 import useSwipeHandler from "../../components/SwipeHandler";
 import { Button, Modal } from "react-bootstrap";
@@ -297,31 +298,21 @@ function V3PortfolioScroll() {
         </a>
         {/* Desktop nav links — hidden on mobile (hamburger takes over) */}
         {!value.isMobile && (
-          <nav aria-label="Main navigation">
-            <ul style={{ display: "flex", gap: "1.5rem", listStyle: "none", margin: 0, padding: 0 }}>
+          <nav aria-label="Main navigation" className="v3-header__nav">
+            <ul className="v3-header__links">
               {sections.map((s, i) => (
                 <li key={s.id}>
                   <button
                     type="button"
+                    className={`v3-header__link${currentSection === i ? " is-active" : ""}`}
                     onClick={() => navigateToSection(i)}
-                    style={{
-                      background: "none",
-                      border: "none",
-                      color: currentSection === i ? "#00A862" : "rgba(255,255,255,0.7)",
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: "0.875rem",
-                      fontWeight: currentSection === i ? 600 : 400,
-                      cursor: "pointer",
-                      padding: "4px 0",
-                      transition: "color 0.2s ease",
-                      minHeight: "44px",
-                    }}
                   >
                     {s.title}
                   </button>
                 </li>
               ))}
             </ul>
+            <NavLoginLink className="v3-nav-login--desktop" />
           </nav>
         )}
       </header>

@@ -1,9 +1,18 @@
-import { render, fireEvent, act } from "@testing-library/react";
+import { render, fireEvent, act, screen } from "@testing-library/react";
 import V3Portfolio from "./Portfolio";
 
 jest.mock("../../../components/ChatAgent", () => () => null);
 jest.mock("../../components/HamburgerMenu", () => () => null);
 jest.mock("../../components/NavDots", () => () => null);
+
+jest.mock("../../admin/useAppMode", () => ({
+  navigateToLogin: jest.fn(),
+}));
+
+jest.mock("../../utils/isStandalonePwa", () => ({
+  isStandalonePwa: jest.fn(() => false),
+}));
+
 
 jest.mock("./theme-provider", () => {
   const React = require("react");
@@ -152,5 +161,26 @@ describe("V3Portfolio section id navigation", () => {
       window.__v3Navigate("contact");
     });
     expect(window.location.hash).toBe("#contact");
+  });
+});
+
+describe("V3Portfolio admin login link", () => {
+  const { isStandalonePwa } = require("../../utils/isStandalonePwa");
+
+  beforeEach(() => {
+    isStandalonePwa.mockReturnValue(false);
+  });
+
+  test("hides Login link when not standalone PWA", () => {
+    render(<V3Portfolio />);
+    expect(screen.queryByRole("link", { name: "Login" })).not.toBeInTheDocument();
+  });
+
+  test("renders Login link in desktop header nav when standalone PWA", () => {
+    isStandalonePwa.mockReturnValue(true);
+    render(<V3Portfolio />);
+    const link = screen.getByRole("link", { name: "Login" });
+    expect(link).toHaveAttribute("href", "#login");
+    expect(link).toHaveClass("v3-nav-login--desktop");
   });
 });

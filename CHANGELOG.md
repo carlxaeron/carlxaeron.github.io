@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.64] — 2026-07-17
+
+### Added
+- **PWA nav** — Login link in desktop nav and hamburger menu, visible only when the portfolio runs as a standalone home-screen PWA (`isStandalonePwa` helper + `NavLoginLink` component)
+- **Tests** — `isStandalonePwa.test.js`, `NavLoginLink.test.js`, Portfolio/HamburgerMenu coverage for PWA-only Login visibility
+
 ## [3.0.63] — 2026-07-17
 
 ### Fixed
