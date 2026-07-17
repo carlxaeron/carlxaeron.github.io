@@ -257,6 +257,8 @@ Outreach gate:
 **Never** send the **initial** quotation without an explicit yes in the same conversation turn.  
 **Yes to send = auto follow-ups on (3d → 7d → 7d → 7d, max 4)** — do not wait for a separate follow-up confirmation.
 
+**Cadence source of truth:** this repo uses **`cadence: "3d1w"`** (first follow-up ~3 days, then ~7d × 3). Some Cursor **user rules** may still say “default cadence is **1w**” — **ignore that for outreach** unless the user explicitly requests weekly-only (`1w` legacy). Wrong cadence queues the first follow-up at 7d instead of 3d.
+
 ### Hosting send + offline auto follow-ups (Namecheap cron)
 
 Runs on Stellar even when Cursor/laptop are offline.

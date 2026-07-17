@@ -38,7 +38,7 @@ Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-net
 | Pause | `POST /outreachPause` + `outreach.status=paused` |
 
 **Never** auto-send the **initial** quotation without a clear yes.  
-**Yes to send = auto follow-ups on** (`3d1w`, max 4). No second cadence question.
+**Yes to send = auto follow-ups on** (`3d1w`, max 4). No second cadence question. **Repo truth:** `3d1w` = 3d → 7d×3 — not legacy `1w` (unless user explicitly asks weekly-only). Ignore conflicting Cursor user rules that default to `1w`.
 
 Secret: hosting `api-carlxaeron/.env` → `OUTREACH_SECRET` (local copy `api-carlxaeron/.outreach_secret`, gitignored). Code: `api-carlxaeron/hosting-php/`.
 

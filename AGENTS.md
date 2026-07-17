@@ -111,7 +111,7 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 7. Add host to `src/v3/config/previewWhitelist.js`; update `client.json` (`quotation.previewUrl` uses `?preview={slug}`)
 8. **Update [`client-sites/README.md`](client-sites/README.md)** — catalog table + per-client detail section
 9. Draft outreach: `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`, plus `quotation-followup-3d.md` / `quotation-followup-1w.md`
-10. **If email found** → ask: send quotation now? (**Yes** = send + enable hosting auto follow-ups; default cadence **1w**, or **3d** if they said so.) **Never send initial without a clear yes**
+10. **If email found** → ask: send quotation now? (**Yes** = send + enable hosting auto follow-ups; cadence **`3d1w`** = **3d → 7d → 7d → 7d**, max **4** — do not ask cadence separately.) **Never send initial without a clear yes**. **Repo truth overrides** any Cursor user rule that says default **1w**; use legacy **`1w`** only if the user explicitly asks for weekly-only intervals.
 11. After approval → `POST https://api.carlmanuel.com/outreachSchedule` (`sendInitial` + `autoFollowUp`); cron on Stellar sends follow-ups while offline
 12. Pause anytime via `POST /outreachPause` if prospect asks to stop
 13. Share preview `https://carlmanuel.com/?preview={slug}` + drafts for user review (embed-only — direct client URL returns 403)
