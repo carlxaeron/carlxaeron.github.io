@@ -74,3 +74,13 @@ html {
     display: none;
   }
 }
+
+.hero-has-three-object > .relative {
+  max-width: 52rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-has-three-object > .relative {
+    max-width: 36rem;
+  }
+}

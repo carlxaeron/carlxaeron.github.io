@@ -114,14 +114,24 @@ Fallback only if browser unavailable: stock photos + note in `client.json` → `
   - Load `hero-three.js` as ESM after `hero-motion.js`
   - CDN: pin `three@0.172.0` (`import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js"`)
   - Markup: `<canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>` inside `[data-hero]`; optional `data-hero-three="blueprint"` (wireframe planes + nodes) or `"particles"`
+  - Optional featured object: `data-hero-three-object="woodblock" | "spa" | "lakehouse"` + accent `warm` | `cool` | `lake`
   - Place canvas above photo/gradient (`z-index: 1`), content wrapper `z-index: 2`, `pointer-events: none`
   - Calm only: slow drift, low opacity, `powerPreference: "low-power"`, pause via `IntersectionObserver` when off-screen
   - Skip / remove canvas when `prefers-reduced-motion: reduce`
-- **Hero Three.js (featured craft object)** — when the brand is physical / craft / product (wood, food, spa tools, cabinetry, etc.), add a **simple branded mesh** in addition to ambient particles/blueprint:
-  - Same `hero-three.js`; set `data-hero-three-object="woodblock"` on `[data-hero]` (built-in: carved wood block / stamp)
-  - Optional `data-hero-three-accent="warm"` for gold/wood particle tint (default `"cool"` blueprint blues)
-  - Reference: [`client-sites/journey-woodblock-ph/`](../../client-sites/journey-woodblock-ph/) — `data-hero-three="particles"` + `data-hero-three-object="woodblock"` + `data-hero-three-accent="warm"`
-  - Low poly, slow rotation, scales down on mobile; pauses off-screen with ambient layer
+- **Hero Three.js (featured craft object)** — when the brand is physical / craft / product (wood, food, spa tools, cabinetry, hospitality, etc.), add a **simple branded mesh** in addition to ambient particles/blueprint:
+  - Same `hero-three.js`; set `data-hero-three-object` on `[data-hero]` (see table below)
+  - Optional `data-hero-three-accent="warm" | "cool" | "lake"` for particle tint (default `"cool"` blueprint blues)
+  - **Available object types** (`OBJECT_BUILDERS` in `_template/hero-three.js`):
+
+    | Object | `data-hero-three-object` | Suggested accent | Use when |
+    |--------|--------------------------|------------------|----------|
+    | Carved wood block | `woodblock` | `warm` | Craft, cabinetry, CNC, print-adjacent brands |
+    | Hot stones + oil bottle | `spa` | `warm` | Spa, massage, wellness, beauty rituals |
+    | Lakeside cabin + pier | `lakehouse` | `lake` | Resort, staycation, lakefront hospitality |
+
+  - Reference: [`client-sites/journey-woodblock-ph/`](../../client-sites/journey-woodblock-ph/) — `particles` + `woodblock` + `warm`; [`amora-body-wellness-spa/`](../../client-sites/amora-body-wellness-spa/) — `spa`; [`the-lakehouse-taguig/`](../../client-sites/the-lakehouse-taguig/) — `lakehouse`
+  - **Premium quality bar (~$10k demo):** low-poly brand-specific mesh (not a generic cube); materials/colors match the site palette; soft key/fill lighting; slow rotation + gentle float; scales down on mobile; pauses off-screen with ambient layer; no heavy GLTF or interactive viewers
+  - Markup adds `.hero-has-three-object` on the hero — constrain copy width via `styles.css` (see `_template/styles.css`)
   - Do **not** add heavy GLTF models or interactive product viewers — keep it calm and performant
 - Mobile-first; default brand palette from V3 greens (`#00473e`, `#00A862`) unless client has brand colors.
 - One-page layout: hero, services, about, FAQ, contact.

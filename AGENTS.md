@@ -104,7 +104,7 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 ### Client site + Netlify preview
 1. Copy `client-sites/_template/` → `client-sites/{slug}/`
 2. **Scrape client Facebook** via Chrome DevTools MCP (About + Photos → inspect + download to `assets/`); see client-site-netlify skill Step 1b
-3. Customize HTML with **Tailwind CDN** + supplemental `styles.css`; keep `site.js` + **`hero-motion.js`** (Motion) + **`hero-three.js`** (Three.js ambient canvas; optional `data-hero-three-object="woodblock"` for craft/product brands — see `journey-woodblock-ph`)
+3. Customize HTML with **Tailwind CDN** + supplemental `styles.css`; keep `site.js` + **`hero-motion.js`** (Motion) + **`hero-three.js`** (Three.js ambient canvas; optional featured object `woodblock` | `spa` | `lakehouse` — see `journey-woodblock-ph`, `amora-body-wellness-spa`, `the-lakehouse-taguig`)
 4. **Keep** `embed-guard.js` + edge `embed-only` + CSP headers
 5. Fill `client.json` (`contact`, `quotation` package/price/timeline)
 6. Deploy via Netlify MCP or CLI (`netlify.toml`: `command = ""`)
