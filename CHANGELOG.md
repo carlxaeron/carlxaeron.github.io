@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.69] — 2026-07-18
+
+### Added
+- **Client site** — Taguig City General Hospital (`taguig-city-general-hospital`) added to portfolio preview whitelist, `client-sites/` catalog, and Netlify embed-only demo
+- **Tests** — `previewWhitelist.test.js` coverage confirms the new slug resolves (via `PREVIEW_SITES` matrix)
+
 ## [3.0.68] — 2026-07-17
 
 ### Added

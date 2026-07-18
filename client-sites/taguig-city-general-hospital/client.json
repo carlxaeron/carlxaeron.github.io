@@ -1,0 +1,41 @@
+{
+  "businessName": "Taguig City General Hospital",
+  "slug": "taguig-city-general-hospital",
+  "previewHost": "taguig-city-general-hospital.netlify.app",
+  "industry": "Government hospital / public healthcare",
+  "deployedAt": "2026-07-18",
+  "sources": {
+    "facebook": "https://www.facebook.com/TaguigCityGeneralHospital/",
+    "website": "https://taguig.gov.ph/health/hospitals-and-centers/",
+    "notes": "27K followers · Government organization · 84% recommend (33 Reviews). OPD opened Jan 30, 2025. Address 506 C6 Road, Barangay Hagonoy, Taguig City. OPD +63 968 377 6440 · tgh@taguig.gov.ph · Mon–Fri 8AM–5PM. HD assets via Chrome DevTools MCP in-page fetch: hero cover 820×312 JPEG, logo 834×813 JPEG, gallery 414×414 JPEG ×4."
+  },
+  "contact": {
+    "name": "Taguig City General Hospital",
+    "email": "tgh@taguig.gov.ph",
+    "phone": "+63 968 377 6440",
+    "address": "506 C6 Road, Barangay Hagonoy, Taguig City, Metro Manila, Philippines"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive hospital site, outpatient services & departments, photo gallery, FAQ, contact section, basic SEO, Netlify hosting setup",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=taguig-city-general-hospital"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "ready",
+    "cadence": null,
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "Email tgh@taguig.gov.ph from official recruitment posts and Taguig.gov.ph. Awaiting user yes before outreachSchedule."
+  }
+}

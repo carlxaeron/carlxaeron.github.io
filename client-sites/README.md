@@ -47,6 +47,8 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Fairview General Hospital Inc.](#fairview-general-hospital-inc) | `fairview-general-hospital` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=fairview-general-hospital) | 2026-07-17 |
 | [MPHS Mother of Perpetual Help Inc. Fairview](#mphs-mother-of-perpetual-help-inc-fairview) | `mphs-fairview` | K–12 school / nonprofit | [Preview](https://carlmanuel.com/?preview=mphs-fairview) | 2026-07-17 |
 | [Amora Body Wellness Spa](#amora-body-wellness-spa) | `amora-body-wellness-spa` | Spa / health & beauty | [Preview](https://carlmanuel.com/?preview=amora-body-wellness-spa) | 2026-07-17 |
+| [Taguig City General Hospital](#taguig-city-general-hospital) | `taguig-city-general-hospital` | Government hospital / public healthcare | [Preview](https://carlmanuel.com/?preview=taguig-city-general-hospital) | 2026-07-18 |
+| [Journey Woodblock Modular Cabinets](#journey-woodblock-modular-cabinets) | `journey-woodblock-ph` | Cabinetry / modular furniture / CNC woodworking | [Preview](https://carlmanuel.com/?preview=journey-woodblock-ph) | 2026-07-18 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -630,6 +632,43 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 
 ---
 
+### Taguig City General Hospital
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/taguig-city-general-hospital/` |
+| **Netlify site** | `taguig-city-general-hospital` |
+| **Preview host** | `taguig-city-general-hospital.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=taguig-city-general-hospital |
+| **Contact** | tgh@taguig.gov.ph · +63 968 377 6440 (OPD) · +63 964 063 02 (Lab) · +63 968 401 5862 (Radiology) |
+| **Address** | 506 C6 Road, Barangay Hagonoy, Taguig City |
+| **Category** | Government organization · public hospital · 27K FB followers · 84% recommend (33 reviews) · OPD Mon–Fri 8AM–5PM |
+| **Source** | [Facebook](https://www.facebook.com/TaguigCityGeneralHospital/) · [Taguig.gov.ph](https://taguig.gov.ph/health/hospitals-and-centers/) |
+| **Assets** | Hero 820×312 + logo 834×813 + gallery 414×414×4 JPEG via Chrome DevTools MCP in-page fetch; Motion + Three.js blueprint hero |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
+| **Outreach** | tgh@taguig.gov.ph — drafts ready · **ask before send** |
+
+---
+
+### Journey Woodblock Modular Cabinets
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/journey-woodblock-ph/` |
+| **Netlify site** | `journey-woodblock-ph` |
+| **Preview host** | `journey-woodblock-ph.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=journey-woodblock-ph |
+| **Contact** | info@journeywoodblock.com · 0917 893 6322 |
+| **Address** | Block 38 L34&36 Sparrow Lane, Bay Breeze Executive Village, Brgy Wawa, Taguig City |
+| **Category** | Cabinet & countertop store · 11K FB followers · 90% recommend (26 reviews) · $$$ · open · in-store pickup |
+| **Source** | [Facebook](https://www.facebook.com/JourneyWoodblockPh/) · [Instagram](https://www.instagram.com/journeywoodblockph) · [journeywoodblock.com](https://www.journeywoodblock.com/) |
+| **Assets** | Logo 2048×1536 + hero 1536×2048 + gallery 1080×1528/960×1280×4 JPEG via Chrome DevTools MCP in-page fetch |
+| **Hero 3D** | Motion + warm particles + **`data-hero-three-object="woodblock"`** featured carved block (shared `_template/hero-three.js`) |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
+| **Outreach** | info@journeywoodblock.com — drafts ready · **ask before send** |
+
+---
+
 ## Folder layout
 
 ```text
@@ -641,7 +680,7 @@ client-sites/
     styles.css        # Hero bg, reveal animations
     site.js           # Mobile nav, accordions, filters, scroll reveal
     hero-motion.js    # Motion (Framer Motion) — first-section hero entrance
-    hero-three.js     # Three.js ambient canvas — first-section background
+    hero-three.js     # Three.js ambient canvas + optional featured object (`data-hero-three-object`)
     assets/           # Logos, photos (optional)
     netlify.toml
     client.json       # business, contact, quotation, preview URL

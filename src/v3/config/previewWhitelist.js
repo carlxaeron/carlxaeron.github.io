@@ -203,6 +203,18 @@ export const PREVIEW_SITES = [
     label: "Amora Body Wellness Spa",
     netlifySite: "amora-body-wellness-spa",
   },
+  {
+    id: "taguig-city-general-hospital",
+    host: "taguig-city-general-hospital.netlify.app",
+    label: "Taguig City General Hospital",
+    netlifySite: "taguig-city-general-hospital",
+  },
+  {
+    id: "journey-woodblock-ph",
+    host: "journey-woodblock-ph.netlify.app",
+    label: "Journey Woodblock Modular Cabinets",
+    netlifySite: "journey-woodblock-ph",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
