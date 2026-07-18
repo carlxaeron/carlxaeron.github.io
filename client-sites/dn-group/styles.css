@@ -100,3 +100,20 @@ html {
   background-size: cover;
   background-position: center;
 }
+
+.hero-has-three-object .hero-bg--dn {
+  background-image:
+    radial-gradient(ellipse 70% 85% at 72% 50%, rgba(56, 189, 248, 0.12), transparent 62%),
+    linear-gradient(118deg, rgba(14, 15, 18,0.88) 42%, rgba(14, 15, 18,0.62) 68%, rgba(14, 15, 18,0.48) 100%),
+    url("assets/hero-roof.jpg");
+}
+
+.hero-has-three-object > .relative {
+  max-width: 52rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-has-three-object > .relative {
+    max-width: 36rem;
+  }
+}

@@ -85,3 +85,20 @@ html {
     display: none;
   }
 }
+
+.hero-has-three-object .hero-bg--casa {
+  background-image:
+    radial-gradient(ellipse 70% 85% at 72% 50%, rgba(94, 196, 212, 0.14), transparent 62%),
+    linear-gradient(118deg, rgba(13, 43, 42,0.88) 42%, rgba(13, 43, 42,0.62) 68%, rgba(13, 43, 42,0.48) 100%),
+    url("assets/hero.jpg");
+}
+
+.hero-has-three-object > .relative {
+  max-width: 52rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-has-three-object > .relative {
+    max-width: 36rem;
+  }
+}

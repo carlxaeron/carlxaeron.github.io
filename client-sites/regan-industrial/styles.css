@@ -89,3 +89,20 @@ html {
 [data-hero] > .relative {
   z-index: 2;
 }
+
+.hero-has-three-object .hero-bg--regan {
+  background-image:
+    radial-gradient(ellipse 70% 85% at 72% 50%, rgba(56, 189, 248, 0.12), transparent 62%),
+    linear-gradient(118deg, rgba(26, 26, 26,0.88) 42%, rgba(26, 26, 26,0.62) 68%, rgba(26, 26, 26,0.48) 100%),
+    url("assets/hero-steel.jpg");
+}
+
+.hero-has-three-object > .relative {
+  max-width: 52rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-has-three-object > .relative {
+    max-width: 36rem;
+  }
+}

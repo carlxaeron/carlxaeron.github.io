@@ -7,7 +7,9 @@
  *   data-hero-three="blueprint" | "particles" (ambient; default blueprint)
  *   data-hero-three-object="woodblock" | "spa" | "lakehouse" | "coffee" | "ricesack" |
  *     "briefcase" | "notaryseal" | "printroll" | "copier" | "hardhat" | "industrialfan" |
- *     "acunit" | "blueprintroll" (optional featured mesh)
+ *     "acunit" | "blueprintroll" | "pooldeck" | "waterslide" | "steelbeam" | "avpanel" |
+ *     "medicinebottle" | "roofpanel" | "towercrane" | "tire" | "stethoscope" |
+ *     "graduationcap" (optional featured mesh)
  *   data-hero-three-accent="warm" | "cool" | "lake" (particle tint when accent set)
  */
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js";
@@ -777,6 +779,564 @@ const OBJECT_BUILDERS = {
     }
 
     group.rotation.y = -0.22;
+    group.scale.setScalar(0.92);
+    return group;
+  },
+
+  /** Infinity pool deck + lounger — day resort / pool venue brands */
+  pooldeck() {
+    const group = new THREE.Group();
+    const water = new THREE.MeshStandardMaterial({
+      color: 0x1a8a9a,
+      roughness: 0.12,
+      metalness: 0.08,
+      transparent: true,
+      opacity: 0.82,
+    });
+    const deck = new THREE.MeshStandardMaterial({
+      color: 0xd4c4a8,
+      roughness: 0.88,
+      metalness: 0.02,
+    });
+    const teak = new THREE.MeshStandardMaterial({
+      color: 0x8b6914,
+      roughness: 0.82,
+      metalness: 0.03,
+    });
+    const fabric = new THREE.MeshStandardMaterial({
+      color: 0xf5f0e8,
+      roughness: 0.92,
+      metalness: 0,
+    });
+    const umbrella = new THREE.MeshStandardMaterial({
+      color: 0xc4a574,
+      roughness: 0.72,
+      metalness: 0.04,
+      side: THREE.DoubleSide,
+    });
+    const pole = new THREE.MeshStandardMaterial({
+      color: 0x94a3b8,
+      roughness: 0.35,
+      metalness: 0.45,
+    });
+
+    const pool = new THREE.Mesh(new THREE.BoxGeometry(1.65, 0.12, 1.05), water);
+    pool.position.set(-0.15, -0.52, 0.08);
+    group.add(pool);
+
+    const edge = new THREE.Mesh(new THREE.BoxGeometry(1.72, 0.08, 0.14), deck);
+    edge.position.set(-0.15, -0.42, -0.42);
+    group.add(edge);
+
+    const loungerBase = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.08, 0.32), teak);
+    loungerBase.position.set(0.55, -0.38, 0.22);
+    loungerBase.rotation.y = -0.35;
+    group.add(loungerBase);
+
+    const back = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.22, 0.06), teak);
+    back.position.set(0.38, -0.22, 0.08);
+    back.rotation.set(-0.55, -0.35, 0);
+    group.add(back);
+
+    const cushion = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.05, 0.24), fabric);
+    cushion.position.set(0.55, -0.32, 0.22);
+    cushion.rotation.y = -0.35;
+    group.add(cushion);
+
+    const umbrellaPole = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 0.95, 8), pole);
+    umbrellaPole.position.set(0.92, 0.02, -0.08);
+    group.add(umbrellaPole);
+
+    const canopy = new THREE.Mesh(new THREE.ConeGeometry(0.42, 0.14, 12, 1, true), umbrella);
+    canopy.position.set(0.92, 0.48, -0.08);
+    group.add(canopy);
+
+    group.rotation.y = 0.22;
+    group.scale.setScalar(0.95);
+    return group;
+  },
+
+  /** Curved water slide + splash basin — water park brands */
+  waterslide() {
+    const group = new THREE.Group();
+    const slide = new THREE.MeshStandardMaterial({
+      color: 0x38bdf8,
+      roughness: 0.28,
+      metalness: 0.12,
+    });
+    const slideDark = new THREE.MeshStandardMaterial({
+      color: 0x0ea5e9,
+      roughness: 0.32,
+      metalness: 0.1,
+    });
+    const pool = new THREE.MeshStandardMaterial({
+      color: 0x1a8a9a,
+      roughness: 0.15,
+      metalness: 0.06,
+      transparent: true,
+      opacity: 0.78,
+    });
+    const rail = new THREE.MeshStandardMaterial({
+      color: 0xfbbf24,
+      roughness: 0.45,
+      metalness: 0.22,
+    });
+
+    const basin = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.62, 0.14, 14), pool);
+    basin.position.set(0.35, -0.58, 0.12);
+    group.add(basin);
+
+    const chute = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.28, 1.05, 12, 1, true, 0, Math.PI), slide);
+    chute.rotation.set(0.65, 0.15, -0.42);
+    chute.position.set(-0.35, 0.08, 0.05);
+    group.add(chute);
+
+    const inner = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.22, 1.02, 10, 1, true, 0, Math.PI), slideDark);
+    inner.rotation.set(0.65, 0.15, -0.42);
+    inner.position.set(-0.32, 0.1, 0.08);
+    group.add(inner);
+
+    for (let i = 0; i < 3; i += 1) {
+      const bar = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.35, 0.04), rail);
+      bar.position.set(-0.62 + i * 0.18, 0.35 - i * 0.12, 0.22);
+      bar.rotation.z = 0.55 - i * 0.08;
+      group.add(bar);
+    }
+
+    group.rotation.y = -0.18;
+    group.scale.setScalar(0.92);
+    return group;
+  },
+
+  /** Steel I-beam — industrial metals / supplier brands */
+  steelbeam() {
+    const group = new THREE.Group();
+    const steel = new THREE.MeshStandardMaterial({
+      color: 0x64748b,
+      roughness: 0.38,
+      metalness: 0.62,
+    });
+    const steelDark = new THREE.MeshStandardMaterial({
+      color: 0x475569,
+      roughness: 0.42,
+      metalness: 0.58,
+    });
+    const rivet = new THREE.MeshStandardMaterial({
+      color: 0x94a3b8,
+      roughness: 0.32,
+      metalness: 0.72,
+    });
+
+    const web = new THREE.Mesh(new THREE.BoxGeometry(0.12, 1.05, 0.55), steel);
+    group.add(web);
+
+    const topFlange = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.1, 0.58), steelDark);
+    topFlange.position.y = 0.52;
+    group.add(topFlange);
+
+    const botFlange = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.1, 0.58), steelDark);
+    botFlange.position.y = -0.52;
+    group.add(botFlange);
+
+    for (let y of [-0.35, 0, 0.35]) {
+      for (let z of [-0.18, 0.18]) {
+        const dot = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.04, 8), rivet);
+        dot.rotation.x = Math.PI / 2;
+        dot.position.set(0, y, z);
+        group.add(dot);
+      }
+    }
+
+    group.rotation.y = 0.42;
+    group.scale.setScalar(0.95);
+    return group;
+  },
+
+  /** Smart panel + dome camera — AV / security / BMS brands */
+  avpanel() {
+    const group = new THREE.Group();
+    const bezel = new THREE.MeshStandardMaterial({
+      color: 0x1e293b,
+      roughness: 0.55,
+      metalness: 0.25,
+    });
+    const screen = new THREE.MeshStandardMaterial({
+      color: 0x0ea5e9,
+      roughness: 0.22,
+      metalness: 0.15,
+      emissive: 0x0369a1,
+      emissiveIntensity: 0.35,
+    });
+    const cameraBody = new THREE.MeshStandardMaterial({
+      color: 0xf1f5f9,
+      roughness: 0.48,
+      metalness: 0.18,
+    });
+    const lens = new THREE.MeshStandardMaterial({
+      color: 0x0f172a,
+      roughness: 0.18,
+      metalness: 0.35,
+    });
+    const accent = new THREE.MeshStandardMaterial({
+      color: 0x38bdf8,
+      roughness: 0.35,
+      metalness: 0.28,
+    });
+
+    const panel = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.62, 0.06), bezel);
+    panel.position.set(-0.15, 0.05, 0);
+    group.add(panel);
+
+    const display = new THREE.Mesh(new THREE.PlaneGeometry(0.82, 0.48), screen);
+    display.position.set(-0.15, 0.05, 0.035);
+    group.add(display);
+
+    const camBase = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.16, 0.18), cameraBody);
+    camBase.position.set(0.62, 0.18, 0.08);
+    group.add(camBase);
+
+    const dome = new THREE.Mesh(new THREE.SphereGeometry(0.12, 12, 8, 0, Math.PI * 2, 0, Math.PI / 2), lens);
+    dome.position.set(0.62, 0.28, 0.08);
+    group.add(dome);
+
+    const led = new THREE.Mesh(new THREE.CircleGeometry(0.025, 8), accent);
+    led.position.set(0.72, 0.12, 0.18);
+    group.add(led);
+
+    const bracket = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.28, 0.08), bezel);
+    bracket.position.set(-0.62, -0.08, 0);
+    group.add(bracket);
+
+    group.rotation.y = -0.25;
+    group.scale.setScalar(0.92);
+    return group;
+  },
+
+  /** Amber pill bottle + capsules — pharmaceutical brands */
+  medicinebottle() {
+    const group = new THREE.Group();
+    const amber = new THREE.MeshStandardMaterial({
+      color: 0xc2782a,
+      roughness: 0.28,
+      metalness: 0.06,
+      transparent: true,
+      opacity: 0.88,
+    });
+    const cap = new THREE.MeshStandardMaterial({
+      color: 0xf8fafc,
+      roughness: 0.55,
+      metalness: 0.08,
+    });
+    const label = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      roughness: 0.72,
+      metalness: 0.02,
+    });
+    const pill = new THREE.MeshStandardMaterial({
+      color: 0xef4444,
+      roughness: 0.45,
+      metalness: 0.05,
+    });
+    const pillWhite = new THREE.MeshStandardMaterial({
+      color: 0xf1f5f9,
+      roughness: 0.42,
+      metalness: 0.04,
+    });
+
+    const bottle = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.32, 0.82, 14), amber);
+    bottle.position.y = -0.08;
+    group.add(bottle);
+
+    const capMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.14, 14), cap);
+    capMesh.position.y = 0.42;
+    group.add(capMesh);
+
+    const tag = new THREE.Mesh(new THREE.PlaneGeometry(0.38, 0.32), label);
+    tag.position.set(0, -0.02, 0.3);
+    group.add(tag);
+
+    for (let i = 0; i < 4; i += 1) {
+      const capsule = new THREE.Mesh(
+        new THREE.CapsuleGeometry(0.07, 0.14, 4, 8),
+        i % 2 === 0 ? pill : pillWhite
+      );
+      capsule.rotation.z = Math.PI / 2;
+      capsule.position.set(0.55 + (i % 2) * 0.14, -0.42 + Math.floor(i / 2) * 0.12, 0.08);
+      group.add(capsule);
+    }
+
+    group.rotation.y = 0.28;
+    group.scale.setScalar(0.95);
+    return group;
+  },
+
+  /** Corrugated roofing panel stack — building materials brands */
+  roofpanel() {
+    const group = new THREE.Group();
+    const metal = new THREE.MeshStandardMaterial({
+      color: 0x64748b,
+      roughness: 0.48,
+      metalness: 0.55,
+    });
+    const metalDark = new THREE.MeshStandardMaterial({
+      color: 0x475569,
+      roughness: 0.52,
+      metalness: 0.5,
+    });
+    const accent = new THREE.MeshStandardMaterial({
+      color: 0xf97316,
+      roughness: 0.55,
+      metalness: 0.18,
+    });
+
+    for (let i = 0; i < 3; i += 1) {
+      const panel = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.04, 0.72), i % 2 === 0 ? metal : metalDark);
+      panel.position.set(0, -0.12 + i * 0.08, i * 0.06);
+      panel.rotation.y = 0.12 + i * 0.05;
+      group.add(panel);
+    }
+
+    for (let x = -0.42; x <= 0.42; x += 0.21) {
+      const rib = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.06, 0.74), metalDark);
+      rib.position.set(x, 0.02, 0.08);
+      group.add(rib);
+    }
+
+    const screw = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.05, 8), accent);
+    screw.position.set(0.35, 0.08, 0.22);
+    group.add(screw);
+
+    group.rotation.y = -0.32;
+    group.scale.setScalar(0.92);
+    return group;
+  },
+
+  /** Tower crane — crane rental / heavy construction brands */
+  towercrane() {
+    const group = new THREE.Group();
+    const yellow = new THREE.MeshStandardMaterial({
+      color: 0xfbbf24,
+      roughness: 0.52,
+      metalness: 0.22,
+    });
+    const steel = new THREE.MeshStandardMaterial({
+      color: 0x64748b,
+      roughness: 0.42,
+      metalness: 0.48,
+    });
+    const cable = new THREE.MeshStandardMaterial({
+      color: 0x1e293b,
+      roughness: 0.75,
+      metalness: 0.15,
+    });
+
+    const mast = new THREE.Mesh(new THREE.BoxGeometry(0.14, 1.35, 0.14), yellow);
+    mast.position.y = 0.08;
+    group.add(mast);
+
+    const jib = new THREE.Mesh(new THREE.BoxGeometry(1.35, 0.08, 0.1), yellow);
+    jib.position.set(0.35, 0.72, 0);
+    group.add(jib);
+
+    const counter = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.08, 0.1), steel);
+    counter.position.set(-0.55, 0.72, 0);
+    group.add(counter);
+
+    const cab = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.18, 0.18), steel);
+    cab.position.set(0.05, 0.62, 0.12);
+    group.add(cab);
+
+    const hookLine = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.55, 6), cable);
+    hookLine.position.set(0.82, 0.22, 0);
+    group.add(hookLine);
+
+    const hook = new THREE.Mesh(new THREE.TorusGeometry(0.06, 0.018, 6, 10, Math.PI), steel);
+    hook.position.set(0.82, -0.08, 0);
+    hook.rotation.x = Math.PI / 2;
+    group.add(hook);
+
+    const base = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.12, 0.55), steel);
+    base.position.y = -0.62;
+    group.add(base);
+
+    group.rotation.y = 0.35;
+    group.scale.setScalar(0.88);
+    return group;
+  },
+
+  /** Commercial truck tire — fleet / tire supply brands */
+  tire() {
+    const group = new THREE.Group();
+    const rubber = new THREE.MeshStandardMaterial({
+      color: 0x1e293b,
+      roughness: 0.88,
+      metalness: 0.04,
+    });
+    const tread = new THREE.MeshStandardMaterial({
+      color: 0x334155,
+      roughness: 0.92,
+      metalness: 0.02,
+    });
+    const rim = new THREE.MeshStandardMaterial({
+      color: 0x94a3b8,
+      roughness: 0.35,
+      metalness: 0.55,
+    });
+    const hub = new THREE.MeshStandardMaterial({
+      color: 0x64748b,
+      roughness: 0.42,
+      metalness: 0.48,
+    });
+
+    const outer = new THREE.Mesh(new THREE.TorusGeometry(0.62, 0.22, 12, 24), rubber);
+    outer.rotation.y = Math.PI / 2;
+    group.add(outer);
+
+    const inner = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.38, 0.18, 16), rim);
+    inner.rotation.z = Math.PI / 2;
+    group.add(inner);
+
+    const center = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.2, 10), hub);
+    center.rotation.z = Math.PI / 2;
+    group.add(center);
+
+    for (let i = 0; i < 8; i += 1) {
+      const block = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.12, 0.06), tread);
+      const angle = (i / 8) * Math.PI * 2;
+      block.position.set(Math.cos(angle) * 0.62, Math.sin(angle) * 0.62, 0);
+      block.rotation.z = angle;
+      group.add(block);
+    }
+
+    group.rotation.x = 0.15;
+    group.rotation.y = 0.42;
+    group.scale.setScalar(0.85);
+    return group;
+  },
+
+  /** Stethoscope + medical cross — hospital / healthcare brands */
+  stethoscope() {
+    const group = new THREE.Group();
+    const tube = new THREE.MeshStandardMaterial({
+      color: 0x1e293b,
+      roughness: 0.62,
+      metalness: 0.12,
+    });
+    const chest = new THREE.MeshStandardMaterial({
+      color: 0x94a3b8,
+      roughness: 0.32,
+      metalness: 0.55,
+    });
+    const cross = new THREE.MeshStandardMaterial({
+      color: 0xef4444,
+      roughness: 0.45,
+      metalness: 0.12,
+      emissive: 0x991b1b,
+      emissiveIntensity: 0.12,
+    });
+    const white = new THREE.MeshStandardMaterial({
+      color: 0xf8fafc,
+      roughness: 0.72,
+      metalness: 0.02,
+    });
+
+    const diaphragm = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.24, 0.08, 14), chest);
+    diaphragm.rotation.x = Math.PI / 2;
+    diaphragm.position.set(-0.42, -0.35, 0.12);
+    group.add(diaphragm);
+
+    const bell = new THREE.Mesh(new THREE.SphereGeometry(0.12, 10, 8), chest);
+    bell.position.set(-0.42, -0.18, 0.12);
+    group.add(bell);
+
+    const tubeA = new THREE.Mesh(new THREE.TorusGeometry(0.28, 0.025, 8, 16, Math.PI * 1.1), tube);
+    tubeA.rotation.set(0.4, 0.2, 0.5);
+    tubeA.position.set(-0.05, 0.08, 0.05);
+    group.add(tubeA);
+
+    for (let x of [-0.12, 0.12]) {
+      const ear = new THREE.Mesh(new THREE.TorusGeometry(0.06, 0.018, 6, 10), tube);
+      ear.position.set(x, 0.42, 0.08);
+      ear.rotation.x = Math.PI / 2;
+      group.add(ear);
+    }
+
+    const crossV = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.32, 0.04), cross);
+    crossV.position.set(0.55, 0.05, 0.05);
+    group.add(crossV);
+
+    const crossH = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.1, 0.04), cross);
+    crossH.position.set(0.55, 0.05, 0.05);
+    group.add(crossH);
+
+    const badge = new THREE.Mesh(new THREE.CircleGeometry(0.28, 16), white);
+    badge.position.set(0.55, 0.05, -0.02);
+    badge.rotation.y = Math.PI;
+    group.add(badge);
+
+    group.rotation.y = -0.22;
+    group.scale.setScalar(0.95);
+    return group;
+  },
+
+  /** Mortarboard + stacked books — K–12 / school brands */
+  graduationcap() {
+    const group = new THREE.Group();
+    const cloth = new THREE.MeshStandardMaterial({
+      color: 0x1e3a5f,
+      roughness: 0.82,
+      metalness: 0.04,
+    });
+    const gold = new THREE.MeshStandardMaterial({
+      color: 0xc9a227,
+      roughness: 0.42,
+      metalness: 0.35,
+    });
+    const bookCover = new THREE.MeshStandardMaterial({
+      color: 0x7c2d12,
+      roughness: 0.78,
+      metalness: 0.03,
+    });
+    const pages = new THREE.MeshStandardMaterial({
+      color: 0xf8fafc,
+      roughness: 0.92,
+      metalness: 0,
+    });
+
+    const book1 = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.12, 0.52), bookCover);
+    book1.position.set(0, -0.52, 0.05);
+    book1.rotation.y = 0.15;
+    group.add(book1);
+
+    const pages1 = new THREE.Mesh(new THREE.BoxGeometry(0.66, 0.1, 0.46), pages);
+    pages1.position.set(0.02, -0.5, 0.08);
+    pages1.rotation.y = 0.15;
+    group.add(pages1);
+
+    const book2 = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.1, 0.46), bookCover);
+    book2.position.set(0.05, -0.38, 0.02);
+    book2.rotation.y = -0.12;
+    group.add(book2);
+
+    const board = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.05, 0.95), cloth);
+    board.position.y = 0.02;
+    board.rotation.y = 0.45;
+    group.add(board);
+
+    const crown = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.32, 0.42), cloth);
+    crown.position.y = 0.18;
+    group.add(crown);
+
+    const tassel = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.35, 6), gold);
+    tassel.position.set(0.32, 0.12, 0.32);
+    tassel.rotation.z = 0.35;
+    group.add(tassel);
+
+    const button = new THREE.Mesh(new THREE.SphereGeometry(0.045, 8, 8), gold);
+    button.position.set(0.32, 0.32, 0.32);
+    group.add(button);
+
+    group.rotation.y = 0.28;
     group.scale.setScalar(0.92);
     return group;
   },
