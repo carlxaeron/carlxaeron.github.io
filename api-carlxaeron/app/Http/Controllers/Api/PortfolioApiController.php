@@ -12,6 +12,7 @@ use App\Services\AnalyticsSummaryService;
 use App\Services\PortfolioContentService;
 use App\Services\PortfolioMailer;
 use App\Services\PreviewAnalyticsPush;
+use App\Services\PreviewFeedbackAutoReply;
 use App\Services\PushNotificationService;
 use App\Support\ApiResponse;
 use App\Support\FormAntiSpam;
@@ -28,6 +29,7 @@ class PortfolioApiController extends Controller
         private PortfolioContentService $portfolioContent,
         private PortfolioMailer $mailer,
         private PreviewAnalyticsPush $previewPush,
+        private PreviewFeedbackAutoReply $feedbackAutoReply,
         private PushNotificationService $push,
     ) {}
 
@@ -111,8 +113,10 @@ class PortfolioApiController extends Controller
             ? substr((string) $request->input('previewLabel'), 0, 128)
             : null;
 
+        $requestEmail = trim((string) $request->input('contactEmail', ''));
+
         try {
-            PreviewFeedback::query()->create([
+            $feedback = PreviewFeedback::query()->create([
                 'visitor_id' => $vid,
                 'session_id' => substr($sessionId, 0, 64),
                 'preview_slug' => $slug,
@@ -130,6 +134,7 @@ class PortfolioApiController extends Controller
         }
 
         $this->previewPush->notifyFeedback($slug, $sentiment, $previewLabel, $comment !== '' ? $comment : null);
+        $this->feedbackAutoReply->maybeSend($feedback, $requestEmail !== '' ? $requestEmail : null);
 
         return ApiResponse::success('Feedback recorded');
     }

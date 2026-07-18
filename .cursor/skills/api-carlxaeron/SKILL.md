@@ -21,7 +21,7 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 |--------|------|-------|
 | GET | `/health` | `{ ok, service: "api-carlxaeron" }` |
 | POST | `/trackVisit` | Analytics |
-| POST | `/previewFeedback` | Like / dislike |
+| POST | `/previewFeedback` | Like / dislike — admin Web Push + **prospect auto-reply email** when email known (`outreach_jobs.contact_email` or optional body `contactEmail`; one per feedback row; BCC `MAIL_BCC`) |
 | GET | `/analyticsSummary` | Insights panel |
 | POST | `/contact` | Form + SMTP |
 | POST | `/quotation` | Form + SMTP |
@@ -58,7 +58,7 @@ Seed admin user: `ADMIN_EMAIL` + `ADMIN_PASSWORD` in server `.env` → `php arti
 - Outreach **initial** email sent (`OutreachScheduler` / `outreachSchedule`)
 - Outreach **follow-up** email sent (hosting-php cron → `POST /pushNotifyAdmins`)
 - **`POST /trackVisit`** with `eventType: preview_view` + allowlisted Origin/Referer + valid slug — **one push per slug + session** (Cache TTL `PUSH_PREVIEW_VIEW_THROTTLE_MINUTES`, default **30**)
-- **`POST /previewFeedback`** on successful like/dislike (slug + sentiment in title/body; dislike includes comment snippet)
+- **`POST /previewFeedback`** on successful like/dislike (slug + sentiment in title/body; dislike includes comment snippet) — also sends **one auto-reply email** to the prospect when `outreach_jobs.contact_email` or body `contactEmail` resolves (like = thank + soft “push through”; dislike = thank + invite revision); BCC `MAIL_BCC`; skipped if no email or already sent for that row
 
 Push failure never breaks form/outreach/analytics responses. Service worker + Settings UI live in the portfolio SPA. **iOS:** user must Add to Home Screen (iOS 16.4+), then open Admin and enable notifications.
 
@@ -114,7 +114,8 @@ CORS origins: `carlmanuel.com`, `www`, `carlxaeron.github.io`, `localhost:3000` 
 | `app/Services/AnalyticsExclusion.php` | IP hash salt `:carlxaeron-portfolio` |
 | `app/Services/PortfolioMailer.php` | Contact / quotation mail |
 | `app/Services/PushNotificationService.php` | Web Push subscribe/send (VAPID) |
-| `app/Services/PreviewAnalyticsPush.php` | Preview view + feedback admin push (slug+session throttle) |
+| `app/Services/PreviewFeedbackAutoReply.php` | Like/dislike prospect auto-reply (email from outreach job or `contactEmail`) |
+| `app/Services/PreviewFeedbackEmailBuilder.php` | Auto-reply HTML/text bodies |
 | `app/Support/BrowserOriginGate.php` | Origin/Referer allowlist (mirrors hosting-php) |
 | `app/Http/Controllers/Api/AdminPushController.php` | Admin push subscribe/test routes |
 | `app/Models/PushSubscription.php` | `push_subscriptions` table |

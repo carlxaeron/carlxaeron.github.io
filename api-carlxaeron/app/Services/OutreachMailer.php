@@ -21,6 +21,14 @@ final class OutreachMailer
             [$subject, $html, $text] = OutreachEmailBuilder::followup($job);
         }
 
+        return $this->sendProspectMessage($to, $subject, $html, $text);
+    }
+
+    /**
+     * @return array{ok:bool,error?:string}
+     */
+    public function sendProspectMessage(string $to, string $subject, string $html, string $text): array
+    {
         try {
             $bccList = $this->bccRecipients();
             $mail = Mail::to($to);

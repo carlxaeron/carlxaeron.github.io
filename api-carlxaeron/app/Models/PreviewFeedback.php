@@ -17,6 +17,8 @@ class PreviewFeedback extends Model
         'preview_label',
         'sentiment',
         'comment',
+        'prospect_email',
+        'auto_reply_sent_at',
         'ip_hash',
         'created_at',
     ];
@@ -25,6 +27,7 @@ class PreviewFeedback extends Model
     {
         return [
             'created_at' => 'datetime',
+            'auto_reply_sent_at' => 'datetime',
         ];
     }
 }

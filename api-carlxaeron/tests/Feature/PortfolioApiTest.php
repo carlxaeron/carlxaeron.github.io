@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Mail\ContactReceived;
+use App\Mail\OutreachProspectMail;
+use App\Models\OutreachJob;
 use App\Models\PreviewFeedback;
 use App\Models\Visit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -151,6 +153,88 @@ class PortfolioApiTest extends TestCase
         ], ['Origin' => 'https://carlmanuel.com'])
             ->assertStatus(400)
             ->assertJsonPath('message', 'Comment is required when disliking');
+    }
+
+    public function test_preview_feedback_like_sends_auto_reply_when_outreach_email_exists(): void
+    {
+        Mail::fake();
+        config(['portfolio.mail_bcc' => 'admin@example.com']);
+
+        OutreachJob::query()->create([
+            'slug' => 'jk-construction',
+            'business_name' => 'JK Construction',
+            'contact_name' => 'Juan',
+            'contact_email' => 'juan@jk.test',
+            'preview_url' => 'https://carlmanuel.com/?preview=jk-construction',
+            'cadence' => '3d1w',
+            'auto_followup' => true,
+            'max_followups' => 4,
+            'follow_up_count' => 0,
+            'status' => 'sent',
+        ]);
+
+        $this->mock(\App\Services\PushNotificationService::class, function ($mock): void {
+            $mock->shouldReceive('sendToAdmins')->once()->andReturn(1);
+        });
+
+        $this->postJson('/previewFeedback', [
+            'visitorId' => 'v-auto-like',
+            'sessionId' => 's-auto-like',
+            'previewSlug' => 'jk-construction',
+            'previewLabel' => 'JK Construction',
+            'sentiment' => 'like',
+        ], ['Origin' => 'https://carlmanuel.com'])
+            ->assertOk();
+
+        Mail::assertSent(OutreachProspectMail::class, function (OutreachProspectMail $mail) {
+            return str_contains(strtolower($mail->htmlBody), 'thanks for the thumbs up');
+        });
+
+        $this->assertDatabaseHas('preview_feedback', [
+            'visitor_id' => 'v-auto-like',
+            'preview_slug' => 'jk-construction',
+            'prospect_email' => 'juan@jk.test',
+        ]);
+
+        $row = PreviewFeedback::query()->where('visitor_id', 'v-auto-like')->first();
+        $this->assertNotNull($row?->auto_reply_sent_at);
+    }
+
+    public function test_preview_feedback_dislike_sends_different_auto_reply(): void
+    {
+        Mail::fake();
+
+        OutreachJob::query()->create([
+            'slug' => 'jk-construction',
+            'business_name' => 'JK Construction',
+            'contact_name' => 'Juan',
+            'contact_email' => 'juan@jk.test',
+            'preview_url' => 'https://carlmanuel.com/?preview=jk-construction',
+            'cadence' => '3d1w',
+            'auto_followup' => false,
+            'max_followups' => 4,
+            'follow_up_count' => 0,
+            'status' => 'sent',
+        ]);
+
+        $this->mock(\App\Services\PushNotificationService::class, function ($mock): void {
+            $mock->shouldReceive('sendToAdmins')->once()->andReturn(1);
+        });
+
+        $this->postJson('/previewFeedback', [
+            'visitorId' => 'v-auto-dislike',
+            'sessionId' => 's-auto-dislike',
+            'previewSlug' => 'jk-construction',
+            'previewLabel' => 'JK Construction',
+            'sentiment' => 'dislike',
+            'comment' => 'Needs clearer CTA',
+        ], ['Origin' => 'https://carlmanuel.com'])
+            ->assertOk();
+
+        Mail::assertSent(OutreachProspectMail::class, function (OutreachProspectMail $mail) {
+            return str_contains(strtolower($mail->htmlBody), 'honest feedback')
+                && str_contains($mail->htmlBody, 'Needs clearer CTA');
+        });
     }
 
     public function test_preview_feedback_dislike_triggers_admin_push(): void
