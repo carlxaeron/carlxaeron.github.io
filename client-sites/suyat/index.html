@@ -49,17 +49,24 @@
   </header>
 
   <main>
-    <section class="relative overflow-hidden bg-brand-dark text-white">
-      <div class="hero-bg hero-bg--suyat absolute inset-0"></div>
+    <section
+      data-hero
+      data-hero-three="particles"
+      data-hero-three-object="notaryseal"
+      data-hero-three-accent="warm"
+      class="relative overflow-hidden bg-brand-dark text-white"
+    >
+      <div data-hero-bg class="hero-bg hero-bg--suyat absolute inset-0 origin-center will-change-transform"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
       <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-        <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-brand-gold" data-reveal>Rodriguez, Rizal · Notary &amp; legal documents</p>
-        <h1 class="font-display max-w-2xl text-4xl font-bold leading-tight sm:text-5xl" data-reveal>Trusted notarization when your documents matter</h1>
-        <p class="mt-5 max-w-xl text-lg text-brand-light/90" data-reveal>Professional notary public services, affidavits, deeds, and legal document preparation at our San Jose office.</p>
-        <div class="mt-8 flex flex-wrap gap-3" data-reveal>
-          <a href="#contact" class="rounded-full bg-brand-gold px-6 py-3 font-semibold text-brand-dark hover:brightness-105 transition">Schedule a visit</a>
-          <a href="https://www.facebook.com/suyatlawoffice/" target="_blank" rel="noopener noreferrer" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Message on Facebook</a>
+        <p data-hero-animate class="opacity-0 mb-3 text-xs font-semibold uppercase tracking-widest text-brand-gold">Rodriguez, Rizal · Notary &amp; legal documents</p>
+        <h1 data-hero-animate class="opacity-0 font-display max-w-2xl text-4xl font-bold leading-tight sm:text-5xl">Trusted notarization when your documents matter</h1>
+        <p data-hero-animate class="opacity-0 mt-5 max-w-xl text-lg text-brand-light/90">Professional notary public services, affidavits, deeds, and legal document preparation at our San Jose office.</p>
+        <div data-hero-animate class="opacity-0 mt-8 flex flex-wrap gap-3">
+          <a data-hero-cta href="#contact" class="rounded-full bg-brand-gold px-6 py-3 font-semibold text-brand-dark hover:brightness-105 transition">Schedule a visit</a>
+          <a data-hero-cta href="https://www.facebook.com/suyatlawoffice/" target="_blank" rel="noopener noreferrer" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Message on Facebook</a>
         </div>
-        <p class="mt-4 text-sm text-brand-light/80" data-reveal>JRS Building, Kanlaon Street</p>
+        <p data-hero-animate class="opacity-0 mt-4 text-sm text-brand-light/80">JRS Building, Kanlaon Street</p>
       </div>
     </section>
 
@@ -140,5 +147,7 @@
     <p>&copy; <span data-year></span> Suyat Notary Public. Rodriguez, Rizal.</p>
   </footer>
   <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
 </body>
 </html>

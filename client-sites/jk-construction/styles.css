@@ -106,3 +106,20 @@ html {
     display: none;
   }
 }
+
+.hero-has-three-object .hero-bg--jk {
+  background-image:
+    radial-gradient(ellipse 70% 85% at 72% 50%, rgba(249, 115, 22, 0.12), transparent 62%),
+    linear-gradient(118deg, rgba(26, 45, 74, 0.92) 42%, rgba(26, 45, 74, 0.68) 68%, rgba(15, 23, 42, 0.55) 100%),
+    url("assets/hero-renovation.jpg");
+}
+
+.hero-has-three-object > .relative {
+  max-width: 52rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-has-three-object > .relative {
+    max-width: 36rem;
+  }
+}

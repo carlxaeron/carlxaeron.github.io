@@ -45,8 +45,15 @@
   </header>
 
   <main>
-    <section data-hero class="relative overflow-hidden bg-brand-dark text-white">
+    <section
+      data-hero
+      data-hero-three="particles"
+      data-hero-three-object="coffee"
+      data-hero-three-accent="warm"
+      class="relative overflow-hidden bg-brand-dark text-white"
+    >
       <div data-hero-bg class="hero-bg hero-bg--bamboo absolute inset-0 origin-center will-change-transform"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
       <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
         <p data-hero-animate class="mb-3 text-xs font-semibold uppercase tracking-widest text-brand-gold opacity-0">Quezon City · Open daily 7am–9pm</p>
         <h1 data-hero-animate class="font-display max-w-2xl text-4xl font-bold leading-tight sm:text-5xl opacity-0">Fresh coffee, honest meals, neighborhood warmth</h1>
@@ -142,5 +149,6 @@
   </footer>
   <script src="site.js"></script>
   <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
 </body>
 </html>

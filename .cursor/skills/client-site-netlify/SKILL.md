@@ -114,7 +114,7 @@ Fallback only if browser unavailable: stock photos + note in `client.json` → `
   - Load `hero-three.js` as ESM after `hero-motion.js`
   - CDN: pin `three@0.172.0` (`import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js"`)
   - Markup: `<canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>` inside `[data-hero]`; optional `data-hero-three="blueprint"` (wireframe planes + nodes) or `"particles"`
-  - Optional featured object: `data-hero-three-object="woodblock" | "spa" | "lakehouse"` + accent `warm` | `cool` | `lake`
+  - Optional featured object: `data-hero-three-object="woodblock" | "spa" | "lakehouse" | "coffee" | "ricesack" | "briefcase" | "notaryseal" | "printroll" | "copier" | "hardhat" | "industrialfan" | "acunit" | "blueprintroll"` + accent `warm` | `cool` | `lake`
   - Place canvas above photo/gradient (`z-index: 1`), content wrapper `z-index: 2`, `pointer-events: none`
   - Calm only: slow drift, low opacity, `powerPreference: "low-power"`, pause via `IntersectionObserver` when off-screen
   - Skip / remove canvas when `prefers-reduced-motion: reduce`
@@ -128,6 +128,16 @@ Fallback only if browser unavailable: stock photos + note in `client.json` → `
     | Carved wood block | `woodblock` | `warm` | Craft, cabinetry, CNC, print-adjacent brands |
     | Hot stones + oil bottle | `spa` | `warm` | Spa, massage, wellness, beauty rituals |
     | Lakeside cabin + pier | `lakehouse` | `lake` | Resort, staycation, lakefront hospitality |
+    | Latte cup + saucer | `coffee` | `warm` | Café, restaurant, food service |
+    | Burlap rice sack | `ricesack` | `warm` | Rice wholesale / grain retail |
+    | Leather briefcase | `briefcase` | `cool` | Business consultancy, corporate services |
+    | Notary seal + document | `notaryseal` | `warm` | Notary, legal document services |
+    | Vinyl decal roll | `printroll` | `cool` | Printing, decals, signage |
+    | Office copier | `copier` | `cool` | Office equipment, B2B supply |
+    | Hard hat + spirit level | `hardhat` | `cool` | Construction, renovation |
+    | Centrifugal industrial fan | `industrialfan` | `cool` | Ventilation, industrial fans / blowers |
+    | Split AC indoor unit | `acunit` | `cool` | HVAC, air conditioning |
+    | Rolled blueprint + ruler | `blueprintroll` | `cool` | CAD plotting, blueprint printing |
 
   - Reference: [`client-sites/journey-woodblock-ph/`](../../client-sites/journey-woodblock-ph/) — `particles` + `woodblock` + `warm`; [`amora-body-wellness-spa/`](../../client-sites/amora-body-wellness-spa/) — `spa`; [`the-lakehouse-taguig/`](../../client-sites/the-lakehouse-taguig/) — `lakehouse`
   - **Premium quality bar (~$10k demo):** low-poly brand-specific mesh (not a generic cube); materials/colors match the site palette; soft key/fill lighting; slow rotation + gentle float; scales down on mobile; pauses off-screen with ambient layer; no heavy GLTF or interactive viewers

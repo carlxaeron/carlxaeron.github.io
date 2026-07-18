@@ -26,3 +26,45 @@ html { scroll-behavior: smooth; }
   background: linear-gradient(135deg, rgba(0, 71, 62, 0.92), rgba(30, 57, 50, 0.88)),
     url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=80") center / cover no-repeat;
 }
+
+.hero-has-three-object .hero-bg--bamboo {
+  background-image:
+    radial-gradient(ellipse 70% 85% at 72% 50%, rgba(203, 162, 88, 0.14), transparent 62%),
+    linear-gradient(118deg, rgba(0, 71, 62, 0.92) 42%, rgba(0, 71, 62, 0.65) 68%, rgba(30, 57, 50, 0.48) 100%),
+    url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=80");
+}
+
+.hero-bg {
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.hero-three-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-hero] > .relative {
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-three-canvas {
+    display: none;
+  }
+}
+
+.hero-has-three-object > .relative {
+  max-width: 52rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-has-three-object > .relative {
+    max-width: 36rem;
+  }
+}
