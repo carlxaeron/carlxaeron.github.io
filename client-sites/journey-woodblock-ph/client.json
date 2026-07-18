@@ -23,14 +23,14 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "ready",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "3d1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-18T04:25:03+00:00",
+    "nextFollowUpAt": "2026-07-21T04:25:03+00:00",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "Email info@journeywoodblock.com from Facebook About. Awaiting user approval before send."
+    "notes": "Initial quotation sent 2026-07-18 via outreachSchedule to info@journeywoodblock.com; auto follow-ups 3d1w (3d→7d×3, max 4)."
   },
   "sources": {
     "facebook": "https://www.facebook.com/JourneyWoodblockPh/",

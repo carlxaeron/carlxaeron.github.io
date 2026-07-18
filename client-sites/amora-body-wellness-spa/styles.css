@@ -67,6 +67,13 @@ html {
     url("assets/hero-spa.jpg");
 }
 
+.hero-has-three-object .hero-bg--amora {
+  background-image:
+    radial-gradient(ellipse 70% 85% at 72% 50%, rgba(201, 168, 124, 0.14), transparent 62%),
+    linear-gradient(118deg, rgba(45, 74, 62, 0.88) 42%, rgba(45, 74, 62, 0.62) 68%, rgba(74, 103, 65, 0.48) 100%),
+    url("assets/hero-spa.jpg");
+}
+
 .hero-three-canvas {
   position: absolute;
   inset: 0;

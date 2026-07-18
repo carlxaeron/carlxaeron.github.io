@@ -29,13 +29,13 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "ready",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "3d1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-18T04:24:59+00:00",
+    "nextFollowUpAt": "2026-07-21T04:24:59+00:00",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "Email tgh@taguig.gov.ph from official recruitment posts and Taguig.gov.ph. Awaiting user yes before outreachSchedule."
+    "notes": "Initial quotation sent 2026-07-18 via outreachSchedule to tgh@taguig.gov.ph; auto follow-ups 3d1w (3d→7d×3, max 4)."
   }
 }

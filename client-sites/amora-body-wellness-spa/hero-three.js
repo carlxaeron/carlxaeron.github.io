@@ -61,74 +61,129 @@ const OBJECT_BUILDERS = {
     return group;
   },
 
-  /** Hot-stone stack + essential oil bottle — spa, wellness, massage brands */
+  /** Hot-stone stack + essential oil bottle — spa, wellness, massage brands (Amora palette) */
   spa() {
     const group = new THREE.Group();
     const stone = new THREE.MeshStandardMaterial({
-      color: 0x8a9488,
-      roughness: 0.92,
-      metalness: 0.02,
+      color: 0x7a8578,
+      roughness: 0.9,
+      metalness: 0.03,
     });
     const stoneDark = new THREE.MeshStandardMaterial({
-      color: 0x6b7568,
-      roughness: 0.95,
-      metalness: 0.01,
+      color: 0x4a5a4e,
+      roughness: 0.94,
+      metalness: 0.02,
+    });
+    const stoneWarm = new THREE.MeshStandardMaterial({
+      color: 0x9a8878,
+      roughness: 0.88,
+      metalness: 0.04,
+      emissive: 0xc9a87c,
+      emissiveIntensity: 0.22,
     });
     const glass = new THREE.MeshStandardMaterial({
-      color: 0xc9d4bc,
-      roughness: 0.18,
-      metalness: 0.08,
+      color: 0xd8e4cc,
+      roughness: 0.14,
+      metalness: 0.1,
       transparent: true,
-      opacity: 0.72,
+      opacity: 0.68,
     });
     const gold = new THREE.MeshStandardMaterial({
       color: 0xc9a87c,
-      roughness: 0.42,
-      metalness: 0.35,
+      roughness: 0.38,
+      metalness: 0.42,
     });
     const oil = new THREE.MeshStandardMaterial({
-      color: 0xd4a84b,
-      roughness: 0.35,
-      metalness: 0.05,
+      color: 0xc9a227,
+      roughness: 0.32,
+      metalness: 0.06,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.88,
     });
     const leaf = new THREE.MeshStandardMaterial({
       color: 0x4a6741,
-      roughness: 0.78,
+      roughness: 0.76,
       metalness: 0.02,
       side: THREE.DoubleSide,
     });
+    const towel = new THREE.MeshStandardMaterial({
+      color: 0xf0ebe3,
+      roughness: 0.92,
+      metalness: 0.01,
+    });
+    const candleWax = new THREE.MeshStandardMaterial({
+      color: 0xf5f0e6,
+      roughness: 0.85,
+      metalness: 0.02,
+    });
+    const flameMat = new THREE.MeshStandardMaterial({
+      color: 0xffd89a,
+      emissive: 0xffb347,
+      emissiveIntensity: 0.85,
+      roughness: 0.4,
+      metalness: 0,
+      transparent: true,
+      opacity: 0.92,
+    });
+    flameMat.userData.isFlame = true;
 
-    const baseStone = new THREE.Mesh(new THREE.CylinderGeometry(0.72, 0.78, 0.22, 14), stoneDark);
-    baseStone.position.y = -0.42;
+    const tray = new THREE.Mesh(new THREE.CylinderGeometry(0.88, 0.92, 0.06, 16), stoneDark);
+    tray.position.y = -0.52;
+    group.add(tray);
+
+    const baseStone = new THREE.Mesh(new THREE.CylinderGeometry(0.72, 0.78, 0.22, 16), stoneDark);
+    baseStone.position.y = -0.38;
     group.add(baseStone);
 
-    const midStone = new THREE.Mesh(new THREE.CylinderGeometry(0.58, 0.64, 0.18, 14), stone);
-    midStone.position.set(-0.08, -0.22, 0.04);
+    const midStone = new THREE.Mesh(new THREE.CylinderGeometry(0.58, 0.64, 0.18, 16), stone);
+    midStone.position.set(-0.08, -0.18, 0.04);
     midStone.rotation.y = 0.35;
     group.add(midStone);
 
-    const topStone = new THREE.Mesh(new THREE.SphereGeometry(0.38, 12, 10), stone);
+    const topStone = new THREE.Mesh(new THREE.SphereGeometry(0.38, 14, 12), stoneWarm);
     topStone.scale.set(1.05, 0.62, 1);
-    topStone.position.set(0.12, -0.02, -0.06);
+    topStone.position.set(0.12, 0.02, -0.06);
     group.add(topStone);
 
-    const bottle = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.2, 0.62, 12), glass);
-    bottle.position.set(0.78, 0.08, 0.12);
+    const pebble = new THREE.Mesh(new THREE.SphereGeometry(0.14, 10, 8), stone);
+    pebble.scale.set(1.1, 0.55, 1);
+    pebble.position.set(-0.42, -0.32, 0.22);
+    group.add(pebble);
+
+    const bottle = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.2, 0.62, 14), glass);
+    bottle.position.set(0.78, 0.12, 0.12);
     group.add(bottle);
 
-    const oilFill = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.15, 0.38, 10), oil);
-    oilFill.position.set(0.78, -0.06, 0.12);
+    const oilFill = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.15, 0.38, 12), oil);
+    oilFill.position.set(0.78, -0.02, 0.12);
     group.add(oilFill);
 
-    const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.09, 0.14, 10), glass);
-    neck.position.set(0.78, 0.44, 0.12);
+    const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.09, 0.14, 12), glass);
+    neck.position.set(0.78, 0.48, 0.12);
     group.add(neck);
 
-    const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.08, 10), gold);
-    cap.position.set(0.78, 0.54, 0.12);
+    const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.08, 12), gold);
+    cap.position.set(0.78, 0.58, 0.12);
     group.add(cap);
+
+    const fold1 = new THREE.Mesh(new THREE.BoxGeometry(0.52, 0.08, 0.38), towel);
+    fold1.position.set(-0.55, -0.48, -0.18);
+    fold1.rotation.set(0.08, 0.42, 0.05);
+    group.add(fold1);
+
+    const fold2 = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.06, 0.32), towel);
+    fold2.position.set(-0.48, -0.42, -0.12);
+    fold2.rotation.set(-0.12, 0.38, -0.08);
+    group.add(fold2);
+
+    const candle = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.07, 0.18, 10), candleWax);
+    candle.position.set(-0.72, -0.38, 0.08);
+    group.add(candle);
+
+    const flame = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 6), flameMat);
+    flame.scale.set(0.7, 1.2, 0.7);
+    flame.position.set(-0.72, -0.26, 0.08);
+    group.add(flame);
 
     const leafShape = new THREE.Shape();
     leafShape.moveTo(0, 0);
@@ -137,13 +192,20 @@ const OBJECT_BUILDERS = {
     leafShape.quadraticCurveTo(-0.12, 0.28, -0.28, 0.32);
     leafShape.quadraticCurveTo(-0.22, 0.08, 0, 0);
     const leafMesh = new THREE.Mesh(new THREE.ShapeGeometry(leafShape), leaf);
-    leafMesh.position.set(-0.62, 0.18, 0.28);
+    leafMesh.position.set(-0.58, 0.22, 0.28);
     leafMesh.rotation.set(-0.4, 0.5, 0.15);
     leafMesh.scale.setScalar(0.55);
     group.add(leafMesh);
 
+    const leaf2 = leafMesh.clone();
+    leaf2.position.set(0.42, 0.38, -0.08);
+    leaf2.rotation.set(0.25, -0.6, -0.2);
+    leaf2.scale.setScalar(0.42);
+    group.add(leaf2);
+
     group.position.x = -0.15;
     group.scale.setScalar(0.95);
+    group.userData.flame = flame;
     return group;
   },
 
@@ -329,15 +391,25 @@ if (!hero || !canvas) {
   const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
   camera.position.set(hasObject ? 0.55 : 0, 0.18, hasObject ? 5.6 : 6.2);
 
+  let warmGlow = null;
   if (hasObject) {
     const isLake = objectType === "lakehouse";
-    scene.add(new THREE.AmbientLight(isLake ? 0xe8f4f8 : 0xfff5e8, 0.55));
-    const key = new THREE.DirectionalLight(isLake ? 0xd4eef8 : 0xffe8cc, 0.85);
+    const isSpa = objectType === "spa";
+    scene.add(new THREE.AmbientLight(isLake ? 0xe8f4f8 : isSpa ? 0xf5efe6 : 0xfff5e8, isSpa ? 0.62 : 0.55));
+    const key = new THREE.DirectionalLight(isLake ? 0xd4eef8 : isSpa ? 0xffeed8 : 0xffe8cc, isSpa ? 0.92 : 0.85);
     key.position.set(2.5, 3, 4);
     scene.add(key);
-    const fill = new THREE.DirectionalLight(isLake ? 0x5ec4d4 : 0xc4a574, 0.35);
+    const fill = new THREE.DirectionalLight(isLake ? 0x5ec4d4 : isSpa ? 0x4a6741 : 0xc4a574, isSpa ? 0.42 : 0.35);
     fill.position.set(-2, 0.5, 2);
     scene.add(fill);
+    if (isSpa) {
+      const rim = new THREE.DirectionalLight(0xc9a87c, 0.28);
+      rim.position.set(-1.5, 2, -3);
+      scene.add(rim);
+      warmGlow = new THREE.PointLight(0xffc878, 0.55, 4.5);
+      warmGlow.position.set(1.8, 0.35, 1.2);
+      scene.add(warmGlow);
+    }
   }
 
   const ambientRoot = new THREE.Group();
@@ -381,9 +453,18 @@ if (!hero || !canvas) {
     ambientRoot.rotation.x = Math.sin(t * 0.22) * 0.06;
     ambientRoot.position.y = Math.sin(t * 0.35) * 0.08;
     if (featured) {
-      featured.rotation.y = t * 0.28;
-      featured.rotation.x = Math.sin(t * 0.18) * 0.12 + 0.08;
-      featured.position.y = (layoutWide ? -0.05 : -0.35) + Math.sin(t * 0.4) * 0.06;
+      featured.rotation.y = t * 0.22;
+      featured.rotation.x = Math.sin(t * 0.16) * 0.1 + 0.08;
+      featured.position.y = (layoutWide ? -0.05 : -0.35) + Math.sin(t * 0.35) * 0.05;
+      const flame = featured.userData.flame;
+      if (flame?.material) {
+        const flicker = 0.72 + Math.sin(t * 9.5) * 0.12 + Math.sin(t * 14.2) * 0.06;
+        flame.material.emissiveIntensity = flicker;
+        flame.scale.y = 1.05 + Math.sin(t * 11) * 0.12;
+      }
+    }
+    if (warmGlow) {
+      warmGlow.intensity = 0.48 + Math.sin(t * 0.9) * 0.08;
     }
     renderer.render(scene, camera);
     frameId = requestAnimationFrame(tick);
