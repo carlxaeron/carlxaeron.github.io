@@ -24,4 +24,7 @@ return [
 
     'vapid_subject' => env('VAPID_SUBJECT', 'mailto:info@carlmanuel.com'),
 
+    // Admin push: one preview_view notification per slug + session (Cache TTL safety net).
+    'push_preview_view_throttle_minutes' => (int) env('PUSH_PREVIEW_VIEW_THROTTLE_MINUTES', 30),
+
 ];

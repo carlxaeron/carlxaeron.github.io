@@ -11,6 +11,7 @@ use App\Services\AnalyticsExclusion;
 use App\Services\AnalyticsSummaryService;
 use App\Services\PortfolioContentService;
 use App\Services\PortfolioMailer;
+use App\Services\PreviewAnalyticsPush;
 use App\Services\PushNotificationService;
 use App\Support\ApiResponse;
 use App\Support\FormAntiSpam;
@@ -26,6 +27,7 @@ class PortfolioApiController extends Controller
         private AnalyticsSummaryService $analyticsSummary,
         private PortfolioContentService $portfolioContent,
         private PortfolioMailer $mailer,
+        private PreviewAnalyticsPush $previewPush,
         private PushNotificationService $push,
     ) {}
 
@@ -50,12 +52,16 @@ class PortfolioApiController extends Controller
             ? substr((string) $request->input('userAgent'), 0, 512)
             : null;
 
+        $eventType = substr(trim((string) $request->input('eventType', 'pageview')), 0, 32);
+        $previewSlug = $this->nullableString($request->input('previewSlug'), 64);
+        $sessionKey = substr($sessionId, 0, 64);
+
         Visit::query()->create([
             'visitor_id' => substr($visitorId, 0, 64),
-            'session_id' => substr($sessionId, 0, 64),
-            'event_type' => substr(trim((string) $request->input('eventType', 'pageview')), 0, 32),
+            'session_id' => $sessionKey,
+            'event_type' => $eventType,
             'section' => $this->nullableString($request->input('section'), 32),
-            'preview_slug' => $this->nullableString($request->input('previewSlug'), 64),
+            'preview_slug' => $previewSlug,
             'path' => $request->has('path') ? substr((string) $request->input('path'), 0, 512) : null,
             'referrer' => $request->has('referrer') ? substr((string) $request->input('referrer'), 0, 512) : null,
             'user_agent' => $userAgent,
@@ -66,6 +72,8 @@ class PortfolioApiController extends Controller
             'ip_hash' => $this->analytics->hashIp($this->analytics->clientIp()),
             'created_at' => now(),
         ]);
+
+        $this->previewPush->maybeNotifyPreviewView($eventType, $previewSlug, $sessionKey);
 
         return ApiResponse::success('Visit recorded');
     }
@@ -99,14 +107,16 @@ class PortfolioApiController extends Controller
             return ApiResponse::error('You already submitted feedback for this preview');
         }
 
+        $previewLabel = $request->has('previewLabel')
+            ? substr((string) $request->input('previewLabel'), 0, 128)
+            : null;
+
         try {
             PreviewFeedback::query()->create([
                 'visitor_id' => $vid,
                 'session_id' => substr($sessionId, 0, 64),
                 'preview_slug' => $slug,
-                'preview_label' => $request->has('previewLabel')
-                    ? substr((string) $request->input('previewLabel'), 0, 128)
-                    : null,
+                'preview_label' => $previewLabel,
                 'sentiment' => $sentiment,
                 'comment' => $comment !== '' ? substr($comment, 0, 1000) : null,
                 'ip_hash' => $this->analytics->hashIp($this->analytics->clientIp()),
@@ -118,6 +128,8 @@ class PortfolioApiController extends Controller
             }
             throw $e;
         }
+
+        $this->previewPush->notifyFeedback($slug, $sentiment, $previewLabel, $comment !== '' ? $comment : null);
 
         return ApiResponse::success('Feedback recorded');
     }

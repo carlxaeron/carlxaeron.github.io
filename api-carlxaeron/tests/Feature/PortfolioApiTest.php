@@ -6,6 +6,7 @@ use App\Mail\ContactReceived;
 use App\Models\PreviewFeedback;
 use App\Models\Visit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
@@ -49,6 +50,52 @@ class PortfolioApiTest extends TestCase
         ]);
     }
 
+    public function test_track_visit_preview_view_triggers_admin_push_once_per_session(): void
+    {
+        Cache::flush();
+
+        $this->mock(\App\Services\PushNotificationService::class, function ($mock): void {
+            $mock->shouldReceive('sendToAdmins')
+                ->once()
+                ->with(
+                    'Client preview viewed',
+                    'jk-construction',
+                    [
+                        'type' => 'preview_view',
+                        'slug' => 'jk-construction',
+                        'url' => 'https://carlmanuel.com/#admin',
+                    ]
+                )
+                ->andReturn(1);
+        });
+
+        $payload = [
+            'visitorId' => 'v-push',
+            'sessionId' => 's-push',
+            'eventType' => 'preview_view',
+            'previewSlug' => 'jk-construction',
+        ];
+
+        $headers = ['Origin' => 'https://carlmanuel.com'];
+
+        $this->postJson('/trackVisit', $payload, $headers)->assertOk();
+        $this->postJson('/trackVisit', $payload, $headers)->assertOk();
+    }
+
+    public function test_track_visit_preview_view_skips_push_without_browser_origin(): void
+    {
+        $this->mock(\App\Services\PushNotificationService::class, function ($mock): void {
+            $mock->shouldNotReceive('sendToAdmins');
+        });
+
+        $this->postJson('/trackVisit', [
+            'visitorId' => 'v2',
+            'sessionId' => 's2',
+            'eventType' => 'preview_view',
+            'previewSlug' => 'jk-construction',
+        ])->assertOk();
+    }
+
     public function test_track_visit_skips_excluded_visitor(): void
     {
         config(['portfolio.analytics_exclude_visitor_ids' => 'excluded-visitor']);
@@ -72,11 +119,27 @@ class PortfolioApiTest extends TestCase
             'sentiment' => 'like',
         ];
 
-        $this->postJson('/previewFeedback', $payload)
+        $this->mock(\App\Services\PushNotificationService::class, function ($mock): void {
+            $mock->shouldReceive('sendToAdmins')
+                ->once()
+                ->with(
+                    'Preview liked',
+                    'jk-construction — thumbs up',
+                    [
+                        'type' => 'preview_feedback',
+                        'slug' => 'jk-construction',
+                        'sentiment' => 'like',
+                        'url' => 'https://carlmanuel.com/#admin',
+                    ]
+                )
+                ->andReturn(1);
+        });
+
+        $this->postJson('/previewFeedback', $payload, ['Origin' => 'https://carlmanuel.com'])
             ->assertOk()
             ->assertJsonPath('message', 'Feedback recorded');
 
-        $this->postJson('/previewFeedback', $payload)
+        $this->postJson('/previewFeedback', $payload, ['Origin' => 'https://carlmanuel.com'])
             ->assertStatus(400)
             ->assertJsonPath('message', 'You already submitted feedback for this preview');
 
@@ -85,9 +148,38 @@ class PortfolioApiTest extends TestCase
             'sessionId' => 's2',
             'previewSlug' => 'jk-construction',
             'sentiment' => 'dislike',
-        ])
+        ], ['Origin' => 'https://carlmanuel.com'])
             ->assertStatus(400)
             ->assertJsonPath('message', 'Comment is required when disliking');
+    }
+
+    public function test_preview_feedback_dislike_triggers_admin_push(): void
+    {
+        $this->mock(\App\Services\PushNotificationService::class, function ($mock): void {
+            $mock->shouldReceive('sendToAdmins')
+                ->once()
+                ->with(
+                    'Preview disliked',
+                    'JK Construction — Needs clearer CTA',
+                    [
+                        'type' => 'preview_feedback',
+                        'slug' => 'jk-construction',
+                        'sentiment' => 'dislike',
+                        'url' => 'https://carlmanuel.com/#admin',
+                    ]
+                )
+                ->andReturn(1);
+        });
+
+        $this->postJson('/previewFeedback', [
+            'visitorId' => 'v3',
+            'sessionId' => 's3',
+            'previewSlug' => 'jk-construction',
+            'previewLabel' => 'JK Construction',
+            'sentiment' => 'dislike',
+            'comment' => 'Needs clearer CTA',
+        ], ['Origin' => 'https://carlmanuel.com'])
+            ->assertOk();
     }
 
     public function test_contact_persists_and_sends_mail(): void

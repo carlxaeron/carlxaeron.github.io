@@ -57,8 +57,10 @@ Seed admin user: `ADMIN_EMAIL` + `ADMIN_PASSWORD` in server `.env` → `php arti
 - `POST /contact` or `POST /quotation` succeeds
 - Outreach **initial** email sent (`OutreachScheduler` / `outreachSchedule`)
 - Outreach **follow-up** email sent (hosting-php cron → `POST /pushNotifyAdmins`)
+- **`POST /trackVisit`** with `eventType: preview_view` + allowlisted Origin/Referer + valid slug — **one push per slug + session** (Cache TTL `PUSH_PREVIEW_VIEW_THROTTLE_MINUTES`, default **30**)
+- **`POST /previewFeedback`** on successful like/dislike (slug + sentiment in title/body; dislike includes comment snippet)
 
-Push failure never breaks form/outreach responses. Service worker + Settings UI live in the portfolio SPA. **iOS:** user must Add to Home Screen (iOS 16.4+), then open Admin and enable notifications.
+Push failure never breaks form/outreach/analytics responses. Service worker + Settings UI live in the portfolio SPA. **iOS:** user must Add to Home Screen (iOS 16.4+), then open Admin and enable notifications.
 
 Live Stellar: **Laravel** serves public API routes including `POST /outreachSchedule` and `POST /outreachPause`. **Follow-up cron** still runs `hosting-php/scripts/cron-outreach-followups.php` (reads same MySQL `outreach_jobs`). Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).
 
@@ -112,6 +114,8 @@ CORS origins: `carlmanuel.com`, `www`, `carlxaeron.github.io`, `localhost:3000` 
 | `app/Services/AnalyticsExclusion.php` | IP hash salt `:carlxaeron-portfolio` |
 | `app/Services/PortfolioMailer.php` | Contact / quotation mail |
 | `app/Services/PushNotificationService.php` | Web Push subscribe/send (VAPID) |
+| `app/Services/PreviewAnalyticsPush.php` | Preview view + feedback admin push (slug+session throttle) |
+| `app/Support/BrowserOriginGate.php` | Origin/Referer allowlist (mirrors hosting-php) |
 | `app/Http/Controllers/Api/AdminPushController.php` | Admin push subscribe/test routes |
 | `app/Models/PushSubscription.php` | `push_subscriptions` table |
 | `config/portfolio.php` | `MAIL_TO`, exclusions, `CLIENT_SITES_COUNT`, VAPID keys |
@@ -133,6 +137,7 @@ Never commit `.env`. Prefer Laravel names; legacy keys still work via config fal
 | `ANALYTICS_EXCLUDE_IP_HASHES` / `ANALYTICS_EXCLUDE_VISITOR_IDS` | (same) |
 | `ADMIN_EMAIL` / `ADMIN_PASSWORD` | Sanctum admin seeder (server only) |
 | `VAPID_PUBLIC_KEY` / `VAPID_PRIVATE_KEY` / `VAPID_SUBJECT` | Web Push (generate once; server only). Subject e.g. `mailto:info@carlmanuel.com` |
+| `PUSH_PREVIEW_VIEW_THROTTLE_MINUTES` | Admin push dedupe for `preview_view` (default **30**) |
 
 **Generate VAPID keys (once per environment):**
 
