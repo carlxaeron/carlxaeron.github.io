@@ -1,0 +1,44 @@
+{
+  "businessName": "Journey Woodblock Modular Cabinets",
+  "slug": "journey-woodblock-ph",
+  "previewHost": "journey-woodblock-ph.netlify.app",
+  "industry": "Cabinetry / modular furniture / CNC woodworking",
+  "deployedAt": "2026-07-18",
+  "contact": {
+    "name": "Journey Woodblock Modular Cabinets",
+    "email": "info@journeywoodblock.com",
+    "phone": "+63 917 893 6322"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive site (services, gallery, about, FAQ, contact), mobile-friendly, Netlify hosting setup, hero Three.js craft object",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=journey-woodblock-ph"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "ready",
+    "cadence": null,
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "Email info@journeywoodblock.com from Facebook About. Awaiting user approval before send."
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/JourneyWoodblockPh/",
+    "instagram": "https://www.instagram.com/journeywoodblockph",
+    "website": "https://www.journeywoodblock.com/",
+    "address": "Block 38 L34&36 Sparrow Lane, Bay Breeze Executive Village, Brgy Wawa, Taguig City, Taguig, Philippines",
+    "phones": ["0917 893 6322"],
+    "followers": "11K",
+    "notes": "Category: Cabinet & Countertop Store. Services: kitchen cabinets, closets, storage, modular cabinets, CNC wood cutting, workshop consultancy, melamine/PVC boards, hardware. 90% recommend (26 reviews). Price $$$. Open · in-store pickup. HD assets from Facebook Photos (2048×1536 logo, 1536×2048 hero, 1080×1528 gallery)."
+  }
+}

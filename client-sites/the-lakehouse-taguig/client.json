@@ -1,0 +1,45 @@
+{
+  "businessName": "The Lakehouse Taguig",
+  "slug": "the-lakehouse-taguig",
+  "previewHost": "the-lakehouse-taguig.netlify.app",
+  "industry": "Hotel resort / staycation",
+  "deployedAt": "2026-07-18",
+  "contact": {
+    "name": "The Lakehouse Team",
+    "email": "thelakehousetaguig@gmail.com",
+    "phone": "+63 917 871 0777"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive resort site (packages, gallery, FAQ, contact/booking), mobile-friendly, Netlify hosting setup",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=the-lakehouse-taguig"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "ready",
+    "cadence": "3d1w",
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "Email found on Facebook About. After user yes: outreachSchedule with cadence 3d1w (3d → 7d × 3, max 4). Do not send without explicit approval."
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/people/The-Lakehouse/61579539671917/",
+    "address": "Taguig, Philippines, 1630",
+    "phones": ["0917 871 0777", "+63 917 871 0777"],
+    "whatsapp": "+63 917 871 0777",
+    "email": "thelakehousetaguig@gmail.com",
+    "followers": "1.6K",
+    "hours": "Always open",
+    "notes": "Category: Hotel resort. Tagline: luxury staycation with Laguna lake view. Superhost on Airbnb. HD assets from Facebook Photos — hero 2048×1536, gallery pool shots up to 2048×1536 / 1536×2048, logo 480×480."
+  }
+}

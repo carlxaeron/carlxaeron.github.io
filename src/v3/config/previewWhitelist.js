@@ -210,6 +210,12 @@ export const PREVIEW_SITES = [
     netlifySite: "taguig-city-general-hospital",
   },
   {
+    id: "the-lakehouse-taguig",
+    host: "the-lakehouse-taguig.netlify.app",
+    label: "The Lakehouse Taguig",
+    netlifySite: "the-lakehouse-taguig",
+  },
+  {
     id: "journey-woodblock-ph",
     host: "journey-woodblock-ph.netlify.app",
     label: "Journey Woodblock Modular Cabinets",

@@ -1,0 +1,84 @@
+/* Supplemental CSS — Tailwind CDN handles layout. */
+
+html {
+  scroll-behavior: smooth;
+}
+
+.trust-strip {
+  background: linear-gradient(90deg, #3d2914, #5c4033);
+}
+
+.hero-bg--jwb {
+  background-image:
+    linear-gradient(115deg, rgba(61, 41, 20, 0.92) 0%, rgba(92, 64, 51, 0.78) 45%, rgba(61, 41, 20, 0.55) 100%),
+    url("assets/hero-cover.jpg");
+  background-size: cover;
+  background-position: center 30%;
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  [data-hero-animate],
+  [data-hero-bg] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-header] {
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+[data-header].is-scrolled {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.hero-three-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-hero] > .relative {
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-three-canvas {
+    display: none;
+  }
+}
+
+.hero-has-three-object > .relative {
+  max-width: 52rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-has-three-object > .relative {
+    max-width: 36rem;
+  }
+}

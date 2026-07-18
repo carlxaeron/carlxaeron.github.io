@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Journey Woodblock Modular Cabinets — custom kitchen cabinets, closets, CNC wood cutting, and modular storage in Taguig City." />
+  <title>Journey Woodblock Modular Cabinets — Taguig City</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: "#3d2914",
+              mid: "#5c4033",
+              accent: "#c4a574",
+              light: "#f5ebe0",
+              gold: "#b8860b",
+            },
+          },
+          fontFamily: {
+            display: ["Playfair Display", "Georgia", "serif"],
+            sans: ["Inter", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="embed-guard.js"></script>
+</head>
+<body class="font-sans text-gray-900 antialiased">
+  <div class="trust-strip py-2 text-center text-xs font-semibold tracking-wide text-white sm:text-sm">
+    Taguig City · 11K followers · 90% recommend (26 reviews) · In-store pickup
+  </div>
+
+  <header data-header class="sticky top-0 z-50 border-b border-brand-dark/10 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#" class="flex min-w-0 items-center gap-2 font-display text-lg font-bold text-brand-dark">
+        <img src="assets/logo.jpg" alt="" width="40" height="40" class="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-brand-accent/40" />
+        <span class="hidden truncate sm:inline">Journey Woodblock</span>
+        <span class="sm:hidden">JWb Cabinets</span>
+      </a>
+      <nav class="hidden items-center gap-5 text-sm font-medium text-brand-dark/80 md:flex" aria-label="Main">
+        <a href="#services" class="hover:text-brand-mid transition-colors">Services</a>
+        <a href="#gallery" class="hover:text-brand-mid transition-colors">Gallery</a>
+        <a href="#about" class="hover:text-brand-mid transition-colors">About</a>
+        <a href="#faq" class="hover:text-brand-mid transition-colors">FAQ</a>
+        <a href="#contact" class="rounded-full bg-brand-mid px-4 py-2 font-semibold text-white hover:brightness-110 transition">Get a quote</a>
+      </nav>
+      <button type="button" data-nav-toggle class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-dark/15 text-brand-dark md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="hidden flex-col border-t border-brand-dark/10 bg-white px-4 py-4 md:hidden">
+      <a href="#services" class="rounded-lg px-3 py-3 hover:bg-brand-light">Services</a>
+      <a href="#gallery" class="rounded-lg px-3 py-3 hover:bg-brand-light">Gallery</a>
+      <a href="#about" class="rounded-lg px-3 py-3 hover:bg-brand-light">About</a>
+      <a href="#faq" class="rounded-lg px-3 py-3 hover:bg-brand-light">FAQ</a>
+      <a href="#contact" class="mt-2 rounded-full bg-brand-mid px-4 py-3 text-center font-semibold text-white">Get a quote</a>
+    </div>
+  </header>
+
+  <main>
+    <section
+      data-hero
+      data-hero-three="particles"
+      data-hero-three-object="woodblock"
+      data-hero-three-accent="warm"
+      class="relative overflow-hidden bg-brand-dark text-white"
+    >
+      <div data-hero-bg class="hero-bg hero-bg--jwb absolute inset-0 origin-center will-change-transform"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
+      <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+        <p data-hero-animate class="opacity-0 mb-3 text-xs font-semibold uppercase tracking-widest text-brand-accent">Modular cabinets · CNC woodworking · Taguig</p>
+        <h1 data-hero-animate class="opacity-0 font-display max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-[3.35rem]">Journey Woodblock Modular Cabinets</h1>
+        <p data-hero-animate class="opacity-0 mt-5 max-w-xl text-lg text-white/88">Custom kitchen cabinets, closets, storage solutions, and CNC wood cutting — crafted with precision for homes and businesses across Metro Manila.</p>
+        <div data-hero-animate class="opacity-0 mt-8 flex flex-wrap gap-3">
+          <a data-hero-cta href="#contact" class="rounded-full bg-brand-accent px-6 py-3 font-semibold text-brand-dark hover:brightness-105 transition">Request a quote</a>
+          <a data-hero-cta href="tel:+639178936322" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Call 0917 893 6322</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>What we build</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal">From modular kitchens to walk-in closets — design, fabrication, and installation under one roof in Taguig.</p>
+        <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <article data-reveal class="rounded-2xl border border-brand-dark/10 bg-brand-light/40 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <h3 class="font-semibold text-brand-mid">Kitchen cabinets</h3>
+            <p class="mt-2 text-sm text-gray-600">Modular kitchen layouts with durable finishes — tailored to your space, workflow, and storage needs.</p>
+          </article>
+          <article data-reveal class="rounded-2xl border border-brand-dark/10 bg-brand-light/40 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <h3 class="font-semibold text-brand-mid">Closets &amp; walk-ins</h3>
+            <p class="mt-2 text-sm text-gray-600">Closet systems and walk-in wardrobes designed for organization, access, and clean modern lines.</p>
+          </article>
+          <article data-reveal class="rounded-2xl border border-brand-dark/10 bg-brand-light/40 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <h3 class="font-semibold text-brand-mid">Storage cabinets</h3>
+            <p class="mt-2 text-sm text-gray-600">Built-in and freestanding storage for offices, retail, and residential projects.</p>
+          </article>
+          <article data-reveal class="rounded-2xl border border-brand-dark/10 bg-brand-light/40 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <h3 class="font-semibold text-brand-mid">CNC wood cutting</h3>
+            <p class="mt-2 text-sm text-gray-600">Precision CNC services for panels, components, and custom woodwork — fast turnaround from their workshop.</p>
+          </article>
+          <article data-reveal class="rounded-2xl border border-brand-dark/10 bg-brand-light/40 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <h3 class="font-semibold text-brand-mid">Materials &amp; hardware</h3>
+            <p class="mt-2 text-sm text-gray-600">Melamine boards, PVC boards, and cabinet hardware &amp; accessories — supply plus expert guidance.</p>
+          </article>
+          <article data-reveal class="rounded-2xl border border-brand-dark/10 bg-brand-light/40 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+            <h3 class="font-semibold text-brand-mid">Workshop consultancy</h3>
+            <p class="mt-2 text-sm text-gray-600">Woodworking workshop and consultancy for builders, designers, and homeowners planning a fit-out.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Recent work</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal">Photos from the Journey Woodblock Facebook page — modular cabinets, interiors, and showroom finishes.</p>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-reveal>
+          <figure class="overflow-hidden rounded-2xl shadow-md"><img src="assets/project-01.jpg" alt="Journey Woodblock modular cabinet showroom interior" width="540" height="764" class="h-56 w-full object-cover sm:h-64" loading="lazy" /></figure>
+          <figure class="overflow-hidden rounded-2xl shadow-md"><img src="assets/project-02.jpg" alt="Custom credenza and storage cabinet" width="960" height="1280" class="h-56 w-full object-cover sm:h-64" loading="lazy" /></figure>
+          <figure class="overflow-hidden rounded-2xl shadow-md"><img src="assets/project-03.jpg" alt="Built-in cabinet and interior finish" width="960" height="1280" class="h-56 w-full object-cover sm:h-64" loading="lazy" /></figure>
+          <figure class="overflow-hidden rounded-2xl shadow-md"><img src="assets/project-04.jpg" alt="Kitchen and cabinet lighting detail" width="960" height="1280" class="h-56 w-full object-cover sm:h-64" loading="lazy" /></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
+        <div data-reveal>
+          <h2 class="font-display text-3xl font-bold text-brand-dark">Crafted in Taguig</h2>
+          <p class="mt-4 text-gray-600">Journey Woodblock Modular Cabinets is a cabinet &amp; countertop store serving homeowners, contractors, and designers across Metro Manila. Their team combines modular systems, CNC precision, and hands-on woodworking expertise.</p>
+          <p class="mt-4 text-gray-600">Visit their showroom in Bay Breeze Executive Village, Wawa, Taguig — or message for a site visit, material selection, and project estimate. Price range $$$ · in-store pickup available.</p>
+          <ul class="mt-6 space-y-2 text-sm text-brand-mid">
+            <li><span class="font-semibold text-brand-dark">Category:</span> Cabinet &amp; countertop store</li>
+            <li><span class="font-semibold text-brand-dark">Reviews:</span> 90% recommend (26 reviews on Facebook)</li>
+            <li><span class="font-semibold text-brand-dark">Also on:</span> Instagram · TikTok · journeywoodblock.com</li>
+          </ul>
+        </div>
+        <figure data-reveal class="overflow-hidden rounded-2xl shadow-lg ring-1 ring-brand-dark/10">
+          <img src="assets/hero-cover.jpg" alt="Journey Woodblock workshop and cabinet display" width="1536" height="2048" class="h-full max-h-[28rem] w-full object-cover" loading="lazy" />
+        </figure>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-brand-light/60 py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Common questions</h2>
+        <div data-accordion class="mt-8 space-y-3">
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-mid" aria-expanded="false">Do you serve areas outside Taguig?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/5 px-5 py-4 text-sm text-gray-600">Yes — Journey Woodblock takes projects across Metro Manila and nearby areas. Message or call with your location and floor plan for a quote.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-mid" aria-expanded="false">What materials do you offer?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/5 px-5 py-4 text-sm text-gray-600">Melamine boards, PVC boards, modular cabinet systems, and a selection of cabinet hardware and accessories — ask their team for current stock and finishes.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-mid" aria-expanded="false">Can I visit the showroom?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/5 px-5 py-4 text-sm text-gray-600">Yes — they are open now with in-store pickup. Visit Block 38 L34&amp;36 Sparrow Lane, Bay Breeze Executive Village, Brgy Wawa, Taguig City, or call ahead before your trip.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-white">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-mid" aria-expanded="false">How do I get a project estimate?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/5 px-5 py-4 text-sm text-gray-600">Call 0917 893 6322, email info@journeywoodblock.com, or message them on Facebook / Instagram with your measurements and inspiration photos.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-brand-dark py-16 text-white sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold" data-reveal>Contact &amp; visit</h2>
+        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" data-reveal>
+          <p><span class="font-semibold text-brand-accent">Phone</span><br /><a href="tel:+639178936322" class="text-brand-light hover:underline">0917 893 6322</a></p>
+          <p><span class="font-semibold text-brand-accent">Email</span><br /><a href="mailto:info@journeywoodblock.com" class="text-brand-light hover:underline">info@journeywoodblock.com</a></p>
+          <p><span class="font-semibold text-brand-accent">Address</span><br />Block 38 L34&amp;36 Sparrow Lane, Bay Breeze Executive Village, Brgy Wawa, Taguig City, Philippines</p>
+          <p><span class="font-semibold text-brand-accent">Web &amp; social</span><br /><a href="https://www.journeywoodblock.com/" class="text-brand-light hover:underline" rel="noopener">journeywoodblock.com</a><br /><a href="https://www.facebook.com/JourneyWoodblockPh/" class="text-brand-light hover:underline" rel="noopener">Facebook</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-brand-mid py-8 text-center text-sm text-brand-light/85">
+    <p>&copy; <span data-year></span> Journey Woodblock Modular Cabinets. All rights reserved.</p>
+  </footer>
+  <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
+</body>
+</html>

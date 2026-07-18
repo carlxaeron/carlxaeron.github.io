@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.70] — 2026-07-18
+
+### Added
+- **Client sites** — The Lakehouse Taguig (`the-lakehouse-taguig`) and Journey Woodblock Modular Cabinets (`journey-woodblock-ph`) added to portfolio preview whitelist, `client-sites/` catalog, and Netlify embed-only demos (alongside `taguig-city-general-hospital` from 3.0.69)
+- **Template** — `_template/hero-three.js` woodblock featured object (`data-hero-three-object="woodblock"`) for cabinetry demos
+- **Agent docs** — client-site-netlify skill, client-quotations rule, and AGENTS.md notes for hero-three featured objects
+- **Tests** — `previewWhitelist.test.js` matrix covers the new slugs via `PREVIEW_SITES`
+
 ## [3.0.69] — 2026-07-18
 
 ### Added

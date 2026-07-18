@@ -48,6 +48,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [MPHS Mother of Perpetual Help Inc. Fairview](#mphs-mother-of-perpetual-help-inc-fairview) | `mphs-fairview` | K–12 school / nonprofit | [Preview](https://carlmanuel.com/?preview=mphs-fairview) | 2026-07-17 |
 | [Amora Body Wellness Spa](#amora-body-wellness-spa) | `amora-body-wellness-spa` | Spa / health & beauty | [Preview](https://carlmanuel.com/?preview=amora-body-wellness-spa) | 2026-07-17 |
 | [Taguig City General Hospital](#taguig-city-general-hospital) | `taguig-city-general-hospital` | Government hospital / public healthcare | [Preview](https://carlmanuel.com/?preview=taguig-city-general-hospital) | 2026-07-18 |
+| [The Lakehouse Taguig](#the-lakehouse-taguig) | `the-lakehouse-taguig` | Hotel resort / Laguna Lake staycation | [Preview](https://carlmanuel.com/?preview=the-lakehouse-taguig) | 2026-07-18 |
 | [Journey Woodblock Modular Cabinets](#journey-woodblock-modular-cabinets) | `journey-woodblock-ph` | Cabinetry / modular furniture / CNC woodworking | [Preview](https://carlmanuel.com/?preview=journey-woodblock-ph) | 2026-07-18 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
@@ -647,6 +648,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | Hero 820×312 + logo 834×813 + gallery 414×414×4 JPEG via Chrome DevTools MCP in-page fetch; Motion + Three.js blueprint hero |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
 | **Outreach** | tgh@taguig.gov.ph — drafts ready · **ask before send** |
+
+---
+
+### The Lakehouse Taguig
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/the-lakehouse-taguig/` |
+| **Netlify site** | `the-lakehouse-taguig` |
+| **Preview host** | `the-lakehouse-taguig.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=the-lakehouse-taguig |
+| **Contact** | thelakehousetaguig@gmail.com · 0917 871 0777 (WhatsApp) |
+| **Address** | Taguig, Philippines 1630 |
+| **Category** | Hotel resort · Laguna Lake staycation · Superhost on Airbnb · 1.6K FB followers · always open |
+| **Source** | [Facebook](https://www.facebook.com/people/The-Lakehouse/61579539671917/) |
+| **Assets** | Hero 2048×1536 + logo 480×480 + gallery pool shots up to 2048×1536 / 1536×2048 JPEG via Chrome DevTools MCP in-page fetch; Motion + Three.js particles hero |
+| **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
+| **Outreach** | thelakehousetaguig@gmail.com — drafts ready · **ask before send** · cadence **3d1w** after yes |
 
 ---
 

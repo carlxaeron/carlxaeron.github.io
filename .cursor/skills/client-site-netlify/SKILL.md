@@ -117,7 +117,12 @@ Fallback only if browser unavailable: stock photos + note in `client.json` → `
   - Place canvas above photo/gradient (`z-index: 1`), content wrapper `z-index: 2`, `pointer-events: none`
   - Calm only: slow drift, low opacity, `powerPreference: "low-power"`, pause via `IntersectionObserver` when off-screen
   - Skip / remove canvas when `prefers-reduced-motion: reduce`
-  - Do **not** put interactive 3D UI, heavy models, or full-screen WebGL products in the hero — ambient presence only
+- **Hero Three.js (featured craft object)** — when the brand is physical / craft / product (wood, food, spa tools, cabinetry, etc.), add a **simple branded mesh** in addition to ambient particles/blueprint:
+  - Same `hero-three.js`; set `data-hero-three-object="woodblock"` on `[data-hero]` (built-in: carved wood block / stamp)
+  - Optional `data-hero-three-accent="warm"` for gold/wood particle tint (default `"cool"` blueprint blues)
+  - Reference: [`client-sites/journey-woodblock-ph/`](../../client-sites/journey-woodblock-ph/) — `data-hero-three="particles"` + `data-hero-three-object="woodblock"` + `data-hero-three-accent="warm"`
+  - Low poly, slow rotation, scales down on mobile; pauses off-screen with ambient layer
+  - Do **not** add heavy GLTF models or interactive product viewers — keep it calm and performant
 - Mobile-first; default brand palette from V3 greens (`#00473e`, `#00A862`) unless client has brand colors.
 - One-page layout: hero, services, about, FAQ, contact.
 - `netlify.toml`: `publish = "."`, `command = ""` (static site — do not run portfolio CRA build).
@@ -152,7 +157,7 @@ Do **not** add a CRA/webpack build to client folders — Tailwind CDN + Motion/T
 ### Hero Motion + Three.js markup (copy pattern)
 
 ```html
-<section data-hero data-hero-three="blueprint" class="relative overflow-hidden …">
+<section data-hero data-hero-three="particles" data-hero-three-object="woodblock" data-hero-three-accent="warm" class="relative overflow-hidden …">
   <div data-hero-bg class="hero-bg absolute inset-0 …"></div>
   <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
   <div class="relative …">

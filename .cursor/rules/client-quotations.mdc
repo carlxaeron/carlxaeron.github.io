@@ -22,7 +22,7 @@ Skill: [`.cursor/skills/client-site-netlify/SKILL.md`](../skills/client-site-net
 
 1. Copy `_template/` → `client-sites/{slug}/`
 2. Gather brief (Chrome DevTools MCP on Facebook); download assets
-3. Customize site; keep Motion + Three.js + embed guards
+3. Customize site; keep Motion + Three.js (ambient + optional `data-hero-three-object` for craft/product brands) + embed guards
 4. Deploy Netlify; register preview; update catalog README
 5. Fill outreach drafts **including** `quotation-followup-3d.md` and `quotation-followup-1w.md`
 6. Track state in `client.json` → `outreach`
