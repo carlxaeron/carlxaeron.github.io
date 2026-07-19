@@ -123,7 +123,9 @@ assert_same('₱7,500', $offerLast['discounted'], '50% of 15k');
 assert_true(str_contains($fuSubject, '10%'), '3d subject has discount');
 assert_true(str_contains($fuHtml, 'commission'), '3d HTML has commission');
 assert_true(str_contains($fuHtml, '61557195950694'), '3d HTML has Facebook link');
+assert_true(str_contains($fuHtml, 'tel:+639625389886'), '3d HTML has phone link');
 assert_true(str_contains($fuText, '₱13,500'), '3d text has discounted price');
+assert_true(str_contains($fuText, '+63 962 538 9886'), '3d text has phone');
 assert_true(str_contains($fuText, '61557195950694'), '3d text has Facebook link');
 
 echo "\ninitial + follow-up systems-first copy\n";
@@ -139,6 +141,8 @@ echo "\ninitial + follow-up systems-first copy\n";
 assert_true(str_contains(strtolower($initSubject), 'admin'), 'initial subject mentions admin');
 assert_true(str_contains($initHtml, '/admin/'), 'initial HTML has admin path');
 assert_true(str_contains(strtolower($initHtml), 'site and admin'), 'initial HTML mentions site + admin');
+assert_true(str_contains($initHtml, 'tel:+639625389886'), 'initial HTML has phone link');
+assert_true(str_contains($initText, '+63 962 538 9886'), 'initial text has phone');
 assert_true(str_contains(strtolower($initText), 'admin'), 'initial text mentions admin');
 [, $initLabelHtml, $initLabelText] = outreach_build_initial_email([
     'contact_name' => 'Test',

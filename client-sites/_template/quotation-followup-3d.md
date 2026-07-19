@@ -28,4 +28,4 @@ No pressure — a short reply is enough.
 
 Best regards,  
 **Carl Louis Manuel**  
-[carlmanuel.com](https://carlmanuel.com) · [Facebook](https://www.facebook.com/profile.php?id=61557195950694) · info@carlmanuel.com
+[carlmanuel.com](https://carlmanuel.com) · [Facebook](https://www.facebook.com/profile.php?id=61557195950694) · +63 962 538 9886 · info@carlmanuel.com

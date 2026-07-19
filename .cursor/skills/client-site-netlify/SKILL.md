@@ -315,7 +315,7 @@ After the site is built and `previewUrl` is known, customize the draft files in 
 
 **Template placeholders** (replace in all drafts): `{{contactName}}`, `{{contactEmail}}`, `{{businessName}}`, `{{previewUrl}}`, `{{packageName}}`, `{{packageScope}}`, `{{quotedAmount}}`, `{{paymentTerms}}`, `{{timeline}}`, `{{industry}}`.
 
-**Tone:** professional, warm, Philippine business context (₱, salamat OK in messenger). Frame as **website + browsable admin system** on desktop and mobile — website package stays the entry offer (₱15k/₱18k); admin sample is the upsell path. Sign off as **Carl Louis Manuel** with [carlmanuel.com](https://carlmanuel.com), [Facebook](https://www.facebook.com/profile.php?id=61557195950694), and info@carlmanuel.com (see `_template/` drafts).
+**Tone:** professional, warm, Philippine business context (₱, salamat OK in messenger). Frame as **website + browsable admin system** on desktop and mobile — website package stays the entry offer (₱15k/₱18k); admin sample is the upsell path. Sign off as **Carl Louis Manuel** with [carlmanuel.com](https://carlmanuel.com), [Facebook](https://www.facebook.com/profile.php?id=61557195950694), **+63 962 538 9886**, and info@carlmanuel.com (see `_template/` drafts).
 
 ### Email found → prepare send → **ask first** (mandatory for initial only)
 

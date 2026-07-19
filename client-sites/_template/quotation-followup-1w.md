@@ -28,4 +28,4 @@ I’d love to know if you **liked** the site and admin sample, want **revisions*
 
 Salamat,  
 **Carl Louis Manuel**  
-[carlmanuel.com](https://carlmanuel.com) · [Facebook](https://www.facebook.com/profile.php?id=61557195950694) · info@carlmanuel.com
+[carlmanuel.com](https://carlmanuel.com) · [Facebook](https://www.facebook.com/profile.php?id=61557195950694) · +63 962 538 9886 · info@carlmanuel.com

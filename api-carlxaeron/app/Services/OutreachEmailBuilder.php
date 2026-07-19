@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Support\OutreachSignature;
+
 /**
  * Builds outreach HTML/text bodies (mirrors hosting-php/src/outreach.php).
  */
@@ -60,9 +62,7 @@ final class OutreachEmailBuilder
             .'<strong>Timeline:</strong> '.e($timeline).'</p>'
             .'<p><em>To start, only the upfront portion is due — not the full package amount.</em></p>'
             .'<p>Reply if you like the site and admin preview, want changes, or want to proceed.</p>'
-            .'<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
-            .'<a href="https://carlmanuel.com">carlmanuel.com</a> · '
-            .'<a href="https://www.facebook.com/profile.php?id=61557195950694">Facebook</a> · info@carlmanuel.com</p>';
+            .OutreachSignature::html();
         $text = "Hi {$name},\n\n{$sample} for {$biz}:\n{$preview}\n\n"
             ."The preview shows site + admin on desktop and mobile. Browse the admin pages inside the frames.\n\n"
             ."Package: {$pkg}\n"
@@ -71,7 +71,7 @@ final class OutreachEmailBuilder
             ."To start, only the upfront portion is due — not the full package amount.\n"
             ."Timeline: {$timeline}\n\n"
             ."Reply if you like the site and admin preview, want changes, or want to proceed.\n\n"
-            ."Carl Louis Manuel\ncarlmanuel.com · facebook.com/profile.php?id=61557195950694 · info@carlmanuel.com";
+            .OutreachSignature::text();
 
         return [$subject, $html, $text];
     }
@@ -126,12 +126,10 @@ final class OutreachEmailBuilder
             .'<p>'.$ask.'</p>'
             .$offer['html']
             .'<p>No pressure — a short reply is enough.</p>'
-            .'<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
-            .'<a href="https://carlmanuel.com">carlmanuel.com</a> · '
-            .'<a href="https://www.facebook.com/profile.php?id=61557195950694">Facebook</a> · info@carlmanuel.com</p>';
+            .OutreachSignature::html();
         $text = "Hi {$name},\n\nChecking in about {$biz} (site + admin preview).\nPreview: {$preview}\n\n{$askText}\n\n"
             .$offer['text']."\n\n"
-            ."Carl Louis Manuel\ncarlmanuel.com · facebook.com/profile.php?id=61557195950694 · info@carlmanuel.com";
+            .OutreachSignature::text();
 
         return [$subject, $html, $text];
     }

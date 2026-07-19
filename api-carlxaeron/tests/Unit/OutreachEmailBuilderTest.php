@@ -9,6 +9,10 @@ class OutreachEmailBuilderTest extends TestCase
 {
     private const FB_PROFILE = '61557195950694';
 
+    private const PHONE_DISPLAY = '+63 962 538 9886';
+
+    private const PHONE_TEL = '+639625389886';
+
     /** @return array<string, mixed> */
     private function sampleJob(): array
     {
@@ -31,6 +35,9 @@ class OutreachEmailBuilderTest extends TestCase
         $this->assertStringContainsString(self::FB_PROFILE, $html);
         $this->assertStringContainsString('Facebook', $html);
         $this->assertStringContainsString(self::FB_PROFILE, $text);
+        $this->assertStringContainsString('tel:'.self::PHONE_TEL, $html);
+        $this->assertStringContainsString(self::PHONE_DISPLAY, $html);
+        $this->assertStringContainsString(self::PHONE_DISPLAY, $text);
     }
 
     public function test_initial_email_mentions_site_and_admin_preview(): void
@@ -59,6 +66,8 @@ class OutreachEmailBuilderTest extends TestCase
         $this->assertStringContainsString(self::FB_PROFILE, $html);
         $this->assertStringContainsString('Facebook', $html);
         $this->assertStringContainsString(self::FB_PROFILE, $text);
+        $this->assertStringContainsString(self::PHONE_DISPLAY, $html);
+        $this->assertStringContainsString(self::PHONE_DISPLAY, $text);
     }
 
     public function test_followup_email_mentions_site_and_admin(): void

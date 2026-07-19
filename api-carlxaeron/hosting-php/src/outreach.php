@@ -207,6 +207,20 @@ function outreach_sample_phrase(array $job): string
     return 'sample website and browsable admin system';
 }
 
+function outreach_signature_html(): string
+{
+    return '<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
+        . '<a href="https://carlmanuel.com">carlmanuel.com</a> · '
+        . '<a href="https://www.facebook.com/profile.php?id=61557195950694">Facebook</a> · '
+        . '<a href="tel:+639625389886">+63 962 538 9886</a> · '
+        . 'info@carlmanuel.com</p>';
+}
+
+function outreach_signature_text(): string
+{
+    return "Carl Louis Manuel\ncarlmanuel.com · facebook.com/profile.php?id=61557195950694 · +63 962 538 9886 · info@carlmanuel.com";
+}
+
 /** @param array<string,mixed> $job */
 function outreach_build_initial_email(array $job): array
 {
@@ -237,9 +251,7 @@ function outreach_build_initial_email(array $job): array
         . '<strong>Timeline:</strong> ' . h($timeline) . '</p>'
         . '<p><em>To start, only the upfront portion is due — not the full package amount.</em></p>'
         . '<p>Reply if you like the site and admin preview, want changes, or want to proceed.</p>'
-        . '<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
-        . '<a href="https://carlmanuel.com">carlmanuel.com</a> · '
-        . '<a href="https://www.facebook.com/profile.php?id=61557195950694">Facebook</a> · info@carlmanuel.com</p>';
+        . outreach_signature_html();
     $text = "Hi {$name},\n\n{$sample} for {$biz}:\n{$preview}\n\n"
         . "The preview shows site + admin on desktop and mobile. Browse the admin pages inside the frames.\n\n"
         . "Package: {$pkg}\n"
@@ -248,7 +260,7 @@ function outreach_build_initial_email(array $job): array
         . "To start, only the upfront portion is due — not the full package amount.\n"
         . "Timeline: {$timeline}\n\n"
         . "Reply if you like the site and admin preview, want changes, or want to proceed.\n\n"
-        . "Carl Louis Manuel\ncarlmanuel.com · facebook.com/profile.php?id=61557195950694 · info@carlmanuel.com";
+        . outreach_signature_text();
 
     return [$subject, $html, $text];
 }
@@ -301,12 +313,10 @@ function outreach_build_followup_email(array $job): array
         . '<p>' . $ask . '</p>'
         . $offer['html']
         . '<p>No pressure — a short reply is enough.</p>'
-        . '<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
-        . '<a href="https://carlmanuel.com">carlmanuel.com</a> · '
-        . '<a href="https://www.facebook.com/profile.php?id=61557195950694">Facebook</a> · info@carlmanuel.com</p>';
+        . outreach_signature_html();
     $text = "Hi {$name},\n\nChecking in about {$biz} (site + admin preview).\nPreview: {$preview}\n\n{$askText}\n\n"
         . $offer['text'] . "\n\n"
-        . "Carl Louis Manuel\ncarlmanuel.com · facebook.com/profile.php?id=61557195950694 · info@carlmanuel.com";
+        . outreach_signature_text();
 
     return [$subject, $html, $text];
 }

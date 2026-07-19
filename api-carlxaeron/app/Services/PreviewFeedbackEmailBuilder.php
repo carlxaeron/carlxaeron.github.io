@@ -2,12 +2,13 @@
 
 namespace App\Services;
 
+use App\Support\OutreachSignature;
+
 /**
  * Auto-reply emails when a prospect likes or dislikes a client preview.
  */
 final class PreviewFeedbackEmailBuilder
 {
-    private const FB_PROFILE = '61557195950694';
 
     /**
      * @param  array<string, mixed>  $ctx
@@ -47,7 +48,7 @@ final class PreviewFeedbackEmailBuilder
             .'<p><strong>Preview again (site + admin on desktop &amp; mobile):</strong> '
             .'<a href="'.e($preview).'">'.e($preview).'</a></p>'
             .'<p>Reply to this email if you want to proceed, need a quick tweak first, or have questions about scope or payment.</p>'
-            .self::signatureHtml();
+            .OutreachSignature::html();
 
         $timelineText = $timeline !== ''
             ? "We can target {$timeline} once the project starts."
@@ -58,7 +59,7 @@ final class PreviewFeedbackEmailBuilder
             ."If you are ready to push through, we can begin with the deposit ({$payment}). {$timelineText}\n\n"
             ."Preview (site + admin): {$preview}\n\n"
             ."Reply if you want to proceed, need a tweak first, or have questions.\n\n"
-            .self::signatureText();
+            .OutreachSignature::text();
 
         return [$subject, $html, $text];
     }
@@ -93,7 +94,7 @@ final class PreviewFeedbackEmailBuilder
             .'<p>If you are still interested, reply with what to change. If timing is not right, that is okay too — '
             .'just let me know.</p>'
             .'<p><strong>Preview:</strong> <a href="'.e($preview).'">'.e($preview).'</a></p>'
-            .self::signatureHtml();
+            .OutreachSignature::html();
 
         $text = "Hi {$name},\n\n"
             ."Thank you for sharing feedback on the sample website and admin system for {$biz}.\n\n"
@@ -101,21 +102,8 @@ final class PreviewFeedbackEmailBuilder
             ."What would make the sample feel right for you? I am happy to revise before we move forward.\n\n"
             ."If you are still interested, reply with what to change. If timing is not right, just let me know.\n\n"
             ."Preview: {$preview}\n\n"
-            .self::signatureText();
+            .OutreachSignature::text();
 
         return [$subject, $html, $text];
-    }
-
-    private static function signatureHtml(): string
-    {
-        return '<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
-            .'<a href="https://carlmanuel.com">carlmanuel.com</a> · '
-            .'<a href="https://www.facebook.com/profile.php?id='.self::FB_PROFILE.'">Facebook</a> · '
-            .'info@carlmanuel.com</p>';
-    }
-
-    private static function signatureText(): string
-    {
-        return "Carl Louis Manuel\ncarlmanuel.com · facebook.com/profile.php?id=".self::FB_PROFILE.' · info@carlmanuel.com';
     }
 }

@@ -9,6 +9,8 @@ class PreviewFeedbackEmailBuilderTest extends TestCase
 {
     private const FB_PROFILE = '61557195950694';
 
+    private const PHONE_DISPLAY = '+63 962 538 9886';
+
     /** @return array<string, mixed> */
     private function sampleContext(): array
     {
@@ -31,6 +33,8 @@ class PreviewFeedbackEmailBuilderTest extends TestCase
         $this->assertStringContainsString('https://carlmanuel.com/?preview=jk-construction', $html);
         $this->assertStringContainsString('50% upfront', $html);
         $this->assertStringContainsString(self::FB_PROFILE, $html);
+        $this->assertStringContainsString(self::PHONE_DISPLAY, $html);
+        $this->assertStringContainsString(self::PHONE_DISPLAY, $text);
         $this->assertStringContainsString('push through', strtolower($text));
         $this->assertStringContainsString('admin system', strtolower($html));
         $this->assertStringContainsString('admin system', strtolower($text));
@@ -45,5 +49,6 @@ class PreviewFeedbackEmailBuilderTest extends TestCase
         $this->assertStringContainsString('revise', strtolower($html));
         $this->assertStringContainsString('Needs clearer CTA', $text);
         $this->assertStringContainsString(self::FB_PROFILE, $text);
+        $this->assertStringContainsString(self::PHONE_DISPLAY, $text);
     }
 }
