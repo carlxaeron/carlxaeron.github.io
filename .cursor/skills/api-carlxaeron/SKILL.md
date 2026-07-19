@@ -62,7 +62,7 @@ Seed admin user: `ADMIN_EMAIL` + `ADMIN_PASSWORD` in server `.env` → `php arti
 
 Push failure never breaks form/outreach/analytics responses. Service worker + Settings UI live in the portfolio SPA. **iOS:** user must Add to Home Screen (iOS 16.4+), then open Admin and enable notifications.
 
-Live Stellar: **Laravel** serves public API routes including `POST /outreachSchedule` and `POST /outreachPause`. **Follow-up cron** still runs `hosting-php/scripts/cron-outreach-followups.php` (reads same MySQL `outreach_jobs`). Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).
+Live Stellar: **Laravel** serves public API routes including `POST /outreachSchedule` and `POST /outreachPause`. **Follow-up cron** still runs `api-carlxaeron/hosting-php/scripts/cron-outreach-followups.php` (reads same MySQL `outreach_jobs`) — **not** `api-carlxaeron/scripts/` (wrong path). Cron bootstraps via `hosting-php/src/bootstrap.php`: loads `hosting-php/.env`, then parent Laravel `api-carlxaeron/.env` if local copy missing (DB + SMTP + `OUTREACH_SECRET`). Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).
 
 ### Public security layer (hosting-php)
 
@@ -203,3 +203,4 @@ Feature: full endpoint contracts + admin auth/CMS/outreach + exclusion / dedupe 
 - Commit `.env` / secrets
 - Deploy `api-carlxaeron-legacy-php/`
 - Change outreach cadence/max without updating and passing `hosting-php/tests/run-unit.php`
+- Point Stellar crontab at `api-carlxaeron/scripts/cron-outreach-followups.php` — use `hosting-php/scripts/` only

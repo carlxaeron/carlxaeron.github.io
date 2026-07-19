@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Weekly visit report cron — Monday 08:00 Asia/Manila (set TZ in crontab or server).
  *
  * cPanel:
- *   0 8 * * 1 /usr/local/bin/php /home/carlxaeron/public_html/api-carlxaeron/scripts/cron-weekly-visit-report.php >> /home/carlxaeron/public_html/api-carlxaeron/storage/weekly-report-cron.log 2>&1
+ *   0 8 * * 1 /usr/local/bin/php /home/carlxaeron/public_html/api-carlxaeron/hosting-php/scripts/cron-weekly-visit-report.php >> /home/carlxaeron/public_html/api-carlxaeron/storage/weekly-report-cron.log 2>&1
  *
  * Force resend: append --force (CLI) or ?force=1&key=SECRET (HTTP)
  */

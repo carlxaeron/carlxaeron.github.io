@@ -43,6 +43,10 @@ function env(string $key, ?string $default = null): ?string
 
 $root = dirname(__DIR__);
 load_env($root . '/.env');
+// Laravel app .env lives one level up when hosting-php has no local copy
+if (!is_file($root . '/.env')) {
+    load_env(dirname($root) . '/.env');
+}
 
 require_once __DIR__ . '/respond.php';
 require_once __DIR__ . '/cors.php';

@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Daily cron: auto-send due quotation follow-ups via Private Email SMTP.
  *
  * cPanel example (09:00 Asia/Manila):
- *   0 1 * * * /usr/local/bin/php /home/carlxaeron/public_html/api-carlxaeron/scripts/cron-outreach-followups.php
+ *   0 1 * * * /usr/local/bin/php /home/carlxaeron/public_html/api-carlxaeron/hosting-php/scripts/cron-outreach-followups.php
  *
  * (1:00 UTC ≈ 9:00 PH if server is UTC — adjust as needed)
  */
