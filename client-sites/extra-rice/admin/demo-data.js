@@ -16,6 +16,24 @@
         { label: "Pending", value: "3" },
         { label: "This week", value: "24" },
       ],
+      occupancy: {
+        weekend: 90,
+        weekday: 62,
+        pending: 3,
+        weekendLabel: "Sat–Sun",
+      },
+      timeline: [
+        { time: "8:00 AM", title: "Reyes Family", detail: "Birthday package · Pool A", status: "confirmed" },
+        { time: "9:00 AM", title: "Maria Santos", detail: "Day swim · 20 guests", status: "confirmed" },
+        { time: "11:00 AM", title: "Corporate outing", detail: "Team building · 35 pax", status: "pending" },
+        { time: "1:00 PM", title: "Ana Villanueva", detail: "Half-day rental", status: "confirmed" },
+        { time: "3:00 PM", title: "Juan Dela Cruz", detail: "Day swim · 12 guests", status: "pending" },
+      ],
+      pendingRequests: [
+        { id: "BK-1040", name: "Juan Dela Cruz", detail: "Half-day rental · 15 guests", date: "Tomorrow · 8:00 AM", source: "Messenger", amount: "₱8,500" },
+        { id: "BK-1039", name: "Corporate outing", detail: "Team building · 35 pax", date: "Sat · 7:00 AM", source: "Facebook", amount: "₱18,000" },
+        { id: "BK-1037", name: "Garcia reunion", detail: "Day swim · 25 guests", date: "Sun · 9:00 AM", source: "SMS", amount: "₱10,500" },
+      ],
       primaryList: [
         { id: "BK-1042", name: "Maria Santos", detail: "Day swim · 20 guests", date: "Today · 9:00 AM", status: "confirmed" },
         { id: "BK-1041", name: "Reyes Family", detail: "Birthday package", date: "Today · 1:00 PM", status: "confirmed" },
@@ -51,6 +69,28 @@
         { label: "Completed", value: "9" },
         { label: "No-shows", value: "1" },
       ],
+      queue: {
+        waiting: [
+          { name: "Pedro Lim", detail: "Follow-up · Lab results", wait: "12 min", ticket: "A-042" },
+          { name: "Grace Tan", detail: "Pediatric consult", wait: "8 min", ticket: "A-043" },
+          { name: "Luis Garcia", detail: "Annual physical", wait: "5 min", ticket: "A-044" },
+          { name: "Nina Reyes", detail: "General check-up", wait: "3 min", ticket: "A-045" },
+        ],
+        inConsult: [
+          { name: "Rosa Mendoza", detail: "General check-up", room: "Room 2", doctor: "Dr. Santos" },
+        ],
+        done: [
+          { name: "Carlo Bautista", detail: "Lab follow-up", time: "8:45 AM" },
+          { name: "Elena Cruz", detail: "Prenatal visit", time: "9:10 AM" },
+          { name: "Mark Villanueva", detail: "Dental referral", time: "9:35 AM" },
+        ],
+      },
+      rooms: [
+        { id: "r1", name: "Room 1", doctor: "Dr. Reyes", status: "available" },
+        { id: "r2", name: "Room 2", doctor: "Dr. Santos", status: "busy" },
+        { id: "r3", name: "Room 3", doctor: "Dr. Lim", status: "busy" },
+        { id: "lab", name: "Lab", doctor: "Tech on duty", status: "available" },
+      ],
       primaryList: [
         { id: "AP-2201", name: "Rosa Mendoza", detail: "General check-up", date: "Today · 9:30 AM", status: "confirmed" },
         { id: "AP-2200", name: "Pedro Lim", detail: "Follow-up · Lab results", date: "Today · 10:15 AM", status: "open" },
@@ -84,6 +124,24 @@
         { label: "Done today", value: "5" },
         { label: "This week", value: "19" },
       ],
+      kanban: {
+        new: [
+          { id: "JB-502", name: "Greenfield homes", detail: "New install · 3 units", priority: "normal", date: "Wed" },
+          { id: "JB-503", name: "QC office tower", detail: "AC not cooling · 12F", priority: "emergency", date: "Today" },
+        ],
+        scheduled: [
+          { id: "JB-499", name: "Office Bldg QC", detail: "Leak repair", priority: "normal", date: "Tomorrow" },
+          { id: "JB-500", name: "Villa Verde", detail: "Preventive maintenance", priority: "low", date: "Today · PM" },
+        ],
+        inProgress: [
+          { id: "JB-501", name: "SM North · Unit 12F", detail: "AC not cooling", priority: "emergency", date: "Today · AM", tech: "Team A" },
+          { id: "JB-497", name: "Marikina condo", detail: "Filter replacement", priority: "normal", date: "Today", tech: "Team B" },
+        ],
+        done: [
+          { id: "JB-496", name: "Pasig retail", detail: "Drain clean", priority: "low", date: "Done 10:30 AM" },
+          { id: "JB-495", name: "Antipolo home", detail: "Gas refill", priority: "normal", date: "Done 9:15 AM" },
+        ],
+      },
       primaryList: [
         { id: "JB-501", name: "SM North · Unit 12F", detail: "AC not cooling", date: "Today · AM slot", status: "open" },
         { id: "JB-500", name: "Villa Verde", detail: "Preventive maintenance", date: "Today · PM slot", status: "confirmed" },
@@ -117,6 +175,22 @@
         { label: "Won this month", value: "3" },
         { label: "Follow-ups due", value: "4" },
       ],
+      pipeline: {
+        new: [
+          { id: "LD-88", name: "Fairview school admin", detail: "Website + enrollment portal", source: "Facebook", quoteAmount: "₱45,000", date: "Today" },
+          { id: "LD-89", name: "Montalban cafe", detail: "Menu site + booking form", source: "Messenger", quoteAmount: "₱18,000", date: "Today" },
+        ],
+        quoted: [
+          { id: "LD-87", name: "Woodblock inquiry", detail: "Modular kitchen quote", source: "Messenger", quoteAmount: "₱32,000", date: "Yesterday" },
+          { id: "LD-84", name: "Retail chain", detail: "Multi-branch site", source: "Email", quoteAmount: "₱120,000", date: "4 days ago" },
+        ],
+        negotiating: [
+          { id: "LD-86", name: "Industrial fan buyer", detail: "Bulk order · 20 units", source: "Phone", quoteAmount: "₱85,000", date: "2 days ago" },
+        ],
+        won: [
+          { id: "LD-82", name: "Local clinic", detail: "Landing page + forms", source: "Referral", quoteAmount: "₱15,000", date: "Won Mon" },
+        ],
+      },
       primaryList: [
         { id: "LD-88", name: "Fairview school admin", detail: "Website + enrollment portal", date: "Today", status: "open" },
         { id: "LD-87", name: "Woodblock inquiry", detail: "Modular kitchen quote", date: "Yesterday", status: "pending" },
