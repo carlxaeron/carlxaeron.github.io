@@ -4,6 +4,12 @@
   "previewHost": "villa-clara-pool.netlify.app",
   "industry": "Private pool / day venue",
   "deployedAt": "2026-07-16",
+  "system": {
+    "type": "booking",
+    "adminPath": "/admin/",
+    "label": "Venue booking admin",
+    "navPages": ["Dashboard", "Bookings", "Calendar", "Guests", "Settings"]
+  },
   "sources": {
     "facebook": "https://www.facebook.com/VillaClaraPoolVenue/",
     "notes": "About + Photos scraped logged-out. HD gallery (2048px) via photo viewer CDN; cover max 960\u00d7542; logo 2048\u00d72034. Daytime only (FB reply). Second mobile 0998-8823670 from promo graphic."

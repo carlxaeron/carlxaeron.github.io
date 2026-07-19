@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.0.71] — 2026-07-19
+
+### Added
+- **PreviewShowcase** — Four-panel layout: Site desktop/mobile + Admin desktop/mobile (`/admin/` iframes); eyebrow “Website + admin system preview”; browse hint for admin nav
+- **Client admin kit** — Shared browsable demo under `client-sites/_systems/admin/` (hash nav, vertical demo data packs: booking, appointments, service, leads; responsive sidebar + mobile bottom nav)
+- **Batch A systems** — Villa Clara Pool (`villa-clara-pool`) and Costa Abril Resort (`costa-abril`): `/admin/` wired, `client.json` `system` fields, embed-only guard covers admin HTML, “View admin demo” CTA on marketing contact
+- **Template** — `_template/client.json` `system` block; embed-only edge function protects `/admin/` paths
+- **Tests** — `PreviewShowcase.test.js` covers four frames, admin URL builder, and `/admin/` iframe src
+
 ## [3.0.70] — 2026-07-18
 
 ### Added

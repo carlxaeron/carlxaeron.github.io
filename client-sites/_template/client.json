@@ -4,6 +4,12 @@
   "previewHost": "your-slug.netlify.app",
   "industry": "Local business",
   "deployedAt": null,
+  "system": {
+    "type": "booking",
+    "adminPath": "/admin/",
+    "label": "Booking admin",
+    "navPages": ["Dashboard", "Bookings", "Calendar", "Guests", "Settings"]
+  },
   "contact": {
     "name": "Client Name",
     "email": "client@example.com",

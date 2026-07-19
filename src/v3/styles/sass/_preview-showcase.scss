@@ -163,6 +163,36 @@ body.v3-preview-active {
     grid-template-columns: 1.4fr 0.6fr;
     gap: $space-6;
   }
+
+  &--quad {
+    gap: $space-8;
+
+    @media (min-width: 992px) {
+      grid-template-columns: 1fr;
+      gap: $space-8;
+    }
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-8;
+    align-items: start;
+
+    @media (min-width: 992px) {
+      grid-template-columns: 1.4fr 0.6fr;
+      gap: $space-6;
+    }
+  }
+
+  &__row--admin {
+    padding-top: $space-2;
+    border-top: 1px solid rgba($green-light, 0.12);
+
+    @media (min-width: 992px) {
+      padding-top: $space-4;
+    }
+  }
 }
 
 .v3-preview-device {
