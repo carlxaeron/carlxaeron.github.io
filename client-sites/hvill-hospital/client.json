@@ -48,6 +48,7 @@
       "Schedule",
       "Patients",
       "Settings"
-    ]
+    ],
+    "painHero": "Walk-ins and follow-ups stack at the Montalban front desk — see the OPD queue, room status, and who's waiting before the next patient asks."
   }
 }
