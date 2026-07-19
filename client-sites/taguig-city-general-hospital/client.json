@@ -37,5 +37,17 @@
     "lastFollowUpAt": null,
     "followUpCount": 0,
     "notes": "Initial quotation sent 2026-07-18 via outreachSchedule to tgh@taguig.gov.ph; auto follow-ups 3d1w (3d→7d×3, max 4)."
+  },
+  "system": {
+    "type": "appointments",
+    "adminPath": "/admin/",
+    "label": "Hospital appointments admin",
+    "navPages": [
+      "Dashboard",
+      "Appointments",
+      "Schedule",
+      "Patients",
+      "Settings"
+    ]
   }
 }

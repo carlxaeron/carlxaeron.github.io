@@ -12,9 +12,9 @@
   "quotation": {
     "packageName": "Business Website Redesign (landing sample)",
     "packageScope": "Modern one-page redesign sample (products, services, about, FAQ, contact CTAs), mobile-first, aligned to existing brand",
-    "quotedAmount": "\u20b118,000",
-    "paymentTerms": "50% upfront to begin \u00b7 50% on delivery (not the full amount upfront)",
-    "timeline": "7\u201310 business days after content approval",
+    "quotedAmount": "₱18,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "7–10 business days after content approval",
     "previewUrl": "https://carlmanuel.com/?preview=regan-industrial"
   },
   "outreach": {
@@ -30,7 +30,7 @@
     "nextFollowUpAt": "2026-07-18T00:08:55+00:00",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "Initial quotation sent 2026-07-15 via outreachSchedule to inquiry@reganindustrial.com.ph; auto follow-ups 1w enabled (). Payment-terms clarification email sent 2026-07-15 (50% upfront, not full amount). Follow-ups: 3d\u21927d\u21927d\u21927d (max 4)."
+    "notes": "Initial quotation sent 2026-07-15 via outreachSchedule to inquiry@reganindustrial.com.ph; auto follow-ups 1w enabled (). Payment-terms clarification email sent 2026-07-15 (50% upfront, not full amount). Follow-ups: 3d→7d→7d→7d (max 4)."
   },
   "sources": {
     "facebook": "https://www.facebook.com/reganindustrialph/",
@@ -46,5 +46,17 @@
     "followers": "~80K",
     "tagline": "Steel Solution for your Success | Creating Value through Innovation",
     "notes": "Est. 1968. 100% recommend (15 FB reviews). Metal supplier. Asset images from live site via browser fetch."
+  },
+  "system": {
+    "type": "leads",
+    "adminPath": "/admin/",
+    "label": "Lead & quote inbox",
+    "navPages": [
+      "Dashboard",
+      "Leads",
+      "Follow-ups",
+      "Contacts",
+      "Settings"
+    ]
   }
 }

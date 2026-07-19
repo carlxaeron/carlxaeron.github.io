@@ -1,6 +1,6 @@
 # Client sites (Netlify)
 
-Static one-page business websites for **quotation / sales demos**. Each folder deploys to its own Netlify site and is showcased on the portfolio via device mockups (desktop + mobile).
+Static one-page business websites for **quotation / sales demos**. Each folder deploys to its own Netlify site and is showcased on the portfolio via **4-panel preview** (site desktop/mobile + admin desktop/mobile). Marketing site at `/`; browsable admin demo at `/admin/`.
 
 **Portfolio preview (use this link with prospects):**
 
@@ -12,44 +12,44 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 
 ## Site catalog
 
-| Business | Slug | Industry | Preview link | Deployed |
-|----------|------|----------|--------------|----------|
-| [Bamboo Grove Café](#bamboo-grove-café-sample) *(sample)* | `quotation` | Café / local food | [Preview](https://carlmanuel.com/?preview=quotation) | 2026-07-10 |
-| [Extra Rice 8 Trading, OPC](#extra-rice-8-trading-opc) | `extra-rice` | Rice wholesale & retail | [Preview](https://carlmanuel.com/?preview=extra-rice) | 2026-07-10 |
-| [Ohana Business Solutions Inc](#ohana-business-solutions-inc) | `ohana` | Business consultancy | [Preview](https://carlmanuel.com/?preview=ohana) | 2026-07-10 |
-| [Suyat Notary Public](#suyat-notary-public) | `suyat` | Notary / legal services | [Preview](https://carlmanuel.com/?preview=suyat) | 2026-07-10 |
-| [RG Decals and Printing Shop](#rg-decals-and-printing-shop) | `rg-decals` | Printing / signs & decals | [Preview](https://carlmanuel.com/?preview=rg-decals) | 2026-07-10 |
-| [Sonyoba Marketing](#sonyoba-marketing) | `sonyoba-marketing` | Office equipment | [Preview](https://carlmanuel.com/?preview=sonyoba-marketing) | 2026-07-13 |
-| [JK Construction Services](#jk-construction-services) | `jk-construction` | Construction / renovation | [Preview](https://carlmanuel.com/?preview=jk-construction) | 2026-07-13 |
-| [Machinemate Mainteneering Services](#machinemate-mainteneering-services) | `machinemate` | Industrial fans / ventilation | [Preview](https://carlmanuel.com/?preview=machinemate) | 2026-07-13 |
-| [Jazz1 Airconditioning Services](#jazz1-airconditioning-services) | `jazz1-aircon` | Air conditioning / HVAC | [Preview](https://carlmanuel.com/?preview=jazz1-aircon) | 2026-07-13 |
-| [Clover Industrial Fan and Blower Inc.](#clover-industrial-fan-and-blower-inc) | `clover-industrial-fan` | Industrial fans & blowers | [Preview](https://carlmanuel.com/?preview=clover-industrial-fan) | 2026-07-13 |
-| [G3k Cad Plotting & Blueprinting Services](#g3k-cad-plotting--blueprinting-services) | `g3k-cad` | CAD plotting / blueprint printing | [Preview](https://carlmanuel.com/?preview=g3k-cad) | 2026-07-14 |
-| [Kubling Tago Resort](#kubling-tago-resort) | `kubling-tago-resort` | Day resort / hospitality | [Preview](https://carlmanuel.com/?preview=kubling-tago-resort) | 2026-07-15 |
-| [Regan Industrial Sales Inc.](#regan-industrial-sales-inc) | `regan-industrial` | Steel supplier / industrial metals | [Preview](https://carlmanuel.com/?preview=regan-industrial) | 2026-07-15 |
-| [IntelliSmart Technology Inc.](#intellismart-technology-inc) | `intellismart` | System integration / AV / security / BMS | [Preview](https://carlmanuel.com/?preview=intellismart) | 2026-07-15 |
-| [SV More Group of Companies](#sv-more-group-of-companies) | `sv-more-group` | Pharmaceuticals / health products | [Preview](https://carlmanuel.com/?preview=sv-more-group) | 2026-07-15 |
-| [Trumed Pharmaceuticals](#trumed-pharmaceuticals) | `trumed-pharma` | Pharmaceutical marketing / distribution | [Preview](https://carlmanuel.com/?preview=trumed-pharma) | 2026-07-15 |
-| [DN Group of Companies](#dn-group-of-companies) | `dn-group` | Building materials / roofing / metal systems | [Preview](https://carlmanuel.com/?preview=dn-group) | 2026-07-15 |
-| [Alibaton Construction Inc.](#alibaton-construction-inc) | `alibaton-construction` | Tower crane rental / sales / service | [Preview](https://carlmanuel.com/?preview=alibaton-construction) | 2026-07-15 |
-| [Fastpoint PH](#fastpoint-ph) | `fastpoint-ph` | Fleet supply / commercial tires | [Preview](https://carlmanuel.com/?preview=fastpoint-ph) | 2026-07-15 |
-| [Archipelago Builders Corporation](#archipelago-builders-corporation) | `archipelago-builders` | General building contractor (AAA) | [Preview](https://carlmanuel.com/?preview=archipelago-builders) | 2026-07-15 |
-| [H Vill Hospital](#h-vill-hospital) | `hvill-hospital` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=hvill-hospital) | 2026-07-15 |
-| [San Mateo Medical Center](#san-mateo-medical-center) | `san-mateo-medical-center` | Private hospital / healthcare | [Preview](https://carlmanuel.com/?preview=san-mateo-medical-center) | 2026-07-15 |
-| [Villa Clara Pool & Venue](#villa-clara-pool--venue) | `villa-clara-pool` | Private pool / day venue | [Preview](https://carlmanuel.com/?preview=villa-clara-pool) | 2026-07-16 |
-| [Costa Abril Resort](#costa-abril-resort) | `costa-abril` | Water park / day resort | [Preview](https://carlmanuel.com/?preview=costa-abril) | 2026-07-17 |
-| [Airalex Private Lodge & Resort](#airalex-private-lodge--resort) | `air-alex-resort` | Day resort / private lodge | [Preview](https://carlmanuel.com/?preview=air-alex-resort) | 2026-07-17 |
-| [Casa De Gloria Private Resort](#casa-de-gloria-private-resort) | `casa-de-gloria` | Private pool / staycation resort | [Preview](https://carlmanuel.com/?preview=casa-de-gloria) | 2026-07-17 |
-| [Casa Angelina Resort](#casa-angelina-resort) | `casa-angelina` | Vacation home rental / private pool venue | [Preview](https://carlmanuel.com/?preview=casa-angelina) | 2026-07-17 |
-| [Bernardino General Hospital](#bernardino-general-hospital) | `bernardino-general-hospital` | Hospital / healthcare / rehab medicine | [Preview](https://carlmanuel.com/?preview=bernardino-general-hospital) | 2026-07-17 |
-| [Pacific Global Medical Center](#pacific-global-medical-center) | `pgmc` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=pgmc) | 2026-07-17 |
-| [NovaGen (Novaliches General Hospital and Medical Center)](#novagen-novaliches-general-hospital-and-medical-center) | `novagen` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=novagen) | 2026-07-17 |
-| [Fairview General Hospital Inc.](#fairview-general-hospital-inc) | `fairview-general-hospital` | Hospital / healthcare | [Preview](https://carlmanuel.com/?preview=fairview-general-hospital) | 2026-07-17 |
-| [MPHS Mother of Perpetual Help Inc. Fairview](#mphs-mother-of-perpetual-help-inc-fairview) | `mphs-fairview` | K–12 school / nonprofit | [Preview](https://carlmanuel.com/?preview=mphs-fairview) | 2026-07-17 |
-| [Amora Body Wellness Spa](#amora-body-wellness-spa) | `amora-body-wellness-spa` | Spa / health & beauty | [Preview](https://carlmanuel.com/?preview=amora-body-wellness-spa) | 2026-07-17 |
-| [Taguig City General Hospital](#taguig-city-general-hospital) | `taguig-city-general-hospital` | Government hospital / public healthcare | [Preview](https://carlmanuel.com/?preview=taguig-city-general-hospital) | 2026-07-18 |
-| [The Lakehouse Taguig](#the-lakehouse-taguig) | `the-lakehouse-taguig` | Hotel resort / Laguna Lake staycation | [Preview](https://carlmanuel.com/?preview=the-lakehouse-taguig) | 2026-07-18 |
-| [Journey Woodblock Modular Cabinets](#journey-woodblock-modular-cabinets) | `journey-woodblock-ph` | Cabinetry / modular furniture / CNC woodworking | [Preview](https://carlmanuel.com/?preview=journey-woodblock-ph) | 2026-07-18 |
+| Business | Slug | Industry | System | Preview link | Deployed |
+|----------|------|----------|--------|--------------|----------|
+| [Bamboo Grove Café](#bamboo-grove-café-sample) *(sample)* | `quotation` | Café / local food | leads | [Preview](https://carlmanuel.com/?preview=quotation) | 2026-07-10 |
+| [Extra Rice 8 Trading, OPC](#extra-rice-8-trading-opc) | `extra-rice` | Rice wholesale & retail | leads | [Preview](https://carlmanuel.com/?preview=extra-rice) | 2026-07-10 |
+| [Ohana Business Solutions Inc](#ohana-business-solutions-inc) | `ohana` | Business consultancy | leads | [Preview](https://carlmanuel.com/?preview=ohana) | 2026-07-10 |
+| [Suyat Notary Public](#suyat-notary-public) | `suyat` | Notary / legal services | leads | [Preview](https://carlmanuel.com/?preview=suyat) | 2026-07-10 |
+| [RG Decals and Printing Shop](#rg-decals-and-printing-shop) | `rg-decals` | Printing / signs & decals | leads | [Preview](https://carlmanuel.com/?preview=rg-decals) | 2026-07-10 |
+| [Sonyoba Marketing](#sonyoba-marketing) | `sonyoba-marketing` | Office equipment | leads | [Preview](https://carlmanuel.com/?preview=sonyoba-marketing) | 2026-07-13 |
+| [JK Construction Services](#jk-construction-services) | `jk-construction` | Construction / renovation | service | [Preview](https://carlmanuel.com/?preview=jk-construction) | 2026-07-13 |
+| [Machinemate Mainteneering Services](#machinemate-mainteneering-services) | `machinemate` | Industrial fans / ventilation | service | [Preview](https://carlmanuel.com/?preview=machinemate) | 2026-07-13 |
+| [Jazz1 Airconditioning Services](#jazz1-airconditioning-services) | `jazz1-aircon` | Air conditioning / HVAC | service | [Preview](https://carlmanuel.com/?preview=jazz1-aircon) | 2026-07-13 |
+| [Clover Industrial Fan and Blower Inc.](#clover-industrial-fan-and-blower-inc) | `clover-industrial-fan` | Industrial fans & blowers | service | [Preview](https://carlmanuel.com/?preview=clover-industrial-fan) | 2026-07-13 |
+| [G3k Cad Plotting & Blueprinting Services](#g3k-cad-plotting--blueprinting-services) | `g3k-cad` | CAD plotting / blueprint printing | service | [Preview](https://carlmanuel.com/?preview=g3k-cad) | 2026-07-14 |
+| [Kubling Tago Resort](#kubling-tago-resort) | `kubling-tago-resort` | Day resort / hospitality | booking | [Preview](https://carlmanuel.com/?preview=kubling-tago-resort) | 2026-07-15 |
+| [Regan Industrial Sales Inc.](#regan-industrial-sales-inc) | `regan-industrial` | Steel supplier / industrial metals | leads | [Preview](https://carlmanuel.com/?preview=regan-industrial) | 2026-07-15 |
+| [IntelliSmart Technology Inc.](#intellismart-technology-inc) | `intellismart` | System integration / AV / security / BMS | leads | [Preview](https://carlmanuel.com/?preview=intellismart) | 2026-07-15 |
+| [SV More Group of Companies](#sv-more-group-of-companies) | `sv-more-group` | Pharmaceuticals / health products | leads | [Preview](https://carlmanuel.com/?preview=sv-more-group) | 2026-07-15 |
+| [Trumed Pharmaceuticals](#trumed-pharmaceuticals) | `trumed-pharma` | Pharmaceutical marketing / distribution | leads | [Preview](https://carlmanuel.com/?preview=trumed-pharma) | 2026-07-15 |
+| [DN Group of Companies](#dn-group-of-companies) | `dn-group` | Building materials / roofing / metal systems | leads | [Preview](https://carlmanuel.com/?preview=dn-group) | 2026-07-15 |
+| [Alibaton Construction Inc.](#alibaton-construction-inc) | `alibaton-construction` | Tower crane rental / sales / service | service | [Preview](https://carlmanuel.com/?preview=alibaton-construction) | 2026-07-15 |
+| [Fastpoint PH](#fastpoint-ph) | `fastpoint-ph` | Fleet supply / commercial tires | leads | [Preview](https://carlmanuel.com/?preview=fastpoint-ph) | 2026-07-15 |
+| [Archipelago Builders Corporation](#archipelago-builders-corporation) | `archipelago-builders` | General building contractor (AAA) | service | [Preview](https://carlmanuel.com/?preview=archipelago-builders) | 2026-07-15 |
+| [H Vill Hospital](#h-vill-hospital) | `hvill-hospital` | Hospital / healthcare | appointments | [Preview](https://carlmanuel.com/?preview=hvill-hospital) | 2026-07-15 |
+| [San Mateo Medical Center](#san-mateo-medical-center) | `san-mateo-medical-center` | Private hospital / healthcare | appointments | [Preview](https://carlmanuel.com/?preview=san-mateo-medical-center) | 2026-07-15 |
+| [Villa Clara Pool & Venue](#villa-clara-pool--venue) | `villa-clara-pool` | Private pool / day venue | booking | [Preview](https://carlmanuel.com/?preview=villa-clara-pool) | 2026-07-16 |
+| [Costa Abril Resort](#costa-abril-resort) | `costa-abril` | Water park / day resort | booking | [Preview](https://carlmanuel.com/?preview=costa-abril) | 2026-07-17 |
+| [Airalex Private Lodge & Resort](#airalex-private-lodge--resort) | `air-alex-resort` | Day resort / private lodge | booking | [Preview](https://carlmanuel.com/?preview=air-alex-resort) | 2026-07-17 |
+| [Casa De Gloria Private Resort](#casa-de-gloria-private-resort) | `casa-de-gloria` | Private pool / staycation resort | booking | [Preview](https://carlmanuel.com/?preview=casa-de-gloria) | 2026-07-17 |
+| [Casa Angelina Resort](#casa-angelina-resort) | `casa-angelina` | Vacation home rental / private pool venue | booking | [Preview](https://carlmanuel.com/?preview=casa-angelina) | 2026-07-17 |
+| [Bernardino General Hospital](#bernardino-general-hospital) | `bernardino-general-hospital` | Hospital / healthcare / rehab medicine | appointments | [Preview](https://carlmanuel.com/?preview=bernardino-general-hospital) | 2026-07-17 |
+| [Pacific Global Medical Center](#pacific-global-medical-center) | `pgmc` | Hospital / healthcare | appointments | [Preview](https://carlmanuel.com/?preview=pgmc) | 2026-07-17 |
+| [NovaGen (Novaliches General Hospital and Medical Center)](#novagen-novaliches-general-hospital-and-medical-center) | `novagen` | Hospital / healthcare | appointments | [Preview](https://carlmanuel.com/?preview=novagen) | 2026-07-17 |
+| [Fairview General Hospital Inc.](#fairview-general-hospital-inc) | `fairview-general-hospital` | Hospital / healthcare | appointments | [Preview](https://carlmanuel.com/?preview=fairview-general-hospital) | 2026-07-17 |
+| [MPHS Mother of Perpetual Help Inc. Fairview](#mphs-mother-of-perpetual-help-inc-fairview) | `mphs-fairview` | K–12 school / nonprofit | leads | [Preview](https://carlmanuel.com/?preview=mphs-fairview) | 2026-07-17 |
+| [Amora Body Wellness Spa](#amora-body-wellness-spa) | `amora-body-wellness-spa` | Spa / health & beauty | appointments | [Preview](https://carlmanuel.com/?preview=amora-body-wellness-spa) | 2026-07-17 |
+| [Taguig City General Hospital](#taguig-city-general-hospital) | `taguig-city-general-hospital` | Government hospital / public healthcare | appointments | [Preview](https://carlmanuel.com/?preview=taguig-city-general-hospital) | 2026-07-18 |
+| [The Lakehouse Taguig](#the-lakehouse-taguig) | `the-lakehouse-taguig` | Hotel resort / Laguna Lake staycation | booking | [Preview](https://carlmanuel.com/?preview=the-lakehouse-taguig) | 2026-07-18 |
+| [Journey Woodblock Modular Cabinets](#journey-woodblock-modular-cabinets) | `journey-woodblock-ph` | Cabinetry / modular furniture / CNC woodworking | leads | [Preview](https://carlmanuel.com/?preview=journey-woodblock-ph) | 2026-07-18 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 

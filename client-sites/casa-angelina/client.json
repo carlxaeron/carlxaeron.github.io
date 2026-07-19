@@ -39,5 +39,17 @@
     "phones": [],
     "followers": "~6.5K",
     "notes": "Category: Vacation Home Rental. 88% recommend (12 reviews). Always open. Private pool house with rain shower deck, indoor karaoke/entertainment lounge, alfresco dining pavilion, upstairs rooms with balcony view, on-site caretaker. Frequently booked for family reunions, birthdays, and barkada celebrations. No public rate sheet or phone/email listed — inquiries via Facebook Messenger only."
+  },
+  "system": {
+    "type": "booking",
+    "adminPath": "/admin/",
+    "label": "Venue booking admin",
+    "navPages": [
+      "Dashboard",
+      "Bookings",
+      "Calendar",
+      "Guests",
+      "Settings"
+    ]
   }
 }

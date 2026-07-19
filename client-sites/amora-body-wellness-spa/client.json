@@ -36,8 +36,22 @@
     "facebook": "https://www.facebook.com/p/Amora-Body-Wellness-Spa-61569071263786/",
     "instagram": "https://www.instagram.com/here_at_amora",
     "address": "17 Fairlane St. Fairview Quezon City, Quezon City, Philippines",
-    "phones": ["0917 176 5171"],
+    "phones": [
+      "0917 176 5171"
+    ],
     "followers": "717",
     "notes": "Category: Health/beauty. Tagline: Timeless Care, Naturally Crafted. Holistic treatments with locally-sourced organic ingredients. Online booking · Reservations. Price range $$. 100% recommend (5 reviews). HD assets from Facebook Photos (1080×1350 gallery, 2048×2048 logo)."
+  },
+  "system": {
+    "type": "appointments",
+    "adminPath": "/admin/",
+    "label": "Spa appointment admin",
+    "navPages": [
+      "Dashboard",
+      "Appointments",
+      "Calendar",
+      "Clients",
+      "Settings"
+    ]
   }
 }

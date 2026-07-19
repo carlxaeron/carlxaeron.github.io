@@ -21,5 +21,17 @@
     "emailDraft": "quotation-email.md",
     "smsDraft": "quotation-sms.txt",
     "messengerDraft": "quotation-messenger.txt"
+  },
+  "system": {
+    "type": "leads",
+    "adminPath": "/admin/",
+    "label": "Lead & quote inbox",
+    "navPages": [
+      "Dashboard",
+      "Leads",
+      "Follow-ups",
+      "Contacts",
+      "Settings"
+    ]
   }
 }

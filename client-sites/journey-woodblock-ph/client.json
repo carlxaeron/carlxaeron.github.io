@@ -37,8 +37,22 @@
     "instagram": "https://www.instagram.com/journeywoodblockph",
     "website": "https://www.journeywoodblock.com/",
     "address": "Block 38 L34&36 Sparrow Lane, Bay Breeze Executive Village, Brgy Wawa, Taguig City, Taguig, Philippines",
-    "phones": ["0917 893 6322"],
+    "phones": [
+      "0917 893 6322"
+    ],
     "followers": "11K",
     "notes": "Category: Cabinet & Countertop Store. Services: kitchen cabinets, closets, storage, modular cabinets, CNC wood cutting, workshop consultancy, melamine/PVC boards, hardware. 90% recommend (26 reviews). Price $$$. Open · in-store pickup. HD assets from Facebook Photos (2048×1536 logo, 1536×2048 hero, 1080×1528 gallery)."
+  },
+  "system": {
+    "type": "leads",
+    "adminPath": "/admin/",
+    "label": "Lead & quote inbox",
+    "navPages": [
+      "Dashboard",
+      "Leads",
+      "Follow-ups",
+      "Contacts",
+      "Settings"
+    ]
   }
 }

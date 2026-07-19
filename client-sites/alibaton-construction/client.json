@@ -11,10 +11,10 @@
   },
   "quotation": {
     "packageName": "Business Website Rebuild (landing)",
-    "packageScope": "Elevated one-page rebuild (services, about, gallery, FAQ, contact), mobile-first, industrial black/red brand \u2014 replacement for suspended alibaton.com.ph",
-    "quotedAmount": "\u20b118,000",
-    "paymentTerms": "50% upfront to begin \u00b7 50% on delivery (not the full amount upfront)",
-    "timeline": "7\u201310 business days after content approval",
+    "packageScope": "Elevated one-page rebuild (services, about, gallery, FAQ, contact), mobile-first, industrial black/red brand — replacement for suspended alibaton.com.ph",
+    "quotedAmount": "₱18,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "7–10 business days after content approval",
     "previewUrl": "https://carlmanuel.com/?preview=alibaton-construction"
   },
   "outreach": {
@@ -30,7 +30,7 @@
     "nextFollowUpAt": "2026-07-18T02:48:15+00:00",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "Initial quotation sent 2026-07-15 via outreachSchedule to info@alibaton.com.ph; auto follow-ups 1w enabled (). BCC info@carlmanuel.com. Follow-ups: 3d\u21927d\u21927d\u21927d (max 4)."
+    "notes": "Initial quotation sent 2026-07-15 via outreachSchedule to info@alibaton.com.ph; auto follow-ups 1w enabled (). BCC info@carlmanuel.com. Follow-ups: 3d→7d→7d→7d (max 4)."
   },
   "sources": {
     "facebook": "https://www.facebook.com/alibatoncons/",
@@ -42,7 +42,19 @@
       "0961 953 1364"
     ],
     "followers": "~7.2K",
-    "tagline": "Best tower crane service in the Philippines \u2014 rental, sales, service",
-    "notes": "ISO 9001:2015. Commercial & Industrial Equipment Supplier. alibaton.com.ph SUSPENDED at scrape time \u2014 strong rebuild sales hook. Assets from Facebook cover, team photo, and equipment highlight."
+    "tagline": "Best tower crane service in the Philippines — rental, sales, service",
+    "notes": "ISO 9001:2015. Commercial & Industrial Equipment Supplier. alibaton.com.ph SUSPENDED at scrape time — strong rebuild sales hook. Assets from Facebook cover, team photo, and equipment highlight."
+  },
+  "system": {
+    "type": "service",
+    "adminPath": "/admin/",
+    "label": "Job schedule admin",
+    "navPages": [
+      "Dashboard",
+      "Jobs",
+      "Dispatch",
+      "Customers",
+      "Settings"
+    ]
   }
 }

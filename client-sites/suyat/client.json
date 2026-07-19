@@ -26,5 +26,17 @@
     "facebook": "https://www.facebook.com/suyatlawoffice/",
     "googleMaps": "https://www.google.com/maps/place/Suyat+Notary+Public/@14.7470042,121.1309309,17z",
     "address": "2nd Floor, JRS Building, Kanlaon Street, Amityville, Barangay San Jose, Rodriguez, Rizal"
+  },
+  "system": {
+    "type": "leads",
+    "adminPath": "/admin/",
+    "label": "Lead & quote inbox",
+    "navPages": [
+      "Dashboard",
+      "Leads",
+      "Follow-ups",
+      "Contacts",
+      "Settings"
+    ]
   }
 }

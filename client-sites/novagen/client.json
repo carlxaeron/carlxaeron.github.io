@@ -40,5 +40,17 @@
     "instagram": "https://www.instagram.com/novagen_ph/",
     "address": "793 Quirino Highway, Brgy. Gulod, Novaliches, Quezon City 1117",
     "notes": "Logo (1620x1620 JPEG) and cover photo (1773x657 PNG) downloaded HD via Chrome DevTools MCP inspect + in-page fetch()/base64 (fbcdn get_network_request file-save blocked by shared-session workspace roots, same limitation noted on prior clients). FB Photos tab is login-walled and only surfaces recent text-graphic health-tip posts (no real facility photos) when logged out — used official novagen.com.ph / About microsite copy for services, pricing, and brand story instead."
+  },
+  "system": {
+    "type": "appointments",
+    "adminPath": "/admin/",
+    "label": "Appointments admin",
+    "navPages": [
+      "Dashboard",
+      "Appointments",
+      "Schedule",
+      "Patients",
+      "Settings"
+    ]
   }
 }

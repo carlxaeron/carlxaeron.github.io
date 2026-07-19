@@ -18,9 +18,9 @@
   "quotation": {
     "packageName": "Starter Business Website",
     "packageScope": "One-page responsive hospital site, services & departments, community programs, FAQ, contact/emergency section, basic SEO, Netlify hosting setup",
-    "quotedAmount": "\u20b115,000",
-    "paymentTerms": "50% upfront to begin \u00b7 50% on delivery (not the full amount upfront)",
-    "timeline": "5\u20137 business days after content approval",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
     "previewUrl": "https://carlmanuel.com/?preview=pgmc"
   },
   "outreach": {
@@ -37,5 +37,17 @@
     "lastFollowUpAt": null,
     "followUpCount": 0,
     "notes": "Initial quotation sent 2026-07-17 via Laravel API to pgmccareers@gmail.com; auto follow-ups 1w enabled (max 4)."
+  },
+  "system": {
+    "type": "appointments",
+    "adminPath": "/admin/",
+    "label": "Appointments admin",
+    "navPages": [
+      "Dashboard",
+      "Appointments",
+      "Schedule",
+      "Patients",
+      "Settings"
+    ]
   }
 }

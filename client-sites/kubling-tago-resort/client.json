@@ -42,5 +42,17 @@
     ],
     "followers": "~25K",
     "notes": "Amenities: public infinity pool (adults/kids), private infinity pool + jacuzzi, videoke, cottages, private rooms, function hall, gazebo. Rates from FB sheet on site. Always open."
+  },
+  "system": {
+    "type": "booking",
+    "adminPath": "/admin/",
+    "label": "Venue booking admin",
+    "navPages": [
+      "Dashboard",
+      "Bookings",
+      "Calendar",
+      "Guests",
+      "Settings"
+    ]
   }
 }

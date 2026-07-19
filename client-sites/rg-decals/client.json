@@ -12,9 +12,9 @@
   "quotation": {
     "packageName": "Starter Business Website",
     "packageScope": "One-page responsive site (services, about, contact, maps link), mobile-friendly, Facebook integration",
-    "quotedAmount": "\u20b115,000",
-    "paymentTerms": "50% upfront to begin \u00b7 50% on delivery (not the full amount upfront)",
-    "timeline": "5\u20137 business days after content approval",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
     "previewUrl": "https://carlmanuel.com/?preview=rg-decals"
   },
   "outreach": {
@@ -30,11 +30,23 @@
     "nextFollowUpAt": "2026-07-22T01:38:33+00:00",
     "lastFollowUpAt": "2026-07-15T01:38:33+00:00",
     "followUpCount": 1,
-    "notes": "Updated-format follow-up sent 2026-07-15 (payment 50% upfront clarified); auto follow-ups 1w continue ( total, count=1). BCC info@carlmanuel.com. Follow-ups: 3d\u21927d\u21927d\u21927d (max 4)."
+    "notes": "Updated-format follow-up sent 2026-07-15 (payment 50% upfront clarified); auto follow-ups 1w continue ( total, count=1). BCC info@carlmanuel.com. Follow-ups: 3d→7d→7d→7d (max 4)."
   },
   "sources": {
     "facebook": "https://www.facebook.com/p/RG-Decals-and-Printing-Shop-61576011299710/",
     "googleMaps": "https://www.google.com/maps/place/RG+Decals+and+Printing+Shop/@14.7557777,121.1330426,18z",
     "address": "Metro Manila Hills, Rodriguez, Rizal"
+  },
+  "system": {
+    "type": "leads",
+    "adminPath": "/admin/",
+    "label": "Lead & quote inbox",
+    "navPages": [
+      "Dashboard",
+      "Leads",
+      "Follow-ups",
+      "Contacts",
+      "Settings"
+    ]
   }
 }

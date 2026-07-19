@@ -40,5 +40,17 @@
     "followers": "~2.6K",
     "tagline": "General Building Contractor - Category AAA engaged in both horizontal and vertical constructions",
     "notes": "Est. 1965. Affiliates: Archiwall, Archi Cast, Resilient Services, White Equipment. Assets from FB + Wayback (about/intro/portfolio/logo)."
+  },
+  "system": {
+    "type": "service",
+    "adminPath": "/admin/",
+    "label": "Service dispatch admin",
+    "navPages": [
+      "Dashboard",
+      "Jobs",
+      "Dispatch",
+      "Customers",
+      "Settings"
+    ]
   }
 }

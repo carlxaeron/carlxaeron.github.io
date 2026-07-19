@@ -27,11 +27,18 @@ function hasAllowedReferrer(request) {
   return ALLOWED_PARENTS.some((host) => referer.includes(host));
 }
 
+function isProtectedPage(pathname) {
+  if (pathname === "/" || pathname === "/index.html") return true;
+  if (pathname.endsWith(".html")) return true;
+  if (pathname === "/admin" || pathname.startsWith("/admin/")) return true;
+  return false;
+}
+
 export default async (request, context) => {
   const fetchDest = request.headers.get("sec-fetch-dest");
   const url = new URL(request.url);
 
-  if (url.pathname !== "/" && !url.pathname.endsWith(".html") && url.pathname !== "/index.html") {
+  if (!isProtectedPage(url.pathname)) {
     return context.next();
   }
 

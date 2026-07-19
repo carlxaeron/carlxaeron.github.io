@@ -36,9 +36,23 @@
     "facebook": "https://www.facebook.com/ltfrbphilippines/",
     "website": null,
     "address": "Service areas: Bicol, Metro Manila, Tuguegarao, Batangas, Cebu, Davao, Bacolod, Central Luzon, Lucena, Cabuyao",
-    "phones": ["0917 821 2009"],
+    "phones": [
+      "0917 821 2009"
+    ],
     "followers": "~504",
     "tagline": "Preferred supplier of the Philippines' biggest fleets to make them more transparent and understandable",
     "notes": "Category Product/service. Joyall commercial tires. EcoVadis Committed Sep 2025. Email biodriver@gmail.com. Play Store link on page returned 404 at scrape time."
+  },
+  "system": {
+    "type": "leads",
+    "adminPath": "/admin/",
+    "label": "Lead & quote inbox",
+    "navPages": [
+      "Dashboard",
+      "Leads",
+      "Follow-ups",
+      "Contacts",
+      "Settings"
+    ]
   }
 }

@@ -36,5 +36,17 @@
     "lastFollowUpAt": null,
     "followUpCount": 0,
     "notes": "Initial quotation sent 2026-07-17 via hosting-php CLI to fairviewgeneralhospitalinc@gmail.com; auto follow-ups 1w enabled (max 4)."
+  },
+  "system": {
+    "type": "appointments",
+    "adminPath": "/admin/",
+    "label": "Hospital appointments admin",
+    "navPages": [
+      "Dashboard",
+      "Appointments",
+      "Schedule",
+      "Patients",
+      "Settings"
+    ]
   }
 }

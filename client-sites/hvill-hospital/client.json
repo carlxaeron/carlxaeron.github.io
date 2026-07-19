@@ -37,5 +37,17 @@
     "lastFollowUpAt": null,
     "followUpCount": 0,
     "notes": "Initial sent via outreachSchedule; auto follow-ups weekly (max 4)."
+  },
+  "system": {
+    "type": "appointments",
+    "adminPath": "/admin/",
+    "label": "Hospital appointments admin",
+    "navPages": [
+      "Dashboard",
+      "Appointments",
+      "Schedule",
+      "Patients",
+      "Settings"
+    ]
   }
 }

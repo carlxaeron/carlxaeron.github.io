@@ -35,11 +35,26 @@
   "sources": {
     "facebook": "https://www.facebook.com/people/The-Lakehouse/61579539671917/",
     "address": "Taguig, Philippines, 1630",
-    "phones": ["0917 871 0777", "+63 917 871 0777"],
+    "phones": [
+      "0917 871 0777",
+      "+63 917 871 0777"
+    ],
     "whatsapp": "+63 917 871 0777",
     "email": "thelakehousetaguig@gmail.com",
     "followers": "1.6K",
     "hours": "Always open",
     "notes": "Category: Hotel resort. Tagline: luxury staycation with Laguna lake view. Superhost on Airbnb. HD assets from Facebook Photos — hero 2048×1536, gallery pool shots up to 2048×1536 / 1536×2048, logo 480×480."
+  },
+  "system": {
+    "type": "booking",
+    "adminPath": "/admin/",
+    "label": "Venue booking admin",
+    "navPages": [
+      "Dashboard",
+      "Bookings",
+      "Calendar",
+      "Guests",
+      "Settings"
+    ]
   }
 }

@@ -40,5 +40,17 @@
     "priceRange": "$",
     "followers": "~14K",
     "notes": "Budget-friendly private lodge/day resort with public and private pools, cottages, and 24/7 stay options. Rate card graphics on Facebook are low-res text overlays (OCR garbled) — site shows real photo + FB rate images with a disclaimer instead of invented numbers."
+  },
+  "system": {
+    "type": "booking",
+    "adminPath": "/admin/",
+    "label": "Venue booking admin",
+    "navPages": [
+      "Dashboard",
+      "Bookings",
+      "Calendar",
+      "Guests",
+      "Settings"
+    ]
   }
 }

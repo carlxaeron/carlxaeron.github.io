@@ -32,5 +32,17 @@
     "services": "Delivery · Contactless delivery · Online booking",
     "phone": "0928 353 4491",
     "notes": "No public email on Facebook About; outreach via phone/Messenger"
+  },
+  "system": {
+    "type": "service",
+    "adminPath": "/admin/",
+    "label": "Service dispatch admin",
+    "navPages": [
+      "Dashboard",
+      "Jobs",
+      "Dispatch",
+      "Customers",
+      "Settings"
+    ]
   }
 }
