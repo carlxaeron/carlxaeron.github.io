@@ -26,14 +26,16 @@ describe("PreviewShowcase", () => {
     expect(screen.getByTestId("preview-feedback")).toBeInTheDocument();
     expect(screen.getByText("Sample Business Quotation Site")).toBeInTheDocument();
     expect(screen.queryByText(/\.netlify\.app/i)).not.toBeInTheDocument();
-    expect(screen.getByText(/Website \+ admin system preview/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Site — Desktop preview/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Site — Mobile preview/i)).toBeInTheDocument();
+    expect(screen.getByText(/Business system \+ website sample/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Admin — Desktop preview/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Admin — Mobile preview/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Site — Desktop preview/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Site — Mobile preview/i)).toBeInTheDocument();
+    const deviceLabels = screen.getAllByRole("heading", { level: 2 }).map((el) => el.textContent);
+    expect(deviceLabels.indexOf("Admin — Desktop")).toBeLessThan(deviceLabels.indexOf("Site — Desktop"));
     expect(screen.getAllByTitle(/preview of Sample Business/i)).toHaveLength(4);
-    expect(screen.getByText(/Scroll inside each frame to explore the sample site and admin/i)).toBeInTheDocument();
-    expect(screen.getByText(/click admin nav to browse pages/i)).toBeInTheDocument();
+    expect(screen.getByText(/Start with the admin frames/i)).toBeInTheDocument();
+    expect(screen.getByText(/click nav to browse pages/i)).toBeInTheDocument();
     expect(screen.queryByText(/Open live site/i)).not.toBeInTheDocument();
   });
 

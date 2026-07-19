@@ -197,14 +197,113 @@ function outreach_system_label(array $job): string
 }
 
 /** @param array<string,mixed> $job */
-function outreach_sample_phrase(array $job): string
+function outreach_system_pain(array $job): string
+{
+    return trim((string) ($job['system_pain'] ?? ''));
+}
+
+/** @param array<string,mixed> $job */
+function outreach_system_hook_sentence(array $job, bool $html = true): string
 {
     $label = outreach_system_label($job);
-    if ($label !== '') {
-        return "sample website and {$label}";
+    $pain = outreach_system_pain($job);
+    $biz = (string) $job['business_name'];
+
+    if ($label !== '' && $pain !== '') {
+        if ($html) {
+            return 'I prepared a sample <strong>' . h($label) . '</strong> for <strong>' . h($biz) . '</strong>. '
+                . '<strong>' . h($pain) . '</strong>';
+        }
+
+        return "I prepared a sample {$label} for {$biz}. {$pain}";
     }
 
-    return 'sample website and browsable admin system';
+    if ($label !== '') {
+        if ($html) {
+            return 'I prepared a sample <strong>' . h($label) . '</strong> for <strong>' . h($biz) . '</strong> '
+                . '— so day-to-day work lives in one place instead of scattered chats and notes.';
+        }
+
+        return "I prepared a sample {$label} for {$biz} — so day-to-day work lives in one place instead of scattered chats and notes.";
+    }
+
+    if ($html) {
+        return 'I prepared a sample <strong>business admin system and website</strong> for <strong>' . h($biz) . '</strong> '
+            . '— operations first, with a marketing site as the public face.';
+    }
+
+    return "I prepared a sample business admin system and website for {$biz} — operations first, with a marketing site as the public face.";
+}
+
+/** @param array<string,mixed> $job */
+function outreach_admin_browse_html(array $job): string
+{
+    $label = outreach_system_label($job);
+    $adminName = $label !== '' ? $label : 'admin demo';
+
+    return '<p><strong>Start with the admin (desktop &amp; mobile):</strong> the preview opens on your '
+        . '<strong>' . h($adminName) . '</strong> — already logged in at <code>/admin/</code>. '
+        . 'Scroll inside the frames and click Dashboard, Bookings/Calendar, and other sample pages.</p>';
+}
+
+/** @param array<string,mixed> $job */
+function outreach_admin_browse_text(array $job): string
+{
+    $label = outreach_system_label($job);
+    $adminName = $label !== '' ? $label : 'admin demo';
+
+    return "Start with the admin (desktop & mobile): {$adminName} at /admin/ — scroll inside the frames and browse the sample pages.\n\n";
+}
+
+/** @param array<string,mixed> $job */
+function outreach_build_initial_email(array $job): array
+{
+    $name = (string) $job['contact_name'];
+    $biz = (string) $job['business_name'];
+    $preview = (string) $job['preview_url'];
+    $pkg = (string) ($job['package_name'] ?: 'Starter Business Website');
+    $amount = (string) ($job['quoted_amount'] ?: '');
+    $timeline = (string) ($job['timeline'] ?: '');
+    $payment = outreach_payment_terms($job);
+    $label = outreach_system_label($job);
+    $hook = outreach_system_hook_sentence($job, true);
+    $hookText = outreach_system_hook_sentence($job, false);
+
+    $subject = $label !== ''
+        ? "{$label} + website sample for {$biz}"
+        : "Business system + website sample for {$biz}";
+
+    $title = $label !== ''
+        ? h($label) . ' + website sample'
+        : 'Business system + website sample';
+
+    $html = '<h2>' . $title . ' for ' . h($biz) . '</h2>'
+        . '<p>Hi ' . h($name) . ',</p>'
+        . '<p>' . $hook . '</p>'
+        . outreach_admin_browse_html($job)
+        . '<p><strong>Then the marketing site:</strong> desktop and mobile pages at <code>/</code> show '
+        . 'how ' . h($biz) . ' could look online.</p>'
+        . '<p><strong>Preview link:</strong> <a href="' . h($preview) . '">' . h($preview) . '</a></p>'
+        . '<p><strong>Package:</strong> ' . h($pkg) . '<br>'
+        . ($amount !== '' ? '<strong>Investment (total):</strong> ' . h($amount) . '<br>' : '')
+        . '<strong>Payment:</strong> ' . h($payment) . '<br>'
+        . '<strong>Timeline:</strong> ' . h($timeline) . '</p>'
+        . '<p><em>To start, only the upfront portion is due — not the full package amount.</em></p>'
+        . '<p>Reply if the admin and site previews look right, you want changes, or you are ready to proceed.</p>'
+        . outreach_signature_html();
+    $text = "Hi {$name},\n\n{$hookText}\n"
+        . outreach_admin_browse_text($job)
+        . "Then the marketing site at / on desktop and mobile.\n"
+        . "Preview: {$preview}\n\n"
+        . "Package: {$pkg}\n"
+        . ($amount !== '' ? "Investment (total): {$amount}\n" : '')
+        . "Payment: {$payment}\n"
+        . "To start, only the upfront portion is due — not the full package amount.\n"
+        . "Timeline: {$timeline}\n\n"
+        . "Reply if the admin and site previews look right, you want changes, or you are ready to proceed.\n\n"
+        . outreach_signature_text();
+
+    return [$subject, $html, $text];
 }
 
 function outreach_signature_html(): string
@@ -222,50 +321,6 @@ function outreach_signature_text(): string
 }
 
 /** @param array<string,mixed> $job */
-function outreach_build_initial_email(array $job): array
-{
-    $name = (string) $job['contact_name'];
-    $biz = (string) $job['business_name'];
-    $preview = (string) $job['preview_url'];
-    $pkg = (string) ($job['package_name'] ?: 'Starter Business Website');
-    $amount = (string) ($job['quoted_amount'] ?: '');
-    $timeline = (string) ($job['timeline'] ?: '');
-    $payment = outreach_payment_terms($job);
-    $sample = outreach_sample_phrase($job);
-
-    $subject = "Website + admin preview for {$biz} — site & system on desktop and mobile";
-    $html = '<h2>Website + admin preview for ' . h($biz) . '</h2>'
-        . '<p>Hi ' . h($name) . ',</p>'
-        . '<p>I prepared a <strong>' . h($sample) . '</strong> for <strong>' . h($biz) . '</strong> '
-        . 'so you can see how your business could look online on <strong>desktop and mobile</strong>.</p>'
-        . '<p><strong>Preview (site + admin — scroll inside each frame):</strong> '
-        . '<a href="' . h($preview) . '">' . h($preview) . '</a></p>'
-        . '<ul>'
-        . '<li><strong>Site</strong> — desktop and mobile marketing page (<code>/</code>)</li>'
-        . '<li><strong>Admin</strong> — desktop and mobile demo, already logged in (<code>/admin/</code>) — '
-        . 'click through Dashboard, Bookings/Calendar, and other sample pages</li>'
-        . '</ul>'
-        . '<p><strong>Package:</strong> ' . h($pkg) . '<br>'
-        . ($amount !== '' ? '<strong>Investment (total):</strong> ' . h($amount) . '<br>' : '')
-        . '<strong>Payment:</strong> ' . h($payment) . '<br>'
-        . '<strong>Timeline:</strong> ' . h($timeline) . '</p>'
-        . '<p><em>To start, only the upfront portion is due — not the full package amount.</em></p>'
-        . '<p>Reply if you like the site and admin preview, want changes, or want to proceed.</p>'
-        . outreach_signature_html();
-    $text = "Hi {$name},\n\n{$sample} for {$biz}:\n{$preview}\n\n"
-        . "The preview shows site + admin on desktop and mobile. Browse the admin pages inside the frames.\n\n"
-        . "Package: {$pkg}\n"
-        . ($amount !== '' ? "Investment (total): {$amount}\n" : '')
-        . "Payment: {$payment}\n"
-        . "To start, only the upfront portion is due — not the full package amount.\n"
-        . "Timeline: {$timeline}\n\n"
-        . "Reply if you like the site and admin preview, want changes, or want to proceed.\n\n"
-        . outreach_signature_text();
-
-    return [$subject, $html, $text];
-}
-
-/** @param array<string,mixed> $job */
 function outreach_build_followup_email(array $job): array
 {
     $name = (string) $job['contact_name'];
@@ -274,6 +329,8 @@ function outreach_build_followup_email(array $job): array
     $pkg = (string) ($job['package_name'] ?: 'Starter Business Website');
     $payment = outreach_payment_terms($job);
     $count = (int) ($job['follow_up_count'] ?? 0);
+    $label = outreach_system_label($job);
+    $systemPhrase = $label !== '' ? $label : 'admin system';
     // Sequence: 1st FU = soft 3d; 2nd+ = 1w “still interested?” + stacking discounts
     $isWeekFollowUp = $count >= 1;
     $offer = outreach_followup_offer_copy($job, $count);
@@ -282,39 +339,39 @@ function outreach_build_followup_email(array $job): array
 
     if ($isWeekFollowUp) {
         $subject = $totalPct > 0
-            ? "Still interested? {$totalPct}% off — {$biz} website + admin preview"
-            : "Still interested? {$biz} website + admin preview";
-        $ask = 'Did you <strong>like</strong> the site and admin sample, want <strong>revisions</strong>, or is it <strong>not a fit right now</strong>?'
+            ? "Still interested? {$totalPct}% off — {$biz} {$systemPhrase} + website preview"
+            : "Still interested? {$biz} {$systemPhrase} + website preview";
+        $ask = 'Did you <strong>browse the admin</strong> preview and like the sample, want <strong>revisions</strong>, or is it <strong>not a fit right now</strong>?'
             . '<br><br>Payment stays <strong>' . h($payment) . '</strong>'
             . ($discounted !== null
                 ? ' on the discounted total of <strong>' . h($discounted) . '</strong>'
                 : '')
             . '. Only the upfront half is due to start.';
-        $askText = 'Did you like the site and admin sample, want revisions, or is it not a fit right now?'
+        $askText = 'Did you browse the admin preview and like the sample, want revisions, or is it not a fit right now?'
             . "\n\nPayment stays {$payment}"
             . ($discounted !== null ? " on the discounted total of {$discounted}" : '')
             . '. Only the upfront half is due to start.';
     } else {
         $subject = $totalPct > 0
-            ? "Quick check-in + {$totalPct}% off — your {$biz} website + admin preview"
-            : "Quick check-in — your {$biz} website + admin preview";
-        $ask = 'Did the <strong>site and admin</strong> previews look useful on desktop and mobile? Anything to change? Ready to proceed with <strong>'
+            ? "Quick check-in + {$totalPct}% off — your {$biz} {$systemPhrase} + website preview"
+            : "Quick check-in — your {$biz} {$systemPhrase} + website preview";
+        $ask = 'Did the <strong>admin</strong> preview look useful on desktop and mobile? Browse the pages inside the frames, then the marketing site. Anything to change? Ready to proceed with <strong>'
             . h($pkg) . '</strong>'
             . ($discounted !== null ? ' at <strong>' . h($discounted) . '</strong>' : '')
             . '? Only the upfront portion is due to begin — not the full amount.';
-        $askText = "Did the site and admin previews look useful on desktop and mobile? Anything to change? Ready to proceed with {$pkg}"
+        $askText = "Did the admin preview look useful on desktop and mobile? Browse the pages inside the frames, then the marketing site. Anything to change? Ready to proceed with {$pkg}"
             . ($discounted !== null ? " at {$discounted}" : '')
             . '? Only the upfront portion is due to begin — not the full amount.';
     }
 
     $html = '<p>Hi ' . h($name) . ',</p>'
-        . '<p>Checking in about the sample website and admin system for <strong>' . h($biz) . '</strong>.</p>'
-        . '<p><strong>Preview (site + admin):</strong> <a href="' . h($preview) . '">' . h($preview) . '</a></p>'
+        . '<p>Checking in about the sample <strong>' . h($systemPhrase) . '</strong> and website for <strong>' . h($biz) . '</strong>.</p>'
+        . '<p><strong>Preview (admin + site):</strong> <a href="' . h($preview) . '">' . h($preview) . '</a></p>'
         . '<p>' . $ask . '</p>'
         . $offer['html']
         . '<p>No pressure — a short reply is enough.</p>'
         . outreach_signature_html();
-    $text = "Hi {$name},\n\nChecking in about {$biz} (site + admin preview).\nPreview: {$preview}\n\n{$askText}\n\n"
+    $text = "Hi {$name},\n\nChecking in about the {$systemPhrase} and website for {$biz}.\nPreview: {$preview}\n\n{$askText}\n\n"
         . $offer['text'] . "\n\n"
         . outreach_signature_text();
 
@@ -442,6 +499,7 @@ function route_outreach_schedule(): void
     $autoFollowUp = array_key_exists('autoFollowUp', $body) ? (bool) $body['autoFollowUp'] : true;
     $maxFollowUps = max(0, min(8, (int) ($body['maxFollowUps'] ?? outreach_default_max_followups())));
     $systemLabel = trim((string) ($body['systemLabel'] ?? ''));
+    $systemPain = trim((string) ($body['systemPain'] ?? ''));
 
     if ($slug === '' || $businessName === '' || $contactName === '' || $contactEmail === '' || $previewUrl === '') {
         send_error('Missing required fields');
@@ -467,6 +525,7 @@ function route_outreach_schedule(): void
         'cadence' => $cadence,
         'follow_up_count' => 0,
         'system_label' => $systemLabel,
+        'system_pain' => $systemPain,
     ];
 
     if ($sendInitial) {

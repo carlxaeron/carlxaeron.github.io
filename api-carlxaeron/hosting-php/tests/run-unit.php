@@ -138,12 +138,13 @@ echo "\ninitial + follow-up systems-first copy\n";
     'payment_terms' => '',
     'timeline' => '5–7 days',
 ]);
-assert_true(str_contains(strtolower($initSubject), 'admin'), 'initial subject mentions admin');
+assert_true(str_contains(strtolower($initSubject), 'website sample'), 'initial subject leads with system + website sample');
 assert_true(str_contains($initHtml, '/admin/'), 'initial HTML has admin path');
-assert_true(str_contains(strtolower($initHtml), 'site and admin'), 'initial HTML mentions site + admin');
+assert_true(str_contains($initHtml, 'Start with the admin'), 'initial HTML leads with admin browse');
+assert_true(str_contains($initHtml, 'Then the marketing site'), 'initial HTML mentions site second');
 assert_true(str_contains($initHtml, 'tel:+639625389886'), 'initial HTML has phone link');
 assert_true(str_contains($initText, '+63 962 538 9886'), 'initial text has phone');
-assert_true(str_contains(strtolower($initText), 'admin'), 'initial text mentions admin');
+assert_true(str_contains(strtolower($initText), 'start with the admin'), 'initial text leads with admin');
 [, $initLabelHtml, $initLabelText] = outreach_build_initial_email([
     'contact_name' => 'Test',
     'business_name' => 'Demo Biz',
@@ -156,7 +157,19 @@ assert_true(str_contains(strtolower($initText), 'admin'), 'initial text mentions
 ]);
 assert_true(str_contains($initLabelText, 'Booking & calendar admin'), 'initial uses systemLabel');
 assert_true(str_contains($initLabelHtml, 'Booking'), 'initial HTML includes system label');
-assert_true(str_contains(strtolower($fuHtml), 'site and admin'), '3d HTML mentions site + admin');
+[, $initPainHtml, $initPainText] = outreach_build_initial_email([
+    'contact_name' => 'Test',
+    'business_name' => 'Demo Biz',
+    'preview_url' => 'https://carlmanuel.com/?preview=demo',
+    'package_name' => 'Starter',
+    'quoted_amount' => '',
+    'payment_terms' => '',
+    'timeline' => '',
+    'system_label' => 'Booking & calendar admin',
+    'system_pain' => 'Stop taking bookings only on Messenger — see the calendar fill in real time.',
+]);
+assert_true(str_contains($initPainText, 'Stop taking bookings only on Messenger'), 'initial uses systemPain');
+assert_true(str_contains(strtolower($fuHtml), 'admin system'), '3d HTML leads with admin');
 
 echo "\nMail header helpers\n";
 assert_same('info@carlmanuel.com', mail_bare_address('info@carlmanuel.com'), 'bare stays bare');

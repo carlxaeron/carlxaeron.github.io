@@ -199,7 +199,7 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
             </button>
           </div>
           <div className="v3-preview-header__copy">
-            <p className="v3-preview-eyebrow">Website + admin system preview</p>
+            <p className="v3-preview-eyebrow">Business system + website sample</p>
             <h1 className="v3-preview-title">{displayLabel}</h1>
           </div>
         </div>
@@ -210,41 +210,11 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
           <span className="v3-preview-scroll-hint__icon" aria-hidden="true">
             ↕
           </span>
-          Scroll inside each frame to explore the sample site and admin. Click admin nav to browse
-          pages.
+          Start with the admin frames — scroll and click nav to browse pages. Then check the
+          marketing site on desktop and mobile.
         </p>
 
         <div className="v3-preview-devices v3-preview-devices--quad">
-          <div className="v3-preview-devices__row v3-preview-devices__row--site">
-            <PreviewDevice
-              variant="desktop"
-              label="Site — Desktop"
-              hint="Scroll inside the monitor to explore the marketing site."
-              previewUrl={previewUrl}
-              displayLabel={displayLabel}
-              screenRef={siteDesktopRef}
-              viewport={DESKTOP_VIEWPORT}
-              scale={siteDesktopScale}
-              iframeClass="v3-preview-iframe v3-preview-iframe--desktop"
-              onError={() => setSiteDesktopBlocked(true)}
-              blocked={siteDesktopBlocked}
-            />
-            <PreviewDevice
-              variant="mobile"
-              label="Site — Mobile"
-              hint="Scroll inside the phone to explore the marketing site."
-              previewUrl={previewUrl}
-              displayLabel={displayLabel}
-              screenRef={siteMobileRef}
-              viewport={MOBILE_VIEWPORT}
-              scale={siteMobileScale}
-              iframeClass="v3-preview-iframe v3-preview-iframe--mobile"
-              loading="lazy"
-              onError={() => setSiteMobileBlocked(true)}
-              blocked={siteMobileBlocked}
-            />
-          </div>
-
           <div className="v3-preview-devices__row v3-preview-devices__row--admin">
             <PreviewDevice
               variant="desktop"
@@ -256,7 +226,6 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
               viewport={DESKTOP_VIEWPORT}
               scale={adminDesktopScale}
               iframeClass="v3-preview-iframe v3-preview-iframe--desktop v3-preview-iframe--admin"
-              loading="lazy"
               onError={() => setAdminDesktopBlocked(true)}
               blocked={adminDesktopBlocked}
             />
@@ -273,6 +242,37 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
               loading="lazy"
               onError={() => setAdminMobileBlocked(true)}
               blocked={adminMobileBlocked}
+            />
+          </div>
+
+          <div className="v3-preview-devices__row v3-preview-devices__row--site">
+            <PreviewDevice
+              variant="desktop"
+              label="Site — Desktop"
+              hint="Scroll inside the monitor to explore the marketing site."
+              previewUrl={previewUrl}
+              displayLabel={displayLabel}
+              screenRef={siteDesktopRef}
+              viewport={DESKTOP_VIEWPORT}
+              scale={siteDesktopScale}
+              iframeClass="v3-preview-iframe v3-preview-iframe--desktop"
+              loading="lazy"
+              onError={() => setSiteDesktopBlocked(true)}
+              blocked={siteDesktopBlocked}
+            />
+            <PreviewDevice
+              variant="mobile"
+              label="Site — Mobile"
+              hint="Scroll inside the phone to explore the marketing site."
+              previewUrl={previewUrl}
+              displayLabel={displayLabel}
+              screenRef={siteMobileRef}
+              viewport={MOBILE_VIEWPORT}
+              scale={siteMobileScale}
+              iframeClass="v3-preview-iframe v3-preview-iframe--mobile"
+              loading="lazy"
+              onError={() => setSiteMobileBlocked(true)}
+              blocked={siteMobileBlocked}
             />
           </div>
         </div>

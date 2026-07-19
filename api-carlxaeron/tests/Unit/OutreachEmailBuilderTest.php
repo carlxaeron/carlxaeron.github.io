@@ -40,23 +40,38 @@ class OutreachEmailBuilderTest extends TestCase
         $this->assertStringContainsString(self::PHONE_DISPLAY, $text);
     }
 
-    public function test_initial_email_mentions_site_and_admin_preview(): void
+    public function test_initial_email_leads_with_admin_then_site(): void
     {
         [$subject, $html, $text] = OutreachEmailBuilder::initial($this->sampleJob());
 
-        $this->assertStringContainsString('admin', strtolower($subject));
+        $this->assertStringContainsString('Business system + website sample', $subject);
         $this->assertStringContainsString('/admin/', $html);
-        $this->assertStringContainsString('site and admin', strtolower($html));
-        $this->assertStringContainsString('admin', strtolower($text));
+        $this->assertStringContainsString('Start with the admin', $html);
+        $this->assertStringContainsString('Then the marketing site', $html);
+        $this->assertStringContainsString('Start with the admin', $text);
+        $this->assertStringContainsString('Then the marketing site', $text);
     }
 
     public function test_initial_email_uses_system_label_when_provided(): void
     {
         $job = array_merge($this->sampleJob(), ['system_label' => 'Booking & calendar admin']);
-        [, $html, $text] = OutreachEmailBuilder::initial($job);
+        [$subject, $html, $text] = OutreachEmailBuilder::initial($job);
 
+        $this->assertStringContainsString('Booking & calendar admin + website sample', $subject);
         $this->assertStringContainsString('Booking &amp; calendar admin', $html);
         $this->assertStringContainsString('Booking & calendar admin', $text);
+    }
+
+    public function test_initial_email_uses_system_pain_when_provided(): void
+    {
+        $job = array_merge($this->sampleJob(), [
+            'system_label' => 'Booking & calendar admin',
+            'system_pain' => 'Stop taking bookings only on Messenger — see the calendar fill in real time.',
+        ]);
+        [, $html, $text] = OutreachEmailBuilder::initial($job);
+
+        $this->assertStringContainsString('Stop taking bookings only on Messenger', $html);
+        $this->assertStringContainsString('Stop taking bookings only on Messenger', $text);
     }
 
     public function test_followup_email_includes_facebook_in_signature(): void
@@ -70,11 +85,12 @@ class OutreachEmailBuilderTest extends TestCase
         $this->assertStringContainsString(self::PHONE_DISPLAY, $text);
     }
 
-    public function test_followup_email_mentions_site_and_admin(): void
+    public function test_followup_email_leads_with_admin(): void
     {
         [$subject, $html] = OutreachEmailBuilder::followup($this->sampleJob());
 
-        $this->assertStringContainsString('admin', strtolower($subject));
-        $this->assertStringContainsString('site and admin', strtolower($html));
+        $this->assertStringContainsString('admin system', strtolower($subject));
+        $this->assertStringContainsString('browse the pages inside the frames', strtolower($html));
+        $this->assertStringContainsString('Preview (admin + site)', $html);
     }
 }

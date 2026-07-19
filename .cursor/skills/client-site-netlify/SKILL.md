@@ -53,11 +53,23 @@ Edit `client.json`: `businessName`, `slug`, `industry`, `contact`, `quotation` (
   "type": "booking",
   "adminPath": "/admin/",
   "label": "Booking & calendar admin",
+  "painHero": "Stop taking bookings only on Messenger — see the calendar fill in real time.",
   "navPages": ["Dashboard", "Bookings", "Calendar", "Guests", "Settings"]
 }
 ```
 
-Pass `system.label` as optional **`systemLabel`** on `POST /outreachSchedule` when sending (not stored in DB — initial email only).
+Pass optional **`systemLabel`** (`system.label`) and **`systemPain`** (`system.painHero`) on `POST /outreachSchedule` when sending (used in initial email hook — not persisted in DB for cron follow-ups).
+
+### Per-client customization (mandatory — do not ship defaults)
+
+Every client admin demo **must** feel like *their* business, not a recolored template:
+
+1. **`brand-config.js`** — real `businessName`, logo/initials, colors from the marketing site (no leftover “Business Admin” text).
+2. **`demo-data.override.js`** (or `ADMIN_CONFIG.demo`) — client-specific rows: package names, rates, local names, services from their FB/site — **not** unchanged vertical pack defaults (e.g. generic “Maria Santos”, placeholder rates).
+3. **`system.painHero`** in `client.json` — one-line pain the prospect recognizes (shown in admin dashboard hero + outreach hook).
+4. **Outreach drafts** — systems-first copy: open with the admin hook + pain, then browse admin, then website; never paste `_template/` pack text unchanged.
+
+**Do not** deploy or share a preview until demo data + pain hero are customized for that client.
 
 ### Vertical → system type (nav pages)
 
@@ -290,16 +302,16 @@ Use `buildPreviewPortfolioUrl("slug")` for outreach `previewUrl` values.
 
 4. **Update the site catalog:** add a row and detail section in [`client-sites/README.md`](../../client-sites/README.md) (preview link, contact, package, sources, outreach paths).
 
-**Preview UI:** `PreviewShowcase` shows **four** labeled device panels:
+**Preview UI:** `PreviewShowcase` shows **four** labeled device panels (**admin first**, then site):
 
 | Panel | iframe src | Viewport |
 |-------|------------|----------|
-| Site — Desktop | `{base}/` | 1280×800 |
-| Site — Mobile | `{base}/` | 390×844 |
 | Admin — Desktop | `{base}/admin/` | 1280×800 |
 | Admin — Mobile | `{base}/admin/` | 390×844 |
+| Site — Desktop | `{base}/` | 1280×800 |
+| Site — Mobile | `{base}/` | 390×844 |
 
-Eyebrow: “Website + admin system preview”. Prospects can scroll inside each frame and **browse admin nav** (Dashboard, Bookings/Jobs, Calendar, etc.). There is **no “Open live site”** link (client URLs are embed-only by design).
+Eyebrow: **“Business system + website sample”**. Intro copy tells prospects to **start with the admin frames** (scroll + click nav), then check the marketing site. There is **no “Open live site”** link (client URLs are embed-only by design).
 
 ## Step 5 — Draft outreach quotations (required)
 
@@ -315,7 +327,7 @@ After the site is built and `previewUrl` is known, customize the draft files in 
 
 **Template placeholders** (replace in all drafts): `{{contactName}}`, `{{contactEmail}}`, `{{businessName}}`, `{{previewUrl}}`, `{{packageName}}`, `{{packageScope}}`, `{{quotedAmount}}`, `{{paymentTerms}}`, `{{timeline}}`, `{{industry}}`.
 
-**Tone:** professional, warm, Philippine business context (₱, salamat OK in messenger). Frame as **website + browsable admin system** on desktop and mobile — website package stays the entry offer (₱15k/₱18k); admin sample is the upsell path. Sign off as **Carl Louis Manuel** with [carlmanuel.com](https://carlmanuel.com), [Facebook](https://www.facebook.com/profile.php?id=61557195950694), **+63 962 538 9886**, and info@carlmanuel.com (see `_template/` drafts).
+**Tone:** professional, warm, Philippine business context (₱, salamat OK in messenger). **Lead with the business system** (`system.label` + `system.painHero`), then admin browse on desktop/mobile, then the marketing site — website package stays the entry offer (₱15k/₱18k); admin sample is the upsell path. Sign off as **Carl Louis Manuel** with [carlmanuel.com](https://carlmanuel.com), [Facebook](https://www.facebook.com/profile.php?id=61557195950694), **+63 962 538 9886**, and info@carlmanuel.com (see `_template/` drafts).
 
 ### Email found → prepare send → **ask first** (mandatory for initial only)
 
@@ -330,7 +342,8 @@ Outreach gate:
 - [ ] On yes → do NOT ask a separate cadence question
 - [ ] Default cadence: **3d1w** — **3d → 7d → 7d → 7d** (max **4** follow-ups)
 - [ ] Immediately POST https://api.carlmanuel.com/outreachSchedule with
-      sendInitial: true, autoFollowUp: true, cadence: "3d1w", maxFollowUps: 4
+      sendInitial: true, autoFollowUp: true, cadence: "3d1w", maxFollowUps: 4,
+      systemLabel (from system.label), systemPain (from system.painHero)
 - [ ] Mirror status into client.json → outreach.*
 ```
 
@@ -464,6 +477,7 @@ curl -sI -H "Sec-Fetch-Dest: iframe" \
 ## Rules
 
 - **Systems-first pitch** when a vertical applies — never frame as website-only if admin demo exists.
+- **Customize demo data + pain hero per client** — forbid shipping default vertical pack text or generic placeholder rows unchanged.
 - Whitelist-only preview hosts (no arbitrary domains).
 - Keep `embed-guard.js` + edge `embed-only` on every client folder — do not ship browsable public demos.
 - No secrets in `client-sites/` — use Netlify env for forms later.

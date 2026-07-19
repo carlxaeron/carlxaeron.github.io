@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.72] — 2026-07-19
+
+### Changed
+- **PreviewShowcase** — Admin desktop/mobile panels first, site second; eyebrow “Business system + website sample”; intro leads with admin browse
+- **Outreach emails** — Initial + follow-up copy opens with system hook (`systemLabel` + optional `systemPain`), then admin browse, then marketing site; phone kept in signature
+- **Agent docs** — client-site-netlify skill + client-quotations rule require per-client demo data + `painHero` customization (forbid default pack text unchanged)
+
 ## [3.0.71] — 2026-07-19
 
 ### Added
