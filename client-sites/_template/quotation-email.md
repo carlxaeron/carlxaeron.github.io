@@ -2,7 +2,7 @@
 
 **Status:** Draft — review before sending  
 **To:** {{contactEmail}}  
-**Subject:** Website proposal for {{businessName}} — preview your sample site
+**Subject:** Website + admin preview for {{businessName}} — site & system on desktop and mobile
 
 ---
 
@@ -10,10 +10,15 @@ Hi {{contactName}},
 
 Good day! I'm **Carl Louis Manuel**, a full-stack web developer based in the Philippines.
 
-I prepared a **sample one-page website** for **{{businessName}}** so you can see how your business could look online on desktop and mobile — before you commit to anything.
+I prepared a **sample website and browsable admin system** for **{{businessName}}** so you can see how your business could look online — on **desktop and mobile** — before you commit to anything.
 
-**Preview (desktop + mobile):**  
+**Preview (4 panels — scroll inside each frame):**  
 {{previewUrl}}
+
+- **Site — Desktop & Mobile:** marketing one-pager at `/` (hero, services, contact)
+- **Admin — Desktop & Mobile:** pre-logged-in demo at `/admin/` — click through Dashboard, Bookings, Calendar, and other sample pages inside the admin frames
+
+The **website package** below is the entry offer; the admin sample shows the natural next layer for day-to-day operations (bookings, jobs, appointments, or leads — tailored to your industry).
 
 ### Proposed package — {{packageName}}
 
@@ -28,8 +33,9 @@ I prepared a **sample one-page website** for **{{businessName}}** so you can see
 
 ### Next steps
 
-1. Open the preview link above and tell me what you'd like changed.
-2. If you're happy to proceed, I'll finalize content, connect your domain (optional), and hand over the live site.
+1. Open the preview link above — browse the **site and admin** on both desktop and mobile mockups.
+2. Tell me what you'd like changed on either side.
+3. If you're happy to proceed, I'll finalize content, connect your domain (optional), and hand over the live site.
 
 Reply to this email or message me if you have questions — happy to adjust the scope or quote.
 

@@ -32,6 +32,8 @@ class PreviewFeedbackEmailBuilderTest extends TestCase
         $this->assertStringContainsString('50% upfront', $html);
         $this->assertStringContainsString(self::FB_PROFILE, $html);
         $this->assertStringContainsString('push through', strtolower($text));
+        $this->assertStringContainsString('admin system', strtolower($html));
+        $this->assertStringContainsString('admin system', strtolower($text));
     }
 
     public function test_dislike_email_references_comment_and_invites_revision(): void

@@ -34,6 +34,7 @@ final class OutreachScheduler
         $sendInitial = ! empty($body['sendInitial']);
         $autoFollowUp = array_key_exists('autoFollowUp', $body) ? (bool) $body['autoFollowUp'] : true;
         $maxFollowUps = max(0, min(8, (int) ($body['maxFollowUps'] ?? OutreachCadence::defaultMaxFollowups())));
+        $systemLabel = trim((string) ($body['systemLabel'] ?? ''));
 
         if ($slug === '' || $businessName === '' || $contactName === '' || $contactEmail === '' || $previewUrl === '') {
             throw new \InvalidArgumentException('Missing required fields');
@@ -58,6 +59,7 @@ final class OutreachScheduler
             'contact_email' => $contactEmail,
             'cadence' => $cadence,
             'follow_up_count' => 0,
+            'system_label' => $systemLabel,
         ];
 
         if ($sendInitial) {

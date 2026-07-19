@@ -1,5 +1,5 @@
-Hi {{contactName}}! Carl here — I made a sample website preview for {{businessName}} (desktop + mobile view):
+Hi {{contactName}}! Carl here — I made a website + admin system preview for {{businessName}} (site & admin on desktop + mobile):
 
 {{previewUrl}}
 
-Package: {{packageName}} — {{quotedAmount}}. Reply if you'd like changes or to proceed. Thanks!
+Browse the admin pages inside the preview. Package: {{packageName}} — {{quotedAmount}}. Reply if you'd like changes or to proceed. Thanks!

@@ -23,8 +23,8 @@ if (!function_exists('env')) {
 require_once $root . '/src/cors.php';
 require_once $root . '/src/rate_limit.php';
 require_once $root . '/src/analytics.php';
-require_once $root . '/src/outreach.php';
 require_once $root . '/src/mail.php';
+require_once $root . '/src/outreach.php';
 require_once $root . '/src/assistant.php';
 require_once $root . '/src/weekly_report.php';
 
@@ -125,6 +125,34 @@ assert_true(str_contains($fuHtml, 'commission'), '3d HTML has commission');
 assert_true(str_contains($fuHtml, '61557195950694'), '3d HTML has Facebook link');
 assert_true(str_contains($fuText, '₱13,500'), '3d text has discounted price');
 assert_true(str_contains($fuText, '61557195950694'), '3d text has Facebook link');
+
+echo "\ninitial + follow-up systems-first copy\n";
+[$initSubject, $initHtml, $initText] = outreach_build_initial_email([
+    'contact_name' => 'Test',
+    'business_name' => 'Demo Biz',
+    'preview_url' => 'https://carlmanuel.com/?preview=demo',
+    'package_name' => 'Starter Business Website',
+    'quoted_amount' => '₱15,000',
+    'payment_terms' => '',
+    'timeline' => '5–7 days',
+]);
+assert_true(str_contains(strtolower($initSubject), 'admin'), 'initial subject mentions admin');
+assert_true(str_contains($initHtml, '/admin/'), 'initial HTML has admin path');
+assert_true(str_contains(strtolower($initHtml), 'site and admin'), 'initial HTML mentions site + admin');
+assert_true(str_contains(strtolower($initText), 'admin'), 'initial text mentions admin');
+[, $initLabelHtml, $initLabelText] = outreach_build_initial_email([
+    'contact_name' => 'Test',
+    'business_name' => 'Demo Biz',
+    'preview_url' => 'https://carlmanuel.com/?preview=demo',
+    'package_name' => 'Starter',
+    'quoted_amount' => '',
+    'payment_terms' => '',
+    'timeline' => '',
+    'system_label' => 'Booking & calendar admin',
+]);
+assert_true(str_contains($initLabelText, 'Booking & calendar admin'), 'initial uses systemLabel');
+assert_true(str_contains($initLabelHtml, 'Booking'), 'initial HTML includes system label');
+assert_true(str_contains(strtolower($fuHtml), 'site and admin'), '3d HTML mentions site + admin');
 
 echo "\nMail header helpers\n";
 assert_same('info@carlmanuel.com', mail_bare_address('info@carlmanuel.com'), 'bare stays bare');

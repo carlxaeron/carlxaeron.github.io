@@ -9,6 +9,12 @@
     "email": "client@example.com",
     "phone": "+63 900 000 0000"
   },
+  "system": {
+    "type": "booking",
+    "adminPath": "/admin/",
+    "label": "Booking & calendar admin",
+    "navPages": ["Dashboard", "Bookings", "Calendar", "Guests", "Settings"]
+  },
   "quotation": {
     "packageName": "Starter Business Website",
     "packageScope": "One-page responsive site, contact section, basic SEO, Netlify hosting setup",

@@ -40,11 +40,12 @@ final class PreviewFeedbackEmailBuilder
 
         $html = '<h2>Thanks for the thumbs up</h2>'
             .'<p>Hi '.e($name).',</p>'
-            .'<p>Thank you for liking the sample website I prepared for <strong>'.e($biz).'</strong>. '
+            .'<p>Thank you for liking the sample website and admin system I prepared for <strong>'.e($biz).'</strong>. '
             .'It is good to know the direction resonates with you.</p>'
             .'<p>If you are ready to <strong>push through</strong>, we can begin with the deposit '
             .'(<strong>'.e($payment).'</strong>). '.$timelineLine.'</p>'
-            .'<p><strong>Preview again:</strong> <a href="'.e($preview).'">'.e($preview).'</a></p>'
+            .'<p><strong>Preview again (site + admin on desktop &amp; mobile):</strong> '
+            .'<a href="'.e($preview).'">'.e($preview).'</a></p>'
             .'<p>Reply to this email if you want to proceed, need a quick tweak first, or have questions about scope or payment.</p>'
             .self::signatureHtml();
 
@@ -53,9 +54,9 @@ final class PreviewFeedbackEmailBuilder
             : 'We can agree on a timeline once you are ready to begin.';
 
         $text = "Hi {$name},\n\n"
-            ."Thank you for liking the sample website for {$biz}.\n\n"
+            ."Thank you for liking the sample website and admin system for {$biz}.\n\n"
             ."If you are ready to push through, we can begin with the deposit ({$payment}). {$timelineText}\n\n"
-            ."Preview: {$preview}\n\n"
+            ."Preview (site + admin): {$preview}\n\n"
             ."Reply if you want to proceed, need a tweak first, or have questions.\n\n"
             .self::signatureText();
 
@@ -84,7 +85,7 @@ final class PreviewFeedbackEmailBuilder
 
         $html = '<h2>Thanks for your honest feedback</h2>'
             .'<p>Hi '.e($name).',</p>'
-            .'<p>Thank you for taking a moment to share feedback on the sample website for <strong>'.e($biz).'</strong>. '
+            .'<p>Thank you for taking a moment to share feedback on the sample website and admin system for <strong>'.e($biz).'</strong>. '
             .'Honest input helps me get the preview closer to what you want.</p>'
             .$commentHtml
             .'<p>What would make the sample feel right for you — layout, photos, wording, or something else? '
@@ -95,7 +96,7 @@ final class PreviewFeedbackEmailBuilder
             .self::signatureHtml();
 
         $text = "Hi {$name},\n\n"
-            ."Thank you for sharing feedback on the sample website for {$biz}.\n\n"
+            ."Thank you for sharing feedback on the sample website and admin system for {$biz}.\n\n"
             .$commentText
             ."What would make the sample feel right for you? I am happy to revise before we move forward.\n\n"
             ."If you are still interested, reply with what to change. If timing is not right, just let me know.\n\n"

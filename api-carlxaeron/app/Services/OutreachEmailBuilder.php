@@ -9,6 +9,26 @@ final class OutreachEmailBuilder
 {
     /**
      * @param  array<string, mixed>  $job
+     */
+    private static function systemLabel(array $job): string
+    {
+        return trim((string) ($job['system_label'] ?? ''));
+    }
+
+    /**
+     * @param  array<string, mixed>  $job
+     */
+    private static function samplePhrase(array $job): string
+    {
+        $label = self::systemLabel($job);
+
+        return $label !== ''
+            ? "sample website and {$label}"
+            : 'sample website and browsable admin system';
+    }
+
+    /**
+     * @param  array<string, mixed>  $job
      * @return array{0:string,1:string,2:string}
      */
     public static function initial(array $job): array
@@ -20,29 +40,37 @@ final class OutreachEmailBuilder
         $amount = (string) ($job['quoted_amount'] ?: '');
         $timeline = (string) ($job['timeline'] ?: '');
         $payment = OutreachCadence::paymentTerms($job);
+        $sample = self::samplePhrase($job);
 
-        $subject = "Website proposal for {$biz} — preview your sample site";
-        $html = '<h2>Website proposal for '.e($biz).'</h2>'
+        $subject = "Website + admin preview for {$biz} — site & system on desktop and mobile";
+        $html = '<h2>Website + admin preview for '.e($biz).'</h2>'
             .'<p>Hi '.e($name).',</p>'
-            .'<p>I prepared a <strong>sample one-page website</strong> for <strong>'.e($biz).'</strong> '
-            .'so you can see how your business could look online on desktop and mobile.</p>'
-            .'<p><strong>Preview:</strong> <a href="'.e($preview).'">'.e($preview).'</a></p>'
+            .'<p>I prepared a <strong>'.e($sample).'</strong> for <strong>'.e($biz).'</strong> '
+            .'so you can see how your business could look online on <strong>desktop and mobile</strong>.</p>'
+            .'<p><strong>Preview (site + admin — scroll inside each frame):</strong> '
+            .'<a href="'.e($preview).'">'.e($preview).'</a></p>'
+            .'<ul>'
+            .'<li><strong>Site</strong> — desktop and mobile marketing page (<code>/</code>)</li>'
+            .'<li><strong>Admin</strong> — desktop and mobile demo, already logged in (<code>/admin/</code>) — '
+            .'click through Dashboard, Bookings/Calendar, and other sample pages</li>'
+            .'</ul>'
             .'<p><strong>Package:</strong> '.e($pkg).'<br>'
             .($amount !== '' ? '<strong>Investment (total):</strong> '.e($amount).'<br>' : '')
             .'<strong>Payment:</strong> '.e($payment).'<br>'
             .'<strong>Timeline:</strong> '.e($timeline).'</p>'
             .'<p><em>To start, only the upfront portion is due — not the full package amount.</em></p>'
-            .'<p>Reply if you like the preview, want changes, or want to proceed.</p>'
+            .'<p>Reply if you like the site and admin preview, want changes, or want to proceed.</p>'
             .'<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
             .'<a href="https://carlmanuel.com">carlmanuel.com</a> · '
             .'<a href="https://www.facebook.com/profile.php?id=61557195950694">Facebook</a> · info@carlmanuel.com</p>';
-        $text = "Hi {$name},\n\nSample website for {$biz}:\n{$preview}\n\n"
+        $text = "Hi {$name},\n\n{$sample} for {$biz}:\n{$preview}\n\n"
+            ."The preview shows site + admin on desktop and mobile. Browse the admin pages inside the frames.\n\n"
             ."Package: {$pkg}\n"
             .($amount !== '' ? "Investment (total): {$amount}\n" : '')
             ."Payment: {$payment}\n"
             ."To start, only the upfront portion is due — not the full package amount.\n"
             ."Timeline: {$timeline}\n\n"
-            ."Reply if you like it, want changes, or want to proceed.\n\n"
+            ."Reply if you like the site and admin preview, want changes, or want to proceed.\n\n"
             ."Carl Louis Manuel\ncarlmanuel.com · facebook.com/profile.php?id=61557195950694 · info@carlmanuel.com";
 
         return [$subject, $html, $text];
@@ -67,41 +95,41 @@ final class OutreachEmailBuilder
 
         if ($isWeekFollowUp) {
             $subject = $totalPct > 0
-                ? "Still interested? {$totalPct}% off — {$biz} website proposal"
-                : "Still interested? {$biz} website proposal";
-            $ask = 'Did you <strong>like</strong> the sample, want <strong>revisions</strong>, or is it <strong>not a fit right now</strong>?'
+                ? "Still interested? {$totalPct}% off — {$biz} website + admin preview"
+                : "Still interested? {$biz} website + admin preview";
+            $ask = 'Did you <strong>like</strong> the site and admin sample, want <strong>revisions</strong>, or is it <strong>not a fit right now</strong>?'
                 .'<br><br>Payment stays <strong>'.e($payment).'</strong>'
                 .($discounted !== null
                     ? ' on the discounted total of <strong>'.e($discounted).'</strong>'
                     : '')
                 .'. Only the upfront half is due to start.';
-            $askText = 'Did you like the sample, want revisions, or is it not a fit right now?'
+            $askText = 'Did you like the site and admin sample, want revisions, or is it not a fit right now?'
                 ."\n\nPayment stays {$payment}"
                 .($discounted !== null ? " on the discounted total of {$discounted}" : '')
                 .'. Only the upfront half is due to start.';
         } else {
             $subject = $totalPct > 0
-                ? "Quick check-in + {$totalPct}% off — your {$biz} website preview"
-                : "Quick check-in — your {$biz} website preview";
-            $ask = 'Did the desktop + mobile preview look useful? Anything to change? Ready to proceed with <strong>'
+                ? "Quick check-in + {$totalPct}% off — your {$biz} website + admin preview"
+                : "Quick check-in — your {$biz} website + admin preview";
+            $ask = 'Did the <strong>site and admin</strong> previews look useful on desktop and mobile? Anything to change? Ready to proceed with <strong>'
                 .e($pkg).'</strong>'
                 .($discounted !== null ? ' at <strong>'.e($discounted).'</strong>' : '')
                 .'? Only the upfront portion is due to begin — not the full amount.';
-            $askText = "Did the preview look useful? Anything to change? Ready to proceed with {$pkg}"
+            $askText = "Did the site and admin previews look useful on desktop and mobile? Anything to change? Ready to proceed with {$pkg}"
                 .($discounted !== null ? " at {$discounted}" : '')
                 .'? Only the upfront portion is due to begin — not the full amount.';
         }
 
         $html = '<p>Hi '.e($name).',</p>'
-            .'<p>Checking in about the sample website for <strong>'.e($biz).'</strong>.</p>'
-            .'<p><strong>Preview:</strong> <a href="'.e($preview).'">'.e($preview).'</a></p>'
+            .'<p>Checking in about the sample website and admin system for <strong>'.e($biz).'</strong>.</p>'
+            .'<p><strong>Preview (site + admin):</strong> <a href="'.e($preview).'">'.e($preview).'</a></p>'
             .'<p>'.$ask.'</p>'
             .$offer['html']
             .'<p>No pressure — a short reply is enough.</p>'
             .'<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
             .'<a href="https://carlmanuel.com">carlmanuel.com</a> · '
             .'<a href="https://www.facebook.com/profile.php?id=61557195950694">Facebook</a> · info@carlmanuel.com</p>';
-        $text = "Hi {$name},\n\nChecking in about {$biz}.\nPreview: {$preview}\n\n{$askText}\n\n"
+        $text = "Hi {$name},\n\nChecking in about {$biz} (site + admin preview).\nPreview: {$preview}\n\n{$askText}\n\n"
             .$offer['text']."\n\n"
             ."Carl Louis Manuel\ncarlmanuel.com · facebook.com/profile.php?id=61557195950694 · info@carlmanuel.com";
 

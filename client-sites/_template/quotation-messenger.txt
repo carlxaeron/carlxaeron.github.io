@@ -1,15 +1,19 @@
 Hi {{contactName}}! 👋
 
-I'm Carl Louis Manuel, web developer. I put together a **sample website** for {{businessName}} so you can see how it looks on phone and desktop before deciding.
+I'm Carl Louis Manuel, web developer. I put together a **sample website + browsable admin system** for {{businessName}} so you can see how it looks on **phone and desktop** before deciding.
 
-🔗 Preview: {{previewUrl}}
+🔗 Preview (site + admin, 4 panels): {{previewUrl}}
+
+Inside the link you'll see:
+• **Site** — desktop + mobile marketing page
+• **Admin** — desktop + mobile demo (already logged in — tap through Dashboard, Bookings/Calendar, etc.)
 
 📦 {{packageName}}
 • {{packageScope}}
 • Timeline: {{timeline}}
 • Investment: {{quotedAmount}} ({{paymentTerms}})
 
-Open the link when you have a minute — it's a demo layout we can customize with your photos, menu/services, and colors.
+Open when you have a minute — it's a demo layout we can customize with your photos, services, and colors. The admin sample shows what a booking/operations layer could look like next.
 
 Let me know what you think or if you want a quick call. Salamat!
 

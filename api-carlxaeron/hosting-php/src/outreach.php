@@ -191,6 +191,23 @@ function outreach_ensure_table(): void
 }
 
 /** @param array<string,mixed> $job */
+function outreach_system_label(array $job): string
+{
+    return trim((string) ($job['system_label'] ?? ''));
+}
+
+/** @param array<string,mixed> $job */
+function outreach_sample_phrase(array $job): string
+{
+    $label = outreach_system_label($job);
+    if ($label !== '') {
+        return "sample website and {$label}";
+    }
+
+    return 'sample website and browsable admin system';
+}
+
+/** @param array<string,mixed> $job */
 function outreach_build_initial_email(array $job): array
 {
     $name = (string) $job['contact_name'];
@@ -200,29 +217,37 @@ function outreach_build_initial_email(array $job): array
     $amount = (string) ($job['quoted_amount'] ?: '');
     $timeline = (string) ($job['timeline'] ?: '');
     $payment = outreach_payment_terms($job);
+    $sample = outreach_sample_phrase($job);
 
-    $subject = "Website proposal for {$biz} — preview your sample site";
-    $html = '<h2>Website proposal for ' . h($biz) . '</h2>'
+    $subject = "Website + admin preview for {$biz} — site & system on desktop and mobile";
+    $html = '<h2>Website + admin preview for ' . h($biz) . '</h2>'
         . '<p>Hi ' . h($name) . ',</p>'
-        . '<p>I prepared a <strong>sample one-page website</strong> for <strong>' . h($biz) . '</strong> '
-        . 'so you can see how your business could look online on desktop and mobile.</p>'
-        . '<p><strong>Preview:</strong> <a href="' . h($preview) . '">' . h($preview) . '</a></p>'
+        . '<p>I prepared a <strong>' . h($sample) . '</strong> for <strong>' . h($biz) . '</strong> '
+        . 'so you can see how your business could look online on <strong>desktop and mobile</strong>.</p>'
+        . '<p><strong>Preview (site + admin — scroll inside each frame):</strong> '
+        . '<a href="' . h($preview) . '">' . h($preview) . '</a></p>'
+        . '<ul>'
+        . '<li><strong>Site</strong> — desktop and mobile marketing page (<code>/</code>)</li>'
+        . '<li><strong>Admin</strong> — desktop and mobile demo, already logged in (<code>/admin/</code>) — '
+        . 'click through Dashboard, Bookings/Calendar, and other sample pages</li>'
+        . '</ul>'
         . '<p><strong>Package:</strong> ' . h($pkg) . '<br>'
         . ($amount !== '' ? '<strong>Investment (total):</strong> ' . h($amount) . '<br>' : '')
         . '<strong>Payment:</strong> ' . h($payment) . '<br>'
         . '<strong>Timeline:</strong> ' . h($timeline) . '</p>'
         . '<p><em>To start, only the upfront portion is due — not the full package amount.</em></p>'
-        . '<p>Reply if you like the preview, want changes, or want to proceed.</p>'
+        . '<p>Reply if you like the site and admin preview, want changes, or want to proceed.</p>'
         . '<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
         . '<a href="https://carlmanuel.com">carlmanuel.com</a> · '
         . '<a href="https://www.facebook.com/profile.php?id=61557195950694">Facebook</a> · info@carlmanuel.com</p>';
-    $text = "Hi {$name},\n\nSample website for {$biz}:\n{$preview}\n\n"
+    $text = "Hi {$name},\n\n{$sample} for {$biz}:\n{$preview}\n\n"
+        . "The preview shows site + admin on desktop and mobile. Browse the admin pages inside the frames.\n\n"
         . "Package: {$pkg}\n"
         . ($amount !== '' ? "Investment (total): {$amount}\n" : '')
         . "Payment: {$payment}\n"
         . "To start, only the upfront portion is due — not the full package amount.\n"
         . "Timeline: {$timeline}\n\n"
-        . "Reply if you like it, want changes, or want to proceed.\n\n"
+        . "Reply if you like the site and admin preview, want changes, or want to proceed.\n\n"
         . "Carl Louis Manuel\ncarlmanuel.com · facebook.com/profile.php?id=61557195950694 · info@carlmanuel.com";
 
     return [$subject, $html, $text];
@@ -245,41 +270,41 @@ function outreach_build_followup_email(array $job): array
 
     if ($isWeekFollowUp) {
         $subject = $totalPct > 0
-            ? "Still interested? {$totalPct}% off — {$biz} website proposal"
-            : "Still interested? {$biz} website proposal";
-        $ask = 'Did you <strong>like</strong> the sample, want <strong>revisions</strong>, or is it <strong>not a fit right now</strong>?'
+            ? "Still interested? {$totalPct}% off — {$biz} website + admin preview"
+            : "Still interested? {$biz} website + admin preview";
+        $ask = 'Did you <strong>like</strong> the site and admin sample, want <strong>revisions</strong>, or is it <strong>not a fit right now</strong>?'
             . '<br><br>Payment stays <strong>' . h($payment) . '</strong>'
             . ($discounted !== null
                 ? ' on the discounted total of <strong>' . h($discounted) . '</strong>'
                 : '')
             . '. Only the upfront half is due to start.';
-        $askText = 'Did you like the sample, want revisions, or is it not a fit right now?'
+        $askText = 'Did you like the site and admin sample, want revisions, or is it not a fit right now?'
             . "\n\nPayment stays {$payment}"
             . ($discounted !== null ? " on the discounted total of {$discounted}" : '')
             . '. Only the upfront half is due to start.';
     } else {
         $subject = $totalPct > 0
-            ? "Quick check-in + {$totalPct}% off — your {$biz} website preview"
-            : "Quick check-in — your {$biz} website preview";
-        $ask = 'Did the desktop + mobile preview look useful? Anything to change? Ready to proceed with <strong>'
+            ? "Quick check-in + {$totalPct}% off — your {$biz} website + admin preview"
+            : "Quick check-in — your {$biz} website + admin preview";
+        $ask = 'Did the <strong>site and admin</strong> previews look useful on desktop and mobile? Anything to change? Ready to proceed with <strong>'
             . h($pkg) . '</strong>'
             . ($discounted !== null ? ' at <strong>' . h($discounted) . '</strong>' : '')
             . '? Only the upfront portion is due to begin — not the full amount.';
-        $askText = "Did the preview look useful? Anything to change? Ready to proceed with {$pkg}"
+        $askText = "Did the site and admin previews look useful on desktop and mobile? Anything to change? Ready to proceed with {$pkg}"
             . ($discounted !== null ? " at {$discounted}" : '')
             . '? Only the upfront portion is due to begin — not the full amount.';
     }
 
     $html = '<p>Hi ' . h($name) . ',</p>'
-        . '<p>Checking in about the sample website for <strong>' . h($biz) . '</strong>.</p>'
-        . '<p><strong>Preview:</strong> <a href="' . h($preview) . '">' . h($preview) . '</a></p>'
+        . '<p>Checking in about the sample website and admin system for <strong>' . h($biz) . '</strong>.</p>'
+        . '<p><strong>Preview (site + admin):</strong> <a href="' . h($preview) . '">' . h($preview) . '</a></p>'
         . '<p>' . $ask . '</p>'
         . $offer['html']
         . '<p>No pressure — a short reply is enough.</p>'
         . '<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
         . '<a href="https://carlmanuel.com">carlmanuel.com</a> · '
         . '<a href="https://www.facebook.com/profile.php?id=61557195950694">Facebook</a> · info@carlmanuel.com</p>';
-    $text = "Hi {$name},\n\nChecking in about {$biz}.\nPreview: {$preview}\n\n{$askText}\n\n"
+    $text = "Hi {$name},\n\nChecking in about {$biz} (site + admin preview).\nPreview: {$preview}\n\n{$askText}\n\n"
         . $offer['text'] . "\n\n"
         . "Carl Louis Manuel\ncarlmanuel.com · facebook.com/profile.php?id=61557195950694 · info@carlmanuel.com";
 
@@ -406,6 +431,7 @@ function route_outreach_schedule(): void
     $sendInitial = !empty($body['sendInitial']);
     $autoFollowUp = array_key_exists('autoFollowUp', $body) ? (bool) $body['autoFollowUp'] : true;
     $maxFollowUps = max(0, min(8, (int) ($body['maxFollowUps'] ?? outreach_default_max_followups())));
+    $systemLabel = trim((string) ($body['systemLabel'] ?? ''));
 
     if ($slug === '' || $businessName === '' || $contactName === '' || $contactEmail === '' || $previewUrl === '') {
         send_error('Missing required fields');
@@ -430,6 +456,7 @@ function route_outreach_schedule(): void
         'contact_email' => $contactEmail,
         'cadence' => $cadence,
         'follow_up_count' => 0,
+        'system_label' => $systemLabel,
     ];
 
     if ($sendInitial) {

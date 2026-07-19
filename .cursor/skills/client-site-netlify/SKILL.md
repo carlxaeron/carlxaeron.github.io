@@ -5,6 +5,8 @@ description: Scaffold, build, and deploy local-business quotation websites under
 
 # Client site + Netlify deploy
 
+**Pitch:** **Website + browsable admin system** — not website-only. One Netlify codebase per client: marketing site at `/` + pre-logged-in admin demo at `/admin/`. Portfolio preview shows **4 panels**: site desktop, site mobile, admin desktop, admin mobile (`?preview={slug}`).
+
 **Preview URL format:** `https://carlmanuel.com/?preview={slug}` (e.g. `?preview=jk-construction`)  
 **Helper:** `buildPreviewPortfolioUrl(slug)` in [`previewWhitelist.js`](../../src/v3/config/previewWhitelist.js)  
 **Legacy:** full `*.netlify.app` hostnames in `?preview=` still resolve but the URL bar is normalized to the slug.  
@@ -25,10 +27,11 @@ description: Scaffold, build, and deploy local-business quotation websites under
 Client site progress:
 - [ ] Brief gathered via Chrome DevTools MCP (Facebook About + Photos; assets inspected and downloaded)
 - [ ] Folder scaffolded from _template
+- [ ] client.json: contact + quotation + **system** (`type`, `adminPath`, `label`, `navPages`)
+- [ ] Marketing site at `/` + browsable admin at `/admin/` (shared kit from `client-sites/_systems/admin/` when available)
 - [ ] Site content + styles customized
 - [ ] Deployed to Netlify (capture previewHost)
-- [ ] client.json updated (contact + quotation fields)
-- [ ] Draft outreach written (email, SMS, messenger + 3d/1w follow-ups)
+- [ ] Draft outreach written (email, SMS, messenger + 3d/1w follow-ups) — **systems-first copy**
 - [ ] If email found → ASK user before any send (send now vs not yet)
 - [ ] If sent → auto follow-ups on (**3d → 7d → 7d → 7d**, max 4); set nextFollowUpAt — do not ask cadence
 - [ ] PREVIEW_SITES entry added
@@ -43,7 +46,40 @@ Client site progress:
 cp -R client-sites/_template client-sites/{slug}
 ```
 
-Edit `client.json`: `businessName`, `slug`, `industry`, `contact`, `quotation` (package, amount, timeline).
+Edit `client.json`: `businessName`, `slug`, `industry`, `contact`, `quotation` (package, amount, timeline), and **`system`**:
+
+```json
+"system": {
+  "type": "booking",
+  "adminPath": "/admin/",
+  "label": "Booking & calendar admin",
+  "navPages": ["Dashboard", "Bookings", "Calendar", "Guests", "Settings"]
+}
+```
+
+Pass `system.label` as optional **`systemLabel`** on `POST /outreachSchedule` when sending (not stored in DB — initial email only).
+
+### Vertical → system type (nav pages)
+
+| Vertical | `system.type` | Admin focus | Example nav |
+|----------|---------------|-------------|-------------|
+| Pool / resort / staycation | `booking` | Bookings + calendar | Dashboard, Bookings, Calendar, Guests, Settings |
+| Hospital / clinic | `appointments` | OPD / appointments | Dashboard, Appointments, Schedule, Patients, Settings |
+| Spa | `appointments` | Appointment booking | Dashboard, Appointments, Calendar, Clients, Settings |
+| Field service (AC, construction) | `service` | Job schedule | Dashboard, Jobs, Dispatch, Customers, Settings |
+| B2B / retail / school | `leads` | Lead & quote inbox | Dashboard, Leads, Follow-ups, Contacts, Settings |
+
+Admin is **pre-logged-in**, **responsive** (sidebar → drawer/bottom nav on mobile), and **browsable** inside preview iframes. Still **embed-only** — edge guard + CSP must allow `/admin/` navigation.
+
+### Batch upgrade (existing clients)
+
+Upgrade **oldest first** (~4–6 per batch). Do **not** auto-resend initials — update drafts; re-outreach only when user says yes.
+
+1. Wire `/admin/` multi-page nav from `_systems/admin/` kit
+2. Fill `client.json` → `system`
+3. Redeploy Netlify
+4. QA all **4** preview iframes + click through admin nav (desktop + mobile frames)
+5. Update outreach drafts to systems-first copy
 
 ## Step 1b — Gather brief from Facebook (Chrome DevTools MCP)
 
@@ -254,7 +290,16 @@ Use `buildPreviewPortfolioUrl("slug")` for outreach `previewUrl` values.
 
 4. **Update the site catalog:** add a row and detail section in [`client-sites/README.md`](../../client-sites/README.md) (preview link, contact, package, sources, outreach paths).
 
-**Preview UI:** `PreviewShowcase` shows desktop + mobile mockups only — there is **no “Open live site”** link (client URLs are embed-only by design).
+**Preview UI:** `PreviewShowcase` shows **four** labeled device panels:
+
+| Panel | iframe src | Viewport |
+|-------|------------|----------|
+| Site — Desktop | `{base}/` | 1280×800 |
+| Site — Mobile | `{base}/` | 390×844 |
+| Admin — Desktop | `{base}/admin/` | 1280×800 |
+| Admin — Mobile | `{base}/admin/` | 390×844 |
+
+Eyebrow: “Website + admin system preview”. Prospects can scroll inside each frame and **browse admin nav** (Dashboard, Bookings/Jobs, Calendar, etc.). There is **no “Open live site”** link (client URLs are embed-only by design).
 
 ## Step 5 — Draft outreach quotations (required)
 
@@ -270,7 +315,7 @@ After the site is built and `previewUrl` is known, customize the draft files in 
 
 **Template placeholders** (replace in all drafts): `{{contactName}}`, `{{contactEmail}}`, `{{businessName}}`, `{{previewUrl}}`, `{{packageName}}`, `{{packageScope}}`, `{{quotedAmount}}`, `{{paymentTerms}}`, `{{timeline}}`, `{{industry}}`.
 
-**Tone:** professional, warm, Philippine business context (₱, salamat OK in messenger). Sign off as **Carl Louis Manuel** with [carlmanuel.com](https://carlmanuel.com), [Facebook](https://www.facebook.com/profile.php?id=61557195950694), and info@carlmanuel.com (see `_template/` drafts).
+**Tone:** professional, warm, Philippine business context (₱, salamat OK in messenger). Frame as **website + browsable admin system** on desktop and mobile — website package stays the entry offer (₱15k/₱18k); admin sample is the upsell path. Sign off as **Carl Louis Manuel** with [carlmanuel.com](https://carlmanuel.com), [Facebook](https://www.facebook.com/profile.php?id=61557195950694), and info@carlmanuel.com (see `_template/` drafts).
 
 ### Email found → prepare send → **ask first** (mandatory for initial only)
 
@@ -323,6 +368,7 @@ curl -sS -X POST 'https://api.carlmanuel.com/outreachSchedule' \
     \"paymentTerms\": \"50% upfront to begin · 50% on delivery (not the full amount upfront)\",
     \"timeline\": \"…\",
     \"cadence\": \"3d1w\",
+    \"systemLabel\": \"Booking & calendar admin\",
     \"sendInitial\": true,
     \"autoFollowUp\": true,
     \"maxFollowUps\": 4
@@ -376,21 +422,23 @@ Applies to **every** whitelisted client site via shared `PreviewShowcase` (not p
 
 | Mockup | Viewport | Behavior |
 |--------|----------|----------|
-| Desktop monitor | 1280×800 | Scaled down to fit bezel — true desktop layout on phone |
-| Phone frame | 390×844 | Scaled down slightly to fit phone chrome — true mobile layout (hamburger, stacked sections) |
+| Site — Desktop | 1280×800 | Marketing `/` — scaled to fit bezel |
+| Site — Mobile | 390×844 | Marketing `/` — true mobile layout |
+| Admin — Desktop | 1280×800 | `/admin/` — browse nav inside frame |
+| Admin — Mobile | 390×844 | `/admin/` — responsive admin (drawer/bottom nav) |
 
-Both use absolute-positioned iframe scalers so layout does not overlap on narrow screens.
+All four use absolute-positioned iframe scalers so layout does not overlap on narrow screens.
 
 ```
 Browser QA checklist:
 - [ ] Preview page loads (title, hostname, Back to portfolio)
-- [ ] Desktop mockup: site visible, header/hero readable, iframe scrolls
+- [ ] **Four panels** visible (site desktop/mobile + admin desktop/mobile)
+- [ ] Site desktop mockup: marketing page visible, iframe scrolls
+- [ ] Site mobile mockup: hamburger, stacked sections, iframe scrolls
+- [ ] **Admin desktop** — pre-logged-in shell; click Dashboard / Bookings / Calendar / Settings
+- [ ] **Admin mobile** — nav usable (not broken desktop-only UI); browse at least 2 pages
 - [ ] Scroll hints visible (intro + per-device); native `title` on hover for screen areas
-- [ ] **Desktop on phone** — monitor shows full 1280px layout scaled down (not mobile breakpoints)
-- [ ] **Mobile mockup** — phone shows 390px mobile layout (short logo, hamburger) scaled to fit frame
-- [ ] Mobile mockup: logo not cramped, CTA visible, iframe scrolls
-- [ ] **Mobile page scroll** — preview page scrolls past desktop mockup to mobile section (desktop iframe ignores touch on mobile so page scroll works)
-- [ ] **No overlap on mobile** — desktop monitor and phone mockup must not overlap (40px+ gap); desktop iframe uses absolute scaler so 1280px layout does not bleed into phone section
+- [ ] **No overlap on mobile** — all mockups stack with 40px+ gap
 - [ ] Direct URL returns 403 (embed-only)
 - [ ] No broken images or layout overflow at ~256px (phone iframe width)
 ```
@@ -415,6 +463,7 @@ curl -sI -H "Sec-Fetch-Dest: iframe" \
 
 ## Rules
 
+- **Systems-first pitch** when a vertical applies — never frame as website-only if admin demo exists.
 - Whitelist-only preview hosts (no arbitrary domains).
 - Keep `embed-guard.js` + edge `embed-only` on every client folder — do not ship browsable public demos.
 - No secrets in `client-sites/` — use Netlify env for forms later.
