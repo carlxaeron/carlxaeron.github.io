@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.73] — 2026-07-19
+
+### Changed
+- **PreviewShowcase (mobile ≤991px)** — Default to Admin + Site phone frames only; **Mobile | Desktop** view toggle (sessionStorage per slug); sticky bottom feedback dock with compact Like/Dislike row; intro hint updated for phone browsing
+- **Tests** — `PreviewShowcase.test.js` mocks `matchMedia` for mobile toggle, frame visibility, and feedback dock
+
 ## [3.0.72] — 2026-07-19
 
 ### Changed
