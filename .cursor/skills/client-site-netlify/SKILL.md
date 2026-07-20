@@ -419,6 +419,15 @@ Also update `client.json` → `outreach` (`status=sent`, `cadence: "3d1w"`, `sen
 3. Present drafts + gate question (send now?).
 4. Use fictitious contact details only for portfolio demos (see `quotation/` sample).
 
+### Client says yes — proceed beyond quotation
+
+When a prospect accepts the quote and wants to **move forward** (deposit, kickoff, signed terms):
+
+1. Copy [`docs/templates/client-service-agreement.md`](../../docs/templates/client-service-agreement.md) — fill placeholders from `client.json` (`businessName`, `slug`, `quotation.*`, `system.*`, `previewUrl`).
+2. For a fast yes after preview: send **Section 14 — Proposal Acceptance** (one page) + deposit payment details; attach full Agreement or link to PDF when Client prefers long form.
+3. Set `client.json` → `outreach.status` to `won` (or note in `outreach.notes`); pause auto follow-ups via `POST /outreachPause` if a sequence was running.
+4. **Not legal advice** — remind Client (and yourself) to have a lawyer review for high-value or non-standard deals.
+
 **SMS length:** keep under ~320 characters when possible; shorten package line if needed.
 
 ## Step 6 — Portfolio release (if preview UI changed)
