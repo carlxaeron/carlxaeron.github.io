@@ -115,7 +115,7 @@ Response shape (Firebase-compatible):
 - Success: `{ status: 200, message, data }`
 - Error: `{ status: 400, message, data, errCode: "" }` (HTTP usually 400)
 
-CORS origins: `carlmanuel.com`, `www`, `carlxaeron.github.io`, `localhost:3000` — see `config/cors.php`.
+CORS origins: `carlmanuel.com`, `www`, `carlxaeron.github.io`, `localhost:3000` — see `config/cors.php` (`paths` must include public routes including `agreements/*`).
 
 ## Key code
 

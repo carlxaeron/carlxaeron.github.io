@@ -312,4 +312,50 @@ class ServiceAgreementApiTest extends TestCase
             ->assertJsonPath('data.signable', false)
             ->assertJsonPath('data.clientSignatureData', self::SAMPLE_SIGNATURE);
     }
+
+    public function test_cors_paths_include_public_agreements(): void
+    {
+        $this->assertContains('agreements/*', config('cors.paths'));
+        $this->assertContains('https://carlmanuel.com', config('cors.allowed_origins'));
+        $this->assertContains('https://www.carlmanuel.com', config('cors.allowed_origins'));
+    }
+
+    public function test_public_agreement_routes_emit_cors_for_portfolio_origin(): void
+    {
+        Mail::fake();
+        $this->actingAsAdmin();
+
+        $token = $this->postJson('/admin/agreements', $this->createPayload())
+            ->json('data.token');
+
+        $origin = 'https://carlmanuel.com';
+
+        $this->call('OPTIONS', '/agreements/'.$token, [], [], [], [
+            'HTTP_ORIGIN' => $origin,
+            'HTTP_ACCESS_CONTROL_REQUEST_METHOD' => 'GET',
+        ])
+            ->assertSuccessful()
+            ->assertHeader('Access-Control-Allow-Origin', $origin);
+
+        $this->withHeaders(['Origin' => $origin])
+            ->getJson('/agreements/'.$token)
+            ->assertOk()
+            ->assertHeader('Access-Control-Allow-Origin', $origin);
+
+        $this->call('OPTIONS', '/agreements/'.$token.'/sign', [], [], [], [
+            'HTTP_ORIGIN' => $origin,
+            'HTTP_ACCESS_CONTROL_REQUEST_METHOD' => 'POST',
+            'HTTP_ACCESS_CONTROL_REQUEST_HEADERS' => 'content-type',
+        ])
+            ->assertSuccessful()
+            ->assertHeader('Access-Control-Allow-Origin', $origin);
+
+        $this->withHeaders(['Origin' => $origin])
+            ->postJson('/agreements/'.$token.'/sign', [
+                'signatoryName' => 'Jane Client',
+                'signatureData' => self::SAMPLE_SIGNATURE,
+            ])
+            ->assertOk()
+            ->assertHeader('Access-Control-Allow-Origin', $origin);
+    }
 }

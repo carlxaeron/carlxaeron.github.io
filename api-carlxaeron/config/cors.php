@@ -17,6 +17,7 @@ return [
         'quotation',
         'assistant',
         'content/*',
+        'agreements/*',
         'admin/*',
         'up',
     ],
