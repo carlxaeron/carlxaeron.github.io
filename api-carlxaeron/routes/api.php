@@ -40,6 +40,7 @@ Route::post('/admin/login', [AdminController::class, 'login'])
 Route::middleware(['auth:sanctum', 'throttle:adminApi'])->group(function (): void {
     Route::post('/admin/logout', [AdminController::class, 'logout']);
     Route::get('/admin/summary', [AdminController::class, 'summary']);
+    Route::get('/admin/analytics', [AdminController::class, 'analytics']);
     Route::get('/admin/contacts', [AdminController::class, 'contacts']);
     Route::get('/admin/quotations', [AdminController::class, 'quotations']);
     Route::get('/admin/outreach', [AdminController::class, 'outreach']);

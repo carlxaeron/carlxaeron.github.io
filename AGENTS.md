@@ -82,7 +82,7 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 ### Contact / quote / visits / assistant API
 - Frontend: `Contact.js`, `Quote.js`, analytics, ChatAgent → `src/mapping.js` → `https://api.carlmanuel.com`
 - Backend: hosting-php / Laravel [`api-carlxaeron/`](api-carlxaeron/) (skill **api-carlxaeron**)
-- **Admin ops + CMS:** `carlmanuel.com/#login` → Sanctum → `#admin` (Overview, Inbox, Outreach, Clients, CMS); Laravel `/admin/*` only
+- **Admin ops + CMS:** `carlmanuel.com/#login` → Sanctum → `#admin` (Overview, Analytics, Inbox, Outreach, Clients, CMS, Settings); Laravel `/admin/*` only
 - **Preview feedback:** `?preview=` dock — Like / Dislike / **Ready to proceed**; Like or Ready → confirm; **Yes** → `POST /previewFeedback` `sentiment: agree` (Carl email + Web Push + prospect soft-ack if outreach email known). Does **not** auto-send a service agreement.
 - **Service agreements:** Admin → Clients → Generate agreement → **Send for signature** (Laravel `/admin/agreements`); client signs at `carlmanuel.com/?sign={token}` (public `/agreements/{token}`). **Resend** only re-mails the stored `filledHtml` — after client-facing HTML fixes, Generate → Send again (new token); revoke the old one if needed.
 - **Before deploy:** `cd api-carlxaeron && php artisan test` (and `php api-carlxaeron/hosting-php/tests/run-unit.php`)

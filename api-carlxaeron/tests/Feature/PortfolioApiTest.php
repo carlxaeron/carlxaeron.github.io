@@ -512,6 +512,7 @@ class PortfolioApiTest extends TestCase
                     'uniquePreviewVisitorsWeek',
                     'totalLikes',
                     'totalDislikes',
+                    'totalAgrees',
                     'visitsByDay',
                     'previewStats',
                     'generatedAt',

@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.0.81] — 2026-07-20
+
+### Added
+- **Admin → Analytics** — detailed visits (by day / section / device / referrer), preview feedback (like / dislike / Ready), top previews table, outreach funnel; range toggles 7 / 14 / 30 / 90 days
+- **API** — `GET /admin/analytics?days=` (Sanctum); summary includes `totalAgrees` / `previewStats[].agrees`
+
+### Changed
+- **Admin Overview** — shows Ready to proceed count alongside likes/dislikes
+
 ## [3.0.80] — 2026-07-20
 
 ### Added

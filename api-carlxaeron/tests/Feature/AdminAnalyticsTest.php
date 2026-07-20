@@ -1,0 +1,155 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Models\OutreachJob;
+use App\Models\PreviewFeedback;
+use App\Models\User;
+use App\Models\Visit;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\Sanctum;
+use Tests\TestCase;
+
+class AdminAnalyticsTest extends TestCase
+{
+    use RefreshDatabase;
+
+    private const ADMIN_EMAIL = 'admin@example.com';
+
+    private const ADMIN_PASSWORD = 'secret-password';
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        User::query()->create([
+            'name' => 'Admin',
+            'email' => self::ADMIN_EMAIL,
+            'password' => Hash::make(self::ADMIN_PASSWORD),
+        ]);
+    }
+
+    public function test_analytics_requires_auth(): void
+    {
+        $this->getJson('/admin/analytics')
+            ->assertUnauthorized();
+    }
+
+    public function test_analytics_returns_detailed_metrics(): void
+    {
+        Sanctum::actingAs(
+            User::query()->where('email', self::ADMIN_EMAIL)->firstOrFail(),
+            ['*']
+        );
+
+        Visit::query()->create([
+            'visitor_id' => 'v1',
+            'session_id' => 's1',
+            'event_type' => 'preview_view',
+            'section' => null,
+            'preview_slug' => 'jk-construction',
+            'path' => '/?preview=jk-construction',
+            'referrer' => 'https://facebook.com/',
+            'device' => 'Desktop',
+            'ip_hash' => 'abcd',
+            'created_at' => now()->subDay(),
+        ]);
+
+        Visit::query()->create([
+            'visitor_id' => 'v2',
+            'session_id' => 's2',
+            'event_type' => 'section_view',
+            'section' => 'projects',
+            'preview_slug' => null,
+            'path' => '/#projects',
+            'referrer' => '',
+            'device' => 'Mobile',
+            'ip_hash' => 'efgh',
+            'created_at' => now()->subHours(2),
+        ]);
+
+        PreviewFeedback::query()->create([
+            'visitor_id' => 'v1',
+            'session_id' => 's1',
+            'preview_slug' => 'jk-construction',
+            'preview_label' => 'JK Construction',
+            'sentiment' => 'agree',
+            'comment' => null,
+            'ip_hash' => 'abcd',
+            'created_at' => now()->subHour(),
+        ]);
+
+        PreviewFeedback::query()->create([
+            'visitor_id' => 'v3',
+            'session_id' => 's3',
+            'preview_slug' => 'jk-construction',
+            'preview_label' => 'JK Construction',
+            'sentiment' => 'like',
+            'comment' => 'Looks great',
+            'ip_hash' => 'ijkl',
+            'created_at' => now()->subMinutes(30),
+        ]);
+
+        OutreachJob::query()->create([
+            'slug' => 'jk-construction',
+            'business_name' => 'JK Construction',
+            'contact_name' => 'Client',
+            'contact_email' => 'client@example.com',
+            'preview_url' => 'https://carlmanuel.com/?preview=jk-construction',
+            'auto_followup' => true,
+            'status' => 'active',
+            'follow_up_count' => 1,
+            'initial_sent_at' => now()->subDays(5),
+            'next_follow_up_at' => now()->addDays(2),
+        ]);
+
+        $this->getJson('/admin/analytics?days=30')
+            ->assertOk()
+            ->assertJsonPath('status', 200)
+            ->assertJsonPath('data.rangeDays', 30)
+            ->assertJsonPath('data.previewViews', 1)
+            ->assertJsonPath('data.sectionViews', 1)
+            ->assertJsonPath('data.totalAgrees', 1)
+            ->assertJsonPath('data.totalLikes', 1)
+            ->assertJsonPath('data.agreesInRange', 1)
+            ->assertJsonPath('data.outreachFunnel.total', 1)
+            ->assertJsonPath('data.outreachFunnel.withInitialSent', 1)
+            ->assertJsonStructure([
+                'data' => [
+                    'visitsByDay',
+                    'topSections',
+                    'topPreviews',
+                    'devices',
+                    'previewStats',
+                    'recentFeedback',
+                    'outreachFunnel' => [
+                        'total',
+                        'byStatus',
+                        'autoFollowUp',
+                        'withInitialSent',
+                        'totalFollowUpsSent',
+                    ],
+                    'generatedAt',
+                ],
+            ]);
+
+        $previews = collect($this->getJson('/admin/analytics?days=7')->json('data.topPreviews'));
+        $this->assertTrue(
+            $previews->contains(fn ($row) => ($row['label'] ?? '') === 'jk-construction'),
+            'Admin analytics keeps raw preview slugs'
+        );
+    }
+
+    public function test_analytics_rejects_invalid_days_with_default(): void
+    {
+        Sanctum::actingAs(
+            User::query()->where('email', self::ADMIN_EMAIL)->firstOrFail(),
+            ['*']
+        );
+
+        $this->getJson('/admin/analytics?days=999')
+            ->assertOk()
+            ->assertJsonPath('data.rangeDays', 30);
+    }
+}

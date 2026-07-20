@@ -520,6 +520,86 @@ body.v3-admin-active .App {
   color: $green-light;
 }
 
+// --- Analytics range + feedback ---
+
+.v3-admin-range {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  background: rgba($green-dark, 0.45);
+  border-radius: 999px;
+  padding: 3px;
+  border: 1px solid rgba($green-light, 0.15);
+}
+
+.v3-admin-range__btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgba($white, 0.7);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: $space-2 $space-3;
+  border-radius: 999px;
+  cursor: pointer;
+  min-height: 36px;
+  transition: background 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    color: $white;
+  }
+
+  &.is-active {
+    background: $green-accent;
+    color: $white;
+  }
+}
+
+.v3-admin-section-title {
+  font-family: $font-display;
+  font-size: 1.15rem;
+  margin: $space-8 0 $space-4;
+  color: rgba($white, 0.92);
+}
+
+.v3-admin-table-wrap--spaced {
+  margin-top: $space-4;
+  margin-bottom: $space-2;
+}
+
+.v3-admin-table__caption {
+  caption-side: top;
+  text-align: left;
+  padding: $space-3 $space-4 0;
+  font-size: 0.8rem;
+  color: rgba($white, 0.55);
+}
+
+.v3-admin-pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba($white, 0.1);
+  color: rgba($white, 0.85);
+
+  &--like {
+    background: rgba($green-accent, 0.2);
+    color: $green-light;
+  }
+
+  &--agree {
+    background: rgba($gold, 0.22);
+    color: lighten($gold, 12%);
+  }
+
+  &--dislike {
+    background: rgba(180, 40, 40, 0.25);
+    color: #ffc9c0;
+  }
+}
+
 // --- Tables ---
 
 .v3-admin-table-wrap {

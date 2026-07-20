@@ -57,6 +57,9 @@ class AdminApiTest extends TestCase
         $this->getJson('/admin/summary')
             ->assertUnauthorized();
 
+        $this->getJson('/admin/analytics')
+            ->assertUnauthorized();
+
         $this->getJson('/admin/contacts')
             ->assertUnauthorized();
 
@@ -80,6 +83,7 @@ class AdminApiTest extends TestCase
                 'data' => [
                     'clientSites',
                     'totalPreviewViews',
+                    'totalAgrees',
                     'previewStats',
                     'generatedAt',
                 ],

@@ -18,6 +18,7 @@ export const mapping = {
   adminLogin: 'https://api.carlmanuel.com/admin/login',
   adminLogout: 'https://api.carlmanuel.com/admin/logout',
   adminSummary: 'https://api.carlmanuel.com/admin/summary',
+  adminAnalytics: 'https://api.carlmanuel.com/admin/analytics',
   adminContacts: 'https://api.carlmanuel.com/admin/contacts',
   adminQuotations: 'https://api.carlmanuel.com/admin/quotations',
   adminOutreach: 'https://api.carlmanuel.com/admin/outreach',

@@ -74,6 +74,14 @@ export function fetchAdminSummary() {
   return adminFetch(mapping.adminSummary, { cache: "no-store" });
 }
 
+/**
+ * @param {number} [days=30]
+ */
+export function fetchAdminAnalytics(days = 30) {
+  const range = [7, 14, 30, 90].includes(Number(days)) ? Number(days) : 30;
+  return adminFetch(`${mapping.adminAnalytics}?days=${range}`, { cache: "no-store" });
+}
+
 export function fetchAdminContacts(page = 1) {
   return adminFetch(`${mapping.adminContacts}?page=${page}`, { cache: "no-store" });
 }

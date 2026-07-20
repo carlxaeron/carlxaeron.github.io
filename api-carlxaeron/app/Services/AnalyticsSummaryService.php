@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\OutreachJob;
 use App\Models\PreviewFeedback;
 use App\Models\Visit;
 use Illuminate\Support\Carbon;
@@ -13,6 +14,8 @@ class AnalyticsSummaryService
     ) {}
 
     /**
+     * Public Insights + admin Overview (backward-compatible shape).
+     *
      * @return array<string, mixed>
      */
     public function build(bool $maskSlugs = true): array
@@ -32,8 +35,10 @@ class AnalyticsSummaryService
         $totalPreviewViews = 0;
         $totalLikes = 0;
         $totalDislikes = 0;
+        $totalAgrees = 0;
         $previewLikes = [];
         $previewDislikes = [];
+        $previewAgrees = [];
 
         foreach (Visit::query()->where('event_type', 'preview_view')->get(['visitor_id', 'ip_hash']) as $row) {
             if ($this->analytics->isExcludedRecord($row->ip_hash, $row->visitor_id)) {
@@ -77,6 +82,10 @@ class AnalyticsSummaryService
                 $totalDislikes++;
                 $previewDislikes[$slug] = ($previewDislikes[$slug] ?? 0) + 1;
             }
+            if ($row->sentiment === 'agree') {
+                $totalAgrees++;
+                $previewAgrees[$slug] = ($previewAgrees[$slug] ?? 0) + 1;
+            }
         }
 
         $visitsByDay = [];
@@ -94,7 +103,8 @@ class AnalyticsSummaryService
         $slugs = array_unique(array_merge(
             array_keys($previewViews),
             array_keys($previewLikes),
-            array_keys($previewDislikes)
+            array_keys($previewDislikes),
+            array_keys($previewAgrees)
         ));
         $previewStats = [];
         foreach ($slugs as $slug) {
@@ -103,6 +113,7 @@ class AnalyticsSummaryService
                 'views' => $previewViews[$slug] ?? 0,
                 'likes' => $previewLikes[$slug] ?? 0,
                 'dislikes' => $previewDislikes[$slug] ?? 0,
+                'agrees' => $previewAgrees[$slug] ?? 0,
             ];
         }
         usort($previewStats, static fn ($a, $b) => $b['views'] <=> $a['views']);
@@ -113,9 +124,327 @@ class AnalyticsSummaryService
             'uniquePreviewVisitorsWeek' => count($visitors),
             'totalLikes' => $totalLikes,
             'totalDislikes' => $totalDislikes,
+            'totalAgrees' => $totalAgrees,
             'visitsByDay' => array_values($visitsByDay),
             'previewStats' => $previewStats,
             'generatedAt' => Carbon::now('UTC')->toIso8601String(),
         ];
+    }
+
+    /**
+     * Admin Analytics tab — visits, feedback, devices, outreach funnel.
+     *
+     * @return array<string, mixed>
+     */
+    public function buildDetailed(int $days = 30, bool $maskSlugs = false): array
+    {
+        $days = max(1, min(90, $days));
+        $now = Carbon::now();
+        $from = $now->copy()->subDays($days);
+        $today = Carbon::today();
+
+        $visits = Visit::query()
+            ->where('created_at', '>=', $from)
+            ->get([
+                'visitor_id',
+                'session_id',
+                'event_type',
+                'section',
+                'preview_slug',
+                'referrer',
+                'device',
+                'ip_hash',
+                'created_at',
+            ]);
+
+        $feedbackInRange = PreviewFeedback::query()
+            ->where('created_at', '>=', $from)
+            ->orderByDesc('created_at')
+            ->get([
+                'visitor_id',
+                'preview_slug',
+                'preview_label',
+                'sentiment',
+                'comment',
+                'ip_hash',
+                'created_at',
+            ]);
+
+        $allFeedback = PreviewFeedback::query()
+            ->get(['visitor_id', 'preview_slug', 'sentiment', 'ip_hash']);
+
+        $visitors = [];
+        $sessions = [];
+        $pageViews = 0;
+        $sectionViews = 0;
+        $previewViews = 0;
+        $totalEvents = 0;
+        $sections = [];
+        $previews = [];
+        $referrers = [];
+        $devices = [];
+        $byDay = [];
+
+        for ($i = $days - 1; $i >= 0; $i--) {
+            $key = $today->copy()->subDays($i)->format('Y-m-d');
+            $byDay[$key] = [
+                'date' => $key,
+                'pageViews' => 0,
+                'sectionViews' => 0,
+                'previewViews' => 0,
+                'total' => 0,
+            ];
+        }
+
+        foreach ($visits as $row) {
+            if ($this->analytics->isExcludedRecord($row->ip_hash, $row->visitor_id)) {
+                continue;
+            }
+            $totalEvents++;
+            if ($row->visitor_id) {
+                $visitors[$row->visitor_id] = true;
+            }
+            if ($row->session_id) {
+                $sessions[$row->session_id] = true;
+            }
+
+            $type = (string) ($row->event_type ?? '');
+            $dayKey = $row->created_at?->format('Y-m-d');
+
+            if ($type === 'pageview') {
+                $pageViews++;
+            } elseif ($type === 'section_view') {
+                $sectionViews++;
+            } elseif ($type === 'preview_view') {
+                $previewViews++;
+            }
+
+            if ($dayKey !== null && isset($byDay[$dayKey])) {
+                $byDay[$dayKey]['total']++;
+                if ($type === 'pageview') {
+                    $byDay[$dayKey]['pageViews']++;
+                } elseif ($type === 'section_view') {
+                    $byDay[$dayKey]['sectionViews']++;
+                } elseif ($type === 'preview_view') {
+                    $byDay[$dayKey]['previewViews']++;
+                }
+            }
+
+            $section = trim((string) ($row->section ?? ''));
+            if ($section !== '') {
+                $sections[$section] = ($sections[$section] ?? 0) + 1;
+            }
+
+            $slug = trim((string) ($row->preview_slug ?? ''));
+            if ($slug !== '' && $type === 'preview_view') {
+                $previews[$slug] = ($previews[$slug] ?? 0) + 1;
+            }
+
+            $ref = trim((string) ($row->referrer ?? ''));
+            $refLabel = $ref !== '' ? $this->shortReferrer($ref) : 'Direct / none';
+            $referrers[$refLabel] = ($referrers[$refLabel] ?? 0) + 1;
+
+            $device = trim((string) ($row->device ?? ''));
+            $deviceLabel = $device !== '' ? $device : 'Unknown';
+            $devices[$deviceLabel] = ($devices[$deviceLabel] ?? 0) + 1;
+        }
+
+        $likesInRange = 0;
+        $dislikesInRange = 0;
+        $agreesInRange = 0;
+        $recentFeedback = [];
+        $previewLikesRange = [];
+        $previewDislikesRange = [];
+        $previewAgreesRange = [];
+
+        foreach ($feedbackInRange as $row) {
+            if ($this->analytics->isExcludedRecord($row->ip_hash, $row->visitor_id)) {
+                continue;
+            }
+            $slug = (string) ($row->preview_slug ?? '');
+            if ($slug === '') {
+                continue;
+            }
+            $displaySlug = $maskSlugs ? $this->analytics->maskClientSlug($slug) : $slug;
+
+            if ($row->sentiment === 'like') {
+                $likesInRange++;
+                $previewLikesRange[$slug] = ($previewLikesRange[$slug] ?? 0) + 1;
+            } elseif ($row->sentiment === 'dislike') {
+                $dislikesInRange++;
+                $previewDislikesRange[$slug] = ($previewDislikesRange[$slug] ?? 0) + 1;
+            } elseif ($row->sentiment === 'agree') {
+                $agreesInRange++;
+                $previewAgreesRange[$slug] = ($previewAgreesRange[$slug] ?? 0) + 1;
+            }
+
+            if (count($recentFeedback) < 25) {
+                $recentFeedback[] = [
+                    'slug' => $displaySlug,
+                    'previewLabel' => $row->preview_label,
+                    'sentiment' => $row->sentiment,
+                    'comment' => $row->comment,
+                    'createdAt' => $row->created_at?->toIso8601String(),
+                ];
+            }
+        }
+
+        $totalLikesAll = 0;
+        $totalDislikesAll = 0;
+        $totalAgreesAll = 0;
+        $previewLikesAll = [];
+        $previewDislikesAll = [];
+        $previewAgreesAll = [];
+
+        foreach ($allFeedback as $row) {
+            if ($this->analytics->isExcludedRecord($row->ip_hash, $row->visitor_id)) {
+                continue;
+            }
+            $slug = (string) ($row->preview_slug ?? '');
+            if ($slug === '') {
+                continue;
+            }
+            if ($row->sentiment === 'like') {
+                $totalLikesAll++;
+                $previewLikesAll[$slug] = ($previewLikesAll[$slug] ?? 0) + 1;
+            } elseif ($row->sentiment === 'dislike') {
+                $totalDislikesAll++;
+                $previewDislikesAll[$slug] = ($previewDislikesAll[$slug] ?? 0) + 1;
+            } elseif ($row->sentiment === 'agree') {
+                $totalAgreesAll++;
+                $previewAgreesAll[$slug] = ($previewAgreesAll[$slug] ?? 0) + 1;
+            }
+        }
+
+        $totalPreviewViewsAll = 0;
+        foreach (Visit::query()->where('event_type', 'preview_view')->get(['visitor_id', 'ip_hash']) as $row) {
+            if ($this->analytics->isExcludedRecord($row->ip_hash, $row->visitor_id)) {
+                continue;
+            }
+            $totalPreviewViewsAll++;
+        }
+
+        $previewStats = [];
+        $statSlugs = array_unique(array_merge(
+            array_keys($previews),
+            array_keys($previewLikesAll),
+            array_keys($previewDislikesAll),
+            array_keys($previewAgreesAll)
+        ));
+        foreach ($statSlugs as $slug) {
+            $previewStats[] = [
+                'slug' => $maskSlugs ? $this->analytics->maskClientSlug($slug) : $slug,
+                'views' => $previews[$slug] ?? 0,
+                'likes' => $previewLikesAll[$slug] ?? 0,
+                'dislikes' => $previewDislikesAll[$slug] ?? 0,
+                'agrees' => $previewAgreesAll[$slug] ?? 0,
+                'likesInRange' => $previewLikesRange[$slug] ?? 0,
+                'dislikesInRange' => $previewDislikesRange[$slug] ?? 0,
+                'agreesInRange' => $previewAgreesRange[$slug] ?? 0,
+            ];
+        }
+        usort($previewStats, static fn ($a, $b) => $b['views'] <=> $a['views']);
+
+        return [
+            'rangeDays' => $days,
+            'rangeStart' => $from->toIso8601String(),
+            'rangeEnd' => $now->toIso8601String(),
+            'totalEvents' => $totalEvents,
+            'pageViews' => $pageViews,
+            'sectionViews' => $sectionViews,
+            'previewViews' => $previewViews,
+            'uniqueVisitors' => count($visitors),
+            'uniqueSessions' => count($sessions),
+            'likesInRange' => $likesInRange,
+            'dislikesInRange' => $dislikesInRange,
+            'agreesInRange' => $agreesInRange,
+            'totalPreviewViews' => $totalPreviewViewsAll,
+            'totalLikes' => $totalLikesAll,
+            'totalDislikes' => $totalDislikesAll,
+            'totalAgrees' => $totalAgreesAll,
+            'visitsByDay' => array_values($byDay),
+            'topSections' => $this->topMap($sections, 12),
+            'topPreviews' => $this->topMap($previews, 12, $maskSlugs),
+            'topReferrers' => $this->topMap($referrers, 8),
+            'devices' => $this->topMap($devices, 8),
+            'previewStats' => $previewStats,
+            'recentFeedback' => $recentFeedback,
+            'outreachFunnel' => $this->outreachFunnel(),
+            'generatedAt' => Carbon::now('UTC')->toIso8601String(),
+        ];
+    }
+
+    /**
+     * @return array<string, int|bool>
+     */
+    private function outreachFunnel(): array
+    {
+        $jobs = OutreachJob::query()->get([
+            'status',
+            'auto_followup',
+            'follow_up_count',
+            'initial_sent_at',
+        ]);
+
+        $byStatus = [];
+        $autoFollowUp = 0;
+        $withInitial = 0;
+        $totalFollowUps = 0;
+
+        foreach ($jobs as $job) {
+            $status = strtolower(trim((string) ($job->status ?? 'unknown'))) ?: 'unknown';
+            $byStatus[$status] = ($byStatus[$status] ?? 0) + 1;
+            if ($job->auto_followup) {
+                $autoFollowUp++;
+            }
+            if ($job->initial_sent_at) {
+                $withInitial++;
+            }
+            $totalFollowUps += (int) ($job->follow_up_count ?? 0);
+        }
+
+        return [
+            'total' => $jobs->count(),
+            'byStatus' => $byStatus,
+            'autoFollowUp' => $autoFollowUp,
+            'withInitialSent' => $withInitial,
+            'totalFollowUpsSent' => $totalFollowUps,
+        ];
+    }
+
+    /**
+     * @param  array<string, int>  $map
+     * @return list<array{label: string, count: int}>
+     */
+    private function topMap(array $map, int $limit, bool $maskSlugs = false): array
+    {
+        arsort($map);
+        $out = [];
+        $i = 0;
+        foreach ($map as $label => $count) {
+            if ($i >= $limit) {
+                break;
+            }
+            if ($label === '') {
+                continue;
+            }
+            $out[] = [
+                'label' => $maskSlugs ? $this->analytics->maskClientSlug($label) : $label,
+                'count' => $count,
+            ];
+            $i++;
+        }
+
+        return $out;
+    }
+
+    private function shortReferrer(string $url): string
+    {
+        $host = parse_url($url, PHP_URL_HOST);
+        if (is_string($host) && $host !== '') {
+            return $host;
+        }
+
+        return mb_substr($url, 0, 64);
     }
 }

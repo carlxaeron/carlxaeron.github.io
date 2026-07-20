@@ -105,6 +105,11 @@ function OverviewTab() {
         />
         <StatCard label="Likes" value={summary?.totalLikes ?? (loading ? "…" : "0")} />
         <StatCard label="Dislikes" value={summary?.totalDislikes ?? (loading ? "…" : "0")} />
+        <StatCard
+          label="Ready to proceed"
+          value={summary?.totalAgrees ?? (loading ? "…" : "0")}
+          hint="Preview agree"
+        />
       </div>
 
       <div className="v3-admin-chart-grid">

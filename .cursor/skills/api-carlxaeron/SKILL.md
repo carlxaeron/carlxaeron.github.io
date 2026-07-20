@@ -36,7 +36,8 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 |--------|------|------|------|
 | POST | `/admin/login` | public + named throttle `adminLogin` (20/5min) | email/password → `{ token, user }` |
 | POST | `/admin/logout` | `auth:sanctum` | revoke current token |
-| GET | `/admin/summary` | sanctum | unmasked analytics (raw preview slugs) |
+| GET | `/admin/summary` | sanctum | unmasked analytics (raw preview slugs) — includes `totalAgrees` |
+| GET | `/admin/analytics` | sanctum | detailed analytics (`?days=7\|14\|30\|90`) — visits by day/section, feedback, devices, outreach funnel |
 | GET | `/admin/contacts` | sanctum | paginated `contact` (`?perPage=25`) |
 | GET | `/admin/quotations` | sanctum | paginated `quotations` |
 | GET | `/admin/outreach` | sanctum | list `outreach_jobs` |
@@ -58,7 +59,7 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 
 Seed admin user: `ADMIN_EMAIL` + `ADMIN_PASSWORD` in server `.env` → `php artisan db:seed --class=AdminSeeder --force`. Never commit password.
 
-**Admin SPA:** `carlmanuel.com/#login` → Sanctum token → `#admin` dashboard (Overview, Inbox, Outreach, Clients, CMS). URLs in [`src/mapping.js`](../../../src/mapping.js) (`adminLogin`, `adminSummary`, `adminContent`, etc.).
+**Admin SPA:** `carlmanuel.com/#login` → Sanctum token → `#admin` dashboard (Overview, **Analytics**, Inbox, Outreach, Clients, CMS, Settings). URLs in [`src/mapping.js`](../../../src/mapping.js) (`adminLogin`, `adminSummary`, `adminAnalytics`, `adminContent`, etc.).
 
 **Clients → Generate agreement:** Prefills from `public/data/client-catalog.json` (built from `client-sites/*/client.json`) + outreach rows; client-side fill of [`docs/templates/client-service-agreement.md`](../../../docs/templates/client-service-agreement.md) → download **`.md`**, printable **`.html`**, or Word **`.docx`** (or all three). Template also served from `public/templates/`.
 

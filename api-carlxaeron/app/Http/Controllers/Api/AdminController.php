@@ -60,6 +60,19 @@ class AdminController extends Controller
         return ApiResponse::success('OK', $this->analyticsSummary->build(maskSlugs: false));
     }
 
+    public function analytics(Request $request): JsonResponse
+    {
+        $days = (int) $request->input('days', 30);
+        if (! in_array($days, [7, 14, 30, 90], true)) {
+            $days = 30;
+        }
+
+        return ApiResponse::success(
+            'OK',
+            $this->analyticsSummary->buildDetailed(days: $days, maskSlugs: false)
+        );
+    }
+
     public function contacts(Request $request): JsonResponse
     {
         $perPage = min(100, max(1, (int) $request->input('perPage', 25)));
