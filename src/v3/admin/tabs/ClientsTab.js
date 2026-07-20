@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { PREVIEW_SITES, buildPreviewPortfolioUrl } from "../../config/previewWhitelist";
 import { fetchAdminOutreach, parsePaginatedList } from "../adminApi";
+import ServiceAgreementModal from "../ServiceAgreementModal";
 
 function statusClass(status) {
   const s = String(status || "none").toLowerCase();
@@ -14,6 +15,7 @@ function ClientsTab() {
   const [outreachRows, setOutreachRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [agreementClient, setAgreementClient] = useState(null);
 
   const load = useCallback(async () => {
     setError("");
@@ -110,9 +112,26 @@ function ClientsTab() {
                   Netlify host
                 </a>
               </div>
+
+              <div className="v3-admin-client-card__actions">
+                <button
+                  type="button"
+                  className="v3-admin-btn v3-admin-btn--sm"
+                  onClick={() => setAgreementClient(client)}
+                >
+                  Generate agreement
+                </button>
+              </div>
             </article>
           ))}
         </div>
+      )}
+
+      {agreementClient && (
+        <ServiceAgreementModal
+          client={agreementClient}
+          onClose={() => setAgreementClient(null)}
+        />
       )}
     </div>
   );

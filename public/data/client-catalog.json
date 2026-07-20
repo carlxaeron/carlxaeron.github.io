@@ -1,0 +1,1193 @@
+{
+  "generatedAt": "2026-07-20T02:19:40.967Z",
+  "clients": [
+    {
+      "slug": "air-alex-resort",
+      "businessName": "Airalex Private Lodge & Resort",
+      "industry": "Day resort / private lodge",
+      "contact": {
+        "name": "Airalex Private Lodge & Resort team",
+        "email": "",
+        "phone": "+63 962 903 5321"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive site (private lodges, pools, rates, about, FAQ, contact), mobile-friendly, Facebook integration",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=air-alex-resort"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Venue booking admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "alibaton-construction",
+      "businessName": "Alibaton Construction Inc.",
+      "industry": "Tower crane rental / sales / service",
+      "contact": {
+        "name": "Alibaton Construction Inc.",
+        "email": "info@alibaton.com.ph",
+        "phone": "+63 917 542 0415"
+      },
+      "quotation": {
+        "packageName": "Business Website Rebuild (landing)",
+        "packageScope": "Elevated one-page rebuild (services, about, gallery, FAQ, contact), mobile-first, industrial black/red brand — replacement for suspended alibaton.com.ph",
+        "quotedAmount": "₱18,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "7–10 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=alibaton-construction"
+      },
+      "system": {
+        "type": "service",
+        "adminPath": "/admin/",
+        "label": "Job schedule admin",
+        "navPages": [
+          "Dashboard",
+          "Jobs",
+          "Dispatch",
+          "Customers",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Unit 3-J, 3rd Floor, Edificio Enriqueta Bldg, 422 N.S. Amoranto St. cor D. Tuazon Ave, Santa Mesa Heights / Maharlika, Quezon City"
+      }
+    },
+    {
+      "slug": "amora-body-wellness-spa",
+      "businessName": "Amora Body Wellness Spa",
+      "industry": "Spa / health & beauty / wellness",
+      "contact": {
+        "name": "Amora Body Wellness Spa",
+        "email": "sugar.stamaria@gmail.com",
+        "phone": "+63 917 176 5171"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive spa site (services, gallery, FAQ, contact/booking), mobile-friendly, Netlify hosting setup",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=amora-body-wellness-spa"
+      },
+      "system": {
+        "type": "appointments",
+        "adminPath": "/admin/",
+        "label": "Spa appointment admin",
+        "navPages": [
+          "Dashboard",
+          "Appointments",
+          "Calendar",
+          "Clients",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "17 Fairlane St. Fairview Quezon City, Quezon City, Philippines"
+      }
+    },
+    {
+      "slug": "archipelago-builders",
+      "businessName": "Archipelago Builders Corporation",
+      "industry": "General building contractor (Category AAA)",
+      "contact": {
+        "name": "Archipelago Builders Corporation",
+        "email": "abcorpinfo@archipelagobuilders.com",
+        "phone": ""
+      },
+      "quotation": {
+        "packageName": "Business Website Rebuild (landing)",
+        "packageScope": "Elevated one-page rebuild (services, about since 1965, projects, affiliates, FAQ, contact), mobile-first, navy AAA brand — replacement for unreachable archipelagobuilderscorporation.com",
+        "quotedAmount": "₱18,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "7–10 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=archipelago-builders"
+      },
+      "system": {
+        "type": "service",
+        "adminPath": "/admin/",
+        "label": "Service dispatch admin",
+        "navPages": [
+          "Dashboard",
+          "Jobs",
+          "Dispatch",
+          "Customers",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Archipelago Building, 29 North Avenue, Brgy. Pag-asa, Quezon City"
+      }
+    },
+    {
+      "slug": "bernardino-general-hospital",
+      "businessName": "Bernardino General Hospital",
+      "industry": "Hospital / healthcare",
+      "contact": {
+        "name": "Bernardino General Hospital",
+        "email": "bghcorpone@yahoo.com",
+        "phone": "+63 2 8935 5264"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive hospital site, services & contact, basic SEO, Netlify hosting setup",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=bernardino-general-hospital"
+      },
+      "system": {
+        "type": "appointments",
+        "adminPath": "/admin/",
+        "label": "Hospital appointments admin",
+        "navPages": [
+          "Dashboard",
+          "Appointments",
+          "Schedule",
+          "Patients",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "casa-angelina",
+      "businessName": "Casa Angelina Resort",
+      "industry": "Vacation home rental / private pool venue",
+      "contact": {
+        "name": "Casa Angelina",
+        "email": "",
+        "phone": ""
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive site (amenities, gallery, testimonials, FAQ, Facebook Messenger contact), mobile-friendly, Netlify hosting setup",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=casa-angelina"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Venue booking admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Block 10 Lot 1, Phase 2, Congress Village, Manggahan, Rodriguez, Rizal, Philippines 1860"
+      }
+    },
+    {
+      "slug": "casa-de-gloria",
+      "businessName": "Casa De Gloria Private Resort",
+      "industry": "Private pool / staycation resort",
+      "contact": {
+        "name": "Casa De Gloria Private Resort",
+        "email": "",
+        "phone": "+63 916 266 6266"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive private-pool resort site, HD gallery, packages & FAQ, contact/booking section, basic SEO, Netlify hosting setup",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=casa-de-gloria"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Venue booking admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "clover-industrial-fan",
+      "businessName": "Clover Industrial Fan and Blower Inc.",
+      "industry": "Industrial fans & blowers",
+      "contact": {
+        "name": "Clover team",
+        "email": "cloverindustrial@gmail.com",
+        "phone": "+63 908 157 4707"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive site (services, capabilities, project gallery, FAQ, contact), mobile-friendly, Facebook integration",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=clover-industrial-fan"
+      },
+      "system": {
+        "type": "service",
+        "adminPath": "/admin/",
+        "label": "Service dispatch admin",
+        "navPages": [
+          "Dashboard",
+          "Jobs",
+          "Dispatch",
+          "Customers",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "2181 L. Sumulong Memorial Circle, Antipolo, Philippines 1870"
+      }
+    },
+    {
+      "slug": "costa-abril",
+      "businessName": "Costa Abril Resort",
+      "industry": "Water park / day resort",
+      "contact": {
+        "name": "Costa Abril Resort",
+        "email": "",
+        "phone": "+63 917 802 1966"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive water-park site, amenities & gallery, rates overview, contact section, basic SEO, Netlify hosting setup",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=costa-abril"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Resort booking admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "dn-group",
+      "businessName": "DN Group of Companies",
+      "industry": "Building materials / roofing / metal systems",
+      "contact": {
+        "name": "DN Group",
+        "email": "dncreativegroup@gmail.com",
+        "phone": "+63 998 846 2400"
+      },
+      "quotation": {
+        "packageName": "Business Website Redesign (landing sample)",
+        "packageScope": "Elevated one-page redesign (product mosaic, about since 1983, projects, FAQ, contact), mobile-first, industrial brand system",
+        "quotedAmount": "₱18,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "7–10 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=dn-group"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "Lead & quote inbox",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "1388 Quezon Avenue, DN Corporate Center, Brgy. South Triangle, Quezon City"
+      }
+    },
+    {
+      "slug": "extra-rice",
+      "businessName": "Extra Rice 8 Trading, OPC",
+      "industry": "Rice wholesale & retail",
+      "contact": {
+        "name": "Extra Rice 8 Trading team",
+        "email": "extraricetradingdmanuel@gmail.com",
+        "phone": "+63 967 582 0455"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive site (products, services, locations, contact), mobile-friendly, Facebook integration",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=extra-rice"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "Lead & quote inbox",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "fairview-general-hospital",
+      "businessName": "Fairview General Hospital Inc.",
+      "industry": "Hospital / healthcare",
+      "contact": {
+        "name": "Fairview General Hospital Inc.",
+        "email": "fairviewgeneralhospitalinc@gmail.com",
+        "phone": "(02) 8939-8764"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive hospital site, departments & services, PhilHealth accreditation highlight, photo gallery, FAQ, contact/emergency section, basic SEO, Netlify hosting setup",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=fairview-general-hospital"
+      },
+      "system": {
+        "type": "appointments",
+        "adminPath": "/admin/",
+        "label": "Hospital appointments admin",
+        "navPages": [
+          "Dashboard",
+          "Appointments",
+          "Schedule",
+          "Patients",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "fastpoint-ph",
+      "businessName": "Fastpoint PH",
+      "industry": "Fleet supply / commercial tires",
+      "contact": {
+        "name": "Fastpoint Enterprises Incorporated",
+        "email": "biodriver@gmail.com",
+        "phone": "+63 917 821 2009"
+      },
+      "quotation": {
+        "packageName": "Business Website Redesign (landing sample)",
+        "packageScope": "Elevated one-page redesign (services, about, supply gallery, FAQ, contact), mobile-first, fleet/navy brand — Joyall tires + EcoVadis highlight",
+        "quotedAmount": "₱18,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "7–10 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=fastpoint-ph"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "Lead & quote inbox",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Service areas: Bicol, Metro Manila, Tuguegarao, Batangas, Cebu, Davao, Bacolod, Central Luzon, Lucena, Cabuyao"
+      }
+    },
+    {
+      "slug": "g3k-cad",
+      "businessName": "G3k Cad Plotting & Blueprinting Services",
+      "industry": "CAD plotting / blueprint printing",
+      "contact": {
+        "name": "G3k team",
+        "email": "",
+        "phone": "+63 928 353 4491"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive site (services, gallery, FAQ, contact), mobile-friendly, Facebook integration",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=g3k-cad"
+      },
+      "system": {
+        "type": "service",
+        "adminPath": "/admin/",
+        "label": "Service dispatch admin",
+        "navPages": [
+          "Dashboard",
+          "Jobs",
+          "Dispatch",
+          "Customers",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "3rd Floor Blk.30 Lot.12 Badjao St. corner Ivatan Amity Village Phase 2 San Jose Rodriguez Rizal 1860"
+      }
+    },
+    {
+      "slug": "hvill-hospital",
+      "businessName": "H Vill Hospital",
+      "industry": "Hospital / healthcare",
+      "contact": {
+        "name": "H Vill Hospital",
+        "email": "hvill.hospital@yahoo.com",
+        "phone": "+63 2 8997 8949"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive hospital site, services & contact, basic SEO, Netlify hosting setup",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=hvill-hospital"
+      },
+      "system": {
+        "type": "appointments",
+        "adminPath": "/admin/",
+        "label": "Hospital appointments admin",
+        "navPages": [
+          "Dashboard",
+          "Appointments",
+          "Schedule",
+          "Patients",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "intellismart",
+      "businessName": "IntelliSmart Technology Inc.",
+      "industry": "System integration / AV / security / BMS / ICT",
+      "contact": {
+        "name": "IntelliSmart sales team",
+        "email": "sales@intellismartinc.com",
+        "phone": "+632 8350 5986"
+      },
+      "quotation": {
+        "packageName": "Business Website Redesign (landing sample)",
+        "packageScope": "Modern one-page redesign sample (solutions, projects, about, FAQ, contact CTAs), mobile-first, aligned to existing brand",
+        "quotedAmount": "₱18,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "7–10 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=intellismart"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "Lead & quote inbox",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "12 Catanduanes St., Brgy Paltok, West Ave., Quezon City 1105"
+      }
+    },
+    {
+      "slug": "jazz1-aircon",
+      "businessName": "Jazz1 Airconditioning Services - Montalban Rizal",
+      "industry": "Heating, ventilating & air conditioning service",
+      "contact": {
+        "name": "Jazz1 team",
+        "email": "jrairconditioningservices@gmail.com",
+        "phone": "+63 931 763 9752"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive site (services, gallery, pricing guide, FAQ, contact), mobile-friendly, Facebook integration",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=jazz1-aircon"
+      },
+      "system": {
+        "type": "service",
+        "adminPath": "/admin/",
+        "label": "Service dispatch admin",
+        "navPages": [
+          "Dashboard",
+          "Jobs",
+          "Dispatch",
+          "Customers",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "No. 14 F. Rodriguez St. (Crossing), Brgy. San Jose, Rodriguez Rizal 1860"
+      }
+    },
+    {
+      "slug": "jk-construction",
+      "businessName": "JK Construction Services",
+      "industry": "Construction / renovation & general labor",
+      "contact": {
+        "name": "JK Construction Services team",
+        "email": "jkconstructionservices@yahoo.com",
+        "phone": "+63 926 658 6754"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive site (services, project gallery, service area, FAQ, contact), mobile-friendly, Facebook integration",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=jk-construction"
+      },
+      "system": {
+        "type": "service",
+        "adminPath": "/admin/",
+        "label": "Job schedule admin",
+        "navPages": [
+          "Dashboard",
+          "Jobs",
+          "Dispatch",
+          "Customers",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Caloocan, Philippines 1422"
+      }
+    },
+    {
+      "slug": "journey-woodblock-ph",
+      "businessName": "Journey Woodblock Modular Cabinets",
+      "industry": "Cabinetry / modular furniture / CNC woodworking",
+      "contact": {
+        "name": "Journey Woodblock Modular Cabinets",
+        "email": "info@journeywoodblock.com",
+        "phone": "+63 917 893 6322"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive site (services, gallery, about, FAQ, contact), mobile-friendly, Netlify hosting setup, hero Three.js craft object",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=journey-woodblock-ph"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "Lead & quote inbox",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Block 38 L34&36 Sparrow Lane, Bay Breeze Executive Village, Brgy Wawa, Taguig City, Taguig, Philippines"
+      }
+    },
+    {
+      "slug": "kubling-tago-resort",
+      "businessName": "Kubling Tago Resort",
+      "industry": "Day resort / hospitality",
+      "contact": {
+        "name": "Kubling Tago Resort team",
+        "email": "",
+        "phone": "+63 954 385 8881"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive site (amenities, gallery, about, FAQ, contact), mobile-friendly, Facebook integration",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=kubling-tago-resort"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Venue booking admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Villa Maria 2 Subd., Cupang, Antipolo City"
+      }
+    },
+    {
+      "slug": "machinemate",
+      "businessName": "Machinemate Mainteneering Services",
+      "industry": "Industrial fans / ventilation & maintenance engineering",
+      "contact": {
+        "name": "Machinemate team",
+        "email": "mms_fans@yahoo.com",
+        "phone": "+63 917 776 1418"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive site (services, capabilities, project gallery, FAQ, contact), mobile-friendly, Facebook integration",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=machinemate"
+      },
+      "system": {
+        "type": "service",
+        "adminPath": "/admin/",
+        "label": "Service dispatch admin",
+        "navPages": [
+          "Dashboard",
+          "Jobs",
+          "Dispatch",
+          "Customers",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Rodriguez, Philippines"
+      }
+    },
+    {
+      "slug": "mphs-fairview",
+      "businessName": "MPHS Mother of Perpetual Help Inc. Fairview",
+      "industry": "K–12 school / nonprofit education",
+      "contact": {
+        "name": "MPHS Mother of Perpetual Help Inc. Fairview",
+        "email": "mphsi.edu@gmail.com",
+        "phone": "0966 194 6589"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive school site, programs & schedules, photo gallery, FAQ, contact section, basic SEO, Netlify hosting setup",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=mphs-fairview"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "School inquiry admin",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "novagen",
+      "businessName": "Novaliches General Hospital and Medical Center (NovaGen)",
+      "industry": "Private tertiary hospital / healthcare",
+      "contact": {
+        "name": "NovaGen Admissions / Trunkline",
+        "email": "info@novagen.com.ph",
+        "phone": "(02) 8426-8888"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive site, services & facilities overview, contact section, basic SEO, Netlify hosting setup",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=novagen"
+      },
+      "system": {
+        "type": "appointments",
+        "adminPath": "/admin/",
+        "label": "Appointments admin",
+        "navPages": [
+          "Dashboard",
+          "Appointments",
+          "Schedule",
+          "Patients",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "793 Quirino Highway, Brgy. Gulod, Novaliches, Quezon City 1117"
+      }
+    },
+    {
+      "slug": "ohana",
+      "businessName": "Ohana Business Solutions Inc",
+      "industry": "Business consultancy / corporate services",
+      "contact": {
+        "name": "Ohana Biz — Rizal Branch",
+        "email": "ohanabusinessconsultancyinc@gmail.com",
+        "phone": ""
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive site (services, about, contact), mobile-friendly, Facebook integration",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=ohana"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "Lead & quote inbox",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Block 1 Lot 5 Phase 4 Eastwood Greenview, San Isidro, Rodriguez, Rizal 1860"
+      }
+    },
+    {
+      "slug": "pgmc",
+      "businessName": "Pacific Global Medical Center",
+      "industry": "Hospital / healthcare",
+      "contact": {
+        "name": "Pacific Global Medical Center",
+        "email": "pgmccareers@gmail.com",
+        "phone": "(02) 8248-7400"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive hospital site, services & departments, community programs, FAQ, contact/emergency section, basic SEO, Netlify hosting setup",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=pgmc"
+      },
+      "system": {
+        "type": "appointments",
+        "adminPath": "/admin/",
+        "label": "Appointments admin",
+        "navPages": [
+          "Dashboard",
+          "Appointments",
+          "Schedule",
+          "Patients",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "quotation",
+      "businessName": "Bamboo Grove Café",
+      "industry": "Café / Local food business",
+      "contact": {
+        "name": "Maria Santos",
+        "email": "maria.santos@example.com",
+        "phone": "+63 917 123 4567"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive site (menu highlights, story, visit & contact), basic SEO",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=quotation"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "Lead & quote inbox",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "regan-industrial",
+      "businessName": "Regan Industrial Sales Inc.",
+      "industry": "Steel supplier / industrial metals",
+      "contact": {
+        "name": "Regan Industrial sales team",
+        "email": "inquiry@reganindustrial.com.ph",
+        "phone": "+63 998 843 4711"
+      },
+      "quotation": {
+        "packageName": "Business Website Redesign (landing sample)",
+        "packageScope": "Modern one-page redesign sample (products, services, about, FAQ, contact CTAs), mobile-first, aligned to existing brand",
+        "quotedAmount": "₱18,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "7–10 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=regan-industrial"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "Lead & quote inbox",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "#5 Harmony Street, Grace Village, Brgy. Balingasa, Balintawak, Quezon City 1106"
+      }
+    },
+    {
+      "slug": "rg-decals",
+      "businessName": "RG Decals and Printing Shop",
+      "industry": "Printing service / signs & decals",
+      "contact": {
+        "name": "RG Decals team",
+        "email": "rgdecals123@gmail.com",
+        "phone": "+63 995 456 7971"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive site (services, about, contact, maps link), mobile-friendly, Facebook integration",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=rg-decals"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "Lead & quote inbox",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Metro Manila Hills, Rodriguez, Rizal"
+      }
+    },
+    {
+      "slug": "san-mateo-medical-center",
+      "businessName": "San Mateo Medical Center",
+      "industry": "Private hospital / healthcare",
+      "contact": {
+        "name": "San Mateo Medical Center",
+        "email": "",
+        "phone": "+63 921 605 2365"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive hospital site, services & contact, basic SEO, Netlify hosting setup",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=san-mateo-medical-center"
+      },
+      "system": {
+        "type": "appointments",
+        "adminPath": "/admin/",
+        "label": "Appointments admin",
+        "navPages": [
+          "Dashboard",
+          "Appointments",
+          "Schedule",
+          "Patients",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "sonyoba-marketing",
+      "businessName": "Sonyoba Marketing",
+      "industry": "Office equipment / paper shredders & business machines",
+      "contact": {
+        "name": "Sonyoba Marketing team",
+        "email": "sales@sonyobamarketing.com",
+        "phone": "(02) 8774-1525"
+      },
+      "quotation": {
+        "packageName": "Business Website Redesign",
+        "packageScope": "Modern one-page site with product showcase, category filters, testimonials, FAQ, and contact CTAs — mobile-first, linked to your existing shop",
+        "quotedAmount": "₱18,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "7–10 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=sonyoba-marketing"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "Lead & quote inbox",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "suyat",
+      "businessName": "Suyat Notary Public",
+      "industry": "Notary public / legal document services",
+      "contact": {
+        "name": "Suyat Law Office",
+        "email": "",
+        "phone": ""
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive site (services, about, contact, maps link), mobile-friendly, Facebook integration",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=suyat"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "Lead & quote inbox",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "2nd Floor, JRS Building, Kanlaon Street, Amityville, Barangay San Jose, Rodriguez, Rizal"
+      }
+    },
+    {
+      "slug": "sv-more-group",
+      "businessName": "SV More Group of Companies",
+      "industry": "Pharmaceuticals / health products",
+      "contact": {
+        "name": "SV More Group",
+        "email": "reply@svmoregroup.net",
+        "phone": "+632 8373 6240"
+      },
+      "quotation": {
+        "packageName": "Business Website Redesign (landing sample)",
+        "packageScope": "Modern one-page redesign sample (products, about, FAQ, contact CTAs), mobile-first, aligned to existing brand",
+        "quotedAmount": "₱18,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "7–10 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=sv-more-group"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "Lead & quote inbox",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "#16 Scout Tuazon corner Roces Avenue, Quezon City, Metro Manila 1103"
+      }
+    },
+    {
+      "slug": "taguig-city-general-hospital",
+      "businessName": "Taguig City General Hospital",
+      "industry": "Government hospital / public healthcare",
+      "contact": {
+        "name": "Taguig City General Hospital",
+        "email": "tgh@taguig.gov.ph",
+        "phone": "+63 968 377 6440"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive hospital site, outpatient services & departments, photo gallery, FAQ, contact section, basic SEO, Netlify hosting setup",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=taguig-city-general-hospital"
+      },
+      "system": {
+        "type": "appointments",
+        "adminPath": "/admin/",
+        "label": "Hospital appointments admin",
+        "navPages": [
+          "Dashboard",
+          "Appointments",
+          "Schedule",
+          "Patients",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "the-lakehouse-taguig",
+      "businessName": "The Lakehouse Taguig",
+      "industry": "Hotel resort / staycation",
+      "contact": {
+        "name": "The Lakehouse Team",
+        "email": "thelakehousetaguig@gmail.com",
+        "phone": "+63 917 871 0777"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive resort site (packages, gallery, FAQ, contact/booking), mobile-friendly, Netlify hosting setup",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=the-lakehouse-taguig"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Venue booking admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Taguig, Philippines, 1630"
+      }
+    },
+    {
+      "slug": "trumed-pharma",
+      "businessName": "Trumed Pharmaceuticals",
+      "industry": "Pharmaceutical marketing / distribution",
+      "contact": {
+        "name": "Trumed Pharmaceuticals",
+        "email": "info@trumedpharma.com",
+        "phone": "+632 8697 1754"
+      },
+      "quotation": {
+        "packageName": "Business Website Redesign (landing sample)",
+        "packageScope": "Modern one-page redesign sample (products, about, responsibility, FAQ, contact CTAs), mobile-first, aligned to existing brand",
+        "quotedAmount": "₱18,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "7–10 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=trumed-pharma"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "Lead & quote inbox",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "12th Floor, Hexagon Corporate Center, 1471 Quezon Avenue, Brgy. West Triangle, Quezon City 1104"
+      }
+    },
+    {
+      "slug": "villa-clara-pool",
+      "businessName": "Villa Clara Pool & Venue",
+      "industry": "Private pool / day venue",
+      "contact": {
+        "name": "Villa Clara Pool & Venue",
+        "email": "coco.mountain@yahoo.com",
+        "phone": "+63 915 001 4133"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive private-pool venue site, gallery & contact, basic SEO, Netlify hosting setup",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=villa-clara-pool"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Venue booking admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    }
+  ]
+}

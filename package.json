@@ -1,6 +1,6 @@
 {
   "name": "my-app",
-  "version": "3.0.73",
+  "version": "3.0.74",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
@@ -37,6 +37,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build:client-catalog": "node scripts/build-client-catalog.js",
+    "prebuild": "npm run build:client-catalog",
     "build": "react-scripts build && node scripts/inject-seo-prerender.cjs build/index.html && rm -rf docs && mkdir -p docs && cp -r build/* docs/",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

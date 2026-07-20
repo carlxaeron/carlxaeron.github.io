@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.74] — 2026-07-20
+
+### Added
+- **Admin → Clients** — **Generate agreement** opens a prefilled service agreement form (catalog + outreach data), then downloads filled **Markdown** and/or **printable HTML** from `docs/templates/client-service-agreement.md`
+- **Static assets** — `public/templates/client-service-agreement.md` and `public/data/client-catalog.json` (built from `client-sites/*/client.json` via `npm run build:client-catalog`)
+- **Tests** — `serviceAgreement.test.js` for placeholder fill, peso split, and HTML export
+
 ## [3.0.73] — 2026-07-19
 
 ### Changed
