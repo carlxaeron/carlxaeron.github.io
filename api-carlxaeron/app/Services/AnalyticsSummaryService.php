@@ -375,6 +375,128 @@ class AnalyticsSummaryService
     }
 
     /**
+     * Admin Analytics — paginated recent visit events (detail rows).
+     *
+     * Privacy: only salted truncated `ip_hash` is stored/returned — never raw IP.
+     *
+     * @return array<string, mixed>
+     */
+    public function buildRecentVisits(
+        int $days = 30,
+        int $page = 1,
+        int $perPage = 25,
+        ?string $eventType = null,
+        ?string $device = null,
+        bool $maskSlugs = false,
+    ): array {
+        $days = in_array($days, [7, 14, 30, 90], true) ? $days : 30;
+        $perPage = max(1, min(50, $perPage));
+        $page = max(1, $page);
+        $from = Carbon::now()->subDays($days);
+
+        $allowedEvents = ['pageview', 'section_view', 'preview_view'];
+        $eventFilter = is_string($eventType) && in_array($eventType, $allowedEvents, true)
+            ? $eventType
+            : null;
+
+        $allowedDevices = ['Desktop', 'Mobile', 'Tablet'];
+        $deviceFilter = is_string($device) && in_array($device, $allowedDevices, true)
+            ? $device
+            : null;
+
+        $query = Visit::query()
+            ->where('created_at', '>=', $from)
+            ->orderByDesc('created_at');
+
+        if ($eventFilter !== null) {
+            $query->where('event_type', $eventFilter);
+        }
+        if ($deviceFilter !== null) {
+            $query->where('device', $deviceFilter);
+        }
+
+        $rows = $query->get([
+            'visitor_id',
+            'event_type',
+            'section',
+            'preview_slug',
+            'path',
+            'referrer',
+            'user_agent',
+            'language',
+            'device',
+            'ip_hash',
+            'created_at',
+        ]);
+
+        $items = [];
+        foreach ($rows as $row) {
+            if ($this->analytics->isExcludedRecord($row->ip_hash, $row->visitor_id)) {
+                continue;
+            }
+
+            $ua = $row->user_agent;
+            $slug = trim((string) ($row->preview_slug ?? ''));
+            $section = trim((string) ($row->section ?? ''));
+            $ref = trim((string) ($row->referrer ?? ''));
+
+            $items[] = [
+                'createdAt' => $row->created_at?->toIso8601String(),
+                'visitorId' => $this->shortVisitorId($row->visitor_id),
+                'eventType' => (string) ($row->event_type ?? ''),
+                'section' => $section !== '' ? $section : null,
+                'previewSlug' => $slug !== ''
+                    ? ($maskSlugs ? $this->analytics->maskClientSlug($slug) : $slug)
+                    : null,
+                'path' => $row->path,
+                'device' => trim((string) ($row->device ?? '')) !== ''
+                    ? (string) $row->device
+                    : $this->analytics->parseDevice($ua),
+                'browser' => $this->analytics->parseBrowser($ua),
+                'os' => $this->analytics->parseOs($ua),
+                'referrer' => $ref !== '' ? $this->shortReferrer($ref) : null,
+                'language' => $row->language,
+                'ipHash' => $this->analytics->formatIpHash($row->ip_hash),
+            ];
+        }
+
+        $total = count($items);
+        $lastPage = max(1, (int) ceil($total / $perPage));
+        $page = min($page, $lastPage);
+        $slice = array_slice($items, ($page - 1) * $perPage, $perPage);
+
+        return [
+            'rangeDays' => $days,
+            'items' => array_values($slice),
+            'pagination' => [
+                'currentPage' => $page,
+                'lastPage' => $lastPage,
+                'perPage' => $perPage,
+                'total' => $total,
+            ],
+            'filters' => [
+                'eventType' => $eventFilter,
+                'device' => $deviceFilter,
+            ],
+            'ipPrivacy' => 'hashed',
+            'privacyNote' => 'Raw IP addresses are not stored. Only a salted truncated hash (ip_hash) is kept and shown truncated.',
+        ];
+    }
+
+    private function shortVisitorId(?string $visitorId): ?string
+    {
+        $id = trim((string) $visitorId);
+        if ($id === '') {
+            return null;
+        }
+        if (strlen($id) <= 10) {
+            return $id;
+        }
+
+        return substr($id, 0, 8).'…';
+    }
+
+    /**
      * @return array<string, int|bool>
      */
     private function outreachFunnel(): array

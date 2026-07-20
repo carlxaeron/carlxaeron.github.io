@@ -73,6 +73,29 @@ class AdminController extends Controller
         );
     }
 
+    public function analyticsVisits(Request $request): JsonResponse
+    {
+        $days = (int) $request->input('days', 30);
+        if (! in_array($days, [7, 14, 30, 90], true)) {
+            $days = 30;
+        }
+
+        $eventType = $request->input('eventType');
+        $device = $request->input('device');
+
+        return ApiResponse::success(
+            'OK',
+            $this->analyticsSummary->buildRecentVisits(
+                days: $days,
+                page: max(1, (int) $request->input('page', 1)),
+                perPage: (int) $request->input('perPage', 25),
+                eventType: is_string($eventType) ? $eventType : null,
+                device: is_string($device) ? $device : null,
+                maskSlugs: false,
+            )
+        );
+    }
+
     public function contacts(Request $request): JsonResponse
     {
         $perPage = min(100, max(1, (int) $request->input('perPage', 25)));

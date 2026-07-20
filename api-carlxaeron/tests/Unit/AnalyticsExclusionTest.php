@@ -39,6 +39,31 @@ class AnalyticsExclusionTest extends TestCase
         $this->assertSame('Desktop', $this->analytics->parseDevice(null));
     }
 
+    public function test_parse_browser_and_os_from_user_agent(): void
+    {
+        $chromeWin = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+        $this->assertSame('Chrome', $this->analytics->parseBrowser($chromeWin));
+        $this->assertSame('Windows', $this->analytics->parseOs($chromeWin));
+
+        $safariMac = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15';
+        $this->assertSame('Safari', $this->analytics->parseBrowser($safariMac));
+        $this->assertSame('macOS', $this->analytics->parseOs($safariMac));
+
+        $edge = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0';
+        $this->assertSame('Edge', $this->analytics->parseBrowser($edge));
+
+        $this->assertSame('Unknown', $this->analytics->parseBrowser(null));
+        $this->assertSame('Unknown', $this->analytics->parseOs(''));
+    }
+
+    public function test_format_ip_hash_truncates_for_display(): void
+    {
+        $this->assertNull($this->analytics->formatIpHash(null));
+        $this->assertNull($this->analytics->formatIpHash(''));
+        $this->assertSame('abcd', $this->analytics->formatIpHash('abcd'));
+        $this->assertSame('deadbeef…', $this->analytics->formatIpHash('deadbeefcafebabe'));
+    }
+
     public function test_is_excluded_record_by_ip_hash_and_visitor_id(): void
     {
         config([

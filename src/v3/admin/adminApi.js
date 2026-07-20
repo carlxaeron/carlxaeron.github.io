@@ -82,6 +82,23 @@ export function fetchAdminAnalytics(days = 30) {
   return adminFetch(`${mapping.adminAnalytics}?days=${range}`, { cache: "no-store" });
 }
 
+/**
+ * @param {{ days?: number, page?: number, perPage?: number, eventType?: string, device?: string }} [opts]
+ */
+export function fetchAdminAnalyticsVisits(opts = {}) {
+  const days = [7, 14, 30, 90].includes(Number(opts.days)) ? Number(opts.days) : 30;
+  const page = Math.max(1, Number(opts.page) || 1);
+  const perPage = Math.min(50, Math.max(1, Number(opts.perPage) || 25));
+  const params = new URLSearchParams({
+    days: String(days),
+    page: String(page),
+    perPage: String(perPage),
+  });
+  if (opts.eventType) params.set("eventType", opts.eventType);
+  if (opts.device) params.set("device", opts.device);
+  return adminFetch(`${mapping.adminAnalyticsVisits}?${params}`, { cache: "no-store" });
+}
+
 export function fetchAdminContacts(page = 1) {
   return adminFetch(`${mapping.adminContacts}?page=${page}`, { cache: "no-store" });
 }

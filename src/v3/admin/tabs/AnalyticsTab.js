@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
-import { fetchAdminAnalytics } from "../adminApi";
+import { fetchAdminAnalytics, fetchAdminAnalyticsVisits } from "../adminApi";
 import AdminBarChart from "../AdminBarChart";
 import {
   ANALYTICS_RANGE_OPTIONS,
+  VISIT_DEVICE_FILTERS,
+  VISIT_EVENT_FILTERS,
   feedbackSentimentLabel,
   formatAnalyticsUpdatedAt,
   mapOutreachFunnelRows,
@@ -10,6 +12,9 @@ import {
   mapTopCountRows,
   mapVisitsByDayRows,
   normalizeAnalyticsDays,
+  visitClientLabel,
+  visitEventLabel,
+  visitTargetLabel,
 } from "../analyticsHelpers";
 
 function StatCard({ label, value, hint }) {
@@ -42,6 +47,15 @@ function AnalyticsTab() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const [visits, setVisits] = useState([]);
+  const [visitsMeta, setVisitsMeta] = useState(null);
+  const [visitsPrivacy, setVisitsPrivacy] = useState("");
+  const [visitsError, setVisitsError] = useState("");
+  const [visitsLoading, setVisitsLoading] = useState(true);
+  const [visitPage, setVisitPage] = useState(1);
+  const [eventType, setEventType] = useState("");
+  const [deviceFilter, setDeviceFilter] = useState("");
+
   const load = useCallback(async (rangeDays = days) => {
     setError("");
     try {
@@ -54,12 +68,39 @@ function AnalyticsTab() {
     }
   }, [days]);
 
+  const loadVisits = useCallback(async () => {
+    setVisitsError("");
+    setVisitsLoading(true);
+    try {
+      const next = await fetchAdminAnalyticsVisits({
+        days: normalizeAnalyticsDays(days),
+        page: visitPage,
+        perPage: 25,
+        eventType: eventType || undefined,
+        device: deviceFilter || undefined,
+      });
+      setVisits(next?.items || []);
+      setVisitsMeta(next?.pagination || null);
+      setVisitsPrivacy(next?.privacyNote || "");
+    } catch (err) {
+      setVisitsError(err.message || "Could not load recent visits.");
+      setVisits([]);
+      setVisitsMeta(null);
+    } finally {
+      setVisitsLoading(false);
+    }
+  }, [days, visitPage, eventType, deviceFilter]);
+
   useEffect(() => {
     setLoading(true);
     load(days);
     const interval = window.setInterval(() => load(days), 60000);
     return () => window.clearInterval(interval);
   }, [days, load]);
+
+  useEffect(() => {
+    loadVisits();
+  }, [loadVisits]);
 
   const updatedAt = formatAnalyticsUpdatedAt(data?.generatedAt);
   const visitsTotal = mapVisitsByDayRows(data?.visitsByDay, "total");
@@ -90,7 +131,10 @@ function AnalyticsTab() {
               key={opt.days}
               type="button"
               className={`v3-admin-range__btn${days === opt.days ? " is-active" : ""}`}
-              onClick={() => setDays(opt.days)}
+              onClick={() => {
+                setDays(opt.days);
+                setVisitPage(1);
+              }}
             >
               {opt.label}
             </button>
@@ -199,6 +243,125 @@ function AnalyticsTab() {
           </tbody>
         </table>
       </div>
+
+      <div className="v3-admin-section-head">
+        <h3 className="v3-admin-section-title">Recent visits</h3>
+        <div className="v3-admin-toolbar v3-admin-toolbar--filters">
+          <label className="v3-admin-field v3-admin-field--inline">
+            <span className="v3-admin-field__label">Event</span>
+            <select
+              className="v3-admin-field__input"
+              value={eventType}
+              onChange={(e) => {
+                setEventType(e.target.value);
+                setVisitPage(1);
+              }}
+            >
+              {VISIT_EVENT_FILTERS.map((opt) => (
+                <option key={opt.value || "all"} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="v3-admin-field v3-admin-field--inline">
+            <span className="v3-admin-field__label">Device</span>
+            <select
+              className="v3-admin-field__input"
+              value={deviceFilter}
+              onChange={(e) => {
+                setDeviceFilter(e.target.value);
+                setVisitPage(1);
+              }}
+            >
+              {VISIT_DEVICE_FILTERS.map((opt) => (
+                <option key={opt.value || "all"} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+      </div>
+      {visitsPrivacy && (
+        <p className="v3-admin-panel__meta v3-admin-panel__meta--tight">{visitsPrivacy}</p>
+      )}
+      {visitsError && (
+        <p className="v3-admin-alert" role="alert">
+          {visitsError}
+          <button type="button" className="v3-admin-link v3-admin-link--inline" onClick={loadVisits}>
+            Retry
+          </button>
+        </p>
+      )}
+      <div className="v3-admin-table-wrap">
+        <table className="v3-admin-table">
+          <thead>
+            <tr>
+              <th scope="col">When</th>
+              <th scope="col">Visitor</th>
+              <th scope="col">Event</th>
+              <th scope="col">Target</th>
+              <th scope="col">Device</th>
+              <th scope="col">Browser / OS</th>
+              <th scope="col">Referrer</th>
+              <th scope="col">IP hash</th>
+            </tr>
+          </thead>
+          <tbody>
+            {visits.length === 0 ? (
+              <tr>
+                <td colSpan={8} className="v3-admin-empty">
+                  {visitsLoading ? "Loading…" : "No visits in this range."}
+                </td>
+              </tr>
+            ) : (
+              visits.map((row, idx) => (
+                <tr key={`${row.visitorId}-${row.createdAt}-${idx}`}>
+                  <td>{formatWhen(row.createdAt)}</td>
+                  <td>
+                    <code className="v3-admin-code">{row.visitorId || "—"}</code>
+                  </td>
+                  <td>{visitEventLabel(row.eventType)}</td>
+                  <td>{visitTargetLabel(row)}</td>
+                  <td>{row.device || "—"}</td>
+                  <td>{visitClientLabel(row)}</td>
+                  <td className="v3-admin-cell-clamp">{row.referrer || "Direct"}</td>
+                  <td>
+                    <code className="v3-admin-code" title="Salted truncated hash — raw IP is not stored">
+                      {row.ipHash || "—"}
+                    </code>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+      {visitsMeta && visitsMeta.lastPage > 1 && (
+        <div className="v3-admin-pagination">
+          <button
+            type="button"
+            className="v3-admin-btn v3-admin-btn--ghost"
+            disabled={visitPage <= 1 || visitsLoading}
+            onClick={() => setVisitPage((p) => Math.max(1, p - 1))}
+          >
+            Previous
+          </button>
+          <span>
+            Page {visitPage} of {visitsMeta.lastPage}
+            {typeof visitsMeta.total === "number" ? ` · ${visitsMeta.total} visits` : ""}
+          </span>
+          <button
+            type="button"
+            className="v3-admin-btn v3-admin-btn--ghost"
+            disabled={visitPage >= visitsMeta.lastPage || visitsLoading}
+            onClick={() => setVisitPage((p) => p + 1)}
+          >
+            Next
+          </button>
+        </div>
+      )}
 
       <h3 className="v3-admin-section-title">Recent preview feedback</h3>
       <div className="v3-admin-table-wrap">

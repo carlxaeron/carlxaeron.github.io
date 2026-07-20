@@ -562,6 +562,42 @@ body.v3-admin-active .App {
   color: rgba($white, 0.92);
 }
 
+.v3-admin-section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: $space-4;
+  margin-top: $space-8;
+
+  .v3-admin-section-title {
+    margin: 0;
+  }
+}
+
+.v3-admin-toolbar--filters {
+  align-items: flex-end;
+}
+
+.v3-admin-field--inline {
+  margin: 0;
+  min-width: 140px;
+
+  .v3-admin-field__label {
+    margin-bottom: $space-1;
+  }
+
+  .v3-admin-field__input {
+    min-height: 36px;
+    padding: $space-2 $space-3;
+  }
+}
+
+.v3-admin-panel__meta--tight {
+  margin: $space-2 0 $space-3;
+  font-size: 0.8rem;
+}
+
 .v3-admin-table-wrap--spaced {
   margin-top: $space-4;
   margin-bottom: $space-2;

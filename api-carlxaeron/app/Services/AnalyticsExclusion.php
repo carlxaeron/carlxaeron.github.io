@@ -77,6 +77,80 @@ final class AnalyticsExclusion
         return 'Desktop';
     }
 
+    /** Best-effort browser label from stored user_agent (no extra columns). */
+    public function parseBrowser(?string $userAgent): string
+    {
+        $ua = (string) $userAgent;
+        if ($ua === '') {
+            return 'Unknown';
+        }
+        if (preg_match('/Edg(?:e|A|iOS)?\//i', $ua)) {
+            return 'Edge';
+        }
+        if (preg_match('/OPR\/|Opera/i', $ua)) {
+            return 'Opera';
+        }
+        if (preg_match('/Firefox\//i', $ua)) {
+            return 'Firefox';
+        }
+        if (preg_match('/Chrome\//i', $ua) && ! preg_match('/Edg/i', $ua)) {
+            return 'Chrome';
+        }
+        if (preg_match('/Safari\//i', $ua) && ! preg_match('/Chrome\//i', $ua)) {
+            return 'Safari';
+        }
+        if (preg_match('/MSIE |Trident\//i', $ua)) {
+            return 'IE';
+        }
+
+        return 'Other';
+    }
+
+    /** Best-effort OS label from stored user_agent. */
+    public function parseOs(?string $userAgent): string
+    {
+        $ua = (string) $userAgent;
+        if ($ua === '') {
+            return 'Unknown';
+        }
+        if (preg_match('/Android/i', $ua)) {
+            return 'Android';
+        }
+        if (preg_match('/iPhone|iPad|iPod/i', $ua)) {
+            return 'iOS';
+        }
+        if (preg_match('/Windows/i', $ua)) {
+            return 'Windows';
+        }
+        if (preg_match('/Mac OS X|Macintosh/i', $ua)) {
+            return 'macOS';
+        }
+        if (preg_match('/CrOS/i', $ua)) {
+            return 'Chrome OS';
+        }
+        if (preg_match('/Linux/i', $ua)) {
+            return 'Linux';
+        }
+
+        return 'Other';
+    }
+
+    /**
+     * Truncate stored ip_hash for admin display (raw IPs are never persisted).
+     */
+    public function formatIpHash(?string $ipHash): ?string
+    {
+        $hash = trim((string) $ipHash);
+        if ($hash === '') {
+            return null;
+        }
+        if (strlen($hash) <= 8) {
+            return $hash;
+        }
+
+        return substr($hash, 0, 8).'…';
+    }
+
     /** Public Insights slug mask — mirrors hosting-php mask_client_slug / frontend maskClientSlug. */
     public function maskClientSlug(?string $slug): string
     {

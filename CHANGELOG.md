@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.0.82] — 2026-07-20
+
+### Added
+- **Admin → Analytics → Recent visits** — filterable/paginated table (when, visitor, event, target, device, browser/OS, referrer, truncated `ip_hash`)
+- **API** — `GET /admin/analytics/visits` (Sanctum); browser/OS parsed from stored `user_agent`
+
+### Notes
+- Raw IPs are **not** stored; only salted truncated `ip_hash` (shown truncated in Admin)
+
 ## [3.0.81] — 2026-07-20
 
 ### Added

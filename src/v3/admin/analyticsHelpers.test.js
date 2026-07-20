@@ -7,6 +7,9 @@ import {
   mapTopCountRows,
   mapVisitsByDayRows,
   normalizeAnalyticsDays,
+  visitClientLabel,
+  visitEventLabel,
+  visitTargetLabel,
 } from "./analyticsHelpers";
 
 describe("analyticsHelpers", () => {
@@ -81,5 +84,22 @@ describe("analyticsHelpers", () => {
     expect(feedbackSentimentLabel("agree")).toBe("Ready");
     expect(feedbackSentimentLabel("like")).toBe("Like");
     expect(feedbackSentimentLabel("dislike")).toBe("Dislike");
+  });
+
+  test("visitEventLabel and visitTargetLabel", () => {
+    expect(visitEventLabel("preview_view")).toBe("Preview");
+    expect(visitEventLabel("section_view")).toBe("Section");
+    expect(visitEventLabel("pageview")).toBe("Page");
+    expect(visitTargetLabel({ previewSlug: "jk-construction", section: "home" })).toBe(
+      "jk-construction"
+    );
+    expect(visitTargetLabel({ section: "projects" })).toBe("projects");
+    expect(visitTargetLabel({})).toBe("—");
+  });
+
+  test("visitClientLabel joins browser and OS", () => {
+    expect(visitClientLabel({ browser: "Chrome", os: "Windows" })).toBe("Chrome · Windows");
+    expect(visitClientLabel({ browser: "Safari", os: "Unknown" })).toBe("Safari");
+    expect(visitClientLabel({ browser: "Unknown", os: "Unknown" })).toBe("—");
   });
 });

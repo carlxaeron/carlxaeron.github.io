@@ -51,19 +51,21 @@ class AdminAnalyticsTest extends TestCase
             'preview_slug' => 'jk-construction',
             'path' => '/?preview=jk-construction',
             'referrer' => 'https://facebook.com/',
+            'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
             'device' => 'Desktop',
-            'ip_hash' => 'abcd',
+            'ip_hash' => 'abcd1234efgh5678',
             'created_at' => now()->subDay(),
         ]);
 
         Visit::query()->create([
-            'visitor_id' => 'v2',
+            'visitor_id' => 'v2-long-visitor-id-xyz',
             'session_id' => 's2',
             'event_type' => 'section_view',
             'section' => 'projects',
             'preview_slug' => null,
             'path' => '/#projects',
             'referrer' => '',
+            'user_agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
             'device' => 'Mobile',
             'ip_hash' => 'efgh',
             'created_at' => now()->subHours(2),
@@ -151,5 +153,86 @@ class AdminAnalyticsTest extends TestCase
         $this->getJson('/admin/analytics?days=999')
             ->assertOk()
             ->assertJsonPath('data.rangeDays', 30);
+    }
+
+    public function test_analytics_visits_returns_detail_rows_with_hashed_ip_only(): void
+    {
+        Visit::query()->create([
+            'visitor_id' => 'visitor-aaaaaaaa',
+            'session_id' => 's1',
+            'event_type' => 'preview_view',
+            'section' => null,
+            'preview_slug' => 'jk-construction',
+            'path' => '/?preview=jk-construction',
+            'referrer' => 'https://facebook.com/page',
+            'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'language' => 'en-US',
+            'device' => 'Desktop',
+            'ip_hash' => 'deadbeefcafebabe',
+            'created_at' => now()->subHour(),
+        ]);
+
+        Visit::query()->create([
+            'visitor_id' => 'visitor-bbbbbbbb',
+            'session_id' => 's2',
+            'event_type' => 'section_view',
+            'section' => 'about',
+            'preview_slug' => null,
+            'path' => '/#about',
+            'referrer' => null,
+            'user_agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1',
+            'device' => 'Mobile',
+            'ip_hash' => '1111222233334444',
+            'created_at' => now()->subMinutes(10),
+        ]);
+
+        $this->getJson('/admin/analytics/visits')
+            ->assertUnauthorized();
+
+        Sanctum::actingAs(
+            User::query()->where('email', self::ADMIN_EMAIL)->firstOrFail(),
+            ['*']
+        );
+
+        $this->getJson('/admin/analytics/visits?days=30&perPage=10')
+            ->assertOk()
+            ->assertJsonPath('data.pagination.total', 2)
+            ->assertJsonPath('data.ipPrivacy', 'hashed')
+            ->assertJsonPath('data.items.0.eventType', 'section_view')
+            ->assertJsonPath('data.items.0.browser', 'Safari')
+            ->assertJsonPath('data.items.0.os', 'iOS')
+            ->assertJsonPath('data.items.0.device', 'Mobile')
+            ->assertJsonPath('data.items.0.ipHash', '11112222…')
+            ->assertJsonPath('data.items.1.previewSlug', 'jk-construction')
+            ->assertJsonPath('data.items.1.browser', 'Chrome')
+            ->assertJsonPath('data.items.1.os', 'Windows')
+            ->assertJsonPath('data.items.1.referrer', 'facebook.com')
+            ->assertJsonPath('data.items.1.ipHash', 'deadbeef…')
+            ->assertJsonMissingPath('data.items.0.ip')
+            ->assertJsonStructure([
+                'data' => [
+                    'items' => [
+                        [
+                            'createdAt',
+                            'visitorId',
+                            'eventType',
+                            'section',
+                            'previewSlug',
+                            'device',
+                            'browser',
+                            'os',
+                            'referrer',
+                            'ipHash',
+                        ],
+                    ],
+                    'pagination',
+                    'privacyNote',
+                ],
+            ]);
+
+        $this->getJson('/admin/analytics/visits?eventType=preview_view&device=Desktop')
+            ->assertOk()
+            ->assertJsonPath('data.pagination.total', 1)
+            ->assertJsonPath('data.items.0.eventType', 'preview_view');
     }
 }

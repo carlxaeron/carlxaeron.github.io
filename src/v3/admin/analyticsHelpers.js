@@ -7,6 +7,20 @@ export const ANALYTICS_RANGE_OPTIONS = [
   { days: 90, label: "90 days" },
 ];
 
+export const VISIT_EVENT_FILTERS = [
+  { value: "", label: "All events" },
+  { value: "pageview", label: "Page view" },
+  { value: "section_view", label: "Section" },
+  { value: "preview_view", label: "Preview" },
+];
+
+export const VISIT_DEVICE_FILTERS = [
+  { value: "", label: "All devices" },
+  { value: "Desktop", label: "Desktop" },
+  { value: "Mobile", label: "Mobile" },
+  { value: "Tablet", label: "Tablet" },
+];
+
 export const ADMIN_TABS = [
   { id: "overview", label: "Overview" },
   { id: "analytics", label: "Analytics" },
@@ -121,4 +135,38 @@ export function feedbackSentimentLabel(sentiment) {
   if (s === "like") return "Like";
   if (s === "dislike") return "Dislike";
   return sentiment || "—";
+}
+
+/**
+ * @param {string} eventType
+ * @returns {string}
+ */
+export function visitEventLabel(eventType) {
+  const t = String(eventType || "").toLowerCase();
+  if (t === "pageview") return "Page";
+  if (t === "section_view") return "Section";
+  if (t === "preview_view") return "Preview";
+  return eventType || "—";
+}
+
+/**
+ * Section or preview slug for the visit target column.
+ * @param {{ section?: string|null, previewSlug?: string|null, eventType?: string }} row
+ */
+export function visitTargetLabel(row) {
+  if (!row || typeof row !== "object") return "—";
+  if (row.previewSlug) return row.previewSlug;
+  if (row.section) return row.section;
+  return "—";
+}
+
+/**
+ * @param {{ browser?: string, os?: string }} row
+ */
+export function visitClientLabel(row) {
+  if (!row || typeof row !== "object") return "—";
+  const browser = row.browser && row.browser !== "Unknown" ? row.browser : null;
+  const os = row.os && row.os !== "Unknown" ? row.os : null;
+  if (browser && os) return `${browser} · ${os}`;
+  return browser || os || "—";
 }
