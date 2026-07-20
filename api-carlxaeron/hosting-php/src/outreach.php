@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/outreach-signature.php';
+
 /**
  * Client quotation outreach — schedule + auto follow-ups (hosting cron).
  * Initial send only via POST /outreachSchedule after Cursor gets user approval.
@@ -255,6 +257,37 @@ function outreach_admin_browse_text(array $job): string
     return "Start with the admin (desktop & mobile): {$adminName} at /admin/ — scroll inside the frames and browse the sample pages.\n\n";
 }
 
+/**
+ * Quoted amounts (₱15k / ₱18k) are website-only; admin preview is a sample; production system is extra.
+ *
+ * @return array{0:string,1:string}
+ */
+function outreach_website_pricing_block(string $pkg, string $amount, string $payment, string $timeline): array
+{
+    $amountHtml = $amount !== ''
+        ? '<strong>Investment (website only):</strong> ' . h($amount) . '<br>'
+        : '';
+    $amountText = $amount !== '' ? "Investment (website only): {$amount}\n" : '';
+
+    $html = '<p><strong>Package:</strong> ' . h($pkg) . ' <em>(website only)</em><br>'
+        . $amountHtml
+        . '<strong>Payment:</strong> ' . h($payment) . '<br>'
+        . '<strong>Timeline:</strong> ' . h($timeline) . '</p>'
+        . '<p><strong>Admin system:</strong> the preview includes a <em>sample</em> so you can explore how day-to-day operations could look. '
+        . 'A production business system is <strong>priced separately</strong> if you want that built for real.</p>'
+        . '<p><em>To start the website, only the upfront portion is due — not the full website amount.</em></p>';
+
+    $text = "Package: {$pkg} (website only)\n"
+        . $amountText
+        . "Payment: {$payment}\n"
+        . "Timeline: {$timeline}\n\n"
+        . "Admin system: the preview includes a sample so you can explore operations. "
+        . "A production business system is priced separately if you want that built for real.\n"
+        . "To start the website, only the upfront portion is due — not the full website amount.\n";
+
+    return [$html, $text];
+}
+
 /** @param array<string,mixed> $job */
 function outreach_build_initial_email(array $job): array
 {
@@ -268,6 +301,7 @@ function outreach_build_initial_email(array $job): array
     $label = outreach_system_label($job);
     $hook = outreach_system_hook_sentence($job, true);
     $hookText = outreach_system_hook_sentence($job, false);
+    [$pricingHtml, $pricingText] = outreach_website_pricing_block($pkg, $amount, $payment, $timeline);
 
     $subject = $label !== ''
         ? "{$label} + website sample for {$biz}"
@@ -284,40 +318,22 @@ function outreach_build_initial_email(array $job): array
         . '<p><strong>Then the marketing site:</strong> desktop and mobile pages at <code>/</code> show '
         . 'how ' . h($biz) . ' could look online.</p>'
         . '<p><strong>Preview link:</strong> <a href="' . h($preview) . '">' . h($preview) . '</a></p>'
-        . '<p><strong>Package:</strong> ' . h($pkg) . '<br>'
-        . ($amount !== '' ? '<strong>Investment (total):</strong> ' . h($amount) . '<br>' : '')
-        . '<strong>Payment:</strong> ' . h($payment) . '<br>'
-        . '<strong>Timeline:</strong> ' . h($timeline) . '</p>'
-        . '<p><em>To start, only the upfront portion is due — not the full package amount.</em></p>'
-        . '<p>Reply if the admin and site previews look right, you want changes, or you are ready to proceed.</p>'
+        . $pricingHtml
+        . '<p>Reply if the admin and site previews look right, you want changes, or you are ready to proceed '
+        . '(website now, and/or a custom quote for a live system).</p>'
+        . outreach_facebook_contact_html()
         . outreach_signature_html();
     $text = "Hi {$name},\n\n{$hookText}\n"
         . outreach_admin_browse_text($job)
         . "Then the marketing site at / on desktop and mobile.\n"
         . "Preview: {$preview}\n\n"
-        . "Package: {$pkg}\n"
-        . ($amount !== '' ? "Investment (total): {$amount}\n" : '')
-        . "Payment: {$payment}\n"
-        . "To start, only the upfront portion is due — not the full package amount.\n"
-        . "Timeline: {$timeline}\n\n"
-        . "Reply if the admin and site previews look right, you want changes, or you are ready to proceed.\n\n"
+        . $pricingText . "\n"
+        . "Reply if the admin and site previews look right, you want changes, or you are ready to proceed "
+        . "(website now, and/or a custom quote for a live system).\n\n"
+        . outreach_facebook_contact_text()
         . outreach_signature_text();
 
     return [$subject, $html, $text];
-}
-
-function outreach_signature_html(): string
-{
-    return '<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
-        . '<a href="https://carlmanuel.com">carlmanuel.com</a> · '
-        . '<a href="https://www.facebook.com/profile.php?id=61557195950694">Facebook</a> · '
-        . '<a href="tel:+639625389886">+63 962 538 9886</a> · '
-        . 'info@carlmanuel.com</p>';
-}
-
-function outreach_signature_text(): string
-{
-    return "Carl Louis Manuel\ncarlmanuel.com · facebook.com/profile.php?id=61557195950694 · +63 962 538 9886 · info@carlmanuel.com";
 }
 
 /** @param array<string,mixed> $job */
@@ -337,42 +353,49 @@ function outreach_build_followup_email(array $job): array
     $totalPct = $offer['totalPct'];
     $discounted = $offer['discounted'];
 
+    $pricingAside = 'Quoted figures are for the <strong>website only</strong>. The admin preview is a sample — a production system is priced separately if you want one.';
+    $pricingAsideText = 'Quoted figures are for the website only. The admin preview is a sample — a production system is priced separately if you want one.';
+
     if ($isWeekFollowUp) {
         $subject = $totalPct > 0
-            ? "Still interested? {$totalPct}% off — {$biz} {$systemPhrase} + website preview"
+            ? "Still interested? {$totalPct}% off website — {$biz} {$systemPhrase} + website preview"
             : "Still interested? {$biz} {$systemPhrase} + website preview";
         $ask = 'Did you <strong>browse the admin</strong> preview and like the sample, want <strong>revisions</strong>, or is it <strong>not a fit right now</strong>?'
-            . '<br><br>Payment stays <strong>' . h($payment) . '</strong>'
+            . '<br><br>Website payment stays <strong>' . h($payment) . '</strong>'
             . ($discounted !== null
-                ? ' on the discounted total of <strong>' . h($discounted) . '</strong>'
+                ? ' on the discounted <strong>website</strong> total of <strong>' . h($discounted) . '</strong>'
                 : '')
-            . '. Only the upfront half is due to start.';
+            . '. Only the upfront half is due to start the website.';
         $askText = 'Did you browse the admin preview and like the sample, want revisions, or is it not a fit right now?'
-            . "\n\nPayment stays {$payment}"
-            . ($discounted !== null ? " on the discounted total of {$discounted}" : '')
-            . '. Only the upfront half is due to start.';
+            . "\n\nWebsite payment stays {$payment}"
+            . ($discounted !== null ? " on the discounted website total of {$discounted}" : '')
+            . '. Only the upfront half is due to start the website.';
     } else {
         $subject = $totalPct > 0
-            ? "Quick check-in + {$totalPct}% off — your {$biz} {$systemPhrase} + website preview"
+            ? "Quick check-in + {$totalPct}% off website — your {$biz} {$systemPhrase} + website preview"
             : "Quick check-in — your {$biz} {$systemPhrase} + website preview";
-        $ask = 'Did the <strong>admin</strong> preview look useful on desktop and mobile? Browse the pages inside the frames, then the marketing site. Anything to change? Ready to proceed with <strong>'
+        $ask = 'Did the <strong>admin</strong> preview look useful on desktop and mobile? Browse the pages inside the frames, then the marketing site. Anything to change? Ready to proceed with the <strong>website</strong> package (<strong>'
             . h($pkg) . '</strong>'
             . ($discounted !== null ? ' at <strong>' . h($discounted) . '</strong>' : '')
-            . '? Only the upfront portion is due to begin — not the full amount.';
-        $askText = "Did the admin preview look useful on desktop and mobile? Browse the pages inside the frames, then the marketing site. Anything to change? Ready to proceed with {$pkg}"
+            . ')? Only the upfront portion is due to begin — not the full website amount. Want a live system too? I can quote that separately.';
+        $askText = "Did the admin preview look useful on desktop and mobile? Browse the pages inside the frames, then the marketing site. Anything to change? Ready to proceed with the website package ({$pkg}"
             . ($discounted !== null ? " at {$discounted}" : '')
-            . '? Only the upfront portion is due to begin — not the full amount.';
+            . ')? Only the upfront portion is due to begin — not the full website amount. Want a live system too? I can quote that separately.';
     }
 
     $html = '<p>Hi ' . h($name) . ',</p>'
         . '<p>Checking in about the sample <strong>' . h($systemPhrase) . '</strong> and website for <strong>' . h($biz) . '</strong>.</p>'
         . '<p><strong>Preview (admin + site):</strong> <a href="' . h($preview) . '">' . h($preview) . '</a></p>'
         . '<p>' . $ask . '</p>'
+        . '<p><em>' . $pricingAside . '</em></p>'
         . $offer['html']
         . '<p>No pressure — a short reply is enough.</p>'
+        . outreach_facebook_contact_html()
         . outreach_signature_html();
     $text = "Hi {$name},\n\nChecking in about the {$systemPhrase} and website for {$biz}.\nPreview: {$preview}\n\n{$askText}\n\n"
+        . "{$pricingAsideText}\n\n"
         . $offer['text'] . "\n\n"
+        . outreach_facebook_contact_text()
         . outreach_signature_text();
 
     return [$subject, $html, $text];

@@ -43,11 +43,13 @@ final class PreviewFeedbackEmailBuilder
             .'<p>Hi '.e($name).',</p>'
             .'<p>Thank you for liking the sample website and admin system I prepared for <strong>'.e($biz).'</strong>. '
             .'It is good to know the direction resonates with you.</p>'
-            .'<p>If you are ready to <strong>push through</strong>, we can begin with the deposit '
-            .'(<strong>'.e($payment).'</strong>). '.$timelineLine.'</p>'
+            .'<p>If you are ready to <strong>push through on the website</strong>, we can begin with the deposit '
+            .'(<strong>'.e($payment).'</strong>). '.$timelineLine
+            .' The quoted package is <strong>website only</strong>; the admin preview is a sample — a production system is priced separately if you want one.</p>'
             .'<p><strong>Preview again (site + admin on desktop &amp; mobile):</strong> '
             .'<a href="'.e($preview).'">'.e($preview).'</a></p>'
             .'<p>Reply to this email if you want to proceed, need a quick tweak first, or have questions about scope or payment.</p>'
+            .OutreachSignature::facebookContactHtml()
             .OutreachSignature::html();
 
         $timelineText = $timeline !== ''
@@ -56,9 +58,11 @@ final class PreviewFeedbackEmailBuilder
 
         $text = "Hi {$name},\n\n"
             ."Thank you for liking the sample website and admin system for {$biz}.\n\n"
-            ."If you are ready to push through, we can begin with the deposit ({$payment}). {$timelineText}\n\n"
+            ."If you are ready to push through on the website, we can begin with the deposit ({$payment}). {$timelineText} "
+            ."The quoted package is website only; the admin preview is a sample — a production system is priced separately if you want one.\n\n"
             ."Preview (site + admin): {$preview}\n\n"
             ."Reply if you want to proceed, need a tweak first, or have questions.\n\n"
+            .OutreachSignature::facebookContactText()
             .OutreachSignature::text();
 
         return [$subject, $html, $text];
@@ -94,6 +98,7 @@ final class PreviewFeedbackEmailBuilder
             .'<p>If you are still interested, reply with what to change. If timing is not right, that is okay too — '
             .'just let me know.</p>'
             .'<p><strong>Preview:</strong> <a href="'.e($preview).'">'.e($preview).'</a></p>'
+            .OutreachSignature::facebookContactHtml()
             .OutreachSignature::html();
 
         $text = "Hi {$name},\n\n"
@@ -102,6 +107,7 @@ final class PreviewFeedbackEmailBuilder
             ."What would make the sample feel right for you? I am happy to revise before we move forward.\n\n"
             ."If you are still interested, reply with what to change. If timing is not right, just let me know.\n\n"
             ."Preview: {$preview}\n\n"
+            .OutreachSignature::facebookContactText()
             .OutreachSignature::text();
 
         return [$subject, $html, $text];

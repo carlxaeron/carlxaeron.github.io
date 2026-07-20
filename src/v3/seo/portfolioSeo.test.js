@@ -59,10 +59,11 @@ describe("portfolioSeo", () => {
     expect(shouldNoIndex({ appMode: "portfolio", previewQuery: "" })).toBe(false);
   });
 
-  test("shouldNoIndex is true for preview, login, and admin", () => {
+  test("shouldNoIndex is true for preview, login, admin, and sign", () => {
     expect(shouldNoIndex({ appMode: "portfolio", previewQuery: "jk-construction" })).toBe(true);
     expect(shouldNoIndex({ appMode: "login" })).toBe(true);
     expect(shouldNoIndex({ appMode: "admin" })).toBe(true);
+    expect(shouldNoIndex({ appMode: "sign" })).toBe(true);
   });
 
   test("PORTFOLIO_SEO has canonical site URL", () => {

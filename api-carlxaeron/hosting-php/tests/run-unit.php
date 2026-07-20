@@ -142,6 +142,10 @@ assert_true(str_contains(strtolower($initSubject), 'website sample'), 'initial s
 assert_true(str_contains($initHtml, '/admin/'), 'initial HTML has admin path');
 assert_true(str_contains($initHtml, 'Start with the admin'), 'initial HTML leads with admin browse');
 assert_true(str_contains($initHtml, 'Then the marketing site'), 'initial HTML mentions site second');
+assert_true(str_contains($initHtml, 'Investment (website only)'), 'initial HTML website-only pricing');
+assert_true(str_contains(strtolower($initHtml), 'message me on'), 'initial HTML facebook contact');
+assert_true(str_contains(strtolower($initHtml), 'priced separately'), 'initial HTML system priced separately');
+assert_true(str_contains($initText, 'Investment (website only)'), 'initial text website-only pricing');
 assert_true(str_contains($initHtml, 'tel:+639625389886'), 'initial HTML has phone link');
 assert_true(str_contains($initText, '+63 962 538 9886'), 'initial text has phone');
 assert_true(str_contains(strtolower($initText), 'start with the admin'), 'initial text leads with admin');
@@ -170,6 +174,8 @@ assert_true(str_contains($initLabelHtml, 'Booking'), 'initial HTML includes syst
 ]);
 assert_true(str_contains($initPainText, 'Stop taking bookings only on Messenger'), 'initial uses systemPain');
 assert_true(str_contains(strtolower($fuHtml), 'admin system'), '3d HTML leads with admin');
+assert_true(str_contains(strtolower($fuHtml), 'website only'), '3d HTML website-only note');
+assert_true(str_contains(strtolower($fuText), 'website only'), '3d text website-only note');
 
 echo "\nMail header helpers\n";
 assert_same('info@carlmanuel.com', mail_bare_address('info@carlmanuel.com'), 'bare stays bare');

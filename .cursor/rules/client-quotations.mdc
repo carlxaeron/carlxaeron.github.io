@@ -20,7 +20,7 @@ Each client demo is **website + browsable admin system** on one Netlify host:
 - Marketing site: `/`
 - Portfolio `?preview={slug}` → **4 panels:** admin desktop/mobile **first**, then site desktop/mobile
 
-Pricing stays staged: **₱15k / ₱18k website** entry offer; admin sample is the natural upsell shown in the same preview. Cadence remains **`3d1w`** (3d → 7d × 3, max 4).
+Pricing: **₱15k / ₱18k = website only**. Admin in the preview is a **sample**; a production business system is **priced separately**. Say this in every outreach email/SMS/messenger. Cadence remains **`3d1w`** (3d → 7d × 3, max 4).
 
 ## Per-client customization (mandatory)
 

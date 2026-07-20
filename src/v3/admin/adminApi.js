@@ -135,3 +135,66 @@ export function sendPushTest() {
     method: "POST",
   });
 }
+
+/**
+ * @param {{ slug?: string, status?: string, perPage?: number }} [params]
+ */
+export function fetchAdminAgreements(params = {}) {
+  const query = new URLSearchParams();
+  if (params.slug) query.set("slug", params.slug);
+  if (params.status) query.set("status", params.status);
+  if (params.perPage) query.set("perPage", String(params.perPage));
+  const qs = query.toString();
+  return adminFetch(`${mapping.adminAgreements}${qs ? `?${qs}` : ""}`, {
+    cache: "no-store",
+  });
+}
+
+export function fetchAdminAgreement(id) {
+  return adminFetch(`${mapping.adminAgreements}/${encodeURIComponent(id)}`, {
+    cache: "no-store",
+  });
+}
+
+/**
+ * @param {{
+ *   slug: string,
+ *   businessName: string,
+ *   clientEmail: string,
+ *   clientName?: string,
+ *   formJson?: Record<string, unknown>,
+ *   filledHtml: string,
+ * }} payload
+ */
+export function createAdminAgreement(payload) {
+  return adminFetch(mapping.adminAgreements, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function resendAdminAgreement(id) {
+  return adminFetch(`${mapping.adminAgreements}/${encodeURIComponent(id)}/resend`, {
+    method: "POST",
+  });
+}
+
+export function revokeAdminAgreement(id) {
+  return adminFetch(`${mapping.adminAgreements}/${encodeURIComponent(id)}/revoke`, {
+    method: "POST",
+  });
+}
+
+/** Open = can still resend / revoke (not signed / revoked / expired). */
+export function isOpenAgreementStatus(status) {
+  return ["draft", "sent", "viewed"].includes(String(status || "").toLowerCase());
+}
+
+/**
+ * Pick the newest open agreement from a list/index payload.
+ * @param {unknown} payload
+ */
+export function pickOpenAgreement(payload) {
+  const { rows } = parsePaginatedList(payload);
+  return rows.find((row) => isOpenAgreementStatus(row?.status)) || null;
+}

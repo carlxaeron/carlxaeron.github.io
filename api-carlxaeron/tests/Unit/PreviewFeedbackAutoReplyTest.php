@@ -48,6 +48,7 @@ class PreviewFeedbackAutoReplyTest extends TestCase
 
         Mail::assertSent(OutreachProspectMail::class, function (OutreachProspectMail $mail) {
             return str_contains(strtolower($mail->htmlBody), 'push through')
+                && str_contains(strtolower($mail->htmlBody), 'website only')
                 && str_contains($mail->htmlBody, 'jk-construction');
         });
 

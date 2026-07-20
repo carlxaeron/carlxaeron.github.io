@@ -43,7 +43,7 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 | Skill | Use when |
 |-------|----------|
 | [.cursor/skills/deploy-portfolio/SKILL.md](.cursor/skills/deploy-portfolio/SKILL.md) | Deploy, release, tag, verify carlmanuel.com, CI failures |
-| [.cursor/skills/api-carlxaeron/SKILL.md](.cursor/skills/api-carlxaeron/SKILL.md) | Laravel API: contact, quote, visits, feedback, analytics, contracts |
+| [.cursor/skills/api-carlxaeron/SKILL.md](.cursor/skills/api-carlxaeron/SKILL.md) | Laravel API: contact, quote, visits, feedback, analytics, agreements |
 | [.cursor/skills/hosting-ssh/SKILL.md](.cursor/skills/hosting-ssh/SKILL.md) | Namecheap Stellar SSH/SFTP — deploy `api-carlxaeron` / api.carlmanuel.com |
 | [.cursor/skills/firebase-backend/SKILL.md](.cursor/skills/firebase-backend/SKILL.md) | Firebase Analytics + leftover legacy functions (assistant/weekly/license moved/deleted) |
 | [.cursor/skills/namecheap-browser/SKILL.md](.cursor/skills/namecheap-browser/SKILL.md) | Namecheap DNS via browser (when API access unavailable) |
@@ -83,6 +83,7 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 - Frontend: `Contact.js`, `Quote.js`, analytics, ChatAgent → `src/mapping.js` → `https://api.carlmanuel.com`
 - Backend: hosting-php / Laravel [`api-carlxaeron/`](api-carlxaeron/) (skill **api-carlxaeron**)
 - **Admin ops + CMS:** `carlmanuel.com/#login` → Sanctum → `#admin` (Overview, Inbox, Outreach, Clients, CMS); Laravel `/admin/*` only
+- **Service agreements:** Admin → Clients → Generate agreement → **Send for signature** (Laravel `/admin/agreements`); client signs at `carlmanuel.com/?sign={token}` (public `/agreements/{token}`)
 - **Before deploy:** `cd api-carlxaeron && php artisan test` (and `php api-carlxaeron/hosting-php/tests/run-unit.php`)
 - Deploy: hosting-ssh to Stellar; set `OPENAI_API_KEY` for ChatAgent
 - Weekly report: Mon 08:00 cron `cron-weekly-visit-report.php` (MySQL)

@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AdminPushController;
 use App\Http\Controllers\Api\OutreachController;
 use App\Http\Controllers\Api\PortfolioApiController;
+use App\Http\Controllers\Api\ServiceAgreementController;
 use Illuminate\Support\Facades\Route;
 
 // Mirror hosting-php rate limits (maxAttempts,decayMinutes) for future Laravel cutover.
@@ -27,6 +28,11 @@ Route::post('/outreachPause', [OutreachController::class, 'pause'])
 Route::post('/pushNotifyAdmins', [OutreachController::class, 'pushNotify'])
     ->middleware('throttle:60,60');
 
+Route::get('/agreements/{token}', [ServiceAgreementController::class, 'publicShow'])
+    ->middleware('throttle:60,1');
+Route::post('/agreements/{token}/sign', [ServiceAgreementController::class, 'publicSign'])
+    ->middleware('throttle:10,60');
+
 Route::post('/admin/login', [AdminController::class, 'login'])
     ->middleware('throttle:20,5');
 
@@ -43,4 +49,13 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::post('/admin/push/subscribe', [AdminPushController::class, 'subscribe']);
     Route::delete('/admin/push/subscribe', [AdminPushController::class, 'unsubscribe']);
     Route::post('/admin/push/sendPing', [AdminPushController::class, 'test']);
+
+    Route::post('/admin/agreements', [ServiceAgreementController::class, 'store']);
+    Route::get('/admin/agreements', [ServiceAgreementController::class, 'index']);
+    Route::get('/admin/agreements/{id}', [ServiceAgreementController::class, 'show'])
+        ->whereNumber('id');
+    Route::post('/admin/agreements/{id}/resend', [ServiceAgreementController::class, 'resend'])
+        ->whereNumber('id');
+    Route::post('/admin/agreements/{id}/revoke', [ServiceAgreementController::class, 'revoke'])
+        ->whereNumber('id');
 });

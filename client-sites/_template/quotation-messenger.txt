@@ -8,12 +8,14 @@ Inside the link you'll see:
 • **Site** — desktop + mobile marketing page
 • **Admin** — desktop + mobile demo (already logged in — tap through Dashboard, Bookings/Calendar, etc.)
 
-📦 {{packageName}}
+📦 {{packageName}} *(website only)*
 • {{packageScope}}
 • Timeline: {{timeline}}
-• Investment: {{quotedAmount}} ({{paymentTerms}})
+• Investment (website only): {{quotedAmount}} ({{paymentTerms}})
 
-Open when you have a minute — it's a demo layout we can customize with your photos, services, and colors. The admin sample shows what a booking/operations layer could look like next.
+The admin in the preview is a **sample** to explore. A **production business system is priced separately** if you want that built for real — just say the word and I’ll quote it.
+
+Open when you have a minute — we can customize the website with your photos, services, and colors first.
 
 Let me know what you think or if you want a quick call. Salamat!
 

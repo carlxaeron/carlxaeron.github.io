@@ -18,26 +18,26 @@ I prepared a **sample website and browsable admin system** for **{{businessName}
 - **Site — Desktop & Mobile:** marketing one-pager at `/` (hero, services, contact)
 - **Admin — Desktop & Mobile:** pre-logged-in demo at `/admin/` — click through Dashboard, Bookings, Calendar, and other sample pages inside the admin frames
 
-The **website package** below is the entry offer; the admin sample shows the natural next layer for day-to-day operations (bookings, jobs, appointments, or leads — tailored to your industry).
-
-### Proposed package — {{packageName}}
+### Proposed package — {{packageName}} *(website only)*
 
 | Item | Details |
 |------|---------|
 | **Scope** | {{packageScope}} |
 | **Timeline** | {{timeline}} |
-| **Investment (total)** | **{{quotedAmount}}** |
+| **Investment (website only)** | **{{quotedAmount}}** |
 | **Payment** | {{paymentTerms}} |
 
-**Includes:** responsive layout, contact section, basic SEO setup, and deployment. Copy and photos can be updated to match your brand.
+**Website includes:** responsive layout, contact section, basic SEO setup, and deployment. Copy and photos can be updated to match your brand.
+
+**Admin system:** the preview includes a **sample** so you can explore how day-to-day operations could look. A **production business system is priced separately** if you want that built for real — reply and I’ll quote it.
 
 ### Next steps
 
 1. Open the preview link above — browse the **site and admin** on both desktop and mobile mockups.
 2. Tell me what you'd like changed on either side.
-3. If you're happy to proceed, I'll finalize content, connect your domain (optional), and hand over the live site.
+3. If you're happy to proceed with the **website**, I'll finalize content, connect your domain (optional), and hand over the live site. Want the live system too? We’ll scope that as an add-on.
 
-Reply to this email or message me if you have questions — happy to adjust the scope or quote.
+Reply to this email or message me on [Facebook](https://www.facebook.com/profile.php?id=61557195950694) if you have questions — happy to adjust the scope or quote.
 
 Best regards,  
 **Carl Louis Manuel**  
@@ -46,4 +46,4 @@ info@carlmanuel.com · [Facebook](https://www.facebook.com/profile.php?id=615571
 
 ---
 
-*Draft generated for {{businessName}} ({{industry}}). Update amounts, scope, and contact details before sending.*
+*Draft generated for {{businessName}} ({{industry}}). Update amounts, scope, and contact details before sending. `quotedAmount` is website-only.*

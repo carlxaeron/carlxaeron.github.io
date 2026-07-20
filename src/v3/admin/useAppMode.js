@@ -1,7 +1,19 @@
 import { useEffect, useState } from "react";
 
 /**
- * @returns {'portfolio' | 'login' | 'admin'}
+ * @param {string} [search]
+ * @returns {string | null}
+ */
+export function getSignTokenFromSearch(search = "") {
+  if (typeof window !== "undefined" && !search) {
+    return new URLSearchParams(window.location.search).get("sign");
+  }
+  const token = new URLSearchParams(search).get("sign");
+  return token && String(token).trim() ? String(token).trim() : null;
+}
+
+/**
+ * @returns {'portfolio' | 'login' | 'admin' | 'sign'}
  */
 export function getAppMode() {
   if (typeof window === "undefined") return "portfolio";
@@ -11,6 +23,7 @@ export function getAppMode() {
 
   if (path === "/login" || hash === "login") return "login";
   if (path === "/admin" || hash === "admin") return "admin";
+  if (getSignTokenFromSearch(window.location.search)) return "sign";
   return "portfolio";
 }
 

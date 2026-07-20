@@ -11,6 +11,10 @@ export const CLIENT_CATALOG_URL =
   `${process.env.PUBLIC_URL || ""}/data/client-catalog.json`.replace(/\/+/g, "/");
 
 export const PROVIDER_DEFAULTS = {
+  providerLegalName: "CarlManuel Software Development Services",
+  providerTradeName: "Carl Manuel (carlmanuel.com)",
+  providerSignatoryName: "Carl Louis Manuel",
+  providerSignatoryTitle: "Proprietor / Authorized representative",
   providerAddress: "Philippines",
   providerTin: "N/A",
   bankName: "BDO Unibank",
@@ -198,6 +202,14 @@ export function agreementValuesToPlaceholders(values) {
     ACCEPTANCE_DATE: values.acceptanceDate || values.agreementDate || formatDisplayDate(),
     CLIENT_LEGAL_NAME: values.clientLegalName || values.businessName || "",
     BUSINESS_NAME: values.businessName || "",
+    PROVIDER_LEGAL_NAME:
+      values.providerLegalName || PROVIDER_DEFAULTS.providerLegalName,
+    PROVIDER_TRADE_NAME:
+      values.providerTradeName || PROVIDER_DEFAULTS.providerTradeName,
+    PROVIDER_SIGNATORY_NAME:
+      values.providerSignatoryName || PROVIDER_DEFAULTS.providerSignatoryName,
+    PROVIDER_SIGNATORY_TITLE:
+      values.providerSignatoryTitle || PROVIDER_DEFAULTS.providerSignatoryTitle,
     PROVIDER_ADDRESS: values.providerAddress || PROVIDER_DEFAULTS.providerAddress,
     CLIENT_ADDRESS: values.clientAddress || "To be provided by Client",
     CLIENT_EMAIL: values.clientEmail || "",
@@ -613,8 +625,8 @@ export async function markdownToDocxBlob(markdown, title = "Client Service Agree
   xmlns:dcmitype="http://purl.org/dc/dcmitype/"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <dc:title>${escapeXml(title)}</dc:title>
-  <dc:creator>Carl Louis Manuel</dc:creator>
-  <cp:lastModifiedBy>Carl Louis Manuel</cp:lastModifiedBy>
+  <dc:creator>${escapeXml(PROVIDER_DEFAULTS.providerLegalName)}</dc:creator>
+  <cp:lastModifiedBy>${escapeXml(PROVIDER_DEFAULTS.providerSignatoryName)}</cp:lastModifiedBy>
   <dcterms:created xsi:type="dcterms:W3CDTF">${now}</dcterms:created>
   <dcterms:modified xsi:type="dcterms:W3CDTF">${now}</dcterms:modified>
 </cp:coreProperties>`;
@@ -666,6 +678,47 @@ export async function generateServiceAgreementDownloads(values, template) {
     mdFilename: buildAgreementFilename(values.slug, "md"),
     htmlFilename: buildAgreementFilename(values.slug, "html"),
     docxFilename: buildAgreementFilename(values.slug, "docx"),
+  };
+}
+
+/**
+ * Turn printable full-document HTML into an <article> fragment for API / sign page.
+ * Sign page and signed-notify email embed this inside a host layout (not a full document).
+ */
+export function extractAgreementArticleHtml(printableHtml) {
+  const source = String(printableHtml || "").trim();
+  if (!source) return "";
+
+  const bodyMatch = source.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+  const inner = (bodyMatch ? bodyMatch[1] : source).trim();
+  if (!inner) return "";
+  if (/^<article[\s>]/i.test(inner)) return inner;
+  return `<article class="service-agreement">${inner}</article>`;
+}
+
+const CLIENT_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export function isValidClientEmail(email) {
+  return CLIENT_EMAIL_RE.test(String(email || "").trim());
+}
+
+/**
+ * Build POST /admin/agreements body from form values + filled HTML.
+ */
+export function buildAgreementSendPayload(values, filledHtml) {
+  const clientName =
+    String(values?.clientSignatoryName || "").trim() ||
+    String(values?.clientContactName || "").trim() ||
+    String(values?.clientLegalName || "").trim() ||
+    String(values?.businessName || "").trim();
+
+  return {
+    slug: String(values?.slug || "").trim(),
+    businessName: String(values?.businessName || "").trim(),
+    clientEmail: String(values?.clientEmail || "").trim().toLowerCase(),
+    clientName,
+    formJson: { ...(values || {}) },
+    filledHtml: String(filledHtml || ""),
   };
 }
 

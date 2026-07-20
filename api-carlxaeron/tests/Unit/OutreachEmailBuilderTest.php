@@ -85,6 +85,35 @@ class OutreachEmailBuilderTest extends TestCase
         $this->assertStringContainsString(self::PHONE_DISPLAY, $text);
     }
 
+    public function test_initial_email_states_website_only_pricing(): void
+    {
+        [, $html, $text] = OutreachEmailBuilder::initial($this->sampleJob());
+
+        $this->assertStringContainsString('Investment (website only)', $html);
+        $this->assertStringContainsString('Investment (website only)', $text);
+        $this->assertStringContainsString('priced separately', strtolower($html));
+        $this->assertStringContainsString('priced separately', strtolower($text));
+        $this->assertStringContainsString('(website only)', $html);
+    }
+
+    public function test_followup_email_states_website_only_pricing(): void
+    {
+        [, $html, $text] = OutreachEmailBuilder::followup($this->sampleJob());
+
+        $this->assertStringContainsString('website only', strtolower($html));
+        $this->assertStringContainsString('website only', strtolower($text));
+        $this->assertStringContainsString('priced separately', strtolower($html));
+    }
+
+    public function test_initial_email_includes_facebook_contact_line(): void
+    {
+        [, $html, $text] = OutreachEmailBuilder::initial($this->sampleJob());
+
+        $this->assertStringContainsString('message me on', strtolower($html));
+        $this->assertStringContainsString(self::FB_PROFILE, $html);
+        $this->assertStringContainsString('message me on Facebook', $text);
+    }
+
     public function test_followup_email_leads_with_admin(): void
     {
         [$subject, $html] = OutreachEmailBuilder::followup($this->sampleJob());

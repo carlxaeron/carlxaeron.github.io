@@ -1,9 +1,9 @@
 # Client Service Agreement
 
-> **Disclaimer:** This document is a **template only** and does **not** constitute legal advice. Carl Louis Manuel may customize it for each engagement. For high-value contracts, regulated industries, or unusual terms, have a qualified lawyer in the Philippines review the final version before signing.
+> **Disclaimer:** This document is a **template only** and does **not** constitute legal advice. **CarlManuel Software Development Services** (represented by Carl Louis Manuel) may customize it for each engagement. For high-value contracts, regulated industries, or unusual terms, have a qualified lawyer in the Philippines review the final version before signing.
 
 **Template version:** 1.0 · **Last updated:** {{DATE}}  
-**Service Provider:** Carl Louis Manuel · [carlmanuel.com](https://carlmanuel.com) · info@carlmanuel.com · +63 962 538 9886
+**Service Provider (legal):** {{PROVIDER_LEGAL_NAME}} · [carlmanuel.com](https://carlmanuel.com) · [Facebook](https://www.facebook.com/profile.php?id=61557195950694) · info@carlmanuel.com · +63 962 538 9886
 
 ---
 
@@ -24,8 +24,8 @@ This Service Agreement (“**Agreement**”) is entered into as of **{{AGREEMENT
 
 | | **Service Provider** | **Client** |
 |---|----------------------|------------|
-| **Name** | Carl Louis Manuel | {{CLIENT_LEGAL_NAME}} |
-| **Business / trade name** | Carl Manuel (carlmanuel.com) | {{BUSINESS_NAME}} |
+| **Name** | {{PROVIDER_LEGAL_NAME}} | {{CLIENT_LEGAL_NAME}} |
+| **Business / trade name** | {{PROVIDER_TRADE_NAME}} | {{BUSINESS_NAME}} |
 | **Address** | {{PROVIDER_ADDRESS}} | {{CLIENT_ADDRESS}} |
 | **Email** | info@carlmanuel.com | {{CLIENT_EMAIL}} |
 | **Phone** | +63 962 538 9886 | {{CLIENT_PHONE}} |
@@ -45,13 +45,13 @@ Subject to the selected package (**{{PACKAGE_NAME}}**), scope generally includes
 
 | Area | Deliverables |
 |------|--------------|
-| **Marketing website** | Responsive one-page or multi-section site (hero, services/about, FAQ, contact); mobile-friendly layout; basic on-page SEO (titles, meta descriptions, headings); contact section (click-to-call, email, or form placeholder as agreed) |
-| **Business admin system (sample → production-ready demo)** | Browsable admin interface tailored to Client’s vertical (e.g. **{{SYSTEM_TYPE}}** — {{SYSTEM_LABEL}}): pre-configured demo pages such as {{SYSTEM_NAV_PAGES}}; brand colors and sample data aligned to Client’s business |
+| **Marketing website** | Responsive one-page or multi-section site (hero, services/about, FAQ, contact); mobile-friendly layout; basic on-page SEO (titles, meta descriptions, headings); contact section (click-to-call, email, or form placeholder as agreed) — **covered by the package fee** |
+| **Business admin system (sample)** | Browsable **demo** admin tailored to Client’s vertical (e.g. **{{SYSTEM_TYPE}}** — {{SYSTEM_LABEL}}): sample pages such as {{SYSTEM_NAV_PAGES}}; brand colors and sample data for evaluation. **Not a production system unless Annex A adds a paid system build** |
 | **Deployment & setup** | Initial deployment to Netlify (or agreed host); embed/preview configuration as applicable; handover of source files or repository access as agreed |
 | **Basic SEO** | Semantic structure, readable URLs where applicable, sitemap/robots guidance for launch |
 | **Revisions** | Reasonable revision rounds during build (see Section 5) |
 
-**Reference sample (non-binding):** Portfolio preview at {{PREVIEW_URL}} illustrates the proposed look and admin flow. Final delivered work may differ where Client requests changes or provides different content.
+**Reference sample (non-binding):** Portfolio preview at {{PREVIEW_URL}} illustrates the proposed look and admin flow. Final delivered work may differ where Client requests changes or provides different content. **Package fee = website;** production system = separate quote when opted in.
 
 #### 2.2 Not included (unless added in writing)
 
@@ -92,9 +92,11 @@ If Client delays content, feedback, or approvals, timelines extend day-for-day. 
 
 | Description | Amount (PHP) |
 |-------------|--------------|
-| **{{PACKAGE_NAME}}** — website + business admin system | **{{QUOTED_AMOUNT}}** |
-| **Optional add-ons** (Annex A / Change Orders) | {{ADDON_AMOUNT_OR_NONE}} |
+| **{{PACKAGE_NAME}}** — website only | **{{QUOTED_AMOUNT}}** |
+| **Optional production business system** (separate quote / Annex A) | {{ADDON_AMOUNT_OR_NONE}} |
 | **Total** | **{{TOTAL_AMOUNT}}** |
+
+> **Pricing note:** Standard package fees (e.g. ₱15,000 / ₱18,000) cover the **website** only. The admin interface in the preview is a **sample**. A production business system is scoped and priced separately when Client opts in.
 
 #### 4.2 Payment schedule
 
@@ -277,8 +279,8 @@ By signing below, the Parties agree to this Service Agreement and any attached A
 | | **Service Provider** | **Client** |
 |---|------------------------|------------|
 | **Signature** | _________________________________ | _________________________________ |
-| **Printed name** | Carl Louis Manuel | {{CLIENT_SIGNATORY_NAME}} |
-| **Title** | Full-Stack Web Developer | {{CLIENT_SIGNATORY_TITLE}} |
+| **Printed name** | {{PROVIDER_SIGNATORY_NAME}} | {{CLIENT_SIGNATORY_NAME}} |
+| **Title** | {{PROVIDER_SIGNATORY_TITLE}} | {{CLIENT_SIGNATORY_TITLE}} |
 | **Date** | _________________________________ | _________________________________ |
 
 ---
@@ -342,14 +344,14 @@ Use this section when Client has reviewed the preview and quotation and wants to
 **Date:** {{ACCEPTANCE_DATE}}
 
 **Client:** {{BUSINESS_NAME}} · {{CLIENT_LEGAL_NAME}}  
-**Project:** Website + business admin system — **{{PACKAGE_NAME}}**  
-**Total fee:** **{{QUOTED_AMOUNT}}** · **Payment:** 50% deposit **{{DEPOSIT_AMOUNT}}** now · 50% balance **{{BALANCE_AMOUNT}}** on delivery  
+**Project:** Website — **{{PACKAGE_NAME}}** *(website only; system optional / separate)*  
+**Total fee:** **{{QUOTED_AMOUNT}}** *(website)* · **Payment:** 50% deposit **{{DEPOSIT_AMOUNT}}** now · 50% balance **{{BALANCE_AMOUNT}}** on delivery  
 **Timeline:** {{TIMELINE}} (after content approval)  
 **Preview reviewed:** {{PREVIEW_URL}}
 
 #### Summary Terms (incorporated by reference)
 
-1. **Scope:** As described in the quotation email and Annex A (if provided): responsive website + admin demo (**{{SYSTEM_LABEL}}**).
+1. **Scope:** As described in the quotation email and Annex A (if provided): responsive **website**. Admin preview (**{{SYSTEM_LABEL}}**) is a sample unless Annex A includes a production system as a paid add-on.
 2. **Deposit:** Non-refundable once work begins; required to schedule kickoff.
 3. **Client duties:** Provide content and timely feedback; delays extend timeline.
 4. **Revisions:** {{INCLUDED_REVISION_ROUNDS}} included round(s); extra scope = Change Order.
@@ -359,7 +361,7 @@ Use this section when Client has reviewed the preview and quotation and wants to
 
 **Client acceptance:**
 
-> I have reviewed the sample preview and quotation. I authorize **Carl Louis Manuel** to begin work upon clearance of the deposit. I agree to the Summary Terms and the full **Client Service Agreement** template (Sections 1–13) on file with Service Provider.
+> I have reviewed the sample preview and quotation. I authorize **{{PROVIDER_LEGAL_NAME}}** ({{PROVIDER_SIGNATORY_NAME}}, authorized representative) to begin work upon clearance of the deposit. I agree to the Summary Terms and the full **Client Service Agreement** template (Sections 1–13) on file with Service Provider.
 
 | | **Client** |
 |---|------------|
@@ -371,10 +373,10 @@ Use this section when Client has reviewed the preview and quotation and wants to
 | | **Service Provider** |
 |---|----------------------|
 | **Signature** | _________________________________ |
-| **Printed name** | Carl Louis Manuel |
+| **Printed name** | {{PROVIDER_SIGNATORY_NAME}} |
 | **Date** | _________________________________ |
 
-**Send signed PDF + deposit proof to:** info@carlmanuel.com · +63 962 538 9886
+**Send signed PDF + deposit proof to:** info@carlmanuel.com · [Facebook](https://www.facebook.com/profile.php?id=61557195950694) · +63 962 538 9886
 
 ---
 
@@ -382,10 +384,10 @@ Use this section when Client has reviewed the preview and quotation and wants to
 
 | Package | Typical fee | Timeline | Best for |
 |---------|-------------|----------|----------|
-| **Starter Business Website** | ₱15,000 | 5–7 business days after content approval | New or simple one-page presence + admin sample |
-| **Website Redesign** | ₱18,000 | 7–10 business days after content approval | Refresh of existing brand/site + admin sample |
+| **Starter Business Website** | ₱15,000 *(website only)* | 5–7 business days after content approval | New or simple one-page presence |
+| **Website Redesign** | ₱18,000 *(website only)* | 7–10 business days after content approval | Refresh of existing brand/site |
 
-Adjust amounts in `client.json` → `quotation` when discounts or custom scope apply. Document final numbers in Annex A.
+Admin preview samples are included in demos at no extra charge for evaluation. **Production business systems are quoted separately.** Adjust amounts in `client.json` → `quotation` when discounts or custom scope apply. Document final numbers in Annex A.
 
 ---
 

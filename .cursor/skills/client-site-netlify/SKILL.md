@@ -327,7 +327,7 @@ After the site is built and `previewUrl` is known, customize the draft files in 
 
 **Template placeholders** (replace in all drafts): `{{contactName}}`, `{{contactEmail}}`, `{{businessName}}`, `{{previewUrl}}`, `{{packageName}}`, `{{packageScope}}`, `{{quotedAmount}}`, `{{paymentTerms}}`, `{{timeline}}`, `{{industry}}`.
 
-**Tone:** professional, warm, Philippine business context (₱, salamat OK in messenger). **Lead with the business system** (`system.label` + `system.painHero`), then admin browse on desktop/mobile, then the marketing site — website package stays the entry offer (₱15k/₱18k); admin sample is the upsell path. Sign off as **Carl Louis Manuel** with [carlmanuel.com](https://carlmanuel.com), [Facebook](https://www.facebook.com/profile.php?id=61557195950694), **+63 962 538 9886**, and info@carlmanuel.com (see `_template/` drafts).
+**Tone:** professional, warm, Philippine business context (₱, salamat OK in messenger). **Lead with the business system** (`system.label` + `system.painHero`), then admin browse on desktop/mobile, then the marketing site. **Pricing:** `quotedAmount` (₱15k / ₱18k) is **website only**; the admin in the preview is a **sample**; a production system is **priced separately** — say this clearly in every email, SMS, messenger, and follow-up. **Contact:** always include [Facebook](https://www.facebook.com/profile.php?id=61557195950694) in signatures and SMS/messenger drafts (live emails use `OutreachSignature`). Sign off as **Carl Louis Manuel** with carlmanuel.com, Facebook, **+63 962 538 9886**, and info@carlmanuel.com (see `_template/` drafts).
 
 ### Email found → prepare send → **ask first** (mandatory for initial only)
 
@@ -423,8 +423,8 @@ Also update `client.json` → `outreach` (`status=sent`, `cadence: "3d1w"`, `sen
 
 When a prospect accepts the quote and wants to **move forward** (deposit, kickoff, signed terms):
 
-1. Copy [`docs/templates/client-service-agreement.md`](../../docs/templates/client-service-agreement.md) — fill placeholders from `client.json` (`businessName`, `slug`, `quotation.*`, `system.*`, `previewUrl`).
-2. For a fast yes after preview: send **Section 14 — Proposal Acceptance** (one page) + deposit payment details; attach full Agreement or link to PDF when Client prefers long form.
+1. Prefer Admin → Clients → **Generate agreement** → **Send for signature** (emails `carlmanuel.com/?sign={token}`; see api-carlxaeron skill). Or copy [`docs/templates/client-service-agreement.md`](../../docs/templates/client-service-agreement.md) and fill from `client.json`.
+2. For a fast yes after preview: send **Section 14 — Proposal Acceptance** (one page) + deposit payment details; attach full Agreement or the `?sign=` link when Client prefers long form.
 3. Set `client.json` → `outreach.status` to `won` (or note in `outreach.notes`); pause auto follow-ups via `POST /outreachPause` if a sequence was running.
 4. **Not legal advice** — remind Client (and yourself) to have a lawyer review for high-value or non-standard deals.
 

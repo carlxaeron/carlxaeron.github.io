@@ -1,5 +1,5 @@
-Hi {{contactName}}! Carl here — I made a website + admin system preview for {{businessName}} (site & admin on desktop + mobile):
+Hi {{contactName}}! Carl here — website + admin sample for {{businessName}} (desktop + mobile):
 
 {{previewUrl}}
 
-Browse the admin pages inside the preview. Package: {{packageName}} — {{quotedAmount}}. Reply if you'd like changes or to proceed. Thanks!
+Website package: {{packageName}} — {{quotedAmount}} (website only). Admin in the preview is a sample; a live system is priced separately if you want one. Reply or message on FB: facebook.com/profile.php?id=61557195950694 — Carl · carlmanuel.com · +63 962 538 9886

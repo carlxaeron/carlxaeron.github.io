@@ -47,13 +47,34 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 | POST | `/admin/push/subscribe` | sanctum | body `{ endpoint, keys: { p256dh, auth } }` — upsert subscription for current user |
 | DELETE | `/admin/push/subscribe` | sanctum | body `{ endpoint }` — remove current user's subscription |
 | POST | `/admin/push/sendPing` | sanctum | send test push to current user's subscriptions; `{ data: { sent } }` |
+| POST | `/admin/agreements` | sanctum | create service agreement + email client `?sign=` link |
+| GET | `/admin/agreements` | sanctum | list agreements (`?status=` `?slug=`) |
+| GET | `/admin/agreements/{id}` | sanctum | agreement detail |
+| POST | `/admin/agreements/{id}/resend` | sanctum | re-email sign link |
+| POST | `/admin/agreements/{id}/revoke` | sanctum | invalidate sign link |
+| GET | `/agreements/{token}` | public + throttle | load agreement for portfolio `?sign=` page |
+| POST | `/agreements/{token}/sign` | public + throttle | client one-time sign |
 | GET | `/content/{section}` | public | portfolio read with `source: static|cms` |
 
 Seed admin user: `ADMIN_EMAIL` + `ADMIN_PASSWORD` in server `.env` → `php artisan db:seed --class=AdminSeeder --force`. Never commit password.
 
 **Admin SPA:** `carlmanuel.com/#login` → Sanctum token → `#admin` dashboard (Overview, Inbox, Outreach, Clients, CMS). URLs in [`src/mapping.js`](../../../src/mapping.js) (`adminLogin`, `adminSummary`, `adminContent`, etc.).
 
-**Clients → Generate agreement:** Prefills from `public/data/client-catalog.json` (built from `client-sites/*/client.json`) + outreach rows; client-side fill of [`docs/templates/client-service-agreement.md`](../../../docs/templates/client-service-agreement.md) → download **`.md`**, printable **`.html`**, or Word **`.docx`** (or all three). No API route; template served from `public/templates/`.
+**Clients → Generate agreement:** Prefills from `public/data/client-catalog.json` (built from `client-sites/*/client.json`) + outreach rows; client-side fill of [`docs/templates/client-service-agreement.md`](../../../docs/templates/client-service-agreement.md) → download **`.md`**, printable **`.html`**, or Word **`.docx`** (or all three). Template also served from `public/templates/`.
+
+**Send for signature (Laravel):** Admin POSTs pre-filled HTML + `formJson` to create a row and email the client a `https://carlmanuel.com/?sign={token}` link (expires **14 days**). Portfolio SPA loads/signs via public routes.
+
+| Method | Path | Auth |
+|--------|------|------|
+| POST | `/admin/agreements` | Sanctum — create + email client |
+| GET | `/admin/agreements` | Sanctum — list (`?status=` / `?slug=` / `?perPage=`) |
+| GET | `/admin/agreements/{id}` | Sanctum — detail |
+| POST | `/admin/agreements/{id}/resend` | Sanctum — re-email if not signed/expired/revoked |
+| POST | `/admin/agreements/{id}/revoke` | Sanctum — invalidate link |
+| GET | `/agreements/{token}` | public throttle 60/min — load for sign page (marks `viewed`) |
+| POST | `/agreements/{token}/sign` | public throttle 10/h — one-time sign; emails `MAIL_TO` + BCC |
+
+Create body: `slug`, `businessName`, `clientEmail`, `clientName`, `formJson` (object), `filledHtml`. Sign body: `signatoryName`, `signatoryTitle?`, `signedAt?`, `signatureData` (PNG/JPEG/SVG data URL). Table: `service_agreements`. Mail: `AgreementMailer` + `OutreachSignature` footer.
 
 **Web Push (Admin Settings):** Sanctum admin subscribes via `POST /admin/push/subscribe`; Laravel stores rows in `push_subscriptions` and sends via `minishlink/web-push` when:
 - `POST /contact` or `POST /quotation` succeeds
@@ -104,6 +125,10 @@ CORS origins: `carlmanuel.com`, `www`, `carlxaeron.github.io`, `localhost:3000` 
 | `app/Http/Controllers/Api/PortfolioApiController.php` | Public handlers |
 | `app/Http/Controllers/Api/OutreachController.php` | Secret-gated `outreachSchedule` / `outreachPause` |
 | `app/Http/Controllers/Api/AdminController.php` | Admin auth + ops + CMS |
+| `app/Http/Controllers/Api/ServiceAgreementController.php` | Admin + public agreement send/sign |
+| `app/Models/ServiceAgreement.php` | `service_agreements` table |
+| `app/Services/AgreementMailer.php` | Sign-request + signed-notify SMTP |
+| `app/Services/AgreementEmailBuilder.php` | Agreement email HTML/text (+ OutreachSignature) |
 | `app/Services/OutreachScheduler.php` | Schedule initial send + queue follow-ups |
 | `app/Services/OutreachCadence.php` | Cadence normalize, discount ladder (mirrors hosting-php) |
 | `app/Services/OutreachMailer.php` | Prospect outreach SMTP (+ `MAIL_BCC`) |

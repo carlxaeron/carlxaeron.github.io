@@ -1,13 +1,14 @@
 import { useEffect, useMemo } from "react";
 import Portfolio from "../v3/containers/Portfolio/Portfolio";
 import PreviewShowcase, { PreviewShowcaseError } from "../v3/containers/PreviewShowcase/PreviewShowcase";
+import AgreementSign from "../v3/containers/AgreementSign/AgreementSign";
 import { getPreviewQueryFromSearch, resolvePreviewUrl } from "../v3/config/previewWhitelist";
 import VisitTracker from "../components/VisitTracker";
 import { applyOwnerExcludeFromUrl } from "../utils/visitTracker";
 import AdminLogin from "../v3/admin/AdminLogin";
 import AdminDashboard from "../v3/admin/AdminDashboard";
 import { getAdminToken } from "../v3/admin/adminAuth";
-import { useAppMode } from "../v3/admin/useAppMode";
+import { getSignTokenFromSearch, useAppMode } from "../v3/admin/useAppMode";
 import SeoHead from "../v3/seo/SeoHead";
 import "./../styles/App.css";
 
@@ -36,8 +37,25 @@ function Index() {
     };
   }, [appMode]);
 
+  useEffect(() => {
+    if (appMode !== "sign") {
+      return undefined;
+    }
+    document.documentElement.classList.add("v3-sign-active");
+    document.body.classList.add("v3-sign-active");
+    return () => {
+      document.documentElement.classList.remove("v3-sign-active");
+      document.body.classList.remove("v3-sign-active");
+    };
+  }, [appMode]);
+
   const previewQuery = useMemo(
     () => getPreviewQueryFromSearch(typeof window !== "undefined" ? window.location.search : ""),
+    []
+  );
+
+  const signToken = useMemo(
+    () => getSignTokenFromSearch(typeof window !== "undefined" ? window.location.search : ""),
     []
   );
 
@@ -68,6 +86,15 @@ function Index() {
       <div className="App">
         {seoHead}
         <AdminDashboard />
+      </div>
+    );
+  }
+
+  if (appMode === "sign" && signToken) {
+    return (
+      <div className="App">
+        {seoHead}
+        <AgreementSign token={signToken} />
       </div>
     );
   }

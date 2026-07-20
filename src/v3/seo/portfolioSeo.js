@@ -85,7 +85,7 @@ function topProjectNames(limit = 6) {
  * @returns {boolean}
  */
 function shouldNoIndex({ appMode = "portfolio", previewQuery = null } = {}) {
-  if (appMode === "login" || appMode === "admin") return true;
+  if (appMode === "login" || appMode === "admin" || appMode === "sign") return true;
   if (previewQuery && String(previewQuery).trim()) return true;
   return false;
 }

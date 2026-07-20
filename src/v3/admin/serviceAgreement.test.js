@@ -3,9 +3,12 @@ import {
   agreementValuesToPlaceholders,
   buildAgreementFilename,
   buildAgreementFormValues,
+  buildAgreementSendPayload,
+  extractAgreementArticleHtml,
   fillServiceAgreementTemplate,
   formatPeso,
   indexClientCatalog,
+  isValidClientEmail,
   markdownToDocxBlob,
   markdownToPrintableHtml,
   parsePesoAmount,
@@ -106,6 +109,10 @@ describe("serviceAgreement helpers", () => {
     expect(placeholders.BUSINESS_NAME).toBe("Demo Biz");
     expect(placeholders.QUOTED_AMOUNT).toBe("₱15,000");
     expect(placeholders.SLUG).toBe("demo-biz");
+    expect(placeholders.PROVIDER_LEGAL_NAME).toBe(
+      "CarlManuel Software Development Services"
+    );
+    expect(placeholders.PROVIDER_SIGNATORY_NAME).toBe("Carl Louis Manuel");
   });
 
   test("buildAgreementFilename uses slug and date", () => {
@@ -151,5 +158,47 @@ describe("serviceAgreement helpers", () => {
     expect(html).toContain("<table>");
     expect(html).toContain("<td>1</td>");
     expect(html).toContain("<title>Test Agreement</title>");
+  });
+
+  test("extractAgreementArticleHtml wraps printable body in article", () => {
+    const printable = markdownToPrintableHtml("# Hello\n\nBody copy", "T");
+    const article = extractAgreementArticleHtml(printable);
+    expect(article.startsWith("<article")).toBe(true);
+    expect(article).toContain("<h1>Hello</h1>");
+    expect(article).not.toContain("<!DOCTYPE");
+    expect(extractAgreementArticleHtml("<article><p>x</p></article>")).toBe(
+      "<article><p>x</p></article>"
+    );
+  });
+
+  test("isValidClientEmail and buildAgreementSendPayload", () => {
+    expect(isValidClientEmail("client@example.com")).toBe(true);
+    expect(isValidClientEmail("not-an-email")).toBe(false);
+
+    const payload = buildAgreementSendPayload(
+      {
+        slug: "jk-construction",
+        businessName: "JK Construction",
+        clientEmail: " Client@Example.com ",
+        clientSignatoryName: "Juan",
+        quotedAmount: "₱15,000",
+      },
+      "<article>ok</article>"
+    );
+
+    expect(payload).toEqual({
+      slug: "jk-construction",
+      businessName: "JK Construction",
+      clientEmail: "client@example.com",
+      clientName: "Juan",
+      formJson: {
+        slug: "jk-construction",
+        businessName: "JK Construction",
+        clientEmail: " Client@Example.com ",
+        clientSignatoryName: "Juan",
+        quotedAmount: "₱15,000",
+      },
+      filledHtml: "<article>ok</article>",
+    });
   });
 });

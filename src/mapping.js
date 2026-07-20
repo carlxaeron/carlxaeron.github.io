@@ -26,5 +26,8 @@ export const mapping = {
   adminPushVapidPublicKey: 'https://api.carlmanuel.com/admin/push/vapidPublicKey',
   adminPushSubscribe: 'https://api.carlmanuel.com/admin/push/subscribe',
   adminPushTest: 'https://api.carlmanuel.com/admin/push/sendPing',
+  adminAgreements: 'https://api.carlmanuel.com/admin/agreements',
   portfolioContent: 'https://api.carlmanuel.com/content',
+  /** Public service agreement by token — GET /agreements/{token}, POST /agreements/{token}/sign */
+  agreementBase: 'https://api.carlmanuel.com/agreements',
 }

@@ -15,6 +15,9 @@ jest.mock("../v3/admin/AdminLogin", () => () => (
 jest.mock("../v3/admin/AdminDashboard", () => () => (
   <div data-testid="admin-dashboard-mock">Admin Dashboard</div>
 ));
+jest.mock("../v3/containers/AgreementSign/AgreementSign", () => ({ token }) => (
+  <div data-testid="agreement-sign-mock">Agreement Sign {token}</div>
+));
 
 const originalLocation = window.location;
 const originalReplaceState = window.history.replaceState;
@@ -189,5 +192,46 @@ describe("Index admin scroll shell", () => {
     unmount();
     expect(document.documentElement.classList.contains("v3-admin-active")).toBe(false);
     expect(document.body.classList.contains("v3-admin-active")).toBe(false);
+  });
+});
+
+describe("Index sign routing", () => {
+  beforeEach(() => {
+    window.history.replaceState = jest.fn();
+    sessionStorage.clear();
+    document.documentElement.classList.remove("v3-sign-active");
+    document.body.classList.remove("v3-sign-active");
+  });
+
+  afterEach(() => {
+    window.location = originalLocation;
+    window.history.replaceState = originalReplaceState;
+    document.documentElement.classList.remove("v3-sign-active");
+    document.body.classList.remove("v3-sign-active");
+  });
+
+  test("renders AgreementSign for ?sign= token", () => {
+    mockSearch("?sign=tok-abc");
+    render(<Index />);
+    expect(screen.getByTestId("agreement-sign-mock")).toBeInTheDocument();
+    expect(screen.getByText(/tok-abc/)).toBeInTheDocument();
+    expect(screen.queryByTestId("portfolio-mock")).not.toBeInTheDocument();
+    expect(document.querySelector('meta[name="robots"][content="noindex, nofollow"]')).toBeTruthy();
+  });
+
+  test("adds v3-sign-active on html and body", () => {
+    mockSearch("?sign=tok-abc");
+    render(<Index />);
+    expect(document.documentElement.classList.contains("v3-sign-active")).toBe(true);
+    expect(document.body.classList.contains("v3-sign-active")).toBe(true);
+  });
+
+  test("removes v3-sign-active on unmount", () => {
+    mockSearch("?sign=tok-abc");
+    const { unmount } = render(<Index />);
+    expect(document.body.classList.contains("v3-sign-active")).toBe(true);
+    unmount();
+    expect(document.documentElement.classList.contains("v3-sign-active")).toBe(false);
+    expect(document.body.classList.contains("v3-sign-active")).toBe(false);
   });
 });
