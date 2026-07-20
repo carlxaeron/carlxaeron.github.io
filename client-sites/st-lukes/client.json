@@ -33,14 +33,14 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "ready",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "3d1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-20T13:10:09+08:00",
+    "nextFollowUpAt": "2026-07-23 05:10:09",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "Public productinfo@stlukes.com.ph found. ASK before send. Website-only ₱15k; system sample separate."
+    "notes": "Initial sent 2026-07-20 via outreachSchedule to productinfo@stlukes.com.ph; auto follow-ups 3d1w (max 4). Website-only ₱15k."
   },
   "system": {
     "type": "appointments",

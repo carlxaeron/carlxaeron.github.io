@@ -30,14 +30,14 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "ready",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "3d1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-20T13:10:06+08:00",
+    "nextFollowUpAt": "2026-07-23 05:10:06",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "Email found on Facebook About: manila.grand@hyatt.com. Ask before send."
+    "notes": "Initial sent 2026-07-20 via outreachSchedule to manila.grand@hyatt.com; auto follow-ups 3d1w (max 4)."
   },
   "sources": {
     "facebook": "https://www.facebook.com/grandhyattmanilaph/",

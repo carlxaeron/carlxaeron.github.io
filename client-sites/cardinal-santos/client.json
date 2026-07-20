@@ -30,14 +30,14 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "ready",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "3d1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-20T13:10:08+08:00",
+    "nextFollowUpAt": "2026-07-23 05:10:08",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "Emails found: marketing@csmc.ph (official site), productinfo@csmc.ph (Facebook). Ask before send."
+    "notes": "Initial sent 2026-07-20 via outreachSchedule to marketing@csmc.ph; auto follow-ups 3d1w (max 4). Alt: productinfo@csmc.ph."
   },
   "system": {
     "type": "appointments",
