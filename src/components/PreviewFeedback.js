@@ -125,6 +125,9 @@ export default function PreviewFeedback({ previewSlug, previewLabel }) {
         onHide={closeConfirm}
         centered
         className="v3-preview-feedback-modal"
+        contentClassName="v3-preview-feedback-modal__content"
+        backdropClassName="v3-preview-feedback-backdrop"
+        data-testid="preview-feedback-confirm-modal"
       >
         <Modal.Header closeButton={!loading}>
           <Modal.Title>Ready to move forward?</Modal.Title>
@@ -151,6 +154,9 @@ export default function PreviewFeedback({ previewSlug, previewLabel }) {
         onHide={() => !loading && setShowDislikeModal(false)}
         centered
         className="v3-preview-feedback-modal"
+        contentClassName="v3-preview-feedback-modal__content"
+        backdropClassName="v3-preview-feedback-backdrop"
+        data-testid="preview-feedback-dislike-modal"
       >
         <Modal.Header closeButton>
           <Modal.Title>Tell us what to improve</Modal.Title>

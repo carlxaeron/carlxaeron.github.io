@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.79] — 2026-07-20
+
+### Fixed
+- **Preview feedback modals** — confirm (“Ready to move forward?”) and dislike dialogs now render a solid white V3 card (border, shadow, padding, Playfair title, green-accent primary / secondary footer buttons) instead of transparent text over the backdrop; base `.modal-content` also gets a white surface since V3 does not load full Bootstrap CSS
+
 ## [3.0.78] — 2026-07-20
 
 ### Added

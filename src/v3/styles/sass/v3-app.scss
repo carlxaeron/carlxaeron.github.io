@@ -465,13 +465,20 @@ html, body {
   min-height: calc(100% - 3.5rem);
 }
 
+// Base surface — V3 does not load full Bootstrap CSS; without these,
+// React-Bootstrap modals render as transparent text over the backdrop.
 .modal-content {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
+  background-color: $white;
   background-clip: padding-box;
+  border: 1px solid rgba($green-dark, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
+  color: $text-dark;
   outline: 0;
 }
 
@@ -480,6 +487,25 @@ html, body {
   flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
+  gap: $space-3;
+  padding: $space-5 $space-6;
+  border-bottom: 1px solid rgba($green-dark, 0.08);
+}
+
+.modal-title {
+  margin: 0;
+  font-family: $font-display;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: $green-dark;
+  line-height: 1.3;
+}
+
+.modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: $space-5 $space-6;
+  color: $text-dark;
 }
 
 .modal-footer {
@@ -488,6 +514,9 @@ html, body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
+  gap: $space-3;
+  padding: $space-4 $space-6 $space-5;
+  border-top: 1px solid rgba($green-dark, 0.08);
 }
 
 .modal-xl {

@@ -602,7 +602,165 @@ body.v3-preview-active {
 }
 
 .v3-preview-feedback__modal-copy {
-  margin-bottom: $space-4;
-  color: rgba($green-light, 0.85);
+  margin: 0 0 $space-4;
+  color: $text-muted;
+  font-family: $font-body;
   font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+// Confirm + dislike modals — solid light card (base .modal-content is white;
+// these tighten V3 button language and form controls inside the dialog).
+.v3-preview-feedback-modal {
+  z-index: 1400 !important;
+
+  .modal-content,
+  .v3-preview-feedback-modal__content {
+    background-color: $white !important;
+    border: 1px solid rgba($green-dark, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 20px 56px rgba(0, 71, 62, 0.28);
+    overflow: hidden;
+  }
+
+  .modal-header {
+    background: $white;
+    border-bottom: 1px solid rgba($green-dark, 0.08);
+
+    .btn-close {
+      box-sizing: content-box;
+      width: 1em;
+      height: 1em;
+      min-width: 2rem;
+      min-height: 2rem;
+      padding: 0.5rem;
+      color: $green-dark;
+      background: transparent
+        url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%231A1A1A'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e")
+        center / 1em auto no-repeat;
+      border: 0;
+      border-radius: 0.375rem;
+      opacity: 0.65;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .modal-title {
+    font-family: $font-display;
+    font-size: 1.35rem;
+    color: $green-dark;
+  }
+
+  .modal-body {
+    background: $white;
+    color: $text-dark;
+  }
+
+  .modal-footer {
+    background: rgba($green-light, 0.35);
+    border-top: 1px solid rgba($green-dark, 0.08);
+    gap: $space-3;
+  }
+
+  .v3-preview-feedback__error {
+    color: #b42318;
+  }
+
+  .form-control {
+    display: block;
+    width: 100%;
+    padding: $space-3 $space-4;
+    font-family: $font-body;
+    font-size: 16px; // iOS: avoid auto-zoom
+    line-height: 1.5;
+    color: $text-dark;
+    background-color: $white;
+    border: 1.5px solid rgba($green-dark, 0.2);
+    border-radius: 10px;
+    resize: vertical;
+
+    &:focus {
+      outline: 0;
+      border-color: $green-accent;
+      box-shadow: 0 0 0 3px rgba($green-accent, 0.25);
+    }
+
+    &::placeholder {
+      color: rgba($text-muted, 0.85);
+    }
+  }
+
+  // Bootstrap Button variants are unstyled without full Bootstrap CSS —
+  // map them to V3 button language inside this modal only.
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: $space-3 $space-6;
+    border-radius: 100px;
+    font-family: $font-body;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, color 0.25s ease;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: $green-dark;
+    border-color: rgba($green-dark, 0.35);
+
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
+      background: rgba($green-dark, 0.06);
+      border-color: $green-dark;
+      color: $green-dark;
+    }
+  }
+
+  .btn-success {
+    background: $green-accent;
+    color: $white;
+    border-color: $green-accent;
+
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
+      background: darken($green-accent, 8%);
+      border-color: darken($green-accent, 8%);
+      color: $white;
+      box-shadow: 0 6px 24px rgba(0, 168, 98, 0.35);
+      transform: translateY(-1px);
+    }
+  }
+
+  .btn-danger {
+    background: #b42318;
+    color: $white;
+    border-color: #b42318;
+
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
+      background: darken(#b42318, 6%);
+      border-color: darken(#b42318, 6%);
+      color: $white;
+    }
+  }
+}
+
+.modal-backdrop.v3-preview-feedback-backdrop {
+  z-index: 1390;
+  background-color: #000;
 }

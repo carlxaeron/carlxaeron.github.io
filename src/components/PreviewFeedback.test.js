@@ -26,8 +26,24 @@ describe("PreviewFeedback", () => {
     render(<PreviewFeedback previewSlug="machinemate" previewLabel="Machinemate" />);
     fireEvent.click(screen.getByRole("button", { name: "Like" }));
 
+    // className is on the outer .modal (react-bootstrap); data-testid lands on .modal-dialog
+    expect(document.querySelector(".v3-preview-feedback-modal.modal")).toBeTruthy();
+    expect(document.querySelector(".v3-preview-feedback-modal__content")).toBeTruthy();
+    expect(screen.getByTestId("preview-feedback-confirm-modal")).toBeInTheDocument();
+    expect(screen.getByText("Ready to move forward?")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /yes, i'm interested/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Not yet" })).toBeInTheDocument();
     expect(submitPreviewFeedback).not.toHaveBeenCalled();
+  });
+
+  test("Dislike modal uses the same designed modal class", () => {
+    render(<PreviewFeedback previewSlug="machinemate" previewLabel="Machinemate" />);
+    fireEvent.click(screen.getByRole("button", { name: "Dislike" }));
+
+    expect(document.querySelector(".v3-preview-feedback-modal.modal")).toBeTruthy();
+    expect(document.querySelector(".v3-preview-feedback-modal__content")).toBeTruthy();
+    expect(screen.getByTestId("preview-feedback-dislike-modal")).toBeInTheDocument();
+    expect(screen.getByText("Tell us what to improve")).toBeInTheDocument();
   });
 
   test("confirm Yes posts agree sentiment", async () => {
