@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.76] — 2026-07-20
+
+### Added
+- **Service agreements — send for signature** — Admin → Clients → Generate agreement → **Send for signature** emails the client a `?sign={token}` link (Laravel `/admin/agreements`; expires 14 days)
+- **AgreementSign UI** — public portfolio page at `carlmanuel.com/?sign=` with document view, signature pad, and one-time submit (`/agreements/{token}` + `/sign`)
+- **API** — `service_agreements` table; admin list/resend/revoke; signed-copy notify mail to admin
+
+### Changed
+- **Outreach + SMS** — website-only package pricing clarified (admin demo is a sample; live system priced separately); Facebook link in email/SMS signature
+- **Agreement template** — legal/copy updates for post-quotation sign-off flow
+
 ## [3.0.75] — 2026-07-20
 
 ### Added
