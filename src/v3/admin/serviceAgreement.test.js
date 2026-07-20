@@ -1,3 +1,4 @@
+import { TextDecoder, TextEncoder } from "util";
 import {
   agreementValuesToPlaceholders,
   buildAgreementFilename,
@@ -5,11 +6,19 @@ import {
   fillServiceAgreementTemplate,
   formatPeso,
   indexClientCatalog,
+  markdownToDocxBlob,
   markdownToPrintableHtml,
   parsePesoAmount,
   recalcAmountFields,
   splitDepositBalance,
 } from "./serviceAgreement";
+
+if (typeof global.TextEncoder === "undefined") {
+  global.TextEncoder = TextEncoder;
+}
+if (typeof global.TextDecoder === "undefined") {
+  global.TextDecoder = TextDecoder;
+}
 
 describe("serviceAgreement helpers", () => {
   test("parsePesoAmount and formatPeso handle Philippine peso strings", () => {
@@ -103,6 +112,18 @@ describe("serviceAgreement helpers", () => {
     expect(
       buildAgreementFilename("jk-construction", "md", new Date("2026-07-20T00:00:00.000Z"))
     ).toBe("jk-construction-service-agreement-2026-07-20.md");
+    expect(
+      buildAgreementFilename("jk-construction", "docx", new Date("2026-07-20T00:00:00.000Z"))
+    ).toBe("jk-construction-service-agreement-2026-07-20.docx");
+  });
+
+  test("markdownToDocxBlob returns a Blob for Word download", async () => {
+    const blob = await markdownToDocxBlob(
+      "# Title\n\nHello **world**\n\n| A | B |\n|---|---|\n| 1 | 2 |\n",
+      "Test Agreement"
+    );
+    expect(blob).toBeInstanceOf(Blob);
+    expect(blob.size).toBeGreaterThan(500);
   });
 
   test("recalcAmountFields updates deposit and balance when quoted amount changes", () => {

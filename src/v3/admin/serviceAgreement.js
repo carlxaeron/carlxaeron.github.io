@@ -1,3 +1,4 @@
+import JSZip from "jszip";
 import { buildPreviewPortfolioUrl } from "../config/previewWhitelist";
 
 export const SERVICE_AGREEMENT_TEMPLATE_URL =
@@ -426,18 +427,245 @@ ${htmlParts.join("\n")}
 </html>`;
 }
 
+function escapeXml(text) {
+  return String(text ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+function wTextRuns(text) {
+  const parts = [];
+  const pattern = /(\*\*(.+?)\*\*)/g;
+  let lastIndex = 0;
+  let match;
+  const source = String(text ?? "");
+  while ((match = pattern.exec(source)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(
+        `<w:r><w:t xml:space="preserve">${escapeXml(source.slice(lastIndex, match.index))}</w:t></w:r>`
+      );
+    }
+    parts.push(
+      `<w:r><w:rPr><w:b/></w:rPr><w:t xml:space="preserve">${escapeXml(match[2])}</w:t></w:r>`
+    );
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < source.length || !parts.length) {
+    parts.push(
+      `<w:r><w:t xml:space="preserve">${escapeXml(source.slice(lastIndex))}</w:t></w:r>`
+    );
+  }
+  return parts.join("");
+}
+
+function wParagraph(text, { style = null, italic = false } = {}) {
+  const pPr = [];
+  if (style) pPr.push(`<w:pStyle w:val="${style}"/>`);
+  const props = pPr.length ? `<w:pPr>${pPr.join("")}</w:pPr>` : "";
+  if (italic) {
+    return `<w:p>${props}<w:r><w:rPr><w:i/></w:rPr><w:t xml:space="preserve">${escapeXml(text)}</w:t></w:r></w:p>`;
+  }
+  return `<w:p>${props}${wTextRuns(text)}</w:p>`;
+}
+
+function wTable(rows) {
+  if (!rows.length) return "";
+  const colCount = Math.max(...rows.map((row) => row.length));
+  const width = Math.floor(9000 / Math.max(colCount, 1));
+  const grid = Array.from({ length: colCount }, () => `<w:gridCol w:w="${width}"/>`).join("");
+  const body = rows
+    .map((cells, rowIndex) => {
+      const padded = [...cells];
+      while (padded.length < colCount) padded.push("");
+      const cellXml = padded
+        .map((cell) => {
+          const shading =
+            rowIndex === 0
+              ? "<w:tcPr><w:shd w:val=\"clear\" w:fill=\"F5F5F5\"/></w:tcPr>"
+              : "<w:tcPr/>";
+          return `<w:tc>${shading}${wParagraph(cell)}</w:tc>`;
+        })
+        .join("");
+      return `<w:tr>${cellXml}</w:tr>`;
+    })
+    .join("");
+  return `<w:tbl><w:tblPr><w:tblW w:w="9000" w:type="dxa"/><w:tblBorders>
+    <w:top w:val="single" w:sz="4" w:color="CCCCCC"/>
+    <w:left w:val="single" w:sz="4" w:color="CCCCCC"/>
+    <w:bottom w:val="single" w:sz="4" w:color="CCCCCC"/>
+    <w:right w:val="single" w:sz="4" w:color="CCCCCC"/>
+    <w:insideH w:val="single" w:sz="4" w:color="CCCCCC"/>
+    <w:insideV w:val="single" w:sz="4" w:color="CCCCCC"/>
+  </w:tblBorders></w:tblPr><w:tblGrid>${grid}</w:tblGrid>${body}</w:tbl>`;
+}
+
+function markdownToWordBodyXml(markdown) {
+  const lines = String(markdown || "").split("\n");
+  const parts = [];
+  let tableRows = [];
+
+  const flushTable = () => {
+    if (!tableRows.length) return;
+    parts.push(wTable(tableRows));
+    tableRows = [];
+  };
+
+  lines.forEach((line) => {
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith("|") && trimmed.endsWith("|")) {
+      if (/^\|[\s\-:|]+\|$/.test(trimmed)) return;
+      tableRows.push(
+        trimmed
+          .slice(1, -1)
+          .split("|")
+          .map((cell) => cell.trim())
+      );
+      return;
+    }
+
+    if (tableRows.length) flushTable();
+
+    if (!trimmed) {
+      parts.push("<w:p/>");
+      return;
+    }
+    if (trimmed === "---") {
+      parts.push(
+        '<w:p><w:pPr><w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="CCCCCC"/></w:pBdr></w:pPr></w:p>'
+      );
+      return;
+    }
+
+    let content = trimmed
+      .replace(/^#+\s+/, "")
+      .replace(/^>\s+/, "")
+      .replace(/^-\s+/, "• ");
+    content = content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1 ($2)");
+
+    if (trimmed.startsWith("# ")) {
+      parts.push(wParagraph(content, { style: "Heading1" }));
+      return;
+    }
+    if (trimmed.startsWith("## ")) {
+      parts.push(wParagraph(content, { style: "Heading2" }));
+      return;
+    }
+    if (trimmed.startsWith("### ") || trimmed.startsWith("#### ")) {
+      parts.push(wParagraph(content, { style: "Heading3" }));
+      return;
+    }
+    if (trimmed.startsWith("> ")) {
+      parts.push(wParagraph(content, { italic: true }));
+      return;
+    }
+
+    parts.push(wParagraph(content));
+  });
+
+  if (tableRows.length) flushTable();
+  return parts.join("") || wParagraph("");
+}
+
+/**
+ * Convert filled markdown agreement into a Word (.docx) Blob (OOXML via JSZip).
+ * Avoids the `docx` npm package — CRA Babel cannot compile its modern syntax.
+ */
+export async function markdownToDocxBlob(markdown, title = "Client Service Agreement") {
+  const documentXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:body>
+    ${markdownToWordBodyXml(markdown)}
+    <w:sectPr>
+      <w:pgSz w:w="12240" w:h="15840"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440"/>
+    </w:sectPr>
+  </w:body>
+</w:document>`;
+
+  const contentTypes = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+  <Default Extension="xml" ContentType="application/xml"/>
+  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+  <Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>
+  <Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/>
+</Types>`;
+
+  const rels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+  <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>
+  <Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/>
+</Relationships>`;
+
+  const docRels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"/>`;
+
+  const now = new Date().toISOString();
+  const core = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:dcmitype="http://purl.org/dc/dcmitype/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <dc:title>${escapeXml(title)}</dc:title>
+  <dc:creator>Carl Louis Manuel</dc:creator>
+  <cp:lastModifiedBy>Carl Louis Manuel</cp:lastModifiedBy>
+  <dcterms:created xsi:type="dcterms:W3CDTF">${now}</dcterms:created>
+  <dcterms:modified xsi:type="dcterms:W3CDTF">${now}</dcterms:modified>
+</cp:coreProperties>`;
+
+  const app = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties"
+  xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">
+  <Application>carlmanuel.com admin</Application>
+</Properties>`;
+
+  const zip = new JSZip();
+  zip.file("[Content_Types].xml", contentTypes);
+  zip.folder("_rels").file(".rels", rels);
+  zip.folder("word").file("document.xml", documentXml);
+  zip.folder("word").folder("_rels").file("document.xml.rels", docRels);
+  zip.folder("docProps").file("core.xml", core);
+  zip.folder("docProps").file("app.xml", app);
+
+  return zip.generateAsync({
+    type: "blob",
+    mimeType:
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  });
+}
+
+export function downloadBlobFile(filename, blob) {
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = filename;
+  anchor.rel = "noopener";
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(url);
+}
+
 export async function generateServiceAgreementDownloads(values, template) {
   const source = template || (await fetchServiceAgreementTemplate());
   const markdown = fillServiceAgreementTemplate(source, values);
-  const baseName = buildAgreementFilename(values.slug, "md");
-  const htmlName = buildAgreementFilename(values.slug, "html");
-  const html = markdownToPrintableHtml(markdown, `${values.businessName || "Client"} — Service Agreement`);
+  const title = `${values.businessName || "Client"} — Service Agreement`;
+  const html = markdownToPrintableHtml(markdown, title);
+  const docxBlob = await markdownToDocxBlob(markdown, title);
 
   return {
     markdown,
     html,
-    mdFilename: baseName,
-    htmlFilename: htmlName,
+    docxBlob,
+    mdFilename: buildAgreementFilename(values.slug, "md"),
+    htmlFilename: buildAgreementFilename(values.slug, "html"),
+    docxFilename: buildAgreementFilename(values.slug, "docx"),
   };
 }
 

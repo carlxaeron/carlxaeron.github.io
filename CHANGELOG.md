@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.75] — 2026-07-20
+
+### Added
+- **Admin → Clients → Generate agreement** — download options now include **Word (.docx)** plus **Download all** (`.md` + `.html` + `.docx`) via OOXML + JSZip
+
 ## [3.0.74] — 2026-07-20
 
 ### Added

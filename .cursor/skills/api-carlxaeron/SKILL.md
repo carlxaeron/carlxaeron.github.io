@@ -53,7 +53,7 @@ Seed admin user: `ADMIN_EMAIL` + `ADMIN_PASSWORD` in server `.env` → `php arti
 
 **Admin SPA:** `carlmanuel.com/#login` → Sanctum token → `#admin` dashboard (Overview, Inbox, Outreach, Clients, CMS). URLs in [`src/mapping.js`](../../../src/mapping.js) (`adminLogin`, `adminSummary`, `adminContent`, etc.).
 
-**Clients → Generate agreement:** Prefills from `public/data/client-catalog.json` (built from `client-sites/*/client.json`) + outreach rows; client-side fill of [`docs/templates/client-service-agreement.md`](../../../docs/templates/client-service-agreement.md) → download `.md` / printable `.html` (no API route; template served from `public/templates/`).
+**Clients → Generate agreement:** Prefills from `public/data/client-catalog.json` (built from `client-sites/*/client.json`) + outreach rows; client-side fill of [`docs/templates/client-service-agreement.md`](../../../docs/templates/client-service-agreement.md) → download **`.md`**, printable **`.html`**, or Word **`.docx`** (or all three). No API route; template served from `public/templates/`.
 
 **Web Push (Admin Settings):** Sanctum admin subscribes via `POST /admin/push/subscribe`; Laravel stores rows in `push_subscriptions` and sends via `minishlink/web-push` when:
 - `POST /contact` or `POST /quotation` succeeds

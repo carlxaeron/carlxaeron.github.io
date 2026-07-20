@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   buildAgreementFormValues,
+  downloadBlobFile,
   downloadTextFile,
   fetchClientCatalog,
   fetchServiceAgreementTemplate,
@@ -36,6 +37,13 @@ const FORM_FIELDS = [
   { key: "accountNumber", label: "Account number" },
   { key: "ewalletDetails", label: "GCash / e-wallet" },
 ];
+
+const FORMAT_LABELS = {
+  md: "Markdown (.md)",
+  html: "HTML (.html)",
+  docx: "Word (.docx)",
+  all: "Markdown + HTML + Word",
+};
 
 function ServiceAgreementModal({ client, onClose }) {
   const [values, setValues] = useState(null);
@@ -111,19 +119,39 @@ function ServiceAgreementModal({ client, onClose }) {
     setNotice("");
     try {
       const template = await fetchServiceAgreementTemplate();
-      const { markdown, html, mdFilename, htmlFilename } =
-        await generateServiceAgreementDownloads(values, template);
+      const {
+        markdown,
+        html,
+        docxBlob,
+        mdFilename,
+        htmlFilename,
+        docxFilename,
+      } = await generateServiceAgreementDownloads(values, template);
 
-      if (format === "md" || format === "both") {
+      const wantMd = format === "md" || format === "all";
+      const wantHtml = format === "html" || format === "all";
+      const wantDocx = format === "docx" || format === "all";
+
+      if (wantMd) {
         downloadTextFile(mdFilename, markdown, "text/markdown;charset=utf-8");
       }
-      if (format === "html" || format === "both") {
+      if (wantHtml) {
         downloadTextFile(htmlFilename, html, "text/html;charset=utf-8");
       }
+      if (wantDocx) {
+        downloadBlobFile(
+          docxFilename,
+          docxBlob,
+        );
+      }
 
-      const formats =
-        format === "both" ? "Markdown + HTML" : format === "html" ? "HTML" : "Markdown";
-      setNotice(`Downloaded ${formats}: ${mdFilename}${format === "both" ? ` and ${htmlFilename}` : ""}`);
+      const names = [
+        wantMd ? mdFilename : null,
+        wantHtml ? htmlFilename : null,
+        wantDocx ? docxFilename : null,
+      ].filter(Boolean);
+
+      setNotice(`Downloaded ${FORMAT_LABELS[format] || format}: ${names.join(", ")}`);
     } catch (err) {
       setError(err.message || "Could not generate agreement.");
     } finally {
@@ -175,7 +203,7 @@ function ServiceAgreementModal({ client, onClose }) {
               className="v3-admin-agreement-form"
               onSubmit={(event) => {
                 event.preventDefault();
-                handleGenerate("both");
+                handleGenerate("docx");
               }}
             >
               <div className="v3-admin-agreement-form__grid">
@@ -194,14 +222,14 @@ function ServiceAgreementModal({ client, onClose }) {
                 ))}
               </div>
 
-              <div className="v3-admin-modal__actions">
+              <div className="v3-admin-modal__actions v3-admin-modal__actions--wrap">
                 <button
                   type="button"
                   className="v3-admin-btn v3-admin-btn--ghost"
                   disabled={generating}
                   onClick={() => handleGenerate("md")}
                 >
-                  {generating ? "Generating…" : "Download .md"}
+                  Download .md
                 </button>
                 <button
                   type="button"
@@ -211,15 +239,28 @@ function ServiceAgreementModal({ client, onClose }) {
                 >
                   Download .html
                 </button>
-                <button type="submit" className="v3-admin-btn" disabled={generating}>
-                  Download both
+                <button
+                  type="submit"
+                  className="v3-admin-btn"
+                  disabled={generating}
+                >
+                  {generating ? "Generating…" : "Download .docx"}
+                </button>
+                <button
+                  type="button"
+                  className="v3-admin-btn v3-admin-btn--ghost"
+                  disabled={generating}
+                  onClick={() => handleGenerate("all")}
+                >
+                  Download all
                 </button>
               </div>
             </form>
 
             <p className="v3-admin-modal__hint">
-              Files save as <code className="v3-admin-code">{slugLabel}-service-agreement-YYYY-MM-DD</code>.
-              Open HTML in a browser and print to PDF, or paste Markdown into Word.
+              Files save as{" "}
+              <code className="v3-admin-code">{slugLabel}-service-agreement-YYYY-MM-DD</code>
+              {" "}(.md / .html / .docx). Word opens <strong>.docx</strong> directly; HTML can print to PDF.
             </p>
           </>
         )}
