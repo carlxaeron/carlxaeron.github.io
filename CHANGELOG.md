@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.77] — 2026-07-20
+
+### Fixed
+- **Service agreement HTML** — blockquotes no longer show a stray `t;` before Disclaimer / notes (`>` was HTML-escaped to `&gt;` then sliced incorrectly)
+- **Client-facing agreement** — strips the internal **How to use this template** section (and `client-sites/{slug}/` authoring notes) from printable HTML / DOCX / send payload
+
 ## [3.0.76] — 2026-07-20
 
 ### Added

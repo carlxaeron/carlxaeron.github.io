@@ -7,6 +7,7 @@ import {
   extractAgreementArticleHtml,
   fillServiceAgreementTemplate,
   formatPeso,
+  generateServiceAgreementDownloads,
   indexClientCatalog,
   isValidClientEmail,
   markdownToDocxBlob,
@@ -14,6 +15,7 @@ import {
   parsePesoAmount,
   recalcAmountFields,
   splitDepositBalance,
+  stripInternalAgreementSections,
 } from "./serviceAgreement";
 
 if (typeof global.TextEncoder === "undefined") {
@@ -158,6 +160,83 @@ describe("serviceAgreement helpers", () => {
     expect(html).toContain("<table>");
     expect(html).toContain("<td>1</td>");
     expect(html).toContain("<title>Test Agreement</title>");
+  });
+
+  test("markdownToPrintableHtml does not leave stray t; before blockquote Disclaimer", () => {
+    const html = markdownToPrintableHtml(
+      "> **Disclaimer:** This is a template only.\n\n> **Pricing note:** Website only.",
+      "Disclaimer Test"
+    );
+    expect(html).toContain("<blockquote><strong>Disclaimer:</strong> This is a template only.</blockquote>");
+    expect(html).toContain("<blockquote><strong>Pricing note:</strong> Website only.</blockquote>");
+    expect(html).not.toMatch(/t;\s*<strong>Disclaimer/);
+    expect(html).not.toContain("t; Disclaimer");
+    expect(html).not.toContain("&gt;");
+  });
+
+  test("stripInternalAgreementSections removes How to use this template", () => {
+    const markdown = [
+      "# Client Service Agreement",
+      "",
+      "> **Disclaimer:** Template only.",
+      "",
+      "---",
+      "",
+      "## How to use this template",
+      "",
+      "1. Copy this file.",
+      "2. Replace placeholders from `client-sites/{slug}/client.json`.",
+      "",
+      "---",
+      "",
+      "# SERVICE AGREEMENT",
+      "",
+      "Parties agree.",
+    ].join("\n");
+
+    const stripped = stripInternalAgreementSections(markdown);
+    expect(stripped).toContain("Disclaimer");
+    expect(stripped).toContain("# SERVICE AGREEMENT");
+    expect(stripped).not.toContain("How to use this template");
+    expect(stripped).not.toContain("client-sites/{slug}/");
+
+    const html = markdownToPrintableHtml(stripped, "Client Facing");
+    expect(html).not.toContain("How to use this template");
+    expect(html).not.toContain("client-sites/{slug}/");
+    expect(html).toContain("<blockquote><strong>Disclaimer:</strong> Template only.</blockquote>");
+    expect(html).not.toMatch(/t;\s*<strong>Disclaimer/);
+  });
+
+  test("generateServiceAgreementDownloads strips How to use from client HTML", async () => {
+    const template = [
+      "# Client Service Agreement",
+      "",
+      "> **Disclaimer:** Template only for {{BUSINESS_NAME}}.",
+      "",
+      "## How to use this template",
+      "",
+      "Replace from `client-sites/{slug}/client.json`.",
+      "",
+      "---",
+      "",
+      "# SERVICE AGREEMENT",
+      "",
+      "Hello {{BUSINESS_NAME}}.",
+    ].join("\n");
+
+    const { html, markdown } = await generateServiceAgreementDownloads(
+      { businessName: "Bamboo Grove", slug: "bamboo-grove" },
+      template
+    );
+    const article = extractAgreementArticleHtml(html);
+
+    expect(markdown).not.toContain("How to use this template");
+    expect(markdown).not.toContain("client-sites/{slug}/");
+    expect(article).not.toContain("How to use this template");
+    expect(article).not.toContain("client-sites/{slug}/");
+    expect(article).toContain("Bamboo Grove");
+    expect(article).toContain("<blockquote><strong>Disclaimer:</strong>");
+    expect(article).not.toMatch(/t;\s*<strong>Disclaimer/);
   });
 
   test("extractAgreementArticleHtml wraps printable body in article", () => {

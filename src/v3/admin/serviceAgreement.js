@@ -327,8 +327,29 @@ function escapeHtml(text) {
     .replace(/"/g, "&quot;");
 }
 
+function formatInlineMarkdown(text) {
+  let content = escapeHtml(text);
+  content = content.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  content = content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+  return content;
+}
+
+/**
+ * Remove internal authoring notes (not for clients) from filled markdown
+ * before printable HTML / DOCX / send payload.
+ */
+export function stripInternalAgreementSections(markdown) {
+  return String(markdown || "")
+    .replace(
+      /^## How to use this template\s*\n[\s\S]*?^---\s*\n?/m,
+      ""
+    )
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 export function markdownToPrintableHtml(markdown, title = "Client Service Agreement") {
-  const lines = markdown.split("\n");
+  const lines = String(markdown || "").split("\n");
   const htmlParts = [];
   let inTable = false;
   let tableRows = [];
@@ -356,15 +377,7 @@ export function markdownToPrintableHtml(markdown, title = "Client Service Agreem
       const cells = trimmed
         .slice(1, -1)
         .split("|")
-        .map((cell) => {
-          let value = escapeHtml(cell.trim());
-          value = value.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-          value = value.replace(
-            /\[([^\]]+)\]\(([^)]+)\)/g,
-            '<a href="$2">$1</a>'
-          );
-          return value;
-        });
+        .map((cell) => formatInlineMarkdown(cell.trim()));
       tableRows.push(cells);
       return;
     }
@@ -381,36 +394,44 @@ export function markdownToPrintableHtml(markdown, title = "Client Service Agreem
       return;
     }
 
-    let content = escapeHtml(trimmed);
-    content = content.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-    content = content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+    // Strip markdown markers *before* escapeHtml — escaping `>` to `&gt;`
+    // then slicing 2 chars left a stray `t;` in blockquotes.
+    let tag = "p";
+    let rawContent = trimmed;
+    let prefix = "";
 
-    if (trimmed.startsWith("# ")) {
-      htmlParts.push(`<h1>${content.slice(2)}</h1>`);
-      return;
-    }
-    if (trimmed.startsWith("## ")) {
-      htmlParts.push(`<h2>${content.slice(3)}</h2>`);
-      return;
-    }
-    if (trimmed.startsWith("### ")) {
-      htmlParts.push(`<h3>${content.slice(4)}</h3>`);
-      return;
-    }
     if (trimmed.startsWith("#### ")) {
-      htmlParts.push(`<h4>${content.slice(5)}</h4>`);
+      tag = "h4";
+      rawContent = trimmed.slice(5);
+    } else if (trimmed.startsWith("### ")) {
+      tag = "h3";
+      rawContent = trimmed.slice(4);
+    } else if (trimmed.startsWith("## ")) {
+      tag = "h2";
+      rawContent = trimmed.slice(3);
+    } else if (trimmed.startsWith("# ")) {
+      tag = "h1";
+      rawContent = trimmed.slice(2);
+    } else if (trimmed.startsWith("> ")) {
+      tag = "blockquote";
+      rawContent = trimmed.slice(2);
+    } else if (trimmed.startsWith("- ")) {
+      prefix = "• ";
+      rawContent = trimmed.slice(2);
+    }
+
+    const content = formatInlineMarkdown(rawContent);
+
+    if (tag === "blockquote") {
+      htmlParts.push(`<blockquote>${content}</blockquote>`);
       return;
     }
-    if (trimmed.startsWith("> ")) {
-      htmlParts.push(`<blockquote>${content.slice(2)}</blockquote>`);
-      return;
-    }
-    if (trimmed.startsWith("- ")) {
-      htmlParts.push(`<p>• ${content.slice(2)}</p>`);
+    if (tag === "p") {
+      htmlParts.push(`<p>${prefix}${content}</p>`);
       return;
     }
 
-    htmlParts.push(`<p>${content}</p>`);
+    htmlParts.push(`<${tag}>${content}</${tag}>`);
   });
 
   if (inTable) flushTable();
@@ -666,7 +687,8 @@ export function downloadBlobFile(filename, blob) {
 
 export async function generateServiceAgreementDownloads(values, template) {
   const source = template || (await fetchServiceAgreementTemplate());
-  const markdown = fillServiceAgreementTemplate(source, values);
+  const filled = fillServiceAgreementTemplate(source, values);
+  const markdown = stripInternalAgreementSections(filled);
   const title = `${values.businessName || "Client"} — Service Agreement`;
   const html = markdownToPrintableHtml(markdown, title);
   const docxBlob = await markdownToDocxBlob(markdown, title);
