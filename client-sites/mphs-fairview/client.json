@@ -28,13 +28,13 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "sent",
+    "status": "followup_sent",
     "cadence": "3d1w",
     "emailFound": true,
     "sentAt": "2026-07-17T07:05:33+00:00",
-    "nextFollowUpAt": "2026-07-20T07:07:53+00:00",
-    "lastFollowUpAt": null,
-    "followUpCount": 0,
+    "nextFollowUpAt": "2026-07-27T01:44:42+00:00",
+    "lastFollowUpAt": "2026-07-20T01:44:42+00:00",
+    "followUpCount": 1,
     "notes": "Initial quotation sent 2026-07-17 via outreachSchedule to mphsi.edu@gmail.com; auto follow-ups 3d1w (3d→7d×3, max 4). Cadence corrected 2026-07-17 (was 1w). BCC info@carlmanuel.com."
   },
   "system": {

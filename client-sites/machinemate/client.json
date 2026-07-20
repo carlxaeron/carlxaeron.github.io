@@ -27,10 +27,10 @@
     "cadence": "3d1w",
     "emailFound": true,
     "sentAt": "2026-07-14T05:51:53.214473+00:00",
-    "lastFollowUpAt": "2026-07-14T05:51:53.214473+00:00",
-    "nextFollowUpAt": "2026-07-21T05:51:44+00:00",
-    "followUpCount": 1,
-    "notes": "Follow-up sent 2026-07-14 via hosting Private Email (hero Motion/Three refresh check-in). Follow-ups: 3d→7d→7d→7d (max 4)."
+    "lastFollowUpAt": "2026-07-20T01:44:40+00:00",
+    "nextFollowUpAt": "2026-07-27T01:44:40+00:00",
+    "followUpCount": 2,
+    "notes": "Follow-up #2 sent 2026-07-20 (early batch Jul 20–21). Follow-ups: 3d→7d→7d→7d (max 4)."
   },
   "sources": {
     "facebook": "https://www.facebook.com/machinemate/",
