@@ -6,6 +6,8 @@ import { isAnalyticsExcluded } from "../utils/visitTracker";
 export default function PreviewFeedback({ previewSlug, previewLabel }) {
   const [submitted, setSubmitted] = useState(() => hasSubmittedFeedback(previewSlug));
   const [showDislikeModal, setShowDislikeModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [confirmSource, setConfirmSource] = useState(null);
   const [comment, setComment] = useState("");
   const [sentiment, setSentiment] = useState(null);
   const [error, setError] = useState("");
@@ -15,27 +17,57 @@ export default function PreviewFeedback({ previewSlug, previewLabel }) {
     return submitted ? (
       <div className="v3-preview-feedback v3-preview-feedback--done" data-testid="preview-feedback-thanks">
         <p>Thanks for your feedback on this sample site.</p>
+        {sentiment && (
+          <span className="visually-hidden" data-testid="preview-feedback-sentiment">{sentiment}</span>
+        )}
       </div>
     ) : null;
   }
 
-  const handleLike = async () => {
+  const openConfirm = (source) => {
+    setError("");
+    setConfirmSource(source);
+    setShowConfirmModal(true);
+  };
+
+  const closeConfirm = () => {
+    if (loading) return;
+    setShowConfirmModal(false);
+    setConfirmSource(null);
+  };
+
+  const submitSentiment = async (nextSentiment, nextComment = "") => {
     setError("");
     setLoading(true);
     try {
       await submitPreviewFeedback({
         previewSlug,
         previewLabel,
-        sentiment: "like",
-        comment: "",
+        sentiment: nextSentiment,
+        comment: nextComment,
       });
-      setSentiment("like");
+      setSentiment(nextSentiment);
       setSubmitted(true);
+      setShowConfirmModal(false);
+      setShowDislikeModal(false);
+      setConfirmSource(null);
     } catch (err) {
       setError(err.message || "Could not submit feedback");
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleConfirmYes = async () => {
+    await submitSentiment("agree", "");
+  };
+
+  const handleConfirmNotYet = async () => {
+    if (confirmSource === "like") {
+      await submitSentiment("like", "");
+      return;
+    }
+    closeConfirm();
   };
 
   const handleDislikeSubmit = async (event) => {
@@ -45,24 +77,7 @@ export default function PreviewFeedback({ previewSlug, previewLabel }) {
       setError("Please add a comment explaining what you dislike before submitting.");
       return;
     }
-
-    setError("");
-    setLoading(true);
-    try {
-      await submitPreviewFeedback({
-        previewSlug,
-        previewLabel,
-        sentiment: "dislike",
-        comment: trimmed,
-      });
-      setSentiment("dislike");
-      setSubmitted(true);
-      setShowDislikeModal(false);
-    } catch (err) {
-      setError(err.message || "Could not submit feedback");
-    } finally {
-      setLoading(false);
-    }
+    await submitSentiment("dislike", trimmed);
   };
 
   return (
@@ -74,7 +89,7 @@ export default function PreviewFeedback({ previewSlug, previewLabel }) {
             <button
               type="button"
               className="v3-preview-feedback__btn v3-preview-feedback__btn--like"
-              onClick={handleLike}
+              onClick={() => openConfirm("like")}
               disabled={loading}
             >
               Like
@@ -90,12 +105,46 @@ export default function PreviewFeedback({ previewSlug, previewLabel }) {
             >
               Dislike
             </button>
+            <button
+              type="button"
+              className="v3-preview-feedback__btn v3-preview-feedback__btn--ready"
+              onClick={() => openConfirm("agree")}
+              disabled={loading}
+            >
+              Ready to proceed
+            </button>
           </div>
-          {error && !showDislikeModal && (
+          {error && !showDislikeModal && !showConfirmModal && (
             <p className="v3-preview-feedback__error" role="alert">{error}</p>
           )}
         </div>
       </section>
+
+      <Modal
+        show={showConfirmModal}
+        onHide={closeConfirm}
+        centered
+        className="v3-preview-feedback-modal"
+      >
+        <Modal.Header closeButton={!loading}>
+          <Modal.Title>Ready to move forward?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p className="v3-preview-feedback__modal-copy">
+            Are you ready to move forward with this project? This sample covers the website only —
+            hosting and extras are separate if you need them later.
+          </p>
+          {error && <p className="v3-preview-feedback__error" role="alert">{error}</p>}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleConfirmNotYet} disabled={loading}>
+            Not yet
+          </Button>
+          <Button variant="success" onClick={handleConfirmYes} disabled={loading}>
+            Yes, I&apos;m interested
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
       <Modal
         show={showDislikeModal}
@@ -134,10 +183,6 @@ export default function PreviewFeedback({ previewSlug, previewLabel }) {
           </Modal.Footer>
         </Form>
       </Modal>
-
-      {submitted && sentiment && (
-        <span className="visually-hidden" data-testid="preview-feedback-sentiment">{sentiment}</span>
-      )}
     </>
   );
 }

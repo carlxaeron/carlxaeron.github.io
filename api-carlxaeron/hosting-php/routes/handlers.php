@@ -75,7 +75,7 @@ function route_preview_feedback(): void
     if ($visitorId === '' || $sessionId === '' || $previewSlug === '' || $sentiment === '') {
         send_error('Missing required fields');
     }
-    if ($sentiment !== 'like' && $sentiment !== 'dislike') {
+    if ($sentiment !== 'like' && $sentiment !== 'dislike' && $sentiment !== 'agree') {
         send_error('Invalid sentiment');
     }
     if ($sentiment === 'dislike' && $comment === '') {

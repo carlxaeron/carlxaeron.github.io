@@ -51,4 +51,18 @@ class PreviewFeedbackEmailBuilderTest extends TestCase
         $this->assertStringContainsString(self::FB_PROFILE, $text);
         $this->assertStringContainsString(self::PHONE_DISPLAY, $text);
     }
+
+    public function test_agree_email_thanks_and_promises_follow_up(): void
+    {
+        [$subject, $html, $text] = PreviewFeedbackEmailBuilder::build('agree', $this->sampleContext());
+
+        $this->assertStringContainsString('follow up', strtolower($subject));
+        $this->assertStringContainsString('JK Construction', $subject);
+        $this->assertStringContainsString('follow up shortly', strtolower($html));
+        $this->assertStringContainsString('website only', strtolower($html));
+        $this->assertStringContainsString('https://carlmanuel.com/?preview=jk-construction', $html);
+        $this->assertStringContainsString('follow up shortly', strtolower($text));
+        $this->assertStringContainsString(self::FB_PROFILE, $html);
+        $this->assertStringContainsString(self::PHONE_DISPLAY, $text);
+    }
 }

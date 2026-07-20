@@ -123,6 +123,30 @@ class PreviewAnalyticsPushTest extends TestCase
         );
     }
 
+    public function test_notify_feedback_agree(): void
+    {
+        $this->mock(PushNotificationService::class, function ($mock): void {
+            $mock->shouldReceive('sendToAdmins')
+                ->once()
+                ->with(
+                    'Ready to proceed',
+                    'JK Construction — wants to move forward',
+                    [
+                        'type' => 'preview_feedback',
+                        'slug' => 'jk-construction',
+                        'sentiment' => 'agree',
+                        'url' => 'https://carlmanuel.com/#admin',
+                    ]
+                )
+                ->andReturn(1);
+        });
+
+        $service = app(PreviewAnalyticsPush::class);
+
+        $this->bindRequestHeaders(self::ORIGIN);
+        $service->notifyFeedback('jk-construction', 'agree', 'JK Construction');
+    }
+
     public function test_browser_origin_gate_matches_hosting_php_allowlist(): void
     {
         $this->assertTrue(BrowserOriginGate::isAllowedOrigin('https://carlmanuel.com'));

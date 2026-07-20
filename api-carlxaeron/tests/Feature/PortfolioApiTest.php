@@ -237,6 +237,87 @@ class PortfolioApiTest extends TestCase
         });
     }
 
+    public function test_preview_feedback_agree_notifies_carl_push_mail_and_prospect(): void
+    {
+        Mail::fake();
+        config([
+            'portfolio.mail_to' => 'carl@example.com',
+            'portfolio.mail_bcc' => 'bcc@example.com',
+        ]);
+
+        OutreachJob::query()->create([
+            'slug' => 'jk-construction',
+            'business_name' => 'JK Construction',
+            'contact_name' => 'Juan',
+            'contact_email' => 'juan@jk.test',
+            'preview_url' => 'https://carlmanuel.com/?preview=jk-construction',
+            'cadence' => '3d1w',
+            'auto_followup' => true,
+            'max_followups' => 4,
+            'follow_up_count' => 0,
+            'status' => 'sent',
+        ]);
+
+        $this->mock(\App\Services\PushNotificationService::class, function ($mock): void {
+            $mock->shouldReceive('sendToAdmins')
+                ->once()
+                ->with(
+                    'Ready to proceed',
+                    'JK Construction — wants to move forward',
+                    [
+                        'type' => 'preview_feedback',
+                        'slug' => 'jk-construction',
+                        'sentiment' => 'agree',
+                        'url' => 'https://carlmanuel.com/#admin',
+                    ]
+                )
+                ->andReturn(1);
+        });
+
+        $this->postJson('/previewFeedback', [
+            'visitorId' => 'v-agree',
+            'sessionId' => 's-agree',
+            'previewSlug' => 'jk-construction',
+            'previewLabel' => 'JK Construction',
+            'sentiment' => 'agree',
+        ], ['Origin' => 'https://carlmanuel.com'])
+            ->assertOk()
+            ->assertJsonPath('message', 'Feedback recorded');
+
+        Mail::assertSent(\App\Mail\PreviewAgreeNotifyMail::class, function ($mail) {
+            return str_contains($mail->mailSubject, 'Ready to proceed')
+                && str_contains($mail->mailSubject, 'JK Construction')
+                && $mail->hasTo('carl@example.com')
+                && $mail->hasBcc('bcc@example.com')
+                && str_contains($mail->htmlBody, 'jk-construction')
+                && str_contains($mail->htmlBody, 'v-agree');
+        });
+
+        Mail::assertSent(OutreachProspectMail::class, function (OutreachProspectMail $mail) {
+            return str_contains(strtolower($mail->htmlBody), 'ready to proceed')
+                || str_contains(strtolower($mail->htmlBody), 'follow up shortly');
+        });
+
+        $this->assertDatabaseHas('preview_feedback', [
+            'visitor_id' => 'v-agree',
+            'preview_slug' => 'jk-construction',
+            'sentiment' => 'agree',
+            'prospect_email' => 'juan@jk.test',
+        ]);
+    }
+
+    public function test_preview_feedback_rejects_invalid_sentiment(): void
+    {
+        $this->postJson('/previewFeedback', [
+            'visitorId' => 'v-bad',
+            'sessionId' => 's-bad',
+            'previewSlug' => 'jk-construction',
+            'sentiment' => 'love',
+        ], ['Origin' => 'https://carlmanuel.com'])
+            ->assertStatus(400)
+            ->assertJsonPath('message', 'Invalid sentiment');
+    }
+
     public function test_preview_feedback_dislike_triggers_admin_push(): void
     {
         $this->mock(\App\Services\PushNotificationService::class, function ($mock): void {

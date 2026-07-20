@@ -14,16 +14,42 @@ describe("PreviewFeedback", () => {
     hasSubmittedFeedback.mockReturnValue(false);
   });
 
-  test("renders like and dislike actions", () => {
+  test("renders like, dislike, and ready actions", () => {
     render(<PreviewFeedback previewSlug="machinemate" previewLabel="Machinemate" />);
     expect(screen.getByTestId("preview-feedback")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Like" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Dislike" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Ready to proceed" })).toBeInTheDocument();
   });
 
-  test("submits like without comment", async () => {
+  test("Like opens confirm modal without posting immediately", () => {
     render(<PreviewFeedback previewSlug="machinemate" previewLabel="Machinemate" />);
     fireEvent.click(screen.getByRole("button", { name: "Like" }));
+
+    expect(screen.getByRole("button", { name: /yes, i'm interested/i })).toBeInTheDocument();
+    expect(submitPreviewFeedback).not.toHaveBeenCalled();
+  });
+
+  test("confirm Yes posts agree sentiment", async () => {
+    render(<PreviewFeedback previewSlug="machinemate" previewLabel="Machinemate" />);
+    fireEvent.click(screen.getByRole("button", { name: "Like" }));
+    fireEvent.click(screen.getByRole("button", { name: /yes, i'm interested/i }));
+
+    await waitFor(() => {
+      expect(submitPreviewFeedback).toHaveBeenCalledWith({
+        previewSlug: "machinemate",
+        previewLabel: "Machinemate",
+        sentiment: "agree",
+        comment: "",
+      });
+      expect(screen.getByTestId("preview-feedback-thanks")).toBeInTheDocument();
+    });
+  });
+
+  test("Not yet from Like posts like sentiment", async () => {
+    render(<PreviewFeedback previewSlug="machinemate" previewLabel="Machinemate" />);
+    fireEvent.click(screen.getByRole("button", { name: "Like" }));
+    fireEvent.click(screen.getByRole("button", { name: "Not yet" }));
 
     await waitFor(() => {
       expect(submitPreviewFeedback).toHaveBeenCalledWith({
@@ -33,6 +59,35 @@ describe("PreviewFeedback", () => {
         comment: "",
       });
       expect(screen.getByTestId("preview-feedback-thanks")).toBeInTheDocument();
+    });
+  });
+
+  test("Ready to proceed opens confirm; Not yet closes without POST", async () => {
+    render(<PreviewFeedback previewSlug="machinemate" previewLabel="Machinemate" />);
+    fireEvent.click(screen.getByRole("button", { name: "Ready to proceed" }));
+
+    expect(screen.getByRole("button", { name: /yes, i'm interested/i })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Not yet" }));
+
+    await waitFor(() => {
+      expect(screen.queryByRole("button", { name: /yes, i'm interested/i })).not.toBeInTheDocument();
+    });
+    expect(submitPreviewFeedback).not.toHaveBeenCalled();
+    expect(screen.getByTestId("preview-feedback")).toBeInTheDocument();
+  });
+
+  test("Ready Yes posts agree sentiment", async () => {
+    render(<PreviewFeedback previewSlug="jk-construction" previewLabel="JK Construction" />);
+    fireEvent.click(screen.getByRole("button", { name: "Ready to proceed" }));
+    fireEvent.click(screen.getByRole("button", { name: /yes, i'm interested/i }));
+
+    await waitFor(() => {
+      expect(submitPreviewFeedback).toHaveBeenCalledWith({
+        previewSlug: "jk-construction",
+        previewLabel: "JK Construction",
+        sentiment: "agree",
+        comment: "",
+      });
     });
   });
 

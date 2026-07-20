@@ -91,7 +91,7 @@ class PortfolioApiController extends Controller
         if ($visitorId === '' || $sessionId === '' || $previewSlug === '' || $sentiment === '') {
             return ApiResponse::error('Missing required fields');
         }
-        if ($sentiment !== 'like' && $sentiment !== 'dislike') {
+        if ($sentiment !== 'like' && $sentiment !== 'dislike' && $sentiment !== 'agree') {
             return ApiResponse::error('Invalid sentiment');
         }
         if ($sentiment === 'dislike' && $comment === '') {
@@ -131,6 +131,18 @@ class PortfolioApiController extends Controller
                 return ApiResponse::error('You already submitted feedback for this preview');
             }
             throw $e;
+        }
+
+        if ($sentiment === 'agree') {
+            $this->mailer->trySend(
+                fn () => $this->mailer->sendPreviewAgree(
+                    $slug,
+                    $previewLabel,
+                    $vid,
+                    "https://carlmanuel.com/?preview={$slug}",
+                ),
+                'preview-agree'
+            );
         }
 
         $this->previewPush->notifyFeedback($slug, $sentiment, $previewLabel, $comment !== '' ? $comment : null);

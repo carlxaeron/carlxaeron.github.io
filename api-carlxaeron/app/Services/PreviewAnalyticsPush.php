@@ -54,12 +54,17 @@ class PreviewAnalyticsPush
 
         $slug = trim($previewSlug);
         $label = trim((string) ($previewLabel ?: $slug));
-        $isLike = $sentiment === 'like';
 
-        $title = $isLike ? 'Preview liked' : 'Preview disliked';
-        $body = $isLike
-            ? "{$label} — thumbs up"
-            : $this->dislikeBody($label, $comment);
+        if ($sentiment === 'agree') {
+            $title = 'Ready to proceed';
+            $body = "{$label} — wants to move forward";
+        } elseif ($sentiment === 'like') {
+            $title = 'Preview liked';
+            $body = "{$label} — thumbs up";
+        } else {
+            $title = 'Preview disliked';
+            $body = $this->dislikeBody($label, $comment);
+        }
 
         $this->tryPush($title, $body, [
             'type' => 'preview_feedback',

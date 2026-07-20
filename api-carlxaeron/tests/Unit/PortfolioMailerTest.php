@@ -62,6 +62,31 @@ class PortfolioMailerTest extends TestCase
         Mail::assertSent(QuotationReceived::class);
     }
 
+    public function test_send_preview_agree_queues_mailable_with_bcc(): void
+    {
+        config([
+            'portfolio.mail_to' => 'to@example.com',
+            'portfolio.mail_bcc' => 'bcc@example.com',
+        ]);
+        Mail::fake();
+
+        (new PortfolioMailer)->sendPreviewAgree(
+            'jk-construction',
+            'JK Construction',
+            'visitor-1',
+            'https://carlmanuel.com/?preview=jk-construction',
+        );
+
+        Mail::assertSent(\App\Mail\PreviewAgreeNotifyMail::class, function ($mail) {
+            return str_contains($mail->mailSubject, 'Ready to proceed')
+                && str_contains($mail->mailSubject, 'JK Construction')
+                && $mail->hasTo('to@example.com')
+                && $mail->hasBcc('bcc@example.com')
+                && str_contains($mail->htmlBody, 'jk-construction')
+                && str_contains($mail->htmlBody, 'visitor-1');
+        });
+    }
+
     public function test_try_send_swallows_exceptions(): void
     {
         $mailer = new PortfolioMailer;

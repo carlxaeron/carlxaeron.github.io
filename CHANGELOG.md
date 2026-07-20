@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.0.78] — 2026-07-20
+
+### Added
+- **Preview Ready to proceed** — sticky feedback dock CTA beside Like/Dislike; Like or Ready opens a confirm modal; **Yes** posts `sentiment: agree` (Carl email + Web Push + prospect soft-ack when email known). Does not auto-send a service agreement
+- **API** — `POST /previewFeedback` accepts `agree`; `PreviewAgreeNotifyMail` + prospect agree auto-reply
+
+### Changed
+- **Preview Like** — no longer posts immediately; confirm **Not yet** still posts `like`
+
 ## [3.0.77] — 2026-07-20
 
 ### Fixed

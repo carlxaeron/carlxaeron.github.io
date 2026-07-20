@@ -245,6 +245,11 @@ body.v3-preview-active {
     font-size: 0.875rem;
   }
 
+  .v3-preview-feedback-dock .v3-preview-feedback__btn--ready {
+    padding: $space-2 $space-2;
+    font-size: 0.8125rem;
+  }
+
   .v3-preview-feedback-dock .v3-preview-feedback--done {
     text-align: center;
     padding: $space-3 $space-4 calc(#{$space-3} + env(safe-area-inset-bottom, 0px));
@@ -569,6 +574,24 @@ body.v3-preview-active {
     background: transparent;
     color: $white;
     border: 1.5px solid rgba($white, 0.45);
+  }
+
+  &--ready {
+    min-width: auto;
+    padding: $space-2 $space-3;
+    background: transparent;
+    color: rgba($green-light, 0.95);
+    border: 0;
+    border-radius: 0;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba($green-light, 0.45);
+
+    &:hover:not(:disabled) {
+      color: $white;
+      text-decoration-color: rgba($white, 0.7);
+    }
   }
 }
 
