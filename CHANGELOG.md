@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.80] — 2026-07-20
+
+### Added
+- **Preview whitelist** — `cardinal-santos`, `st-lukes`, and `grand-hyatt-manila` quotation demos (`?preview=` + client-sites folders + catalog)
+
 ## [3.0.79] — 2026-07-20
 
 ### Fixed

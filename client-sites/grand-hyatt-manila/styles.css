@@ -1,0 +1,95 @@
+/* Supplemental CSS — luxury hotel: hero photography, reveal, Three.js canvas. */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  [data-hero-animate],
+  [data-hero-bg] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-header] {
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+[data-header].is-scrolled {
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+}
+
+.trust-strip {
+  background: linear-gradient(90deg, #0b0f14 0%, #1c2430 50%, #0b0f14 100%);
+}
+
+.hero-bg {
+  background-size: cover;
+  background-position: center 35%;
+}
+
+.hero-bg--grand {
+  background-image:
+    linear-gradient(165deg, rgba(11, 15, 20, 0.55) 0%, rgba(11, 15, 20, 0.25) 40%, rgba(11, 15, 20, 0.82) 100%),
+    url("assets/hero-grand-hyatt.jpg");
+}
+
+.hero-vignette {
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, transparent 0%, rgba(11, 15, 20, 0.35) 100%),
+    linear-gradient(to top, rgba(11, 15, 20, 0.9) 0%, transparent 45%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-three-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+[data-hero] > .relative {
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-three-canvas {
+    display: none;
+  }
+}
+
+.hero-has-three-object > .relative {
+  max-width: 52rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-has-three-object > .relative {
+    max-width: 38rem;
+  }
+}

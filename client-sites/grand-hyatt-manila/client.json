@@ -1,0 +1,55 @@
+{
+  "businessName": "Grand Hyatt Manila",
+  "slug": "grand-hyatt-manila",
+  "previewHost": "grand-hyatt-manila.netlify.app",
+  "industry": "Luxury hotel / hospitality",
+  "deployedAt": "2026-07-20",
+  "contact": {
+    "name": "Grand Hyatt Manila",
+    "email": "manila.grand@hyatt.com",
+    "phone": "+63 2 8838 1234"
+  },
+  "system": {
+    "type": "booking",
+    "adminPath": "/admin/",
+    "label": "Hotel booking & arrivals admin",
+    "painHero": "Room blocks and banquet inquiries land on Messenger and email — see occupancy and VIP arrivals in one place.",
+    "navPages": ["Dashboard", "Bookings", "Calendar", "Guests", "Settings"]
+  },
+  "quotation": {
+    "packageName": "Premium Business Website",
+    "packageScope": "One-page responsive luxury hotel marketing site only (rooms & dining highlights, gallery, FAQ, contact). Admin preview is a sample; production booking system priced separately.",
+    "quotedAmount": "₱18,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "7–10 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=grand-hyatt-manila"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "ready",
+    "cadence": null,
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "Email found on Facebook About: manila.grand@hyatt.com. Ask before send."
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/grandhyattmanilaph/",
+    "website": "https://www.hyatt.com/grand-hyatt/en-US/mangh-grand-hyatt-manila",
+    "address": "8th Avenue corner 35th Street, Bonifacio Global City, Taguig, Philippines",
+    "phones": ["+63 2 8838 1234", "288381234"],
+    "email": "manila.grand@hyatt.com",
+    "followers": "80K",
+    "hours": "Always open",
+    "category": "Hotel",
+    "recommend": "96% recommend (24,950 Reviews)",
+    "tagline": "Embracing the #LivingGrand philosophy, we bring moments of more to everything that we do.",
+    "notes": "HD cover 2048×1638 from Facebook; logo 386×386; gallery dining/lifestyle 1365×2048 + tower crops from cover. Official Hyatt page timed out on fetch — contact confirmed via FB About."
+  }
+}

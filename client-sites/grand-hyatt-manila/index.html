@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Grand Hyatt Manila — Living Grand in Bonifacio Global City. 461 rooms &amp; suites, Illume Spa, skyline dining, and meeting spaces above BGC." />
+  <title>Grand Hyatt Manila — Living Grand in BGC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              ink: "#0B0F14",
+              dark: "#141A22",
+              mid: "#1C2430",
+              gold: "#C5A572",
+              champagne: "#D4B896",
+              stone: "#E8E6E3",
+              ivory: "#F5F0E8",
+            },
+          },
+          fontFamily: {
+            display: ["Cormorant Garamond", "Georgia", "serif"],
+            sans: ["Manrope", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="embed-guard.js"></script>
+</head>
+<body class="font-sans text-brand-ink antialiased bg-brand-stone">
+  <div class="trust-strip py-2.5 text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-brand-champagne sm:text-xs">
+    Bonifacio Global City · 80K followers · 96% recommend · Always open
+  </div>
+
+  <header data-header class="sticky top-0 z-50 border-b border-white/5 bg-brand-ink/90 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#" class="flex min-w-0 items-center gap-3 font-display text-lg font-semibold tracking-wide text-brand-ivory">
+        <img src="assets/logo.png" alt="" width="40" height="40" class="h-10 w-10 shrink-0 rounded-full object-cover ring-1 ring-brand-gold/40" />
+        <span class="hidden truncate sm:inline">Grand Hyatt Manila</span>
+        <span class="sm:hidden">Grand Hyatt</span>
+      </a>
+      <nav class="hidden items-center gap-6 text-sm font-medium text-brand-ivory/75 md:flex" aria-label="Main">
+        <a href="#stay" class="hover:text-brand-gold transition-colors">Stay</a>
+        <a href="#dining" class="hover:text-brand-gold transition-colors">Dining</a>
+        <a href="#gallery" class="hover:text-brand-gold transition-colors">Gallery</a>
+        <a href="#about" class="hover:text-brand-gold transition-colors">About</a>
+        <a href="#faq" class="hover:text-brand-gold transition-colors">FAQ</a>
+        <a href="#contact" class="rounded-sm bg-brand-gold px-4 py-2 font-semibold text-brand-ink hover:brightness-110 transition">Reserve</a>
+      </nav>
+      <button type="button" data-nav-toggle class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border border-white/15 text-brand-ivory md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="hidden flex-col border-t border-white/10 bg-brand-ink px-4 py-4 md:hidden">
+      <a href="#stay" class="rounded-sm px-3 py-3 text-brand-ivory/90 hover:bg-white/5">Stay</a>
+      <a href="#dining" class="rounded-sm px-3 py-3 text-brand-ivory/90 hover:bg-white/5">Dining</a>
+      <a href="#gallery" class="rounded-sm px-3 py-3 text-brand-ivory/90 hover:bg-white/5">Gallery</a>
+      <a href="#about" class="rounded-sm px-3 py-3 text-brand-ivory/90 hover:bg-white/5">About</a>
+      <a href="#faq" class="rounded-sm px-3 py-3 text-brand-ivory/90 hover:bg-white/5">FAQ</a>
+      <a href="#contact" class="mt-2 rounded-sm bg-brand-gold px-4 py-3 text-center font-semibold text-brand-ink">Reserve</a>
+    </div>
+  </header>
+
+  <main>
+    <section
+      data-hero
+      data-hero-three="particles"
+      data-hero-three-object="spa"
+      data-hero-three-accent="champagne"
+      class="relative min-h-[88vh] overflow-hidden bg-brand-ink text-brand-ivory sm:min-h-[92vh]"
+    >
+      <div data-hero-bg class="hero-bg hero-bg--grand absolute inset-0 origin-center will-change-transform"></div>
+      <div class="hero-vignette absolute inset-0" aria-hidden="true"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
+      <div class="relative mx-auto flex max-w-6xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 sm:pb-24 sm:pt-36">
+        <p data-hero-animate class="opacity-0 mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-brand-gold">Living Grand · Bonifacio Global City</p>
+        <h1 data-hero-animate class="opacity-0 font-display max-w-3xl text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+          Grand Hyatt<br /><span class="italic text-brand-champagne">Manila</span>
+        </h1>
+        <p data-hero-animate class="opacity-0 mt-6 max-w-xl text-base leading-relaxed text-brand-ivory/85 sm:text-lg">
+          Moments of more — above the skyline of BGC. Refined rooms, Illume Spa, destination dining, and spaces that turn arrivals into occasions.
+        </p>
+        <div data-hero-animate class="opacity-0 mt-10 flex flex-wrap gap-3">
+          <a data-hero-cta href="#contact" class="rounded-sm bg-brand-gold px-7 py-3.5 text-sm font-semibold tracking-wide text-brand-ink hover:brightness-105 transition">Request a stay</a>
+          <a data-hero-cta href="tel:+63288381234" class="rounded-sm border border-brand-ivory/35 px-7 py-3.5 text-sm font-semibold tracking-wide hover:bg-white/5 transition">+63 2 8838 1234</a>
+        </div>
+        <div data-hero-animate class="opacity-0 mt-14 grid max-w-2xl gap-6 border-t border-white/10 pt-8 sm:grid-cols-3">
+          <div>
+            <p class="font-display text-3xl text-brand-gold">461</p>
+            <p class="mt-1 text-xs uppercase tracking-wider text-brand-ivory/60">Rooms &amp; suites</p>
+          </div>
+          <div>
+            <p class="font-display text-3xl text-brand-gold">80K</p>
+            <p class="mt-1 text-xs uppercase tracking-wider text-brand-ivory/60">Facebook followers</p>
+          </div>
+          <div>
+            <p class="font-display text-3xl text-brand-gold">96%</p>
+            <p class="mt-1 text-xs uppercase tracking-wider text-brand-ivory/60">Recommend on Facebook</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stay" class="bg-brand-stone py-20 sm:py-28">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="max-w-2xl">
+          <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-gold" data-reveal>Stay</p>
+          <h2 class="font-display mt-3 text-4xl font-semibold text-brand-ink sm:text-5xl" data-reveal>Rooms with a view of the city</h2>
+          <p class="mt-4 text-brand-mid/80" data-reveal>From Grand King rooms to expansive suites — calm materials, floor-to-ceiling light, and Club Lounge privileges when you want more.</p>
+        </div>
+        <div class="mt-14 grid gap-8 lg:grid-cols-3">
+          <article data-reveal class="group relative overflow-hidden bg-brand-ink text-brand-ivory shadow-xl">
+            <div class="aspect-[4/5] overflow-hidden">
+              <img src="assets/project-02.jpg" alt="Grand Hyatt Manila tower view" width="1200" height="1200" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" />
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-ink via-brand-ink/20 to-transparent"></div>
+            <div class="absolute bottom-0 p-6 sm:p-8">
+              <h3 class="font-display text-2xl font-semibold">Grand King</h3>
+              <p class="mt-2 text-sm text-brand-ivory/75">City or pool outlook · marble baths · thoughtful amenities for business and leisure.</p>
+            </div>
+          </article>
+          <article data-reveal class="group relative overflow-hidden bg-brand-ink text-brand-ivory shadow-xl lg:mt-10">
+            <div class="aspect-[4/5] overflow-hidden">
+              <img src="assets/project-01.jpg" alt="Grand Hyatt Manila skyline" width="1600" height="900" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" loading="lazy" />
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-ink via-brand-ink/20 to-transparent"></div>
+            <div class="absolute bottom-0 p-6 sm:p-8">
+              <h3 class="font-display text-2xl font-semibold">Grand Suite</h3>
+              <p class="mt-2 text-sm text-brand-ivory/75">Separate living · host in private · ideal for VIP stays and longer residencies.</p>
+            </div>
+          </article>
+          <article data-reveal class="group border border-brand-ink/10 bg-white p-8 shadow-sm lg:mt-4">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold">Also on property</p>
+            <ul class="mt-6 space-y-5 text-sm text-brand-mid/85">
+              <li class="border-b border-brand-ink/8 pb-4"><strong class="font-display text-lg text-brand-ink">Illume Spa</strong><br />Rituals, recovery, and quiet above the city.</li>
+              <li class="border-b border-brand-ink/8 pb-4"><strong class="font-display text-lg text-brand-ink">Outdoor pool</strong><br />Skyline swim deck with day-to-evening calm.</li>
+              <li class="border-b border-brand-ink/8 pb-4"><strong class="font-display text-lg text-brand-ink">Fitness</strong><br />Full health club for early risers and late travelers.</li>
+              <li><strong class="font-display text-lg text-brand-ink">Meetings &amp; events</strong><br />Ballrooms and boardrooms for MICE and celebrations.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="dining" class="bg-brand-ink py-20 text-brand-ivory sm:py-28">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="grid gap-12 lg:grid-cols-2 lg:items-end">
+          <div>
+            <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-gold" data-reveal>Dining</p>
+            <h2 class="font-display mt-3 text-4xl font-semibold sm:text-5xl" data-reveal>Tables worth dressing for</h2>
+            <p class="mt-4 max-w-lg text-brand-ivory/75" data-reveal>Filipino favorites reimagined, sushi counters, and breakfast that turns into a ritual — the same energy guests see on Facebook, composed for the screen.</p>
+          </div>
+          <p class="font-display text-2xl italic text-brand-champagne/90 lg:text-right" data-reveal>“Embracing the #LivingGrand philosophy, we bring moments of more to everything that we do.”</p>
+        </div>
+        <div class="mt-14 grid gap-4 sm:grid-cols-2">
+          <figure data-reveal class="overflow-hidden">
+            <img src="assets/project-03.jpg" alt="Dining at Grand Hyatt Manila" width="1365" height="2048" class="h-[28rem] w-full object-cover sm:h-[32rem]" loading="lazy" />
+            <figcaption class="mt-3 text-sm text-brand-ivory/60">Signature plates · Instagram-ready, service-led</figcaption>
+          </figure>
+          <figure data-reveal class="overflow-hidden sm:mt-12">
+            <img src="assets/project-04.jpg" alt="Lifestyle dining at Grand Hyatt Manila" width="1365" height="2048" class="h-[28rem] w-full object-cover sm:h-[32rem]" loading="lazy" />
+            <figcaption class="mt-3 text-sm text-brand-ivory/60">Seasonal menus · brunch to late evening</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="bg-brand-stone py-20 sm:py-28">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-4xl font-semibold text-brand-ink sm:text-5xl" data-reveal>Inside the tower</h2>
+        <p class="mt-3 max-w-xl text-brand-mid/75" data-reveal>Photography from the Grand Hyatt Manila Facebook page — architecture, rooms atmosphere, and dining.</p>
+        <div class="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <img data-reveal src="assets/hero-grand-hyatt.jpg" alt="Grand Hyatt Manila exterior at dusk" width="2048" height="1638" class="h-56 w-full object-cover lg:col-span-2 lg:h-72" loading="lazy" />
+          <img data-reveal src="assets/project-01.jpg" alt="BGC skyline from Grand Hyatt Manila" width="1600" height="900" class="h-56 w-full object-cover lg:h-72" loading="lazy" />
+          <img data-reveal src="assets/project-02.jpg" alt="Grand Hyatt Manila architectural detail" width="1200" height="1200" class="h-56 w-full object-cover lg:h-72" loading="lazy" />
+          <img data-reveal src="assets/project-03.jpg" alt="Grand Hyatt Manila dining" width="1365" height="2048" class="h-64 w-full object-cover sm:h-56 lg:col-span-2 lg:h-80" loading="lazy" />
+          <img data-reveal src="assets/project-04.jpg" alt="Grand Hyatt Manila lifestyle" width="1365" height="2048" class="h-64 w-full object-cover sm:h-56 lg:col-span-2 lg:h-80" loading="lazy" />
+        </div>
+        <p class="mt-8 text-center" data-reveal>
+          <a href="https://www.facebook.com/grandhyattmanilaph/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold tracking-wide text-brand-mid hover:text-brand-gold transition">See more on Facebook →</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="about" class="relative overflow-hidden bg-brand-dark py-20 text-brand-ivory sm:py-28">
+      <div class="absolute inset-y-0 right-0 hidden w-1/2 bg-cover bg-center opacity-35 lg:block" style="background-image:url('assets/gallery-skyline.jpg')" aria-hidden="true"></div>
+      <div class="absolute inset-y-0 right-0 hidden w-1/2 bg-gradient-to-r from-brand-dark to-transparent lg:block" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="max-w-xl">
+          <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-gold" data-reveal>About</p>
+          <h2 class="font-display mt-3 text-4xl font-semibold sm:text-5xl" data-reveal>A landmark above Bonifacio</h2>
+          <p class="mt-5 text-brand-ivory/80" data-reveal>
+            <strong>Grand Hyatt Manila</strong> rises at 8th Avenue corner 35th Street in Bonifacio Global City — a five-star address for travelers who expect quiet confidence, not noise.
+          </p>
+          <p class="mt-4 text-brand-ivory/80" data-reveal>
+            With <strong>80K Facebook followers</strong> and nearly <strong>25,000 reviews</strong> recommending the stay, the hotel is already a destination. This sample site shows how that presence can feel online — cinematic, calm, and unmistakably yours.
+          </p>
+          <p class="mt-6 font-display text-xl italic text-brand-champagne" data-reveal>8th Ave cor. 35th St · BGC, Taguig</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-white py-20 sm:py-28">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <h2 class="font-display text-center text-4xl font-semibold text-brand-ink" data-reveal>Questions guests ask</h2>
+        <div data-accordion class="mt-12 space-y-3">
+          <div data-accordion-item class="overflow-hidden border border-brand-ink/10 bg-brand-stone/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-ink" aria-expanded="false">Where is Grand Hyatt Manila?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-ink/10 px-5 py-4 text-sm text-brand-mid/80">8th Avenue corner 35th Street, Bonifacio Global City, Taguig, Philippines. Centrally placed for Makati, Ortigas, and airport transfers.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden border border-brand-ink/10 bg-brand-stone/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-ink" aria-expanded="false">How many rooms are there?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-ink/10 px-5 py-4 text-sm text-brand-mid/80">461 rooms and suites — from Grand King and Twin configurations to Grand Suites for longer stays and VIP arrivals.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden border border-brand-ink/10 bg-brand-stone/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-ink" aria-expanded="false">Is there a spa and pool?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-ink/10 px-5 py-4 text-sm text-brand-mid/80">Yes — Illume Spa, an outdoor pool, fitness center, and full concierge services. Ask reservations about spa packages with your stay.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden border border-brand-ink/10 bg-brand-stone/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-ink" aria-expanded="false">How do I book or inquire?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-ink/10 px-5 py-4 text-sm text-brand-mid/80">Call <a href="tel:+63288381234" class="font-semibold text-brand-mid hover:underline">+63 2 8838 1234</a>, email <a href="mailto:manila.grand@hyatt.com" class="font-semibold text-brand-mid hover:underline">manila.grand@hyatt.com</a>, or message the official Facebook page.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-brand-stone py-20 sm:py-28">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="overflow-hidden bg-brand-ink text-brand-ivory shadow-2xl">
+          <div class="grid gap-0 lg:grid-cols-2">
+            <div class="p-8 sm:p-10 lg:p-14">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-gold" data-reveal>Reserve</p>
+              <h2 class="font-display mt-3 text-4xl font-semibold" data-reveal>Plan your arrival</h2>
+              <p class="mt-4 text-brand-ivory/75" data-reveal>Share dates, room preference, and any banquet or spa needs — the team will confirm availability.</p>
+              <ul class="mt-10 space-y-5 text-sm sm:text-base" data-reveal>
+                <li><span class="text-xs font-semibold uppercase tracking-wider text-brand-gold">Phone</span><br /><a href="tel:+63288381234" class="hover:text-brand-champagne transition">+63 2 8838 1234</a></li>
+                <li><span class="text-xs font-semibold uppercase tracking-wider text-brand-gold">Email</span><br /><a href="mailto:manila.grand@hyatt.com" class="hover:text-brand-champagne transition">manila.grand@hyatt.com</a></li>
+                <li><span class="text-xs font-semibold uppercase tracking-wider text-brand-gold">Address</span><br />8th Ave corner 35th St, Bonifacio Global City, Taguig</li>
+                <li><span class="text-xs font-semibold uppercase tracking-wider text-brand-gold">Facebook</span><br /><a href="https://www.facebook.com/grandhyattmanilaph/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-champagne transition">facebook.com/grandhyattmanilaph</a></li>
+              </ul>
+            </div>
+            <div class="flex flex-col justify-center gap-4 border-t border-white/10 bg-brand-mid/40 p-8 sm:p-10 lg:border-l lg:border-t-0 lg:p-14" data-reveal>
+              <a href="tel:+63288381234" class="rounded-sm bg-brand-gold px-6 py-4 text-center text-sm font-semibold tracking-wide text-brand-ink hover:brightness-105 transition">Call reservations</a>
+              <a href="mailto:manila.grand@hyatt.com" class="rounded-sm border border-brand-ivory/30 px-6 py-4 text-center text-sm font-semibold tracking-wide hover:bg-white/5 transition">Email the hotel</a>
+              <a href="https://www.facebook.com/grandhyattmanilaph/" target="_blank" rel="noopener noreferrer" class="rounded-sm border border-brand-ivory/30 px-6 py-4 text-center text-sm font-semibold tracking-wide hover:bg-white/5 transition">Message on Facebook</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-brand-ink/10 bg-white py-10 text-center text-sm text-brand-mid/60">
+    <p class="font-display text-xl text-brand-ink">Grand Hyatt Manila</p>
+    <p class="mt-1">Luxury hotel demo site for quotation · BGC, Taguig</p>
+    <p class="mt-4">&copy; <span id="year"></span> · Sample by <a href="https://carlmanuel.com" class="text-brand-mid hover:text-brand-gold transition">Carl Louis Manuel</a></p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
+</body>
+</html>

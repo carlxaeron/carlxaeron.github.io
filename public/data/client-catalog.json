@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-20T04:45:38.424Z",
+  "generatedAt": "2026-07-20T05:02:04.324Z",
   "clients": [
     {
       "slug": "air-alex-resort",
@@ -149,6 +149,39 @@
         "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
         "timeline": "5–7 business days after content approval",
         "previewUrl": "https://carlmanuel.com/?preview=bernardino-general-hospital"
+      },
+      "system": {
+        "type": "appointments",
+        "adminPath": "/admin/",
+        "label": "Hospital appointments admin",
+        "navPages": [
+          "Dashboard",
+          "Appointments",
+          "Schedule",
+          "Patients",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "cardinal-santos",
+      "businessName": "Cardinal Santos Medical Center",
+      "industry": "Hospital / healthcare",
+      "contact": {
+        "name": "Cardinal Santos Medical Center Marketing",
+        "email": "marketing@csmc.ph",
+        "phone": "+63 2 8727 0001"
+      },
+      "quotation": {
+        "packageName": "Business Website",
+        "packageScope": "One-page responsive hospital marketing site only (centers of excellence, packages overview, FAQ, contact). Admin preview is a sample; production appointments system priced separately.",
+        "quotedAmount": "₱18,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=cardinal-santos"
       },
       "system": {
         "type": "appointments",
@@ -461,6 +494,39 @@
       },
       "sources": {
         "address": "3rd Floor Blk.30 Lot.12 Badjao St. corner Ivatan Amity Village Phase 2 San Jose Rodriguez Rizal 1860"
+      }
+    },
+    {
+      "slug": "grand-hyatt-manila",
+      "businessName": "Grand Hyatt Manila",
+      "industry": "Luxury hotel / hospitality",
+      "contact": {
+        "name": "Grand Hyatt Manila",
+        "email": "manila.grand@hyatt.com",
+        "phone": "+63 2 8838 1234"
+      },
+      "quotation": {
+        "packageName": "Premium Business Website",
+        "packageScope": "One-page responsive luxury hotel marketing site only (rooms & dining highlights, gallery, FAQ, contact). Admin preview is a sample; production booking system priced separately.",
+        "quotedAmount": "₱18,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "7–10 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=grand-hyatt-manila"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Hotel booking & arrivals admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "8th Avenue corner 35th Street, Bonifacio Global City, Taguig, Philippines"
       }
     },
     {
@@ -984,6 +1050,39 @@
           "Leads",
           "Follow-ups",
           "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "st-lukes",
+      "businessName": "St. Luke's Medical Center",
+      "industry": "Private hospital / healthcare",
+      "contact": {
+        "name": "St. Luke's Medical Center",
+        "email": "productinfo@stlukes.com.ph",
+        "phone": "+63 2 8789 7700"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive hospital site only (institutes & services, gallery, FAQ, contact), basic SEO, Netlify hosting. Admin preview is a sample; production appointments system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=st-lukes"
+      },
+      "system": {
+        "type": "appointments",
+        "adminPath": "/admin/",
+        "label": "OPD & appointments admin",
+        "navPages": [
+          "Dashboard",
+          "Appointments",
+          "Schedule",
+          "Patients",
           "Settings"
         ]
       },

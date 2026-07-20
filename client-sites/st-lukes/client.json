@@ -1,0 +1,58 @@
+{
+  "businessName": "St. Luke's Medical Center",
+  "slug": "st-lukes",
+  "previewHost": "st-lukes.netlify.app",
+  "industry": "Private hospital / healthcare",
+  "deployedAt": "2026-07-20",
+  "sources": {
+    "facebook": "https://www.facebook.com/StLukesPH/",
+    "website": "https://www.stlukes.com.ph/",
+    "notes": "430K FB followers. Intro: Philippines' leading and most respected healthcare institution. Phones from FB: (02) 8-789-7700 (Global City) · (02) 8-723-0101 (Quezon City). Brand indigo #291f84 from stlukes.com.ph. Gallery/hero from official site banners (FB CDN download blocked in MCP workspace). Public emails: productinfo@stlukes.com.ph, customer.bgc@stlukes.com.ph, customer.qc@stlukes.com.ph."
+  },
+  "contact": {
+    "name": "St. Luke's Medical Center",
+    "email": "productinfo@stlukes.com.ph",
+    "emailAlt": "customer.bgc@stlukes.com.ph",
+    "emailQc": "customer.qc@stlukes.com.ph",
+    "phone": "+63 2 8789 7700",
+    "phoneQc": "+63 2 8723 0101",
+    "phoneExtension": "+63 2 8521 0020",
+    "address": "Quezon City · 279 E. Rodriguez Sr. Ave · Global City · Rizal Drive cor. 32nd St. & 5th Ave, Taguig"
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive hospital site only (institutes & services, gallery, FAQ, contact), basic SEO, Netlify hosting. Admin preview is a sample; production appointments system priced separately.",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=st-lukes"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "ready",
+    "cadence": null,
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "Public productinfo@stlukes.com.ph found. ASK before send. Website-only ₱15k; system sample separate."
+  },
+  "system": {
+    "type": "appointments",
+    "adminPath": "/admin/",
+    "label": "OPD & appointments admin",
+    "navPages": [
+      "Dashboard",
+      "Appointments",
+      "Schedule",
+      "Patients",
+      "Settings"
+    ],
+    "painHero": "Specialty clinics across Quezon City and Global City fill fast — see the OPD queue, consult rooms, and who's waiting before the next call stacks up."
+  }
+}

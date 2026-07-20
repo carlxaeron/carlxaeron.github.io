@@ -221,6 +221,24 @@ export const PREVIEW_SITES = [
     label: "Journey Woodblock Modular Cabinets",
     netlifySite: "journey-woodblock-ph",
   },
+  {
+    id: "cardinal-santos",
+    host: "cardinal-santos.netlify.app",
+    label: "Cardinal Santos Medical Center",
+    netlifySite: "cardinal-santos",
+  },
+  {
+    id: "st-lukes",
+    host: "st-lukes.netlify.app",
+    label: "St. Luke's Medical Center",
+    netlifySite: "st-lukes",
+  },
+  {
+    id: "grand-hyatt-manila",
+    host: "grand-hyatt-manila.netlify.app",
+    label: "Grand Hyatt Manila",
+    netlifySite: "grand-hyatt-manila",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

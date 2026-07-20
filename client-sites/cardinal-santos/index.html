@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cardinal Santos Medical Center — Caring for YOU like family. Leading hospital in Greenhills, San Juan for Cardiology, Oncology, Neurosurgery, Gastroenterology, and Rehab Medicine. Trunkline (02) 8727-0001." />
+  <title>Cardinal Santos Medical Center — Greenhills, San Juan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: "#1a0f10",
+              mid: "#8b1a1f",
+              accent: "#c41e3a",
+              light: "#f8f1f2",
+              soft: "#f0dfe2",
+              gold: "#c9a84c",
+            },
+          },
+          fontFamily: {
+            display: ["Cormorant Garamond", "Georgia", "serif"],
+            sans: ["Source Sans 3", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="embed-guard.js"></script>
+</head>
+<body class="font-sans text-gray-900 antialiased">
+  <div class="trust-strip bg-brand-dark py-2 text-center text-xs font-semibold tracking-wide text-brand-soft sm:text-sm">
+    Hospital · Always open · Greenhills West, San Juan · 267K Facebook followers
+  </div>
+
+  <header data-header class="sticky top-0 z-50 border-b border-brand-dark/10 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#" class="flex min-w-0 items-center gap-3 font-display text-lg font-bold text-brand-dark">
+        <img src="assets/logo.png" alt="" width="120" height="52" class="h-10 w-auto shrink-0 object-contain sm:h-11" />
+        <span class="hidden truncate sm:inline">Cardinal Santos Medical Center</span>
+        <span class="sm:hidden">CSMC</span>
+      </a>
+      <nav class="hidden items-center gap-5 text-sm font-medium text-brand-dark/80 md:flex" aria-label="Main">
+        <a href="#institutes" class="hover:text-brand-mid transition-colors">Institutes</a>
+        <a href="#packages" class="hover:text-brand-mid transition-colors">Packages</a>
+        <a href="#about" class="hover:text-brand-mid transition-colors">About</a>
+        <a href="#faq" class="hover:text-brand-mid transition-colors">FAQ</a>
+        <a href="#contact" class="rounded-full bg-brand-accent px-4 py-2 font-semibold text-white hover:brightness-110 transition">Contact</a>
+      </nav>
+      <button type="button" data-nav-toggle class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-dark/15 text-brand-dark md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="hidden flex-col border-t border-brand-dark/10 bg-white px-4 py-4 md:hidden">
+      <a href="#institutes" class="rounded-lg px-3 py-3 hover:bg-brand-light">Institutes</a>
+      <a href="#packages" class="rounded-lg px-3 py-3 hover:bg-brand-light">Packages</a>
+      <a href="#about" class="rounded-lg px-3 py-3 hover:bg-brand-light">About</a>
+      <a href="#faq" class="rounded-lg px-3 py-3 hover:bg-brand-light">FAQ</a>
+      <a href="#contact" class="mt-2 rounded-full bg-brand-accent px-4 py-3 text-center font-semibold text-white">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <section data-hero data-hero-three="particles" data-hero-three-object="stethoscope" data-hero-three-accent="cool" class="relative overflow-hidden bg-brand-dark text-white">
+      <div data-hero-bg class="hero-bg hero-bg--csmc absolute inset-0 origin-center will-change-transform"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
+      <div class="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+        <p data-hero-animate class="opacity-0 mb-3 text-xs font-semibold uppercase tracking-widest text-brand-gold">Greenhills West · San Juan City</p>
+        <h1 data-hero-animate class="opacity-0 font-display max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-[3.4rem]">Cardinal Santos Medical Center</h1>
+        <p data-hero-animate class="opacity-0 mt-5 max-w-xl text-lg text-white/90">Caring for YOU like family — a leading hospital for Cardiology, Oncology, Neurosurgery, Gastroenterology, and Rehabilitation Medicine.</p>
+        <div data-hero-animate class="opacity-0 mt-8 flex flex-wrap gap-3">
+          <a data-hero-cta href="#contact" class="rounded-full bg-brand-accent px-6 py-3 font-semibold text-white hover:brightness-110 transition">Get directions &amp; contact</a>
+          <a data-hero-cta href="tel:+63287270001" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Trunkline (02) 8727-0001</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="institutes" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark sm:text-4xl" data-reveal>Centers of Excellence</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>Flagship institutes patients and families look for when they need specialized care in Metro Manila.</p>
+        <div data-filter class="mt-8">
+          <div class="flex flex-wrap gap-2">
+            <button type="button" data-filter-btn="all" class="filter-active rounded-full bg-brand-mid px-4 py-2 text-sm text-white" aria-pressed="true">All</button>
+            <button type="button" data-filter-btn="heart" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Heart &amp; vessels</button>
+            <button type="button" data-filter-btn="neuro" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Brain &amp; spine</button>
+            <button type="button" data-filter-btn="cancer" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Cancer</button>
+            <button type="button" data-filter-btn="recovery" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Recovery</button>
+          </div>
+          <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <article data-filter-item data-categories="heart,all" data-reveal class="institute-card border-t-4 border-brand-accent bg-brand-light/80 p-6">
+              <h3 class="font-semibold text-brand-dark">Cardiovascular Institute</h3>
+              <p class="mt-2 text-sm text-gray-600">Center of Excellence for heart care — diagnostics, intervention, and coordinated cardiac pathways.</p>
+            </article>
+            <article data-filter-item data-categories="neuro,all" data-reveal class="institute-card border-t-4 border-brand-accent bg-brand-light/80 p-6">
+              <h3 class="font-semibold text-brand-dark">Brain and Spine Institute</h3>
+              <p class="mt-2 text-sm text-gray-600">Neurosurgery and spine expertise with imaging and multidisciplinary support under one roof.</p>
+            </article>
+            <article data-filter-item data-categories="cancer,all" data-reveal class="institute-card border-t-4 border-brand-accent bg-brand-light/80 p-6">
+              <h3 class="font-semibold text-brand-dark">Cancer Center</h3>
+              <p class="mt-2 text-sm text-gray-600">Oncology care designed around patients and families — consults, treatment planning, and follow-up.</p>
+            </article>
+            <article data-filter-item data-categories="heart,all" data-reveal class="institute-card border-t-4 border-brand-gold bg-brand-light/80 p-6">
+              <h3 class="font-semibold text-brand-dark">GI Endoscopy Center</h3>
+              <p class="mt-2 text-sm text-gray-600">Prof. Sol Z. Alvarez Center for Digestive Diseases &amp; Gastrointestinal Endoscopy.</p>
+            </article>
+            <article data-filter-item data-categories="recovery,all" data-reveal class="institute-card border-t-4 border-brand-gold bg-brand-light/80 p-6">
+              <h3 class="font-semibold text-brand-dark">Sports Medicine Institute</h3>
+              <p class="mt-2 text-sm text-gray-600">Injury assessment, therapy, and return-to-activity programs for athletes and active adults.</p>
+            </article>
+            <article data-filter-item data-categories="recovery,all" data-reveal class="institute-card border-t-4 border-brand-gold bg-brand-light/80 p-6">
+              <h3 class="font-semibold text-brand-dark">Rehabilitation Medicine</h3>
+              <p class="mt-2 text-sm text-gray-600">Physiatry-led rehab for recovery after illness, surgery, or neurological events.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="packages" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark sm:text-4xl" data-reveal>Medical &amp; surgical packages</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>Sample package categories from CSMC — confirm current inclusions and rates with Admissions or Marketing.</p>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-reveal>
+          <div class="bg-white p-5 shadow-sm ring-1 ring-brand-dark/5">
+            <p class="text-xs font-semibold uppercase tracking-wider text-brand-mid">Heart</p>
+            <p class="mt-1 font-semibold text-brand-dark">Cardiac packages</p>
+          </div>
+          <div class="bg-white p-5 shadow-sm ring-1 ring-brand-dark/5">
+            <p class="text-xs font-semibold uppercase tracking-wider text-brand-mid">Ortho</p>
+            <p class="mt-1 font-semibold text-brand-dark">Orthopedic packages</p>
+          </div>
+          <div class="bg-white p-5 shadow-sm ring-1 ring-brand-dark/5">
+            <p class="text-xs font-semibold uppercase tracking-wider text-brand-mid">Neuro</p>
+            <p class="mt-1 font-semibold text-brand-dark">Neurosurgery packages</p>
+          </div>
+          <div class="bg-white p-5 shadow-sm ring-1 ring-brand-dark/5">
+            <p class="text-xs font-semibold uppercase tracking-wider text-brand-mid">GI</p>
+            <p class="mt-1 font-semibold text-brand-dark">Endoscopy packages</p>
+          </div>
+          <div class="bg-white p-5 shadow-sm ring-1 ring-brand-dark/5">
+            <p class="text-xs font-semibold uppercase tracking-wider text-brand-mid">Wellness</p>
+            <p class="mt-1 font-semibold text-brand-dark">Executive check-up</p>
+          </div>
+          <div class="bg-white p-5 shadow-sm ring-1 ring-brand-dark/5">
+            <p class="text-xs font-semibold uppercase tracking-wider text-brand-mid">Maternity</p>
+            <p class="mt-1 font-semibold text-brand-dark">Maternity packages</p>
+          </div>
+          <div class="bg-white p-5 shadow-sm ring-1 ring-brand-dark/5">
+            <p class="text-xs font-semibold uppercase tracking-wider text-brand-mid">Surgery</p>
+            <p class="mt-1 font-semibold text-brand-dark">Robotic surgery</p>
+          </div>
+          <div class="bg-white p-5 shadow-sm ring-1 ring-brand-dark/5">
+            <p class="text-xs font-semibold uppercase tracking-wider text-brand-mid">Allied</p>
+            <p class="mt-1 font-semibold text-brand-dark">Medical allied services</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark sm:text-4xl" data-reveal>Inside CSMC</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>Institutes and campus moments from Cardinal Santos Medical Center.</p>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-reveal>
+          <img src="assets/project-01.jpg" alt="Cardiovascular Institute at Cardinal Santos Medical Center" width="1000" height="855" class="h-56 w-full object-cover sm:h-64" loading="lazy" />
+          <img src="assets/project-02.jpg" alt="Brain and Spine Institute" width="1185" height="775" class="h-56 w-full object-cover sm:h-64" loading="lazy" />
+          <img src="assets/project-03.jpg" alt="Cancer Center" width="1000" height="855" class="h-56 w-full object-cover sm:h-64" loading="lazy" />
+          <img src="assets/project-04.jpg" alt="Sports Medicine Institute" width="1163" height="775" class="h-56 w-full object-cover sm:h-64" loading="lazy" />
+          <img src="assets/project-05.jpg" alt="Rehabilitation Medicine" width="1000" height="855" class="h-56 w-full object-cover sm:h-64" loading="lazy" />
+          <img src="assets/hero-cover.jpg" alt="Cardinal Santos Medical Center facility" width="2048" height="1365" class="h-56 w-full object-cover sm:h-64" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
+        <div>
+          <h2 class="font-display text-3xl font-bold text-brand-dark sm:text-4xl" data-reveal>About CSMC</h2>
+          <p class="mt-4 text-gray-600" data-reveal>
+            Despite being destroyed by heavy artillery after World War II, Cardinal Santos Medical Center — formerly St. Paul’s Hospital of Manila — now stands as one of the country’s leading hospitals specializing in Cardiology, Oncology, Neurosurgery, Gastroenterology, and Rehabilitation Medicine.
+          </p>
+          <p class="mt-4 text-gray-600" data-reveal>
+            CSMC is also known for Pediatrics, Obstetrics and Gynecology, Pulmonary Medicine, Nephrology, Urology, and Minimally Invasive Surgery — serving families from Greenhills and across Metro Manila.
+          </p>
+        </div>
+        <div data-reveal class="relative overflow-hidden bg-brand-dark">
+          <img src="assets/hero-hospital.jpg" alt="Cardinal Santos Medical Center campus highlight" width="2048" height="779" class="h-64 w-full object-cover opacity-90 sm:h-80" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/90 to-transparent"></div>
+          <p class="absolute bottom-4 left-4 right-4 text-sm font-medium text-white">10 Wilson St., Greenhills West, San Juan City</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark sm:text-4xl" data-reveal>FAQ</h2>
+        <div class="mt-8 space-y-3" data-accordion>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              Where is Cardinal Santos Medical Center?
+              <span class="text-brand-mid" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              10 Wilson St., Greenhills West, San Juan City, Metro Manila 1502 — near Greenhills Shopping Center.
+            </div>
+          </div>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              How do I call the hospital?
+              <span class="text-brand-mid" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              Trunkline: (02) 8727-0001. For marketing inquiries: marketing@csmc.ph. See the contact directory on cardinalsantos.com.ph for department lines.
+            </div>
+          </div>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              Are you open 24 hours?
+              <span class="text-brand-mid" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              The Facebook page lists the hospital as always open. For a specific institute, outpatient clinic, or package schedule, call ahead to confirm.
+            </div>
+          </div>
+          <div data-accordion-item data-reveal class="border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">
+              Where can I find doctors and results?
+              <span class="text-brand-mid" aria-hidden="true">+</span>
+            </button>
+            <div data-accordion-panel class="hidden px-5 pb-4 text-sm text-gray-600">
+              Use Find a Doctor, Care Consult, and Get Results on the official site cardinalsantos.com.ph — or call the trunkline for guidance.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-brand-dark py-16 text-white sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold sm:text-4xl" data-reveal>Contact</h2>
+        <p class="mt-2 max-w-xl text-white/80" data-reveal>Your health is our top priority — reach Admissions, Marketing, or the trunkline for directions and appointments.</p>
+        <div class="mt-8 grid gap-8 lg:grid-cols-2">
+          <div class="space-y-4 text-sm sm:text-base" data-reveal>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-gold">Trunkline</span>
+              <a href="tel:+63287270001" class="text-lg font-semibold hover:underline">(02) 8727-0001</a>
+            </p>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-gold">Email</span>
+              <a href="mailto:marketing@csmc.ph" class="hover:underline">marketing@csmc.ph</a>
+              <span class="block text-white/70">Alt: <a href="mailto:productinfo@csmc.ph" class="hover:underline">productinfo@csmc.ph</a></span>
+            </p>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-gold">Address</span>
+              10 Wilson St., Greenhills West<br />
+              San Juan City, Metro Manila 1502
+            </p>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-gold">Facebook</span>
+              <a href="https://www.facebook.com/CardinalSantos/" class="hover:underline" rel="noopener noreferrer" target="_blank">facebook.com/CardinalSantos</a>
+            </p>
+            <p>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-brand-gold">Website</span>
+              <a href="https://cardinalsantos.com.ph/" class="hover:underline" rel="noopener noreferrer" target="_blank">cardinalsantos.com.ph</a>
+            </p>
+          </div>
+          <div data-reveal class="border border-white/15 bg-white/5 p-6">
+            <p class="font-display text-xl font-semibold">Caring for YOU like family</p>
+            <p class="mt-3 text-sm text-white/80">This quotation sample shows how CSMC can present institutes, packages, and contact paths clearly on desktop and mobile — alongside a browsable appointments admin demo.</p>
+            <a href="https://www.facebook.com/CardinalSantos/" class="mt-6 inline-flex rounded-full bg-brand-accent px-5 py-3 text-sm font-semibold text-white hover:brightness-110 transition" rel="noopener noreferrer" target="_blank">Message on Facebook</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-brand-dark/10 bg-white py-8 text-center text-sm text-gray-500">
+    <p>© <span id="y"></span> Cardinal Santos Medical Center · San Juan City</p>
+    <p class="mt-1">Quotation sample by <a href="https://carlmanuel.com" class="text-brand-mid hover:underline">Carl Louis Manuel</a></p>
+  </footer>
+
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+  <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
+</body>
+</html>

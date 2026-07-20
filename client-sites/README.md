@@ -50,6 +50,9 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Taguig City General Hospital](#taguig-city-general-hospital) | `taguig-city-general-hospital` | Government hospital / public healthcare | appointments | [Preview](https://carlmanuel.com/?preview=taguig-city-general-hospital) | 2026-07-18 |
 | [The Lakehouse Taguig](#the-lakehouse-taguig) | `the-lakehouse-taguig` | Hotel resort / Laguna Lake staycation | booking | [Preview](https://carlmanuel.com/?preview=the-lakehouse-taguig) | 2026-07-18 |
 | [Journey Woodblock Modular Cabinets](#journey-woodblock-modular-cabinets) | `journey-woodblock-ph` | Cabinetry / modular furniture / CNC woodworking | leads | [Preview](https://carlmanuel.com/?preview=journey-woodblock-ph) | 2026-07-18 |
+| [Cardinal Santos Medical Center](#cardinal-santos-medical-center) | `cardinal-santos` | Hospital / healthcare | appointments | [Preview](https://carlmanuel.com/?preview=cardinal-santos) | 2026-07-20 |
+| [St. Luke's Medical Center](#st-lukes-medical-center) | `st-lukes` | Private hospital / healthcare | appointments | [Preview](https://carlmanuel.com/?preview=st-lukes) | 2026-07-20 |
+| [Grand Hyatt Manila](#grand-hyatt-manila) | `grand-hyatt-manila` | Luxury hotel / hospitality | booking | [Preview](https://carlmanuel.com/?preview=grand-hyatt-manila) | 2026-07-20 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -685,6 +688,64 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Hero 3D** | Motion + warm particles + **`data-hero-three-object="woodblock"`** featured carved block (shared `_template/hero-three.js`) |
 | **Package** | Starter Business Website · **₱15,000** · 5–7 days · 50% upfront |
 | **Outreach** | info@journeywoodblock.com — drafts ready · **ask before send** |
+
+---
+
+### Cardinal Santos Medical Center
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/cardinal-santos/` |
+| **Netlify site** | `cardinal-santos` |
+| **Preview host** | `cardinal-santos.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=cardinal-santos |
+| **Contact** | marketing@csmc.ph · productinfo@csmc.ph · +63 2 8727 0001 |
+| **Address** | 10 Wilson St., Greenhills West, San Juan City, Metro Manila 1502 |
+| **Category** | Hospital · Always open · 267K FB followers · verified |
+| **Source** | [Facebook](https://www.facebook.com/CardinalSantos/) · [cardinalsantos.com.ph](https://cardinalsantos.com.ph/) |
+| **System** | appointments · Hospital appointments admin · painHero: institute backlog at Greenhills front desk |
+| **Hero 3D** | Motion + cool particles + **`data-hero-three-object="stethoscope"`** |
+| **Package** | Business Website · **₱18,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
+| **Outreach** | marketing@csmc.ph — drafts ready · **ask before send** |
+
+---
+
+### St. Luke's Medical Center
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/st-lukes/` |
+| **Netlify site** | `st-lukes` |
+| **Preview host** | `st-lukes.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=st-lukes |
+| **Contact** | productinfo@stlukes.com.ph · customer.bgc@stlukes.com.ph · +63 2 8789 7700 (GC) · +63 2 8723 0101 (QC) |
+| **Address** | QC · 279 E. Rodriguez Sr. Ave · Global City · Rizal Drive cor. 32nd St. & 5th Ave, Taguig |
+| **Category** | Hospital · 430K FB followers · JCI-accredited · Quezon City & Global City |
+| **Source** | [Facebook](https://www.facebook.com/StLukesPH/) · [stlukes.com.ph](https://www.stlukes.com.ph/) |
+| **System** | appointments · OPD & appointments admin · painHero: specialty clinics across QC & Global City |
+| **Hero 3D** | Motion + cool particles + **`data-hero-three-object="stethoscope"`** · brand indigo `#291f84` |
+| **Package** | Starter Business Website · **₱15,000** *(website only; ₱18k fuller option)* · 5–7 days · 50% upfront · admin sample priced separately |
+| **Outreach** | productinfo@stlukes.com.ph — drafts ready · **ask before send** |
+
+---
+
+### Grand Hyatt Manila
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/grand-hyatt-manila/` |
+| **Netlify site** | `grand-hyatt-manila` |
+| **Preview host** | `grand-hyatt-manila.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=grand-hyatt-manila |
+| **Contact** | manila.grand@hyatt.com · +63 2 8838 1234 |
+| **Address** | 8th Avenue corner 35th Street, Bonifacio Global City, Taguig |
+| **Category** | Luxury hotel · 80K FB followers · 96% recommend (24,950 reviews) · Always open · 461 rooms |
+| **Source** | [Facebook](https://www.facebook.com/grandhyattmanilaph/) · [Hyatt](https://www.hyatt.com/grand-hyatt/en-US/mangh-grand-hyatt-manila) |
+| **System** | booking · Hotel booking & arrivals admin · painHero: room blocks & banquet inquiries on Messenger/email |
+| **Hero 3D** | Motion + champagne particles + **`data-hero-three-object="spa"`** (Illume Spa) · charcoal/gold luxury palette |
+| **Assets** | Cover 2048×1638 + logo 386×386 + dining 1365×2048×2 + tower crops from cover |
+| **Package** | Premium Business Website · **₱18,000** *(website only)* · 7–10 days · 50% upfront · admin sample priced separately |
+| **Outreach** | manila.grand@hyatt.com — drafts ready · **ask before send** · cadence **3d1w** after yes |
 
 ---
 
