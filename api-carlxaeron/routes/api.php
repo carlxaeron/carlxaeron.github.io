@@ -7,36 +7,37 @@ use App\Http\Controllers\Api\PortfolioApiController;
 use App\Http\Controllers\Api\ServiceAgreementController;
 use Illuminate\Support\Facades\Route;
 
-// Mirror hosting-php rate limits (maxAttempts,decayMinutes) for future Laravel cutover.
+// Per-route named limiters (AppServiceProvider) — do not use bare throttle:max,decay
+// (that shares one IP key across every throttled route).
 Route::get('/health', [PortfolioApiController::class, 'health']);
 Route::post('/trackVisit', [PortfolioApiController::class, 'trackVisit'])
-    ->middleware('throttle:120,1');
+    ->middleware('throttle:trackVisit');
 Route::post('/previewFeedback', [PortfolioApiController::class, 'previewFeedback'])
-    ->middleware('throttle:30,60');
+    ->middleware('throttle:previewFeedback');
 Route::get('/analyticsSummary', [PortfolioApiController::class, 'analyticsSummary'])
-    ->middleware('throttle:60,1');
+    ->middleware('throttle:analyticsSummary');
 Route::get('/content/{section}', [PortfolioApiController::class, 'content'])
-    ->middleware('throttle:120,1');
+    ->middleware('throttle:content');
 Route::post('/contact', [PortfolioApiController::class, 'contact'])
-    ->middleware('throttle:5,60');
+    ->middleware('throttle:contact');
 Route::post('/quotation', [PortfolioApiController::class, 'quotation'])
-    ->middleware('throttle:5,60');
+    ->middleware('throttle:quotation');
 Route::post('/outreachSchedule', [OutreachController::class, 'schedule'])
-    ->middleware('throttle:60,60');
+    ->middleware('throttle:outreach');
 Route::post('/outreachPause', [OutreachController::class, 'pause'])
-    ->middleware('throttle:60,60');
+    ->middleware('throttle:outreach');
 Route::post('/pushNotifyAdmins', [OutreachController::class, 'pushNotify'])
-    ->middleware('throttle:60,60');
+    ->middleware('throttle:outreach');
 
 Route::get('/agreements/{token}', [ServiceAgreementController::class, 'publicShow'])
-    ->middleware('throttle:60,1');
+    ->middleware('throttle:agreementsShow');
 Route::post('/agreements/{token}/sign', [ServiceAgreementController::class, 'publicSign'])
-    ->middleware('throttle:10,60');
+    ->middleware('throttle:agreementsSign');
 
 Route::post('/admin/login', [AdminController::class, 'login'])
-    ->middleware('throttle:20,5');
+    ->middleware('throttle:adminLogin');
 
-Route::middleware('auth:sanctum')->group(function (): void {
+Route::middleware(['auth:sanctum', 'throttle:adminApi'])->group(function (): void {
     Route::post('/admin/logout', [AdminController::class, 'logout']);
     Route::get('/admin/summary', [AdminController::class, 'summary']);
     Route::get('/admin/contacts', [AdminController::class, 'contacts']);

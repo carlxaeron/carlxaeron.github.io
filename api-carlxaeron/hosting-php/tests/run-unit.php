@@ -243,9 +243,13 @@ assert_true(rate_limit_check('t', 2, 60, '1.2.3.4', $tmpdir), '1st allow');
 assert_true(rate_limit_check('t', 2, 60, '1.2.3.4', $tmpdir), '2nd allow');
 assert_true(!rate_limit_check('t', 2, 60, '1.2.3.4', $tmpdir), '3rd blocked');
 assert_true(rate_limit_check('t', 2, 60, '9.9.9.9', $tmpdir), 'other IP still allowed');
+assert_true(!rate_limit_check('t', 2, 60, '1.2.3.4', $tmpdir), 'same bucket still blocked');
+assert_true(rate_limit_check('previewFeedback', 2, 60, '1.2.3.4', $tmpdir), 'other route bucket still allowed');
+assert_true(rate_limit_check('contact', 2, 60, '1.2.3.4', $tmpdir), 'contact bucket independent of trackVisit');
 assert_same([8, 3600], rate_limit_config('contact'), 'contact default 8/hour');
 assert_same([120, 60], rate_limit_config('trackVisit'), 'trackVisit default 120/min');
 assert_same([30, 3600], rate_limit_config('assistant'), 'assistant default 30/hour');
+assert_same([30, 3600], rate_limit_config('previewFeedback'), 'previewFeedback default 30/hour');
 foreach (glob($tmpdir . '/*') ?: [] as $f) {
     @unlink($f);
 }

@@ -34,7 +34,7 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 
 | Method | Path | Auth | Role |
 |--------|------|------|------|
-| POST | `/admin/login` | public + throttle 5/min | email/password → `{ token, user }` |
+| POST | `/admin/login` | public + named throttle `adminLogin` (20/5min) | email/password → `{ token, user }` |
 | POST | `/admin/logout` | `auth:sanctum` | revoke current token |
 | GET | `/admin/summary` | sanctum | unmasked analytics (raw preview slugs) |
 | GET | `/admin/contacts` | sanctum | paginated `contact` (`?perPage=25`) |
@@ -99,6 +99,8 @@ Live Stellar: **Laravel** serves public API routes including `POST /outreachSche
 | Outreach | `OUTREACH_SECRET` + outreach rate bucket |
 
 Forms / Insights stay public to the SPA (browser sends Origin). Defaults: contact/quote 8/h, visits 120/min, feedback 30/h, summary 60/min, outreach 60/h.
+
+**Laravel rate limits (live):** named limiters in `AppServiceProvider` + `throttle:{name}` on routes — **never** bare `throttle:max,decay` (that shares one IP key across all routes and lets `trackVisit` 429 unrelated APIs). Buckets: `trackVisit` 120/min, `previewFeedback` 30/h, `analyticsSummary` 60/min, `content` 120/min, `contact`/`quotation` 5/h each, `outreach` 60/h (schedule/pause/pushNotify), `agreementsShow` 60/min, `agreementsSign` 10/h, `adminLogin` 20/5min, `adminApi` 120/min per user.
 
 **`POST /quotation` body** (portfolio Get a Quote): `name`, `email`, `details` required; optional `company`, `phone`, `projectType`, `budgetRange`, `currency` (`PHP`|`USD`), `timeline`, `services[]`. Persisted to `quotations.currency` (nullable). Before first deploy with currency: run `php hosting-php/scripts/migrate-quotations-currency.php` on Stellar and `php artisan migrate` for Laravel.
 
