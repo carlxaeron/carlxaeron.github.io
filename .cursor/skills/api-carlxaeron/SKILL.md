@@ -38,7 +38,7 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 | POST | `/admin/logout` | `auth:sanctum` | revoke current token |
 | GET | `/admin/summary` | sanctum | unmasked analytics (raw preview slugs) — includes `totalAgrees` |
 | GET | `/admin/analytics` | sanctum | detailed analytics (`?days=7\|14\|30\|90`) — visits by day/section, feedback, devices, outreach funnel |
-| GET | `/admin/analytics/visits` | sanctum | paginated visit detail rows (`?days=` `?page=` `?perPage=` `?eventType=` `?device=`) — browser/OS parsed from stored `user_agent`; **ip_hash truncated only** (raw IP never stored) |
+| GET | `/admin/analytics/visits` | sanctum | paginated visit detail rows (`?days=` `?page=` `?perPage=` `?eventType=` `?device=`) — browser/OS from `user_agent`; returns raw `ipAddress` + truncated `ipHash` |
 | GET | `/admin/contacts` | sanctum | paginated `contact` (`?perPage=25`) |
 | GET | `/admin/quotations` | sanctum | paginated `quotations` |
 | GET | `/admin/outreach` | sanctum | list `outreach_jobs` |

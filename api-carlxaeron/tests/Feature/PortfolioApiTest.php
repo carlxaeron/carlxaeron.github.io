@@ -40,6 +40,8 @@ class PortfolioApiTest extends TestCase
             'sessionId' => 's1',
             'eventType' => 'preview_view',
             'previewSlug' => 'demo',
+        ], [
+            'X-Forwarded-For' => '203.0.113.50, 10.0.0.1',
         ])
             ->assertOk()
             ->assertJsonPath('message', 'Visit recorded');
@@ -49,7 +51,12 @@ class PortfolioApiTest extends TestCase
             'session_id' => 's1',
             'event_type' => 'preview_view',
             'preview_slug' => 'demo',
+            'ip_address' => '203.0.113.50',
         ]);
+
+        $visit = Visit::query()->where('visitor_id', 'v1')->firstOrFail();
+        $this->assertNotNull($visit->ip_hash);
+        $this->assertSame(16, strlen((string) $visit->ip_hash));
     }
 
     public function test_track_visit_preview_view_triggers_admin_push_once_per_session(): void

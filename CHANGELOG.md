@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.0.89] — 2026-07-21
+
+### Added
+- **Admin → Analytics → Recent visits** — raw **IP** column (alongside truncated `ip_hash`)
+- **API** — `visits.ip_address` stored on `trackVisit`; `GET /admin/analytics/visits` returns `ipAddress`
+
+### Changed
+- Visit privacy: raw IP kept for admin review; salted `ip_hash` still used for exclusion matching
+
 ## [3.0.88] — 2026-07-21
 
 ### Added

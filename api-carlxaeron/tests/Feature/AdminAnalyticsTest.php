@@ -155,7 +155,7 @@ class AdminAnalyticsTest extends TestCase
             ->assertJsonPath('data.rangeDays', 30);
     }
 
-    public function test_analytics_visits_returns_detail_rows_with_hashed_ip_only(): void
+    public function test_analytics_visits_returns_detail_rows_with_raw_ip_and_hash(): void
     {
         Visit::query()->create([
             'visitor_id' => 'visitor-aaaaaaaa',
@@ -169,6 +169,7 @@ class AdminAnalyticsTest extends TestCase
             'language' => 'en-US',
             'device' => 'Desktop',
             'ip_hash' => 'deadbeefcafebabe',
+            'ip_address' => '203.0.113.10',
             'created_at' => now()->subHour(),
         ]);
 
@@ -183,6 +184,7 @@ class AdminAnalyticsTest extends TestCase
             'user_agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1',
             'device' => 'Mobile',
             'ip_hash' => '1111222233334444',
+            'ip_address' => '198.51.100.22',
             'created_at' => now()->subMinutes(10),
         ]);
 
@@ -197,18 +199,19 @@ class AdminAnalyticsTest extends TestCase
         $this->getJson('/admin/analytics/visits?days=30&perPage=10')
             ->assertOk()
             ->assertJsonPath('data.pagination.total', 2)
-            ->assertJsonPath('data.ipPrivacy', 'hashed')
+            ->assertJsonPath('data.ipPrivacy', 'raw_and_hashed')
             ->assertJsonPath('data.items.0.eventType', 'section_view')
             ->assertJsonPath('data.items.0.browser', 'Safari')
             ->assertJsonPath('data.items.0.os', 'iOS')
             ->assertJsonPath('data.items.0.device', 'Mobile')
+            ->assertJsonPath('data.items.0.ipAddress', '198.51.100.22')
             ->assertJsonPath('data.items.0.ipHash', '11112222…')
             ->assertJsonPath('data.items.1.previewSlug', 'jk-construction')
             ->assertJsonPath('data.items.1.browser', 'Chrome')
             ->assertJsonPath('data.items.1.os', 'Windows')
             ->assertJsonPath('data.items.1.referrer', 'facebook.com')
+            ->assertJsonPath('data.items.1.ipAddress', '203.0.113.10')
             ->assertJsonPath('data.items.1.ipHash', 'deadbeef…')
-            ->assertJsonMissingPath('data.items.0.ip')
             ->assertJsonStructure([
                 'data' => [
                     'items' => [
@@ -222,6 +225,7 @@ class AdminAnalyticsTest extends TestCase
                             'browser',
                             'os',
                             'referrer',
+                            'ipAddress',
                             'ipHash',
                         ],
                     ],

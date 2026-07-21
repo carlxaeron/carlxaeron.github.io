@@ -57,6 +57,8 @@ class PortfolioApiController extends Controller
         $eventType = substr(trim((string) $request->input('eventType', 'pageview')), 0, 32);
         $previewSlug = $this->nullableString($request->input('previewSlug'), 64);
         $sessionKey = substr($sessionId, 0, 64);
+        $clientIp = $this->analytics->clientIp();
+        $ipAddress = $clientIp !== '' ? substr($clientIp, 0, 45) : null;
 
         Visit::query()->create([
             'visitor_id' => substr($visitorId, 0, 64),
@@ -71,7 +73,8 @@ class PortfolioApiController extends Controller
             'screen_json' => $request->input('screen'),
             'viewport_json' => $request->input('viewport'),
             'device' => $this->analytics->parseDevice($userAgent),
-            'ip_hash' => $this->analytics->hashIp($this->analytics->clientIp()),
+            'ip_hash' => $this->analytics->hashIp($clientIp),
+            'ip_address' => $ipAddress,
             'created_at' => now(),
         ]);
 

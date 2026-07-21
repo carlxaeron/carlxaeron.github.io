@@ -22,6 +22,7 @@ class Visit extends Model
         'viewport_json',
         'device',
         'ip_hash',
+        'ip_address',
         'created_at',
     ];
 

@@ -377,7 +377,7 @@ class AnalyticsSummaryService
     /**
      * Admin Analytics — paginated recent visit events (detail rows).
      *
-     * Privacy: only salted truncated `ip_hash` is stored/returned — never raw IP.
+     * Returns raw `ipAddress` (when stored) plus truncated salted `ipHash`.
      *
      * @return array<string, mixed>
      */
@@ -426,6 +426,7 @@ class AnalyticsSummaryService
             'language',
             'device',
             'ip_hash',
+            'ip_address',
             'created_at',
         ]);
 
@@ -439,6 +440,7 @@ class AnalyticsSummaryService
             $slug = trim((string) ($row->preview_slug ?? ''));
             $section = trim((string) ($row->section ?? ''));
             $ref = trim((string) ($row->referrer ?? ''));
+            $ip = trim((string) ($row->ip_address ?? ''));
 
             $items[] = [
                 'createdAt' => $row->created_at?->toIso8601String(),
@@ -456,6 +458,7 @@ class AnalyticsSummaryService
                 'os' => $this->analytics->parseOs($ua),
                 'referrer' => $ref !== '' ? $this->shortReferrer($ref) : null,
                 'language' => $row->language,
+                'ipAddress' => $ip !== '' ? $ip : null,
                 'ipHash' => $this->analytics->formatIpHash($row->ip_hash),
             ];
         }
@@ -478,8 +481,8 @@ class AnalyticsSummaryService
                 'eventType' => $eventFilter,
                 'device' => $deviceFilter,
             ],
-            'ipPrivacy' => 'hashed',
-            'privacyNote' => 'Raw IP addresses are not stored. Only a salted truncated hash (ip_hash) is kept and shown truncated.',
+            'ipPrivacy' => 'raw_and_hashed',
+            'privacyNote' => 'Raw IP is stored for admin review. A salted truncated hash (ip_hash) is also kept for exclusion matching.',
         ];
     }
 

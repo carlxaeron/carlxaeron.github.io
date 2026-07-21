@@ -305,13 +305,14 @@ function AnalyticsTab() {
               <th scope="col">Device</th>
               <th scope="col">Browser / OS</th>
               <th scope="col">Referrer</th>
+              <th scope="col">IP</th>
               <th scope="col">IP hash</th>
             </tr>
           </thead>
           <tbody>
             {visits.length === 0 ? (
               <tr>
-                <td colSpan={8} className="v3-admin-empty">
+                <td colSpan={9} className="v3-admin-empty">
                   {visitsLoading ? "Loading…" : "No visits in this range."}
                 </td>
               </tr>
@@ -328,7 +329,12 @@ function AnalyticsTab() {
                   <td>{visitClientLabel(row)}</td>
                   <td className="v3-admin-cell-clamp">{row.referrer || "Direct"}</td>
                   <td>
-                    <code className="v3-admin-code" title="Salted truncated hash — raw IP is not stored">
+                    <code className="v3-admin-code" title="Client IP from request (X-Forwarded-For aware)">
+                      {row.ipAddress || "—"}
+                    </code>
+                  </td>
+                  <td>
+                    <code className="v3-admin-code" title="Salted truncated hash (exclusion matching)">
                       {row.ipHash || "—"}
                     </code>
                   </td>

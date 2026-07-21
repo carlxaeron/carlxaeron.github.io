@@ -136,7 +136,7 @@ final class AnalyticsExclusion
     }
 
     /**
-     * Truncate stored ip_hash for admin display (raw IPs are never persisted).
+     * Truncate stored ip_hash for admin display (alongside raw ip_address when present).
      */
     public function formatIpHash(?string $ipHash): ?string
     {
