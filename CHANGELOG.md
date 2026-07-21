@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.91] — 2026-07-21
+
+### Changed
+- **Profile photo** — refreshed About avatar and OG/Twitter headshot (`/static/images/profile3.jpg`)
+
 ## [3.0.90] — 2026-07-21
 
 ### Added

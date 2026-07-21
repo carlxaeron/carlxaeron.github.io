@@ -19,7 +19,9 @@ describe("V3About", () => {
   test("renders profile avatar and bio", () => {
     render(<V3About isActive={true} />);
 
-    expect(screen.getByAltText("Carl Louis Manuel")).toBeInTheDocument();
+    const avatar = screen.getByAltText("Carl Louis Manuel");
+    expect(avatar).toBeInTheDocument();
+    expect(avatar).toHaveAttribute("src", "/static/images/profile3.jpg");
     expect(screen.getByText(/I'm Carl Louis Manuel/i)).toBeInTheDocument();
     expect(screen.getByText(/Years Experience/i)).toBeInTheDocument();
   });
