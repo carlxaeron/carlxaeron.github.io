@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.88] — 2026-07-21
+
+### Added
+- **Preview whitelist** — `sky-glass` (Sky Glass · Rodriguez Rizal) quotation demo (`?preview=` + client-sites + catalog)
+- **Preview whitelist** — `joyce-kim-resort` (Joyce Kim Resort · Balite, Rodriguez) quotation demo (`?preview=` + client-sites + catalog)
+
 ## [3.0.87] — 2026-07-21
 
 ### Added
