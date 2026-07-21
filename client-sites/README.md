@@ -59,6 +59,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Palms and Terraces](#palms-and-terraces) | `palms-and-terraces` | Public swimming pool / events venue · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=palms-and-terraces) | 2026-07-21 |
 | [Frances Teresa Garden — The Party Place](#frances-teresa-garden--the-party-place) | `frances-teresa-garden` | Party venue / garden event place · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=frances-teresa-garden) | 2026-07-21 |
 | [Sky Glass](#sky-glass) | `sky-glass` | Indoor pool / exclusive resort · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=sky-glass) | 2026-07-21 |
+| [Joyce Kim Resort](#joyce-kim-resort) | `joyce-kim-resort` | Hotel resort / day swim & staycation · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=joyce-kim-resort) | 2026-07-21 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -872,6 +873,26 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | Cover 2048×1536 + indoor pool promo 1448×1086 + neon logo wall + guest gallery via Chrome DevTools + signed fbcdn |
 | **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
 | **Outreach** | No email — Messenger/SMS drafts ready · **ask before send** · cadence **3d1w** after yes |
+
+---
+
+### Joyce Kim Resort
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/joyce-kim-resort/` |
+| **Netlify site** | `joyce-kim-resort` |
+| **Preview host** | `joyce-kim-resort.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=joyce-kim-resort |
+| **Contact** | jkimresort@gmail.com · 0917 657 5747 |
+| **Address** | Leal Compound, Brgy. Balite, Rodriguez, Philippines |
+| **Category** | Hotel resort · Day Time Swim 8 AM–4 PM · Dine-in / outdoor seating · ~3.3K FB · 84% recommend |
+| **Source** | [Facebook](https://www.facebook.com/joycekimresort/) |
+| **System** | booking · Booking & calendar admin · painHero: day-swim + overnight Messenger bookings |
+| **Hero 3D** | Motion + particles + **`data-hero-three-object="lakehouse"`** · lagoon green / sand gold |
+| **Assets** | Logo 959² + hero-venue 2048×1536 + gallery rooms/kitchen (1448–2048) via isolated Chrome CDP + FB Photos |
+| **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
+| **Outreach** | jkimresort@gmail.com — drafts ready · **ask before send** · cadence **3d1w** after yes |
 
 ---
 
