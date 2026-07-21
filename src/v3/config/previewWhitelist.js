@@ -251,6 +251,12 @@ export const PREVIEW_SITES = [
     label: "Merlita's Private Resort",
     netlifySite: "merlitas-private-resort",
   },
+  {
+    id: "cj-resort",
+    host: "cj-gomez-private-resort.netlify.app",
+    label: "CJ Gomez Private Resort",
+    netlifySite: "cj-gomez-private-resort",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

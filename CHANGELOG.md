@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.85] — 2026-07-21
+
+### Added
+- **Preview whitelist** — `cj-resort` (CJ Gomez Private Resort) quotation demo (`?preview=` + client-sites + catalog)
+
 ## [3.0.84] — 2026-07-21
 
 ### Added

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-21T03:03:58.912Z",
+  "generatedAt": "2026-07-21T03:43:14.324Z",
   "clients": [
     {
       "slug": "air-alex-resort",
@@ -263,6 +263,39 @@
       },
       "sources": {
         "address": ""
+      }
+    },
+    {
+      "slug": "cj-resort",
+      "businessName": "CJ Gomez Private Resort",
+      "industry": "Private resort / staycation venue",
+      "contact": {
+        "name": "CJ Gomez Private Resort",
+        "email": "cjgprivateresort@gmail.com",
+        "phone": "+63 919 358 8505"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive private-resort site only (amenities, gallery, packages, FAQ, contact). Admin preview is a sample; production booking system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=cj-resort"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Venue booking & calendar admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "1860 (Rodriguez, Rizal area — exact pin shared on booking)"
       }
     },
     {
@@ -794,6 +827,39 @@
       }
     },
     {
+      "slug": "merlitas-private-resort",
+      "businessName": "Merlita's Private Resort",
+      "industry": "Private resort / venue / staycation",
+      "contact": {
+        "name": "Merlita's Venue and Resort team",
+        "email": "",
+        "phone": "+63 949 563 1129"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (amenities, gallery, about, FAQ, contact). Admin preview is a sample; production booking system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=merlitas-private-resort"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Booking & calendar admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "220 E. Manuel St. Brgy. San Jose, Rodriguez, Philippines, 1860"
+      }
+    },
+    {
       "slug": "mphs-fairview",
       "businessName": "MPHS Mother of Perpetual Help Inc. Fairview",
       "industry": "K–12 school / nonprofit education",
@@ -890,6 +956,39 @@
       },
       "sources": {
         "address": "Block 1 Lot 5 Phase 4 Eastwood Greenview, San Isidro, Rodriguez, Rizal 1860"
+      }
+    },
+    {
+      "slug": "palms-and-terraces",
+      "businessName": "Palms and Terraces",
+      "industry": "Public swimming pool / events venue / staycation",
+      "contact": {
+        "name": "Palms and Terraces team",
+        "email": "palms.and.terraces@gmail.com",
+        "phone": ""
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (amenities, gallery, about, FAQ, contact). Admin preview is a sample; production booking system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=palms-and-terraces"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Booking & calendar admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Chico Street, Torres Subd., San Jose, Rodriguez, Philippines, 1850"
       }
     },
     {
@@ -1309,6 +1408,105 @@
         "type": "booking",
         "adminPath": "/admin/",
         "label": "Venue booking admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "your-slug",
+      "businessName": "Your Business Name",
+      "industry": "Local business",
+      "contact": {
+        "name": "Client Name",
+        "email": "client@example.com",
+        "phone": "+63 900 000 0000"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (contact section, basic SEO, Netlify hosting). Admin preview is a sample; production system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=your-slug"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Booking & calendar admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "your-slug",
+      "businessName": "Your Business Name",
+      "industry": "Local business",
+      "contact": {
+        "name": "Client Name",
+        "email": "client@example.com",
+        "phone": "+63 900 000 0000"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (contact section, basic SEO, Netlify hosting). Admin preview is a sample; production system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=your-slug"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Booking & calendar admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": ""
+      }
+    },
+    {
+      "slug": "your-slug",
+      "businessName": "Your Business Name",
+      "industry": "Local business",
+      "contact": {
+        "name": "Client Name",
+        "email": "client@example.com",
+        "phone": "+63 900 000 0000"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (contact section, basic SEO, Netlify hosting). Admin preview is a sample; production system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=your-slug"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Booking & calendar admin",
         "navPages": [
           "Dashboard",
           "Bookings",

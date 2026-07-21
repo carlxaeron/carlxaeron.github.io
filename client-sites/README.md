@@ -55,6 +55,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Grand Hyatt Manila](#grand-hyatt-manila) | `grand-hyatt-manila` | Luxury hotel / hospitality | booking | [Preview](https://carlmanuel.com/?preview=grand-hyatt-manila) | 2026-07-20 |
 | [Lucky Drive Inn Hotel](#lucky-drive-inn-hotel) | `lucky-drive-inn` | Drive-in hotel / inn · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=lucky-drive-inn) | 2026-07-21 |
 | [Merlita's Private Resort](#merlitas-private-resort) | `merlitas-private-resort` | Private resort / venue / staycation · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=merlitas-private-resort) | 2026-07-21 |
+| [CJ Gomez Private Resort](#cj-gomez-private-resort) | `cj-resort` | Private resort / staycation venue | booking | [Preview](https://carlmanuel.com/?preview=cj-resort) | 2026-07-21 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -788,6 +789,26 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | Cover 2048×1536 + logo 2048×2048 + venue/event gallery (~939–1074px ×4) via Chrome DevTools MCP inspect + signed fbcdn curl |
 | **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
 | **Outreach** | No email — Messenger/SMS/call drafts · ask how to reach |
+
+---
+
+### CJ Gomez Private Resort
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/cj-resort/` |
+| **Netlify site** | `cj-gomez-private-resort` |
+| **Preview host** | `cj-gomez-private-resort.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=cj-resort |
+| **Contact** | cjgprivateresort@gmail.com · +63 919 358 8505 |
+| **Address** | 1860 · Rodriguez, Rizal (exact pin shared on booking) |
+| **Category** | Local business · Private resort · special occasions · ~4.2K FB followers · tagline “feel like you're HOME” |
+| **Source** | [Facebook](https://www.facebook.com/CJresort/) |
+| **System** | booking · Venue booking & calendar admin · painHero: special-occasion big-group Messenger bookings |
+| **Hero 3D** | Motion + particles + **`data-hero-three-object="pooldeck"`** · forest green / warm gold |
+| **Assets** | Cover garden + lodge profile + gallery (960×960 ×5) via Chrome DevTools + signed fbcdn curl |
+| **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
+| **Outreach** | cjgprivateresort@gmail.com — drafts ready · **ask before send** · cadence **3d1w** after yes |
 
 ---
 
