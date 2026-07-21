@@ -60,6 +60,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Frances Teresa Garden — The Party Place](#frances-teresa-garden--the-party-place) | `frances-teresa-garden` | Party venue / garden event place · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=frances-teresa-garden) | 2026-07-21 |
 | [Sky Glass](#sky-glass) | `sky-glass` | Indoor pool / exclusive resort · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=sky-glass) | 2026-07-21 |
 | [Joyce Kim Resort](#joyce-kim-resort) | `joyce-kim-resort` | Hotel resort / day swim & staycation · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=joyce-kim-resort) | 2026-07-21 |
+| [Villa Apolonia Resort Hotel](#villa-apolonia-resort-hotel) | `villa-apolonia` | Hotel resort / day stay & overnight · San Mateo Rizal | booking | [Preview](https://carlmanuel.com/?preview=villa-apolonia) | 2026-07-21 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -893,6 +894,24 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | Logo 959² + hero-venue 2048×1536 + gallery rooms/kitchen (1448–2048) via isolated Chrome CDP + FB Photos |
 | **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
 | **Outreach** | jkimresort@gmail.com — drafts ready · **ask before send** · cadence **3d1w** after yes |
+
+### Villa Apolonia Resort Hotel
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/villa-apolonia/` |
+| **Netlify site** | `villa-apolonia` |
+| **Preview host** | `villa-apolonia.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=villa-apolonia |
+| **Contact** | newvarh@gmail.com · SMART 0968 306 6345 · PLDT (02) 8788 2475 |
+| **Address** | Maly-Maarang Road, Brgy. Maly, San Mateo, Rizal |
+| **Category** | Hotel resort · Always open · ~4.3K FB · 66% recommend · “The Perfect Hide-away” |
+| **Source** | [Facebook](https://www.facebook.com/VillaApoloniaResortHotel/) |
+| **System** | booking · Booking & calendar admin · painHero: room + day-stay Messenger bookings |
+| **Hero 3D** | Motion + particles + **`data-hero-three-object="lakehouse"`** · forest green / gold |
+| **Assets** | Logo 960² + hero 960×720 + gallery (800–1080) from FB Photos |
+| **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
+| **Outreach** | newvarh@gmail.com — drafts ready · **ask before send** · cadence **3d1w** after yes |
 
 ---
 

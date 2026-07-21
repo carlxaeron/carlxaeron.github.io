@@ -281,6 +281,18 @@ export const PREVIEW_SITES = [
     label: "Joyce Kim Resort",
     netlifySite: "joyce-kim-resort",
   },
+  {
+    id: "villa-apolonia",
+    host: "villa-apolonia.netlify.app",
+    label: "Villa Apolonia Resort Hotel",
+    netlifySite: "villa-apolonia",
+  },
+  {
+    id: "a-and-c-private-pool",
+    host: "a-and-c-private-pool.netlify.app",
+    label: "A and C Private Pool Resort",
+    netlifySite: "a-and-c-private-pool",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

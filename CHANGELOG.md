@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.90] — 2026-07-21
+
+### Added
+- **Preview whitelist** — `villa-apolonia` (Villa Apolonia Resort Hotel · Maly, San Mateo) quotation demo (`?preview=` + client-sites + catalog)
+
 ## [3.0.89] — 2026-07-21
 
 ### Added

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Villa Apolonia Resort Hotel — the perfect hide-away in Brgy. Maly, San Mateo. Day stays, overnight rooms, and warm hospitality." />
+  <title>Villa Apolonia Resort Hotel · San Mateo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: "#1a2f2b",
+              mid: "#2f6b5c",
+              accent: "#c9a227",
+              light: "#eef4f1",
+              mist: "#c5d9d2",
+            },
+          },
+          fontFamily: {
+            display: ["Cormorant Garamond", "Georgia", "serif"],
+            sans: ["Outfit", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="embed-guard.js"></script>
+</head>
+<body class="font-sans text-gray-900 antialiased">
+  <div class="trust-strip py-2 text-center text-xs font-semibold tracking-wide text-white sm:text-sm">
+    The Perfect Hide-away · Maly-Maarang Road, Brgy. Maly, San Mateo
+  </div>
+
+  <header data-header class="sticky top-0 z-50 border-b border-brand-dark/10 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#" class="flex min-w-0 items-center gap-2 font-display text-lg font-bold text-brand-dark">
+        <img src="assets/logo.jpg" alt="" width="40" height="40" class="h-10 w-10 shrink-0 rounded-lg object-cover ring-2 ring-brand-mid/20" />
+        <span class="hidden truncate sm:inline">Villa Apolonia</span>
+        <span class="sm:hidden">Apolonia</span>
+      </a>
+      <nav class="hidden items-center gap-5 text-sm font-medium text-brand-dark/80 md:flex" aria-label="Main">
+        <a href="#amenities" class="hover:text-brand-mid transition-colors">Amenities</a>
+        <a href="#gallery" class="hover:text-brand-mid transition-colors">Gallery</a>
+        <a href="#about" class="hover:text-brand-mid transition-colors">About</a>
+        <a href="#faq" class="hover:text-brand-mid transition-colors">FAQ</a>
+        <a href="#contact" class="rounded-full bg-brand-mid px-4 py-2 font-semibold text-white hover:brightness-110 transition">Book a stay</a>
+      </nav>
+      <button type="button" data-nav-toggle class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-dark/15 text-brand-dark md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="hidden flex-col border-t border-brand-dark/10 bg-white px-4 py-4 md:hidden" role="dialog" aria-label="Mobile navigation">
+      <a href="#amenities" class="rounded-lg px-3 py-3 hover:bg-brand-light">Amenities</a>
+      <a href="#gallery" class="rounded-lg px-3 py-3 hover:bg-brand-light">Gallery</a>
+      <a href="#about" class="rounded-lg px-3 py-3 hover:bg-brand-light">About</a>
+      <a href="#faq" class="rounded-lg px-3 py-3 hover:bg-brand-light">FAQ</a>
+      <a href="#contact" class="mt-2 rounded-full bg-brand-mid px-4 py-3 text-center font-semibold text-white">Book a stay</a>
+    </div>
+  </header>
+
+  <main>
+    <section data-hero data-hero-three="particles" data-hero-three-object="lakehouse" data-hero-three-accent="lake" class="relative overflow-hidden bg-brand-dark text-white">
+      <div data-hero-bg class="hero-bg hero-bg--apolonia absolute inset-0 origin-center will-change-transform"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
+      <div class="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+        <p data-hero-animate class="opacity-0 mb-3 text-xs font-semibold uppercase tracking-widest text-brand-accent">Hotel resort · San Mateo, Rizal</p>
+        <h1 data-hero-animate class="opacity-0 font-display max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-[3.35rem]">Villa Apolonia Resort Hotel</h1>
+        <p data-hero-animate class="opacity-0 mt-5 max-w-2xl text-lg text-white/85">The Perfect Hide-away — day stays and overnight rooms on Maly-Maarang Road, Brgy. Maly, for family gatherings and quiet getaways.</p>
+        <div data-hero-animate class="opacity-0 mt-8 flex flex-wrap gap-3">
+          <a data-hero-cta href="#contact" class="rounded-full bg-brand-accent px-6 py-3 font-semibold text-brand-dark hover:brightness-105 transition">Check availability</a>
+          <a data-hero-cta href="tel:+639683066345" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Call 0968 306 6345</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="amenities" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Amenities</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>A hotel-resort hideaway for day visits and overnight stays — built for San Mateo weekends with family or barkada.</p>
+        <div data-filter class="mt-8">
+          <div class="flex flex-wrap gap-2">
+            <button type="button" data-filter-btn="all" class="filter-active rounded-full bg-brand-mid px-4 py-2 text-sm text-white" aria-pressed="true">All</button>
+            <button type="button" data-filter-btn="day" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Day stay</button>
+            <button type="button" data-filter-btn="stay" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Overnight</button>
+          </div>
+          <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <article data-filter-item data-categories="day,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/40 p-6">
+              <h3 class="font-semibold text-brand-dark">Day stays</h3>
+              <p class="mt-2 text-sm text-gray-600">Come for the day — swim, rest, and gather without overnight commitment. Message ahead to confirm your preferred date.</p>
+            </article>
+            <article data-filter-item data-categories="stay,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/40 p-6">
+              <h3 class="font-semibold text-brand-dark">Overnight rooms</h3>
+              <p class="mt-2 text-sm text-gray-600">Hotel rooms for staycations and weekend escapes — rest after a full day at the resort.</p>
+            </article>
+            <article data-filter-item data-categories="day,stay,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/40 p-6">
+              <h3 class="font-semibold text-brand-dark">Pool &amp; grounds</h3>
+              <p class="mt-2 text-sm text-gray-600">Outdoor spaces for swimming, photos, and family gatherings in a quieter San Mateo setting.</p>
+            </article>
+            <article data-filter-item data-categories="day,stay,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/40 p-6">
+              <h3 class="font-semibold text-brand-dark">Family-friendly</h3>
+              <p class="mt-2 text-sm text-gray-600">Ideal for reunions and barkada days — guests rate the page as a hotel resort hide-away.</p>
+            </article>
+            <article data-filter-item data-categories="day,stay,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/40 p-6">
+              <h3 class="font-semibold text-brand-dark">Easy San Mateo access</h3>
+              <p class="mt-2 text-sm text-gray-600">On Maly-Maarang Road, Brgy. Maly — close enough for a Metro Manila day trip.</p>
+            </article>
+            <article data-filter-item data-categories="stay,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/40 p-6">
+              <h3 class="font-semibold text-brand-dark">Warm hospitality</h3>
+              <p class="mt-2 text-sm text-gray-600">4.3K Facebook followers and a 66% recommend score — guests come back for a comfortable stay.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Resort gallery</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>Real photos from the Villa Apolonia Resort Hotel Facebook page — grounds, rooms, and resort life.</p>
+        <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <figure data-reveal class="group overflow-hidden bg-white sm:col-span-2">
+            <img src="assets/hero-resort.jpg" alt="Villa Apolonia Resort Hotel grounds" width="960" height="720" loading="lazy" class="gallery-card__img gallery-card__img--wide w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Resort grounds</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden bg-white">
+            <img src="assets/project-01.jpg" alt="Villa Apolonia resort view" width="1080" height="1080" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Resort view</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden bg-white">
+            <img src="assets/project-03.jpg" alt="Villa Apolonia outdoor area" width="1000" height="1000" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Outdoor area</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden bg-white">
+            <img src="assets/project-04.jpg" alt="Villa Apolonia resort atmosphere" width="800" height="800" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Resort atmosphere</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden bg-white">
+            <img src="assets/project-02.jpg" alt="Villa Apolonia guest space" width="800" height="800" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Guest space</figcaption>
+          </figure>
+        </div>
+        <p class="mt-6 text-center">
+          <a href="https://www.facebook.com/VillaApoloniaResortHotel/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-mid hover:underline">See more photos on Facebook →</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="about" class="bg-brand-dark py-16 text-white sm:py-20">
+      <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2">
+        <img src="assets/project-01.jpg" alt="Villa Apolonia Resort Hotel" width="1080" height="1080" loading="lazy" class="w-full shadow-lg ring-1 ring-white/10 object-cover" data-reveal />
+        <div data-reveal>
+          <h2 class="font-display text-3xl font-bold">About Villa Apolonia</h2>
+          <p class="mt-4 text-white/85"><strong>Villa Apolonia Resort Hotel</strong> is a hotel resort on Maly-Maarang Road, Brgy. Maly, San Mateo, Rizal — offering day stays and overnight rooms as a quiet hide-away from the city.</p>
+          <p class="mt-3 text-white/85">With <strong>4.3K Facebook followers</strong> and a 66% recommend score, guests look for a comfortable place to unwind with family and friends.</p>
+          <p class="mt-4 font-display italic text-brand-mist">The Perfect Hide-away · Day stay · Overnight rooms</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <h2 class="font-display text-center text-3xl font-bold text-brand-dark" data-reveal>Common questions</h2>
+        <div data-accordion class="mt-10 space-y-3">
+          <div data-accordion-item class="overflow-hidden border border-brand-dark/10 bg-brand-light/40">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Do you accept day stays and overnight guests?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Yes — message or call with your preferred date, party size, and whether you need a day stay or overnight room so the team can confirm availability.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden border border-brand-dark/10 bg-brand-light/40">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Where is Villa Apolonia?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Maly-Maarang Road, Brgy. Maly, San Mateo, Rizal. Ask for directions when you book.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden border border-brand-dark/10 bg-brand-light/40">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">What are your hours?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">The Facebook page lists the resort as <strong>Always open</strong> — confirm day-stay cutoffs and check-in times when you inquire.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden border border-brand-dark/10 bg-brand-light/40">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">How do we reserve a date?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Call <a href="tel:+639683066345" class="font-semibold text-brand-mid hover:underline">0968 306 6345</a> (SMART), landline <a href="tel:+63287882475" class="font-semibold text-brand-mid hover:underline">(02) 8788 2475</a>, email <a href="mailto:newvarh@gmail.com" class="font-semibold text-brand-mid hover:underline">newvarh@gmail.com</a>, or message the Facebook page.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="overflow-hidden bg-brand-dark text-white shadow-xl">
+          <div class="grid gap-0 lg:grid-cols-2">
+            <div class="p-8 sm:p-10 lg:p-12">
+              <h2 class="font-display text-3xl font-bold" data-reveal>Plan your visit</h2>
+              <p class="mt-4 text-white/80" data-reveal>Tell us your preferred date, group size, and whether you want a day stay or overnight room — we will confirm availability.</p>
+              <ul class="mt-8 space-y-4 text-sm sm:text-base" data-reveal>
+                <li><span class="font-semibold text-brand-accent">SMART</span><br /><a href="tel:+639683066345" class="hover:underline">0968 306 6345</a></li>
+                <li><span class="font-semibold text-brand-accent">PLDT</span><br /><a href="tel:+63287882475" class="hover:underline">(02) 8788 2475</a></li>
+                <li><span class="font-semibold text-brand-accent">Email</span><br /><a href="mailto:newvarh@gmail.com" class="hover:underline">newvarh@gmail.com</a></li>
+                <li><span class="font-semibold text-brand-accent">Facebook</span><br /><a href="https://www.facebook.com/VillaApoloniaResortHotel/" target="_blank" rel="noopener noreferrer" class="hover:underline">facebook.com/VillaApoloniaResortHotel</a></li>
+                <li><span class="font-semibold text-brand-accent">Address</span><br />Maly-Maarang Road, Brgy. Maly, San Mateo, Rizal</li>
+              </ul>
+            </div>
+            <div class="flex flex-col justify-center gap-4 bg-brand-mid/40 p-8 sm:p-10 lg:p-12" data-reveal>
+              <a href="tel:+639683066345" class="rounded-full bg-brand-accent px-6 py-4 text-center font-semibold text-brand-dark hover:brightness-105 transition">Call SMART</a>
+              <a href="mailto:newvarh@gmail.com" class="rounded-full border border-white/40 px-6 py-4 text-center font-semibold hover:bg-white/10 transition">Email the resort</a>
+              <a href="https://www.facebook.com/VillaApoloniaResortHotel/" target="_blank" rel="noopener noreferrer" class="rounded-full border border-white/40 px-6 py-4 text-center font-semibold hover:bg-white/10 transition">Message on Facebook</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-brand-dark/10 bg-white py-8 text-center text-sm text-gray-500">
+    <p class="font-display text-brand-dark">Villa Apolonia Resort Hotel</p>
+    <p class="mt-1">Hotel resort · Brgy. Maly, San Mateo · Demo site for quotation</p>
+    <p class="mt-3">&copy; <span id="year"></span> · Sample site by <a href="https://carlmanuel.com" class="text-brand-mid hover:underline">Carl Louis Manuel</a></p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
+</body>
+</html>
