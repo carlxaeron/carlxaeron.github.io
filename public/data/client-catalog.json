@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-21T03:43:14.324Z",
+  "generatedAt": "2026-07-21T03:53:20.242Z",
   "clients": [
     {
       "slug": "air-alex-resort",
@@ -497,6 +497,39 @@
       }
     },
     {
+      "slug": "frances-teresa-garden",
+      "businessName": "Frances Teresa Garden — The Party Place",
+      "industry": "Party venue / garden event place",
+      "contact": {
+        "name": "Frances Teresa Garden",
+        "email": "ftdl.corp.design@gmail.com",
+        "phone": "+63 947 705 2252"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (events, gallery, about, FAQ, contact). Admin preview is a sample; production booking system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=frances-teresa-garden"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Venue booking admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "698 Tanguile St., San Jose, Rodriguez, Philippines 1860"
+      }
+    },
+    {
       "slug": "g3k-cad",
       "businessName": "G3k Cad Plotting & Blueprinting Services",
       "industry": "CAD plotting / blueprint printing",
@@ -725,6 +758,39 @@
       },
       "sources": {
         "address": "Block 38 L34&36 Sparrow Lane, Bay Breeze Executive Village, Brgy Wawa, Taguig City, Taguig, Philippines"
+      }
+    },
+    {
+      "slug": "joyce-kim-resort",
+      "businessName": "Joyce Kim Resort",
+      "industry": "Hotel resort / day swim & staycation",
+      "contact": {
+        "name": "Joyce Kim Resort Team",
+        "email": "jkimresort@gmail.com",
+        "phone": "+63 917 657 5747"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (amenities, gallery, about, FAQ, contact). Admin preview is a sample; production booking system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=joyce-kim-resort"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Booking & calendar admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Leal Compound, Brgy. Balite, Rodriguez, Philippines"
       }
     },
     {
@@ -1157,6 +1223,39 @@
       }
     },
     {
+      "slug": "sky-glass",
+      "businessName": "Sky Glass",
+      "industry": "Indoor pool / exclusive resort venue",
+      "contact": {
+        "name": "Sky Glass",
+        "email": "",
+        "phone": "+63 927 578 8947"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive indoor-pool resort site only (amenities, gallery, packages, FAQ, contact). Admin preview is a sample; production booking system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=sky-glass"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Venue booking & calendar admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Blk 10 Lot 45 Phase 2 Congressville Subd. Brgy. Manggahan, Rodriguez, Rizal"
+      }
+    },
+    {
       "slug": "sonyoba-marketing",
       "businessName": "Sonyoba Marketing",
       "industry": "Office equipment / paper shredders & business machines",
@@ -1408,105 +1507,6 @@
         "type": "booking",
         "adminPath": "/admin/",
         "label": "Venue booking admin",
-        "navPages": [
-          "Dashboard",
-          "Bookings",
-          "Calendar",
-          "Guests",
-          "Settings"
-        ]
-      },
-      "sources": {
-        "address": ""
-      }
-    },
-    {
-      "slug": "your-slug",
-      "businessName": "Your Business Name",
-      "industry": "Local business",
-      "contact": {
-        "name": "Client Name",
-        "email": "client@example.com",
-        "phone": "+63 900 000 0000"
-      },
-      "quotation": {
-        "packageName": "Starter Business Website",
-        "packageScope": "One-page responsive website only (contact section, basic SEO, Netlify hosting). Admin preview is a sample; production system priced separately.",
-        "quotedAmount": "₱15,000",
-        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
-        "timeline": "5–7 business days after content approval",
-        "previewUrl": "https://carlmanuel.com/?preview=your-slug"
-      },
-      "system": {
-        "type": "booking",
-        "adminPath": "/admin/",
-        "label": "Booking & calendar admin",
-        "navPages": [
-          "Dashboard",
-          "Bookings",
-          "Calendar",
-          "Guests",
-          "Settings"
-        ]
-      },
-      "sources": {
-        "address": ""
-      }
-    },
-    {
-      "slug": "your-slug",
-      "businessName": "Your Business Name",
-      "industry": "Local business",
-      "contact": {
-        "name": "Client Name",
-        "email": "client@example.com",
-        "phone": "+63 900 000 0000"
-      },
-      "quotation": {
-        "packageName": "Starter Business Website",
-        "packageScope": "One-page responsive website only (contact section, basic SEO, Netlify hosting). Admin preview is a sample; production system priced separately.",
-        "quotedAmount": "₱15,000",
-        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
-        "timeline": "5–7 business days after content approval",
-        "previewUrl": "https://carlmanuel.com/?preview=your-slug"
-      },
-      "system": {
-        "type": "booking",
-        "adminPath": "/admin/",
-        "label": "Booking & calendar admin",
-        "navPages": [
-          "Dashboard",
-          "Bookings",
-          "Calendar",
-          "Guests",
-          "Settings"
-        ]
-      },
-      "sources": {
-        "address": ""
-      }
-    },
-    {
-      "slug": "your-slug",
-      "businessName": "Your Business Name",
-      "industry": "Local business",
-      "contact": {
-        "name": "Client Name",
-        "email": "client@example.com",
-        "phone": "+63 900 000 0000"
-      },
-      "quotation": {
-        "packageName": "Starter Business Website",
-        "packageScope": "One-page responsive website only (contact section, basic SEO, Netlify hosting). Admin preview is a sample; production system priced separately.",
-        "quotedAmount": "₱15,000",
-        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
-        "timeline": "5–7 business days after content approval",
-        "previewUrl": "https://carlmanuel.com/?preview=your-slug"
-      },
-      "system": {
-        "type": "booking",
-        "adminPath": "/admin/",
-        "label": "Booking & calendar admin",
         "navPages": [
           "Dashboard",
           "Bookings",

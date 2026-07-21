@@ -31,6 +31,7 @@
         "npm:gulp-postcss@10",
         "npm:gulp-sass@^5.1.0",
         "npm:gulp@5",
+        "npm:jszip@^3.10.1",
         "npm:os-browserify@0.3",
         "npm:os@~0.1.2",
         "npm:path-browserify@^1.0.1",

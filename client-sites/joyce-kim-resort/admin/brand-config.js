@@ -1,0 +1,107 @@
+window.ADMIN_CONFIG = window.ADMIN_CONFIG || {
+  vertical: "booking",
+  businessName: "Joyce Kim Resort",
+  ownerRole: "Owner",
+  userInitials: "JK",
+  logo: "/assets/logo.jpg",
+  painHero:
+    "Stop taking day-swim and overnight bookings only on Messenger — see which dates are taken and confirm guests from one calendar.",
+  brand: {
+    primary: "#d4a574",
+    primaryDark: "#0c3d38",
+    accent: "#e8f4f1",
+  },
+  demo: {
+    booking: {
+      labels: {
+        dashboardTitle: "Joyce Kim · today",
+        dashboardSub: "Day swim + overnight stays · Balite, Rodriguez",
+        primary: "Bookings",
+        people: "Guests",
+        calendar: "Resort calendar",
+      },
+      stats: [
+        { label: "Check-ins today", value: "5" },
+        { label: "Occupancy", value: "76%" },
+        { label: "Pending", value: "2" },
+        { label: "This week", value: "19" },
+      ],
+      occupancy: { weekend: 91, weekday: 54, pending: 2, weekendLabel: "Sat–Sun" },
+      timeline: [
+        { time: "8:00 AM", title: "Balite family day", detail: "Day swim · 8 AM–4 PM", status: "confirmed" },
+        { time: "9:00 AM", title: "Santos barkada", detail: "Day package · 16 pax", status: "confirmed" },
+        { time: "11:00 AM", title: "Room tour · Cruz", detail: "Overnight inquiry · Suite", status: "pending" },
+        { time: "2:00 PM", title: "Villanueva stay", detail: "Overnight · 2 rooms", status: "confirmed" },
+        { time: "4:00 PM", title: "Day swim wrap", detail: "Checkout · Day guests", status: "confirmed" },
+      ],
+      pendingRequests: [
+        {
+          id: "JK-118",
+          name: "Cruz overnight",
+          detail: "2 rooms · weekend stay",
+          date: "Sat · 2:00 PM",
+          source: "Messenger",
+          amount: "Quote · overnight",
+        },
+        {
+          id: "JK-117",
+          name: "Montalban barkada",
+          detail: "Day swim · 20 pax",
+          date: "Sun · 8:00 AM",
+          source: "Facebook",
+          amount: "Quote · day",
+        },
+      ],
+      primaryList: [
+        {
+          id: "JK-120",
+          name: "Balite family day",
+          detail: "Day swim · 8 AM–4 PM",
+          date: "Today · 8:00 AM",
+          status: "confirmed",
+        },
+        {
+          id: "JK-119",
+          name: "Villanueva stay",
+          detail: "Overnight · 2 rooms",
+          date: "Today · 2:00 PM",
+          status: "confirmed",
+        },
+        {
+          id: "JK-118",
+          name: "Cruz overnight",
+          detail: "2 rooms · weekend stay",
+          date: "Sat · 2:00 PM",
+          status: "pending",
+        },
+        {
+          id: "JK-117",
+          name: "Montalban barkada",
+          detail: "Day swim · 20 pax",
+          date: "Sun · 8:00 AM",
+          status: "pending",
+        },
+        {
+          id: "JK-116",
+          name: "Santos barkada",
+          detail: "Day package · 16 pax",
+          date: "Today · 9:00 AM",
+          status: "confirmed",
+        },
+      ],
+      calendarEvents: [1, 4, 7, 9, 12, 15, 18, 21, 24, 27],
+      people: [
+        { name: "Balite family", meta: "2 day visits · Local", tag: "Repeat" },
+        { name: "Villanueva stay", meta: "Overnight · 2 rooms", tag: "VIP" },
+        { name: "Cruz overnight", meta: "Pending · Messenger", tag: "Hot" },
+        { name: "Montalban barkada", meta: "Day swim · FB inquiry", tag: "New" },
+      ],
+      settings: [
+        { label: "Day swim hours", value: "8:00 AM – 4:00 PM" },
+        { label: "Location", value: "Leal Compound, Brgy. Balite, Rodriguez" },
+        { label: "Mobile", value: "0917 657 5747" },
+        { label: "Email", value: "jkimresort@gmail.com" },
+      ],
+    },
+  },
+};

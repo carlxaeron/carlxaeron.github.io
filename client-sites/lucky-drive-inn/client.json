@@ -30,14 +30,14 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "ready",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "3d1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-21T03:35:08Z",
+    "nextFollowUpAt": "2026-07-24T03:35:08Z",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "Email from Facebook About: luckydriveinnhotel@gmail.com. First drive-in hotel in Rodriguez Rizal. Ask before send."
+    "notes": "Initial sent 2026-07-21 via outreachSchedule; auto follow-ups 3d1w max 4. Email: luckydriveinnhotel@gmail.com."
   },
   "sources": {
     "facebook": "https://www.facebook.com/luckydriveinnhotel/",

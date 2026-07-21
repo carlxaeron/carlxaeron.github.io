@@ -30,14 +30,14 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "ready",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "3d1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-21T03:53:00Z",
+    "nextFollowUpAt": "2026-07-24 03:53:00",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "Email found on FB About: palms.and.terraces@gmail.com. No public phone. ASK before send."
+    "notes": "Initial quotation sent 2026-07-21 via outreachSchedule; auto follow-ups 3d1w (max 4)."
   },
   "sources": {
     "facebook": "https://www.facebook.com/p/Palms-and-Terraces-100063872265656/",
