@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-20T05:59:16.773Z",
+  "generatedAt": "2026-07-21T03:03:58.912Z",
   "clients": [
     {
       "slug": "air-alex-resort",
@@ -725,6 +725,39 @@
       },
       "sources": {
         "address": "Villa Maria 2 Subd., Cupang, Antipolo City"
+      }
+    },
+    {
+      "slug": "lucky-drive-inn",
+      "businessName": "Lucky Drive Inn Hotel",
+      "industry": "Drive-in hotel / inn · Rodriguez Rizal",
+      "contact": {
+        "name": "Lucky Drive Inn Hotel team",
+        "email": "luckydriveinnhotel@gmail.com",
+        "phone": "+63 917 824 7925"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (themed rooms, gallery, about, FAQ, contact), basic SEO, Netlify hosting. Admin preview is a sample; production booking system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=lucky-drive-inn"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Room booking & calendar admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Don Mariano Ave., San Jose, Rodriguez, Rizal, Philippines, 1860"
       }
     },
     {

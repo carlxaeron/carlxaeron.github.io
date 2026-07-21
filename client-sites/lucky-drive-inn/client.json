@@ -1,0 +1,52 @@
+{
+  "businessName": "Lucky Drive Inn Hotel",
+  "slug": "lucky-drive-inn",
+  "previewHost": "lucky-drive-inn.netlify.app",
+  "industry": "Drive-in hotel / inn · Rodriguez Rizal",
+  "deployedAt": "2026-07-21",
+  "contact": {
+    "name": "Lucky Drive Inn Hotel team",
+    "email": "luckydriveinnhotel@gmail.com",
+    "phone": "+63 917 824 7925"
+  },
+  "system": {
+    "type": "booking",
+    "adminPath": "/admin/",
+    "label": "Room booking & calendar admin",
+    "painHero": "Overnight and drive-in room requests pile up on Messenger — see tonight's occupancy and confirm stays without double-booking.",
+    "navPages": ["Dashboard", "Bookings", "Calendar", "Guests", "Settings"]
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive website only (themed rooms, gallery, about, FAQ, contact), basic SEO, Netlify hosting. Admin preview is a sample; production booking system priced separately.",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=lucky-drive-inn"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "ready",
+    "cadence": null,
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "Email from Facebook About: luckydriveinnhotel@gmail.com. First drive-in hotel in Rodriguez Rizal. Ask before send."
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/luckydriveinnhotel/",
+    "category": "Company · Drive-in hotel / inn",
+    "intro": "Lucky Drive Inn Hotel is the first drive Inn hotel in Rodriguez Rizal",
+    "slogan": "Satisfaction at its Best",
+    "address": "Don Mariano Ave., San Jose, Rodriguez, Rizal, Philippines, 1860",
+    "hours": "Always open",
+    "followers": "~1.9K",
+    "notes": "Assets from FB Photos + cover/logo (Chrome DevTools inspect + download). Themed guest rooms with murals; yellow promo banner kept as brand asset."
+  }
+}

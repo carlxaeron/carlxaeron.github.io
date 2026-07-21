@@ -53,6 +53,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Cardinal Santos Medical Center](#cardinal-santos-medical-center) | `cardinal-santos` | Hospital / healthcare | appointments | [Preview](https://carlmanuel.com/?preview=cardinal-santos) | 2026-07-20 |
 | [St. Luke's Medical Center](#st-lukes-medical-center) | `st-lukes` | Private hospital / healthcare | appointments | [Preview](https://carlmanuel.com/?preview=st-lukes) | 2026-07-20 |
 | [Grand Hyatt Manila](#grand-hyatt-manila) | `grand-hyatt-manila` | Luxury hotel / hospitality | booking | [Preview](https://carlmanuel.com/?preview=grand-hyatt-manila) | 2026-07-20 |
+| [Lucky Drive Inn Hotel](#lucky-drive-inn-hotel) | `lucky-drive-inn` | Drive-in hotel / inn · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=lucky-drive-inn) | 2026-07-21 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -746,6 +747,26 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | Cover 2048×1638 + logo 386×386 + dining 1365×2048×2 + tower crops from cover |
 | **Package** | Premium Business Website · **₱18,000** *(website only)* · 7–10 days · 50% upfront · admin sample priced separately |
 | **Outreach** | manila.grand@hyatt.com — drafts ready · **ask before send** · cadence **3d1w** after yes |
+
+---
+
+### Lucky Drive Inn Hotel
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/lucky-drive-inn/` |
+| **Netlify site** | `lucky-drive-inn` |
+| **Preview host** | `lucky-drive-inn.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=lucky-drive-inn |
+| **Contact** | luckydriveinnhotel@gmail.com · +63 917 824 7925 |
+| **Address** | Don Mariano Ave., San Jose, Rodriguez, Rizal 1860 |
+| **Category** | Company · First drive-in hotel in Rodriguez Rizal · Always open · ~1.9K FB followers · slogan “Satisfaction at its Best” |
+| **Source** | [Facebook](https://www.facebook.com/luckydriveinnhotel/) |
+| **System** | booking · Room booking & calendar admin · painHero: overnight/drive-in requests on Messenger |
+| **Hero 3D** | Motion + particles + **`data-hero-three-object="lakehouse"`** · royal blue / kelly green / gold (logo palette) |
+| **Assets** | Cover promo 1640×924 + logo 480×480 + themed rooms 2048×1536 (×4) + portrait room 1536×2048 |
+| **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
+| **Outreach** | luckydriveinnhotel@gmail.com — drafts ready · **ask before send** · cadence **3d1w** after yes |
 
 ---
 

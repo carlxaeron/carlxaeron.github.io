@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lucky Drive Inn Hotel — the first drive-in hotel in Rodriguez, Rizal. Themed rooms, always open. Satisfaction at its Best." />
+  <title>Lucky Drive Inn Hotel · Rodriguez Rizal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: "#0B2A5B",
+              mid: "#1B6B3A",
+              accent: "#E8B923",
+              light: "#E8F2EC",
+              ink: "#0A1628",
+            },
+          },
+          fontFamily: {
+            display: ["Cormorant Garamond", "Georgia", "serif"],
+            sans: ["Outfit", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="embed-guard.js"></script>
+</head>
+<body class="font-sans text-brand-ink antialiased">
+  <div class="trust-strip py-2 text-center text-xs font-semibold tracking-wide text-white sm:text-sm">
+    First drive-in hotel in Rodriguez, Rizal · Always open · Satisfaction at its Best
+  </div>
+
+  <header data-header class="sticky top-0 z-50 border-b border-brand-dark/10 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#" class="flex min-w-0 items-center gap-2.5 font-display text-lg font-bold text-brand-dark">
+        <img src="assets/logo.jpg" alt="" width="44" height="44" class="h-11 w-11 shrink-0 rounded-full object-cover ring-2 ring-brand-mid/25" />
+        <span class="hidden truncate sm:inline">Lucky Drive Inn Hotel</span>
+        <span class="sm:hidden">Lucky Drive Inn</span>
+      </a>
+      <nav class="hidden items-center gap-5 text-sm font-medium text-brand-dark/80 md:flex" aria-label="Main">
+        <a href="#rooms" class="hover:text-brand-mid transition-colors">Rooms</a>
+        <a href="#gallery" class="hover:text-brand-mid transition-colors">Gallery</a>
+        <a href="#about" class="hover:text-brand-mid transition-colors">About</a>
+        <a href="#faq" class="hover:text-brand-mid transition-colors">FAQ</a>
+        <a href="#contact" class="rounded-full bg-brand-mid px-4 py-2 font-semibold text-white hover:brightness-110 transition">Book a stay</a>
+      </nav>
+      <button type="button" data-nav-toggle class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-dark/15 text-brand-dark md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="hidden flex-col border-t border-brand-dark/10 bg-white px-4 py-4 md:hidden" role="dialog" aria-label="Mobile navigation">
+      <a href="#rooms" class="rounded-lg px-3 py-3 hover:bg-brand-light">Rooms</a>
+      <a href="#gallery" class="rounded-lg px-3 py-3 hover:bg-brand-light">Gallery</a>
+      <a href="#about" class="rounded-lg px-3 py-3 hover:bg-brand-light">About</a>
+      <a href="#faq" class="rounded-lg px-3 py-3 hover:bg-brand-light">FAQ</a>
+      <a href="#contact" class="mt-2 rounded-full bg-brand-mid px-4 py-3 text-center font-semibold text-white">Book a stay</a>
+    </div>
+  </header>
+
+  <main>
+    <section data-hero data-hero-three="particles" data-hero-three-object="lakehouse" data-hero-three-accent="cool" class="relative overflow-hidden bg-brand-dark text-white">
+      <div data-hero-bg class="hero-bg hero-bg--lucky absolute inset-0 origin-center will-change-transform"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
+      <div class="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+        <p data-hero-animate class="opacity-0 mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">Rodriguez · Rizal</p>
+        <h1 data-hero-animate class="opacity-0 font-display max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-[3.4rem]">Lucky Drive Inn Hotel</h1>
+        <p data-hero-animate class="opacity-0 mt-5 max-w-xl text-lg text-white/85">The first drive-in hotel in Rodriguez, Rizal — themed rooms, always open, and satisfaction at its best for overnight stays and road-trip rest.</p>
+        <div data-hero-animate class="opacity-0 mt-8 flex flex-wrap gap-3">
+          <a data-hero-cta href="#contact" class="rounded-full bg-brand-accent px-6 py-3 font-semibold text-brand-ink hover:brightness-105 transition">Check availability</a>
+          <a data-hero-cta href="tel:+639178247925" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Call 0917 824 7925</a>
+        </div>
+        <div data-hero-animate class="opacity-0 mt-10 grid gap-4 sm:grid-cols-3">
+          <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <p class="text-2xl font-bold text-brand-accent">1st</p>
+            <p class="mt-1 text-sm text-white/80">Drive-in hotel in Rodriguez</p>
+          </div>
+          <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <p class="text-2xl font-bold text-brand-accent">24/7</p>
+            <p class="mt-1 text-sm text-white/80">Always open for guests</p>
+          </div>
+          <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <p class="text-2xl font-bold text-brand-accent">1.9K+</p>
+            <p class="mt-1 text-sm text-white/80">Facebook followers</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rooms" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Stay with character</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>Themed guest rooms, clean linens, and drive-in convenience on Don Mariano Avenue — built for couples, road trips, and overnight rest.</p>
+        <div data-filter class="mt-8">
+          <div class="flex flex-wrap gap-2">
+            <button type="button" data-filter-btn="all" class="filter-active rounded-full bg-brand-mid px-4 py-2 text-sm text-white" aria-pressed="true">All</button>
+            <button type="button" data-filter-btn="rooms" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Rooms</button>
+            <button type="button" data-filter-btn="stay" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Stay</button>
+          </div>
+          <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <article data-filter-item data-categories="rooms,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Themed guest rooms</h3>
+              <p class="mt-2 text-sm text-gray-600">Hand-painted murals and cozy double beds — each room has its own look for a memorable overnight stay.</p>
+            </article>
+            <article data-filter-item data-categories="stay,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Drive-in convenience</h3>
+              <p class="mt-2 text-sm text-gray-600">Park and settle in — the first drive-in hotel experience in Rodriguez for travelers who want easy access.</p>
+            </article>
+            <article data-filter-item data-categories="stay,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Always open</h3>
+              <p class="mt-2 text-sm text-gray-600">Check in when you arrive — day or night. Call or message ahead so we can ready your room.</p>
+            </article>
+            <article data-filter-item data-categories="rooms,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Clean &amp; ready rooms</h3>
+              <p class="mt-2 text-sm text-gray-600">Fresh linens, tidy bathrooms, and housekeeping support so every guest walks into a room that feels cared for.</p>
+            </article>
+            <article data-filter-item data-categories="stay,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Couples &amp; overnight guests</h3>
+              <p class="mt-2 text-sm text-gray-600">Quiet rest after a long drive or a private staycation night — without leaving Rodriguez.</p>
+            </article>
+            <article data-filter-item data-categories="rooms,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Easy booking</h3>
+              <p class="mt-2 text-sm text-gray-600">Reserve by phone or Facebook — tell us your arrival time and preferred room style.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Inside Lucky Drive Inn</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>Real photos from the Lucky Drive Inn Hotel Facebook page — themed rooms and the stay experience.</p>
+        <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-white shadow-sm sm:col-span-2">
+            <img src="assets/hero-room.jpg" alt="Themed guest room with mural at Lucky Drive Inn Hotel" width="960" height="720" loading="lazy" class="gallery-card__img gallery-card__img--wide w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Themed guest room</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-white shadow-sm">
+            <img src="assets/project-02.jpg" alt="Lucky Drive Inn Hotel room detail" width="768" height="1024" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Room detail</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-white shadow-sm">
+            <img src="assets/project-03.jpg" alt="Lucky Drive Inn Hotel interior" width="960" height="720" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Guest interior</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-white shadow-sm">
+            <img src="assets/project-04.jpg" alt="Lucky Drive Inn Hotel stay space" width="960" height="720" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Stay space</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-white shadow-sm">
+            <img src="assets/logo.jpg" alt="Lucky Drive Inn Hotel logo" width="480" height="480" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Lucky Drive Inn branding</figcaption>
+          </figure>
+        </div>
+        <p class="mt-6 text-center">
+          <a href="https://www.facebook.com/luckydriveinnhotel/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-mid hover:underline">See more photos on Facebook →</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="about" class="bg-brand-dark py-16 text-white sm:py-20">
+      <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2">
+        <img src="assets/promo-banner.jpg" alt="Lucky Drive Inn Hotel — Satisfaction at its Best" width="960" height="500" loading="lazy" class="w-full rounded-2xl shadow-lg ring-1 ring-white/10 object-cover" data-reveal />
+        <div data-reveal>
+          <h2 class="font-display text-3xl font-bold">About Lucky Drive Inn</h2>
+          <p class="mt-4 text-white/85"><strong>Lucky Drive Inn Hotel</strong> is the first drive-in hotel in Rodriguez, Rizal — a place for overnight guests who want themed rooms, easy parking, and a warm welcome on Don Mariano Avenue.</p>
+          <p class="mt-3 text-white/85">We’re <strong>always open</strong>, with about <strong>1.9K Facebook followers</strong> who know us for Satisfaction at its Best. Call or message to reserve your room.</p>
+          <p class="mt-4 font-display italic text-brand-accent text-xl">“Satisfaction at its Best”</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <h2 class="font-display text-center text-3xl font-bold text-brand-dark" data-reveal>Common questions</h2>
+        <div data-accordion class="mt-10 space-y-3">
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Are you open 24 hours?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Yes — Lucky Drive Inn Hotel is always open. Call or message ahead so we can prepare your room for arrival.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Where are you located?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Don Mariano Ave., San Jose, Rodriguez, Rizal 1860 — the first drive-in hotel in the city.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Do you have themed rooms?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Yes — guest rooms feature murals and unique décor. Ask when you book if you’d like a particular style.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/50">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">How do we reserve a room?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Call <a href="tel:+639178247925" class="font-semibold text-brand-mid hover:underline">0917 824 7925</a>, email <a href="mailto:luckydriveinnhotel@gmail.com" class="font-semibold text-brand-mid hover:underline">luckydriveinnhotel@gmail.com</a>, or message the Facebook page with your preferred date and arrival time.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="overflow-hidden rounded-3xl bg-brand-dark text-white shadow-xl">
+          <div class="grid gap-0 lg:grid-cols-2">
+            <div class="p-8 sm:p-10 lg:p-12">
+              <h2 class="font-display text-3xl font-bold" data-reveal>Reserve your room</h2>
+              <p class="mt-4 text-white/80" data-reveal>Tell us your arrival date, time, and party size — we’ll confirm availability for your overnight stay.</p>
+              <ul class="mt-8 space-y-4 text-sm sm:text-base" data-reveal>
+                <li><span class="font-semibold text-brand-accent">Phone</span><br /><a href="tel:+639178247925" class="hover:underline">0917 824 7925</a></li>
+                <li><span class="font-semibold text-brand-accent">Email</span><br /><a href="mailto:luckydriveinnhotel@gmail.com" class="hover:underline">luckydriveinnhotel@gmail.com</a></li>
+                <li><span class="font-semibold text-brand-accent">Facebook</span><br /><a href="https://www.facebook.com/luckydriveinnhotel/" target="_blank" rel="noopener noreferrer" class="hover:underline">facebook.com/luckydriveinnhotel</a></li>
+                <li><span class="font-semibold text-brand-accent">Address</span><br />Don Mariano Ave., San Jose, Rodriguez, Rizal 1860</li>
+                <li><span class="font-semibold text-brand-accent">Hours</span><br />Always open</li>
+              </ul>
+            </div>
+            <div class="flex flex-col justify-center gap-4 bg-brand-mid/35 p-8 sm:p-10 lg:p-12" data-reveal>
+              <a href="tel:+639178247925" class="rounded-full bg-brand-accent px-6 py-4 text-center font-semibold text-brand-ink hover:brightness-105 transition">Call now</a>
+              <a href="mailto:luckydriveinnhotel@gmail.com" class="rounded-full border border-white/40 px-6 py-4 text-center font-semibold hover:bg-white/10 transition">Email the hotel</a>
+              <a href="https://www.facebook.com/luckydriveinnhotel/" target="_blank" rel="noopener noreferrer" class="rounded-full border border-white/40 px-6 py-4 text-center font-semibold hover:bg-white/10 transition">Message on Facebook</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-brand-dark/10 bg-white py-8 text-center text-sm text-gray-500">
+    <p class="font-display text-lg text-brand-dark">Lucky Drive Inn Hotel</p>
+    <p class="mt-1">First drive-in hotel in Rodriguez, Rizal · Demo site for quotation</p>
+    <p class="mt-3">&copy; <span id="year"></span> · Sample site by <a href="https://carlmanuel.com" class="text-brand-mid hover:underline">Carl Louis Manuel</a></p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
+</body>
+</html>

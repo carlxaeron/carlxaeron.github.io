@@ -239,6 +239,12 @@ export const PREVIEW_SITES = [
     label: "Grand Hyatt Manila",
     netlifySite: "grand-hyatt-manila",
   },
+  {
+    id: "lucky-drive-inn",
+    host: "lucky-drive-inn.netlify.app",
+    label: "Lucky Drive Inn Hotel",
+    netlifySite: "lucky-drive-inn",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

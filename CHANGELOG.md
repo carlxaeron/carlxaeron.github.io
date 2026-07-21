@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.83] — 2026-07-21
+
+### Added
+- **Preview whitelist** — `lucky-drive-inn` (Lucky Drive Inn Hotel · Rodriguez Rizal) quotation demo (`?preview=` + client-sites + catalog)
+
 ## [3.0.82] — 2026-07-20
 
 ### Added
