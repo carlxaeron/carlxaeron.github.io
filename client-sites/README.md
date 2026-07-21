@@ -54,6 +54,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [St. Luke's Medical Center](#st-lukes-medical-center) | `st-lukes` | Private hospital / healthcare | appointments | [Preview](https://carlmanuel.com/?preview=st-lukes) | 2026-07-20 |
 | [Grand Hyatt Manila](#grand-hyatt-manila) | `grand-hyatt-manila` | Luxury hotel / hospitality | booking | [Preview](https://carlmanuel.com/?preview=grand-hyatt-manila) | 2026-07-20 |
 | [Lucky Drive Inn Hotel](#lucky-drive-inn-hotel) | `lucky-drive-inn` | Drive-in hotel / inn · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=lucky-drive-inn) | 2026-07-21 |
+| [Merlita's Private Resort](#merlitas-private-resort) | `merlitas-private-resort` | Private resort / venue / staycation · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=merlitas-private-resort) | 2026-07-21 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -767,6 +768,26 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | Cover promo 1640×924 + logo 480×480 + themed rooms 2048×1536 (×4) + portrait room 1536×2048 |
 | **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
 | **Outreach** | luckydriveinnhotel@gmail.com — drafts ready · **ask before send** · cadence **3d1w** after yes |
+
+---
+
+### Merlita's Private Resort
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/merlitas-private-resort/` |
+| **Netlify site** | `merlitas-private-resort` |
+| **Preview host** | `merlitas-private-resort.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=merlitas-private-resort |
+| **Contact** | +63 949 563 1129 (**no public email** on FB) |
+| **Address** | 220 E. Manuel St. Brgy. San Jose, Rodriguez, Rizal 1860 |
+| **Category** | Page · Event · Private resort in Montalban Rizal · Daytime 8am–5pm · Overnight 8pm–5am · ~4.5K FB followers · TikTok @merlitasvenue |
+| **Source** | [Facebook](https://www.facebook.com/merlitasprivateresort/) |
+| **System** | booking · Booking & calendar admin · painHero: day/overnight Messenger bookings |
+| **Hero 3D** | Motion + particles + **`data-hero-three-object="pooldeck"`** · tropical green / champagne gold |
+| **Assets** | Cover 2048×1536 + logo 2048×2048 + venue/event gallery (~939–1074px ×4) via Chrome DevTools MCP inspect + signed fbcdn curl |
+| **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
+| **Outreach** | No email — Messenger/SMS/call drafts · ask how to reach |
 
 ---
 

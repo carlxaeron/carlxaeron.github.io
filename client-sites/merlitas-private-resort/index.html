@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Merlita's Private Resort — private resort &amp; venue in Rodriguez, Rizal. Daytime 8am–5pm and overnight 8pm–5am staycations, celebrations, and barkada days." />
+  <title>Merlita's Private Resort — Rodriguez, Rizal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: "#0f3d36",
+              mid: "#2d6a5a",
+              accent: "#c9a86c",
+              light: "#e8f2ee",
+              foam: "#d4e8e0",
+            },
+          },
+          fontFamily: {
+            display: ["Cormorant Garamond", "Georgia", "serif"],
+            sans: ["Outfit", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="embed-guard.js"></script>
+</head>
+<body class="font-sans text-gray-900 antialiased">
+  <div class="trust-strip py-2 text-center text-xs font-semibold tracking-wide text-white sm:text-sm">
+    Rodriguez · Private resort &amp; venue · Daytime + overnight
+  </div>
+
+  <header data-header class="sticky top-0 z-50 border-b border-brand-dark/10 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#" class="flex min-w-0 items-center gap-2 font-display text-lg font-bold text-brand-dark">
+        <img src="assets/logo.jpg" alt="" width="40" height="40" class="h-10 w-10 shrink-0 rounded-lg object-cover ring-2 ring-brand-mid/20" />
+        <span class="hidden truncate sm:inline">Merlita's Private Resort</span>
+        <span class="sm:hidden">Merlita's</span>
+      </a>
+      <nav class="hidden items-center gap-5 text-sm font-medium text-brand-dark/80 md:flex" aria-label="Main">
+        <a href="#amenities" class="hover:text-brand-mid transition-colors">Amenities</a>
+        <a href="#gallery" class="hover:text-brand-mid transition-colors">Gallery</a>
+        <a href="#hours" class="hover:text-brand-mid transition-colors">Hours</a>
+        <a href="#about" class="hover:text-brand-mid transition-colors">About</a>
+        <a href="#faq" class="hover:text-brand-mid transition-colors">FAQ</a>
+        <a href="#contact" class="rounded-full bg-brand-mid px-4 py-2 font-semibold text-white hover:brightness-110 transition">Book a stay</a>
+      </nav>
+      <button type="button" data-nav-toggle class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-dark/15 text-brand-dark md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="hidden flex-col border-t border-brand-dark/10 bg-white px-4 py-4 md:hidden">
+      <a href="#amenities" class="rounded-lg px-3 py-3 hover:bg-brand-light">Amenities</a>
+      <a href="#gallery" class="rounded-lg px-3 py-3 hover:bg-brand-light">Gallery</a>
+      <a href="#hours" class="rounded-lg px-3 py-3 hover:bg-brand-light">Hours</a>
+      <a href="#about" class="rounded-lg px-3 py-3 hover:bg-brand-light">About</a>
+      <a href="#faq" class="rounded-lg px-3 py-3 hover:bg-brand-light">FAQ</a>
+      <a href="#contact" class="mt-2 rounded-full bg-brand-mid px-4 py-3 text-center font-semibold text-white">Book a stay</a>
+    </div>
+  </header>
+
+  <main>
+    <section data-hero data-hero-three="particles" data-hero-three-object="pooldeck" data-hero-three-accent="lake" class="relative overflow-hidden bg-brand-dark text-white">
+      <div data-hero-bg class="hero-bg hero-bg--merlita absolute inset-0 origin-center will-change-transform"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
+      <div class="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+        <p data-hero-animate class="opacity-0 mb-3 text-xs font-semibold uppercase tracking-widest text-brand-accent">Rodriguez · Montalban private resort</p>
+        <h1 data-hero-animate class="opacity-0 font-display max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-[3.25rem]">Merlita's Private Resort</h1>
+        <p data-hero-animate class="opacity-0 mt-5 max-w-2xl text-lg text-white/85">A calm private resort and venue for daytime staycations, overnight escapes, and celebrations — right in Brgy. San Jose, Rodriguez.</p>
+        <div data-hero-animate class="opacity-0 mt-8 flex flex-wrap gap-3">
+          <a data-hero-cta href="#contact" class="rounded-full bg-brand-accent px-6 py-3 font-semibold text-brand-dark hover:brightness-105 transition">Check availability</a>
+          <a data-hero-cta href="tel:+639495631129" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Call 0949 563 1129</a>
+        </div>
+        <div data-hero-animate class="opacity-0 mt-10 grid gap-4 sm:grid-cols-3">
+          <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <p class="text-2xl font-bold text-brand-accent">Day</p>
+            <p class="mt-1 text-sm text-white/80">8:00 AM – 5:00 PM</p>
+          </div>
+          <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <p class="text-2xl font-bold text-brand-accent">Night</p>
+            <p class="mt-1 text-sm text-white/80">8:00 PM – 5:00 AM overnight</p>
+          </div>
+          <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
+            <p class="text-2xl font-bold text-brand-accent">4.5K+</p>
+            <p class="mt-1 text-sm text-white/80">Facebook followers</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="amenities" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Amenities &amp; occasions</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>Private resort space for staycations, barkada days, and venue celebrations — day or overnight.</p>
+        <div data-filter class="mt-8">
+          <div class="flex flex-wrap gap-2">
+            <button type="button" data-filter-btn="all" class="filter-active rounded-full bg-brand-mid px-4 py-2 text-sm text-white" aria-pressed="true">All</button>
+            <button type="button" data-filter-btn="stay" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Stay</button>
+            <button type="button" data-filter-btn="events" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Events</button>
+            <button type="button" data-filter-btn="venue" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Venue</button>
+          </div>
+          <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <article data-filter-item data-categories="stay,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Daytime staycation</h3>
+              <p class="mt-2 text-sm text-gray-600">Open 8:00 AM to 5:00 PM for family days, barkada hangouts, and quiet private resort time.</p>
+            </article>
+            <article data-filter-item data-categories="stay,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Overnight escape</h3>
+              <p class="mt-2 text-sm text-gray-600">Overnight slots from 8:00 PM to 5:00 AM — stay close to Rodriguez without leaving Montalban.</p>
+            </article>
+            <article data-filter-item data-categories="events,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Celebrations &amp; reunions</h3>
+              <p class="mt-2 text-sm text-gray-600">Private grounds for birthdays, reunions, and small gatherings with room to decorate and host.</p>
+            </article>
+            <article data-filter-item data-categories="venue,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Venue styling</h3>
+              <p class="mt-2 text-sm text-gray-600">Event-ready spaces with lighting and décor-friendly areas for intimate ceremonies and photos.</p>
+            </article>
+            <article data-filter-item data-categories="venue,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Private booking</h3>
+              <p class="mt-2 text-sm text-gray-600">Reserve the resort for your group — confirm dates by phone or Facebook before someone else takes the slot.</p>
+            </article>
+            <article data-filter-item data-categories="events,all" data-reveal class="rounded-2xl border-t-4 border-brand-accent bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+              <h3 class="font-semibold text-brand-dark">Always open</h3>
+              <p class="mt-2 text-sm text-gray-600">Flexible day and overnight windows so you can plan around work schedules and weekend crowds.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Resort gallery</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>Real photos from the Merlita's Venue and Resort Facebook page — grounds, styling, and celebration spaces.</p>
+        <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-white shadow-sm">
+            <img src="assets/project-01.jpg" alt="Merlita's Private Resort floral venue styling" width="939" height="939" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Floral venue moments</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-white shadow-sm">
+            <img src="assets/project-02.jpg" alt="Merlita's Private Resort candlelit table setting" width="1060" height="1060" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Evening table styling</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-white shadow-sm">
+            <img src="assets/project-03.jpg" alt="Merlita's Private Resort celebration setup" width="1072" height="1072" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Celebration setup</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden rounded-2xl bg-white shadow-sm">
+            <img src="assets/project-04.jpg" alt="Merlita's Private Resort decorated aisle" width="1074" height="1074" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Decorated aisle views</figcaption>
+          </figure>
+        </div>
+        <p class="mt-6 text-center">
+          <a href="https://www.facebook.com/merlitasprivateresort/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-mid hover:underline">See more photos on Facebook →</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="about" class="bg-brand-dark py-16 text-white sm:py-20">
+      <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2">
+        <img src="assets/hero-resort.jpg" alt="Merlita's Private Resort cover view" width="2048" height="1536" loading="lazy" class="w-full rounded-2xl shadow-lg ring-1 ring-white/10 object-cover aspect-[4/3]" data-reveal />
+        <div data-reveal>
+          <h2 class="font-display text-3xl font-bold">About Merlita's</h2>
+          <p class="mt-4 text-white/85"><strong>Merlita's Private Resort</strong> (Merlita's Venue and Resort on Facebook) is a private resort and event venue in Rodriguez, Rizal — known locally for daytime staycations and overnight escapes in Brgy. San Jose.</p>
+          <p class="mt-3 text-white/85">With <strong>4.5K+ Facebook followers</strong>, guests inquire for family days, barkada overnight stays, and celebration setups on the private grounds.</p>
+          <p class="mt-4 font-display italic text-brand-foam">220 E. Manuel St. Brgy. San Jose, Rodriguez, Rizal 1860</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="hours" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Hours &amp; booking</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal">From the Facebook intro — confirm rates and packages when you inquire.</p>
+        <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <article data-reveal class="rounded-2xl bg-white p-6 shadow-sm">
+            <p class="text-xs font-semibold uppercase tracking-wide text-brand-mid">Daytime</p>
+            <p class="mt-2 text-2xl font-bold text-brand-dark">8 AM – 5 PM</p>
+            <p class="mt-1 text-sm text-gray-600">Private resort day use</p>
+          </article>
+          <article data-reveal class="rounded-2xl bg-white p-6 shadow-sm">
+            <p class="text-xs font-semibold uppercase tracking-wide text-brand-mid">Overnight</p>
+            <p class="mt-2 text-2xl font-bold text-brand-dark">8 PM – 5 AM</p>
+            <p class="mt-1 text-sm text-gray-600">Night staycation window</p>
+          </article>
+          <article data-reveal class="rounded-2xl bg-white p-6 shadow-sm">
+            <p class="text-xs font-semibold uppercase tracking-wide text-brand-mid">Availability</p>
+            <p class="mt-2 text-2xl font-bold text-brand-dark">Always open</p>
+            <p class="mt-1 text-sm text-gray-600">Message to reserve your date</p>
+          </article>
+        </div>
+        <p class="mt-6 text-sm text-gray-500" data-reveal">* Hours from Facebook About. Package rates and guest limits vary — call or message for the latest quote.</p>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <h2 class="font-display text-center text-3xl font-bold text-brand-dark" data-reveal>Common questions</h2>
+        <div data-accordion class="mt-10 space-y-3">
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/40">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Where is Merlita's Private Resort?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">220 E. Manuel St. Brgy. San Jose, Rodriguez, Rizal 1860 (Montalban). Message or call for directions and parking notes before you visit.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/40">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Do you offer daytime and overnight?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Yes — daytime from 8:00 AM to 5:00 PM and overnight from 8:00 PM to 5:00 AM. Share your preferred window when you inquire.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/40">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Can we book for celebrations?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">The resort doubles as a venue for celebrations and gatherings. Tell us your guest count, date, and styling needs when you message.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden rounded-xl border border-brand-dark/10 bg-brand-light/40">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">How do we reserve a date?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Call <a href="tel:+639495631129" class="font-semibold text-brand-mid hover:underline">0949 563 1129</a> or message the <a href="https://www.facebook.com/merlitasprivateresort/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-mid hover:underline">Facebook page</a> with your preferred date, day or overnight slot, and party size.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="overflow-hidden rounded-3xl bg-brand-dark text-white shadow-xl">
+          <div class="grid gap-0 lg:grid-cols-2">
+            <div class="p-8 sm:p-10 lg:p-12">
+              <h2 class="font-display text-3xl font-bold" data-reveal>Plan your stay</h2>
+              <p class="mt-4 text-white/80" data-reveal>Tell us your preferred date, day or overnight window, and group size — we will confirm availability.</p>
+              <ul class="mt-8 space-y-4 text-sm sm:text-base" data-reveal>
+                <li><span class="font-semibold text-brand-accent">Mobile</span><br /><a href="tel:+639495631129" class="hover:underline">0949 563 1129</a></li>
+                <li><span class="font-semibold text-brand-accent">Address</span><br />220 E. Manuel St. Brgy. San Jose, Rodriguez, Rizal 1860</li>
+                <li><span class="font-semibold text-brand-accent">Facebook</span><br /><a href="https://www.facebook.com/merlitasprivateresort/" target="_blank" rel="noopener noreferrer" class="hover:underline">facebook.com/merlitasprivateresort</a></li>
+                <li><span class="font-semibold text-brand-accent">TikTok</span><br />@merlitasvenue</li>
+              </ul>
+            </div>
+            <div class="flex flex-col justify-center gap-4 bg-brand-mid/40 p-8 sm:p-10 lg:p-12" data-reveal>
+              <a href="tel:+639495631129" class="rounded-full bg-brand-accent px-6 py-4 text-center font-semibold text-brand-dark hover:brightness-105 transition">Call now</a>
+              <a href="https://www.facebook.com/merlitasprivateresort/" target="_blank" rel="noopener noreferrer" class="rounded-full border border-white/40 px-6 py-4 text-center font-semibold hover:bg-white/10 transition">Message on Facebook</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-brand-dark/10 bg-white py-8 text-center text-sm text-gray-500">
+    <p class="font-display text-brand-dark">Merlita's Private Resort</p>
+    <p class="mt-1">Rodriguez · Private resort demo site for quotation</p>
+    <p class="mt-3">&copy; <span id="year"></span> · Sample site by <a href="https://carlmanuel.com" class="text-brand-mid hover:underline">Carl Louis Manuel</a></p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
+</body>
+</html>

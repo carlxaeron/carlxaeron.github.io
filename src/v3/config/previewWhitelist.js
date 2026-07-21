@@ -245,6 +245,12 @@ export const PREVIEW_SITES = [
     label: "Lucky Drive Inn Hotel",
     netlifySite: "lucky-drive-inn",
   },
+  {
+    id: "merlitas-private-resort",
+    host: "merlitas-private-resort.netlify.app",
+    label: "Merlita's Private Resort",
+    netlifySite: "merlitas-private-resort",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

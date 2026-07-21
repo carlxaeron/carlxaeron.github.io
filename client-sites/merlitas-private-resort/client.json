@@ -1,0 +1,57 @@
+{
+  "businessName": "Merlita's Private Resort",
+  "slug": "merlitas-private-resort",
+  "previewHost": "merlitas-private-resort.netlify.app",
+  "industry": "Private resort / venue / staycation",
+  "deployedAt": "2026-07-21",
+  "contact": {
+    "name": "Merlita's Venue and Resort team",
+    "email": null,
+    "phone": "+63 949 563 1129",
+    "facebook": "https://www.facebook.com/merlitasprivateresort/",
+    "tiktok": "merlitasvenue",
+    "address": "220 E. Manuel St. Brgy. San Jose, Rodriguez, Rizal 1860"
+  },
+  "system": {
+    "type": "booking",
+    "adminPath": "/admin/",
+    "label": "Booking & calendar admin",
+    "painHero": "Day and overnight staycation bookings stack up on Messenger — see the calendar fill and confirm private resort dates without double-booking.",
+    "navPages": ["Dashboard", "Bookings", "Calendar", "Guests", "Settings"]
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive website only (amenities, gallery, about, FAQ, contact). Admin preview is a sample; production booking system priced separately.",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=merlitas-private-resort"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "draft",
+    "cadence": null,
+    "emailFound": false,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "No public email on Facebook About — outreach via Messenger/SMS/call. Ask before any email send if an address appears later."
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/merlitasprivateresort/",
+    "pageTitle": "Merlita's Venue and Resort | Rodriguez",
+    "category": "Page · Event",
+    "intro": "Open Daytime 8am to 5pm and Overnight 8pm to 5am (Private Resort in Montalban Rizal)",
+    "address": "220 E. Manuel St. Brgy. San Jose, Rodriguez, Philippines, 1860",
+    "phone": "0949 563 1129",
+    "tiktok": "merlitasvenue",
+    "hours": "Always open · Daytime 8am–5pm · Overnight 8pm–5am",
+    "followers": "~4.5K",
+    "notes": "Scraped logged-out via Chrome DevTools MCP (About + Photos). No public email. Assets: cover 2048×1536, logo 2048×2048, venue/event gallery (~939–1074px) via signed fbcdn curl + Facebook referer. Wedding/venue styling on Photos — marketed as private resort staycation."
+  }
+}
