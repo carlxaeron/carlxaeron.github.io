@@ -1,0 +1,97 @@
+/* Palms and Terraces — hero, reveal, tropical pool accents */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  [data-hero-animate],
+  [data-hero-bg] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-three-canvas {
+    display: none;
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-header] {
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+[data-header].is-scrolled {
+  box-shadow: 0 4px 24px rgba(12, 61, 50, 0.12);
+}
+
+.hero-bg {
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.hero-bg--palms {
+  background-image:
+    linear-gradient(135deg, rgba(12, 61, 50, 0.92) 0%, rgba(26, 107, 84, 0.78) 48%, rgba(12, 61, 50, 0.88) 100%),
+    url("assets/hero-pool.jpg");
+}
+
+.trust-strip {
+  background: linear-gradient(90deg, #0c3d32 0%, #1a6b54 50%, #0c3d32 100%);
+}
+
+.filter-active {
+  background-color: #1a6b54;
+  color: #fff;
+}
+
+.filter-inactive {
+  background-color: transparent;
+}
+
+.hero-three-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.72;
+  mix-blend-mode: screen;
+}
+
+[data-hero] > .relative {
+  z-index: 2;
+}
+
+.hero-has-three-object .hero-bg--palms {
+  background-image:
+    radial-gradient(ellipse 70% 85% at 72% 50%, rgba(201, 168, 108, 0.16), transparent 62%),
+    linear-gradient(118deg, rgba(12, 61, 50, 0.9) 42%, rgba(12, 61, 50, 0.64) 68%, rgba(12, 61, 50, 0.5) 100%),
+    url("assets/hero-pool.jpg");
+}
+
+.hero-has-three-object > .relative {
+  max-width: 36rem;
+}

@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.86] — 2026-07-21
+
+### Added
+- **Preview whitelist** — `palms-and-terraces` (Palms and Terraces · Rodriguez Rizal) quotation demo (`?preview=` + client-sites + catalog)
+
 ## [3.0.85] — 2026-07-21
 
 ### Added

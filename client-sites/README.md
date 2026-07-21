@@ -56,6 +56,7 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Lucky Drive Inn Hotel](#lucky-drive-inn-hotel) | `lucky-drive-inn` | Drive-in hotel / inn · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=lucky-drive-inn) | 2026-07-21 |
 | [Merlita's Private Resort](#merlitas-private-resort) | `merlitas-private-resort` | Private resort / venue / staycation · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=merlitas-private-resort) | 2026-07-21 |
 | [CJ Gomez Private Resort](#cj-gomez-private-resort) | `cj-resort` | Private resort / staycation venue | booking | [Preview](https://carlmanuel.com/?preview=cj-resort) | 2026-07-21 |
+| [Palms and Terraces](#palms-and-terraces) | `palms-and-terraces` | Public swimming pool / events venue · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=palms-and-terraces) | 2026-07-21 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -809,6 +810,26 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | Cover garden + lodge profile + gallery (960×960 ×5) via Chrome DevTools + signed fbcdn curl |
 | **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
 | **Outreach** | cjgprivateresort@gmail.com — drafts ready · **ask before send** · cadence **3d1w** after yes |
+
+---
+
+### Palms and Terraces
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/palms-and-terraces/` |
+| **Netlify site** | `palms-and-terraces` |
+| **Preview host** | `palms-and-terraces.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=palms-and-terraces |
+| **Contact** | palms.and.terraces@gmail.com (**no public phone** on FB) |
+| **Address** | Chico Street, Torres Subd., San Jose, Rodriguez, Philippines 1850 |
+| **Category** | Public Swimming Pool · Events place (weddings, birthdays, parties, forums) · ~4.3K FB followers |
+| **Source** | [Facebook](https://www.facebook.com/p/Palms-and-Terraces-100063872265656/) |
+| **System** | booking · Booking & calendar admin · painHero: weddings/birthdays/pool Messenger bookings |
+| **Hero 3D** | Motion + particles + **`data-hero-three-object="pooldeck"`** · tropical green / champagne gold |
+| **Assets** | Hero 1920×1795 + logo 908×908 + gallery (1920 / 1440×864 / 1200 / 2048×1536) via Chrome DevTools + signed fbcdn |
+| **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
+| **Outreach** | palms.and.terraces@gmail.com — drafts ready · **ask before send** · cadence **3d1w** after yes |
 
 ---
 

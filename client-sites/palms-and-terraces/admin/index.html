@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Admin — Palms and Terraces</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+  <script src="../embed-guard.js"></script>
+  <script src="brand-config.js"></script>
+  <script src="demo-data.js"></script>
+</head>
+<body>
+  <div class="admin-app" data-admin-app>
+    <div class="admin-demo-banner" role="status">
+      <span class="admin-demo-banner__badge">Demo</span>
+      Sample data only · Logged in as <strong data-owner-role>Owner</strong>
+    </div>
+
+    <header class="admin-topbar">
+      <button type="button" class="admin-menu-btn" data-menu-toggle aria-expanded="false" aria-controls="admin-sidebar" aria-label="Open menu">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="admin-topbar__brand">
+        <img data-brand-logo src="" alt="" class="admin-topbar__logo" hidden />
+        <span data-brand-name>Business Admin</span>
+      </div>
+      <span class="admin-topbar__user" data-user-initials>OW</span>
+    </header>
+
+    <div class="admin-layout">
+      <aside id="admin-sidebar" class="admin-sidebar" data-sidebar aria-label="Admin navigation">
+        <nav class="admin-nav" data-nav></nav>
+      </aside>
+      <div class="admin-overlay" data-overlay hidden></div>
+
+      <main class="admin-main" data-main tabindex="-1">
+        <div class="admin-main__inner" data-page></div>
+      </main>
+    </div>
+
+    <nav class="admin-bottom-nav" data-bottom-nav aria-label="Mobile admin navigation"></nav>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

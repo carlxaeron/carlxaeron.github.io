@@ -257,6 +257,12 @@ export const PREVIEW_SITES = [
     label: "CJ Gomez Private Resort",
     netlifySite: "cj-gomez-private-resort",
   },
+  {
+    id: "palms-and-terraces",
+    host: "palms-and-terraces.netlify.app",
+    label: "Palms and Terraces",
+    netlifySite: "palms-and-terraces",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

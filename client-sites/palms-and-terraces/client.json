@@ -1,0 +1,54 @@
+{
+  "businessName": "Palms and Terraces",
+  "slug": "palms-and-terraces",
+  "previewHost": "palms-and-terraces.netlify.app",
+  "industry": "Public swimming pool / events venue / staycation",
+  "deployedAt": "2026-07-21",
+  "contact": {
+    "name": "Palms and Terraces team",
+    "email": "palms.and.terraces@gmail.com",
+    "phone": null
+  },
+  "system": {
+    "type": "booking",
+    "adminPath": "/admin/",
+    "label": "Booking & calendar admin",
+    "painHero": "Weddings, birthdays, and pool bookings pile up on Messenger — see the calendar fill and confirm event dates without double-booking.",
+    "navPages": ["Dashboard", "Bookings", "Calendar", "Guests", "Settings"]
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive website only (amenities, gallery, about, FAQ, contact). Admin preview is a sample; production booking system priced separately.",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=palms-and-terraces"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "ready",
+    "cadence": null,
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "Email found on FB About: palms.and.terraces@gmail.com. No public phone. ASK before send."
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/p/Palms-and-Terraces-100063872265656/",
+    "address": "Chico Street, Torres Subd., San Jose, Rodriguez, Philippines, 1850",
+    "email": "palms.and.terraces@gmail.com",
+    "phones": [],
+    "followers": "4.3K",
+    "hours": "Open now (hours listed on Facebook)",
+    "category": "Public Swimming Pool",
+    "intro": "Swimming Sports Facility, Events Place for Weddings, Birthdays, Parties, Forums...",
+    "priceRange": "$",
+    "notes": "Night swimming temporarily not available starting June 30 (FB post). HD assets from Facebook Photos via Chrome DevTools MCP + signed fbcdn download. Hero 1920×1795, gallery up to 1920×1795 / 844×1440 / 1200×1200, logo 908×908."
+  }
+}
