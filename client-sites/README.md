@@ -57,6 +57,8 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Merlita's Private Resort](#merlitas-private-resort) | `merlitas-private-resort` | Private resort / venue / staycation · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=merlitas-private-resort) | 2026-07-21 |
 | [CJ Gomez Private Resort](#cj-gomez-private-resort) | `cj-resort` | Private resort / staycation venue | booking | [Preview](https://carlmanuel.com/?preview=cj-resort) | 2026-07-21 |
 | [Palms and Terraces](#palms-and-terraces) | `palms-and-terraces` | Public swimming pool / events venue · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=palms-and-terraces) | 2026-07-21 |
+| [Frances Teresa Garden — The Party Place](#frances-teresa-garden--the-party-place) | `frances-teresa-garden` | Party venue / garden event place · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=frances-teresa-garden) | 2026-07-21 |
+| [Sky Glass](#sky-glass) | `sky-glass` | Indoor pool / exclusive resort · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=sky-glass) | 2026-07-21 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -830,6 +832,46 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | Hero 1920×1795 + logo 908×908 + gallery (1920 / 1440×864 / 1200 / 2048×1536) via Chrome DevTools + signed fbcdn |
 | **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
 | **Outreach** | palms.and.terraces@gmail.com — drafts ready · **ask before send** · cadence **3d1w** after yes |
+
+---
+
+### Frances Teresa Garden — The Party Place
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/frances-teresa-garden/` |
+| **Netlify site** | `frances-teresa-garden` |
+| **Preview host** | `frances-teresa-garden.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=frances-teresa-garden |
+| **Contact** | ftdl.corp.design@gmail.com · 0947 705 2252 |
+| **Address** | 698 Tanguile St., San Jose, Rodriguez, Philippines 1860 |
+| **Category** | Performance & Event Venue · weddings, debuts, baptisms, reunions, seminars, photo shoots · vintage bridal/sports cars · ~4.2K FB · 80% recommend |
+| **Source** | [Facebook](https://www.facebook.com/p/Frances-Teresa-Garden-The-Party-PlaceParty-Venue-100064148883159/) |
+| **System** | booking · Venue booking admin · painHero: wedding/debut/party Messenger bookings |
+| **Hero 3D** | Motion + particles + **`data-hero-three-object="lakehouse"`** · garden green / champagne |
+| **Assets** | Logo 2048² + gallery (1080–1536) + cover via Playwright logged-out download |
+| **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
+| **Outreach** | ftdl.corp.design@gmail.com — drafts ready · **ask before send** · cadence **3d1w** after yes |
+
+---
+
+### Sky Glass
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/sky-glass/` |
+| **Netlify site** | `sky-glass-resort` |
+| **Preview host** | `sky-glass-resort.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=sky-glass |
+| **Contact** | **No email** on FB About · 0927 578 8947 |
+| **Address** | Blk 10 Lot 45 Phase 2 Congressville Subd. Brgy. Manggahan, Rodriguez, Rizal |
+| **Category** | Hotel resort · Public Swimming Pool · Exclusive Resort · Indoor pool (*Dito hindi ka mangingitim*) · ~9.5K FB followers |
+| **Source** | [Facebook](https://www.facebook.com/p/Sky-Glass-61557954401054/) |
+| **System** | booking · Venue booking & calendar admin · painHero: indoor-pool day + night staycations on Messenger |
+| **Hero 3D** | Motion + particles + **`data-hero-three-object="pooldeck"`** · midnight navy / amber |
+| **Assets** | Cover 2048×1536 + indoor pool promo 1448×1086 + neon logo wall + guest gallery via Chrome DevTools + signed fbcdn |
+| **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
+| **Outreach** | No email — Messenger/SMS drafts ready · **ask before send** · cadence **3d1w** after yes |
 
 ---
 

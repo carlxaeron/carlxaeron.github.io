@@ -1,0 +1,52 @@
+{
+  "businessName": "Frances Teresa Garden — The Party Place",
+  "slug": "frances-teresa-garden",
+  "previewHost": "frances-teresa-garden.netlify.app",
+  "industry": "Party venue / garden event place",
+  "deployedAt": "2026-07-21",
+  "contact": {
+    "name": "Frances Teresa Garden",
+    "email": "ftdl.corp.design@gmail.com",
+    "phone": "+63 947 705 2252",
+    "facebook": "https://www.facebook.com/p/Frances-Teresa-Garden-The-Party-PlaceParty-Venue-100064148883159/",
+    "address": "698 Tanguile St., San Jose, Rodriguez, Philippines 1860"
+  },
+  "system": {
+    "type": "booking",
+    "adminPath": "/admin/",
+    "label": "Venue booking admin",
+    "painHero": "Wedding, debut, and party bookings pile up on Messenger — see the garden calendar fill and confirm event dates without double-booking.",
+    "navPages": ["Dashboard", "Bookings", "Calendar", "Guests", "Settings"]
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive website only (events, gallery, about, FAQ, contact). Admin preview is a sample; production booking system priced separately.",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=frances-teresa-garden"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "ready",
+    "cadence": null,
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "Email from FB About: ftdl.corp.design@gmail.com. Ask before initial send."
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/p/Frances-Teresa-Garden-The-Party-PlaceParty-Venue-100064148883159/",
+    "address": "698 Tanguile St., San Jose, Rodriguez, Philippines 1860",
+    "phones": ["0947 705 2252"],
+    "email": "ftdl.corp.design@gmail.com",
+    "followers": "4.2K",
+    "notes": "Category: Performance & Event Venue. 80% recommend (11 reviews). Open now. Price Range $. Intro: Wedding, Debut, Birthdays, anniversary, Baptismal, reunion, seminars, photo shoot, convention, and all events. Vintage Bridal cars and sports car for rental. Assets via Playwright logged-out download (cover/logo/gallery) — Chrome MCP tab race with parallel agents blocked get_network_request writes."
+  }
+}

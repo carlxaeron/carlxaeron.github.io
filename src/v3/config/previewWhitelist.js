@@ -263,6 +263,18 @@ export const PREVIEW_SITES = [
     label: "Palms and Terraces",
     netlifySite: "palms-and-terraces",
   },
+  {
+    id: "frances-teresa-garden",
+    host: "frances-teresa-garden.netlify.app",
+    label: "Frances Teresa Garden — The Party Place",
+    netlifySite: "frances-teresa-garden",
+  },
+  {
+    id: "sky-glass",
+    host: "sky-glass-resort.netlify.app",
+    label: "Sky Glass",
+    netlifySite: "sky-glass-resort",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

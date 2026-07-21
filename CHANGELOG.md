@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.87] — 2026-07-21
+
+### Added
+- **Preview whitelist** — `frances-teresa-garden` (Frances Teresa Garden — The Party Place · Rodriguez Rizal) quotation demo (`?preview=` + client-sites + catalog)
+
 ## [3.0.86] — 2026-07-21
 
 ### Added
