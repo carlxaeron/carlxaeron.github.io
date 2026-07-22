@@ -2,6 +2,18 @@
 
 Personal portfolio ([carlmanuel.com](https://carlmanuel.com)) built with Create React App, V3 design system, Laravel API on Namecheap, Firebase (assistant), and GitHub Pages.
 
+### Clone (portfolio + private tooling)
+
+This public repo hosts the portfolio. API, client demos, and MCP servers live in **private** git submodules (same local paths). You need GitHub access to those repos.
+
+```bash
+git clone --recurse-submodules git@github.com:carlxaeron/carlxaeron.github.io.git
+# or after a normal clone:
+git submodule update --init --recursive
+```
+
+Details: [SUBMODULES.md](SUBMODULES.md).
+
 ---
 
 ## Major features (2026 updates)
@@ -50,18 +62,20 @@ Full pipeline for **OnlineJobs.ph** remote job search, tailored CVs, apply track
 ## Repository layout (high level)
 
 ```text
-src/v3/                    # Portfolio V3 (active UI)
-api-carlxaeron/            # Laravel 12 API → api.carlmanuel.com
-OnlineJobs-MCP-Server/     # MCP server + FastAPI dashboard + dashboard-ui/
-Office-Word-MCP-Server/    # CV Word doc generator (Canva-style)
-client-sites/              # Netlify client quotation demos
-job-applications/          # Generated apply folders (gitignored)
-docs/                      # GitHub Pages build + workflow docs
-functions/                 # Firebase (assistant, license, weekly report)
-.cursor/skills/            # Cursor agent skills (deploy, api-carlxaeron, hosting-ssh, …)
-.cursor/rules/             # Agent rules (v3 design, api-carlxaeron, firebase, …)
+src/v3/                    # Portfolio V3 (active UI) — public
+docs/                      # GitHub Pages build — public
+functions/                 # Firebase leftovers — public
+api-carlxaeron/            # PRIVATE submodule — Laravel API
+client-sites/              # PRIVATE submodule — Netlify demos
+OnlineJobs-MCP-Server/     # PRIVATE submodule — MCP + dashboard
+Hosting-SSH-MCP-Server/    # PRIVATE submodule
+Namecheap-MCP-Server/      # PRIVATE submodule
+Office-Word-MCP-Server/    # PRIVATE submodule — CV tooling
+job-applications/          # gitignored (local only)
+agency-agents/             # gitignored (local only)
+.cursor/skills/            # Cursor agent skills
 AGENTS.md                  # Agent entry point
-docs/project-history.md    # What the repo has now + version timeline
+SUBMODULES.md              # Private submodule map + clone notes
 ```
 
 ---

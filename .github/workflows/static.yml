@@ -22,6 +22,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      # Do not set submodules: recursive — tooling submodules are private and not needed for Pages.
       - name: Checkout
         uses: actions/checkout@v4
 

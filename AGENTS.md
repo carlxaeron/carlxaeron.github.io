@@ -17,6 +17,7 @@ Instructions for AI agents working in this repository.
 2. Match existing conventions — minimal diffs, no drive-by refactors.
 3. **Do not edit** `.cursor/plans/` or user plan files.
 4. **Do not commit** `job-applications/`, `exports/`, or `.env` secrets.
+5. **Private submodules:** `api-carlxaeron`, `client-sites`, and the MCP server folders are private repos linked via [`.gitmodules`](.gitmodules). After clone run `git submodule update --init --recursive`. See [SUBMODULES.md](SUBMODULES.md). Commit API/client/MCP changes **inside** the submodule (then bump the parent gitlink). Do not re-vendor those trees into the public parent.
 
 ## Keep agent docs current (no wait for a command)
 
