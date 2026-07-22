@@ -254,20 +254,22 @@ Pin Motion and Three.js CDN versions in the hero scripts so demos do not break o
 
 ### Embed-only security (required)
 
-Client demos are **not** meant to be browsed directly. They only render inside the portfolio preview iframes.
+Client demos are **not** meant to be browsed directly by default. Portfolio `?preview=` iframes stay embed-only. Prospects may open a **one-time** magic link (`?access=`) from outreach email — exactly one HTML document load per token (site and admin are separate tokens).
 
 | Layer | File | Behavior |
 |-------|------|----------|
-| Edge | `netlify/edge-functions/embed-only.js` | 403 for direct document loads; allows `Sec-Fetch-Dest: iframe` or portfolio referer |
-| Client | `embed-guard.js` | Replaces page if not in iframe or referrer not from allowed portfolio hosts |
-| Headers | `netlify.toml` | `frame-ancestors` limits who can embed the site |
+| Edge | `netlify/edge-functions/embed-only.js` | Allows iframe / portfolio Referer; `?access=` → redeem API then one load + short `cm_unlock` cookie (edge **ignores** cookie later); else 403 lock + Notify Carl |
+| Client | `embed-guard.js` | Allows iframe+allowlisted referrer **or** `cm_unlock=1` cookie |
+| Headers | `netlify.toml` | `frame-ancestors` limits who may embed the site |
 
 Allowed portfolio hosts: `carlmanuel.com`, `www.carlmanuel.com`, `carlxaeron.github.io`, `localhost`.
+
+**Netlify env:** set `PREVIEW_ACCESS_SECRET` (all contexts; CLI `netlify env:set`) to match API — see [`client-sites/_template/README.md`](../../client-sites/_template/README.md). Redeploy after copy from `_template` or secret rotate. Before redeploy: `rm -rf .netlify/edge-functions-dist` (or `--skip-functions-cache`) so a stale edge bundle does not keep the old lock HTML.
 
 After deploy, verify:
 
 ```bash
-# Direct access → 403
+# Direct access → 403 lock HTML
 curl -sI https://{previewHost} | head -1
 
 # Iframe simulation → 200
@@ -343,12 +345,39 @@ Outreach gate:
 - [ ] Default cadence: **3d1w** — **3d → 7d → 7d → 7d** (max **4** follow-ups)
 - [ ] Immediately POST https://api.carlmanuel.com/outreachSchedule with
       sendInitial: true, autoFollowUp: true, cadence: "3d1w", maxFollowUps: 4,
-      systemLabel (from system.label), systemPain (from system.painHero)
+      systemLabel (from system.label), systemPain (from system.painHero),
+      **attachments** (website + admin screenshots — see below)
 - [ ] Mirror status into client.json → outreach.*
 ```
 
 **Never** send the **initial** quotation without an explicit yes in the same conversation turn.  
 **Yes to send = auto follow-ups on (3d → 7d → 7d → 7d, max 4)** — do not wait for a separate follow-up confirmation.
+
+### Screenshot attachments (required on initial send)
+
+Before `outreachSchedule` with `sendInitial: true`, attach **at least 2** clear images:
+
+| File | What to capture |
+|------|-----------------|
+| `website-preview.jpg` | Marketing site (desktop hero / first viewport, or full desktop frame) |
+| `admin-preview.jpg` | Admin/system (`/admin/`) — desktop dashboard preferred |
+
+**How (agent):**
+
+1. Open the live Netlify site (`https://{previewHost}/` and `/admin/`) **or** portfolio `?preview={slug}` panels.
+2. Capture via Chrome DevTools / browser MCP `take_screenshot` (or save under `client-sites/{slug}/assets/outreach-*.jpg` and redeploy so URLs are public).
+3. Pass on `POST /outreachSchedule` as `attachments` (max **4**, **5MB** each, jpeg/png/gif/webp):
+
+```json
+"attachments": [
+  { "filename": "website-preview.jpg", "contentBase64": "<base64 or data:image/jpeg;base64,…>" },
+  { "filename": "admin-preview.jpg", "url": "https://{previewHost}/assets/outreach-admin.jpg" }
+]
+```
+
+Use **`url`** (preferred when already on Netlify) **or** **`contentBase64`** — not both per item. Follow-up cron emails **omit** attachments; initial only.
+
+HTML signature includes Carl’s headshot (`https://carlmanuel.com/static/images/profile3.jpg`); plain-text signature stays text-only.
 
 **Cadence source of truth:** this repo uses **`cadence: "3d1w"`** (first follow-up ~3 days, then ~7d × 3). Some Cursor **user rules** may still say “default cadence is **1w**” — **ignore that for outreach** unless the user explicitly requests weekly-only (`1w` legacy). Wrong cadence queues the first follow-up at 7d instead of 3d.
 
@@ -382,14 +411,19 @@ curl -sS -X POST 'https://api.carlmanuel.com/outreachSchedule' \
     \"timeline\": \"…\",
     \"cadence\": \"3d1w\",
     \"systemLabel\": \"Booking & calendar admin\",
+    \"systemPain\": \"…\",
     \"sendInitial\": true,
     \"autoFollowUp\": true,
-    \"maxFollowUps\": 4
+    \"maxFollowUps\": 4,
+    \"attachments\": [
+      { \"filename\": \"website-preview.jpg\", \"url\": \"https://{previewHost}/assets/outreach-website.jpg\" },
+      { \"filename\": \"admin-preview.jpg\", \"url\": \"https://{previewHost}/assets/outreach-admin.jpg\" }
+    ]
   }"
 ```
 
-- `sendInitial: true` → sends the proposal now, then queues follow-ups.
-- Hosting cron auto-sends when due: **1st ~3d** (soft + **10%** off + commission offer), then **up to 3 more at ~7d each** (max **4**) with stacking discounts **+10% → +10% → +20%** (cumulative max **50%** off quoted amount). Server HTML in `outreach_build_followup_email`.
+- `sendInitial: true` → sends the proposal now (with screenshot attachments when provided), then queues follow-ups.
+- Hosting cron auto-sends when due: **1st ~3d** (soft + **10%** off + commission offer), then **up to 3 more at ~7d each** (max **4**) with stacking discounts **+10% → +10% → +20%** (cumulative max **50%** off quoted amount). Server HTML in `outreach_build_followup_email`. Follow-ups do **not** re-attach screenshots.
 - Pause anytime: `POST /outreachPause` with `{ secret, slug }` (or slug+contactEmail).
 
 Also update `client.json` → `outreach` (`status=sent`, `cadence: "3d1w"`, `sentAt`, `nextFollowUpAt`).

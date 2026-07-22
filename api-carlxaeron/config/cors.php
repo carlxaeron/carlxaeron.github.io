@@ -18,6 +18,7 @@ return [
         'assistant',
         'content/*',
         'agreements/*',
+        'previewAccess/*',
         'admin/*',
         'up',
     ],
@@ -31,9 +32,12 @@ return [
         'http://localhost:3000',
     ],
 
-    'allowed_origins_patterns' => [],
+    // Lock-page Notify Carl from client Netlify demos.
+    'allowed_origins_patterns' => [
+        '#^https://[a-z0-9-]+\.netlify\.app$#i',
+    ],
 
-    'allowed_headers' => ['Content-Type', 'Accept', 'Origin', 'Authorization'],
+    'allowed_headers' => ['Content-Type', 'Accept', 'Origin', 'Authorization', 'X-Preview-Access-Secret'],
 
     'exposed_headers' => [],
 

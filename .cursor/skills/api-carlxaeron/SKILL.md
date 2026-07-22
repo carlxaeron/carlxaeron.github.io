@@ -26,9 +26,11 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 | POST | `/contact` | Form + SMTP |
 | POST | `/quotation` | Form + SMTP |
 | POST | `/assistant` | ChatAgent — browser Origin + OpenAI (`OPENAI_API_KEY`) |
-| POST | `/outreachSchedule` | **Secret** — after user yes: send initial + queue auto follow-ups (`autoFollowUp: true`, cadence `3d1w` = **3d→7d→7d→7d**, `maxFollowUps: 4`). Follow-up emails stack goodwill discount **10%→20%→30%→50%** + commission invite. On successful initial send → admin Web Push |
-| POST | `/outreachPause` | **Secret** — stop auto follow-ups for a slug (hosting-php cron still reads same MySQL rows) |
+| POST | `/outreachSchedule` | **Secret** — after user yes: send initial + queue auto follow-ups (`autoFollowUp: true`, cadence `3d1w` = **3d→7d→7d→7d**, `maxFollowUps: 4`). Optional **`attachments`**: website + admin screenshot images (`url` or `contentBase64`, max 4, 5MB, jpeg/png/gif/webp) — attached on **initial** only. Optional **`previewHost` / `netlifyHost`**: on initial send, mints site+admin one-time Netlify unlock tokens and injects URLs into the email. Follow-up emails stack goodwill discount **10%→20%→30%→50%** + commission invite. HTML sign-off uses `OutreachSignature` (+ hosted headshot `profile3.jpg`). On successful initial send → admin Web Push |
+| POST | `/outreachPause` | **Secret** — stop auto follow-ups for a slug (Artisan `outreach:followups` cron reads same MySQL rows) |
 | POST | `/pushNotifyAdmins` | **Secret** — `{ title, body, data? }` → push to all admin subscriptions (used by hosting-php follow-up cron) |
+| POST | `/previewAccess/redeem` | **`X-Preview-Access-Secret`** (env `PREVIEW_ACCESS_SECRET`) — Netlify edge only. Body: `token`, `host`, `path` (+ optional `clientIp`/`clientUa`). Atomic consume unused token matching host + scope (`/` → site, `/admin…` → admin). **ok** → `{ ok, slug, scope, unlockMarker:"1" }`; **denied** → HTTP 403 `{ ok:false, reason }` (`used`\|`expired`\|`revoked`\|`invalid`\|`host_mismatch`\|`scope_mismatch`) |
+| POST | `/previewAccess/requestUnlock` | Browser Origin/Referer (portfolio allowlist **or** matching Netlify host). Body: `slug` and/or `host`, optional `token`, `message`, `label`. Rate-limit 5/h per IP+slug. Emails Carl + Web Push `data.type: preview_unlock_request` (does **not** reissue tokens) |
 
 ### Admin (Sanctum Bearer token — Laravel only)
 
@@ -54,6 +56,9 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 | GET | `/admin/agreements/{id}` | sanctum | agreement detail |
 | POST | `/admin/agreements/{id}/resend` | sanctum | re-email sign link |
 | POST | `/admin/agreements/{id}/revoke` | sanctum | invalidate sign link |
+| POST | `/admin/preview-access` | sanctum | mint/reissue site+admin tokens (`slug`, `netlifyHost`, optional `contactEmail`, `scopes`, `revokeExisting`) |
+| GET | `/admin/preview-access` | sanctum | list tokens by `slug` (`?status=` `?scope=` `?perPage=`) |
+| POST | `/admin/preview-access/{id}/revoke` | sanctum | revoke unused token |
 | GET | `/agreements/{token}` | public + throttle | load agreement for portfolio `?sign=` page |
 | POST | `/agreements/{token}/sign` | public + throttle | client one-time sign |
 | GET | `/content/{section}` | public | portfolio read with `source: static|cms` |
@@ -81,13 +86,13 @@ Create body: `slug`, `businessName`, `clientEmail`, `clientName`, `formJson` (ob
 **Web Push (Admin Settings):** Sanctum admin subscribes via `POST /admin/push/subscribe`; Laravel stores rows in `push_subscriptions` and sends via `minishlink/web-push` when:
 - `POST /contact` or `POST /quotation` succeeds
 - Outreach **initial** email sent (`OutreachScheduler` / `outreachSchedule`)
-- Outreach **follow-up** email sent (hosting-php cron → `POST /pushNotifyAdmins`)
+- Outreach **follow-up** email sent (`php artisan outreach:followups` → Web Push directly)
 - **`POST /trackVisit`** with `eventType: preview_view` + allowlisted Origin/Referer + valid slug — **one push per slug + session** (Cache TTL `PUSH_PREVIEW_VIEW_THROTTLE_MINUTES`, default **30**)
 - **`POST /previewFeedback`** on successful like/dislike/**agree** (slug + sentiment in title/body; dislike includes comment snippet) — also sends **one auto-reply email** to the prospect when `outreach_jobs.contact_email` or body `contactEmail` resolves (like = thank + soft “push through”; dislike = thank + invite revision; agree = thank + “I’ll follow up”); BCC `MAIL_BCC`; skipped if no email or already sent for that row. **agree** additionally emails Carl (`MAIL_TO` + BCC) with Ready to proceed details (no auto agreement send)
 
 Push failure never breaks form/outreach/analytics responses. Service worker + Settings UI live in the portfolio SPA. **iOS:** user must Add to Home Screen (iOS 16.4+), then open Admin and enable notifications.
 
-Live Stellar: **Laravel** serves public API routes including `POST /outreachSchedule` and `POST /outreachPause`. **Follow-up cron** still runs `api-carlxaeron/hosting-php/scripts/cron-outreach-followups.php` (reads same MySQL `outreach_jobs`) — **not** `api-carlxaeron/scripts/` (wrong path). Cron bootstraps via `hosting-php/src/bootstrap.php`: loads `hosting-php/.env`, then parent Laravel `api-carlxaeron/.env` if local copy missing (DB + SMTP + `OUTREACH_SECRET`). Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).
+Live Stellar: **Laravel** serves public API routes including `POST /outreachSchedule` and `POST /outreachPause`. **Follow-up cron** runs `php artisan outreach:followups` (Blade emails under `resources/views/emails/`; same MySQL `outreach_jobs`). Legacy `hosting-php/scripts/cron-outreach-followups.php` shells out to Artisan. **Do not** reintroduce concatenated HTML email builders in hosting-php. **Timezone:** app + MySQL session + cron PHP are **UTC** (`SET time_zone = '+00:00'`; Stellar OS/MySQL default is EDT — do not compare UTC `next_follow_up_at` to EDT `NOW()`). Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).
 
 ### Public security layer (hosting-php)
 
@@ -135,8 +140,13 @@ CORS origins: `carlmanuel.com`, `www`, `carlxaeron.github.io`, `localhost:3000` 
 | `app/Services/AgreementEmailBuilder.php` | Agreement email HTML/text (+ OutreachSignature) |
 | `app/Services/OutreachScheduler.php` | Schedule initial send + queue follow-ups |
 | `app/Services/OutreachCadence.php` | Cadence normalize, discount ladder (mirrors hosting-php) |
-| `app/Services/OutreachMailer.php` | Prospect outreach SMTP (+ `MAIL_BCC`) |
-| `app/Mail/OutreachProspectMail.php` | Initial / follow-up HTML bodies |
+| `app/Services/OutreachMailer.php` | Prospect outreach SMTP (+ `MAIL_BCC`) + optional file attachments |
+| `app/Services/OutreachFollowupProcessor.php` | Due follow-ups for Artisan cron |
+| `app/Console/Commands/OutreachFollowupsCommand.php` | `php artisan outreach:followups` |
+| `resources/views/emails/` | Blade layout + partials + outreach/preview/agreement views (single HTML source of truth) |
+| `app/Services/OutreachAttachmentResolver.php` | Resolve `attachments[]` from url / base64 for initial send |
+| `app/Support/OutreachSignature.php` | Constants + Blade signature partial wrapper (+ hosted headshot URL) |
+| `app/Mail/OutreachProspectMail.php` | Initial / follow-up / feedback Blade Mailables |
 | `app/Services/PortfolioContentService.php` | CMS section read/write |
 | `app/Models/PortfolioContent.php` | `portfolio_content_sections` table |
 | `app/Services/AnalyticsSummaryService.php` | Shared analytics (masked public / raw admin) |
@@ -234,4 +244,5 @@ Feature: full endpoint contracts + admin auth/CMS/outreach + exclusion / dedupe 
 - Commit `.env` / secrets
 - Deploy `api-carlxaeron-legacy-php/`
 - Change outreach cadence/max without updating and passing `hosting-php/tests/run-unit.php`
-- Point Stellar crontab at `api-carlxaeron/scripts/cron-outreach-followups.php` — use `hosting-php/scripts/` only
+- Point Stellar crontab at a non-existent `api-carlxaeron/scripts/` path — use `php artisan outreach:followups` (or the hosting-php wrapper that shells to it)
+- Reintroduce string-concatenated prospect email HTML in hosting-php — Blade under `resources/views/emails/` only

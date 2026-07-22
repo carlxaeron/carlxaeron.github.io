@@ -93,16 +93,94 @@ class OutreachApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('data.sendInitial', true)
             ->assertJsonPath('data.status', 'sent')
+            ->assertJsonPath('data.attachmentCount', 0)
             ->assertJsonStructure(['data' => ['nextFollowUpAt']]);
 
         Mail::assertSent(OutreachProspectMail::class, function (OutreachProspectMail $mail) {
-            return str_contains($mail->mailSubject, 'Send Now Co');
+            return str_contains($mail->mailSubject, 'Send Now Co')
+                && $mail->fileAttachments === [];
         });
         $this->assertDatabaseHas('outreach_jobs', [
             'slug' => 'send-now',
             'status' => 'sent',
             'auto_followup' => true,
         ]);
+    }
+
+    public function test_outreach_schedule_send_initial_mints_preview_access_when_host_known(): void
+    {
+        Mail::fake();
+
+        $response = $this->postJson('/outreachSchedule', [
+            'secret' => self::SECRET,
+            'slug' => 'mint-demo',
+            'businessName' => 'Mint Demo Co',
+            'contactName' => 'Pat',
+            'contactEmail' => 'pat@example.com',
+            'previewUrl' => 'https://carlmanuel.com/?preview=mint-demo',
+            'previewHost' => 'mint-demo.netlify.app',
+            'cadence' => '3d1w',
+            'sendInitial' => true,
+            'autoFollowUp' => true,
+            'maxFollowUps' => 4,
+        ])
+            ->assertOk()
+            ->assertJsonPath('data.status', 'sent');
+
+        $this->assertNotNull($response->json('data.previewAccess.site'));
+        $this->assertNotNull($response->json('data.previewAccess.admin'));
+        $this->assertStringContainsString('mint-demo.netlify.app/?access=', $response->json('data.previewAccess.site'));
+        $this->assertStringContainsString('mint-demo.netlify.app/admin/?access=', $response->json('data.previewAccess.admin'));
+
+        $this->assertDatabaseCount('preview_access_tokens', 2);
+        $this->assertDatabaseHas('preview_access_tokens', [
+            'slug' => 'mint-demo',
+            'scope' => 'site',
+            'status' => 'unused',
+            'netlify_host' => 'mint-demo.netlify.app',
+        ]);
+
+        Mail::assertSent(OutreachProspectMail::class, function (OutreachProspectMail $mail) {
+            return str_contains($mail->htmlBody, 'Open website (one-time)')
+                && str_contains($mail->htmlBody, 'Open admin sample (one-time)')
+                && str_contains($mail->htmlBody, 'mint-demo.netlify.app');
+        });
+    }
+
+    public function test_outreach_schedule_send_initial_with_base64_attachments(): void
+    {
+        Mail::fake();
+
+        $jpeg = base64_encode(base64_decode(
+            '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAn/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAA8A/9k='
+        ) ?: '');
+
+        $this->postJson('/outreachSchedule', [
+            'secret' => self::SECRET,
+            'slug' => 'with-shots',
+            'businessName' => 'Shot Co',
+            'contactName' => 'Sam',
+            'contactEmail' => 'sam@example.com',
+            'previewUrl' => 'https://carlmanuel.com/?preview=with-shots',
+            'cadence' => '3d1w',
+            'sendInitial' => true,
+            'autoFollowUp' => true,
+            'maxFollowUps' => 4,
+            'attachments' => [
+                ['filename' => 'website-preview.jpg', 'contentBase64' => $jpeg],
+                ['filename' => 'admin-preview.jpg', 'contentBase64' => $jpeg],
+            ],
+        ])
+            ->assertOk()
+            ->assertJsonPath('data.status', 'sent')
+            ->assertJsonPath('data.attachmentCount', 2);
+
+        Mail::assertSent(OutreachProspectMail::class, function (OutreachProspectMail $mail) {
+            return count($mail->fileAttachments) === 2
+                && $mail->fileAttachments[0]['filename'] === 'website-preview.jpg'
+                && str_contains($mail->htmlBody, 'Attached:')
+                && str_contains($mail->htmlBody, 'profile3.jpg');
+        });
     }
 
     public function test_outreach_schedule_validates_required_fields(): void

@@ -61,6 +61,8 @@ Direct Netlify URLs return **403** (embed-only) — content loads only inside po
 | [Sky Glass](#sky-glass) | `sky-glass` | Indoor pool / exclusive resort · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=sky-glass) | 2026-07-21 |
 | [Joyce Kim Resort](#joyce-kim-resort) | `joyce-kim-resort` | Hotel resort / day swim & staycation · Rodriguez Rizal | booking | [Preview](https://carlmanuel.com/?preview=joyce-kim-resort) | 2026-07-21 |
 | [Villa Apolonia Resort Hotel](#villa-apolonia-resort-hotel) | `villa-apolonia` | Hotel resort / day stay & overnight · San Mateo Rizal | booking | [Preview](https://carlmanuel.com/?preview=villa-apolonia) | 2026-07-21 |
+| [A and C Private Pool Resort](#a-and-c-private-pool-resort) | `a-and-c-private-pool` | Private pool / vacation home rental · San Mateo Rizal | booking | [Preview](https://carlmanuel.com/?preview=a-and-c-private-pool) | 2026-07-21 |
+| [Liz Palmana Resort](#liz-palmana-resort) | `liz-palmana` | Hotel resort / family staycation · San Mateo Rizal | booking | [Preview](https://carlmanuel.com/?preview=liz-palmana) | 2026-07-21 |
 
 Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/config/previewWhitelist.js) (`PREVIEW_SITES`).
 
@@ -912,6 +914,42 @@ Whitelist source of truth: [`src/v3/config/previewWhitelist.js`](../src/v3/confi
 | **Assets** | Logo 960² + hero 960×720 + gallery (800–1080) from FB Photos |
 | **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
 | **Outreach** | newvarh@gmail.com — drafts ready · **ask before send** · cadence **3d1w** after yes |
+
+### A and C Private Pool Resort
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/a-and-c-private-pool/` |
+| **Netlify site** | `a-and-c-private-pool` |
+| **Preview host** | `a-and-c-private-pool.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=a-and-c-private-pool |
+| **Contact** | **No public email/phone** on FB About · [Facebook](https://www.facebook.com/p/A-and-C-Private-Pool-Resort-100057536286377/) |
+| **Address** | Abuab Road II, San Mateo, Rizal, Philippines |
+| **Category** | Vacation Home Rental · Always open · ~5.1K FB · 92% recommend · Curbside pickup |
+| **Source** | [Facebook](https://www.facebook.com/p/A-and-C-Private-Pool-Resort-100057536286377/) |
+| **System** | booking · Booking & calendar admin · painHero: day swim / pavilion / room Messenger bookings |
+| **Hero 3D** | Motion + particles + **`data-hero-three-object="pooldeck"`** · teal / lake accent |
+| **Assets** | Logo 512² (hero crop) + hero 2048×1536 + gallery pool shots (414–1024×1536) via Cursor browser + signed fbcdn |
+| **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
+| **Outreach** | No email — Messenger/SMS drafts ready · **ask before send** · cadence **3d1w** after yes |
+
+### Liz Palmana Resort
+
+| Field | Value |
+|-------|--------|
+| **Folder** | `client-sites/liz-palmana/` |
+| **Netlify site** | `liz-palmana` |
+| **Preview host** | `liz-palmana.netlify.app` |
+| **Preview URL** | https://carlmanuel.com/?preview=liz-palmana |
+| **Contact** | lizpalmanaresort@yahoo.com · no public phone on FB |
+| **Address** | Baltazar Compound, Patiis Rd, Malanday, San Mateo, Philippines |
+| **Category** | Hotel · Always open · ~3K FB · Not yet rated (3 Reviews) · Tagline: “An ideal place for your family and friends.” |
+| **Source** | [Facebook](https://www.facebook.com/LizPalmana/) · [lizpalmana.com](http://www.lizpalmana.com/) |
+| **System** | booking · Booking & calendar admin · painHero: family/friends Messenger bookings |
+| **Hero 3D** | Motion + particles + **`data-hero-three-object="lakehouse"`** · palm teal / sand gold |
+| **Assets** | Logo 942² + hero-venue 1080×810 + gallery pool/venue (414–1080) via Chrome DevTools + in-page fetch |
+| **Package** | Starter Business Website · **₱15,000** *(website only)* · 5–7 days · 50% upfront · admin sample priced separately |
+| **Outreach** | lizpalmanaresort@yahoo.com — drafts ready · **ask before send** · cadence **3d1w** after yes |
 
 ---
 

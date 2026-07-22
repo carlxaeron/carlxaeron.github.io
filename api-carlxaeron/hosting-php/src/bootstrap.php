@@ -48,6 +48,9 @@ if (!is_file($root . '/.env')) {
     load_env(dirname($root) . '/.env');
 }
 
+// Match Laravel app timezone — cron due checks compare naive UTC datetimes.
+date_default_timezone_set('UTC');
+
 require_once __DIR__ . '/respond.php';
 require_once __DIR__ . '/cors.php';
 require_once __DIR__ . '/rate_limit.php';

@@ -55,7 +55,8 @@ function send_smtp_mail(
     string $html,
     string $text,
     ?string $replyTo = null,
-    ?string $bccCsv = null
+    ?string $bccCsv = null,
+    array $attachments = []
 ): void {
     $host = env('SMTP_HOST', 'mail.privateemail.com');
     $port = (int) env('SMTP_PORT', '465');
@@ -127,7 +128,10 @@ function send_smtp_mail(
     }
     $cmd($fp, 'DATA', [354]);
 
-    $boundary = 'b_' . bin2hex(random_bytes(8));
+    $altBoundary = 'alt_' . bin2hex(random_bytes(8));
+    $mixedBoundary = 'mix_' . bin2hex(random_bytes(8));
+    $hasAttachments = $attachments !== [];
+
     $headers = [];
     $headers[] = 'From: ' . mail_format_mailbox($fromEmail, $fromName);
     $headers[] = 'To: ' . implode(', ', $recipients);
@@ -138,14 +142,38 @@ function send_smtp_mail(
     $headers[] = 'Message-ID: ' . mail_message_id();
     $headers[] = 'Date: ' . date('r');
     $headers[] = 'MIME-Version: 1.0';
-    $headers[] = "Content-Type: multipart/alternative; boundary=\"{$boundary}\"";
+    if ($hasAttachments) {
+        $headers[] = "Content-Type: multipart/mixed; boundary=\"{$mixedBoundary}\"";
+    } else {
+        $headers[] = "Content-Type: multipart/alternative; boundary=\"{$altBoundary}\"";
+    }
     // Mailto unsubscribe hint for filters (no HTTPS one-click endpoint yet).
     $headers[] = 'List-Unsubscribe: <mailto:' . $fromEmail . '?subject=unsubscribe>';
 
+    $altBody = "--{$altBoundary}\r\nContent-Type: text/plain; charset=UTF-8\r\n\r\n{$text}\r\n";
+    $altBody .= "--{$altBoundary}\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n{$html}\r\n";
+    $altBody .= "--{$altBoundary}--";
+
     $payload = implode("\r\n", $headers) . "\r\n\r\n";
-    $payload .= "--{$boundary}\r\nContent-Type: text/plain; charset=UTF-8\r\n\r\n{$text}\r\n";
-    $payload .= "--{$boundary}\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n{$html}\r\n";
-    $payload .= "--{$boundary}--";
+    if ($hasAttachments) {
+        $payload .= "--{$mixedBoundary}\r\n";
+        $payload .= "Content-Type: multipart/alternative; boundary=\"{$altBoundary}\"\r\n\r\n";
+        $payload .= $altBody . "\r\n";
+        foreach ($attachments as $file) {
+            $filename = (string) ($file['filename'] ?? 'attachment.bin');
+            $mime = (string) ($file['mime'] ?? 'application/octet-stream');
+            $content = (string) ($file['content'] ?? '');
+            $safeName = str_replace(['"', "\r", "\n"], '', $filename);
+            $payload .= "--{$mixedBoundary}\r\n";
+            $payload .= "Content-Type: {$mime}; name=\"{$safeName}\"\r\n";
+            $payload .= "Content-Transfer-Encoding: base64\r\n";
+            $payload .= "Content-Disposition: attachment; filename=\"{$safeName}\"\r\n\r\n";
+            $payload .= chunk_split(base64_encode($content)) . "\r\n";
+        }
+        $payload .= "--{$mixedBoundary}--";
+    } else {
+        $payload .= $altBody;
+    }
     // Dot-stuff body lines only — never the SMTP DATA terminator.
     $payload = preg_replace('/^\./m', '..', $payload) ?? $payload;
     fwrite($fp, $payload . "\r\n.\r\n");

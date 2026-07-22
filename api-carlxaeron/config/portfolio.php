@@ -16,6 +16,9 @@ return [
 
     'outreach_secret' => env('OUTREACH_SECRET', ''),
 
+    // Shared secret for Netlify edge → POST /previewAccess/redeem (header X-Preview-Access-Secret).
+    'preview_access_secret' => env('PREVIEW_ACCESS_SECRET', ''),
+
     'mail_bcc' => env('MAIL_BCC', 'info@carlmanuel.com'),
 
     'vapid_public_key' => env('VAPID_PUBLIC_KEY', ''),

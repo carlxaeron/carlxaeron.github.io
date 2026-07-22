@@ -10,24 +10,25 @@ final class OutreachMailer
 {
     /**
      * @param  array<string, mixed>  $job
+     * @param  list<array{filename:string,mime:string,content:string}>  $attachments
      * @return array{ok:bool,error?:string}
      */
-    public function sendToProspect(array $job, string $kind): array
+    public function sendToProspect(array $job, string $kind, array $attachments = []): array
     {
         $to = (string) $job['contact_email'];
-        if ($kind === 'initial') {
-            [$subject, $html, $text] = OutreachEmailBuilder::initial($job);
-        } else {
-            [$subject, $html, $text] = OutreachEmailBuilder::followup($job);
-        }
+        $payload = $kind === 'initial'
+            ? OutreachEmailBuilder::initial($job)
+            : OutreachEmailBuilder::followup($job);
 
-        return $this->sendProspectMessage($to, $subject, $html, $text);
+        return $this->sendProspectPayload($to, $payload, $attachments);
     }
 
     /**
+     * @param  array{subject:string,view:string,text:string,data:array<string,mixed>}  $payload
+     * @param  list<array{filename:string,mime:string,content:string}>  $attachments
      * @return array{ok:bool,error?:string}
      */
-    public function sendProspectMessage(string $to, string $subject, string $html, string $text): array
+    public function sendProspectPayload(string $to, array $payload, array $attachments = []): array
     {
         try {
             $bccList = $this->bccRecipients();
@@ -35,7 +36,7 @@ final class OutreachMailer
             if ($bccList !== []) {
                 $mail->bcc($bccList);
             }
-            $mail->send(new OutreachProspectMail($subject, $html, $text));
+            $mail->send(new OutreachProspectMail($payload, $attachments));
 
             return ['ok' => true];
         } catch (Throwable $e) {

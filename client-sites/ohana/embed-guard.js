@@ -1,3 +1,9 @@
+/**
+ * Client-side companion to netlify/edge-functions/embed-only.js.
+ * Allow if: (iframe + allowlisted portfolio referrer) OR cookie cm_unlock=1
+ * (set once by edge after a successful ?access= redeem; Max-Age ~30s).
+ * Cookie alone does not unlock HTML — edge ignores it on later document loads.
+ */
 (function () {
   var ALLOWED_PARENTS = [
     "carlmanuel.com",
@@ -21,7 +27,14 @@
     });
   }
 
-  if (!isInIframe() || !hasAllowedReferrer()) {
+  function hasUnlockCookie() {
+    return /(?:^|;\s*)cm_unlock=1(?:;|$)/.test(document.cookie || "");
+  }
+
+  var allowed =
+    (isInIframe() && hasAllowedReferrer()) || hasUnlockCookie();
+
+  if (!allowed) {
     document.documentElement.innerHTML =
       '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Preview only</title><style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:Inter,system-ui,sans-serif;background:#00473e;color:#fff;padding:24px;text-align:center}p{max-width:28rem;line-height:1.6;margin:0}</style></head><body><p>This demo is only available through the portfolio preview. Visit <strong>carlmanuel.com</strong> to view client samples.</p></body></html>';
     throw new Error("Direct access blocked");

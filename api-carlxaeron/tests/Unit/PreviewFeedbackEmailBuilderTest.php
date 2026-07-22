@@ -26,7 +26,7 @@ class PreviewFeedbackEmailBuilderTest extends TestCase
 
     public function test_like_email_asks_to_push_through_with_preview_link(): void
     {
-        [$subject, $html, $text] = PreviewFeedbackEmailBuilder::build('like', $this->sampleContext());
+        [$subject, $html, $text] = PreviewFeedbackEmailBuilder::render('like', $this->sampleContext());
 
         $this->assertStringContainsString('JK Construction', $subject);
         $this->assertStringContainsString('push through', strtolower($html));
@@ -38,11 +38,12 @@ class PreviewFeedbackEmailBuilderTest extends TestCase
         $this->assertStringContainsString('push through', strtolower($text));
         $this->assertStringContainsString('admin system', strtolower($html));
         $this->assertStringContainsString('admin system', strtolower($text));
+        $this->assertStringContainsString('#00473e', $html);
     }
 
     public function test_dislike_email_references_comment_and_invites_revision(): void
     {
-        [$subject, $html, $text] = PreviewFeedbackEmailBuilder::build('dislike', $this->sampleContext());
+        [$subject, $html, $text] = PreviewFeedbackEmailBuilder::render('dislike', $this->sampleContext());
 
         $this->assertStringContainsString('feedback', strtolower($subject));
         $this->assertStringContainsString('Needs clearer CTA', $html);
@@ -54,7 +55,7 @@ class PreviewFeedbackEmailBuilderTest extends TestCase
 
     public function test_agree_email_thanks_and_promises_follow_up(): void
     {
-        [$subject, $html, $text] = PreviewFeedbackEmailBuilder::build('agree', $this->sampleContext());
+        [$subject, $html, $text] = PreviewFeedbackEmailBuilder::render('agree', $this->sampleContext());
 
         $this->assertStringContainsString('follow up', strtolower($subject));
         $this->assertStringContainsString('JK Construction', $subject);

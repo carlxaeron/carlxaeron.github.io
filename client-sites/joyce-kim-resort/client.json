@@ -30,14 +30,14 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "ready",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "3d1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-21T04:01:25Z",
+    "nextFollowUpAt": "2026-07-24 04:01:25",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "Email from FB About: jkimresort@gmail.com. Ask before send."
+    "notes": "Initial sent to jkimresort@gmail.com via outreachSchedule; autoFollowUp 3d1w max 4."
   },
   "sources": {
     "facebook": "https://www.facebook.com/joycekimresort/",

@@ -32,14 +32,14 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "ready",
-    "cadence": null,
+    "status": "sent",
+    "cadence": "3d1w",
     "emailFound": true,
-    "sentAt": null,
-    "nextFollowUpAt": null,
+    "sentAt": "2026-07-21T03:56:22Z",
+    "nextFollowUpAt": "2026-07-24 03:56:22",
     "lastFollowUpAt": null,
     "followUpCount": 0,
-    "notes": "Email from FB About: ftdl.corp.design@gmail.com. Ask before initial send."
+    "notes": "Initial sent 2026-07-21 via outreachSchedule; autoFollowUp 3d1w max 4."
   },
   "sources": {
     "facebook": "https://www.facebook.com/p/Frances-Teresa-Garden-The-Party-PlaceParty-Venue-100064148883159/",

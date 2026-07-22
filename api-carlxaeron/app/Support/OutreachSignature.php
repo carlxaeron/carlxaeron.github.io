@@ -3,7 +3,8 @@
 namespace App\Support;
 
 /**
- * Shared sign-off for outreach, follow-ups, and preview feedback auto-replies.
+ * Shared sign-off constants + text helpers. HTML chrome lives in Blade
+ * (`emails.partials.signature`); this class still renders that partial for tests.
  */
 final class OutreachSignature
 {
@@ -15,6 +16,14 @@ final class OutreachSignature
 
     public const PHONE_DISPLAY = '+63 962 538 9886';
 
+    /** Hosted headshot for HTML signature (portfolio static asset). */
+    public const PHOTO_URL = 'https://carlmanuel.com/static/images/profile3.jpg';
+
+    public const PHOTO_ALT = 'Carl Louis Manuel';
+
+    /** Display size in email clients (px). */
+    public const PHOTO_SIZE = 56;
+
     public static function facebookContactHtml(): string
     {
         return '<p>You can also message me on <a href="'.self::FB_URL.'">Facebook</a> if that is easier.</p>';
@@ -25,20 +34,17 @@ final class OutreachSignature
         return 'You can also message me on Facebook: facebook.com/profile.php?id='.self::FB_PROFILE."\n";
     }
 
-    public static function html(): string
+    public static function html(bool $showFacebookContact = false): string
     {
-        return '<p>Best regards,<br><strong>Carl Louis Manuel</strong><br>'
-            .'<a href="https://carlmanuel.com">carlmanuel.com</a> · '
-            .'<a href="'.self::FB_URL.'">Facebook</a> · '
-            .'<a href="tel:'.self::PHONE_TEL.'">'.self::PHONE_DISPLAY.'</a> · '
-            .'info@carlmanuel.com</p>';
+        return view('emails.partials.signature', [
+            'showFacebookContact' => $showFacebookContact,
+        ])->render();
     }
 
-    public static function text(): string
+    public static function text(bool $showFacebookContact = false): string
     {
-        return 'Carl Louis Manuel'
-            ."\ncarlmanuel.com · facebook.com/profile.php?id=".self::FB_PROFILE
-            .' · '.self::PHONE_DISPLAY
-            .' · info@carlmanuel.com';
+        return view('emails.partials.signature-text', [
+            'showFacebookContact' => $showFacebookContact,
+        ])->render();
     }
 }

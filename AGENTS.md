@@ -110,17 +110,18 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 1. Copy `client-sites/_template/` → `client-sites/{slug}/`
 2. **Scrape client Facebook** via Chrome DevTools MCP (About + Photos → inspect + download to `assets/`); see client-site-netlify skill Step 1b
 3. Customize HTML with **Tailwind CDN** + supplemental `styles.css`; wire `/admin/` from `client-sites/_systems/admin/` when available; keep `site.js` + **`hero-motion.js`** + **`hero-three.js`**
-4. **Keep** `embed-guard.js` + edge `embed-only` + CSP headers (must allow `/admin/` in-iframe navigation)
+4. **Keep** `embed-guard.js` + edge `embed-only` + CSP headers (must allow `/admin/` in-iframe navigation). Edge redeem uses Laravel `POST /previewAccess/redeem` (`X-Preview-Access-Secret`); set Netlify env **`PREVIEW_ACCESS_SECRET`** to match API before redeploy.
 5. Fill `client.json` (`contact`, `quotation`, **`system`**: `type`, `adminPath`, `label`, `navPages`)
 6. Deploy via Netlify MCP or CLI (`netlify.toml`: `command = ""`)
 7. Add host to `src/v3/config/previewWhitelist.js`; update `client.json` (`quotation.previewUrl` uses `?preview={slug}`)
 8. **Update [`client-sites/README.md`](client-sites/README.md)** — catalog table + per-client detail section (include system type)
 9. Draft outreach (**website + admin** on desktop & mobile): `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`, plus follow-ups
-10. **If email found** → ask: send quotation now? (**Yes** = send + enable hosting auto follow-ups; cadence **`3d1w`** = **3d → 7d → 7d → 7d**, max **4** — do not ask cadence separately.) Pass optional **`systemLabel`** on `outreachSchedule`. **Never send initial without a clear yes**.
-11. After approval → `POST https://api.carlmanuel.com/outreachSchedule` (`sendInitial` + `autoFollowUp`); cron on Stellar sends follow-ups while offline
+10. **If email found** → ask: send quotation now? (**Yes** = send + enable hosting auto follow-ups; cadence **`3d1w`** = **3d → 7d → 7d → 7d**, max **4** — do not ask cadence separately.) Capture **website + admin screenshots** and pass as `attachments` on `outreachSchedule`. Pass optional **`systemLabel`** / **`previewHost`** on `outreachSchedule` (mints site+admin **one-time** Netlify unlock links). **Never send initial without a clear yes**.
+11. After approval → `POST https://api.carlmanuel.com/outreachSchedule` (`sendInitial` + `autoFollowUp` + screenshot `attachments`); cron on Stellar sends follow-ups while offline
 12. Pause anytime via `POST /outreachPause` if prospect asks to stop
-13. Share preview `https://carlmanuel.com/?preview={slug}` + drafts for user review (embed-only — direct client URL returns 403)
+13. Share preview `https://carlmanuel.com/?preview={slug}` + drafts for user review (embed-only — direct client URL returns 403 unless one-time `?access=` token)
 14. **Browser QA** — verify **4 panels**; browse admin nav in desktop + mobile admin frames
+15. **One-time unlock rollout (per site, not batch):** copy `_template` edge + `embed-guard`, set Netlify `PREVIEW_ACCESS_SECRET` = API secret, redeploy; reissue tokens via Admin → preview-access after unlock requests
 
 **Batch upgrade (existing clients):** oldest first; wire `/admin/`, redeploy, QA 4 iframes — do **not** auto-resend initials.
 

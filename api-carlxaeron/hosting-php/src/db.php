@@ -23,5 +23,7 @@ function db(): PDO
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     ]);
+    // Stellar MySQL server TZ is EDT; outreach datetimes are stored/compared in UTC.
+    $pdo->exec("SET time_zone = '+00:00'");
     return $pdo;
 }

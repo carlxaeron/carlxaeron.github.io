@@ -27,9 +27,9 @@ final class PreviewFeedbackAutoReply
         }
 
         $context = $this->buildContext($feedback, $email);
-        [$subject, $html, $text] = PreviewFeedbackEmailBuilder::build($feedback->sentiment, $context);
+        $payload = PreviewFeedbackEmailBuilder::build($feedback->sentiment, $context);
 
-        $result = $this->mailer->sendProspectMessage($email, $subject, $html, $text);
+        $result = $this->mailer->sendProspectPayload($email, $payload);
         if (! ($result['ok'] ?? false)) {
             Log::warning('Preview feedback auto-reply SMTP failed', [
                 'slug' => $feedback->preview_slug,

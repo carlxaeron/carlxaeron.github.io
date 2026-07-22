@@ -19,13 +19,15 @@ class AgreementEmailBuilderTest extends TestCase
             'expires_at' => now()->addDays(14),
         ]);
 
-        [$subject, $html, $text] = AgreementEmailBuilder::signRequest($agreement);
+        [$subject, $html, $text] = AgreementEmailBuilder::renderSignRequest($agreement);
 
         $this->assertStringContainsString('Demo Co', $subject);
         $this->assertStringContainsString('?sign='.str_repeat('a', 64), $html);
         $this->assertStringContainsString(OutreachSignature::PHONE_DISPLAY, $html);
         $this->assertStringContainsString('?sign='.str_repeat('a', 64), $text);
         $this->assertStringContainsString('Jane', $html);
+        $this->assertStringContainsString('#00473e', $html);
+        $this->assertStringContainsString('Review &amp; sign agreement', $html);
     }
 
     public function test_signed_notify_includes_signatory(): void

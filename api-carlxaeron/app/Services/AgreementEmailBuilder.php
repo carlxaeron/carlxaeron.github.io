@@ -3,15 +3,14 @@
 namespace App\Services;
 
 use App\Models\ServiceAgreement;
-use App\Support\OutreachSignature;
 
 /**
- * Builds agreement sign-request and signed-notification email bodies.
+ * Agreement email view data (sign-request uses Blade; signed-notify stays htmlString for admin).
  */
 final class AgreementEmailBuilder
 {
     /**
-     * @return array{0:string,1:string,2:string} subject, html, text
+     * @return array{subject:string,view:string,text:string,data:array<string,mixed>}
      */
     public static function signRequest(ServiceAgreement $agreement): array
     {
@@ -22,27 +21,33 @@ final class AgreementEmailBuilder
 
         $subject = "Please review & sign — {$biz} service agreement";
 
-        $html = '<p>Hi '.e($name).',</p>'
-            .'<p>I prepared a <strong>service agreement</strong> for <strong>'.e($biz).'</strong>. '
-            .'Please review it online and sign when you are ready.</p>'
-            .'<p><a href="'.e($url).'" style="display:inline-block;padding:10px 16px;background:#00A862;color:#fff;'
-            .'text-decoration:none;border-radius:4px;font-weight:600;">Review &amp; sign agreement</a></p>'
-            .'<p>Or open this link:<br><a href="'.e($url).'">'.e($url).'</a></p>'
-            .'<p>This link expires on <strong>'.e($expires).'</strong> (Asia/Manila).</p>'
-            .OutreachSignature::facebookContactHtml()
-            .OutreachSignature::html();
-
-        $text = "Hi {$name},\n\n"
-            ."I prepared a service agreement for {$biz}. Please review it online and sign when you are ready.\n\n"
-            ."Review & sign: {$url}\n\n"
-            ."This link expires on {$expires} (Asia/Manila).\n\n"
-            .OutreachSignature::facebookContactText()
-            .OutreachSignature::text();
-
-        return [$subject, $html, $text];
+        return [
+            'subject' => $subject,
+            'view' => 'emails.agreement.sign-request',
+            'text' => 'emails.agreement.sign-request-text',
+            'data' => [
+                'title' => $subject,
+                'preheader' => "Service agreement for {$biz} — review and sign",
+                'contactName' => $name,
+                'businessName' => $biz,
+                'signUrl' => $url,
+                'expiresLabel' => $expires,
+                'showFacebookContact' => true,
+            ],
+        ];
     }
 
     /**
+     * @return array{0:string,1:string,2:string} subject, html, text
+     */
+    public static function renderSignRequest(ServiceAgreement $agreement): array
+    {
+        return OutreachEmailBuilder::renderPayload(self::signRequest($agreement));
+    }
+
+    /**
+     * Admin notify — still returns htmlString bodies (embedded agreement HTML).
+     *
      * @return array{0:string,1:string,2:string} subject, html, text
      */
     public static function signedNotify(ServiceAgreement $agreement): array

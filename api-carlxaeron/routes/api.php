@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AdminPushController;
 use App\Http\Controllers\Api\OutreachController;
 use App\Http\Controllers\Api\PortfolioApiController;
+use App\Http\Controllers\Api\PreviewAccessController;
 use App\Http\Controllers\Api\ServiceAgreementController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,11 @@ Route::post('/outreachPause', [OutreachController::class, 'pause'])
     ->middleware('throttle:outreach');
 Route::post('/pushNotifyAdmins', [OutreachController::class, 'pushNotify'])
     ->middleware('throttle:outreach');
+
+Route::post('/previewAccess/redeem', [PreviewAccessController::class, 'redeem'])
+    ->middleware('throttle:previewAccessRedeem');
+Route::post('/previewAccess/requestUnlock', [PreviewAccessController::class, 'requestUnlock'])
+    ->middleware('throttle:previewAccessRequestUnlock');
 
 Route::get('/agreements/{token}', [ServiceAgreementController::class, 'publicShow'])
     ->middleware('throttle:agreementsShow');
@@ -60,5 +66,10 @@ Route::middleware(['auth:sanctum', 'throttle:adminApi'])->group(function (): voi
     Route::post('/admin/agreements/{id}/resend', [ServiceAgreementController::class, 'resend'])
         ->whereNumber('id');
     Route::post('/admin/agreements/{id}/revoke', [ServiceAgreementController::class, 'revoke'])
+        ->whereNumber('id');
+
+    Route::post('/admin/preview-access', [PreviewAccessController::class, 'store']);
+    Route::get('/admin/preview-access', [PreviewAccessController::class, 'index']);
+    Route::post('/admin/preview-access/{id}/revoke', [PreviewAccessController::class, 'revoke'])
         ->whereNumber('id');
 });

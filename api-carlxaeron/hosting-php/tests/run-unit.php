@@ -111,71 +111,50 @@ assert_true(str_contains($offer3d['text'], '10%'), '3d mentions 10%');
 $offerLast = outreach_followup_offer_copy(['quoted_amount' => '₱15,000'], 3);
 assert_same(50, $offerLast['totalPct'], 'last FU total 50%');
 assert_same('₱7,500', $offerLast['discounted'], '50% of 15k');
-[$fuSubject, $fuHtml, $fuText] = outreach_build_followup_email([
-    'contact_name' => 'Test',
-    'business_name' => 'Demo Biz',
-    'preview_url' => 'https://carlmanuel.com/?preview=demo',
-    'package_name' => 'Starter Business Website',
-    'quoted_amount' => '₱15,000',
-    'payment_terms' => '',
-    'follow_up_count' => 0,
-]);
-assert_true(str_contains($fuSubject, '10%'), '3d subject has discount');
-assert_true(str_contains($fuHtml, 'commission'), '3d HTML has commission');
-assert_true(str_contains($fuHtml, '61557195950694'), '3d HTML has Facebook link');
-assert_true(str_contains($fuHtml, 'tel:+639625389886'), '3d HTML has phone link');
-assert_true(str_contains($fuText, '₱13,500'), '3d text has discounted price');
-assert_true(str_contains($fuText, '+63 962 538 9886'), '3d text has phone');
-assert_true(str_contains($fuText, '61557195950694'), '3d text has Facebook link');
 
-echo "\ninitial + follow-up systems-first copy\n";
-[$initSubject, $initHtml, $initText] = outreach_build_initial_email([
-    'contact_name' => 'Test',
-    'business_name' => 'Demo Biz',
-    'preview_url' => 'https://carlmanuel.com/?preview=demo',
-    'package_name' => 'Starter Business Website',
-    'quoted_amount' => '₱15,000',
-    'payment_terms' => '',
-    'timeline' => '5–7 days',
+echo "\nemail HTML builders deprecated (Laravel Blade)\n";
+$deprecatedCaught = false;
+try {
+    outreach_build_initial_email([
+        'contact_name' => 'Test',
+        'business_name' => 'Demo Biz',
+        'preview_url' => 'https://carlmanuel.com/?preview=demo',
+    ]);
+} catch (RuntimeException $e) {
+    $deprecatedCaught = str_contains($e->getMessage(), 'Deprecated');
+}
+assert_true($deprecatedCaught, 'initial builder stub throws Deprecated');
+$deprecatedFu = false;
+try {
+    outreach_build_followup_email([
+        'contact_name' => 'Test',
+        'business_name' => 'Demo Biz',
+        'preview_url' => 'https://carlmanuel.com/?preview=demo',
+        'follow_up_count' => 0,
+    ]);
+} catch (RuntimeException $e) {
+    $deprecatedFu = str_contains($e->getMessage(), 'Deprecated');
+}
+assert_true($deprecatedFu, 'followup builder stub throws Deprecated');
+
+echo "\nattachment resolver (base64 jpeg)\n";
+$tinyJpeg = base64_decode(
+    '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAn/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAA8A/9k='
+);
+$resolved = outreach_resolve_attachments([
+    ['filename' => 'website-preview.jpg', 'contentBase64' => base64_encode($tinyJpeg ?: '')],
+    ['filename' => 'admin-preview.jpg', 'contentBase64' => base64_encode($tinyJpeg ?: '')],
 ]);
-assert_true(str_contains(strtolower($initSubject), 'website sample'), 'initial subject leads with system + website sample');
-assert_true(str_contains($initHtml, '/admin/'), 'initial HTML has admin path');
-assert_true(str_contains($initHtml, 'Start with the admin'), 'initial HTML leads with admin browse');
-assert_true(str_contains($initHtml, 'Then the marketing site'), 'initial HTML mentions site second');
-assert_true(str_contains($initHtml, 'Investment (website only)'), 'initial HTML website-only pricing');
-assert_true(str_contains(strtolower($initHtml), 'message me on'), 'initial HTML facebook contact');
-assert_true(str_contains(strtolower($initHtml), 'priced separately'), 'initial HTML system priced separately');
-assert_true(str_contains($initText, 'Investment (website only)'), 'initial text website-only pricing');
-assert_true(str_contains($initHtml, 'tel:+639625389886'), 'initial HTML has phone link');
-assert_true(str_contains($initText, '+63 962 538 9886'), 'initial text has phone');
-assert_true(str_contains(strtolower($initText), 'start with the admin'), 'initial text leads with admin');
-[, $initLabelHtml, $initLabelText] = outreach_build_initial_email([
-    'contact_name' => 'Test',
-    'business_name' => 'Demo Biz',
-    'preview_url' => 'https://carlmanuel.com/?preview=demo',
-    'package_name' => 'Starter',
-    'quoted_amount' => '',
-    'payment_terms' => '',
-    'timeline' => '',
-    'system_label' => 'Booking & calendar admin',
-]);
-assert_true(str_contains($initLabelText, 'Booking & calendar admin'), 'initial uses systemLabel');
-assert_true(str_contains($initLabelHtml, 'Booking'), 'initial HTML includes system label');
-[, $initPainHtml, $initPainText] = outreach_build_initial_email([
-    'contact_name' => 'Test',
-    'business_name' => 'Demo Biz',
-    'preview_url' => 'https://carlmanuel.com/?preview=demo',
-    'package_name' => 'Starter',
-    'quoted_amount' => '',
-    'payment_terms' => '',
-    'timeline' => '',
-    'system_label' => 'Booking & calendar admin',
-    'system_pain' => 'Stop taking bookings only on Messenger — see the calendar fill in real time.',
-]);
-assert_true(str_contains($initPainText, 'Stop taking bookings only on Messenger'), 'initial uses systemPain');
-assert_true(str_contains(strtolower($fuHtml), 'admin system'), '3d HTML leads with admin');
-assert_true(str_contains(strtolower($fuHtml), 'website only'), '3d HTML website-only note');
-assert_true(str_contains(strtolower($fuText), 'website only'), '3d text website-only note');
+assert_same(2, count($resolved), 'resolves two attachments');
+assert_same('website-preview.jpg', $resolved[0]['filename'], 'first filename');
+assert_same('image/jpeg', $resolved[0]['mime'], 'jpeg mime');
+$attachEx = null;
+try {
+    outreach_resolve_attachments([['filename' => 'x.txt', 'contentBase64' => base64_encode('not-an-image')]]);
+} catch (InvalidArgumentException $e) {
+    $attachEx = $e;
+}
+assert_true($attachEx instanceof InvalidArgumentException, 'rejects non-image attachment');
 
 echo "\nMail header helpers\n";
 assert_same('info@carlmanuel.com', mail_bare_address('info@carlmanuel.com'), 'bare stays bare');
@@ -303,6 +282,20 @@ assert_same(null, normalize_quote_currency(''), 'empty → null');
 assert_same('USD', normalize_quote_currency('usd'), 'usd → USD');
 assert_same('PHP', normalize_quote_currency('PHP'), 'PHP stays');
 assert_same(null, normalize_quote_currency('EUR'), 'unsupported → null');
+
+echo "\nUTC timezone (outreach due checks)\n";
+$dbSrc = file_get_contents($root . '/src/db.php') ?: '';
+assert_true(str_contains($dbSrc, "SET time_zone = '+00:00'"), 'db.php sets MySQL session UTC');
+$bootSrc = file_get_contents($root . '/src/bootstrap.php') ?: '';
+assert_true(str_contains($bootSrc, "date_default_timezone_set('UTC')"), 'bootstrap forces PHP UTC');
+$outreachSrc = file_get_contents($root . '/src/outreach.php') ?: '';
+assert_true(str_contains($outreachSrc, "new DateTimeZone('UTC')"), 'due follow-ups use UTC DateTimeZone');
+// Stored next_follow_up_at is UTC; EDT wall-clock "now" at 01:00 would miss a 03:00Z due job.
+$dueUtc = '2026-07-22 03:00:00';
+$edtNow = '2026-07-22 01:00:00';
+$utcNow = '2026-07-22 05:00:00';
+assert_true(!($dueUtc <= $edtNow), 'EDT wall clock would miss a due UTC job at 03:00Z');
+assert_true($dueUtc <= $utcNow, 'UTC wall clock correctly sees due job at 03:00Z');
 
 echo "\n";
 if ($failed > 0) {

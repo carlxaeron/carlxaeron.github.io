@@ -1,0 +1,55 @@
+{
+  "businessName": "Liz Palmana Resort",
+  "slug": "liz-palmana",
+  "previewHost": "liz-palmana.netlify.app",
+  "industry": "Hotel resort / family staycation · San Mateo Rizal",
+  "deployedAt": "2026-07-21",
+  "contact": {
+    "name": "Liz Palmana Resort Team",
+    "email": "lizpalmanaresort@yahoo.com",
+    "phone": null
+  },
+  "system": {
+    "type": "booking",
+    "adminPath": "/admin/",
+    "label": "Booking & calendar admin",
+    "painHero": "Stop taking family and friends bookings only on Messenger — see which dates are open and confirm guests from one calendar.",
+    "navPages": ["Dashboard", "Bookings", "Calendar", "Guests", "Settings"]
+  },
+  "quotation": {
+    "packageName": "Starter Business Website",
+    "packageScope": "One-page responsive website only (amenities, gallery, about, FAQ, contact). Admin preview is a sample; production booking system priced separately.",
+    "quotedAmount": "₱15,000",
+    "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+    "timeline": "5–7 business days after content approval",
+    "previewUrl": "https://carlmanuel.com/?preview=liz-palmana"
+  },
+  "outreach": {
+    "emailDraft": "quotation-email.md",
+    "smsDraft": "quotation-sms.txt",
+    "messengerDraft": "quotation-messenger.txt",
+    "followUp3dDraft": "quotation-followup-3d.md",
+    "followUp1wDraft": "quotation-followup-1w.md",
+    "status": "ready",
+    "cadence": null,
+    "emailFound": true,
+    "sentAt": null,
+    "nextFollowUpAt": null,
+    "lastFollowUpAt": null,
+    "followUpCount": 0,
+    "notes": "Email from FB Intro: lizpalmanaresort@yahoo.com. No phone on public About. Existing site lizpalmana.com noted (403 on fetch). Ask before send."
+  },
+  "sources": {
+    "facebook": "https://www.facebook.com/LizPalmana/",
+    "website": "http://www.lizpalmana.com/",
+    "address": "Baltazar Compound, Patiis Rd, Malanday, San Mateo, Philippines",
+    "phones": [],
+    "email": "lizpalmanaresort@yahoo.com",
+    "followers": "3K",
+    "hours": "Always open (page hours)",
+    "category": "Hotel",
+    "reviews": "Not yet rated (3 Reviews)",
+    "tagline": "An ideal place for your family and friends.",
+    "notes": "HD assets from Facebook Photos — hero-venue 1080×810, logo 942×941, pool/gallery up to 1080². Parallel-agent FB tab collisions; assets via in-page fetch + base64."
+  }
+}

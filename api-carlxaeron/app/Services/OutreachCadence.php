@@ -85,10 +85,12 @@ final class OutreachCadence
     }
 
     /**
+     * Structured discount/commission facts for Blade follow-up templates.
+     *
      * @param  array<string, mixed>  $job
-     * @return array{html:string,text:string,totalPct:int,stepPct:int,discounted:?string}
+     * @return array{totalPct:int,stepPct:int,discounted:?string,amountRaw:string,showAnotherStep:bool}
      */
-    public static function followupOfferCopy(array $job, int $followUpsAlreadySent): array
+    public static function followupOfferData(array $job, int $followUpsAlreadySent): array
     {
         $stepPct = self::followupDiscountStep($followUpsAlreadySent);
         $totalPct = self::followupDiscountTotal($followUpsAlreadySent);
@@ -99,41 +101,12 @@ final class OutreachCadence
             $discounted = self::formatPesos((int) round($pesos * (100 - $totalPct) / 100));
         }
 
-        $priceHtml = '';
-        $priceText = '';
-        if ($totalPct > 0) {
-            $priceHtml = 'This check-in includes a <strong>'.e((string) $totalPct).'% discount</strong>'
-                .($stepPct > 0 && $followUpsAlreadySent > 0
-                    ? ' (another <strong>'.e((string) $stepPct).'%</strong> off)'
-                    : '')
-                .' from the original package'
-                .($amountRaw !== '' ? ' of '.e($amountRaw) : '')
-                .($discounted !== null ? ' — now <strong>'.e($discounted).'</strong> total' : '')
-                .'. Maximum goodwill discount is 50% off.';
-            $priceText = "This check-in includes a {$totalPct}% discount"
-                .($stepPct > 0 && $followUpsAlreadySent > 0 ? " (another {$stepPct}% off)" : '')
-                .' from the original package'
-                .($amountRaw !== '' ? " of {$amountRaw}" : '')
-                .($discounted !== null ? " — now {$discounted} total" : '')
-                .'. Maximum goodwill discount is 50% off.';
-        }
-
-        $commissionHtml = 'I can also offer a <strong>commission</strong> if you refer clients or want a partner arrangement — '
-            .'just message me and we can discuss a fair split.';
-        $commissionText = 'I can also offer a commission if you refer clients or want a partner arrangement — '
-            .'just message me and we can discuss a fair split.';
-
-        $html = ($priceHtml !== '' ? '<p>'.$priceHtml.'</p>' : '')
-            .'<p>'.$commissionHtml.'</p>';
-        $text = ($priceText !== '' ? $priceText."\n\n" : '')
-            .$commissionText;
-
         return [
-            'html' => $html,
-            'text' => $text,
             'totalPct' => $totalPct,
             'stepPct' => $stepPct,
             'discounted' => $discounted,
+            'amountRaw' => $amountRaw,
+            'showAnotherStep' => $stepPct > 0 && $followUpsAlreadySent > 0,
         ];
     }
 }

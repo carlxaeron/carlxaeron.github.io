@@ -15,7 +15,7 @@ final class AgreementMailer
      */
     public function sendSignRequest(ServiceAgreement $agreement): array
     {
-        [$subject, $html, $text] = AgreementEmailBuilder::signRequest($agreement);
+        $payload = AgreementEmailBuilder::signRequest($agreement);
 
         try {
             $bccList = $this->bccRecipients();
@@ -23,7 +23,7 @@ final class AgreementMailer
             if ($bccList !== []) {
                 $mail->bcc($bccList);
             }
-            $mail->send(new AgreementSignRequestMail($subject, $html, $text));
+            $mail->send(new AgreementSignRequestMail($payload));
 
             return ['ok' => true];
         } catch (Throwable $e) {

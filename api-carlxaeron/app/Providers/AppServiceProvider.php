@@ -44,6 +44,10 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('outreach', fn (Request $request) => Limit::perHour(60)->by($byIp($request)));
         RateLimiter::for('agreementsShow', fn (Request $request) => Limit::perMinute(60)->by($byIp($request)));
         RateLimiter::for('agreementsSign', fn (Request $request) => Limit::perHour(10)->by($byIp($request)));
+        // Edge redeem: generous per-IP (Netlify edge IPs); auth is PREVIEW_ACCESS_SECRET.
+        RateLimiter::for('previewAccessRedeem', fn (Request $request) => Limit::perMinute(120)->by($byIp($request)));
+        // Lock-page notify: coarse IP bucket; controller also rate-limits per IP+slug.
+        RateLimiter::for('previewAccessRequestUnlock', fn (Request $request) => Limit::perHour(30)->by($byIp($request)));
         RateLimiter::for('adminLogin', fn (Request $request) => Limit::perMinutes(5, 20)->by($byIp($request)));
         RateLimiter::for('adminApi', function (Request $request) {
             $id = $request->user()?->getAuthIdentifier() ?: $request->ip();

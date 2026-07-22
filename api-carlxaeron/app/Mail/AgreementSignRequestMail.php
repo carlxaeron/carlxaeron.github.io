@@ -7,17 +7,29 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Symfony\Component\Mime\Email;
 
 class AgreementSignRequestMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(
-        public string $mailSubject,
-        public string $htmlBody,
-        public string $textBody,
-    ) {}
+    public string $mailSubject;
+
+    public string $htmlBody;
+
+    public string $textBody;
+
+    /**
+     * @param  array{subject:string,view:string,text:string,data:array<string,mixed>}  $payload
+     */
+    public function __construct(array $payload)
+    {
+        $this->mailSubject = $payload['subject'];
+        $this->view = $payload['view'];
+        $this->textView = $payload['text'];
+        $this->viewData = $payload['data'];
+        $this->htmlBody = view($this->view, $this->viewData)->render();
+        $this->textBody = view($this->textView, $this->viewData)->render();
+    }
 
     public function envelope(): Envelope
     {
@@ -29,19 +41,14 @@ class AgreementSignRequestMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            htmlString: $this->htmlBody,
+            view: $this->view,
+            text: $this->textView,
+            with: $this->viewData,
         );
     }
 
     public function attachments(): array
     {
         return [];
-    }
-
-    public function build(): self
-    {
-        return $this->withSymfonyMessage(function (Email $message): void {
-            $message->text($this->textBody);
-        });
     }
 }

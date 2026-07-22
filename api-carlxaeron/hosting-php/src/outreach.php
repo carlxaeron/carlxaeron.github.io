@@ -288,138 +288,209 @@ function outreach_website_pricing_block(string $pkg, string $amount, string $pay
     return [$html, $text];
 }
 
-/** @param array<string,mixed> $job */
-function outreach_build_initial_email(array $job): array
+/**
+ * Resolve optional screenshot attachments from outreachSchedule body.
+ *
+ * @return list<array{filename:string,mime:string,content:string}>
+ */
+function outreach_resolve_attachments(mixed $raw): array
 {
-    $name = (string) $job['contact_name'];
-    $biz = (string) $job['business_name'];
-    $preview = (string) $job['preview_url'];
-    $pkg = (string) ($job['package_name'] ?: 'Starter Business Website');
-    $amount = (string) ($job['quoted_amount'] ?: '');
-    $timeline = (string) ($job['timeline'] ?: '');
-    $payment = outreach_payment_terms($job);
-    $label = outreach_system_label($job);
-    $hook = outreach_system_hook_sentence($job, true);
-    $hookText = outreach_system_hook_sentence($job, false);
-    [$pricingHtml, $pricingText] = outreach_website_pricing_block($pkg, $amount, $payment, $timeline);
+    if ($raw === null || $raw === '') {
+        return [];
+    }
+    if (!is_array($raw)) {
+        throw new InvalidArgumentException('attachments must be an array');
+    }
 
-    $subject = $label !== ''
-        ? "{$label} + website sample for {$biz}"
-        : "Business system + website sample for {$biz}";
+    $max = 4;
+    $maxBytes = 5 * 1024 * 1024;
+    $allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    $out = [];
 
-    $title = $label !== ''
-        ? h($label) . ' + website sample'
-        : 'Business system + website sample';
+    foreach (array_values($raw) as $i => $item) {
+        if ($i >= $max) {
+            throw new InvalidArgumentException("Too many attachments (max {$max})");
+        }
+        if (!is_array($item)) {
+            throw new InvalidArgumentException('Each attachment must be an object');
+        }
 
-    $html = '<h2>' . $title . ' for ' . h($biz) . '</h2>'
-        . '<p>Hi ' . h($name) . ',</p>'
-        . '<p>' . $hook . '</p>'
-        . outreach_admin_browse_html($job)
-        . '<p><strong>Then the marketing site:</strong> desktop and mobile pages at <code>/</code> show '
-        . 'how ' . h($biz) . ' could look online.</p>'
-        . '<p><strong>Preview link:</strong> <a href="' . h($preview) . '">' . h($preview) . '</a></p>'
-        . $pricingHtml
-        . '<p>Reply if the admin and site previews look right, you want changes, or you are ready to proceed '
-        . '(website now, and/or a custom quote for a live system).</p>'
-        . outreach_facebook_contact_html()
-        . outreach_signature_html();
-    $text = "Hi {$name},\n\n{$hookText}\n"
-        . outreach_admin_browse_text($job)
-        . "Then the marketing site at / on desktop and mobile.\n"
-        . "Preview: {$preview}\n\n"
-        . $pricingText . "\n"
-        . "Reply if the admin and site previews look right, you want changes, or you are ready to proceed "
-        . "(website now, and/or a custom quote for a live system).\n\n"
-        . outreach_facebook_contact_text()
-        . outreach_signature_text();
+        $filename = basename(str_replace(["\0", '\\'], '', trim((string) ($item['filename'] ?? ''))));
+        $filename = preg_replace('/[^A-Za-z0-9._-]+/', '-', $filename) ?? '';
+        $filename = trim($filename, '.-');
+        if ($filename === '' || $filename === '.' || $filename === '..') {
+            $filename = 'preview-' . ($i + 1) . '.jpg';
+        }
+        if (strlen($filename) > 120) {
+            $filename = substr($filename, 0, 120);
+        }
 
-    return [$subject, $html, $text];
+        $url = trim((string) ($item['url'] ?? ''));
+        $b64 = trim((string) ($item['contentBase64'] ?? $item['base64'] ?? ''));
+        if ($url !== '' && $b64 !== '') {
+            throw new InvalidArgumentException("Attachment {$filename}: provide url or contentBase64, not both");
+        }
+        if ($url === '' && $b64 === '') {
+            throw new InvalidArgumentException("Attachment {$filename}: missing url or contentBase64");
+        }
+
+        if ($b64 !== '') {
+            if (preg_match('/^data:([^;]+);base64,(.+)$/s', $b64, $m)) {
+                $b64 = $m[2];
+            }
+            $b64 = preg_replace('/\s+/', '', $b64) ?? '';
+            $content = base64_decode($b64, true);
+            if ($content === false) {
+                throw new InvalidArgumentException("Attachment {$filename}: invalid base64");
+            }
+        } else {
+            if (!filter_var($url, FILTER_VALIDATE_URL)) {
+                throw new InvalidArgumentException("Attachment {$filename}: invalid url");
+            }
+            $scheme = strtolower((string) parse_url($url, PHP_URL_SCHEME));
+            if (!in_array($scheme, ['http', 'https'], true)) {
+                throw new InvalidArgumentException("Attachment {$filename}: url must be http(s)");
+            }
+            $ctx = stream_context_create([
+                'http' => [
+                    'timeout' => 20,
+                    'follow_location' => 1,
+                    'max_redirects' => 3,
+                    'user_agent' => 'carlmanuel-outreach-attachments/1.0',
+                ],
+            ]);
+            $content = @file_get_contents($url, false, $ctx);
+            if ($content === false) {
+                throw new InvalidArgumentException("Attachment {$filename}: failed to download url");
+            }
+        }
+
+        $len = strlen($content);
+        if ($len === 0) {
+            throw new InvalidArgumentException("Attachment {$filename}: empty content");
+        }
+        if ($len > $maxBytes) {
+            throw new InvalidArgumentException("Attachment {$filename}: exceeds {$maxBytes} bytes");
+        }
+
+        $hint = strtolower(trim((string) ($item['contentType'] ?? $item['mime'] ?? '')));
+        $mime = in_array($hint, $allowed, true) ? $hint : '';
+        if ($mime === '' && function_exists('finfo_open')) {
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            if ($finfo !== false) {
+                $detected = (string) finfo_buffer($finfo, $content);
+                finfo_close($finfo);
+                if (in_array($detected, $allowed, true)) {
+                    $mime = $detected;
+                }
+            }
+        }
+        if ($mime === '') {
+            if (str_starts_with($content, "\xff\xd8\xff")) {
+                $mime = 'image/jpeg';
+            } elseif (str_starts_with($content, "\x89PNG\r\n\x1a\n")) {
+                $mime = 'image/png';
+            } elseif (str_starts_with($content, 'GIF87a') || str_starts_with($content, 'GIF89a')) {
+                $mime = 'image/gif';
+            } elseif (str_starts_with($content, 'RIFF') && str_contains(substr($content, 0, 16), 'WEBP')) {
+                $mime = 'image/webp';
+            } else {
+                $mime = 'application/octet-stream';
+            }
+        }
+        if (!in_array($mime, $allowed, true)) {
+            throw new InvalidArgumentException("Attachment {$filename}: unsupported type {$mime}");
+        }
+
+        $extMap = [
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+            'image/gif' => 'gif',
+            'image/webp' => 'webp',
+        ];
+        if (!preg_match('/\.(jpe?g|png|gif|webp)$/i', $filename)) {
+            $filename .= '.' . ($extMap[$mime] ?? 'bin');
+        }
+
+        $out[] = [
+            'filename' => $filename,
+            'mime' => $mime,
+            'content' => $content,
+        ];
+    }
+
+    return $out;
 }
 
 /** @param array<string,mixed> $job */
-function outreach_build_followup_email(array $job): array
+function outreach_one_time_access_block(array $job): array
 {
-    $name = (string) $job['contact_name'];
-    $biz = (string) $job['business_name'];
-    $preview = (string) $job['preview_url'];
-    $pkg = (string) ($job['package_name'] ?: 'Starter Business Website');
-    $payment = outreach_payment_terms($job);
-    $count = (int) ($job['follow_up_count'] ?? 0);
-    $label = outreach_system_label($job);
-    $systemPhrase = $label !== '' ? $label : 'admin system';
-    // Sequence: 1st FU = soft 3d; 2nd+ = 1w “still interested?” + stacking discounts
-    $isWeekFollowUp = $count >= 1;
-    $offer = outreach_followup_offer_copy($job, $count);
-    $totalPct = $offer['totalPct'];
-    $discounted = $offer['discounted'];
-
-    $pricingAside = 'Quoted figures are for the <strong>website only</strong>. The admin preview is a sample — a production system is priced separately if you want one.';
-    $pricingAsideText = 'Quoted figures are for the website only. The admin preview is a sample — a production system is priced separately if you want one.';
-
-    if ($isWeekFollowUp) {
-        $subject = $totalPct > 0
-            ? "Still interested? {$totalPct}% off website — {$biz} {$systemPhrase} + website preview"
-            : "Still interested? {$biz} {$systemPhrase} + website preview";
-        $ask = 'Did you <strong>browse the admin</strong> preview and like the sample, want <strong>revisions</strong>, or is it <strong>not a fit right now</strong>?'
-            . '<br><br>Website payment stays <strong>' . h($payment) . '</strong>'
-            . ($discounted !== null
-                ? ' on the discounted <strong>website</strong> total of <strong>' . h($discounted) . '</strong>'
-                : '')
-            . '. Only the upfront half is due to start the website.';
-        $askText = 'Did you browse the admin preview and like the sample, want revisions, or is it not a fit right now?'
-            . "\n\nWebsite payment stays {$payment}"
-            . ($discounted !== null ? " on the discounted website total of {$discounted}" : '')
-            . '. Only the upfront half is due to start the website.';
-    } else {
-        $subject = $totalPct > 0
-            ? "Quick check-in + {$totalPct}% off website — your {$biz} {$systemPhrase} + website preview"
-            : "Quick check-in — your {$biz} {$systemPhrase} + website preview";
-        $ask = 'Did the <strong>admin</strong> preview look useful on desktop and mobile? Browse the pages inside the frames, then the marketing site. Anything to change? Ready to proceed with the <strong>website</strong> package (<strong>'
-            . h($pkg) . '</strong>'
-            . ($discounted !== null ? ' at <strong>' . h($discounted) . '</strong>' : '')
-            . ')? Only the upfront portion is due to begin — not the full website amount. Want a live system too? I can quote that separately.';
-        $askText = "Did the admin preview look useful on desktop and mobile? Browse the pages inside the frames, then the marketing site. Anything to change? Ready to proceed with the website package ({$pkg}"
-            . ($discounted !== null ? " at {$discounted}" : '')
-            . ')? Only the upfront portion is due to begin — not the full website amount. Want a live system too? I can quote that separately.';
+    $site = trim((string) ($job['site_access_url'] ?? ''));
+    $admin = trim((string) ($job['admin_access_url'] ?? ''));
+    if ($site === '' && $admin === '') {
+        return ['', ''];
     }
 
-    $html = '<p>Hi ' . h($name) . ',</p>'
-        . '<p>Checking in about the sample <strong>' . h($systemPhrase) . '</strong> and website for <strong>' . h($biz) . '</strong>.</p>'
-        . '<p><strong>Preview (admin + site):</strong> <a href="' . h($preview) . '">' . h($preview) . '</a></p>'
-        . '<p>' . $ask . '</p>'
-        . '<p><em>' . $pricingAside . '</em></p>'
-        . $offer['html']
-        . '<p>No pressure — a short reply is enough.</p>'
-        . outreach_facebook_contact_html()
-        . outreach_signature_html();
-    $text = "Hi {$name},\n\nChecking in about the {$systemPhrase} and website for {$biz}.\nPreview: {$preview}\n\n{$askText}\n\n"
-        . "{$pricingAsideText}\n\n"
-        . $offer['text'] . "\n\n"
-        . outreach_facebook_contact_text()
-        . outreach_signature_text();
+    $htmlParts = [];
+    $textParts = [];
+    if ($site !== '') {
+        $htmlParts[] = '<strong>Open website (one-time):</strong> <a href="' . h($site) . '">' . h($site) . '</a>';
+        $textParts[] = "Open website (one-time): {$site}";
+    }
+    if ($admin !== '') {
+        $htmlParts[] = '<strong>Open admin sample (one-time):</strong> <a href="' . h($admin) . '">' . h($admin) . '</a>';
+        $textParts[] = "Open admin sample (one-time): {$admin}";
+    }
 
-    return [$subject, $html, $text];
+    $note = 'Each link opens once — refresh closes access. Use Notify Carl on the lock screen if you need another look.';
+    $html = '<p>' . implode('<br>', $htmlParts) . '</p>'
+        . '<p><em>' . h($note) . '</em></p>';
+    $text = implode("\n", $textParts) . "\n{$note}\n\n";
+
+    return [$html, $text];
+}
+
+/**
+ * @deprecated Prospect email HTML moved to Laravel Blade (`resources/views/emails/`).
+ * @param array<string,mixed> $job
+ * @return array{0:string,1:string,2:string}
+ */
+function outreach_build_initial_email(array $job): array
+{
+    unset($job);
+    throw new RuntimeException(
+        'Deprecated: outreach email HTML moved to Laravel Blade (resources/views/emails/). '
+        .'Use php artisan outreach:followups / App\\Services\\OutreachEmailBuilder.'
+    );
+}
+
+/**
+ * @deprecated Prospect email HTML moved to Laravel Blade (`resources/views/emails/`).
+ * @param array<string,mixed> $job
+ * @return array{0:string,1:string,2:string}
+ */
+function outreach_build_followup_email(array $job): array
+{
+    unset($job);
+    throw new RuntimeException(
+        'Deprecated: outreach email HTML moved to Laravel Blade (resources/views/emails/). '
+        .'Use php artisan outreach:followups / App\\Services\\OutreachEmailBuilder.'
+    );
 }
 
 /**
  * @param array<string,mixed> $job
+ * @param list<array{filename:string,mime:string,content:string}> $attachments
  * @return array{ok:bool,error?:string}
+ * @deprecated Use Laravel OutreachMailer / artisan outreach:followups
  */
-function outreach_send_to_prospect(array $job, string $kind): array
+function outreach_send_to_prospect(array $job, string $kind, array $attachments = []): array
 {
-    $to = (string) $job['contact_email'];
-    if ($kind === 'initial') {
-        [$subject, $html, $text] = outreach_build_initial_email($job);
-    } else {
-        [$subject, $html, $text] = outreach_build_followup_email($job);
-    }
-    try {
-        send_smtp_mail($to, $subject, $html, $text, env('DEFAULT_FROM') ?: env('SMTP_USER'));
-        outreach_notify_admins_push($kind, $job);
-        return ['ok' => true];
-    } catch (Throwable $e) {
-        return ['ok' => false, 'error' => $e->getMessage()];
-    }
+    unset($job, $kind, $attachments);
+    return [
+        'ok' => false,
+        'error' => 'Deprecated: use php artisan outreach:followups (Laravel Blade mail)',
+    ];
 }
 
 /**
@@ -531,6 +602,13 @@ function route_outreach_schedule(): void
         send_error('Invalid contactEmail');
     }
 
+    try {
+        $fileAttachments = outreach_resolve_attachments($body['attachments'] ?? null);
+    } catch (InvalidArgumentException $e) {
+        send_error($e->getMessage());
+        return;
+    }
+
     $now = new DateTimeImmutable('now');
     $initialSentAt = null;
     $nextFollowUp = null;
@@ -549,10 +627,11 @@ function route_outreach_schedule(): void
         'follow_up_count' => 0,
         'system_label' => $systemLabel,
         'system_pain' => $systemPain,
+        'has_attachments' => $fileAttachments !== [],
     ];
 
     if ($sendInitial) {
-        $result = outreach_send_to_prospect($job, 'initial');
+        $result = outreach_send_to_prospect($job, 'initial', $fileAttachments);
         if (!$result['ok']) {
             send_error('Initial email failed: ' . ($result['error'] ?? 'unknown'), [], 500);
         }
@@ -614,6 +693,7 @@ function route_outreach_schedule(): void
         'cadence' => $cadence,
         'nextFollowUpAt' => $nextFollowUp,
         'status' => $status,
+        'attachmentCount' => count($fileAttachments),
     ]);
 }
 
@@ -658,7 +738,8 @@ function outreach_process_due_followups(): array
 {
     outreach_ensure_table();
     $pdo = db();
-    $now = (new DateTimeImmutable('now'))->format('Y-m-d H:i:s');
+    $utc = new DateTimeZone('UTC');
+    $now = (new DateTimeImmutable('now', $utc))->format('Y-m-d H:i:s');
     $stmt = $pdo->prepare(
         "SELECT * FROM outreach_jobs
          WHERE auto_followup = 1
@@ -693,7 +774,7 @@ function outreach_process_due_followups(): array
         if ($count < $max) {
             // After FU #1 (count=1) wait 1w; legacy 3d/1w keep constant interval
             $days = outreach_days_until_next($cadence, $count);
-            $next = (new DateTimeImmutable('now'))->modify("+{$days} days")->format('Y-m-d H:i:s');
+            $next = (new DateTimeImmutable('now', $utc))->modify("+{$days} days")->format('Y-m-d H:i:s');
         } else {
             $status = 'completed';
         }
@@ -709,7 +790,7 @@ function outreach_process_due_followups(): array
         );
         $u->execute([
             $count,
-            (new DateTimeImmutable('now'))->format('Y-m-d H:i:s'),
+            (new DateTimeImmutable('now', $utc))->format('Y-m-d H:i:s'),
             $next,
             $status,
             $id,

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A and C Private Pool Resort — private pool day swim, pavilion, and A/C rooms on Abuab Road II, San Mateo, Rizal." />
+  <title>A and C Private Pool Resort · San Mateo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: "#0a3d4a",
+              mid: "#1a7a8c",
+              accent: "#5ec8d8",
+              light: "#e6f5f7",
+              mist: "#b8e0e8",
+            },
+          },
+          fontFamily: {
+            display: ["Fraunces", "Georgia", "serif"],
+            sans: ["Manrope", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="embed-guard.js"></script>
+</head>
+<body class="font-sans text-gray-900 antialiased">
+  <div class="trust-strip py-2 text-center text-xs font-semibold tracking-wide text-white sm:text-sm">
+    Private pool · Pavilion &amp; rooms · Abuab Road II, San Mateo, Rizal
+  </div>
+
+  <header data-header class="sticky top-0 z-50 border-b border-brand-dark/10 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="#" class="flex min-w-0 items-center gap-2 font-display text-lg font-bold text-brand-dark">
+        <img src="assets/logo.jpg" alt="" width="40" height="40" class="h-10 w-10 shrink-0 rounded-lg object-cover ring-2 ring-brand-mid/20" />
+        <span class="hidden truncate sm:inline">A and C Private Pool</span>
+        <span class="sm:hidden">A &amp; C</span>
+      </a>
+      <nav class="hidden items-center gap-5 text-sm font-medium text-brand-dark/80 md:flex" aria-label="Main">
+        <a href="#amenities" class="hover:text-brand-mid transition-colors">Amenities</a>
+        <a href="#gallery" class="hover:text-brand-mid transition-colors">Gallery</a>
+        <a href="#about" class="hover:text-brand-mid transition-colors">About</a>
+        <a href="#faq" class="hover:text-brand-mid transition-colors">FAQ</a>
+        <a href="#contact" class="rounded-full bg-brand-mid px-4 py-2 font-semibold text-white hover:brightness-110 transition">Book a date</a>
+      </nav>
+      <button type="button" data-nav-toggle class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-dark/15 text-brand-dark md:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-nav" data-mobile-nav class="hidden flex-col border-t border-brand-dark/10 bg-white px-4 py-4 md:hidden" role="dialog" aria-label="Mobile navigation">
+      <a href="#amenities" class="rounded-lg px-3 py-3 hover:bg-brand-light">Amenities</a>
+      <a href="#gallery" class="rounded-lg px-3 py-3 hover:bg-brand-light">Gallery</a>
+      <a href="#about" class="rounded-lg px-3 py-3 hover:bg-brand-light">About</a>
+      <a href="#faq" class="rounded-lg px-3 py-3 hover:bg-brand-light">FAQ</a>
+      <a href="#contact" class="mt-2 rounded-full bg-brand-mid px-4 py-3 text-center font-semibold text-white">Book a date</a>
+    </div>
+  </header>
+
+  <main>
+    <section data-hero data-hero-three="particles" data-hero-three-object="pooldeck" data-hero-three-accent="lake" class="relative overflow-hidden bg-brand-dark text-white">
+      <div data-hero-bg class="hero-bg hero-bg--anc absolute inset-0 origin-center will-change-transform"></div>
+      <canvas data-hero-canvas class="hero-three-canvas" aria-hidden="true"></canvas>
+      <div class="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+        <p data-hero-animate class="opacity-0 mb-3 text-xs font-semibold uppercase tracking-widest text-brand-accent">Private pool resort · San Mateo</p>
+        <h1 data-hero-animate class="opacity-0 font-display max-w-3xl text-4xl font-bold leading-tight sm:text-5xl lg:text-[3.35rem]">A and C Private Pool Resort</h1>
+        <p data-hero-animate class="opacity-0 mt-5 max-w-2xl text-lg text-white/85">Day swim, pavilion hangouts, and A/C rooms on Abuab Road II — a private pool getaway for family, barkada, and celebrations in San Mateo, Rizal.</p>
+        <div data-hero-animate class="opacity-0 mt-8 flex flex-wrap gap-3">
+          <a data-hero-cta href="#contact" class="rounded-full bg-brand-accent px-6 py-3 font-semibold text-brand-dark hover:brightness-105 transition">Check availability</a>
+          <a data-hero-cta href="https://www.facebook.com/p/A-and-C-Private-Pool-Resort-100057536286377/" target="_blank" rel="noopener noreferrer" class="rounded-full border border-white/50 px-6 py-3 font-semibold hover:bg-white/10 transition">Message on Facebook</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="amenities" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Amenities</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>Private pool entrance, pavilion rental, and A/C rooms — built for day trips and longer staycations.</p>
+        <div data-filter class="mt-8">
+          <div class="flex flex-wrap gap-2">
+            <button type="button" data-filter-btn="all" class="filter-active rounded-full bg-brand-mid px-4 py-2 text-sm text-white" aria-pressed="true">All</button>
+            <button type="button" data-filter-btn="pool" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Pool</button>
+            <button type="button" data-filter-btn="stay" class="filter-inactive rounded-full border border-brand-dark/20 px-4 py-2 text-sm text-brand-dark" aria-pressed="false">Stay</button>
+          </div>
+          <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <article data-filter-item data-categories="pool,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/40 p-6">
+              <h3 class="font-semibold text-brand-dark">Private pool entrance</h3>
+              <p class="mt-2 text-sm text-gray-600">Day, night, and 22-hour packages for groups — senior &amp; PWD discounts available. Minimum group size applies.</p>
+            </article>
+            <article data-filter-item data-categories="stay,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/40 p-6">
+              <h3 class="font-semibold text-brand-dark">A/C rooms</h3>
+              <p class="mt-2 text-sm text-gray-600">Room options with 8 or 12 beds and air-conditioning — rest after a full day at the pool.</p>
+            </article>
+            <article data-filter-item data-categories="pool,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/40 p-6">
+              <h3 class="font-semibold text-brand-dark">Pavilion rental</h3>
+              <p class="mt-2 text-sm text-gray-600">Chairs, tables, and videoke hours — ideal for birthdays and barkada hangouts. Outside griller available.</p>
+            </article>
+            <article data-filter-item data-categories="stay,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/40 p-6">
+              <h3 class="font-semibold text-brand-dark">Videoke house</h3>
+              <p class="mt-2 text-sm text-gray-600">A/C videoke space for smaller groups — chairs and tables included for the party.</p>
+            </article>
+            <article data-filter-item data-categories="pool,stay,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/40 p-6">
+              <h3 class="font-semibold text-brand-dark">Hot &amp; cold dispenser</h3>
+              <p class="mt-2 text-sm text-gray-600">Free use of water dispenser so guests stay hydrated between swim sessions.</p>
+            </article>
+            <article data-filter-item data-categories="pool,all" data-reveal class="border-t-4 border-brand-accent bg-brand-light/40 p-6">
+              <h3 class="font-semibold text-brand-dark">San Mateo access</h3>
+              <p class="mt-2 text-sm text-gray-600">Located on Abuab Road II — close enough for a day trip from Metro Manila and nearby Rizal towns.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <h2 class="font-display text-3xl font-bold text-brand-dark" data-reveal>Resort gallery</h2>
+        <p class="mt-2 max-w-2xl text-gray-600" data-reveal>Real photos from the A and C Private Pool Resort Facebook page — pool decks, hangouts, and resort life.</p>
+        <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <figure data-reveal class="group overflow-hidden bg-white sm:col-span-2">
+            <img src="assets/hero.jpg" alt="A and C Private Pool Resort pool area" width="960" height="640" loading="lazy" class="gallery-card__img gallery-card__img--wide w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Private pool deck</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden bg-white">
+            <img src="assets/project-01.jpg" alt="A and C pool resort guest photo" width="720" height="960" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Pool day</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden bg-white">
+            <img src="assets/project-02.jpg" alt="A and C Private Pool Resort swimming" width="720" height="960" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Swim time</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden bg-white">
+            <img src="assets/project-04.jpg" alt="A and C resort venue" width="720" height="720" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Venue views</figcaption>
+          </figure>
+          <figure data-reveal class="group overflow-hidden bg-white">
+            <img src="assets/project-05.jpg" alt="A and C private pool hangout" width="720" height="720" loading="lazy" class="gallery-card__img w-full transition group-hover:scale-105" />
+            <figcaption class="p-4 text-sm font-medium text-brand-dark">Hangout spots</figcaption>
+          </figure>
+        </div>
+        <p class="mt-6 text-center">
+          <a href="https://www.facebook.com/p/A-and-C-Private-Pool-Resort-100057536286377/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-mid hover:underline">See more photos on Facebook →</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="about" class="bg-brand-dark py-16 text-white sm:py-20">
+      <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2">
+        <img src="assets/project-01.jpg" alt="A and C Private Pool Resort" width="960" height="720" loading="lazy" class="w-full shadow-lg ring-1 ring-white/10 object-cover max-h-[28rem]" data-reveal />
+        <div data-reveal>
+          <h2 class="font-display text-3xl font-bold">About A and C</h2>
+          <p class="mt-4 text-white/85"><strong>A and C Private Pool Resort</strong> is a vacation home rental and private pool venue on Abuab Road II, San Mateo, Rizal — welcoming day guests and overnight groups.</p>
+          <p class="mt-3 text-white/85">With <strong>5.1K Facebook followers</strong> and a 92% recommend score, guests come for the private pool, pavilion parties, and A/C rooms close to Metro Manila.</p>
+          <p class="mt-4 font-display italic text-brand-mist">Private pool · Pavilion · A/C rooms</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="bg-white py-16 sm:py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6">
+        <h2 class="font-display text-center text-3xl font-bold text-brand-dark" data-reveal>Common questions</h2>
+        <div data-accordion class="mt-10 space-y-3">
+          <div data-accordion-item class="overflow-hidden border border-brand-dark/10 bg-brand-light/40">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Do you offer day swim and overnight?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Yes — pool entrance packages cover day, night, and longer stays, plus pavilion and A/C room options. Message the Facebook page with your preferred date and group size.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden border border-brand-dark/10 bg-brand-light/40">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Is there a pavilion or videoke?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Pavilion rental includes chairs, tables, and videoke hours. A separate A/C videoke house is available for smaller groups.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden border border-brand-dark/10 bg-brand-light/40">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">Where is A and C Private Pool Resort?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Abuab Road II, San Mateo, Rizal, Philippines. Ask for directions when you book.</div>
+          </div>
+          <div data-accordion-item class="overflow-hidden border border-brand-dark/10 bg-brand-light/40">
+            <button type="button" data-accordion-trigger class="flex w-full items-center justify-between px-5 py-4 text-left font-semibold text-brand-dark" aria-expanded="false">How do we reserve a date?</button>
+            <div data-accordion-panel class="hidden border-t border-brand-dark/10 px-5 py-4 text-sm text-gray-600">Message the <a href="https://www.facebook.com/p/A-and-C-Private-Pool-Resort-100057536286377/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-mid hover:underline">Facebook page</a> with your preferred date, package (day swim / pavilion / room), and party size.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-brand-light py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="overflow-hidden bg-brand-dark text-white shadow-xl">
+          <div class="grid gap-0 lg:grid-cols-2">
+            <div class="p-8 sm:p-10 lg:p-12">
+              <h2 class="font-display text-3xl font-bold" data-reveal>Plan your visit</h2>
+              <p class="mt-4 text-white/80" data-reveal>Tell us your preferred date, group size, and whether you want day swim, pavilion, or rooms — we will confirm availability.</p>
+              <ul class="mt-8 space-y-4 text-sm sm:text-base" data-reveal>
+                <li><span class="font-semibold text-brand-accent">Facebook</span><br /><a href="https://www.facebook.com/p/A-and-C-Private-Pool-Resort-100057536286377/" target="_blank" rel="noopener noreferrer" class="hover:underline">A and C Private Pool Resort</a></li>
+                <li><span class="font-semibold text-brand-accent">Address</span><br />Abuab Road II, San Mateo, Rizal</li>
+                <li><span class="font-semibold text-brand-accent">Hours</span><br />Always open · confirm package times when you book</li>
+                <li><span class="font-semibold text-brand-accent">Guests say</span><br />92% recommend on Facebook</li>
+              </ul>
+            </div>
+            <div class="flex flex-col justify-center gap-4 bg-brand-mid/40 p-8 sm:p-10 lg:p-12" data-reveal>
+              <a href="https://www.facebook.com/p/A-and-C-Private-Pool-Resort-100057536286377/" target="_blank" rel="noopener noreferrer" class="rounded-full bg-brand-accent px-6 py-4 text-center font-semibold text-brand-dark hover:brightness-105 transition">Message on Facebook</a>
+              <a href="#gallery" class="rounded-full border border-white/40 px-6 py-4 text-center font-semibold hover:bg-white/10 transition">View gallery</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-brand-dark/10 bg-white py-8 text-center text-sm text-gray-500">
+    <p class="font-display text-brand-dark">A and C Private Pool Resort</p>
+    <p class="mt-1">Private pool · San Mateo, Rizal · Demo site for quotation</p>
+    <p class="mt-3">&copy; <span id="year"></span> · Sample site by <a href="https://carlmanuel.com" class="text-brand-mid hover:underline">Carl Louis Manuel</a></p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script src="site.js"></script>
+  <script type="module" src="hero-motion.js"></script>
+  <script type="module" src="hero-three.js"></script>
+</body>
+</html>

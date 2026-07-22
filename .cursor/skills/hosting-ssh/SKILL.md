@@ -70,21 +70,19 @@ Laravel on Stellar:
 - [ ] CMS: GET/PUT /admin/content/{section}; public GET /content/{section}
 ```
 
-Outreach **cron** still runs under `hosting-php/scripts/` until ported to Artisan; admin pause updates the same MySQL `outreach_jobs` rows.
+Outreach **follow-up cron** is Artisan: `php artisan outreach:followups` (Blade emails). Admin pause updates the same MySQL `outreach_jobs` rows. Legacy `hosting-php/scripts/cron-outreach-followups.php` shells out to Artisan.
 
-**Cron paths (must be `hosting-php/scripts/`, not `api-carlxaeron/scripts/` — that folder does not exist):**
+**Preferred cron paths:**
 
 ```
-0 1 * * * /usr/local/bin/php /home/carlxaeron/public_html/api-carlxaeron/hosting-php/scripts/cron-outreach-followups.php >> .../storage/outreach-cron.log 2>&1
+0 1 * * * cd /home/carlxaeron/public_html/api-carlxaeron && /usr/local/bin/php artisan outreach:followups >> .../storage/logs/outreach-cron.log 2>&1
 0 8 * * 1 /usr/local/bin/php /home/carlxaeron/public_html/api-carlxaeron/hosting-php/scripts/cron-weekly-visit-report.php >> .../storage/weekly-report-cron.log 2>&1
 ```
 
-**hosting-php DB env:** cron loads `hosting-php/src/bootstrap.php`, which reads `hosting-php/.env` first. If missing, bootstrap falls back to parent Laravel `api-carlxaeron/.env` (same `DB_*` / `SMTP_*` / `OUTREACH_SECRET`). On Stellar you may symlink or copy Laravel `.env` into `hosting-php/` — fallback still helps after partial deploys.
-
 ```
 Crons on Stellar:
-- [ ] OUTREACH_SECRET (+ DB_*, SMTP_*) reachable via hosting-php/.env or parent Laravel .env
-- [ ] crontab uses full path: hosting-php/scripts/cron-outreach-followups.php (daily)
+- [ ] Laravel `.env` has DB_* + MAIL_* / SMTP_* for artisan cron
+- [ ] crontab uses `php artisan outreach:followups` (daily ~01:00 UTC)
 - [ ] crontab uses full path: hosting-php/scripts/cron-weekly-visit-report.php (Mon 08:00 server TZ)
 - [ ] OPENAI_API_KEY for POST /assistant (ChatAgent)
 - [ ] Never wipe crontab — merge when adding jobs

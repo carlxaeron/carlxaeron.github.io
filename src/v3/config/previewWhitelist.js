@@ -293,6 +293,12 @@ export const PREVIEW_SITES = [
     label: "A and C Private Pool Resort",
     netlifySite: "a-and-c-private-pool",
   },
+  {
+    id: "liz-palmana",
+    host: "liz-palmana.netlify.app",
+    label: "Liz Palmana Resort",
+    netlifySite: "liz-palmana",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;

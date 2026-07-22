@@ -30,14 +30,14 @@
     "messengerDraft": "quotation-messenger.txt",
     "followUp3dDraft": "quotation-followup-3d.md",
     "followUp1wDraft": "quotation-followup-1w.md",
-    "status": "sent",
+    "status": "followup_sent",
     "cadence": "3d1w",
     "emailFound": true,
     "sentAt": "2026-07-20T13:10:06+08:00",
-    "nextFollowUpAt": "2026-07-23 05:10:06",
-    "lastFollowUpAt": null,
-    "followUpCount": 0,
-    "notes": "Initial sent 2026-07-20 via outreachSchedule to manila.grand@hyatt.com; auto follow-ups 3d1w (max 4)."
+    "nextFollowUpAt": "2026-07-29T12:50:29+08:00",
+    "lastFollowUpAt": "2026-07-22T12:50:29+08:00",
+    "followUpCount": 1,
+    "notes": "Initial sent 2026-07-20 via outreachSchedule to manila.grand@hyatt.com; FU #1 sent 2026-07-22 (early for Jul 23 due); next 7d (max 4)."
   },
   "sources": {
     "facebook": "https://www.facebook.com/grandhyattmanilaph/",
