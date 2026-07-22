@@ -1,0 +1,18 @@
+[submodule "api-carlxaeron"]
+	path = api-carlxaeron
+	url = git@github.com:carlxaeron/api-carlxaeron.git
+[submodule "client-sites"]
+	path = client-sites
+	url = git@github.com:carlxaeron/client-sites.git
+[submodule "OnlineJobs-MCP-Server"]
+	path = OnlineJobs-MCP-Server
+	url = git@github.com:carlxaeron/onlinejobs-mcp-server.git
+[submodule "Hosting-SSH-MCP-Server"]
+	path = Hosting-SSH-MCP-Server
+	url = git@github.com:carlxaeron/hosting-ssh-mcp-server.git
+[submodule "Namecheap-MCP-Server"]
+	path = Namecheap-MCP-Server
+	url = git@github.com:carlxaeron/namecheap-mcp-server.git
+[submodule "Office-Word-MCP-Server"]
+	path = Office-Word-MCP-Server
+	url = git@github.com:carlxaeron/office-word-mcp-server.git
