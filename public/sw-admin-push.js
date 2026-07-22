@@ -1,5 +1,11 @@
 /* Admin Web Push service worker — registered only from Admin Settings. */
 
+/** Absolute HTTPS URLs — required by many mobile browsers for notification icons. */
+var ADMIN_PUSH_ICON =
+  "https://carlmanuel.com/static/images/pwa-icon-192.png";
+var ADMIN_PUSH_BADGE =
+  "https://carlmanuel.com/static/images/pwa-icon-192.png";
+
 self.addEventListener("push", (event) => {
   let payload = {};
   if (event.data) {
@@ -13,8 +19,8 @@ self.addEventListener("push", (event) => {
   const title = payload.title || "Carl Manuel Admin";
   const options = {
     body: payload.body || "New admin notification",
-    icon: payload.icon || "/logo192.png",
-    badge: "/logo192.png",
+    icon: payload.icon || ADMIN_PUSH_ICON,
+    badge: payload.badge || ADMIN_PUSH_BADGE,
     tag: payload.tag || "admin-push",
     renotify: true,
     data: {

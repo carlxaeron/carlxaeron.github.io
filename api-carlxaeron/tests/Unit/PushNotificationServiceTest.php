@@ -129,4 +129,16 @@ class PushNotificationServiceTest extends TestCase
             'endpoint' => 'https://example.com/bad',
         ]);
     }
+
+    public function test_push_icon_config_defaults_to_profile_pwa_asset(): void
+    {
+        $this->assertSame(
+            'https://carlmanuel.com/static/images/pwa-icon-192.png',
+            config('portfolio.push_icon_url')
+        );
+        $this->assertSame(
+            'https://carlmanuel.com/static/images/pwa-icon-192.png',
+            config('portfolio.push_badge_url')
+        );
+    }
 }

@@ -24,6 +24,17 @@ return [
 
     'vapid_subject' => env('VAPID_SUBJECT', 'mailto:info@carlmanuel.com'),
 
+    // Absolute HTTPS icon for Web Push (phones often ignore relative paths).
+    'push_icon_url' => env(
+        'PUSH_ICON_URL',
+        'https://carlmanuel.com/static/images/pwa-icon-192.png'
+    ),
+
+    'push_badge_url' => env(
+        'PUSH_BADGE_URL',
+        'https://carlmanuel.com/static/images/pwa-icon-192.png'
+    ),
+
     // Admin push: one preview_view notification per slug + session (Cache TTL safety net).
     'push_preview_view_throttle_minutes' => (int) env('PUSH_PREVIEW_VIEW_THROTTLE_MINUTES', 30),
 

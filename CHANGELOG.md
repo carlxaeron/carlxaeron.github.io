@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.92] — 2026-07-22
+
+### Changed
+- **PWA / Web Push icons** — phone notifications and install icons use Carl’s profile headshot (`/static/images/pwa-icon-192.png`, `pwa-icon-512.png`, maskable 512) instead of the default React logo
+
 ## [3.0.91] — 2026-07-21
 
 ### Changed

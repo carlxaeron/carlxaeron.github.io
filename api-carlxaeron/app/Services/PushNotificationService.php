@@ -80,6 +80,14 @@ class PushNotificationService
         $payload = json_encode([
             'title' => $title,
             'body' => $body,
+            'icon' => (string) config(
+                'portfolio.push_icon_url',
+                'https://carlmanuel.com/static/images/pwa-icon-192.png'
+            ),
+            'badge' => (string) config(
+                'portfolio.push_badge_url',
+                'https://carlmanuel.com/static/images/pwa-icon-192.png'
+            ),
             'data' => $data,
         ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
 

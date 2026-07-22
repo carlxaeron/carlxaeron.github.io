@@ -7,6 +7,12 @@ import {
 /** Service worker script path (served from CRA public/). */
 export const ADMIN_PUSH_SW_PATH = "/sw-admin-push.js";
 
+/** Absolute HTTPS notification icon (matches public/sw-admin-push.js + Laravel push payload). */
+export const ADMIN_PUSH_ICON_URL =
+  "https://carlmanuel.com/static/images/pwa-icon-192.png";
+
+export const ADMIN_PUSH_BADGE_URL = ADMIN_PUSH_ICON_URL;
+
 export function isPushSupported() {
   if (typeof window === "undefined") return false;
   return (

@@ -1,5 +1,7 @@
 import { mapping } from "../../mapping";
 import {
+  ADMIN_PUSH_BADGE_URL,
+  ADMIN_PUSH_ICON_URL,
   ADMIN_PUSH_SW_PATH,
   extractVapidPublicKey,
   getPushPermissionState,
@@ -34,6 +36,40 @@ describe("pushNotifications helpers", () => {
 
   test("ADMIN_PUSH_SW_PATH points at public service worker", () => {
     expect(ADMIN_PUSH_SW_PATH).toBe("/sw-admin-push.js");
+  });
+
+  test("ADMIN_PUSH_ICON_URL uses absolute HTTPS profile PWA icon", () => {
+    expect(ADMIN_PUSH_ICON_URL).toBe(
+      "https://carlmanuel.com/static/images/pwa-icon-192.png"
+    );
+    expect(ADMIN_PUSH_BADGE_URL).toBe(ADMIN_PUSH_ICON_URL);
+    expect(ADMIN_PUSH_ICON_URL.startsWith("https://")).toBe(true);
+  });
+
+  test("public sw-admin-push.js defaults to the same absolute icon URLs", () => {
+    // eslint-disable-next-line global-require
+    const fs = require("fs");
+    // eslint-disable-next-line global-require
+    const path = require("path");
+    const swPath = path.join(__dirname, "../../../public/sw-admin-push.js");
+    const sw = fs.readFileSync(swPath, "utf8");
+    expect(sw).toContain(ADMIN_PUSH_ICON_URL);
+    expect(sw).toContain("payload.icon || ADMIN_PUSH_ICON");
+    expect(sw).toContain("payload.badge || ADMIN_PUSH_BADGE");
+  });
+
+  test("manifest.json references profile PWA icons", () => {
+    // eslint-disable-next-line global-require
+    const fs = require("fs");
+    // eslint-disable-next-line global-require
+    const path = require("path");
+    const manifest = JSON.parse(
+      fs.readFileSync(path.join(__dirname, "../../../public/manifest.json"), "utf8")
+    );
+    const srcs = (manifest.icons || []).map((icon) => icon.src);
+    expect(srcs).toContain("/static/images/pwa-icon-192.png");
+    expect(srcs).toContain("/static/images/pwa-icon-512.png");
+    expect(srcs).toContain("/static/images/pwa-icon-maskable-512.png");
   });
 
   test("isPushSupported detects PushManager availability", () => {
