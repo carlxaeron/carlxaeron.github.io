@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-23T02:36:24.788Z",
+  "generatedAt": "2026-07-23T04:13:53.305Z",
   "clients": [
     {
       "slug": "a-and-c-private-pool",
@@ -164,6 +164,39 @@
       },
       "sources": {
         "address": "Archipelago Building, 29 North Avenue, Brgy. Pag-asa, Quezon City"
+      }
+    },
+    {
+      "slug": "bccc-corp",
+      "businessName": "BC Cuerpo Construction Corporation",
+      "industry": "General building contractor / design-build · Rodriguez Rizal",
+      "contact": {
+        "name": "Engr. Norvin Ray C. Cuerpo",
+        "email": "bccuerpoconstruction@yahoo.com",
+        "phone": "+63 917 847 0755"
+      },
+      "quotation": {
+        "packageName": "Business Website Rebuild",
+        "packageScope": "One-page responsive website only (services, project gallery, about, FAQ, contact), mobile-friendly, Facebook integration. Admin preview is a sample; production job-schedule system priced separately.",
+        "quotedAmount": "₱18,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "7–10 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=bccc-corp"
+      },
+      "system": {
+        "type": "service",
+        "adminPath": "/admin/",
+        "label": "Job schedule & bid pipeline admin",
+        "navPages": [
+          "Dashboard",
+          "Jobs",
+          "Dispatch",
+          "Customers",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "2B E. Rodriguez Sr. Ave., San Jose, Rodriguez, Rizal 1860"
       }
     },
     {
@@ -926,6 +959,39 @@
       }
     },
     {
+      "slug": "lucky-q-enterprises",
+      "businessName": "Lucky Q Enterprises",
+      "industry": "Reinforced concrete pipes · gravel & sand · ready-mix · Montalban Rizal",
+      "contact": {
+        "name": "Rafael B. Quintos",
+        "email": "luckyqenterprises71@gmail.com",
+        "phone": "+63 922 496 1222"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (products, gallery, about, FAQ, contact), basic SEO, Netlify hosting. Admin preview is a sample; production lead/quote system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=lucky-q-enterprises"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "Lead & quote inbox",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Sitio Gulod, Brgy. San Isidro, Montalban (Rodriguez), Rizal"
+      }
+    },
+    {
       "slug": "machinemate",
       "businessName": "Machinemate Mainteneering Services",
       "industry": "Industrial fans / ventilation & maintenance engineering",
@@ -1322,6 +1388,39 @@
       }
     },
     {
+      "slug": "solid-integrated",
+      "businessName": "Solid Integrated Company Inc.",
+      "industry": "Crushed aggregates / quarry materials · Rodriguez Rizal",
+      "contact": {
+        "name": "Solid Integrated Company Inc. team",
+        "email": "",
+        "phone": "+63 2 8948 0301"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (products, plants, about, FAQ, contact), basic SEO, Netlify hosting. Admin preview is a sample; production lead/quote system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=solid-integrated"
+      },
+      "system": {
+        "type": "leads",
+        "adminPath": "/admin/",
+        "label": "Lead & quote inbox",
+        "navPages": [
+          "Dashboard",
+          "Leads",
+          "Follow-ups",
+          "Contacts",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "167 J.P. Rizal St., Manggahan, Rodriguez, Rizal"
+      }
+    },
+    {
       "slug": "sonyoba-marketing",
       "businessName": "Sonyoba Marketing",
       "industry": "Office equipment / paper shredders & business machines",
@@ -1649,6 +1748,39 @@
       },
       "sources": {
         "address": ""
+      }
+    },
+    {
+      "slug": "xkr-construction",
+      "businessName": "XKR Construction",
+      "industry": "Construction / horizontal & vertical (gov + private)",
+      "contact": {
+        "name": "XKR Construction team",
+        "email": "xkrconstruction@yahoo.com",
+        "phone": "+63 906 246 5884"
+      },
+      "quotation": {
+        "packageName": "Business Website",
+        "packageScope": "One-page responsive website only (services, project gallery, about, FAQ, contact). Admin preview is a sample; production job-schedule system priced separately.",
+        "quotedAmount": "₱18,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "7–10 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=xkr-construction"
+      },
+      "system": {
+        "type": "service",
+        "adminPath": "/admin/",
+        "label": "Job schedule admin",
+        "navPages": [
+          "Dashboard",
+          "Jobs",
+          "Dispatch",
+          "Customers",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "San Jose, Rodriguez, Rizal 1860, Philippines"
       }
     }
   ]

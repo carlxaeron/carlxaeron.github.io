@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.94] — 2026-07-23
+
+### Added
+- **Preview whitelist** — `solid-integrated` (Solid Integrated Company Inc. · crushed aggregates, Rodriguez Rizal) quotation demo (`?preview=` + client-sites + catalog)
+
 ## [3.0.93] — 2026-07-23
 
 ### Added

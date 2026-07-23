@@ -305,6 +305,12 @@ export const PREVIEW_SITES = [
     label: "Top Hill Cafe Grill",
     netlifySite: "top-hill-cafe-grill",
   },
+  {
+    id: "solid-integrated",
+    host: "solid-integrated.netlify.app",
+    label: "Solid Integrated Company Inc.",
+    netlifySite: "solid-integrated",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
