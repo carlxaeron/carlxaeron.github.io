@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.98] — 2026-07-23
+
+### Added
+- **Preview whitelist** — `xkr-construction` (XKR Construction · horizontal & vertical, gov + private, Rodriguez Rizal) quotation demo (`?preview=` + client-sites + catalog)
+
+## [3.0.97] — 2026-07-23
+
+### Added
+- **Preview whitelist** — `lucky-q-enterprises` (Lucky Q Enterprises · RCP / gravel & sand / ready-mix, Montalban Rizal) quotation demo (`?preview=` + client-sites + catalog)
+
 ## [3.0.95] — 2026-07-23
 
 ### Added

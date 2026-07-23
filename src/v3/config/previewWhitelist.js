@@ -323,6 +323,12 @@ export const PREVIEW_SITES = [
     label: "Lucky Q Enterprises",
     netlifySite: "lucky-q-enterprises",
   },
+  {
+    id: "xkr-construction",
+    host: "xkr-construction.netlify.app",
+    label: "XKR Construction",
+    netlifySite: "xkr-construction",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
