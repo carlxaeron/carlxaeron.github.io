@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.95] — 2026-07-23
+
+### Added
+- **Preview whitelist** — `bccc-corp` (BC Cuerpo Construction Corporation · design-build / general contractor, Rodriguez Rizal) quotation demo (`?preview=` + client-sites + catalog)
+
 ## [3.0.94] — 2026-07-23
 
 ### Added

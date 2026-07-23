@@ -311,6 +311,18 @@ export const PREVIEW_SITES = [
     label: "Solid Integrated Company Inc.",
     netlifySite: "solid-integrated",
   },
+  {
+    id: "bccc-corp",
+    host: "bccc-corp.netlify.app",
+    label: "BC Cuerpo Construction Corporation",
+    netlifySite: "bccc-corp",
+  },
+  {
+    id: "lucky-q-enterprises",
+    host: "lucky-q-enterprises.netlify.app",
+    label: "Lucky Q Enterprises",
+    netlifySite: "lucky-q-enterprises",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
