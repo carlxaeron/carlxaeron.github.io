@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.93] — 2026-07-23
+
+### Added
+- **Preview whitelist** — `top-hill-cafe-grill` (Top Hill Cafe Grill · Bancom, San Mateo) quotation demo (`?preview=` + client-sites + catalog)
+
 ## [3.0.92] — 2026-07-22
 
 ### Changed

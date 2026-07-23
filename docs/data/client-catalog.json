@@ -1,6 +1,39 @@
 {
-  "generatedAt": "2026-07-21T03:57:20.513Z",
+  "generatedAt": "2026-07-23T02:36:24.788Z",
   "clients": [
+    {
+      "slug": "a-and-c-private-pool",
+      "businessName": "A and C Private Pool Resort",
+      "industry": "Private pool / vacation home rental / day venue",
+      "contact": {
+        "name": "A and C Private Pool Resort team",
+        "email": "",
+        "phone": ""
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (amenities, gallery, about, FAQ, contact). Admin preview is a sample; production booking system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=a-and-c-private-pool"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Booking & calendar admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Abuab Road II, San Mateo, Philippines"
+      }
+    },
     {
       "slug": "air-alex-resort",
       "businessName": "Airalex Private Lodge & Resort",
@@ -827,6 +860,39 @@
       }
     },
     {
+      "slug": "liz-palmana",
+      "businessName": "Liz Palmana Resort",
+      "industry": "Hotel resort / family staycation · San Mateo Rizal",
+      "contact": {
+        "name": "Liz Palmana Resort Team",
+        "email": "lizpalmanaresort@yahoo.com",
+        "phone": ""
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (amenities, gallery, about, FAQ, contact). Admin preview is a sample; production booking system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=liz-palmana"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Booking & calendar admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Baltazar Compound, Patiis Rd, Malanday, San Mateo, Philippines"
+      }
+    },
+    {
       "slug": "lucky-drive-inn",
       "businessName": "Lucky Drive Inn Hotel",
       "industry": "Drive-in hotel / inn · Rodriguez Rizal",
@@ -1454,6 +1520,39 @@
       }
     },
     {
+      "slug": "top-hill-cafe-grill",
+      "businessName": "Top Hill Cafe Grill",
+      "industry": "Café & grill · San Mateo Rizal",
+      "contact": {
+        "name": "Top Hill Cafe Grill team",
+        "email": "tophill.cafegrill@gmail.com",
+        "phone": "+63 968 117 1214"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (menu highlights, gallery, about, FAQ, contact), basic SEO, Netlify hosting. Admin preview is a sample; production booking system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=top-hill-cafe-grill"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Table & private hangout booking admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Aquarius street Bancom gate 2, Bancom Subd., San Mateo, Rizal 1850"
+      }
+    },
+    {
       "slug": "trumed-pharma",
       "businessName": "Trumed Pharmaceuticals",
       "industry": "Pharmaceutical marketing / distribution",
@@ -1484,6 +1583,39 @@
       },
       "sources": {
         "address": "12th Floor, Hexagon Corporate Center, 1471 Quezon Avenue, Brgy. West Triangle, Quezon City 1104"
+      }
+    },
+    {
+      "slug": "villa-apolonia",
+      "businessName": "Villa Apolonia Resort Hotel",
+      "industry": "Hotel resort / day stay & overnight",
+      "contact": {
+        "name": "Villa Apolonia Resort Hotel team",
+        "email": "newvarh@gmail.com",
+        "phone": "+63 968 306 6345"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (amenities, gallery, about, FAQ, contact). Admin preview is a sample; production booking system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=villa-apolonia"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Booking & calendar admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "Maly-Maarang Road, Brgy. Maly, San Mateo, Rizal"
       }
     },
     {

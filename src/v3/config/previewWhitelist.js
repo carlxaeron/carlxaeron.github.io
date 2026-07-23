@@ -299,6 +299,12 @@ export const PREVIEW_SITES = [
     label: "Liz Palmana Resort",
     netlifySite: "liz-palmana",
   },
+  {
+    id: "top-hill-cafe-grill",
+    host: "top-hill-cafe-grill.netlify.app",
+    label: "Top Hill Cafe Grill",
+    netlifySite: "top-hill-cafe-grill",
+  },
 ];
 
 const NETLIFY_HOST_PATTERN = /^[a-z0-9][a-z0-9-]*\.netlify\.app$/i;
