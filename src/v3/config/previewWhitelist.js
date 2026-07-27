@@ -1,6 +1,6 @@
 /**
  * Whitelist for ?preview= portfolio showcase iframes.
- * Public URLs use short slugs: ?preview=jk-construction
+ * Public URLs use short slugs: ?preview=machinemate
  * Legacy full hostnames (?preview=*.netlify.app) still resolve for backward compatibility.
  */
 
@@ -40,12 +40,6 @@ export const PREVIEW_SITES = [
     host: "sonyoba-marketing.netlify.app",
     label: "Sonyoba Marketing",
     netlifySite: "sonyoba-marketing",
-  },
-  {
-    id: "jk-construction",
-    host: "jk-construction-services.netlify.app",
-    label: "JK Construction Services",
-    netlifySite: "jk-construction-services",
   },
   {
     id: "machinemate",

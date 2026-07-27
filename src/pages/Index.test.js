@@ -62,10 +62,10 @@ describe("Index preview routing", () => {
   });
 
   test("renders preview showcase for short slug", () => {
-    mockSearch("?preview=jk-construction");
+    mockSearch("?preview=machinemate");
     render(<Index />);
     expect(screen.getByTestId("preview-showcase")).toBeInTheDocument();
-    expect(screen.getByText(/JK Construction Services/i)).toBeInTheDocument();
+    expect(screen.getByText(/Machinemate Mainteneering Services/i)).toBeInTheDocument();
     expect(screen.queryByText(/\.netlify\.app/i)).not.toBeInTheDocument();
   });
 
@@ -82,8 +82,8 @@ describe("Index preview routing", () => {
   });
 
   test("does not replaceState when preview already uses slug", () => {
-    mockSearch("?preview=jk-construction");
-    window.location.href = "http://localhost/?preview=jk-construction";
+    mockSearch("?preview=machinemate");
+    window.location.href = "http://localhost/?preview=machinemate";
     render(<Index />);
 
     expect(window.history.replaceState).not.toHaveBeenCalled();
@@ -109,7 +109,7 @@ describe("Index preview routing", () => {
   });
 
   test("adds noindex robots meta for preview mode", () => {
-    mockSearch("?preview=jk-construction");
+    mockSearch("?preview=machinemate");
     render(<Index />);
     expect(document.querySelector('meta[name="robots"][content="noindex, nofollow"]')).toBeTruthy();
   });

@@ -172,7 +172,7 @@ describe("PreviewShowcaseError", () => {
   test("shows slug-friendly hint when preview key is missing", () => {
     render(<PreviewShowcaseError previewKey={null} />);
     expect(screen.getByText(/Use \?preview=client-slug/i)).toBeInTheDocument();
-    expect(screen.getByText(/jk-construction/i)).toBeInTheDocument();
+    expect(screen.getByText(/machinemate/i)).toBeInTheDocument();
     expect(screen.queryByText(/netlify/i)).not.toBeInTheDocument();
   });
 });

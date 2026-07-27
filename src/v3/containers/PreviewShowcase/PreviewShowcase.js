@@ -416,7 +416,7 @@ export function PreviewShowcaseError({ previewKey }) {
         <p className="v3-preview-error__text">
           {previewKey
             ? `"${previewKey}" is not on the allowed preview list.`
-            : "Missing or invalid preview parameter. Use ?preview=client-slug (for example ?preview=jk-construction)."}
+            : "Missing or invalid preview parameter. Use ?preview=client-slug (for example ?preview=machinemate)."}
         </p>
         <button type="button" className="v3-btn v3-btn--primary" onClick={handleBack}>
           Back to portfolio

@@ -33,10 +33,10 @@ describe("previewWhitelist — slug resolution", () => {
   });
 
   test("resolves netlifySite alias to site slug", () => {
-    const resolved = resolvePreviewUrl("jk-construction-services");
+    const resolved = resolvePreviewUrl("machinemate-engineering");
 
-    expect(resolved?.slug).toBe("jk-construction");
-    expect(resolved?.url).toBe("https://jk-construction-services.netlify.app");
+    expect(resolved?.slug).toBe("machinemate");
+    expect(resolved?.url).toBe("https://machinemate-engineering.netlify.app");
   });
 
   test("strips protocol and path from legacy preview value", () => {
@@ -86,7 +86,7 @@ describe("buildPreviewPortfolioUrl", () => {
 
 describe("getPreviewQueryFromSearch", () => {
   test("reads preview param from search string", () => {
-    expect(getPreviewQueryFromSearch("?preview=jk-construction&foo=bar")).toBe("jk-construction");
+    expect(getPreviewQueryFromSearch("?preview=machinemate&foo=bar")).toBe("machinemate");
     expect(getPreviewQueryFromSearch("")).toBeNull();
   });
 });

@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.99] — 2026-07-27
+
+### Removed
+- **JK Construction Services** — dropped `jk-construction` from preview whitelist and client-sites catalog (outreach paused)
+
 ## [3.0.98] — 2026-07-23
 
 ### Added

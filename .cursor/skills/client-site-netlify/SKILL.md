@@ -7,7 +7,7 @@ description: Scaffold, build, and deploy local-business quotation websites under
 
 **Pitch:** **Website + browsable admin system** — not website-only. One Netlify codebase per client: marketing site at `/` + pre-logged-in admin demo at `/admin/`. Portfolio preview shows **4 panels**: site desktop, site mobile, admin desktop, admin mobile (`?preview={slug}`).
 
-**Preview URL format:** `https://carlmanuel.com/?preview={slug}` (e.g. `?preview=jk-construction`)  
+**Preview URL format:** `https://carlmanuel.com/?preview={slug}` (e.g. `?preview=machinemate`)  
 **Helper:** `buildPreviewPortfolioUrl(slug)` in [`previewWhitelist.js`](../../src/v3/config/previewWhitelist.js)  
 **Legacy:** full `*.netlify.app` hostnames in `?preview=` still resolve but the URL bar is normalized to the slug.  
 **Whitelist:** [src/v3/config/previewWhitelist.js](../../src/v3/config/previewWhitelist.js)  
