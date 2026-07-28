@@ -3,6 +3,7 @@ import { useSpring, animated } from "@react-spring/web";
 import { EXPERIENCES } from "../../../external-config";
 import SectionTitle from "../../components/SectionTitle";
 import { usePortfolioSection } from "../../config/PortfolioContentContext";
+import { useSectionLabel } from "../../config/useSectionLabel";
 
 function ExperienceItem({ exp, index, isActive }) {
   const [show, setShow] = useState(false);
@@ -106,6 +107,10 @@ function ExperienceItem({ exp, index, isActive }) {
 
 function V3Experience({ isActive }) {
   const experiences = usePortfolioSection("experiences") || EXPERIENCES;
+  const experienceLabel = useSectionLabel("experience", {
+    title: "Experience",
+    subtitle: "My professional journey",
+  });
   const containerSpring = useSpring({
     from: { opacity: 0 },
     to: { opacity: isActive ? 1 : 0 },
@@ -120,7 +125,7 @@ function V3Experience({ isActive }) {
       style={{ background: "#1E3932", height: "100%", overflow: "hidden" }}
     >
       <div className="v3-inner v3-scrollable v3-section-scroll">
-        <SectionTitle subtitle="My professional journey">Experience</SectionTitle>
+        <SectionTitle subtitle={experienceLabel.subtitle}>{experienceLabel.title}</SectionTitle>
 
         <animated.div
           className="v3-timeline v3-scrollable"

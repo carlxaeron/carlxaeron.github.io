@@ -23,6 +23,8 @@ import {
   PortfolioContentProvider,
   usePortfolioContent,
 } from "../../config/PortfolioContentContext";
+import { PortfolioVariantProvider } from "../../config/PortfolioVariantContext";
+import { PORTFOLIO_VARIANTS } from "../../config/portfolioVariant";
 
 const ALL_SECTIONS = [
   { id: "home",       component: V3Home,       title: "Home" },
@@ -37,7 +39,7 @@ const ALL_SECTIONS = [
 ];
 
 function V3PortfolioScroll() {
-  const { getProjectDetails, settings } = usePortfolioContent();
+  const { getProjectDetails, settings, getSection } = usePortfolioContent();
   const { value, setValue } = useStore();
   const [currentSection, setCurrentSection] = useState(0);
   const isTransitioningRef = useRef(false);
@@ -60,9 +62,14 @@ function V3PortfolioScroll() {
 
   const sections = useMemo(() => {
     const flags = settings?.sections || {};
+    const sectionLabels = getSection("sectionLabels") || {};
     const visible = ALL_SECTIONS.filter((s) => flags[s.id] !== false);
-    return visible.length > 0 ? visible : ALL_SECTIONS.filter((s) => s.id === "home");
-  }, [settings]);
+    const mapped = visible.map((section) => ({
+      ...section,
+      title: sectionLabels[section.id]?.title || section.title,
+    }));
+    return mapped.length > 0 ? mapped : ALL_SECTIONS.filter((s) => s.id === "home");
+  }, [settings, getSection]);
 
   useEffect(() => {
     if (currentSection >= sections.length) {
@@ -416,12 +423,14 @@ function V3PortfolioScroll() {
   );
 }
 
-function V3Portfolio() {
+function V3Portfolio({ variant = PORTFOLIO_VARIANTS.RESULTS }) {
   return (
     <ThemeProvider>
-      <PortfolioContentProvider>
-        <V3PortfolioScroll />
-      </PortfolioContentProvider>
+      <PortfolioVariantProvider variant={variant}>
+        <PortfolioContentProvider variant={variant}>
+          <V3PortfolioScroll />
+        </PortfolioContentProvider>
+      </PortfolioVariantProvider>
     </ThemeProvider>
   );
 }

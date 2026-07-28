@@ -3,6 +3,7 @@ import { useSpring, animated } from "@react-spring/web";
 import { SKILLS } from "../../../external-config";
 import SectionTitle from "../../components/SectionTitle";
 import { usePortfolioSection } from "../../config/PortfolioContentContext";
+import { useSectionLabel } from "../../config/useSectionLabel";
 
 function groupSkills(skills) {
   const groups = [];
@@ -54,6 +55,10 @@ function SkillBar({ skill, delay, show }) {
 
 function V3Skills({ isActive }) {
   const skills = usePortfolioSection("skills") || SKILLS;
+  const skillsLabel = useSectionLabel("skills", {
+    title: "Skills",
+    subtitle: "Technologies I work with",
+  });
   const skillGroups = useMemo(() => groupSkills(skills), [skills]);
   const [show, setShow] = useState(false);
   const [activeGroup, setActiveGroup] = useState(0);
@@ -90,7 +95,7 @@ function V3Skills({ isActive }) {
     >
       <div className="v3-inner v3-scrollable v3-section-scroll">
         <animated.div style={headerSpring}>
-          <SectionTitle subtitle="Technologies I work with">Skills</SectionTitle>
+          <SectionTitle subtitle={skillsLabel.subtitle}>{skillsLabel.title}</SectionTitle>
         </animated.div>
 
         <div className="v3-filter-btns" style={{ marginBottom: "1.5rem" }}>

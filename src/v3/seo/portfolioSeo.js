@@ -14,21 +14,20 @@ const V3_GREEN_LIGHT = "#D4E9E2";
 
 const PORTFOLIO_SEO = {
   siteUrl: SITE_URL,
-  title:
-    "Carl Louis Manuel — Building AI-Powered Applications | Full-Stack Engineer & SaaS Builder",
+  title: "Carl Louis Manuel — Senior Full-Stack Engineer (Remote)",
   description:
-    "Building AI-powered enterprise applications and SaaS products. 12+ years across banks, media companies & enterprises — ReactJS, Laravel, OpenAI API, Flutter, Firebase. Senior Full-Stack Engineer based in the Philippines.",
+    "12+ years building web apps for Metrobank, ABS-CBN, GoAutoDial, and others. React, Laravel, Firebase, OpenAI. Based in the Philippines, available for remote work.",
   hero: {
-    eyebrow: "Building AI-Powered Enterprise Applications",
+    eyebrow: "Senior engineer · 12 years in production",
     nameLine1: "Carl Louis",
     nameLine2: "Manuel",
     subheadline:
-      "12+ years architecting production-grade systems for banks, media companies & enterprises — with AI built in. ReactJS · Laravel · OpenAI API · Firebase · Flutter",
+      "I build web apps for banks, media, and product teams. Lately: banking modules at Metrobank, a full agent-app rewrite at GoAutoDial (jQuery/PHP to React/Laravel), and three sites I built from scratch at ABS-CBN. Based in the Philippines, open to remote work overseas.",
   },
   about: {
-    heading: "I'm Carl Louis Manuel",
+    heading: "A bit about me",
     intro:
-      "I build AI-powered applications and automation workflows that enterprises actually ship. With 12+ years across banking, media, and technology — I've led full-stack delivery at Metrobank, ABS-CBN, and GoAutoDial.",
+      "Most of my career has been web development under normal pressure — compliance at a bank, daily use by call-center agents, campaign traffic at a TV network.",
   },
   contact: {
     email: "info@carlmanuel.com",
@@ -40,11 +39,28 @@ const PORTFOLIO_SEO = {
     { id: "about", title: "About" },
     { id: "skills", title: "Skills" },
     { id: "experience", title: "Experience" },
-    { id: "projects", title: "Projects" },
+    { id: "projects", title: "Work" },
     { id: "contact", title: "Contact" },
-    { id: "quote", title: "Get a Quote" },
   ],
 };
+
+const RESUME_PORTFOLIO_SEO = {
+  siteUrl: SITE_URL,
+  title:
+    "Carl Louis Manuel — Building AI-Powered Applications | Full-Stack Engineer & SaaS Builder",
+  description:
+    "Building AI-powered enterprise applications and SaaS products. 12+ years across banks, media companies & enterprises — ReactJS, Laravel, OpenAI API, Flutter, Firebase. Senior Full-Stack Engineer based in the Philippines.",
+};
+
+/**
+ * @param {'results' | 'resume'} [variant]
+ */
+function getPortfolioSeo(variant = "results") {
+  if (variant === "resume") {
+    return RESUME_PORTFOLIO_SEO;
+  }
+  return PORTFOLIO_SEO;
+}
 
 function escapeHtml(value) {
   return String(value)
@@ -147,6 +163,7 @@ function buildBootShellHtml() {
 
 function buildPrerenderHtml() {
   const { hero, about, contact, sections } = PORTFOLIO_SEO;
+  const sectionTitle = (id, fallback) => sections.find((s) => s.id === id)?.title || fallback;
   const skillItems = topSkillNames()
     .map((name) => `<li>${escapeHtml(name)}</li>`)
     .join("\n        ");
@@ -177,32 +194,28 @@ function buildPrerenderHtml() {
       <p>${escapeHtml(about.intro)}</p>
     </section>
     <section id="skills">
-      <h2>Skills</h2>
+      <h2>${escapeHtml(sectionTitle("skills", "Skills"))}</h2>
       <ul>
         ${skillItems}
       </ul>
     </section>
     <section id="experience">
-      <h2>Experience</h2>
+      <h2>${escapeHtml(sectionTitle("experience", "Experience"))}</h2>
       <ul>
         ${experienceItems}
       </ul>
     </section>
     <section id="projects">
-      <h2>Projects</h2>
+      <h2>${escapeHtml(sectionTitle("projects", "Work"))}</h2>
       <ul>
         ${projectItems}
       </ul>
     </section>
     <section id="contact">
-      <h2>Contact</h2>
+      <h2>${escapeHtml(sectionTitle("contact", "Contact"))}</h2>
       <p>Email: <a href="mailto:${escapeHtml(contact.email)}">${escapeHtml(contact.email)}</a></p>
       <p>GitHub: <a href="${escapeHtml(contact.github)}">${escapeHtml(contact.github)}</a></p>
       <p>LinkedIn: <a href="${escapeHtml(contact.linkedin)}">${escapeHtml(contact.linkedin)}</a></p>
-    </section>
-    <section id="quote">
-      <h2>Get a Quote</h2>
-      <p>Request a project quote for enterprise web development, AI integration, or SaaS builds.</p>
     </section>
     <nav aria-label="Portfolio sections">
       ${navLinks}
@@ -212,6 +225,8 @@ function buildPrerenderHtml() {
 
 module.exports = {
   PORTFOLIO_SEO,
+  RESUME_PORTFOLIO_SEO,
+  getPortfolioSeo,
   SITE_URL,
   V3_GREEN_DARK,
   V3_GREEN_MID,

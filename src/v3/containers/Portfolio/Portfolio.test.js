@@ -36,9 +36,10 @@ jest.mock("./About", () => () => <section>About content</section>);
 jest.mock("./Skills", () => () => <section>Skills content</section>);
 jest.mock("./Experience", () => () => <section>Experience content</section>);
 jest.mock("./Projects", () => () => <section>Projects content</section>);
-jest.mock("./Blog", () => () => <section>Blog content</section>);
+jest.mock("./Blog", () => () => <section data-testid="blog-section">Blog content</section>);
+jest.mock("./Insights", () => () => <section data-testid="insights-section">Insights content</section>);
 jest.mock("./Contact", () => () => <section>Contact content</section>);
-jest.mock("./Quote", () => () => <section>Quote content</section>);
+jest.mock("./Quote", () => () => <section data-testid="quote-section">Quote content</section>);
 
 describe("V3Portfolio wheel navigation", () => {
   beforeEach(() => {
@@ -161,6 +162,27 @@ describe("V3Portfolio section id navigation", () => {
       window.__v3Navigate("contact");
     });
     expect(window.location.hash).toBe("#contact");
+  });
+});
+
+describe("V3Portfolio variant sections", () => {
+  beforeEach(() => {
+    window.location.hash = "";
+  });
+
+  test("results mode hides blog, insights, and quote nav links", () => {
+    render(<V3Portfolio variant="results" />);
+    expect(screen.queryByRole("button", { name: "News & Blog" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Insights" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Get a Quote" })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Work" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Skills" })).toBeInTheDocument();
+  });
+
+  test("resume mode keeps full section nav", () => {
+    render(<V3Portfolio variant="resume" />);
+    expect(screen.getByRole("button", { name: "News & Blog" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Get a Quote" })).toBeInTheDocument();
   });
 });
 

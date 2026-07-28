@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import SectionTitle from "../../components/SectionTitle";
 import { usePortfolioSection } from "../../config/PortfolioContentContext";
+import { useSectionLabel } from "../../config/useSectionLabel";
 import { ABOUT_DEFAULTS } from "../../config/portfolioContentDefaults";
 
 function V3About({ isActive }) {
   const [show, setShow] = useState(false);
   const about = usePortfolioSection("about") || ABOUT_DEFAULTS;
+  const aboutLabel = useSectionLabel("about", { title: "About", accent: "Us" });
   const paragraphs = about.paragraphs || ABOUT_DEFAULTS.paragraphs;
   const skillTags = about.skillTags || ABOUT_DEFAULTS.skillTags;
   const stats = about.stats || ABOUT_DEFAULTS.stats;
@@ -44,7 +46,7 @@ function V3About({ isActive }) {
       style={{ background: "#1E3932", height: "100%", overflow: "hidden" }}
     >
       <div className="v3-inner v3-scrollable v3-section-scroll" data-testid="about-scrollable">
-        <SectionTitle accent="Us">About</SectionTitle>
+        <SectionTitle accent={aboutLabel.accent || "Us"}>{aboutLabel.title || "About"}</SectionTitle>
 
         <div className="row align-items-center">
           <div className="col-md-4 text-center mb-4 mb-md-0">

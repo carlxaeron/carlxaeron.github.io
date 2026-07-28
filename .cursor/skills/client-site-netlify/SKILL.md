@@ -38,6 +38,7 @@ Client site progress:
 - [ ] client-sites/README.md catalog updated (table + detail section)
 - [ ] Preview slug tests pass (`previewWhitelist.test.js`)
 - [ ] Portfolio preview link + drafts shared with user for review
+- [ ] **Outreach screenshots** captured to `assets/outreach-website.jpg` + `assets/outreach-admin.jpg` (headless script — Step 7b)
 ```
 
 ## Step 1 — Scaffold
@@ -357,25 +358,39 @@ Outreach gate:
 
 Before `outreachSchedule` with `sendInitial: true`, attach **at least 2** clear images:
 
-| File | What to capture |
-|------|-----------------|
-| `website-preview.jpg` | Marketing site (desktop hero / first viewport, or full desktop frame) |
-| `admin-preview.jpg` | Admin/system (`/admin/`) — desktop dashboard preferred |
+| Stored asset | Email attachment filename | What it shows |
+|--------------|---------------------------|---------------|
+| `assets/outreach-website.jpg` | `website-preview.jpg` | Marketing site — desktop hero / first viewport |
+| `assets/outreach-admin.jpg` | `admin-preview.jpg` | Admin/system (`/admin/`) — desktop dashboard |
 
-**How (agent):**
+**Capture (after site creation + 4-panel QA):**
 
-1. Open the live Netlify site (`https://{previewHost}/` and `/admin/`) **or** portfolio `?preview={slug}` panels.
-2. Capture via Chrome DevTools / browser MCP `take_screenshot` (or save under `client-sites/{slug}/assets/outreach-*.jpg` and redeploy so URLs are public).
-3. Pass on `POST /outreachSchedule` as `attachments` (max **4**, **5MB** each, jpeg/png/gif/webp):
+```bash
+node scripts/capture-client-screenshots.mjs --slug {slug}
+```
+
+Uses **headless Chrome** (Playwright Chromium) — **not** browser MCP manual captures. Skips if both files exist unless `--refresh`. Saves under `client-sites/{slug}/assets/` for reuse on later sends.
+
+**On send** — prefer stored assets; re-capture only if missing or stale (`--refresh`):
+
+```bash
+# Print attachments JSON (base64) for outreachSchedule body
+node scripts/capture-client-screenshots.mjs --slug {slug} --print-attachments
+
+# Or Netlify public URLs (after redeploy with assets)
+node scripts/capture-client-screenshots.mjs --slug {slug} --print-attachments --attachment-mode url
+```
+
+Pass on `POST /outreachSchedule` as `attachments` (max **4**, **5MB** each, jpeg/png/gif/webp):
 
 ```json
 "attachments": [
-  { "filename": "website-preview.jpg", "contentBase64": "<base64 or data:image/jpeg;base64,…>" },
-  { "filename": "admin-preview.jpg", "url": "https://{previewHost}/assets/outreach-admin.jpg" }
+  { "filename": "website-preview.jpg", "contentBase64": "<from --print-attachments>" },
+  { "filename": "admin-preview.jpg", "contentBase64": "<from --print-attachments>" }
 ]
 ```
 
-Use **`url`** (preferred when already on Netlify) **or** **`contentBase64`** — not both per item. Follow-up cron emails **omit** attachments; initial only.
+Use **`contentBase64`** from `--print-attachments` (works before Netlify redeploy) **or** **`url`** when assets are live on `{previewHost}/assets/` — not both per item. Follow-up cron emails **omit** attachments; initial only.
 
 HTML signature includes Carl’s headshot (`https://carlmanuel.com/static/images/profile3.jpg`); plain-text signature stays text-only.
 
@@ -515,7 +530,30 @@ curl -sI -H "Sec-Fetch-Dest: iframe" \
 
 **Fix loop:** if mobile header/hero breaks in the phone mockup (~256px inner width), tighten Tailwind responsive classes (`sm:`, `md:`) and `styles.css`, redeploy Netlify, re-check preview.
 
-**Do not commit:** `.qa/` screenshots or local `qa-iframe.html` — dev-only.
+## Step 7b — Outreach screenshots (headless Chrome, required after QA)
+
+After **4-panel browser QA** (Step 7) and before initial send, capture **desktop** website + admin screenshots and **commit them under `assets/`** so later outreach can reuse them without re-capturing.
+
+**Do not** use browser MCP `take_screenshot` or Chrome DevTools manual captures for outreach attachments — use the repo script (headless Puppeteer / Chromium).
+
+```bash
+# From repo root (first time: npm install && npx playwright install chromium)
+node scripts/capture-client-screenshots.mjs --slug {slug}
+
+# Force re-capture after a redesign
+node scripts/capture-client-screenshots.mjs --slug {slug} --refresh
+```
+
+| Output | Purpose |
+|--------|---------|
+| `client-sites/{slug}/assets/outreach-website.jpg` | Marketing `/` — 1280×800 desktop viewport |
+| `client-sites/{slug}/assets/outreach-admin.jpg` | Admin `/admin/` dashboard — 1280×800 |
+
+**How embed-only bypass works:** the script serves a page on **`http://localhost:3000`** with two iframes (matches Netlify CSP `frame-ancestors … http://localhost:3000`). Edge allows `Sec-Fetch-Dest: iframe`; `embed-guard.js` allows iframe + `localhost` referrer. Requires port **3000** free locally. Fallback if CSP blocks: use portfolio `https://carlmanuel.com/?preview={slug}` and screenshot iframe frames manually.
+
+**Optional:** redeploy Netlify after saving assets so `https://{previewHost}/assets/outreach-*.jpg` is public (enables `url` attachments on `outreachSchedule`).
+
+**Do not commit:** `.qa/` screenshots or local `qa-iframe.html` — dev-only. **`assets/outreach-*.jpg` are committed** (persisted for email reuse).
 
 ## Rules
 

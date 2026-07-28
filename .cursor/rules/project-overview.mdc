@@ -25,15 +25,14 @@ alwaysApply: true
 
 ## Portfolio modes
 
-- **Default:** 7-section slide deck (`home` … `quote`)
+- **Default (`/`):** Results-first portfolio for international remote hire — plain copy, real project names (`home` → `about` → `skills` → `experience` → `work` → `contact`). Content: `src/v3/config/resultsPortfolioContent.js`
+- **Resume deck:** `?resume=1`, `?resume`, or `?cv` → legacy 9-section slide deck (`home` … `quote`) with stack-forward copy from `src/external-config.js`
 - **Preview:** `?preview={slug}` (e.g. `?preview=jk-construction`) → device showcase (desktop 1280×800 + mobile 390×844 iframes, scaled to mockups). Legacy `*.netlify.app` hostnames still resolve and normalize to slug.
 - **Client demos:** embed-only on Netlify — direct URL blocked; view via portfolio preview only · [site catalog](client-sites/README.md)
 - **Client stack:** Tailwind CDN + `site.js` (nav/accordions/reveal) + **Motion** (`hero-motion.js`) + **Three.js** (`hero-three.js` ambient canvas) on the first-section hero
 - **Outreach:** each `client-sites/{slug}/` includes draft email, SMS, and messenger quotations
 
-`home` → `about` → `skills` → `experience` → `projects` → `contact` → `quote`
-
-Config: `src/v3/containers/Portfolio/Portfolio.js` · Content: `src/external-config.js` · Preview: `src/v3/config/previewWhitelist.js`
+Variant helper: `src/v3/config/portfolioVariant.js` · Shell: `src/v3/containers/Portfolio/Portfolio.js` · Preview: `src/v3/config/previewWhitelist.js`
 
 ## Skills by task
 

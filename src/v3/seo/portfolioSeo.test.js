@@ -1,10 +1,12 @@
 import { HERO_DEFAULTS, ABOUT_DEFAULTS } from "../config/portfolioContentDefaults";
+import { RESULTS_HERO, RESULTS_ABOUT } from "../config/resultsPortfolioContent";
 import {
   PORTFOLIO_SEO,
   buildBootShellHtml,
   buildPrerenderBootStyles,
   buildPrerenderHtml,
   escapeHtml,
+  getPortfolioSeo,
   shouldNoIndex,
   topSkillNames,
 } from "./portfolioSeo";
@@ -18,12 +20,13 @@ describe("portfolioSeo", () => {
 
   test("buildPrerenderHtml includes hero, sections, and contact links", () => {
     const html = buildPrerenderHtml();
-    expect(html).toContain(`<h1>${HERO_DEFAULTS.nameLine1} ${HERO_DEFAULTS.nameLine2}</h1>`);
-    expect(html).toContain(escapeHtml(HERO_DEFAULTS.subheadline));
-    expect(html).toContain(ABOUT_DEFAULTS.heading);
+    expect(html).toContain(`<h1>${RESULTS_HERO.nameLine1} ${RESULTS_HERO.nameLine2}</h1>`);
+    expect(html).toContain(escapeHtml(PORTFOLIO_SEO.hero.subheadline));
+    expect(html).toContain(RESULTS_ABOUT.heading);
     expect(html).toContain('id="skills"');
     expect(html).toContain('id="experience"');
     expect(html).toContain('id="projects"');
+    expect(html).not.toContain('id="quote"');
     expect(html).toContain('href="mailto:info@carlmanuel.com"');
     expect(html).toContain('href="https://carlmanuel.com/#contact"');
     expect(html).toContain("<main id=\"seo-prerender\"");
@@ -68,5 +71,11 @@ describe("portfolioSeo", () => {
 
   test("PORTFOLIO_SEO has canonical site URL", () => {
     expect(PORTFOLIO_SEO.siteUrl).toBe("https://carlmanuel.com");
+  });
+
+  test("getPortfolioSeo returns results SEO by default and resume SEO for resume mode", () => {
+    expect(getPortfolioSeo("results").title).toMatch(/Senior Full-Stack Engineer \(Remote\)/i);
+    expect(getPortfolioSeo("resume").title).toMatch(/Building AI-Powered Applications/i);
+    expect(getPortfolioSeo().description).toMatch(/Metrobank/i);
   });
 });

@@ -5,6 +5,7 @@ import { logEvent, analytics } from "../../../config";
 import SectionTitle from "../../components/SectionTitle";
 import ProjectDetailModal from "../../components/ProjectDetailModal";
 import { usePortfolioContent, usePortfolioSection } from "../../config/PortfolioContentContext";
+import { useSectionLabel } from "../../config/useSectionLabel";
 
 function ProjectThumb({ company, project, img, index, isActive, onOpen, animationKey }) {
   const [show, setShow] = useState(false);
@@ -64,7 +65,7 @@ function ProjectThumb({ company, project, img, index, isActive, onOpen, animatio
       <div className="v3-project-thumb__overlay">
         <span className="v3-project-thumb__label">
           <strong>{company.title}</strong><br />
-          {projectTitle}
+          {project.resultLine || projectTitle}
         </span>
       </div>
     </animated.div>
@@ -87,6 +88,10 @@ function buildProjectList(companies) {
 function V3Projects({ isActive, onOpenProject }) {
   const { getProjectDetails } = usePortfolioContent();
   const companies = usePortfolioSection("companies") || COMPANIES;
+  const projectsLabel = useSectionLabel("projects", {
+    title: "Projects",
+    subtitle: "A selection of recent work",
+  });
   const [filter, setFilter] = useState("all");
   const [modal, setModal] = useState({ show: false, company: null, project: null, details: null });
 
@@ -129,7 +134,7 @@ function V3Projects({ isActive, onOpenProject }) {
         className="v3-inner v3-scrollable v3-section-scroll"
       >
         <animated.div style={headerSpring}>
-          <SectionTitle subtitle="A selection of recent work">Projects</SectionTitle>
+          <SectionTitle subtitle={projectsLabel.subtitle}>{projectsLabel.title}</SectionTitle>
         </animated.div>
 
         <div className="v3-filter-btns">

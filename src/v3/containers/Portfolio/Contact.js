@@ -5,11 +5,13 @@ import { useStore } from "./theme-provider";
 import { mapping } from "../../../mapping";
 import SectionTitle from "../../components/SectionTitle";
 import { usePortfolioSettings } from "../../config/PortfolioContentContext";
+import { useSectionLabel } from "../../config/useSectionLabel";
 import { antiSpamPayload, createFormOpenedAt } from "../../utils/formAntiSpam";
 
 function V3Contact({ isActive }) {
   const { setValue } = useStore();
   const settings = usePortfolioSettings();
+  const contactLabel = useSectionLabel("contact", { title: "Contact" });
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const formOpenedAtRef = useRef(createFormOpenedAt());
@@ -89,7 +91,9 @@ function V3Contact({ isActive }) {
       style={{ background: "linear-gradient(160deg, #1E3932 0%, #00473e 100%)", height: "100%", overflow: "hidden" }}
     >
       <div className="v3-inner v3-scrollable v3-section-scroll">
-        <SectionTitle subtitle={settings.contactSubtitle || ""}>Contact</SectionTitle>
+        <SectionTitle subtitle={contactLabel.subtitle || settings.contactSubtitle || ""}>
+          {contactLabel.title || "Contact"}
+        </SectionTitle>
 
         <animated.div style={spring} className="row">
           <div className="col-md-4 mb-4 mb-md-0">

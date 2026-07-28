@@ -94,7 +94,17 @@ Push failure never breaks form/outreach/analytics responses. Service worker + Se
 
 Live Stellar: **Laravel** serves public API routes including `POST /outreachSchedule` and `POST /outreachPause`. **Follow-up cron** runs `php artisan outreach:followups` (Blade emails under `resources/views/emails/`; same MySQL `outreach_jobs`). Legacy `hosting-php/scripts/cron-outreach-followups.php` shells out to Artisan. **Do not** reintroduce concatenated HTML email builders in hosting-php. **Timezone:** app + MySQL session + cron PHP are **UTC** (`SET time_zone = '+00:00'`; Stellar OS/MySQL default is EDT — do not compare UTC `next_follow_up_at` to EDT `NOW()`). Cursor rule: yes-to-send enables follow-ups automatically (no second cadence ask).
 
-### Public security layer (hosting-php)
+### Outreach screenshot attachments (initial send only)
+
+Agents capture screenshots **outside** the API — headless Chrome via repo script (skill **client-site-netlify** Step 7b). Requires `npm install` (installs Playwright Chromium on first `npx playwright install chromium` if needed):
+
+```bash
+node scripts/capture-client-screenshots.mjs --slug {slug}
+node scripts/capture-client-screenshots.mjs --slug {slug} --print-attachments   # base64 JSON for curl body
+```
+
+Stored files: `client-sites/{slug}/assets/outreach-website.jpg`, `outreach-admin.jpg`. On send, pass `attachments[]` to `POST /outreachSchedule` — resolved by `OutreachAttachmentResolver` / `outreach_resolve_attachments()` (`url` **or** `contentBase64` per item, max 4 × 5MB, jpeg/png/gif/webp). Follow-up cron **never** re-attaches. Initial Blade templates mention attachments when `has_attachments` is true.
+
 
 | Control | Detail |
 |---------|--------|

@@ -6,8 +6,10 @@ jest.mock("../components/ChatAgent", () => () => null);
 jest.mock("react-helmet", () => ({
   Helmet: ({ children }) => <>{children}</>,
 }));
-jest.mock("../v3/containers/Portfolio/Portfolio", () => () => (
-  <div data-testid="portfolio-mock">Portfolio</div>
+jest.mock("../v3/containers/Portfolio/Portfolio", () => ({ variant }) => (
+  <div data-testid="portfolio-mock" data-variant={variant}>
+    Portfolio
+  </div>
 ));
 jest.mock("../v3/admin/AdminLogin", () => () => (
   <div data-testid="admin-login-mock">Admin Login</div>
@@ -52,6 +54,19 @@ describe("Index preview routing", () => {
     mockSearch("");
     render(<Index />);
     expect(screen.getByTestId("portfolio-mock")).toBeInTheDocument();
+    expect(screen.getByTestId("portfolio-mock")).toHaveAttribute("data-variant", "results");
+  });
+
+  test("renders resume portfolio when ?resume=1", () => {
+    mockSearch("?resume=1");
+    render(<Index />);
+    expect(screen.getByTestId("portfolio-mock")).toHaveAttribute("data-variant", "resume");
+  });
+
+  test("renders resume portfolio when ?cv", () => {
+    mockSearch("?cv");
+    render(<Index />);
+    expect(screen.getByTestId("portfolio-mock")).toHaveAttribute("data-variant", "resume");
   });
 
   test("renders preview showcase for whitelisted legacy hostname", () => {

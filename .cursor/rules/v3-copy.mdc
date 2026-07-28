@@ -33,7 +33,19 @@ All copy under `src/v3/` and in `src/external-config.js` must follow these conve
 | Scale & security | Banking-grade security, high-load systems, end-to-end testing (Jest, Cypress) |
 | 12+ years depth | Consistent record across media, banking, gaming, and technology sectors |
 
-## Hero copy (Home section)
+## Results mode (default `/`)
+
+Target: **international clients** — lead with real companies and what you actually did. Write like you're explaining your work to a hiring manager, not like a landing-page generator.
+
+- **Voice:** plain, specific, first person. Name companies and tasks ("rewrote the agent app", "banking modules in React").
+- **Avoid:** slogans ("proof over pitch"), arrow notation ("problem → outcome"), consultant section titles, `<b>Result:</b>` blocks, "hire from portfolio", "ship outcomes", stacked em dashes.
+- **Hero:** one factual line on years + where you've worked; subhead lists 2–3 real projects.
+- **CTAs:** "See the work" + "Contact" (not "Hire Me" / "View Selected Results").
+- **Sections:** hide `blog`, `insights`, `quote`; keep normal nav labels (Skills, Experience, Work).
+- **Content pack:** `src/v3/config/resultsPortfolioContent.js`
+- **Resume deck:** `?resume` / `?cv` keeps stack-forward copy from `src/external-config.js`
+
+## Resume mode hero copy (Home section)
 
 - **Eyebrow (small label above h1):** `Senior Full-Stack Engineer · AI Integration Specialist`
 - **H1 (name block):** Keep `Carl Louis` / `Manuel` split — name is the brand.

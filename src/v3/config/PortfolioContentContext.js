@@ -6,11 +6,13 @@ import {
 } from "./portfolioContentDefaults";
 import { fetchContentSection } from "./portfolioContentLoader";
 import { getProjectDetails as getStaticProjectDetails } from "../data/projectDetails";
+import { PORTFOLIO_VARIANTS } from "./portfolioVariant";
+import { RESULTS_PORTFOLIO_CONTENT } from "./resultsPortfolioContent";
 
 const PortfolioContentContext = createContext(null);
 
-function mergeSettings(partial) {
-  const base = SETTINGS_DEFAULTS;
+function mergeSettings(partial, baseSettings = SETTINGS_DEFAULTS) {
+  const base = baseSettings;
   if (!partial || typeof partial !== "object") return { ...base, sections: { ...base.sections } };
   return {
     ...base,
@@ -22,7 +24,18 @@ function mergeSettings(partial) {
   };
 }
 
-export function PortfolioContentProvider({ children }) {
+function getDefaultsForVariant(variant) {
+  if (variant === PORTFOLIO_VARIANTS.RESUME) {
+    return PORTFOLIO_CONTENT_DEFAULTS;
+  }
+  return {
+    ...PORTFOLIO_CONTENT_DEFAULTS,
+    ...RESULTS_PORTFOLIO_CONTENT,
+    settings: mergeSettings(RESULTS_PORTFOLIO_CONTENT.settings, SETTINGS_DEFAULTS),
+  };
+}
+
+export function PortfolioContentProvider({ children, variant = PORTFOLIO_VARIANTS.RESULTS }) {
   const [overrides, setOverrides] = useState({});
   const [ready, setReady] = useState(false);
 
@@ -54,17 +67,19 @@ export function PortfolioContentProvider({ children }) {
     };
   }, []);
 
+  const contentDefaults = useMemo(() => getDefaultsForVariant(variant), [variant]);
+
   const getSection = useCallback(
     (sectionId) => {
       if (overrides[sectionId] != null) return overrides[sectionId];
-      return PORTFOLIO_CONTENT_DEFAULTS[sectionId] ?? null;
+      return contentDefaults[sectionId] ?? null;
     },
-    [overrides]
+    [overrides, contentDefaults]
   );
 
   const settings = useMemo(
-    () => mergeSettings(overrides[SETTINGS_SECTION_ID]),
-    [overrides]
+    () => mergeSettings(overrides[SETTINGS_SECTION_ID], contentDefaults.settings),
+    [overrides, contentDefaults.settings]
   );
 
   const getProjectDetails = useCallback(
@@ -81,12 +96,13 @@ export function PortfolioContentProvider({ children }) {
   const value = useMemo(
     () => ({
       ready,
+      variant,
       overrides,
       settings,
       getSection,
       getProjectDetails,
     }),
-    [ready, overrides, settings, getSection, getProjectDetails]
+    [ready, variant, overrides, settings, getSection, getProjectDetails]
   );
 
   return (
@@ -99,11 +115,13 @@ export function PortfolioContentProvider({ children }) {
 export function usePortfolioContent() {
   const ctx = useContext(PortfolioContentContext);
   if (!ctx) {
+    const defaults = getDefaultsForVariant(PORTFOLIO_VARIANTS.RESULTS);
     return {
       ready: true,
+      variant: PORTFOLIO_VARIANTS.RESULTS,
       overrides: {},
-      settings: mergeSettings(null),
-      getSection: (sectionId) => PORTFOLIO_CONTENT_DEFAULTS[sectionId] ?? null,
+      settings: mergeSettings(null, defaults.settings),
+      getSection: (sectionId) => defaults[sectionId] ?? null,
       getProjectDetails: getStaticProjectDetails,
     };
   }

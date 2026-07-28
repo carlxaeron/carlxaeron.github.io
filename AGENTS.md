@@ -4,7 +4,7 @@ Instructions for AI agents working in this repository.
 
 ## Project at a glance
 
-- **Portfolio V3** (active): `src/v3/` → [carlmanuel.com](https://carlmanuel.com)
+- **Portfolio V3** (active): `src/v3/` → [carlmanuel.com](https://carlmanuel.com) — default `/` is **results-first** (international hire); legacy deck at `?resume=1` / `?cv`
 - **Version:** see `package.json` (currently `3.0.x`)
 - **Forms / analytics API:** Laravel 12 [`api-carlxaeron/`](api-carlxaeron/) → [api.carlmanuel.com](https://api.carlmanuel.com)
 - **Firebase (remaining):** Analytics client SDK (`src/config.js`); optional unused legacy handlers in `functions/`
@@ -117,12 +117,13 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 7. Add host to `src/v3/config/previewWhitelist.js`; update `client.json` (`quotation.previewUrl` uses `?preview={slug}`)
 8. **Update [`client-sites/README.md`](client-sites/README.md)** — catalog table + per-client detail section (include system type)
 9. Draft outreach (**website + admin** on desktop & mobile): `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`, plus follow-ups
-10. **If email found** → ask: send quotation now? (**Yes** = send + enable hosting auto follow-ups; cadence **`3d1w`** = **3d → 7d → 7d → 7d**, max **4** — do not ask cadence separately.) Capture **website + admin screenshots** and pass as `attachments` on `outreachSchedule`. Pass optional **`systemLabel`** / **`previewHost`** on `outreachSchedule` (mints site+admin **one-time** Netlify unlock links). **Never send initial without a clear yes**.
+10. **If email found** → ask: send quotation now? (**Yes** = send + enable hosting auto follow-ups; cadence **`3d1w`** = **3d → 7d → 7d → 7d**, max **4** — do not ask cadence separately.) Use stored **`assets/outreach-website.jpg`** + **`assets/outreach-admin.jpg`** (capture via `node scripts/capture-client-screenshots.mjs --slug {slug}` if missing) and pass as `attachments` on `outreachSchedule` (`--print-attachments` for base64 JSON). **Do not** use browser MCP for outreach screenshots. Pass optional **`systemLabel`** / **`previewHost`** on `outreachSchedule` (mints site+admin **one-time** Netlify unlock links). **Never send initial without a clear yes**.
 11. After approval → `POST https://api.carlmanuel.com/outreachSchedule` (`sendInitial` + `autoFollowUp` + screenshot `attachments`); cron on Stellar sends follow-ups while offline
 12. Pause anytime via `POST /outreachPause` if prospect asks to stop
 13. Share preview `https://carlmanuel.com/?preview={slug}` + drafts for user review (embed-only — direct client URL returns 403 unless one-time `?access=` token)
 14. **Browser QA** — verify **4 panels**; browse admin nav in desktop + mobile admin frames
-15. **One-time unlock rollout (per site, not batch):** copy `_template` edge + `embed-guard`, set Netlify `PREVIEW_ACCESS_SECRET` = API secret, redeploy; reissue tokens via Admin → preview-access after unlock requests
+15. **Outreach screenshots** — `node scripts/capture-client-screenshots.mjs --slug {slug}` → commit `assets/outreach-website.jpg` + `assets/outreach-admin.jpg` (headless Chrome; see client-site-netlify skill Step 7b)
+16. **One-time unlock rollout (per site, not batch):** copy `_template` edge + `embed-guard`, set Netlify `PREVIEW_ACCESS_SECRET` = API secret, redeploy; reissue tokens via Admin → preview-access after unlock requests
 
 **Batch upgrade (existing clients):** oldest first; wire `/admin/`, redeploy, QA 4 iframes — do **not** auto-resend initials.
 

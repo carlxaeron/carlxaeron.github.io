@@ -39,6 +39,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build:client-catalog": "node scripts/build-client-catalog.js",
+    "capture-screenshots": "node scripts/capture-client-screenshots.mjs",
+    "test:scripts": "node --test scripts/lib/*.test.mjs",
     "prebuild": "npm run build:client-catalog",
     "build": "react-scripts build && node scripts/inject-seo-prerender.cjs build/index.html && rm -rf docs && mkdir -p docs && cp -r build/* docs/",
     "test": "react-scripts test",
@@ -70,6 +72,7 @@
     "gulp": "^5.0.0",
     "gulp-autoprefixer": "^9.0.0",
     "gulp-sass": "^5.1.0",
-    "os-browserify": "^0.3.0"
+    "os-browserify": "^0.3.0",
+    "playwright": "^1.62.0"
   }
 }

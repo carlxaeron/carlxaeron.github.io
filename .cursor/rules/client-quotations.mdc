@@ -48,14 +48,15 @@ Before deploy or outreach, customize **every** client admin demo:
 3. Customize marketing site + wire `/admin/` (shared kit from `client-sites/_systems/admin/` when available); keep Motion + Three.js + embed guards
 4. Deploy Netlify; register preview; update catalog README
 5. Fill `client.json` → `system` (`type`, `adminPath`, `label`, `painHero`, `navPages`) + outreach drafts (**systems-first** copy)
-6. Track state in `client.json` → `outreach`
+6. After deploy + 4-panel QA → `node scripts/capture-client-screenshots.mjs --slug {slug}` (headless Chrome; saves `assets/outreach-*.jpg`)
+7. Track state in `client.json` → `outreach`
 
 ## Outreach — ask before initial send; hosting cron for follow-ups
 
 | Situation | Agent action |
 |-----------|--------------|
 | Email found | Prepare drafts; **ask** send now? (**Yes** → send + auto follow-ups: **3d → 7d → 7d → 7d**, max 4) |
-| User says **send** | `POST https://api.carlmanuel.com/outreachSchedule` (`sendInitial: true`, `autoFollowUp: true`, `cadence: "3d1w"`, `maxFollowUps: 4`, optional `systemLabel` from `system.label`, optional `systemPain` from `system.painHero`) using `OUTREACH_SECRET` |
+| User says **send** | `POST https://api.carlmanuel.com/outreachSchedule` (`sendInitial: true`, `autoFollowUp: true`, `cadence: "3d1w"`, `maxFollowUps: 4`, optional `systemLabel` from `system.label`, optional `systemPain` from `system.painHero`, **`attachments`** from `node scripts/capture-client-screenshots.mjs --slug {slug} --print-attachments`) using `OUTREACH_SECRET` |
 | User says **not yet** | Do not call API |
 | Offline follow-ups | **Namecheap cron** sends automatically (no Cursor) |
 | Pause | `POST /outreachPause` + `outreach.status=paused` |
