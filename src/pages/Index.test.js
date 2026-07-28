@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import Index from "./Index";
 import { ADMIN_TOKEN_KEY } from "../v3/admin/adminAuth";
 
@@ -6,8 +6,11 @@ jest.mock("../components/ChatAgent", () => () => null);
 jest.mock("react-helmet", () => ({
   Helmet: ({ children }) => <>{children}</>,
 }));
-jest.mock("../v3/containers/Portfolio/Portfolio", () => ({ variant }) => (
+jest.mock("../v3/containers/Portfolio/Portfolio", () => ({ variant, onVariantToggle }) => (
   <div data-testid="portfolio-mock" data-variant={variant}>
+    <button type="button" data-testid="toggle-variant" onClick={onVariantToggle}>
+      toggle
+    </button>
     Portfolio
   </div>
 ));
@@ -67,6 +70,30 @@ describe("Index preview routing", () => {
     mockSearch("?cv");
     render(<Index />);
     expect(screen.getByTestId("portfolio-mock")).toHaveAttribute("data-variant", "resume");
+  });
+
+  test("toggle updates URL between results and resume", () => {
+    mockSearch("");
+    window.location.href = "http://localhost/";
+    window.history.replaceState = jest.fn((_state, _title, url) => {
+      const parsed = new URL(String(url), "http://localhost");
+      mockLocation({
+        pathname: parsed.pathname,
+        search: parsed.search,
+        hash: parsed.hash,
+      });
+    });
+    render(<Index />);
+    expect(screen.getByTestId("portfolio-mock")).toHaveAttribute("data-variant", "results");
+
+    fireEvent.click(screen.getByTestId("toggle-variant"));
+    expect(window.location.search).toBe("?resume=1");
+    expect(window.location.hash).toBe("#home");
+    expect(screen.getByTestId("portfolio-mock")).toHaveAttribute("data-variant", "resume");
+
+    fireEvent.click(screen.getByTestId("toggle-variant"));
+    expect(window.location.search).toBe("");
+    expect(screen.getByTestId("portfolio-mock")).toHaveAttribute("data-variant", "results");
   });
 
   test("renders preview showcase for whitelisted legacy hostname", () => {

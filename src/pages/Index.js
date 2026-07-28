@@ -9,7 +9,7 @@ import AdminLogin from "../v3/admin/AdminLogin";
 import AdminDashboard from "../v3/admin/AdminDashboard";
 import { getAdminToken } from "../v3/admin/adminAuth";
 import { getSignTokenFromSearch, useAppMode } from "../v3/admin/useAppMode";
-import { getPortfolioVariant } from "../v3/config/portfolioVariant";
+import { usePortfolioVariantFromUrl } from "../v3/config/usePortfolioVariantFromUrl";
 import SeoHead from "../v3/seo/SeoHead";
 import "./../styles/App.css";
 
@@ -71,10 +71,7 @@ function Index() {
     return undefined;
   }, [previewRaw, previewResolved]);
 
-  const portfolioVariant = useMemo(
-    () => getPortfolioVariant(typeof window !== "undefined" ? window.location.search : ""),
-    []
-  );
+  const { variant: portfolioVariant, toggleVariant } = usePortfolioVariantFromUrl();
 
   const seoHead = (
     <SeoHead appMode={appMode} previewQuery={previewRaw} portfolioVariant={portfolioVariant} />
@@ -133,7 +130,7 @@ function Index() {
   return (
     <div className="App">
       {seoHead}
-      <Portfolio variant={portfolioVariant} />
+      <Portfolio key={portfolioVariant} variant={portfolioVariant} onVariantToggle={toggleVariant} />
     </div>
   );
 }

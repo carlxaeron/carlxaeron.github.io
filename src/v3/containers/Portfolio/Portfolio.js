@@ -6,6 +6,7 @@ import NavLoginLink from "../../components/NavLoginLink";
 import HamburgerMenu from "../../components/HamburgerMenu";
 import useSwipeHandler from "../../components/SwipeHandler";
 import { Button, Modal } from "react-bootstrap";
+import PortfolioVariantSwitch from "../../components/PortfolioVariantSwitch";
 import ChatAgent from "../../../components/ChatAgent";
 
 import V3Home from "./Home";
@@ -38,7 +39,7 @@ const ALL_SECTIONS = [
   { id: "quote",      component: V3Quote,      title: "Get a Quote" },
 ];
 
-function V3PortfolioScroll() {
+function V3PortfolioScroll({ onVariantToggle, variant }) {
   const { getProjectDetails, settings, getSection } = usePortfolioContent();
   const { value, setValue } = useStore();
   const [currentSection, setCurrentSection] = useState(0);
@@ -419,16 +420,20 @@ function V3PortfolioScroll() {
 
       {/* AI Chat assistant */}
       {settings.showChatAgent !== false ? <ChatAgent /> : null}
+
+      {typeof onVariantToggle === "function" ? (
+        <PortfolioVariantSwitch variant={variant} onToggle={onVariantToggle} />
+      ) : null}
     </>
   );
 }
 
-function V3Portfolio({ variant = PORTFOLIO_VARIANTS.RESULTS }) {
+function V3Portfolio({ variant = PORTFOLIO_VARIANTS.RESULTS, onVariantToggle }) {
   return (
     <ThemeProvider>
       <PortfolioVariantProvider variant={variant}>
         <PortfolioContentProvider variant={variant}>
-          <V3PortfolioScroll />
+          <V3PortfolioScroll variant={variant} onVariantToggle={onVariantToggle} />
         </PortfolioContentProvider>
       </PortfolioVariantProvider>
     </ThemeProvider>

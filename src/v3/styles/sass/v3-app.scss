@@ -379,6 +379,66 @@ html, body {
 }
 
 // =============================================================
+// Portfolio mode switch (results ↔ resume/CV)
+// =============================================================
+.v3-variant-fab {
+  position: fixed;
+  z-index: 1200;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  left: calc(16px + env(safe-area-inset-left, 0px));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  min-height: 44px;
+  min-width: 44px;
+  padding: $space-3 $space-5;
+  border: 1px solid rgba(212, 233, 226, 0.22);
+  border-radius: 100px;
+  background: rgba(30, 57, 50, 0.92);
+  color: $green-light;
+  font-family: $font-body;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+  transition: background $transition-base, transform $transition-base, border-color $transition-base;
+
+  &:hover {
+    background: rgba(0, 71, 62, 0.95);
+    border-color: rgba(0, 168, 98, 0.45);
+    transform: translateY(-2px);
+  }
+
+  &[aria-pressed="true"] {
+    border-color: rgba(203, 162, 88, 0.55);
+    color: $white;
+  }
+
+  &__icon {
+    font-size: 0.95rem;
+    line-height: 1;
+    opacity: 0.9;
+  }
+
+  @media (max-width: #{$bp-mobile}) {
+    left: auto;
+    right: calc(16px + env(safe-area-inset-right, 0px));
+    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+    padding: $space-3 $space-4;
+    font-size: 0.78rem;
+
+    &__label {
+      max-width: 7.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+// =============================================================
 // Chat assistant (FAB + modal)
 // =============================================================
 .v3-chat-fab {
@@ -918,7 +978,8 @@ body.v3-modal-open {
   .v3-portfolio-root,
   .v3-nav-dots,
   .v3-arrow,
-  .v3-chat-fab {
+  .v3-chat-fab,
+  .v3-variant-fab {
     pointer-events: none !important;
   }
 }

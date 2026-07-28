@@ -180,9 +180,14 @@ describe("V3Portfolio variant sections", () => {
   });
 
   test("resume mode keeps full section nav", () => {
-    render(<V3Portfolio variant="resume" />);
+    render(<V3Portfolio variant="resume" onVariantToggle={jest.fn()} />);
     expect(screen.getByRole("button", { name: "News & Blog" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Get a Quote" })).toBeInTheDocument();
+  });
+
+  test("renders variant switch when onVariantToggle is provided", () => {
+    render(<V3Portfolio variant="results" onVariantToggle={jest.fn()} />);
+    expect(screen.getByTestId("portfolio-variant-switch")).toBeInTheDocument();
   });
 });
 

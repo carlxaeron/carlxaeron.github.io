@@ -1,4 +1,4 @@
-import { getPortfolioVariant, PORTFOLIO_VARIANTS } from "./portfolioVariant";
+import { getPortfolioVariant, PORTFOLIO_VARIANTS, applyPortfolioVariantToSearch } from "./portfolioVariant";
 
 describe("getPortfolioVariant", () => {
   test("defaults to results for empty or unrelated query", () => {
@@ -25,5 +25,12 @@ describe("getPortfolioVariant", () => {
     expect(getPortfolioVariant("?resume=0")).toBe(PORTFOLIO_VARIANTS.RESULTS);
     expect(getPortfolioVariant("?resume=false")).toBe(PORTFOLIO_VARIANTS.RESULTS);
     expect(getPortfolioVariant("?cv=0")).toBe(PORTFOLIO_VARIANTS.RESULTS);
+  });
+
+  test("applyPortfolioVariantToSearch sets or clears resume param", () => {
+    expect(applyPortfolioVariantToSearch("", PORTFOLIO_VARIANTS.RESUME)).toBe("?resume=1");
+    expect(applyPortfolioVariantToSearch("?resume=1", PORTFOLIO_VARIANTS.RESULTS)).toBe("");
+    expect(applyPortfolioVariantToSearch("?cv", PORTFOLIO_VARIANTS.RESULTS)).toBe("");
+    expect(applyPortfolioVariantToSearch("?foo=bar", PORTFOLIO_VARIANTS.RESUME)).toBe("?foo=bar&resume=1");
   });
 });

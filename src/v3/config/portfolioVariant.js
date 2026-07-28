@@ -38,3 +38,46 @@ export function getPortfolioVariant(search = "") {
 
   return PORTFOLIO_VARIANTS.RESULTS;
 }
+
+/**
+ * @param {string} search
+ * @param {PortfolioVariant} variant
+ * @returns {string} search string including leading `?` when non-empty
+ */
+export function applyPortfolioVariantToSearch(search = "", variant) {
+  const raw = search.startsWith("?") ? search.slice(1) : search;
+  const params = new URLSearchParams(raw);
+  params.delete("cv");
+  params.delete("resume");
+  if (variant === PORTFOLIO_VARIANTS.RESUME) {
+    params.set("resume", "1");
+  }
+  const qs = params.toString();
+  return qs ? `?${qs}` : "";
+}
+
+/**
+ * @param {{ pathname?: string, search?: string, hash?: string, variant: PortfolioVariant }} options
+ * @returns {string}
+ */
+export function buildPortfolioVariantUrl({
+  pathname = "/",
+  search = "",
+  hash = "#home",
+  variant,
+}) {
+  const nextSearch = applyPortfolioVariantToSearch(search, variant);
+  const nextHash = hash || "#home";
+  return `${pathname}${nextSearch}${nextHash}`;
+}
+
+/**
+ * @param {string} search
+ * @returns {PortfolioVariant}
+ */
+export function getToggledPortfolioVariant(search = "") {
+  const current = getPortfolioVariant(search);
+  return current === PORTFOLIO_VARIANTS.RESUME
+    ? PORTFOLIO_VARIANTS.RESULTS
+    : PORTFOLIO_VARIANTS.RESUME;
+}
