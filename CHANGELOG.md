@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.1.0] — 2026-07-28
+
+### Changed
+- **Default portfolio (`/`)** — results-first view for international remote hire: plain copy, `Work` / `Skills` / `Experience` sections, blog/insights/quote hidden
+- **Resume deck** — full stack-forward slide deck at `?resume=1`, `?resume`, or `?cv` (unchanged layout intent)
+- **Floating switch** — bottom-corner toggle between portfolio and Resume / CV modes (syncs URL + `#home`)
+- **SEO** — default meta and prerender HTML updated for results mode; resume query keeps legacy title/description
+
+### Added
+- **Outreach screenshots** — headless Chrome capture script (`scripts/capture-client-screenshots.mjs`) for proposal email attachments
+
 ## [3.0.99] — 2026-07-27
 
 ### Removed
