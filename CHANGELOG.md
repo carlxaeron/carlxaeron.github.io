@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.3] — 2026-07-31
+
+### Fixed
+- **Preview settings relay** — read Laravel `data.settings` from `GET /previewSettings` (was looking at top-level `settings`); API CORS now allows `previewSettings` from carlmanuel.com so Save/init work in the browser
+
 ## [3.1.2] — 2026-07-31
 
 ### Changed

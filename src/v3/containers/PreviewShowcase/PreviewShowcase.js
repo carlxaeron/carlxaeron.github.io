@@ -295,10 +295,12 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
             `${endpoint}?slug=${encodeURIComponent(previewSlug)}`
           );
           const json = await response.json().catch(() => ({}));
+          const settings =
+            json?.data?.settings ?? json?.settings ?? null;
           reply(event.source, event.origin, {
             type: MSG_INIT,
             slug: previewSlug,
-            settings: json.settings ?? null,
+            settings,
           });
         } catch {
           // Keep iframe defaults if GET fails

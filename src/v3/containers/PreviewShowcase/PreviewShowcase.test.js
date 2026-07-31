@@ -235,7 +235,11 @@ describe("PreviewShowcase preview settings relay", () => {
     const settings = { galleryCount: 3, showWhyUs: true };
     global.fetch.mockResolvedValueOnce({
       ok: true,
-      json: async () => ({ settings }),
+      json: async () => ({
+        status: 200,
+        message: "OK",
+        data: { settings, previewSlug: PREVIEW_SLUG, updatedAt: null },
+      }),
     });
 
     render(
