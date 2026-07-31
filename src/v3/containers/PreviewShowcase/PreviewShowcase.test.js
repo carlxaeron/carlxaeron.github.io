@@ -197,7 +197,7 @@ describe("PreviewShowcase parent-owned preview settings", () => {
     global.fetch = originalFetch;
   });
 
-  test("shows Customize button and tip; opens settings panel on click", () => {
+  test("shows Customize button with Bootstrap tooltip; opens settings modal on click", async () => {
     render(
       <PreviewShowcase
         previewUrl={XKR_HOST}
@@ -206,20 +206,21 @@ describe("PreviewShowcase parent-owned preview settings", () => {
       />
     );
 
-    expect(screen.getByTestId("preview-settings-open")).toBeInTheDocument();
-    expect(screen.getByTestId("preview-settings-tooltip")).toHaveTextContent(
-      /tweak this preview/i
-    );
+    const openBtn = screen.getByTestId("preview-settings-open");
+    expect(openBtn).toBeInTheDocument();
     expect(screen.queryByTestId("preview-settings-panel")).not.toBeInTheDocument();
     expect(
       screen.getByText(/Scroll inside the monitor to explore the marketing site/i)
     ).toBeInTheDocument();
     expect(global.fetch).not.toHaveBeenCalled();
 
+    fireEvent.focus(openBtn);
+    expect(await screen.findByRole("tooltip")).toHaveTextContent(/tweak this preview/i);
+
     openPreviewSettings();
 
     expect(screen.getByTestId("preview-settings-panel")).toBeInTheDocument();
-    expect(screen.queryByTestId("preview-settings-tooltip")).not.toBeInTheDocument();
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
     expect(screen.getByLabelText(/Gallery photos shown/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Hero background photo/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Show Why agencies work with us/i)).toBeInTheDocument();
@@ -391,7 +392,7 @@ describe("PreviewShowcase parent-owned preview settings", () => {
     ).toBe(true);
   });
 
-  test("dismisses tip and closes settings panel", () => {
+  test("closes settings modal", async () => {
     render(
       <PreviewShowcase
         previewUrl={XKR_HOST}
@@ -400,12 +401,11 @@ describe("PreviewShowcase parent-owned preview settings", () => {
       />
     );
 
-    fireEvent.click(screen.getByTestId("preview-settings-tooltip-dismiss"));
-    expect(screen.queryByTestId("preview-settings-tooltip")).not.toBeInTheDocument();
-
     openPreviewSettings();
-    fireEvent.click(screen.getByTestId("preview-settings-close"));
-    expect(screen.queryByTestId("preview-settings-panel")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: /Close settings/i }));
+    await waitFor(() => {
+      expect(screen.queryByTestId("preview-settings-panel")).not.toBeInTheDocument();
+    });
     expect(screen.getByTestId("preview-settings-open")).toBeInTheDocument();
   });
 });

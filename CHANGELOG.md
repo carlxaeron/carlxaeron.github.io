@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.8] — 2026-07-31
+
+### Changed
+- **Preview settings UX** — Customize uses a Bootstrap tooltip on hover/focus; settings open in a centered modal (not the bottom dock)
+
 ## [3.1.7] — 2026-07-31
 
 ### Changed

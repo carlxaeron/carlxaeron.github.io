@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 import PreviewFeedback from "../../../components/PreviewFeedback";
 import { mapping } from "../../../mapping";
 import { getVisitorContext } from "../../../utils/visitTracker";
@@ -6,9 +7,12 @@ import {
   getPreviewSettingsDefaults,
   getPreviewSettingsSchema,
 } from "../../config/previewWhitelist";
+import useModalBodyLock from "../../hooks/useModalBodyLock";
 import "../../styles/sass/v3-app.scss";
 
 const MSG_APPLY = "cm:preview-settings:apply";
+const SETTINGS_TOOLTIP =
+  "Hey — you can tweak this preview. Change photos, hero, and sections.";
 
 function previewOriginFromUrl(previewUrl) {
   try {
@@ -321,81 +325,43 @@ function PreviewSettingsField({ field, value, onChange }) {
   );
 }
 
-const SETTINGS_TIP_STORAGE_KEY = "cm_preview_settings_tip_seen";
-
-function readSettingsTipSeen() {
-  if (typeof window === "undefined") return false;
-  try {
-    return window.sessionStorage.getItem(SETTINGS_TIP_STORAGE_KEY) === "1";
-  } catch {
-    return false;
-  }
-}
-
-function writeSettingsTipSeen() {
-  if (typeof window === "undefined") return;
-  try {
-    window.sessionStorage.setItem(SETTINGS_TIP_STORAGE_KEY, "1");
-  } catch {
-    // sessionStorage may be unavailable
-  }
-}
-
 function PreviewSettingsLauncher({ fields, open, onOpen }) {
-  const [tipVisible, setTipVisible] = useState(() => !readSettingsTipSeen());
+  if (!fields.length) return null;
 
-  const dismissTip = useCallback(() => {
-    setTipVisible(false);
-    writeSettingsTipSeen();
-  }, []);
-
-  const handleOpen = useCallback(() => {
-    dismissTip();
-    onOpen();
-  }, [dismissTip, onOpen]);
-
-  if (!fields.length || open) return null;
+  const button = (
+    <button
+      type="button"
+      className="v3-preview-settings-fab"
+      onClick={onOpen}
+      aria-expanded={open}
+      aria-controls="v3-preview-settings-panel"
+      data-testid="preview-settings-open"
+    >
+      <span className="v3-preview-settings-fab__icon" aria-hidden="true">
+        ⚙
+      </span>
+      <span className="v3-preview-settings-fab__label">Customize</span>
+    </button>
+  );
 
   return (
     <div className="v3-preview-settings-launcher" data-testid="preview-settings-launcher">
-      {tipVisible ? (
-        <div
-          className="v3-preview-settings-tooltip"
-          role="status"
-          data-testid="preview-settings-tooltip"
-        >
-          <p className="v3-preview-settings-tooltip__text">
-            Hey — you can tweak this preview. Open settings to change photos, hero, and sections.
-          </p>
-          <button
-            type="button"
-            className="v3-preview-settings-tooltip__dismiss"
-            onClick={dismissTip}
-            aria-label="Dismiss tip"
-            data-testid="preview-settings-tooltip-dismiss"
-          >
-            Got it
-          </button>
-        </div>
-      ) : null}
-      <button
-        type="button"
-        className="v3-preview-settings-fab"
-        onClick={handleOpen}
-        aria-expanded="false"
-        aria-controls="v3-preview-settings-panel"
-        data-testid="preview-settings-open"
+      <OverlayTrigger
+        placement="top"
+        overlay={
+          <Tooltip id="preview-settings-tooltip" data-testid="preview-settings-tooltip">
+            {SETTINGS_TOOLTIP}
+          </Tooltip>
+        }
       >
-        <span className="v3-preview-settings-fab__icon" aria-hidden="true">
-          ⚙
-        </span>
-        <span className="v3-preview-settings-fab__label">Customize</span>
-      </button>
+        {button}
+      </OverlayTrigger>
     </div>
   );
 }
 
 function PreviewSettingsPanel({
+  show,
   fields,
   settings,
   onChange,
@@ -404,33 +370,36 @@ function PreviewSettingsPanel({
   saveError,
   onClose,
 }) {
+  useModalBodyLock(show);
+
   if (!fields.length) return null;
 
   return (
-    <section
-      id="v3-preview-settings-panel"
-      className="v3-preview-settings"
-      aria-label="Preview settings"
-      data-testid="preview-settings-panel"
+    <Modal
+      show={show}
+      onHide={onClose}
+      centered
+      size="md"
+      animation={false}
+      className="v3-modal-layer"
+      backdropClassName="v3-modal-backdrop"
+      dialogClassName="v3-preview-settings-modal"
+      contentClassName="v3-preview-settings-modal__content"
     >
-      <div className="v3-preview-settings__inner">
-        <div className="v3-preview-settings__header">
-          <div className="v3-preview-settings__header-row">
-            <h2 className="v3-preview-settings__title">Try these settings</h2>
-            <button
-              type="button"
-              className="v3-preview-settings__close"
-              onClick={onClose}
-              aria-label="Close settings"
-              data-testid="preview-settings-close"
-            >
-              Close
-            </button>
-          </div>
-          <p className="v3-preview-settings__hint">
-            Changes update the site frames live. Save sends your choices to Carl.
-          </p>
-        </div>
+      <Modal.Header className="v3-preview-settings-modal__header">
+        <Modal.Title id="v3-preview-settings-panel">Try these settings</Modal.Title>
+        <button
+          type="button"
+          className="btn-close v3-modal-dismiss"
+          aria-label="Close settings"
+          onClick={onClose}
+          data-testid="preview-settings-close"
+        />
+      </Modal.Header>
+      <Modal.Body className="v3-preview-settings-modal__body" data-testid="preview-settings-panel">
+        <p className="v3-preview-settings__hint">
+          Changes update the site frames live. Save sends your choices to Carl.
+        </p>
         <div className="v3-preview-settings__fields">
           {fields.map((field) => (
             <PreviewSettingsField
@@ -441,28 +410,35 @@ function PreviewSettingsPanel({
             />
           ))}
         </div>
-        <div className="v3-preview-settings__actions">
-          <button
-            type="button"
-            className="v3-btn v3-btn--primary v3-preview-settings__save"
-            onClick={onSave}
-            disabled={saveStatus === "saving" || saveStatus === "sent"}
-            data-testid="preview-settings-save"
-          >
-            {saveStatus === "saving"
-              ? "Sending…"
-              : saveStatus === "sent"
-                ? "Sent to Carl"
-                : "Save"}
-          </button>
-          {saveError ? (
-            <p className="v3-preview-settings__error" role="alert">
-              {saveError}
-            </p>
-          ) : null}
-        </div>
-      </div>
-    </section>
+        {saveError ? (
+          <p className="v3-preview-settings__error" role="alert">
+            {saveError}
+          </p>
+        ) : null}
+      </Modal.Body>
+      <Modal.Footer className="v3-preview-settings-modal__footer">
+        <button
+          type="button"
+          className="v3-btn v3-btn--ghost"
+          onClick={onClose}
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          className="v3-btn v3-btn--primary v3-preview-settings__save"
+          onClick={onSave}
+          disabled={saveStatus === "saving" || saveStatus === "sent"}
+          data-testid="preview-settings-save"
+        >
+          {saveStatus === "saving"
+            ? "Sending…"
+            : saveStatus === "sent"
+              ? "Sent to Carl"
+              : "Save"}
+        </button>
+      </Modal.Footer>
+    </Modal>
   );
 }
 
@@ -727,20 +703,20 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
 
       {previewSlug ? (
         <div className="v3-preview-feedback-dock" data-testid="preview-feedback-dock">
-          {settingsOpen ? (
-            <PreviewSettingsPanel
-              fields={settingsFields}
-              settings={settings}
-              onChange={handleSettingChange}
-              onSave={handleSaveSettings}
-              saveStatus={saveStatus}
-              saveError={saveError}
-              onClose={() => setSettingsOpen(false)}
-            />
-          ) : null}
           <PreviewFeedback previewSlug={previewSlug} previewLabel={displayLabel} />
         </div>
       ) : null}
+
+      <PreviewSettingsPanel
+        show={settingsOpen}
+        fields={settingsFields}
+        settings={settings}
+        onChange={handleSettingChange}
+        onSave={handleSaveSettings}
+        saveStatus={saveStatus}
+        saveError={saveError}
+        onClose={() => setSettingsOpen(false)}
+      />
     </div>
   );
 }
