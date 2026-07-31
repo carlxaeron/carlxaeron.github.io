@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.1] — 2026-07-31
+
+### Added
+- **Flexible preview settings** — prospects can live-adjust demo knobs (gallery count, hero photo, section toggles) inside client `/admin/` Settings; changes sync to the marketing site panel via postMessage + BroadcastChannel; **Save** notifies Carl by email + Web Push (`GET`/`POST /previewSettings` via portfolio parent)
+- **XKR Construction** — first wired example (`previewSettings.fields` + markup hooks); `_template` ships the bridge for new sites
+- Agent docs — `client-site-netlify` skill + `AGENTS.md` note retrofit existing sites later (oldest first)
+
 ## [3.1.0] — 2026-07-28
 
 ### Changed

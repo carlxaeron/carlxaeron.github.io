@@ -1,7 +1,10 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import PreviewShowcase, { PreviewShowcaseError, buildAdminPreviewUrl } from "./PreviewShowcase";
+import { mapping } from "../../../mapping";
 
 const MOBILE_CHROME_QUERY = "(max-width: 991px)";
+const PREVIEW_HOST = "https://bamboo-grove-cafe.netlify.app";
+const PREVIEW_SLUG = "quotation";
 
 function mockMatchMedia(matchesByQuery) {
   const originalMatchMedia = window.matchMedia;
@@ -22,6 +25,12 @@ function mockMatchMedia(matchesByQuery) {
   };
 }
 
+function dispatchPreviewMessage({ origin, data, source }) {
+  const event = new MessageEvent("message", { data, origin });
+  Object.defineProperty(event, "source", { value: source });
+  window.dispatchEvent(event);
+}
+
 describe("buildAdminPreviewUrl", () => {
   test("appends /admin/ to site base URL", () => {
     expect(buildAdminPreviewUrl("https://villa-clara-pool.netlify.app")).toBe(
@@ -39,9 +48,9 @@ describe("PreviewShowcase", () => {
 
     render(
       <PreviewShowcase
-        previewUrl="https://bamboo-grove-cafe.netlify.app"
+        previewUrl={PREVIEW_HOST}
         label="Sample Business Quotation Site"
-        previewSlug="quotation"
+        previewSlug={PREVIEW_SLUG}
       />
     );
 
@@ -71,9 +80,9 @@ describe("PreviewShowcase", () => {
 
     render(
       <PreviewShowcase
-        previewUrl="https://bamboo-grove-cafe.netlify.app"
+        previewUrl={PREVIEW_HOST}
         label="Sample Business Quotation Site"
-        previewSlug="quotation"
+        previewSlug={PREVIEW_SLUG}
       />
     );
 
@@ -93,13 +102,13 @@ describe("PreviewShowcase", () => {
 
   test("switches to desktop monitor frames when Desktop view is selected", () => {
     const restoreMatchMedia = mockMatchMedia({ [MOBILE_CHROME_QUERY]: true });
-    sessionStorage.removeItem("previewViewMode:quotation");
+    sessionStorage.removeItem(`previewViewMode:${PREVIEW_SLUG}`);
 
     render(
       <PreviewShowcase
-        previewUrl="https://bamboo-grove-cafe.netlify.app"
+        previewUrl={PREVIEW_HOST}
         label="Sample Business Quotation Site"
-        previewSlug="quotation"
+        previewSlug={PREVIEW_SLUG}
       />
     );
 
@@ -110,7 +119,7 @@ describe("PreviewShowcase", () => {
     expect(screen.getByLabelText(/Site — Desktop preview/i)).toBeInTheDocument();
     expect(screen.queryByLabelText(/Admin — Mobile preview/i)).not.toBeInTheDocument();
     expect(screen.queryByLabelText(/Site — Mobile preview/i)).not.toBeInTheDocument();
-    expect(sessionStorage.getItem("previewViewMode:quotation")).toBe("desktop");
+    expect(sessionStorage.getItem(`previewViewMode:${PREVIEW_SLUG}`)).toBe("desktop");
 
     restoreMatchMedia();
   });
@@ -120,9 +129,9 @@ describe("PreviewShowcase", () => {
 
     render(
       <PreviewShowcase
-        previewUrl="https://bamboo-grove-cafe.netlify.app"
+        previewUrl={PREVIEW_HOST}
         label="Sample Business Quotation Site"
-        previewSlug="quotation"
+        previewSlug={PREVIEW_SLUG}
       />
     );
 
@@ -157,6 +166,152 @@ describe("PreviewShowcase", () => {
   test("uses default title when label is omitted", () => {
     render(<PreviewShowcase previewUrl="https://example.netlify.app" />);
     expect(screen.getByRole("heading", { name: "Client site preview" })).toBeInTheDocument();
+  });
+});
+
+describe("PreviewShowcase preview settings relay", () => {
+  let restoreMatchMedia;
+  let originalFetch;
+
+  beforeEach(() => {
+    restoreMatchMedia = mockMatchMedia({ [MOBILE_CHROME_QUERY]: false });
+    originalFetch = global.fetch;
+    global.fetch = jest.fn();
+  });
+
+  afterEach(() => {
+    restoreMatchMedia();
+    global.fetch = originalFetch;
+  });
+
+  test("ignores messages from unexpected origins", async () => {
+    const source = { postMessage: jest.fn() };
+
+    render(
+      <PreviewShowcase
+        previewUrl={PREVIEW_HOST}
+        label="Sample"
+        previewSlug={PREVIEW_SLUG}
+      />
+    );
+
+    dispatchPreviewMessage({
+      origin: "https://evil.example",
+      data: { type: "cm:preview-settings:ready", slug: PREVIEW_SLUG },
+      source,
+    });
+
+    await waitFor(() => {
+      expect(global.fetch).not.toHaveBeenCalled();
+    });
+    expect(source.postMessage).not.toHaveBeenCalled();
+  });
+
+  test("ignores messages with mismatched slug", async () => {
+    const source = { postMessage: jest.fn() };
+
+    render(
+      <PreviewShowcase
+        previewUrl={PREVIEW_HOST}
+        label="Sample"
+        previewSlug={PREVIEW_SLUG}
+      />
+    );
+
+    dispatchPreviewMessage({
+      origin: PREVIEW_HOST,
+      data: { type: "cm:preview-settings:ready", slug: "other-slug" },
+      source,
+    });
+
+    await waitFor(() => {
+      expect(global.fetch).not.toHaveBeenCalled();
+    });
+    expect(source.postMessage).not.toHaveBeenCalled();
+  });
+
+  test("ready triggers GET and replies with init settings", async () => {
+    const source = { postMessage: jest.fn() };
+    const settings = { galleryCount: 3, showWhyUs: true };
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ settings }),
+    });
+
+    render(
+      <PreviewShowcase
+        previewUrl={PREVIEW_HOST}
+        label="Sample"
+        previewSlug={PREVIEW_SLUG}
+      />
+    );
+
+    dispatchPreviewMessage({
+      origin: PREVIEW_HOST,
+      data: { type: "cm:preview-settings:ready", slug: PREVIEW_SLUG },
+      source,
+    });
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        `${mapping.previewSettings}?slug=${PREVIEW_SLUG}`
+      );
+    });
+
+    await waitFor(() => {
+      expect(source.postMessage).toHaveBeenCalledWith(
+        { type: "cm:preview-settings:init", slug: PREVIEW_SLUG, settings },
+        PREVIEW_HOST
+      );
+    });
+  });
+
+  test("save triggers POST and replies with saved", async () => {
+    const source = { postMessage: jest.fn() };
+    const settings = { galleryCount: 2, heroImage: "project-02" };
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ status: 200 }),
+    });
+
+    render(
+      <PreviewShowcase
+        previewUrl={PREVIEW_HOST}
+        label="Sample"
+        previewSlug={PREVIEW_SLUG}
+      />
+    );
+
+    dispatchPreviewMessage({
+      origin: PREVIEW_HOST,
+      data: { type: "cm:preview-settings:save", slug: PREVIEW_SLUG, settings },
+      source,
+    });
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        mapping.previewSettings,
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        })
+      );
+    });
+
+    const postBody = JSON.parse(global.fetch.mock.calls[0][1].body);
+    expect(postBody).toMatchObject({
+      previewSlug: PREVIEW_SLUG,
+      settings,
+    });
+    expect(typeof postBody.visitorId).toBe("string");
+    expect(typeof postBody.sessionId).toBe("string");
+
+    await waitFor(() => {
+      expect(source.postMessage).toHaveBeenCalledWith(
+        { type: "cm:preview-settings:saved", slug: PREVIEW_SLUG },
+        PREVIEW_HOST
+      );
+    });
   });
 });
 

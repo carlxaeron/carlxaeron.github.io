@@ -22,6 +22,7 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 | GET | `/health` | `{ ok, service: "api-carlxaeron" }` |
 | POST | `/trackVisit` | Analytics |
 | POST | `/previewFeedback` | Like / dislike / **agree** — admin Web Push + **prospect auto-reply email** when email known (`outreach_jobs.contact_email` or optional body `contactEmail`; one per feedback row; BCC `MAIL_BCC`). **agree** also emails Carl (`MAIL_TO` + BCC) — does not auto-send a service agreement |
+| GET/POST | `/previewSettings` | Client demo settings from portfolio parent (`?preview=`). GET `?slug=` → latest saved settings (or null). POST `{ previewSlug, settings, visitorId?, sessionId? }` → persist audit row + email Carl (`MAIL_TO` + BCC) + Web Push `preview_settings_updated`. Throttle `previewSettings` 30/h. Called by `PreviewShowcase` (not Netlify origins) |
 | GET | `/analyticsSummary` | Insights panel |
 | POST | `/contact` | Form + SMTP |
 | POST | `/quotation` | Form + SMTP |
@@ -117,7 +118,7 @@ Stored files: `client-sites/{slug}/assets/outreach-website.jpg`, `outreach-admin
 
 Forms / Insights stay public to the SPA (browser sends Origin). Defaults: contact/quote 8/h, visits 120/min, feedback 30/h, summary 60/min, outreach 60/h.
 
-**Laravel rate limits (live):** named limiters in `AppServiceProvider` + `throttle:{name}` on routes — **never** bare `throttle:max,decay` (that shares one IP key across all routes and lets `trackVisit` 429 unrelated APIs). Buckets: `trackVisit` 120/min, `previewFeedback` 30/h, `analyticsSummary` 60/min, `content` 120/min, `contact`/`quotation` 5/h each, `outreach` 60/h (schedule/pause/pushNotify), `agreementsShow` 60/min, `agreementsSign` 10/h, `adminLogin` 20/5min, `adminApi` 120/min per user.
+**Laravel rate limits (live):** named limiters in `AppServiceProvider` + `throttle:{name}` on routes — **never** bare `throttle:max,decay` (that shares one IP key across all routes and lets `trackVisit` 429 unrelated APIs). Buckets: `trackVisit` 120/min, `previewFeedback` 30/h, `previewSettings` 30/h, `analyticsSummary` 60/min, `content` 120/min, `contact`/`quotation` 5/h each, `outreach` 60/h (schedule/pause/pushNotify), `agreementsShow` 60/min, `agreementsSign` 10/h, `adminLogin` 20/5min, `adminApi` 120/min per user.
 
 **`POST /quotation` body** (portfolio Get a Quote): `name`, `email`, `details` required; optional `company`, `phone`, `projectType`, `budgetRange`, `currency` (`PHP`|`USD`), `timeline`, `services[]`. Persisted to `quotations.currency` (nullable). Before first deploy with currency: run `php hosting-php/scripts/migrate-quotations-currency.php` on Stellar and `php artisan migrate` for Laravel.
 

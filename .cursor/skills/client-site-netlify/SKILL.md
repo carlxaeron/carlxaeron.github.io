@@ -47,7 +47,7 @@ Client site progress:
 cp -R client-sites/_template client-sites/{slug}
 ```
 
-Edit `client.json`: `businessName`, `slug`, `industry`, `contact`, `quotation` (package, amount, timeline), and **`system`**:
+Edit `client.json`: `businessName`, `slug`, `industry`, `contact`, `quotation` (package, amount, timeline), **`system`**, and optional **`previewSettings.fields`** (live-adjustable demo knobs):
 
 ```json
 "system": {
@@ -56,10 +56,34 @@ Edit `client.json`: `businessName`, `slug`, `industry`, `contact`, `quotation` (
   "label": "Booking & calendar admin",
   "painHero": "Stop taking bookings only on Messenger — see the calendar fill in real time.",
   "navPages": ["Dashboard", "Bookings", "Calendar", "Guests", "Settings"]
+},
+"previewSettings": {
+  "fields": [
+    { "key": "galleryCount", "type": "number", "min": 2, "max": 4, "default": 4, "label": "Gallery photos shown" },
+    { "key": "heroImage", "type": "select", "options": ["project-01", "project-02", "project-03", "project-04"], "default": "project-01", "label": "Hero background photo" },
+    { "key": "showWhyUs", "type": "boolean", "default": true, "label": "Show \"Why choose us\" section" }
+  ]
 }
 ```
 
 Pass optional **`systemLabel`** (`system.label`) and **`systemPain`** (`system.painHero`) on `POST /outreachSchedule` when sending (used in initial email hook — not persisted in DB for cron follow-ups).
+
+### Flexible preview settings (optional — template + XKR ship this)
+
+`_template` includes `preview-settings-bridge.js` on both marketing site and `/admin/`. Prospects tweak fields in admin Settings; live updates reach the site panel via same-origin `BroadcastChannel`; **Save** posts to the portfolio parent (`PreviewShowcase`), which `POST`s `https://api.carlmanuel.com/previewSettings` (email + Web Push to Carl). No Netlify→API CORS.
+
+**Wire per site:**
+
+1. Fill `client.json` → `previewSettings.fields` (`number` / `select` / `boolean`).
+2. Markup hooks on the marketing page:
+   - `[data-hero-bg]` — hero photo swap (`heroImage` → `assets/{value}.jpg`)
+   - `[data-gallery-item]` on each gallery figure — `galleryCount` hides items beyond N
+   - `[data-settings-section="{key}"]` — boolean toggles `display:none`
+3. Include bridge on site + admin: `<script src="/preview-settings-bridge.js" data-slug="{slug}"></script>` (admin may use `../preview-settings-bridge.js`).
+4. Bake schema into admin (same pattern as `ADMIN_CONFIG`): `window.PREVIEW_SETTINGS_SCHEMA` from `previewSettings.fields` so `admin.js` `renderSettings()` is data-driven.
+5. `site.js` listens for `cm-preview-settings:init` / BroadcastChannel and calls `applySettings()`.
+
+**Working example:** `client-sites/xkr-construction/`. Retrofit older sites later (oldest first) — do not block new demos on a full batch.
 
 ### Per-client customization (mandatory — do not ship defaults)
 
@@ -212,6 +236,7 @@ Fallback only if browser unavailable: stock photos + note in `client.json` → `
 - Load guard in `<head>` before body: `<script src="embed-guard.js"></script>`
 - Load interactivity at end of `<body>`:
   ```html
+  <script src="preview-settings-bridge.js" data-slug="{slug}"></script>
   <script src="site.js"></script>
   <script type="module" src="hero-motion.js"></script>
   <script type="module" src="hero-three.js"></script>
@@ -223,7 +248,8 @@ Fallback only if browser unavailable: stock photos + note in `client.json` → `
 |------|------|
 | `index.html` | Mostly Tailwind utility classes; brand tokens in inline `tailwind.config` |
 | `styles.css` | Hero bg images, `[data-reveal]`, header scroll, `.hero-three-canvas` — not full layout |
-| `site.js` | Mobile nav, accordions, tabs, filters, below-fold scroll reveal |
+| `preview-settings-bridge.js` | postMessage ready/init/save + BroadcastChannel live sync (admin ↔ site) |
+| `site.js` | Mobile nav, accordions, tabs, filters, below-fold scroll reveal + `applySettings()` |
 | `hero-motion.js` | Motion (Framer Motion) hero entrance + CTA hover — first section only |
 | `hero-three.js` | Three.js ambient canvas in the hero (behind copy) |
 

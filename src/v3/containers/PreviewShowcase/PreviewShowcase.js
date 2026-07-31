@@ -1,6 +1,21 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PreviewFeedback from "../../../components/PreviewFeedback";
+import { mapping } from "../../../mapping";
+import { getVisitorContext } from "../../../utils/visitTracker";
 import "../../styles/sass/v3-app.scss";
+
+const MSG_READY = "cm:preview-settings:ready";
+const MSG_INIT = "cm:preview-settings:init";
+const MSG_SAVE = "cm:preview-settings:save";
+const MSG_SAVED = "cm:preview-settings:saved";
+
+function previewOriginFromUrl(previewUrl) {
+  try {
+    return new URL(previewUrl).origin;
+  } catch {
+    return null;
+  }
+}
 
 const IFRAME_SANDBOX = "allow-scripts allow-same-origin allow-forms allow-popups";
 const DESKTOP_VIEWPORT = { width: 1280, height: 800 };
@@ -254,6 +269,69 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
       document.body.classList.remove("v3-preview-active");
     };
   }, []);
+
+  // Parent relay: client-site iframes ↔ Laravel previewSettings (same trust model as previewFeedback).
+  useEffect(() => {
+    if (!previewSlug || !previewUrl) return undefined;
+
+    const expectedOrigin = previewOriginFromUrl(previewUrl);
+    const endpoint = mapping.previewSettings;
+    if (!expectedOrigin || !endpoint) return undefined;
+
+    const reply = (source, origin, payload) => {
+      if (!source || typeof source.postMessage !== "function") return;
+      source.postMessage(payload, origin);
+    };
+
+    const handleMessage = async (event) => {
+      if (event.origin !== expectedOrigin) return;
+      const data = event.data;
+      if (!data || typeof data !== "object") return;
+      if (data.slug !== previewSlug) return;
+
+      if (data.type === MSG_READY) {
+        try {
+          const response = await fetch(
+            `${endpoint}?slug=${encodeURIComponent(previewSlug)}`
+          );
+          const json = await response.json().catch(() => ({}));
+          reply(event.source, event.origin, {
+            type: MSG_INIT,
+            slug: previewSlug,
+            settings: json.settings ?? null,
+          });
+        } catch {
+          // Keep iframe defaults if GET fails
+        }
+        return;
+      }
+
+      if (data.type === MSG_SAVE) {
+        try {
+          const { visitorId, sessionId } = getVisitorContext();
+          await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              previewSlug,
+              settings: data.settings ?? {},
+              visitorId,
+              sessionId,
+            }),
+          });
+          reply(event.source, event.origin, {
+            type: MSG_SAVED,
+            slug: previewSlug,
+          });
+        } catch {
+          // Saver keeps local state; no ack on failure
+        }
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [previewSlug, previewUrl]);
 
   const handleBack = useCallback(() => {
     const next = new URL(window.location.href);
