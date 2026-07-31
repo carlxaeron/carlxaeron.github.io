@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.7] — 2026-07-31
+
+### Changed
+- **Preview Customize placement** — Customize button + tip sit beside the site scroll hints (“Scroll inside the monitor…”) instead of the bottom dock; open panel stays in the dock
+
 ## [3.1.6] — 2026-07-31
 
 ### Changed

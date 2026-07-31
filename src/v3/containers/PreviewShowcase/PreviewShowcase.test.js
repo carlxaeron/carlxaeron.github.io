@@ -211,7 +211,9 @@ describe("PreviewShowcase parent-owned preview settings", () => {
       /tweak this preview/i
     );
     expect(screen.queryByTestId("preview-settings-panel")).not.toBeInTheDocument();
-    expect(screen.getByText(/Use Customize to adjust/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Scroll inside the monitor to explore the marketing site/i)
+    ).toBeInTheDocument();
     expect(global.fetch).not.toHaveBeenCalled();
 
     openPreviewSettings();

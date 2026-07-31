@@ -133,14 +133,17 @@ function ViewportIframe({
   );
 }
 
-function ScrollHint({ children, className = "" }) {
+function ScrollHint({ children, className = "", aside = null }) {
   return (
-    <p className={`v3-preview-scroll-hint ${className}`.trim()} role="note">
-      <span className="v3-preview-scroll-hint__icon" aria-hidden="true">
-        ↕
-      </span>
-      {children}
-    </p>
+    <div className={`v3-preview-scroll-hint-row ${aside ? "v3-preview-scroll-hint-row--with-aside" : ""}`.trim()}>
+      <p className={`v3-preview-scroll-hint ${className}`.trim()} role="note">
+        <span className="v3-preview-scroll-hint__icon" aria-hidden="true">
+          ↕
+        </span>
+        {children}
+      </p>
+      {aside}
+    </div>
   );
 }
 
@@ -148,6 +151,7 @@ function PreviewDevice({
   variant,
   label,
   hint,
+  hintAside = null,
   previewUrl,
   displayLabel,
   screenRef,
@@ -168,7 +172,9 @@ function PreviewDevice({
       aria-label={`${label} preview`}
     >
       <h2 className="v3-preview-device__label">{label}</h2>
-      <ScrollHint className={`v3-preview-scroll-hint--${variant}`}>{hint}</ScrollHint>
+      <ScrollHint className={`v3-preview-scroll-hint--${variant}`} aside={hintAside}>
+        {hint}
+      </ScrollHint>
       {isDesktop ? (
         <div className="v3-preview-monitor">
           <div className="v3-preview-monitor__bezel">
@@ -335,17 +341,7 @@ function writeSettingsTipSeen() {
   }
 }
 
-function PreviewSettingsPanel({
-  fields,
-  settings,
-  onChange,
-  onSave,
-  saveStatus,
-  saveError,
-  open,
-  onOpen,
-  onClose,
-}) {
+function PreviewSettingsLauncher({ fields, open, onOpen }) {
   const [tipVisible, setTipVisible] = useState(() => !readSettingsTipSeen());
 
   const dismissTip = useCallback(() => {
@@ -358,47 +354,57 @@ function PreviewSettingsPanel({
     onOpen();
   }, [dismissTip, onOpen]);
 
-  if (!fields.length) return null;
+  if (!fields.length || open) return null;
 
-  if (!open) {
-    return (
-      <div className="v3-preview-settings-launcher" data-testid="preview-settings-launcher">
-        {tipVisible ? (
-          <div
-            className="v3-preview-settings-tooltip"
-            role="status"
-            data-testid="preview-settings-tooltip"
-          >
-            <p className="v3-preview-settings-tooltip__text">
-              Hey — you can tweak this preview. Open settings to change photos, hero, and sections.
-            </p>
-            <button
-              type="button"
-              className="v3-preview-settings-tooltip__dismiss"
-              onClick={dismissTip}
-              aria-label="Dismiss tip"
-              data-testid="preview-settings-tooltip-dismiss"
-            >
-              Got it
-            </button>
-          </div>
-        ) : null}
-        <button
-          type="button"
-          className="v3-preview-settings-fab"
-          onClick={handleOpen}
-          aria-expanded="false"
-          aria-controls="v3-preview-settings-panel"
-          data-testid="preview-settings-open"
+  return (
+    <div className="v3-preview-settings-launcher" data-testid="preview-settings-launcher">
+      {tipVisible ? (
+        <div
+          className="v3-preview-settings-tooltip"
+          role="status"
+          data-testid="preview-settings-tooltip"
         >
-          <span className="v3-preview-settings-fab__icon" aria-hidden="true">
-            ⚙
-          </span>
-          <span className="v3-preview-settings-fab__label">Customize</span>
-        </button>
-      </div>
-    );
-  }
+          <p className="v3-preview-settings-tooltip__text">
+            Hey — you can tweak this preview. Open settings to change photos, hero, and sections.
+          </p>
+          <button
+            type="button"
+            className="v3-preview-settings-tooltip__dismiss"
+            onClick={dismissTip}
+            aria-label="Dismiss tip"
+            data-testid="preview-settings-tooltip-dismiss"
+          >
+            Got it
+          </button>
+        </div>
+      ) : null}
+      <button
+        type="button"
+        className="v3-preview-settings-fab"
+        onClick={handleOpen}
+        aria-expanded="false"
+        aria-controls="v3-preview-settings-panel"
+        data-testid="preview-settings-open"
+      >
+        <span className="v3-preview-settings-fab__icon" aria-hidden="true">
+          ⚙
+        </span>
+        <span className="v3-preview-settings-fab__label">Customize</span>
+      </button>
+    </div>
+  );
+}
+
+function PreviewSettingsPanel({
+  fields,
+  settings,
+  onChange,
+  onSave,
+  saveStatus,
+  saveError,
+  onClose,
+}) {
+  if (!fields.length) return null;
 
   return (
     <section
@@ -596,6 +602,13 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
 
   const showDesktopPanels = !isMobileChrome || viewMode === "desktop";
   const showMobilePanels = !isMobileChrome || viewMode === "mobile";
+  const settingsLauncher = (
+    <PreviewSettingsLauncher
+      fields={settingsFields}
+      open={settingsOpen}
+      onOpen={() => setSettingsOpen(true)}
+    />
+  );
 
   const pageClassName = [
     "v3-preview-page",
@@ -630,12 +643,8 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
             ↕
           </span>
           {isMobileChrome
-            ? settingsFields.length
-              ? "Tap Customize to tweak the site live. Admin is the system demo — switch to Desktop for monitors."
-              : "Browse the admin system demo and marketing site. Switch to Desktop for monitors."
-            : settingsFields.length
-              ? "Use Customize to adjust gallery, hero, and sections on the site frames. Admin is the browsable system demo only."
-              : "Browse the admin system demo first, then the marketing site on desktop and mobile."}
+            ? "Browse the admin system demo and marketing site. Switch to Desktop for monitors."
+            : "Browse the admin system demo first, then the marketing site on desktop and mobile."}
         </p>
 
         <div className="v3-preview-devices v3-preview-devices--quad">
@@ -679,6 +688,7 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
                 variant="desktop"
                 label="Site — Desktop"
                 hint="Scroll inside the monitor to explore the marketing site."
+                hintAside={settingsLauncher}
                 previewUrl={previewUrl}
                 displayLabel={displayLabel}
                 screenRef={siteDesktopScreenRef}
@@ -697,6 +707,7 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
                 variant="mobile"
                 label="Site — Mobile"
                 hint="Scroll inside the phone to explore the marketing site."
+                hintAside={showDesktopPanels ? null : settingsLauncher}
                 previewUrl={previewUrl}
                 displayLabel={displayLabel}
                 screenRef={siteMobileScreenRef}
@@ -716,17 +727,17 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
 
       {previewSlug ? (
         <div className="v3-preview-feedback-dock" data-testid="preview-feedback-dock">
-          <PreviewSettingsPanel
-            fields={settingsFields}
-            settings={settings}
-            onChange={handleSettingChange}
-            onSave={handleSaveSettings}
-            saveStatus={saveStatus}
-            saveError={saveError}
-            open={settingsOpen}
-            onOpen={() => setSettingsOpen(true)}
-            onClose={() => setSettingsOpen(false)}
-          />
+          {settingsOpen ? (
+            <PreviewSettingsPanel
+              fields={settingsFields}
+              settings={settings}
+              onChange={handleSettingChange}
+              onSave={handleSaveSettings}
+              saveStatus={saveStatus}
+              saveError={saveError}
+              onClose={() => setSettingsOpen(false)}
+            />
+          ) : null}
           <PreviewFeedback previewSlug={previewSlug} previewLabel={displayLabel} />
         </div>
       ) : null}
