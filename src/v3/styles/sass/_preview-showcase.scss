@@ -232,7 +232,47 @@ body.v3-preview-active {
     margin-top: auto;
   }
 
-  .v3-preview-feedback-dock .v3-preview-feedback {
+  .v3-preview-feedback-dock .v3-preview-feedback--collapsed {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0;
+    padding: $space-2 $space-4 calc(#{$space-2} + env(safe-area-inset-bottom, 0px));
+    border-top: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .v3-preview-feedback-dock .v3-preview-feedback__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: $space-2 $space-5;
+    border: 1px solid rgba($green-light, 0.22);
+    border-radius: 100px;
+    background: rgba($green-mid, 0.94);
+    color: $green-light;
+    font-family: $font-body;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
+
+    &:hover,
+    &:focus-visible {
+      border-color: rgba($green-accent, 0.45);
+      background: rgba($green-dark, 0.96);
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $green-accent;
+      outline-offset: 2px;
+    }
+  }
+
+  .v3-preview-feedback-dock .v3-preview-feedback--expanded {
     margin-top: 0;
     padding: $space-3 $space-4 calc(#{$space-3} + env(safe-area-inset-bottom, 0px));
     border-top: 1px solid rgba($green-light, 0.18);
@@ -241,27 +281,58 @@ body.v3-preview-active {
     box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.22);
   }
 
-  .v3-preview-feedback-dock .v3-preview-feedback__inner {
+  .v3-preview-feedback-dock .v3-preview-feedback--expanded .v3-preview-feedback__inner {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: stretch;
     gap: $space-3;
     max-width: none;
     text-align: left;
   }
 
-  .v3-preview-feedback-dock .v3-preview-feedback__prompt {
+  .v3-preview-feedback-dock .v3-preview-feedback__expanded-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: $space-3;
+  }
+
+  .v3-preview-feedback-dock .v3-preview-feedback__expanded-head .v3-preview-feedback__prompt {
     margin-bottom: 0;
-    font-size: 0.875rem;
-    line-height: 1.35;
     flex: 1;
     min-width: 0;
   }
 
-  .v3-preview-feedback-dock .v3-preview-feedback__actions {
+  .v3-preview-feedback-dock .v3-preview-feedback__collapse {
     flex-shrink: 0;
-    flex-wrap: nowrap;
+    min-height: 36px;
+    padding: $space-1 $space-3;
+    border: 1px solid rgba($green-light, 0.28);
+    border-radius: 100px;
+    background: transparent;
+    color: $green-light;
+    font-family: $font-body;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      border-color: rgba($green-accent, 0.5);
+      color: $white;
+      outline: none;
+    }
+  }
+
+  .v3-preview-feedback-dock .v3-preview-feedback--expanded .v3-preview-feedback__prompt {
+    margin-bottom: 0;
+    font-size: 0.875rem;
+    line-height: 1.35;
+  }
+
+  .v3-preview-feedback-dock .v3-preview-feedback--expanded .v3-preview-feedback__actions {
+    flex-shrink: 0;
+    flex-wrap: wrap;
     gap: $space-2;
   }
 
@@ -276,9 +347,18 @@ body.v3-preview-active {
     font-size: 0.8125rem;
   }
 
-  .v3-preview-feedback-dock .v3-preview-feedback--done {
+  .v3-preview-feedback-dock .v3-preview-feedback--done,
+  .v3-preview-feedback-dock .v3-preview-feedback--done-compact {
     text-align: center;
-    padding: $space-3 $space-4 calc(#{$space-3} + env(safe-area-inset-bottom, 0px));
+    padding: $space-2 $space-4 calc(#{$space-2} + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid rgba($green-light, 0.18);
+    background: rgba($green-dark, 0.94);
+    backdrop-filter: blur(10px);
+
+    p {
+      margin: 0;
+      font-size: 0.875rem;
+    }
   }
 }
 

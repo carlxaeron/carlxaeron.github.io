@@ -136,7 +136,7 @@ describe("PreviewShowcase", () => {
     restoreMatchMedia();
   });
 
-  test("renders sticky feedback dock on mobile preview", () => {
+  test("renders sticky feedback dock on mobile preview as collapsed toggle", () => {
     const restoreMatchMedia = mockMatchMedia({ [MOBILE_CHROME_QUERY]: true });
 
     render(
@@ -148,6 +148,10 @@ describe("PreviewShowcase", () => {
     );
 
     expect(screen.getByTestId("preview-feedback-dock")).toBeInTheDocument();
+    expect(screen.getByTestId("preview-feedback-toggle")).toBeInTheDocument();
+    expect(screen.queryByText(/What do you think of this sample site/i)).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByTestId("preview-feedback-toggle"));
     expect(screen.getByText(/What do you think of this sample site/i)).toBeInTheDocument();
 
     restoreMatchMedia();

@@ -8,10 +8,43 @@ jest.mock("../utils/previewFeedback", () => ({
 
 const { submitPreviewFeedback, hasSubmittedFeedback } = require("../utils/previewFeedback");
 
+const MOBILE_FEEDBACK_QUERY = "(max-width: 991px)";
+
+function mockMatchMedia(matchesByQuery) {
+  const originalMatchMedia = window.matchMedia;
+
+  window.matchMedia = jest.fn().mockImplementation((query) => ({
+    matches: Boolean(matchesByQuery[query]),
+    media: query,
+    onchange: null,
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  }));
+
+  return () => {
+    window.matchMedia = originalMatchMedia;
+  };
+}
+
+function expandMobileFeedback() {
+  fireEvent.click(screen.getByTestId("preview-feedback-toggle"));
+}
+
 describe("PreviewFeedback", () => {
+  let restoreMatchMedia;
+
   beforeEach(() => {
     jest.clearAllMocks();
     hasSubmittedFeedback.mockReturnValue(false);
+    // Desktop by default — full bar visible (existing flows unchanged)
+    restoreMatchMedia = mockMatchMedia({ [MOBILE_FEEDBACK_QUERY]: false });
+  });
+
+  afterEach(() => {
+    restoreMatchMedia();
   });
 
   test("renders like, dislike, and ready actions", () => {
@@ -20,6 +53,27 @@ describe("PreviewFeedback", () => {
     expect(screen.getByRole("button", { name: "Like" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Dislike" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Ready to proceed" })).toBeInTheDocument();
+  });
+
+  test("on mobile collapses to Feedback button until expanded", () => {
+    restoreMatchMedia();
+    restoreMatchMedia = mockMatchMedia({ [MOBILE_FEEDBACK_QUERY]: true });
+
+    render(<PreviewFeedback previewSlug="machinemate" previewLabel="Machinemate" />);
+
+    expect(screen.getByTestId("preview-feedback-toggle")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Like" })).not.toBeInTheDocument();
+    expect(screen.queryByText(/What do you think of this sample site/i)).not.toBeInTheDocument();
+
+    expandMobileFeedback();
+
+    expect(screen.getByText(/What do you think of this sample site/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Like" })).toBeInTheDocument();
+    expect(screen.getByTestId("preview-feedback-collapse")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByTestId("preview-feedback-collapse"));
+    expect(screen.getByTestId("preview-feedback-toggle")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Like" })).not.toBeInTheDocument();
   });
 
   test("Like opens confirm modal without posting immediately", () => {
@@ -127,5 +181,17 @@ describe("PreviewFeedback", () => {
         comment: "Needs more photos",
       });
     });
+  });
+
+  test("mobile: expand then Like still opens confirm", () => {
+    restoreMatchMedia();
+    restoreMatchMedia = mockMatchMedia({ [MOBILE_FEEDBACK_QUERY]: true });
+
+    render(<PreviewFeedback previewSlug="machinemate" previewLabel="Machinemate" />);
+    expandMobileFeedback();
+    fireEvent.click(screen.getByRole("button", { name: "Like" }));
+
+    expect(screen.getByTestId("preview-feedback-confirm-modal")).toBeInTheDocument();
+    expect(submitPreviewFeedback).not.toHaveBeenCalled();
   });
 });

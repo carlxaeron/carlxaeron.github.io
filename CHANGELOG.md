@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.9] — 2026-07-31
+
+### Changed
+- **Mobile preview feedback** — sticky “What do you think…” bar collapses to a compact Feedback button on phone width; expand to Like / Dislike / Ready, Close to collapse again
+
 ## [3.1.8] — 2026-07-31
 
 ### Changed

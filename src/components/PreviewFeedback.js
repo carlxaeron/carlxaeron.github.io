@@ -1,9 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { hasSubmittedFeedback, submitPreviewFeedback } from "../utils/previewFeedback";
 import { isAnalyticsExcluded } from "../utils/visitTracker";
 
+const MOBILE_FEEDBACK_QUERY = "(max-width: 991px)";
+
+function useMediaQuery(query) {
+  const [matches, setMatches] = useState(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return false;
+    return window.matchMedia(query).matches;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return undefined;
+
+    const mediaQuery = window.matchMedia(query);
+    const handleChange = (event) => setMatches(event.matches);
+
+    setMatches(mediaQuery.matches);
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
+    }
+
+    mediaQuery.addListener(handleChange);
+    return () => mediaQuery.removeListener(handleChange);
+  }, [query]);
+
+  return matches;
+}
+
 export default function PreviewFeedback({ previewSlug, previewLabel }) {
+  const isMobile = useMediaQuery(MOBILE_FEEDBACK_QUERY);
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [submitted, setSubmitted] = useState(() => hasSubmittedFeedback(previewSlug));
   const [showDislikeModal, setShowDislikeModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -13,12 +43,21 @@ export default function PreviewFeedback({ previewSlug, previewLabel }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const showExpanded = !isMobile || feedbackOpen;
+
   if (!previewSlug || isAnalyticsExcluded() || submitted) {
     return submitted ? (
-      <div className="v3-preview-feedback v3-preview-feedback--done" data-testid="preview-feedback-thanks">
+      <div
+        className={`v3-preview-feedback v3-preview-feedback--done${
+          isMobile ? " v3-preview-feedback--done-compact" : ""
+        }`}
+        data-testid="preview-feedback-thanks"
+      >
         <p>Thanks for your feedback on this sample site.</p>
         {sentiment && (
-          <span className="visually-hidden" data-testid="preview-feedback-sentiment">{sentiment}</span>
+          <span className="visually-hidden" data-testid="preview-feedback-sentiment">
+            {sentiment}
+          </span>
         )}
       </div>
     ) : null;
@@ -51,6 +90,7 @@ export default function PreviewFeedback({ previewSlug, previewLabel }) {
       setShowConfirmModal(false);
       setShowDislikeModal(false);
       setConfirmSource(null);
+      setFeedbackOpen(false);
     } catch (err) {
       setError(err.message || "Could not submit feedback");
     } finally {
@@ -82,43 +122,78 @@ export default function PreviewFeedback({ previewSlug, previewLabel }) {
 
   return (
     <>
-      <section className="v3-preview-feedback" aria-label="Preview feedback" data-testid="preview-feedback">
-        <div className="v3-preview-feedback__inner">
-          <p className="v3-preview-feedback__prompt">What do you think of this sample site?</p>
-          <div className="v3-preview-feedback__actions">
-            <button
-              type="button"
-              className="v3-preview-feedback__btn v3-preview-feedback__btn--like"
-              onClick={() => openConfirm("like")}
-              disabled={loading}
-            >
-              Like
-            </button>
-            <button
-              type="button"
-              className="v3-preview-feedback__btn v3-preview-feedback__btn--dislike"
-              onClick={() => {
-                setError("");
-                setShowDislikeModal(true);
-              }}
-              disabled={loading}
-            >
-              Dislike
-            </button>
-            <button
-              type="button"
-              className="v3-preview-feedback__btn v3-preview-feedback__btn--ready"
-              onClick={() => openConfirm("agree")}
-              disabled={loading}
-            >
-              Ready to proceed
-            </button>
-          </div>
-          {error && !showDislikeModal && !showConfirmModal && (
-            <p className="v3-preview-feedback__error" role="alert">{error}</p>
-          )}
+      {isMobile && !showExpanded ? (
+        <div className="v3-preview-feedback v3-preview-feedback--collapsed" data-testid="preview-feedback">
+          <button
+            type="button"
+            className="v3-preview-feedback__toggle"
+            onClick={() => setFeedbackOpen(true)}
+            aria-expanded="false"
+            data-testid="preview-feedback-toggle"
+          >
+            Feedback
+          </button>
         </div>
-      </section>
+      ) : (
+        <section
+          className={`v3-preview-feedback${isMobile ? " v3-preview-feedback--expanded" : ""}`}
+          aria-label="Preview feedback"
+          data-testid="preview-feedback"
+        >
+          <div className="v3-preview-feedback__inner">
+            {isMobile ? (
+              <div className="v3-preview-feedback__expanded-head">
+                <p className="v3-preview-feedback__prompt">What do you think of this sample site?</p>
+                <button
+                  type="button"
+                  className="v3-preview-feedback__collapse"
+                  onClick={() => setFeedbackOpen(false)}
+                  aria-expanded="true"
+                  data-testid="preview-feedback-collapse"
+                >
+                  Close
+                </button>
+              </div>
+            ) : (
+              <p className="v3-preview-feedback__prompt">What do you think of this sample site?</p>
+            )}
+            <div className="v3-preview-feedback__actions">
+              <button
+                type="button"
+                className="v3-preview-feedback__btn v3-preview-feedback__btn--like"
+                onClick={() => openConfirm("like")}
+                disabled={loading}
+              >
+                Like
+              </button>
+              <button
+                type="button"
+                className="v3-preview-feedback__btn v3-preview-feedback__btn--dislike"
+                onClick={() => {
+                  setError("");
+                  setShowDislikeModal(true);
+                }}
+                disabled={loading}
+              >
+                Dislike
+              </button>
+              <button
+                type="button"
+                className="v3-preview-feedback__btn v3-preview-feedback__btn--ready"
+                onClick={() => openConfirm("agree")}
+                disabled={loading}
+              >
+                Ready to proceed
+              </button>
+            </div>
+            {error && !showDislikeModal && !showConfirmModal && (
+              <p className="v3-preview-feedback__error" role="alert">
+                {error}
+              </p>
+            )}
+          </div>
+        </section>
+      )}
 
       <Modal
         show={showConfirmModal}
