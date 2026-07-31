@@ -582,11 +582,39 @@ describe("PreviewShowcase parent-owned preview settings", () => {
     );
 
     openPreviewSettings();
+    expect(screen.getByTestId("preview-settings-dismiss")).toHaveTextContent(/^Close$/);
     fireEvent.click(screen.getByRole("button", { name: /Close settings/i }));
     await waitFor(() => {
       expect(screen.queryByTestId("preview-settings-panel")).not.toBeInTheDocument();
     });
     expect(screen.getByTestId("preview-settings-open")).toBeInTheDocument();
+  });
+
+  test("mobile settings dismiss reads See preview live", async () => {
+    restoreMatchMedia();
+    restoreMatchMedia = mockMatchMedia({ [MOBILE_CHROME_QUERY]: true });
+
+    render(
+      <PreviewShowcase
+        previewUrl={XKR_HOST}
+        label="XKR Construction"
+        previewSlug={XKR_SLUG}
+      />
+    );
+
+    openPreviewSettings();
+    const dismiss = screen.getByTestId("preview-settings-dismiss");
+    expect(dismiss).toHaveTextContent(/^See preview live$/);
+    expect(screen.getByTestId("preview-settings-close")).toHaveAttribute(
+      "aria-label",
+      "See preview live"
+    );
+    expect(screen.queryByRole("button", { name: /^Close$/ })).not.toBeInTheDocument();
+
+    fireEvent.click(dismiss);
+    await waitFor(() => {
+      expect(screen.queryByTestId("preview-settings-panel")).not.toBeInTheDocument();
+    });
   });
 });
 

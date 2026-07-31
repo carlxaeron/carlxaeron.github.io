@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.12] — 2026-07-31
+
+### Changed
+- **Mobile preview settings dismiss** — on phone-width (`max-width: 991px`), the Customize modal footer/dismiss reads “See preview live” instead of “Close” so prospects know dismissing returns them to the live iframe preview
+
 ## [3.1.11] — 2026-07-31
 
 ### Added

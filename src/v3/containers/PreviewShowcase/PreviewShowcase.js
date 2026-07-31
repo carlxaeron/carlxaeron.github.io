@@ -489,6 +489,9 @@ function PreviewSettingsLauncher({ fields, open, onOpen }) {
   );
 }
 
+const SETTINGS_DISMISS_LABEL = "Close";
+const SETTINGS_DISMISS_LABEL_MOBILE = "See preview live";
+
 function PreviewSettingsPanel({
   show,
   fields,
@@ -500,10 +503,14 @@ function PreviewSettingsPanel({
   onError,
   previewSlug,
   onClose,
+  isMobile = false,
 }) {
   useModalBodyLock(show);
 
   if (!fields.length) return null;
+
+  const dismissLabel = isMobile ? SETTINGS_DISMISS_LABEL_MOBILE : SETTINGS_DISMISS_LABEL;
+  const dismissAriaLabel = isMobile ? SETTINGS_DISMISS_LABEL_MOBILE : "Close settings";
 
   return (
     <Modal
@@ -522,7 +529,7 @@ function PreviewSettingsPanel({
         <button
           type="button"
           className="btn-close v3-modal-dismiss"
-          aria-label="Close settings"
+          aria-label={dismissAriaLabel}
           onClick={onClose}
           data-testid="preview-settings-close"
         />
@@ -554,8 +561,9 @@ function PreviewSettingsPanel({
           type="button"
           className="v3-btn v3-btn--ghost"
           onClick={onClose}
+          data-testid="preview-settings-dismiss"
         >
-          Close
+          {dismissLabel}
         </button>
         <button
           type="button"
@@ -856,6 +864,7 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
         onError={handleSettingsError}
         previewSlug={previewSlug}
         onClose={() => setSettingsOpen(false)}
+        isMobile={isMobileChrome}
       />
     </div>
   );
