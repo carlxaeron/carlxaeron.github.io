@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.6] — 2026-07-31
+
+### Changed
+- **Preview settings launcher** — Customize button opens the parent settings panel (collapsed by default); tip tooltip explains you can tweak photos, hero, and sections
+
 ## [3.1.5] — 2026-07-31
 
 ### Changed

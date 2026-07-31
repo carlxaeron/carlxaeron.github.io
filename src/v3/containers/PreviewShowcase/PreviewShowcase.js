@@ -315,6 +315,26 @@ function PreviewSettingsField({ field, value, onChange }) {
   );
 }
 
+const SETTINGS_TIP_STORAGE_KEY = "cm_preview_settings_tip_seen";
+
+function readSettingsTipSeen() {
+  if (typeof window === "undefined") return false;
+  try {
+    return window.sessionStorage.getItem(SETTINGS_TIP_STORAGE_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function writeSettingsTipSeen() {
+  if (typeof window === "undefined") return;
+  try {
+    window.sessionStorage.setItem(SETTINGS_TIP_STORAGE_KEY, "1");
+  } catch {
+    // sessionStorage may be unavailable
+  }
+}
+
 function PreviewSettingsPanel({
   fields,
   settings,
@@ -322,18 +342,85 @@ function PreviewSettingsPanel({
   onSave,
   saveStatus,
   saveError,
+  open,
+  onOpen,
+  onClose,
 }) {
+  const [tipVisible, setTipVisible] = useState(() => !readSettingsTipSeen());
+
+  const dismissTip = useCallback(() => {
+    setTipVisible(false);
+    writeSettingsTipSeen();
+  }, []);
+
+  const handleOpen = useCallback(() => {
+    dismissTip();
+    onOpen();
+  }, [dismissTip, onOpen]);
+
   if (!fields.length) return null;
+
+  if (!open) {
+    return (
+      <div className="v3-preview-settings-launcher" data-testid="preview-settings-launcher">
+        {tipVisible ? (
+          <div
+            className="v3-preview-settings-tooltip"
+            role="status"
+            data-testid="preview-settings-tooltip"
+          >
+            <p className="v3-preview-settings-tooltip__text">
+              Hey — you can tweak this preview. Open settings to change photos, hero, and sections.
+            </p>
+            <button
+              type="button"
+              className="v3-preview-settings-tooltip__dismiss"
+              onClick={dismissTip}
+              aria-label="Dismiss tip"
+              data-testid="preview-settings-tooltip-dismiss"
+            >
+              Got it
+            </button>
+          </div>
+        ) : null}
+        <button
+          type="button"
+          className="v3-preview-settings-fab"
+          onClick={handleOpen}
+          aria-expanded="false"
+          aria-controls="v3-preview-settings-panel"
+          data-testid="preview-settings-open"
+        >
+          <span className="v3-preview-settings-fab__icon" aria-hidden="true">
+            ⚙
+          </span>
+          <span className="v3-preview-settings-fab__label">Customize</span>
+        </button>
+      </div>
+    );
+  }
 
   return (
     <section
+      id="v3-preview-settings-panel"
       className="v3-preview-settings"
       aria-label="Preview settings"
       data-testid="preview-settings-panel"
     >
       <div className="v3-preview-settings__inner">
         <div className="v3-preview-settings__header">
-          <h2 className="v3-preview-settings__title">Try these settings</h2>
+          <div className="v3-preview-settings__header-row">
+            <h2 className="v3-preview-settings__title">Try these settings</h2>
+            <button
+              type="button"
+              className="v3-preview-settings__close"
+              onClick={onClose}
+              aria-label="Close settings"
+              data-testid="preview-settings-close"
+            >
+              Close
+            </button>
+          </div>
           <p className="v3-preview-settings__hint">
             Changes update the site frames live. Save sends your choices to Carl.
           </p>
@@ -390,6 +477,7 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
   );
   const [saveStatus, setSaveStatus] = useState("idle");
   const [saveError, setSaveError] = useState(null);
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   const settingsRef = useRef(settings);
   settingsRef.current = settings;
@@ -543,10 +631,10 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
           </span>
           {isMobileChrome
             ? settingsFields.length
-              ? "Use the settings panel below to tweak the site live. Admin is the system demo — switch to Desktop for monitors."
+              ? "Tap Customize to tweak the site live. Admin is the system demo — switch to Desktop for monitors."
               : "Browse the admin system demo and marketing site. Switch to Desktop for monitors."
             : settingsFields.length
-              ? "Use the settings panel below to adjust gallery, hero, and sections on the site frames. Admin is the browsable system demo only."
+              ? "Use Customize to adjust gallery, hero, and sections on the site frames. Admin is the browsable system demo only."
               : "Browse the admin system demo first, then the marketing site on desktop and mobile."}
         </p>
 
@@ -635,6 +723,9 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
             onSave={handleSaveSettings}
             saveStatus={saveStatus}
             saveError={saveError}
+            open={settingsOpen}
+            onOpen={() => setSettingsOpen(true)}
+            onClose={() => setSettingsOpen(false)}
           />
           <PreviewFeedback previewSlug={previewSlug} previewLabel={displayLabel} />
         </div>

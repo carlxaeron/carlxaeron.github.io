@@ -33,6 +33,11 @@ function getSiteIframes() {
     .filter((el) => el.tagName === "IFRAME");
 }
 
+function openPreviewSettings() {
+  fireEvent.click(screen.getByTestId("preview-settings-open"));
+  return screen.getByTestId("preview-settings-panel");
+}
+
 describe("buildAdminPreviewUrl", () => {
   test("appends /admin/ without settings hash", () => {
     expect(buildAdminPreviewUrl("https://villa-clara-pool.netlify.app")).toBe(
@@ -45,6 +50,10 @@ describe("buildAdminPreviewUrl", () => {
 });
 
 describe("PreviewShowcase", () => {
+  beforeEach(() => {
+    window.sessionStorage.clear();
+  });
+
   test("renders four preview frames (site + admin, desktop + mobile) on wide screens", () => {
     const restoreMatchMedia = mockMatchMedia({ [MOBILE_CHROME_QUERY]: false });
 
@@ -177,6 +186,7 @@ describe("PreviewShowcase parent-owned preview settings", () => {
   let originalFetch;
 
   beforeEach(() => {
+    window.sessionStorage.clear();
     restoreMatchMedia = mockMatchMedia({ [MOBILE_CHROME_QUERY]: false });
     originalFetch = global.fetch;
     global.fetch = jest.fn();
@@ -187,7 +197,7 @@ describe("PreviewShowcase parent-owned preview settings", () => {
     global.fetch = originalFetch;
   });
 
-  test("renders settings panel from whitelist schema for XKR", () => {
+  test("shows Customize button and tip; opens settings panel on click", () => {
     render(
       <PreviewShowcase
         previewUrl={XKR_HOST}
@@ -196,15 +206,24 @@ describe("PreviewShowcase parent-owned preview settings", () => {
       />
     );
 
+    expect(screen.getByTestId("preview-settings-open")).toBeInTheDocument();
+    expect(screen.getByTestId("preview-settings-tooltip")).toHaveTextContent(
+      /tweak this preview/i
+    );
+    expect(screen.queryByTestId("preview-settings-panel")).not.toBeInTheDocument();
+    expect(screen.getByText(/Use Customize to adjust/i)).toBeInTheDocument();
+    expect(global.fetch).not.toHaveBeenCalled();
+
+    openPreviewSettings();
+
     expect(screen.getByTestId("preview-settings-panel")).toBeInTheDocument();
+    expect(screen.queryByTestId("preview-settings-tooltip")).not.toBeInTheDocument();
     expect(screen.getByLabelText(/Gallery photos shown/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Hero background photo/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Show Why agencies work with us/i)).toBeInTheDocument();
-    expect(screen.getByText(/settings panel below/i)).toBeInTheDocument();
-    expect(global.fetch).not.toHaveBeenCalled();
   });
 
-  test("hides settings panel when slug has no schema fields", () => {
+  test("hides settings launcher when slug has no schema fields", () => {
     render(
       <PreviewShowcase
         previewUrl={PREVIEW_HOST}
@@ -213,6 +232,7 @@ describe("PreviewShowcase parent-owned preview settings", () => {
       />
     );
 
+    expect(screen.queryByTestId("preview-settings-open")).not.toBeInTheDocument();
     expect(screen.queryByTestId("preview-settings-panel")).not.toBeInTheDocument();
     expect(global.fetch).not.toHaveBeenCalled();
   });
@@ -227,7 +247,7 @@ describe("PreviewShowcase parent-owned preview settings", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByTestId("preview-settings-panel")).toBeInTheDocument();
+      expect(screen.getByTestId("preview-settings-open")).toBeInTheDocument();
     });
 
     expect(global.fetch).not.toHaveBeenCalled();
@@ -241,6 +261,8 @@ describe("PreviewShowcase parent-owned preview settings", () => {
         previewSlug={XKR_SLUG}
       />
     );
+
+    openPreviewSettings();
 
     const siteFrames = getSiteIframes();
     expect(siteFrames).toHaveLength(2);
@@ -330,6 +352,7 @@ describe("PreviewShowcase parent-owned preview settings", () => {
       />
     );
 
+    openPreviewSettings();
     fireEvent.click(screen.getByTestId("preview-settings-save"));
 
     await waitFor(() => {
@@ -364,6 +387,24 @@ describe("PreviewShowcase parent-owned preview settings", () => {
           !(typeof url === "string" && url.includes("?slug=") && (!options || !options.method))
       )
     ).toBe(true);
+  });
+
+  test("dismisses tip and closes settings panel", () => {
+    render(
+      <PreviewShowcase
+        previewUrl={XKR_HOST}
+        label="XKR Construction"
+        previewSlug={XKR_SLUG}
+      />
+    );
+
+    fireEvent.click(screen.getByTestId("preview-settings-tooltip-dismiss"));
+    expect(screen.queryByTestId("preview-settings-tooltip")).not.toBeInTheDocument();
+
+    openPreviewSettings();
+    fireEvent.click(screen.getByTestId("preview-settings-close"));
+    expect(screen.queryByTestId("preview-settings-panel")).not.toBeInTheDocument();
+    expect(screen.getByTestId("preview-settings-open")).toBeInTheDocument();
   });
 });
 

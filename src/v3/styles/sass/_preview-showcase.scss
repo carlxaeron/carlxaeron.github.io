@@ -213,6 +213,15 @@ body.v3-preview-active {
     backdrop-filter: blur(10px);
   }
 
+  .v3-preview-feedback-dock .v3-preview-settings-launcher {
+    margin-top: 0;
+    padding-top: $space-3;
+    padding-bottom: $space-2;
+    border-top: 1px solid rgba($green-light, 0.18);
+    background: rgba($green-dark, 0.94);
+    backdrop-filter: blur(10px);
+  }
+
   .v3-preview-feedback-dock .v3-preview-settings__inner {
     max-width: none;
   }
@@ -220,6 +229,10 @@ body.v3-preview-active {
   .v3-preview-feedback-dock .v3-preview-settings__header {
     text-align: left;
     margin-bottom: $space-3;
+  }
+
+  .v3-preview-feedback-dock .v3-preview-settings__header-row {
+    justify-content: space-between;
   }
 
   .v3-preview-feedback-dock .v3-preview-settings__title {
@@ -564,6 +577,87 @@ body.v3-preview-active {
   }
 }
 
+.v3-preview-settings-launcher {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-3;
+  margin-top: $space-4;
+  padding: 0 $space-4;
+}
+
+.v3-preview-settings-tooltip {
+  max-width: 320px;
+  padding: $space-3 $space-4;
+  border-radius: 12px;
+  border: 1px solid rgba($green-accent, 0.35);
+  background: rgba($green-mid, 0.96);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  text-align: center;
+}
+
+.v3-preview-settings-tooltip__text {
+  margin: 0 0 $space-3;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: $green-light;
+}
+
+.v3-preview-settings-tooltip__dismiss {
+  min-height: 36px;
+  padding: $space-1 $space-4;
+  border: 1px solid rgba($green-light, 0.28);
+  border-radius: 100px;
+  background: transparent;
+  color: $white;
+  font-family: $font-body;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    border-color: rgba($green-accent, 0.55);
+    background: rgba($green-accent, 0.12);
+  }
+}
+
+.v3-preview-settings-fab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  min-height: 44px;
+  min-width: 44px;
+  padding: $space-3 $space-5;
+  border: 1px solid rgba($green-light, 0.22);
+  border-radius: 100px;
+  background: rgba($green-mid, 0.94);
+  color: $green-light;
+  font-family: $font-body;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    background: rgba($green-dark, 0.96);
+    border-color: rgba($green-accent, 0.45);
+    transform: translateY(-2px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $green-accent;
+    outline-offset: 2px;
+  }
+}
+
+.v3-preview-settings-fab__icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
 .v3-preview-settings {
   margin-top: $space-6;
   padding: $space-5 $space-4 0;
@@ -580,12 +674,39 @@ body.v3-preview-active {
   text-align: center;
 }
 
+.v3-preview-settings__header-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-3;
+  flex-wrap: wrap;
+  margin-bottom: $space-2;
+}
+
 .v3-preview-settings__title {
   font-family: $font-display;
   font-size: 1.15rem;
   font-weight: 600;
   color: $white;
-  margin: 0 0 $space-2;
+  margin: 0;
+}
+
+.v3-preview-settings__close {
+  min-height: 36px;
+  padding: $space-1 $space-3;
+  border: 1px solid rgba($green-light, 0.28);
+  border-radius: 100px;
+  background: transparent;
+  color: $green-light;
+  font-family: $font-body;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    border-color: rgba($green-accent, 0.5);
+    color: $white;
+  }
 }
 
 .v3-preview-settings__hint {
@@ -682,6 +803,12 @@ body.v3-preview-active {
     padding-top: $space-4;
     padding-bottom: $space-4;
     border-top: 0;
+  }
+
+  .v3-preview-settings-launcher {
+    margin-top: 0;
+    padding-top: $space-4;
+    padding-bottom: $space-3;
   }
 
   .v3-preview-feedback {
