@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.2] — 2026-07-31
+
+### Changed
+- **Skill experience years** — updated resume-deck skill years (JS 14, React 4, Node 3, Vue 4, Mobile/Flutter/RN 2, PHP 13, Laravel 10, SQL 10, CSS/HTML 14, Git/SVN 12) plus overall “14 years since 2012” copy; unit test locks the values
+
 ## [3.1.1] — 2026-07-31
 
 ### Added
