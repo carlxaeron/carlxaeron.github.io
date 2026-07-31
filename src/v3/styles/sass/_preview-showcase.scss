@@ -359,13 +359,13 @@ body.v3-preview-active {
 .v3-preview-monitor__screen {
   position: relative;
   flex: 1;
+  min-width: 0;
   min-height: 0;
   overflow: hidden;
   border-radius: 6px;
   background: #0d0d0d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  // Scaler is position:absolute — do not flex-size from iframe content
+  // or narrow viewports expand the 16:10 bezel and break scale math.
   box-shadow: inset 0 0 0 1px rgba($white, 0.04);
 }
 
@@ -394,7 +394,10 @@ body.v3-preview-active {
 }
 
 .v3-preview-iframe-scaler {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -417,6 +420,11 @@ body.v3-preview-active {
   @media (max-width: 991px) {
     pointer-events: none;
   }
+}
+
+// Phone-width Desktop toggle: monitors must stay interactive (Settings knobs).
+.v3-preview-page--mode-desktop .v3-preview-iframe--desktop {
+  pointer-events: auto;
 }
 
 // Phone frame
@@ -444,12 +452,10 @@ body.v3-preview-active {
 .v3-preview-phone__screen {
   position: relative;
   flex: 1;
+  min-width: 0;
   min-height: 0;
   overflow: hidden;
   border-radius: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: $white;
 }
 

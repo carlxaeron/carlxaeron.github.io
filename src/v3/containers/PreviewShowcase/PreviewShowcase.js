@@ -61,7 +61,8 @@ function useMediaQuery(query) {
 
 export function buildAdminPreviewUrl(siteUrl) {
   const base = (siteUrl || "").replace(/\/+$/, "");
-  return `${base}/admin/`;
+  // Land on Settings so previewSettings knobs are visible without hunting nav.
+  return `${base}/admin/#/settings`;
 }
 
 function useViewportScale(containerRef, viewport, initialScale) {
@@ -271,6 +272,7 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
   }, []);
 
   // Parent relay: client-site iframes ↔ Laravel previewSettings (same trust model as previewFeedback).
+  // Deduplicate GET — four iframes each post ready; one fetch avoids burning the hourly IP bucket.
   useEffect(() => {
     if (!previewSlug || !previewUrl) return undefined;
 
@@ -278,9 +280,37 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
     const endpoint = mapping.previewSettings;
     if (!expectedOrigin || !endpoint) return undefined;
 
+    let cancelled = false;
+    let cachedSettings = undefined;
+    let inflight = null;
+
     const reply = (source, origin, payload) => {
       if (!source || typeof source.postMessage !== "function") return;
       source.postMessage(payload, origin);
+    };
+
+    const loadSettings = () => {
+      if (cachedSettings !== undefined) {
+        return Promise.resolve(cachedSettings);
+      }
+      if (inflight) return inflight;
+
+      inflight = fetch(`${endpoint}?slug=${encodeURIComponent(previewSlug)}`)
+        .then((response) => response.json().catch(() => ({})))
+        .then((json) => {
+          const settings = json?.data?.settings ?? json?.settings ?? null;
+          cachedSettings = settings;
+          return settings;
+        })
+        .catch(() => {
+          cachedSettings = null;
+          return null;
+        })
+        .finally(() => {
+          inflight = null;
+        });
+
+      return inflight;
     };
 
     const handleMessage = async (event) => {
@@ -290,21 +320,13 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
       if (data.slug !== previewSlug) return;
 
       if (data.type === MSG_READY) {
-        try {
-          const response = await fetch(
-            `${endpoint}?slug=${encodeURIComponent(previewSlug)}`
-          );
-          const json = await response.json().catch(() => ({}));
-          const settings =
-            json?.data?.settings ?? json?.settings ?? null;
-          reply(event.source, event.origin, {
-            type: MSG_INIT,
-            slug: previewSlug,
-            settings,
-          });
-        } catch {
-          // Keep iframe defaults if GET fails
-        }
+        const settings = await loadSettings();
+        if (cancelled) return;
+        reply(event.source, event.origin, {
+          type: MSG_INIT,
+          slug: previewSlug,
+          settings,
+        });
         return;
       }
 
@@ -321,6 +343,8 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
               sessionId,
             }),
           });
+          if (cancelled) return;
+          cachedSettings = data.settings ?? {};
           reply(event.source, event.origin, {
             type: MSG_SAVED,
             slug: previewSlug,
@@ -332,7 +356,10 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
     };
 
     window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
+    return () => {
+      cancelled = true;
+      window.removeEventListener("message", handleMessage);
+    };
   }, [previewSlug, previewUrl]);
 
   const handleBack = useCallback(() => {
@@ -390,8 +417,8 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
             ↕
           </span>
           {isMobileChrome
-            ? "Swipe/browse the phones. Switch to Desktop view for the full monitor layout."
-            : "Start with the admin frames — scroll and click nav to browse pages. Then check the marketing site on desktop and mobile."}
+            ? "Admin opens on Settings — tweak gallery / hero, then check the site phone. Switch to Desktop for monitors."
+            : "Admin opens on Settings — adjust gallery count, hero photo, and section toggles (Save notifies Carl). Then browse the marketing site."}
         </p>
 
         <div className="v3-preview-devices v3-preview-devices--quad">
@@ -400,7 +427,7 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
               <PreviewDevice
                 variant="desktop"
                 label="Admin — Desktop"
-                hint="Browse the admin — click sidebar links to explore pages."
+                hint="Settings opens first — tweak gallery / hero live. Sidebar has the rest of the admin demo."
                 previewUrl={adminPreviewUrl}
                 displayLabel={displayLabel}
                 screenRef={adminDesktopRef}
@@ -415,7 +442,7 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
               <PreviewDevice
                 variant="mobile"
                 label="Admin — Mobile"
-                hint="Try the mobile admin — bottom nav and drawer menu work here."
+                hint="Settings opens first — try the knobs, then browse bottom nav."
                 previewUrl={adminPreviewUrl}
                 displayLabel={displayLabel}
                 screenRef={adminMobileRef}

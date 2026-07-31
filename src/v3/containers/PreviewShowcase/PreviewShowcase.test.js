@@ -32,12 +32,12 @@ function dispatchPreviewMessage({ origin, data, source }) {
 }
 
 describe("buildAdminPreviewUrl", () => {
-  test("appends /admin/ to site base URL", () => {
+  test("appends /admin/#/settings so preview knobs are visible", () => {
     expect(buildAdminPreviewUrl("https://villa-clara-pool.netlify.app")).toBe(
-      "https://villa-clara-pool.netlify.app/admin/"
+      "https://villa-clara-pool.netlify.app/admin/#/settings"
     );
     expect(buildAdminPreviewUrl("https://example.netlify.app/")).toBe(
-      "https://example.netlify.app/admin/"
+      "https://example.netlify.app/admin/#/settings"
     );
   });
 });
@@ -67,8 +67,8 @@ describe("PreviewShowcase", () => {
     const deviceLabels = screen.getAllByRole("heading", { level: 2 }).map((el) => el.textContent);
     expect(deviceLabels.indexOf("Admin — Desktop")).toBeLessThan(deviceLabels.indexOf("Site — Desktop"));
     expect(screen.getAllByTitle(/preview of Sample Business/i)).toHaveLength(4);
-    expect(screen.getByText(/Start with the admin frames/i)).toBeInTheDocument();
-    expect(screen.getByText(/click nav to browse pages/i)).toBeInTheDocument();
+    expect(screen.getByText(/Admin opens on Settings/i)).toBeInTheDocument();
+    expect(screen.getByText(/adjust gallery count/i)).toBeInTheDocument();
     expect(screen.queryByTestId("preview-view-mode")).not.toBeInTheDocument();
     expect(screen.queryByText(/Open live site/i)).not.toBeInTheDocument();
 
@@ -89,7 +89,8 @@ describe("PreviewShowcase", () => {
     expect(screen.getByTestId("preview-showcase")).toHaveClass("v3-preview-page--mobile-chrome");
     expect(screen.getByTestId("preview-showcase")).toHaveClass("v3-preview-page--mode-mobile");
     expect(screen.getByTestId("preview-view-mode")).toBeInTheDocument();
-    expect(screen.getByText(/Swipe\/browse the phones/i)).toBeInTheDocument();
+    expect(screen.getByText(/Admin opens on Settings/i)).toBeInTheDocument();
+    expect(screen.getByText(/Switch to Desktop for monitors/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Admin — Mobile preview/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Site — Mobile preview/i)).toBeInTheDocument();
     expect(screen.queryByLabelText(/Admin — Desktop preview/i)).not.toBeInTheDocument();
@@ -141,7 +142,7 @@ describe("PreviewShowcase", () => {
     restoreMatchMedia();
   });
 
-  test("admin iframes point to /admin/ path", () => {
+  test("admin iframes deep-link to Settings", () => {
     const restoreMatchMedia = mockMatchMedia({ [MOBILE_CHROME_QUERY]: false });
 
     render(
@@ -156,8 +157,8 @@ describe("PreviewShowcase", () => {
       .getAllByTitle(/Admin — (Desktop|Mobile) preview/i)
       .map((el) => el.getAttribute("src"));
     expect(adminFrames).toEqual([
-      "https://villa-clara-pool.netlify.app/admin/",
-      "https://villa-clara-pool.netlify.app/admin/",
+      "https://villa-clara-pool.netlify.app/admin/#/settings",
+      "https://villa-clara-pool.netlify.app/admin/#/settings",
     ]);
 
     restoreMatchMedia();
@@ -264,6 +265,61 @@ describe("PreviewShowcase preview settings relay", () => {
 
     await waitFor(() => {
       expect(source.postMessage).toHaveBeenCalledWith(
+        { type: "cm:preview-settings:init", slug: PREVIEW_SLUG, settings },
+        PREVIEW_HOST
+      );
+    });
+  });
+
+  test("multiple ready messages share one GET", async () => {
+    const sourceA = { postMessage: jest.fn() };
+    const sourceB = { postMessage: jest.fn() };
+    const settings = { galleryCount: 2 };
+    let resolveFetch;
+    global.fetch.mockImplementationOnce(
+      () =>
+        new Promise((resolve) => {
+          resolveFetch = resolve;
+        })
+    );
+
+    render(
+      <PreviewShowcase
+        previewUrl={PREVIEW_HOST}
+        label="Sample"
+        previewSlug={PREVIEW_SLUG}
+      />
+    );
+
+    dispatchPreviewMessage({
+      origin: PREVIEW_HOST,
+      data: { type: "cm:preview-settings:ready", slug: PREVIEW_SLUG },
+      source: sourceA,
+    });
+    dispatchPreviewMessage({
+      origin: PREVIEW_HOST,
+      data: { type: "cm:preview-settings:ready", slug: PREVIEW_SLUG },
+      source: sourceB,
+    });
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledTimes(1);
+    });
+
+    resolveFetch({
+      ok: true,
+      json: async () => ({
+        status: 200,
+        data: { settings, previewSlug: PREVIEW_SLUG },
+      }),
+    });
+
+    await waitFor(() => {
+      expect(sourceA.postMessage).toHaveBeenCalledWith(
+        { type: "cm:preview-settings:init", slug: PREVIEW_SLUG, settings },
+        PREVIEW_HOST
+      );
+      expect(sourceB.postMessage).toHaveBeenCalledWith(
         { type: "cm:preview-settings:init", slug: PREVIEW_SLUG, settings },
         PREVIEW_HOST
       );

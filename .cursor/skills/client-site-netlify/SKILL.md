@@ -82,6 +82,7 @@ Pass optional **`systemLabel`** (`system.label`) and **`systemPain`** (`system.p
 3. Include bridge on site + admin: `<script src="/preview-settings-bridge.js" data-slug="{slug}"></script>` (admin may use `../preview-settings-bridge.js`).
 4. Bake schema into admin (same pattern as `ADMIN_CONFIG`): `window.PREVIEW_SETTINGS_SCHEMA` from `previewSettings.fields` so `admin.js` `renderSettings()` is data-driven.
 5. `site.js` listens for `cm-preview-settings:init` / BroadcastChannel and calls `applySettings()`.
+6. Portfolio PreviewShowcase deep-links admin iframes to `/admin/#/settings` so knobs are visible without hunting nav.
 
 **Working example:** `client-sites/xkr-construction/`. Retrofit older sites later (oldest first) — do not block new demos on a full batch.
 

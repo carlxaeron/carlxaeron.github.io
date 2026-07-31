@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.4] — 2026-07-31
+
+### Fixed
+- **Preview desktop monitors on phone width** — iframe scaler no longer expands the 16:10 bezel (absolute positioning), so Desktop view stops clipping with a white bar; Desktop mode re-enables pointer events for Settings knobs
+- **Preview settings discoverability** — admin iframes deep-link to `#/settings` with clearer intro/hint copy so gallery / hero controls are visible without hunting nav
+- **Preview settings rate limit** — parent dedupes GET across four iframe `ready` messages; API splits read (60/min) vs write (30/hour) so QA reloads stop 429ing Save/init
+
 ## [3.1.3] — 2026-07-31
 
 ### Fixed
