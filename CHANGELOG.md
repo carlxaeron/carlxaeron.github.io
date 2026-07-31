@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.13] — 2026-07-31
+
+### Changed
+- **Preview Customize chrome** — Customize aligns with the scroll-hint pill (same row, height, radius, border/padding) instead of a mismatched FAB
+- **Settings modal actions** — desktop dismiss is “Cancel”; mobile Cancel/Close still “See preview live”; Save is a clear green-accent primary with full-width stacked footer on ≤991px
+
 ## [3.1.12] — 2026-07-31
 
 ### Changed

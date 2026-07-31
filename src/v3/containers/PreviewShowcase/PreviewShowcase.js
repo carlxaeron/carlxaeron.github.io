@@ -489,7 +489,7 @@ function PreviewSettingsLauncher({ fields, open, onOpen }) {
   );
 }
 
-const SETTINGS_DISMISS_LABEL = "Close";
+const SETTINGS_DISMISS_LABEL = "Cancel";
 const SETTINGS_DISMISS_LABEL_MOBILE = "See preview live";
 
 function PreviewSettingsPanel({

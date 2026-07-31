@@ -582,7 +582,12 @@ describe("PreviewShowcase parent-owned preview settings", () => {
     );
 
     openPreviewSettings();
-    expect(screen.getByTestId("preview-settings-dismiss")).toHaveTextContent(/^Close$/);
+    expect(screen.getByTestId("preview-settings-dismiss")).toHaveTextContent(/^Cancel$/);
+    expect(screen.getByTestId("preview-settings-save")).toHaveClass(
+      "v3-btn",
+      "v3-btn--primary",
+      "v3-preview-settings__save"
+    );
     fireEvent.click(screen.getByRole("button", { name: /Close settings/i }));
     await waitFor(() => {
       expect(screen.queryByTestId("preview-settings-panel")).not.toBeInTheDocument();
@@ -590,7 +595,7 @@ describe("PreviewShowcase parent-owned preview settings", () => {
     expect(screen.getByTestId("preview-settings-open")).toBeInTheDocument();
   });
 
-  test("mobile settings dismiss reads See preview live", async () => {
+  test("mobile settings Cancel reads See preview live", async () => {
     restoreMatchMedia();
     restoreMatchMedia = mockMatchMedia({ [MOBILE_CHROME_QUERY]: true });
 
@@ -609,12 +614,31 @@ describe("PreviewShowcase parent-owned preview settings", () => {
       "aria-label",
       "See preview live"
     );
+    expect(screen.queryByRole("button", { name: /^Cancel$/ })).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /^Close$/ })).not.toBeInTheDocument();
+    expect(screen.getByTestId("preview-settings-save")).toHaveClass("v3-btn--primary");
 
     fireEvent.click(dismiss);
     await waitFor(() => {
       expect(screen.queryByTestId("preview-settings-panel")).not.toBeInTheDocument();
     });
+  });
+
+  test("Customize sits beside site scroll hint as pill sibling", () => {
+    render(
+      <PreviewShowcase
+        previewUrl={XKR_HOST}
+        label="XKR Construction"
+        previewSlug={XKR_SLUG}
+      />
+    );
+
+    const openBtn = screen.getByTestId("preview-settings-open");
+    expect(openBtn).toHaveClass("v3-preview-settings-fab");
+    expect(openBtn).toHaveTextContent(/Customize/);
+    const hintRow = openBtn.closest(".v3-preview-scroll-hint-row");
+    expect(hintRow).toHaveClass("v3-preview-scroll-hint-row--with-aside");
+    expect(hintRow.querySelector(".v3-preview-scroll-hint")).toBeInTheDocument();
   });
 });
 
