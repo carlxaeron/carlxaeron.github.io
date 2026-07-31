@@ -1,14 +1,14 @@
 const SKILLS = [
   {
       name: "Javascript (JS)",
-      experience: "11",
+      experience: "14",
       percentage: "95",
       width: "95",
       parent: true,
   },
   {
       name: "ReactJS",
-      experience: "3",
+      experience: "4",
       percentage: "95",
       width: "95",
   },
@@ -44,7 +44,7 @@ const SKILLS = [
   },
   {
       name: "NodeJS (Backend)",
-      experience: "1",
+      experience: "3",
       percentage: "80",
       width: "80",
   },
@@ -62,39 +62,39 @@ const SKILLS = [
   },
   {
       name: "VueJS",
-      experience: "3",
+      experience: "4",
       percentage: "95",
       width: "95",
   },
   {
       name: "Mobile Development",
-      experience: "1",
+      experience: "2",
       percentage: "80",
       width: "80",
       parent: true,
   },
   {
       name: "Flutter",
-      experience: "1",
+      experience: "2",
       percentage: "80",
       width: "80",
   },
   {
       name: "React Native",
-      experience: "1",
+      experience: "2",
       percentage: "85",
       width: "85",
   },
   {
       name: "PHP",
-      experience: "10",
+      experience: "13",
       percentage: "95",
       width: "95",
       parent: true,
   },
   {
       name: "Laravel",
-      experience: "9",
+      experience: "10",
       percentage: "95",
       width: "95",
   },
@@ -124,7 +124,7 @@ const SKILLS = [
   },
   {
       name: "SQL (MYSQL)",
-      experience: "9",
+      experience: "10",
       percentage: "95",
       width: "95",
   },
@@ -162,7 +162,7 @@ const SKILLS = [
   },
   {
       name: "CSS/CSS3",
-      experience: "10",
+      experience: "14",
       percentage: "95",
       width: "95",
       parent: true,
@@ -181,7 +181,7 @@ const SKILLS = [
   },
   {
       name: "HTML/HTML5",
-      experience: "10",
+      experience: "14",
       percentage: "95",
       width: "95",
       parent: true,
@@ -207,7 +207,7 @@ const SKILLS = [
   },
   {
       name: "Git/SVN",
-      experience: "11",
+      experience: "12",
       percentage: "95",
       width: "95",
   },
@@ -238,8 +238,8 @@ const SKILLS = [
   }
 ];
 
-const PROJECT_DESCRIPTION = 'I am a fullstack web developer working for over 12 years since 2012, I am mainly focused on web development using HTML, CSS, JS (AngularJS, VueJS, JQuery), PHP/MySQL - (XAMPP, WAMP, LAMP). I build website from scratch using any top frameworks such as Laravel, Codeigniter, and Zend on any development environment with support of Linux command or local development environment and my code is up to the current standards, secure, and safe from SQL injections or similar hacking attempts with understanding of OOP. I could be a maintenance support with high analytical thinking skill to solve complex problems. All the websites I developed was built using the latest version of PHP. I have knowledge on building a website from CMS such as Wordpress, Drupal and Joomla, I could make customized themes. I have experienced in SEO friendly website that may affect the visibility of a website or a web page in a search engine’s results. I always adopt latest technologies to meet the market requirements and I am creating a responsive web design that loads correctly in all modern browsers and smaller devices.';
-const PROJECT_DESCRIPTION2 = `I am a passionate Full-Stack Web Developer with over 12 years (4560 days 19 hrs 14 mins 17 secs) experience delivering robust web applications and responsive websites since 2012. My expertise spans a wide range of modern technologies, enabling me to create solutions that are secure, scalable, and user-focused.
+const PROJECT_DESCRIPTION = 'I am a fullstack web developer working for over 14 years since 2012, I am mainly focused on web development using HTML, CSS, JS (AngularJS, VueJS, JQuery), PHP/MySQL - (XAMPP, WAMP, LAMP). I build website from scratch using any top frameworks such as Laravel, Codeigniter, and Zend on any development environment with support of Linux command or local development environment and my code is up to the current standards, secure, and safe from SQL injections or similar hacking attempts with understanding of OOP. I could be a maintenance support with high analytical thinking skill to solve complex problems. All the websites I developed was built using the latest version of PHP. I have knowledge on building a website from CMS such as Wordpress, Drupal and Joomla, I could make customized themes. I have experienced in SEO friendly website that may affect the visibility of a website or a web page in a search engine’s results. I always adopt latest technologies to meet the market requirements and I am creating a responsive web design that loads correctly in all modern browsers and smaller devices.';
+const PROJECT_DESCRIPTION2 = `I am a passionate Full-Stack Web Developer with over 14 years (5325 days 19 hrs 14 mins 17 secs) experience delivering robust web applications and responsive websites since 2012. My expertise spans a wide range of modern technologies, enabling me to create solutions that are secure, scalable, and user-focused.
 🔑 Core Expertise:
 Proficient in front-end development using HTML, CSS, and modern JavaScript frameworks like AngularJS, VueJS, ReactJS, and jQuery.
 Advanced backend skills with PHP/MySQL ecosystems (XAMPP, WAMP, LAMP) and frameworks like Laravel, CodeIgniter, and Zend.
@@ -593,21 +593,21 @@ To speed up development, I utilized the JADE template engine for creating HTML f
 ]
 
 const HEADERCONFIG = {
-  title: "Carl Louis Manuel — Senior Full-Stack Engineer & AI Integration Specialist | 12+ Years Enterprise Experience",
+  title: "Carl Louis Manuel — Senior Full-Stack Engineer & AI Integration Specialist | 14+ Years Enterprise Experience",
   meta: [
     { name: "theme-color", content: "#000000" },
-    { name: "description", content: "Senior Full-Stack Engineer & AI Integration Specialist with 12+ years delivering enterprise-grade web applications for banks, media companies, and technology firms. Expert in ReactJS, Laravel, OpenAI API, Flutter, and Firebase." },
+    { name: "description", content: "Senior Full-Stack Engineer & AI Integration Specialist with 14+ years delivering enterprise-grade web applications for banks, media companies, and technology firms. Expert in ReactJS, Laravel, OpenAI API, Flutter, and Firebase." },
     { name: "keywords", content: "Programmer Analyst, Full-Stack Web & App Developer, Software Engineer, ReactJS, VueJS, AngularJS, NodeJS, PHP, Laravel, CodeIgniter, AngularJS, VueJS, JQuery, HTML, CSS, Web Development, SEO, WordPress, Drupal, Joomla, Custom Themes, Responsive Design, OOP, Web Security, Scalable Websites, MySQL, Linux Development, CMS" },
     { property: "og:locale", content: "en_US" },
     { property: "og:type", content: "portfolio" },
-    { property: "og:title", content: "Programmer Analyst | Full-Stack Web & App Developer | Software Engineer | 12+ Years of Experience" },
-    { name: "twitter:title", content: "Programmer Analyst | Full-Stack Web & App Developer | Software Engineer | 12+ Years of Experience" },
-    { property: "og:description", content: "Experienced Programmer Analyst | Full-Stack Web & App Developer | Software Engineer with 12+ years of expertise in ReactJS, NodeJS, PHP, and top frameworks like Laravel and CodeIgniter. Skilled in creating secure, scalable, and SEO-optimized websites, with a focus on responsive design and performance." },
-    { name: "twitter:description", content: "Experienced Programmer Analyst | Full-Stack Web & App Developer | Software Engineer with 12+ years of expertise in ReactJS, NodeJS, PHP, and top frameworks like Laravel and CodeIgniter. Skilled in creating secure, scalable, and SEO-optimized websites, with a focus on responsive design and performance." },
+    { property: "og:title", content: "Programmer Analyst | Full-Stack Web & App Developer | Software Engineer | 14+ Years of Experience" },
+    { name: "twitter:title", content: "Programmer Analyst | Full-Stack Web & App Developer | Software Engineer | 14+ Years of Experience" },
+    { property: "og:description", content: "Experienced Programmer Analyst | Full-Stack Web & App Developer | Software Engineer with 14+ years of expertise in ReactJS, NodeJS, PHP, and top frameworks like Laravel and CodeIgniter. Skilled in creating secure, scalable, and SEO-optimized websites, with a focus on responsive design and performance." },
+    { name: "twitter:description", content: "Experienced Programmer Analyst | Full-Stack Web & App Developer | Software Engineer with 14+ years of expertise in ReactJS, NodeJS, PHP, and top frameworks like Laravel and CodeIgniter. Skilled in creating secure, scalable, and SEO-optimized websites, with a focus on responsive design and performance." },
     { property: "og:image", content: "/static/images/profile3.jpg" },
     { name: "twitter:image", content: "/static/images/profile3.jpg" },
     { property: "og:url", content: "https://carlmanuel.com/" },
-    { property: "og:site_name", content: "Carl Louis Manuel - Programmer Analyst | Full-Stack Web & App Developer | Software Engineer | 12+ Years of Experience" },
+    { property: "og:site_name", content: "Carl Louis Manuel - Programmer Analyst | Full-Stack Web & App Developer | Software Engineer | 14+ Years of Experience" },
     { name: "twitter:card", content: "summary" },
     { name: "twitter:site", content: "@carlxaeron09" },
     { name: "twitter:creator", content: "@carlxaeron09" },
