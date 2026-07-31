@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.11] — 2026-07-31
+
+### Added
+- **Preview settings retrofit (Jul 31 follow-ups)** — text + dual hero + gallery/About knobs on bernardino-general-hospital, cj-resort, fairview-general-hospital, frances-teresa-garden, hvill-hospital, joyce-kim-resort, lucky-drive-inn, novagen, palms-and-terraces, pgmc (whitelist schemas + Netlify redeploys)
+
 ## [3.1.10] — 2026-07-31
 
 ### Added

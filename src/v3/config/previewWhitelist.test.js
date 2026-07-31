@@ -164,6 +164,35 @@ describe("getPreviewSettingsSchema", () => {
     expect(getPreviewSettingsSchema(null)).toEqual([]);
     expect(getPreviewSettingsSchema("unknown-slug")).toEqual([]);
   });
+
+  test.each([
+    "bernardino-general-hospital",
+    "cj-resort",
+    "fairview-general-hospital",
+    "frances-teresa-garden",
+    "hvill-hospital",
+    "joyce-kim-resort",
+    "lucky-drive-inn",
+    "novagen",
+    "palms-and-terraces",
+    "pgmc",
+  ])("%s ships text + dual hero + gallery/about previewSettings", (slug) => {
+    const fields = getPreviewSettingsSchema(slug);
+    const keys = fields.map((field) => field.key);
+    expect(keys).toEqual(
+      expect.arrayContaining([
+        "heroEyebrow",
+        "heroHeadline",
+        "heroSubhead",
+        "heroImageDesktop",
+        "heroImageMobile",
+        "galleryCount",
+        "showWhyUs",
+      ])
+    );
+    expect(fields.find((field) => field.key === "heroImageDesktop")?.default).toBeNull();
+    expect(fields.find((field) => field.key === "heroHeadline")?.default).toBeTruthy();
+  });
 });
 
 describe("getPreviewSettingsDefaults", () => {
