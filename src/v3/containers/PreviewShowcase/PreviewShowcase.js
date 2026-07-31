@@ -2,12 +2,13 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PreviewFeedback from "../../../components/PreviewFeedback";
 import { mapping } from "../../../mapping";
 import { getVisitorContext } from "../../../utils/visitTracker";
+import {
+  getPreviewSettingsDefaults,
+  getPreviewSettingsSchema,
+} from "../../config/previewWhitelist";
 import "../../styles/sass/v3-app.scss";
 
-const MSG_READY = "cm:preview-settings:ready";
-const MSG_INIT = "cm:preview-settings:init";
-const MSG_SAVE = "cm:preview-settings:save";
-const MSG_SAVED = "cm:preview-settings:saved";
+const MSG_APPLY = "cm:preview-settings:apply";
 
 function previewOriginFromUrl(previewUrl) {
   try {
@@ -61,8 +62,7 @@ function useMediaQuery(query) {
 
 export function buildAdminPreviewUrl(siteUrl) {
   const base = (siteUrl || "").replace(/\/+$/, "");
-  // Land on Settings so previewSettings knobs are visible without hunting nav.
-  return `${base}/admin/#/settings`;
+  return `${base}/admin/`;
 }
 
 function useViewportScale(containerRef, viewport, initialScale) {
@@ -96,6 +96,8 @@ function ViewportIframe({
   className,
   loading,
   onError,
+  iframeRef,
+  onLoad,
 }) {
   return (
     <div
@@ -114,6 +116,7 @@ function ViewportIframe({
         }}
       >
         <iframe
+          ref={iframeRef}
           title={title}
           src={previewUrl}
           className={className}
@@ -123,6 +126,7 @@ function ViewportIframe({
           height={viewport.height}
           loading={loading}
           onError={onError}
+          onLoad={onLoad}
         />
       </div>
     </div>
@@ -147,6 +151,8 @@ function PreviewDevice({
   previewUrl,
   displayLabel,
   screenRef,
+  iframeRef,
+  onIframeLoad,
   viewport,
   scale,
   iframeClass,
@@ -179,6 +185,8 @@ function PreviewDevice({
                 className={iframeClass}
                 loading={loading}
                 onError={onError}
+                iframeRef={iframeRef}
+                onLoad={onIframeLoad}
               />
             </div>
           </div>
@@ -196,6 +204,8 @@ function PreviewDevice({
               className={iframeClass}
               loading={loading}
               onError={onError}
+              iframeRef={iframeRef}
+              onLoad={onIframeLoad}
             />
           </div>
         </div>
@@ -241,6 +251,128 @@ function PreviewViewModeToggle({ viewMode, onChange }) {
   );
 }
 
+function PreviewSettingsField({ field, value, onChange }) {
+  const id = `preview-setting-${field.key}`;
+  const label = field.label || field.key;
+
+  if (field.type === "boolean") {
+    return (
+      <label className="v3-preview-settings__field v3-preview-settings__field--boolean" htmlFor={id}>
+        <input
+          id={id}
+          type="checkbox"
+          checked={Boolean(value)}
+          onChange={(event) => onChange(field.key, event.target.checked)}
+        />
+        <span>{label}</span>
+      </label>
+    );
+  }
+
+  if (field.type === "select") {
+    const options = Array.isArray(field.options) ? field.options : [];
+    return (
+      <label className="v3-preview-settings__field" htmlFor={id}>
+        <span className="v3-preview-settings__label">{label}</span>
+        <select
+          id={id}
+          className="v3-preview-settings__control"
+          value={value ?? ""}
+          onChange={(event) => onChange(field.key, event.target.value)}
+        >
+          {options.map((option) => (
+            <option key={String(option)} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </label>
+    );
+  }
+
+  // number (default)
+  return (
+    <label className="v3-preview-settings__field" htmlFor={id}>
+      <span className="v3-preview-settings__label">{label}</span>
+      <input
+        id={id}
+        className="v3-preview-settings__control"
+        type="number"
+        min={field.min}
+        max={field.max}
+        value={value ?? ""}
+        onChange={(event) => {
+          const raw = event.target.value;
+          if (raw === "") {
+            onChange(field.key, field.default ?? "");
+            return;
+          }
+          const next = Number(raw);
+          onChange(field.key, Number.isFinite(next) ? next : field.default);
+        }}
+      />
+    </label>
+  );
+}
+
+function PreviewSettingsPanel({
+  fields,
+  settings,
+  onChange,
+  onSave,
+  saveStatus,
+  saveError,
+}) {
+  if (!fields.length) return null;
+
+  return (
+    <section
+      className="v3-preview-settings"
+      aria-label="Preview settings"
+      data-testid="preview-settings-panel"
+    >
+      <div className="v3-preview-settings__inner">
+        <div className="v3-preview-settings__header">
+          <h2 className="v3-preview-settings__title">Try these settings</h2>
+          <p className="v3-preview-settings__hint">
+            Changes update the site frames live. Save sends your choices to Carl.
+          </p>
+        </div>
+        <div className="v3-preview-settings__fields">
+          {fields.map((field) => (
+            <PreviewSettingsField
+              key={field.key}
+              field={field}
+              value={settings[field.key]}
+              onChange={onChange}
+            />
+          ))}
+        </div>
+        <div className="v3-preview-settings__actions">
+          <button
+            type="button"
+            className="v3-btn v3-btn--primary v3-preview-settings__save"
+            onClick={onSave}
+            disabled={saveStatus === "saving" || saveStatus === "sent"}
+            data-testid="preview-settings-save"
+          >
+            {saveStatus === "saving"
+              ? "Sending…"
+              : saveStatus === "sent"
+                ? "Sent to Carl"
+                : "Save"}
+          </button>
+          {saveError ? (
+            <p className="v3-preview-settings__error" role="alert">
+              {saveError}
+            </p>
+          ) : null}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function PreviewShowcase({ previewUrl, label, previewSlug }) {
   const isMobileChrome = useMediaQuery(MOBILE_CHROME_QUERY);
   const [viewMode, setViewMode] = useState(() => readStoredViewMode(previewSlug));
@@ -249,18 +381,34 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
   const [adminDesktopBlocked, setAdminDesktopBlocked] = useState(false);
   const [adminMobileBlocked, setAdminMobileBlocked] = useState(false);
 
-  const siteDesktopRef = useRef(null);
-  const siteMobileRef = useRef(null);
+  const settingsFields = useMemo(
+    () => getPreviewSettingsSchema(previewSlug),
+    [previewSlug]
+  );
+  const [settings, setSettings] = useState(() =>
+    getPreviewSettingsDefaults(getPreviewSettingsSchema(previewSlug))
+  );
+  const [saveStatus, setSaveStatus] = useState("idle");
+  const [saveError, setSaveError] = useState(null);
+
+  const settingsRef = useRef(settings);
+  settingsRef.current = settings;
+
+  const siteDesktopScreenRef = useRef(null);
+  const siteMobileScreenRef = useRef(null);
   const adminDesktopRef = useRef(null);
   const adminMobileRef = useRef(null);
+  const siteDesktopIframeRef = useRef(null);
+  const siteMobileIframeRef = useRef(null);
 
-  const siteDesktopScale = useViewportScale(siteDesktopRef, DESKTOP_VIEWPORT, 0.25);
-  const siteMobileScale = useViewportScale(siteMobileRef, MOBILE_VIEWPORT, 0.65);
+  const siteDesktopScale = useViewportScale(siteDesktopScreenRef, DESKTOP_VIEWPORT, 0.25);
+  const siteMobileScale = useViewportScale(siteMobileScreenRef, MOBILE_VIEWPORT, 0.65);
   const adminDesktopScale = useViewportScale(adminDesktopRef, DESKTOP_VIEWPORT, 0.25);
   const adminMobileScale = useViewportScale(adminMobileRef, MOBILE_VIEWPORT, 0.65);
 
   const adminPreviewUrl = useMemo(() => buildAdminPreviewUrl(previewUrl), [previewUrl]);
   const displayLabel = label || "Client site preview";
+  const previewOrigin = useMemo(() => previewOriginFromUrl(previewUrl), [previewUrl]);
 
   useEffect(() => {
     document.documentElement.classList.add("v3-preview-active");
@@ -271,96 +419,73 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
     };
   }, []);
 
-  // Parent relay: client-site iframes ↔ Laravel previewSettings (same trust model as previewFeedback).
-  // Deduplicate GET — four iframes each post ready; one fetch avoids burning the hourly IP bucket.
+  // Re-seed defaults when slug changes (never GET /previewSettings).
   useEffect(() => {
-    if (!previewSlug || !previewUrl) return undefined;
+    setSettings(getPreviewSettingsDefaults(getPreviewSettingsSchema(previewSlug)));
+    setSaveStatus("idle");
+    setSaveError(null);
+  }, [previewSlug]);
 
-    const expectedOrigin = previewOriginFromUrl(previewUrl);
-    const endpoint = mapping.previewSettings;
-    if (!expectedOrigin || !endpoint) return undefined;
-
-    let cancelled = false;
-    let cachedSettings = undefined;
-    let inflight = null;
-
-    const reply = (source, origin, payload) => {
-      if (!source || typeof source.postMessage !== "function") return;
-      source.postMessage(payload, origin);
-    };
-
-    const loadSettings = () => {
-      if (cachedSettings !== undefined) {
-        return Promise.resolve(cachedSettings);
-      }
-      if (inflight) return inflight;
-
-      inflight = fetch(`${endpoint}?slug=${encodeURIComponent(previewSlug)}`)
-        .then((response) => response.json().catch(() => ({})))
-        .then((json) => {
-          const settings = json?.data?.settings ?? json?.settings ?? null;
-          cachedSettings = settings;
-          return settings;
-        })
-        .catch(() => {
-          cachedSettings = null;
-          return null;
-        })
-        .finally(() => {
-          inflight = null;
-        });
-
-      return inflight;
-    };
-
-    const handleMessage = async (event) => {
-      if (event.origin !== expectedOrigin) return;
-      const data = event.data;
-      if (!data || typeof data !== "object") return;
-      if (data.slug !== previewSlug) return;
-
-      if (data.type === MSG_READY) {
-        const settings = await loadSettings();
-        if (cancelled) return;
-        reply(event.source, event.origin, {
-          type: MSG_INIT,
-          slug: previewSlug,
-          settings,
-        });
-        return;
-      }
-
-      if (data.type === MSG_SAVE) {
-        try {
-          const { visitorId, sessionId } = getVisitorContext();
-          await fetch(endpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              previewSlug,
-              settings: data.settings ?? {},
-              visitorId,
-              sessionId,
-            }),
-          });
-          if (cancelled) return;
-          cachedSettings = data.settings ?? {};
-          reply(event.source, event.origin, {
-            type: MSG_SAVED,
-            slug: previewSlug,
-          });
-        } catch {
-          // Saver keeps local state; no ack on failure
+  const applySettingsToSiteIframes = useCallback(
+    (nextSettings) => {
+      if (!previewSlug || !previewOrigin || !settingsFields.length) return;
+      const payload = {
+        type: MSG_APPLY,
+        slug: previewSlug,
+        settings: nextSettings,
+      };
+      [siteDesktopIframeRef, siteMobileIframeRef].forEach((ref) => {
+        const win = ref.current?.contentWindow;
+        if (win && typeof win.postMessage === "function") {
+          win.postMessage(payload, previewOrigin);
         }
-      }
-    };
+      });
+    },
+    [previewOrigin, previewSlug, settingsFields.length]
+  );
 
-    window.addEventListener("message", handleMessage);
-    return () => {
-      cancelled = true;
-      window.removeEventListener("message", handleMessage);
-    };
-  }, [previewSlug, previewUrl]);
+  useEffect(() => {
+    applySettingsToSiteIframes(settings);
+  }, [settings, applySettingsToSiteIframes]);
+
+  const handleSiteIframeLoad = useCallback(() => {
+    applySettingsToSiteIframes(settingsRef.current);
+  }, [applySettingsToSiteIframes]);
+
+  const handleSettingChange = useCallback((key, value) => {
+    setSettings((prev) => ({ ...prev, [key]: value }));
+    setSaveStatus("idle");
+    setSaveError(null);
+  }, []);
+
+  const handleSaveSettings = useCallback(async () => {
+    const endpoint = mapping.previewSettings;
+    if (!endpoint || !previewSlug) return;
+
+    setSaveStatus("saving");
+    setSaveError(null);
+
+    try {
+      const { visitorId, sessionId } = getVisitorContext();
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          previewSlug,
+          settings,
+          visitorId,
+          sessionId,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Save failed");
+      }
+      setSaveStatus("sent");
+    } catch {
+      setSaveStatus("idle");
+      setSaveError("Could not send. Try again.");
+    }
+  }, [previewSlug, settings]);
 
   const handleBack = useCallback(() => {
     const next = new URL(window.location.href);
@@ -417,8 +542,12 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
             ↕
           </span>
           {isMobileChrome
-            ? "Admin opens on Settings — tweak gallery / hero, then check the site phone. Switch to Desktop for monitors."
-            : "Admin opens on Settings — adjust gallery count, hero photo, and section toggles (Save notifies Carl). Then browse the marketing site."}
+            ? settingsFields.length
+              ? "Use the settings panel below to tweak the site live. Admin is the system demo — switch to Desktop for monitors."
+              : "Browse the admin system demo and marketing site. Switch to Desktop for monitors."
+            : settingsFields.length
+              ? "Use the settings panel below to adjust gallery, hero, and sections on the site frames. Admin is the browsable system demo only."
+              : "Browse the admin system demo first, then the marketing site on desktop and mobile."}
         </p>
 
         <div className="v3-preview-devices v3-preview-devices--quad">
@@ -427,7 +556,7 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
               <PreviewDevice
                 variant="desktop"
                 label="Admin — Desktop"
-                hint="Settings opens first — tweak gallery / hero live. Sidebar has the rest of the admin demo."
+                hint="Browse the admin system demo — packages, bookings, and more."
                 previewUrl={adminPreviewUrl}
                 displayLabel={displayLabel}
                 screenRef={adminDesktopRef}
@@ -442,7 +571,7 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
               <PreviewDevice
                 variant="mobile"
                 label="Admin — Mobile"
-                hint="Settings opens first — try the knobs, then browse bottom nav."
+                hint="Browse the admin demo — try the bottom nav."
                 previewUrl={adminPreviewUrl}
                 displayLabel={displayLabel}
                 screenRef={adminMobileRef}
@@ -464,7 +593,9 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
                 hint="Scroll inside the monitor to explore the marketing site."
                 previewUrl={previewUrl}
                 displayLabel={displayLabel}
-                screenRef={siteDesktopRef}
+                screenRef={siteDesktopScreenRef}
+                iframeRef={siteDesktopIframeRef}
+                onIframeLoad={handleSiteIframeLoad}
                 viewport={DESKTOP_VIEWPORT}
                 scale={siteDesktopScale}
                 iframeClass="v3-preview-iframe v3-preview-iframe--desktop"
@@ -480,7 +611,9 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
                 hint="Scroll inside the phone to explore the marketing site."
                 previewUrl={previewUrl}
                 displayLabel={displayLabel}
-                screenRef={siteMobileRef}
+                screenRef={siteMobileScreenRef}
+                iframeRef={siteMobileIframeRef}
+                onIframeLoad={handleSiteIframeLoad}
                 viewport={MOBILE_VIEWPORT}
                 scale={siteMobileScale}
                 iframeClass="v3-preview-iframe v3-preview-iframe--mobile"
@@ -495,6 +628,14 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
 
       {previewSlug ? (
         <div className="v3-preview-feedback-dock" data-testid="preview-feedback-dock">
+          <PreviewSettingsPanel
+            fields={settingsFields}
+            settings={settings}
+            onChange={handleSettingChange}
+            onSave={handleSaveSettings}
+            saveStatus={saveStatus}
+            saveError={saveError}
+          />
           <PreviewFeedback previewSlug={previewSlug} previewLabel={displayLabel} />
         </div>
       ) : null}

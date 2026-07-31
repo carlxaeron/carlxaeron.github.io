@@ -47,7 +47,7 @@ Client site progress:
 cp -R client-sites/_template client-sites/{slug}
 ```
 
-Edit `client.json`: `businessName`, `slug`, `industry`, `contact`, `quotation` (package, amount, timeline), **`system`**, and optional **`previewSettings.fields`** (live-adjustable demo knobs):
+Edit `client.json`: `businessName`, `slug`, `industry`, `contact`, `quotation` (package, amount, timeline), and **`system`**:
 
 ```json
 "system": {
@@ -56,35 +56,27 @@ Edit `client.json`: `businessName`, `slug`, `industry`, `contact`, `quotation` (
   "label": "Booking & calendar admin",
   "painHero": "Stop taking bookings only on Messenger — see the calendar fill in real time.",
   "navPages": ["Dashboard", "Bookings", "Calendar", "Guests", "Settings"]
-},
-"previewSettings": {
-  "fields": [
-    { "key": "galleryCount", "type": "number", "min": 2, "max": 4, "default": 4, "label": "Gallery photos shown" },
-    { "key": "heroImage", "type": "select", "options": ["project-01", "project-02", "project-03", "project-04"], "default": "project-01", "label": "Hero background photo" },
-    { "key": "showWhyUs", "type": "boolean", "default": true, "label": "Show \"Why choose us\" section" }
-  ]
 }
 ```
 
 Pass optional **`systemLabel`** (`system.label`) and **`systemPain`** (`system.painHero`) on `POST /outreachSchedule` when sending (used in initial email hook — not persisted in DB for cron follow-ups).
 
-### Flexible preview settings (optional — template + XKR ship this)
+### Flexible preview settings (optional — parent-owned; template + XKR ship this)
 
-`_template` includes `preview-settings-bridge.js` on both marketing site and `/admin/`. Prospects tweak fields in admin Settings; live updates reach the site panel via same-origin `BroadcastChannel`; **Save** posts to the portfolio parent (`PreviewShowcase`), which `POST`s `https://api.carlmanuel.com/previewSettings` (email + Web Push to Carl). No Netlify→API CORS.
+Knobs live on the **portfolio parent** (`carlmanuel.com/?preview={slug}`), not inside admin. Register fields on the matching entry in [`previewWhitelist.js`](../../src/v3/config/previewWhitelist.js) (`previewSettings.fields`). `PreviewShowcase` renders the panel from schema defaults each session (nothing held/restored as website settings). Tweaks `postMessage` **APPLY** to **site** iframes only; admin is the system demo, not the knob surface. **Save** = notify only (`POST /previewSettings` → email + Web Push); parent never GETs settings back into the UI.
 
 **Wire per site:**
 
-1. Fill `client.json` → `previewSettings.fields` (`number` / `select` / `boolean`).
+1. Add `previewSettings.fields` on the whitelist entry (`number` / `select` / `boolean` + `default` / `label`). Optional mirror in `client.json` for docs — **portfolio whitelist is the source of truth**.
 2. Markup hooks on the marketing page:
    - `[data-hero-bg]` — hero photo swap (`heroImage` → `assets/{value}.jpg`)
    - `[data-gallery-item]` on each gallery figure — `galleryCount` hides items beyond N
    - `[data-settings-section="{key}"]` — boolean toggles `display:none`
-3. Include bridge on site + admin: `<script src="/preview-settings-bridge.js" data-slug="{slug}"></script>` (admin may use `../preview-settings-bridge.js`).
-4. Bake schema into admin (same pattern as `ADMIN_CONFIG`): `window.PREVIEW_SETTINGS_SCHEMA` from `previewSettings.fields` so `admin.js` `renderSettings()` is data-driven.
-5. `site.js` listens for `cm-preview-settings:init` / BroadcastChannel and calls `applySettings()`.
-6. Portfolio PreviewShowcase deep-links admin iframes to `/admin/#/settings` so knobs are visible without hunting nav.
+3. Include apply-only bridge on the site: `<script src="/preview-settings-bridge.js" data-slug="{slug}"></script>` (listens for `cm:preview-settings:apply` from parent).
+4. `site.js` applies via CustomEvent / `applySettings()` on those data hooks.
+5. Keep admin Settings **read-only** demo — do not wire interactive preview knobs there; admin iframes stay at `/admin/`.
 
-**Working example:** `client-sites/xkr-construction/`. Retrofit older sites later (oldest first) — do not block new demos on a full batch.
+**Working example:** `client-sites/xkr-construction/` + whitelist `xkr-construction`. Retrofit older sites later (oldest first) — do not block new demos on a full batch.
 
 ### Per-client customization (mandatory — do not ship defaults)
 

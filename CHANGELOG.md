@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.5] — 2026-07-31
+
+### Changed
+- **Parent-owned preview settings** — adjustable knobs live on `carlmanuel.com/?preview=` (schema in `previewWhitelist`); session starts from defaults (nothing held/restored); parent APPLY postMessages site iframes only; **Save** notifies Carl (email + Web Push) without reading settings back; admin is the system demo, not the knob surface
+- **XKR + `_template`** — apply-only `preview-settings-bridge.js`; admin Settings rolled back to read-only demo
+
 ## [3.1.4] — 2026-07-31
 
 ### Fixed

@@ -22,7 +22,7 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 | GET | `/health` | `{ ok, service: "api-carlxaeron" }` |
 | POST | `/trackVisit` | Analytics |
 | POST | `/previewFeedback` | Like / dislike / **agree** — admin Web Push + **prospect auto-reply email** when email known (`outreach_jobs.contact_email` or optional body `contactEmail`; one per feedback row; BCC `MAIL_BCC`). **agree** also emails Carl (`MAIL_TO` + BCC) — does not auto-send a service agreement |
-| GET/POST | `/previewSettings` | Client demo settings from portfolio parent (`?preview=`). GET `?slug=` → latest saved settings (or null). POST `{ previewSlug, settings, visitorId?, sessionId? }` → persist audit row + email Carl (`MAIL_TO` + BCC) + Web Push `preview_settings_updated`. Throttle `previewSettings` 30/h. Called by `PreviewShowcase` (not Netlify origins) |
+| GET/POST | `/previewSettings` | Client demo settings from portfolio parent (`?preview=`). **Product flow uses POST only** (notify). POST `{ previewSlug, settings, visitorId?, sessionId? }` → audit row + email Carl + Web Push `preview_settings_updated`. GET `?slug=` → `{ data: { settings } }` (debug/audit; parent UI does **not** restore held settings). Throttle `previewSettings` 30/h. Called by `PreviewShowcase` (not Netlify origins) |
 | GET | `/analyticsSummary` | Insights panel |
 | POST | `/contact` | Form + SMTP |
 | POST | `/quotation` | Form + SMTP |
@@ -90,6 +90,7 @@ Create body: `slug`, `businessName`, `clientEmail`, `clientName`, `formJson` (ob
 - Outreach **follow-up** email sent (`php artisan outreach:followups` → Web Push directly)
 - **`POST /trackVisit`** with `eventType: preview_view` + allowlisted Origin/Referer + valid slug — **one push per slug + session** (Cache TTL `PUSH_PREVIEW_VIEW_THROTTLE_MINUTES`, default **30**)
 - **`POST /previewFeedback`** on successful like/dislike/**agree** (slug + sentiment in title/body; dislike includes comment snippet) — also sends **one auto-reply email** to the prospect when `outreach_jobs.contact_email` or body `contactEmail` resolves (like = thank + soft “push through”; dislike = thank + invite revision; agree = thank + “I’ll follow up”); BCC `MAIL_BCC`; skipped if no email or already sent for that row. **agree** additionally emails Carl (`MAIL_TO` + BCC) with Ready to proceed details (no auto agreement send)
+- **`POST /previewSettings`** on successful save — email Carl (`MAIL_TO` + BCC) + Web Push `preview_settings_updated` (parent preview settings panel → API; notify only)
 
 Push failure never breaks form/outreach/analytics responses. Service worker + Settings UI live in the portfolio SPA. **iOS:** user must Add to Home Screen (iOS 16.4+), then open Admin and enable notifications.
 
@@ -110,7 +111,7 @@ Stored files: `client-sites/{slug}/assets/outreach-website.jpg`, `outreach-admin
 | Control | Detail |
 |---------|--------|
 | CORS | Allowlist only — **never** `Access-Control-Allow-Origin: *` (`src/cors.php`) |
-| Browser gate | Public data routes (`analyticsSummary`, contact, quotation, trackVisit, previewFeedback) require allowlisted **Origin** or **Referer** (`require_browser_origin`); bare curl / address-bar → **403**. `/health` stays open. Outreach still `OUTREACH_SECRET` |
+| Browser gate | Public data routes (`analyticsSummary`, contact, quotation, trackVisit, previewFeedback, previewSettings) require allowlisted **Origin** or **Referer** (`require_browser_origin`); bare curl / address-bar → **403**. `/health` stays open. Outreach still `OUTREACH_SECRET` |
 | Slug mask | `analyticsSummary` `previewStats[].slug` masked server-side (`mask_client_slug`: `g3k-cad` → `g3****ad`) — no raw client slugs in JSON |
 | Rate limits | Per-IP file counters in `storage/rate-limit/` (`src/rate_limit.php`); env `RATE_LIMIT_*` |
 | Headers | `nosniff`, `X-Frame-Options: DENY`, `no-store`, CSP `default-src 'none'` |
@@ -135,7 +136,7 @@ Response shape (Firebase-compatible):
 - Success: `{ status: 200, message, data }`
 - Error: `{ status: 400, message, data, errCode: "" }` (HTTP usually 400)
 
-CORS origins: `carlmanuel.com`, `www`, `carlxaeron.github.io`, `localhost:3000` — see `config/cors.php` (`paths` must include public routes including `previewSettings`, `agreements/*`).
+CORS origins: `carlmanuel.com`, `www`, `carlxaeron.github.io`, `localhost:3000` — see `config/cors.php`. **Any new public browser endpoint** (same class as `previewFeedback` / `previewSettings`) must be added to `config/cors.php` `paths` or browser calls from carlmanuel.com fail silently (missing CORS). Also include `agreements/*`.
 
 ## Key code
 

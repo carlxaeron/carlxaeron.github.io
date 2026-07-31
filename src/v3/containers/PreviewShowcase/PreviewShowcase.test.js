@@ -5,6 +5,8 @@ import { mapping } from "../../../mapping";
 const MOBILE_CHROME_QUERY = "(max-width: 991px)";
 const PREVIEW_HOST = "https://bamboo-grove-cafe.netlify.app";
 const PREVIEW_SLUG = "quotation";
+const XKR_HOST = "https://xkr-construction.netlify.app";
+const XKR_SLUG = "xkr-construction";
 
 function mockMatchMedia(matchesByQuery) {
   const originalMatchMedia = window.matchMedia;
@@ -25,19 +27,19 @@ function mockMatchMedia(matchesByQuery) {
   };
 }
 
-function dispatchPreviewMessage({ origin, data, source }) {
-  const event = new MessageEvent("message", { data, origin });
-  Object.defineProperty(event, "source", { value: source });
-  window.dispatchEvent(event);
+function getSiteIframes() {
+  return screen
+    .getAllByTitle(/Site — (Desktop|Mobile) preview/i)
+    .filter((el) => el.tagName === "IFRAME");
 }
 
 describe("buildAdminPreviewUrl", () => {
-  test("appends /admin/#/settings so preview knobs are visible", () => {
+  test("appends /admin/ without settings hash", () => {
     expect(buildAdminPreviewUrl("https://villa-clara-pool.netlify.app")).toBe(
-      "https://villa-clara-pool.netlify.app/admin/#/settings"
+      "https://villa-clara-pool.netlify.app/admin/"
     );
     expect(buildAdminPreviewUrl("https://example.netlify.app/")).toBe(
-      "https://example.netlify.app/admin/#/settings"
+      "https://example.netlify.app/admin/"
     );
   });
 });
@@ -67,8 +69,8 @@ describe("PreviewShowcase", () => {
     const deviceLabels = screen.getAllByRole("heading", { level: 2 }).map((el) => el.textContent);
     expect(deviceLabels.indexOf("Admin — Desktop")).toBeLessThan(deviceLabels.indexOf("Site — Desktop"));
     expect(screen.getAllByTitle(/preview of Sample Business/i)).toHaveLength(4);
-    expect(screen.getByText(/Admin opens on Settings/i)).toBeInTheDocument();
-    expect(screen.getByText(/adjust gallery count/i)).toBeInTheDocument();
+    expect(screen.getByText(/Browse the admin system demo first/i)).toBeInTheDocument();
+    expect(screen.queryByTestId("preview-settings-panel")).not.toBeInTheDocument();
     expect(screen.queryByTestId("preview-view-mode")).not.toBeInTheDocument();
     expect(screen.queryByText(/Open live site/i)).not.toBeInTheDocument();
 
@@ -89,7 +91,7 @@ describe("PreviewShowcase", () => {
     expect(screen.getByTestId("preview-showcase")).toHaveClass("v3-preview-page--mobile-chrome");
     expect(screen.getByTestId("preview-showcase")).toHaveClass("v3-preview-page--mode-mobile");
     expect(screen.getByTestId("preview-view-mode")).toBeInTheDocument();
-    expect(screen.getByText(/Admin opens on Settings/i)).toBeInTheDocument();
+    expect(screen.getByText(/Browse the admin system demo and marketing site/i)).toBeInTheDocument();
     expect(screen.getByText(/Switch to Desktop for monitors/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Admin — Mobile preview/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Site — Mobile preview/i)).toBeInTheDocument();
@@ -142,7 +144,7 @@ describe("PreviewShowcase", () => {
     restoreMatchMedia();
   });
 
-  test("admin iframes deep-link to Settings", () => {
+  test("admin iframes load /admin/ without settings hash", () => {
     const restoreMatchMedia = mockMatchMedia({ [MOBILE_CHROME_QUERY]: false });
 
     render(
@@ -157,8 +159,8 @@ describe("PreviewShowcase", () => {
       .getAllByTitle(/Admin — (Desktop|Mobile) preview/i)
       .map((el) => el.getAttribute("src"));
     expect(adminFrames).toEqual([
-      "https://villa-clara-pool.netlify.app/admin/#/settings",
-      "https://villa-clara-pool.netlify.app/admin/#/settings",
+      "https://villa-clara-pool.netlify.app/admin/",
+      "https://villa-clara-pool.netlify.app/admin/",
     ]);
 
     restoreMatchMedia();
@@ -170,7 +172,7 @@ describe("PreviewShowcase", () => {
   });
 });
 
-describe("PreviewShowcase preview settings relay", () => {
+describe("PreviewShowcase parent-owned preview settings", () => {
   let restoreMatchMedia;
   let originalFetch;
 
@@ -185,9 +187,24 @@ describe("PreviewShowcase preview settings relay", () => {
     global.fetch = originalFetch;
   });
 
-  test("ignores messages from unexpected origins", async () => {
-    const source = { postMessage: jest.fn() };
+  test("renders settings panel from whitelist schema for XKR", () => {
+    render(
+      <PreviewShowcase
+        previewUrl={XKR_HOST}
+        label="XKR Construction"
+        previewSlug={XKR_SLUG}
+      />
+    );
 
+    expect(screen.getByTestId("preview-settings-panel")).toBeInTheDocument();
+    expect(screen.getByLabelText(/Gallery photos shown/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Hero background photo/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Show Why agencies work with us/i)).toBeInTheDocument();
+    expect(screen.getByText(/settings panel below/i)).toBeInTheDocument();
+    expect(global.fetch).not.toHaveBeenCalled();
+  });
+
+  test("hides settings panel when slug has no schema fields", () => {
     render(
       <PreviewShowcase
         previewUrl={PREVIEW_HOST}
@@ -196,139 +213,110 @@ describe("PreviewShowcase preview settings relay", () => {
       />
     );
 
-    dispatchPreviewMessage({
-      origin: "https://evil.example",
-      data: { type: "cm:preview-settings:ready", slug: PREVIEW_SLUG },
-      source,
-    });
-
-    await waitFor(() => {
-      expect(global.fetch).not.toHaveBeenCalled();
-    });
-    expect(source.postMessage).not.toHaveBeenCalled();
+    expect(screen.queryByTestId("preview-settings-panel")).not.toBeInTheDocument();
+    expect(global.fetch).not.toHaveBeenCalled();
   });
 
-  test("ignores messages with mismatched slug", async () => {
-    const source = { postMessage: jest.fn() };
-
+  test("does not GET previewSettings on mount", async () => {
     render(
       <PreviewShowcase
-        previewUrl={PREVIEW_HOST}
-        label="Sample"
-        previewSlug={PREVIEW_SLUG}
+        previewUrl={XKR_HOST}
+        label="XKR Construction"
+        previewSlug={XKR_SLUG}
       />
     );
 
-    dispatchPreviewMessage({
-      origin: PREVIEW_HOST,
-      data: { type: "cm:preview-settings:ready", slug: "other-slug" },
-      source,
+    await waitFor(() => {
+      expect(screen.getByTestId("preview-settings-panel")).toBeInTheDocument();
     });
 
-    await waitFor(() => {
-      expect(global.fetch).not.toHaveBeenCalled();
-    });
-    expect(source.postMessage).not.toHaveBeenCalled();
+    expect(global.fetch).not.toHaveBeenCalled();
   });
 
-  test("ready triggers GET and replies with init settings", async () => {
-    const source = { postMessage: jest.fn() };
-    const settings = { galleryCount: 3, showWhyUs: true };
-    global.fetch.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({
-        status: 200,
-        message: "OK",
-        data: { settings, previewSlug: PREVIEW_SLUG, updatedAt: null },
-      }),
-    });
-
+  test("changing a setting posts APPLY to site iframes only", () => {
     render(
       <PreviewShowcase
-        previewUrl={PREVIEW_HOST}
-        label="Sample"
-        previewSlug={PREVIEW_SLUG}
+        previewUrl={XKR_HOST}
+        label="XKR Construction"
+        previewSlug={XKR_SLUG}
       />
     );
 
-    dispatchPreviewMessage({
-      origin: PREVIEW_HOST,
-      data: { type: "cm:preview-settings:ready", slug: PREVIEW_SLUG },
-      source,
+    const siteFrames = getSiteIframes();
+    expect(siteFrames).toHaveLength(2);
+
+    const sitePostMessages = siteFrames.map((iframe) => {
+      const postMessage = jest.fn();
+      Object.defineProperty(iframe, "contentWindow", {
+        configurable: true,
+        value: { postMessage },
+      });
+      return postMessage;
     });
 
-    await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith(
-        `${mapping.previewSettings}?slug=${PREVIEW_SLUG}`
-      );
+    const adminFrames = screen
+      .getAllByTitle(/Admin — (Desktop|Mobile) preview/i)
+      .filter((el) => el.tagName === "IFRAME");
+    const adminSpies = adminFrames.map((iframe) =>
+      jest.spyOn(iframe.contentWindow, "postMessage")
+    );
+
+    fireEvent.change(screen.getByLabelText(/Gallery photos shown/i), {
+      target: { value: "2" },
     });
 
-    await waitFor(() => {
-      expect(source.postMessage).toHaveBeenCalledWith(
-        { type: "cm:preview-settings:init", slug: PREVIEW_SLUG, settings },
-        PREVIEW_HOST
-      );
+    const expectedPayload = {
+      type: "cm:preview-settings:apply",
+      slug: XKR_SLUG,
+      settings: {
+        galleryCount: 2,
+        heroImage: "project-01",
+        showWhyUs: true,
+      },
+    };
+
+    sitePostMessages.forEach((postMessage) => {
+      expect(postMessage).toHaveBeenCalledWith(expectedPayload, XKR_HOST);
+    });
+    adminSpies.forEach((spy) => {
+      expect(spy).not.toHaveBeenCalled();
+      spy.mockRestore();
     });
   });
 
-  test("multiple ready messages share one GET", async () => {
-    const sourceA = { postMessage: jest.fn() };
-    const sourceB = { postMessage: jest.fn() };
-    const settings = { galleryCount: 2 };
-    let resolveFetch;
-    global.fetch.mockImplementationOnce(
-      () =>
-        new Promise((resolve) => {
-          resolveFetch = resolve;
-        })
-    );
-
+  test("site iframe load posts APPLY with current settings", () => {
     render(
       <PreviewShowcase
-        previewUrl={PREVIEW_HOST}
-        label="Sample"
-        previewSlug={PREVIEW_SLUG}
+        previewUrl={XKR_HOST}
+        label="XKR Construction"
+        previewSlug={XKR_SLUG}
       />
     );
 
-    dispatchPreviewMessage({
-      origin: PREVIEW_HOST,
-      data: { type: "cm:preview-settings:ready", slug: PREVIEW_SLUG },
-      source: sourceA,
-    });
-    dispatchPreviewMessage({
-      origin: PREVIEW_HOST,
-      data: { type: "cm:preview-settings:ready", slug: PREVIEW_SLUG },
-      source: sourceB,
+    const siteFrames = getSiteIframes();
+    const postMessage = jest.fn();
+    Object.defineProperty(siteFrames[0], "contentWindow", {
+      configurable: true,
+      value: { postMessage },
     });
 
-    await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledTimes(1);
-    });
+    fireEvent.load(siteFrames[0]);
 
-    resolveFetch({
-      ok: true,
-      json: async () => ({
-        status: 200,
-        data: { settings, previewSlug: PREVIEW_SLUG },
-      }),
-    });
-
-    await waitFor(() => {
-      expect(sourceA.postMessage).toHaveBeenCalledWith(
-        { type: "cm:preview-settings:init", slug: PREVIEW_SLUG, settings },
-        PREVIEW_HOST
-      );
-      expect(sourceB.postMessage).toHaveBeenCalledWith(
-        { type: "cm:preview-settings:init", slug: PREVIEW_SLUG, settings },
-        PREVIEW_HOST
-      );
-    });
+    expect(postMessage).toHaveBeenCalledWith(
+      {
+        type: "cm:preview-settings:apply",
+        slug: XKR_SLUG,
+        settings: {
+          galleryCount: 4,
+          heroImage: "project-01",
+          showWhyUs: true,
+        },
+      },
+      XKR_HOST
+    );
   });
 
-  test("save triggers POST and replies with saved", async () => {
-    const source = { postMessage: jest.fn() };
-    const settings = { galleryCount: 2, heroImage: "project-02" };
+  test("Save POSTs previewSettings and shows Sent to Carl", async () => {
     global.fetch.mockResolvedValueOnce({
       ok: true,
       json: async () => ({ status: 200 }),
@@ -336,17 +324,13 @@ describe("PreviewShowcase preview settings relay", () => {
 
     render(
       <PreviewShowcase
-        previewUrl={PREVIEW_HOST}
-        label="Sample"
-        previewSlug={PREVIEW_SLUG}
+        previewUrl={XKR_HOST}
+        label="XKR Construction"
+        previewSlug={XKR_SLUG}
       />
     );
 
-    dispatchPreviewMessage({
-      origin: PREVIEW_HOST,
-      data: { type: "cm:preview-settings:save", slug: PREVIEW_SLUG, settings },
-      source,
-    });
+    fireEvent.click(screen.getByTestId("preview-settings-save"));
 
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledWith(
@@ -360,18 +344,26 @@ describe("PreviewShowcase preview settings relay", () => {
 
     const postBody = JSON.parse(global.fetch.mock.calls[0][1].body);
     expect(postBody).toMatchObject({
-      previewSlug: PREVIEW_SLUG,
-      settings,
+      previewSlug: XKR_SLUG,
+      settings: {
+        galleryCount: 4,
+        heroImage: "project-01",
+        showWhyUs: true,
+      },
     });
     expect(typeof postBody.visitorId).toBe("string");
     expect(typeof postBody.sessionId).toBe("string");
 
     await waitFor(() => {
-      expect(source.postMessage).toHaveBeenCalledWith(
-        { type: "cm:preview-settings:saved", slug: PREVIEW_SLUG },
-        PREVIEW_HOST
-      );
+      expect(screen.getByTestId("preview-settings-save")).toHaveTextContent(/Sent to Carl/i);
     });
+
+    expect(
+      global.fetch.mock.calls.every(
+        ([url, options]) =>
+          !(typeof url === "string" && url.includes("?slug=") && (!options || !options.method))
+      )
+    ).toBe(true);
   });
 });
 

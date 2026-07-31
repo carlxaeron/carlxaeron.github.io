@@ -322,6 +322,31 @@ export const PREVIEW_SITES = [
     host: "xkr-construction.netlify.app",
     label: "XKR Construction",
     netlifySite: "xkr-construction",
+    previewSettings: {
+      fields: [
+        {
+          key: "galleryCount",
+          type: "number",
+          min: 2,
+          max: 4,
+          default: 4,
+          label: "Gallery photos shown",
+        },
+        {
+          key: "heroImage",
+          type: "select",
+          options: ["project-01", "project-02", "project-03", "project-04"],
+          default: "project-01",
+          label: "Hero background photo",
+        },
+        {
+          key: "showWhyUs",
+          type: "boolean",
+          default: true,
+          label: "Show Why agencies work with us",
+        },
+      ],
+    },
   },
 ];
 
@@ -427,4 +452,35 @@ export function getPreviewQueryFromSearch(search = "") {
     return new URLSearchParams(window.location.search).get("preview");
   }
   return new URLSearchParams(search).get("preview");
+}
+
+/**
+ * Schema fields for parent-owned preview knobs (?preview= panel).
+ * @param {object | string | null | undefined} siteOrSlug - whitelist site object or slug/id
+ * @returns {Array<object>}
+ */
+export function getPreviewSettingsSchema(siteOrSlug) {
+  const site =
+    siteOrSlug && typeof siteOrSlug === "object" && !Array.isArray(siteOrSlug)
+      ? siteOrSlug
+      : findPreviewSiteByKey(siteOrSlug);
+  const fields = site?.previewSettings?.fields;
+  return Array.isArray(fields) ? fields : [];
+}
+
+/**
+ * Build a settings object from schema field defaults (session start — never from API).
+ * @param {Array<object>} fields
+ * @returns {Record<string, unknown>}
+ */
+export function getPreviewSettingsDefaults(fields) {
+  const defaults = {};
+  if (!Array.isArray(fields)) return defaults;
+  for (const field of fields) {
+    if (!field || typeof field.key !== "string" || !field.key) continue;
+    if (Object.prototype.hasOwnProperty.call(field, "default")) {
+      defaults[field.key] = field.default;
+    }
+  }
+  return defaults;
 }

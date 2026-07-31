@@ -112,9 +112,9 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 2. **Scrape client Facebook** via Chrome DevTools MCP (About + Photos → inspect + download to `assets/`); see client-site-netlify skill Step 1b
 3. Customize HTML with **Tailwind CDN** + supplemental `styles.css`; wire `/admin/` from `client-sites/_systems/admin/` when available; keep `site.js` + **`hero-motion.js`** + **`hero-three.js`**
 4. **Keep** `embed-guard.js` + edge `embed-only` + CSP headers (must allow `/admin/` in-iframe navigation). Edge redeem uses Laravel `POST /previewAccess/redeem` (`X-Preview-Access-Secret`); set Netlify env **`PREVIEW_ACCESS_SECRET`** to match API before redeploy.
-5. Fill `client.json` (`contact`, `quotation`, **`system`**: `type`, `adminPath`, `label`, `navPages`; optional **`previewSettings.fields`** for live-adjustable demo knobs)
+5. Fill `client.json` (`contact`, `quotation`, **`system`**: `type`, `adminPath`, `label`, `navPages`)
 6. Deploy via Netlify MCP or CLI (`netlify.toml`: `command = ""`)
-7. Add host to `src/v3/config/previewWhitelist.js`; update `client.json` (`quotation.previewUrl` uses `?preview={slug}`)
+7. Add host to `src/v3/config/previewWhitelist.js` (optional **`previewSettings.fields`** for parent knobs); update `client.json` (`quotation.previewUrl` uses `?preview={slug}`)
 8. **Update [`client-sites/README.md`](client-sites/README.md)** — catalog table + per-client detail section (include system type)
 9. Draft outreach (**website + admin** on desktop & mobile): `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`, plus follow-ups
 10. **If email found** → ask: send quotation now? (**Yes** = send + enable hosting auto follow-ups; cadence **`3d1w`** = **3d → 7d → 7d → 7d**, max **4** — do not ask cadence separately.) Use stored **`assets/outreach-website.jpg`** + **`assets/outreach-admin.jpg`** (capture via `node scripts/capture-client-screenshots.mjs --slug {slug}` if missing) and pass as `attachments` on `outreachSchedule` (`--print-attachments` for base64 JSON). **Do not** use browser MCP for outreach screenshots. Pass optional **`systemLabel`** / **`previewHost`** on `outreachSchedule` (mints site+admin **one-time** Netlify unlock links). **Never send initial without a clear yes**.
@@ -125,9 +125,9 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 15. **Outreach screenshots** — `node scripts/capture-client-screenshots.mjs --slug {slug}` → commit `assets/outreach-website.jpg` + `assets/outreach-admin.jpg` (headless Chrome; see client-site-netlify skill Step 7b)
 16. **One-time unlock rollout (per site, not batch):** copy `_template` edge + `embed-guard`, set Netlify `PREVIEW_ACCESS_SECRET` = API secret, redeploy; reissue tokens via Admin → preview-access after unlock requests
 
-**Flexible preview settings:** `_template` + **XKR Construction** ship the bridge now (`previewSettings.fields` in `client.json`, `data-gallery-item` / `data-settings-section` / `data-hero-bg` markup, admin Save → portfolio parent → `POST /previewSettings` email+push). **Retrofit existing sites later, oldest first** — same batch pattern as `/admin/` rollout; do not block new demos.
+**Flexible preview settings (parent-owned):** knobs on `carlmanuel.com/?preview=` from `previewWhitelist` schema defaults each session (no held/restored website settings). Parent APPLY → site iframes only; **Save** = `POST /previewSettings` notify (email+push). Site needs markup hooks + apply-only `preview-settings-bridge.js`; admin is **not** the knob surface. `_template` + **XKR** ship this. **Retrofit existing sites later, oldest first** — do not block new demos.
 
-**Batch upgrade (existing clients):** oldest first; wire `/admin/`, redeploy, QA 4 iframes — do **not** auto-resend initials. Optional second pass: add `previewSettings` bridge (template already has the script).
+**Batch upgrade (existing clients):** oldest first; wire `/admin/`, redeploy, QA 4 iframes — do **not** auto-resend initials. Optional second pass: add apply-only bridge + whitelist fields (template already has the script).
 
 Full catalog: [`client-sites/README.md`](client-sites/README.md)  
 Preview tests: `src/v3/config/previewWhitelist.test.js`, `src/pages/Index.test.js`, `PreviewShowcase.test.js`

@@ -2,6 +2,8 @@ import {
   PREVIEW_SITES,
   buildPreviewPortfolioUrl,
   getPreviewQueryFromSearch,
+  getPreviewSettingsDefaults,
+  getPreviewSettingsSchema,
   isPreviewHostAllowed,
   resolvePreviewUrl,
 } from "./previewWhitelist";
@@ -88,5 +90,61 @@ describe("getPreviewQueryFromSearch", () => {
   test("reads preview param from search string", () => {
     expect(getPreviewQueryFromSearch("?preview=machinemate&foo=bar")).toBe("machinemate");
     expect(getPreviewQueryFromSearch("")).toBeNull();
+  });
+});
+
+describe("getPreviewSettingsSchema", () => {
+  test("returns XKR previewSettings.fields", () => {
+    const fields = getPreviewSettingsSchema("xkr-construction");
+
+    expect(fields).toEqual([
+      {
+        key: "galleryCount",
+        type: "number",
+        min: 2,
+        max: 4,
+        default: 4,
+        label: "Gallery photos shown",
+      },
+      {
+        key: "heroImage",
+        type: "select",
+        options: ["project-01", "project-02", "project-03", "project-04"],
+        default: "project-01",
+        label: "Hero background photo",
+      },
+      {
+        key: "showWhyUs",
+        type: "boolean",
+        default: true,
+        label: "Show Why agencies work with us",
+      },
+    ]);
+  });
+
+  test("accepts site object", () => {
+    const site = PREVIEW_SITES.find((entry) => entry.id === "xkr-construction");
+    expect(getPreviewSettingsSchema(site)).toHaveLength(3);
+  });
+
+  test("returns empty array when site has no previewSettings", () => {
+    expect(getPreviewSettingsSchema("machinemate")).toEqual([]);
+    expect(getPreviewSettingsSchema(null)).toEqual([]);
+    expect(getPreviewSettingsSchema("unknown-slug")).toEqual([]);
+  });
+});
+
+describe("getPreviewSettingsDefaults", () => {
+  test("maps field defaults by key", () => {
+    expect(getPreviewSettingsDefaults(getPreviewSettingsSchema("xkr-construction"))).toEqual({
+      galleryCount: 4,
+      heroImage: "project-01",
+      showWhyUs: true,
+    });
+  });
+
+  test("returns empty object for empty schema", () => {
+    expect(getPreviewSettingsDefaults([])).toEqual({});
+    expect(getPreviewSettingsDefaults(null)).toEqual({});
   });
 });
