@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.10] — 2026-07-31
+
+### Added
+- **Preview CMS texts + dual hero images** — Customize modal supports text/textarea fields and desktop/mobile hero uploads (`POST /previewSettings/upload`); APPLY postMessages site iframes; Save still notify-only (email + Web Push) with image URLs in settings JSON; XKR + `_template` wire `[data-settings-text]` and dual hero backgrounds
+
 ## [3.1.9] — 2026-07-31
 
 ### Changed

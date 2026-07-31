@@ -261,7 +261,104 @@ function PreviewViewModeToggle({ viewMode, onChange }) {
   );
 }
 
-function PreviewSettingsField({ field, value, onChange }) {
+const DEFAULT_IMAGE_ACCEPT = "image/jpeg,image/png,image/webp";
+const DEFAULT_IMAGE_MAX_BYTES = 2 * 1024 * 1024;
+
+function PreviewSettingsImageField({ field, value, onChange, previewSlug, onError }) {
+  const [uploading, setUploading] = useState(false);
+  const id = `preview-setting-${field.key}`;
+  const label = field.label || field.key;
+  const accept = field.accept || DEFAULT_IMAGE_ACCEPT;
+  const maxBytes = field.maxBytes || DEFAULT_IMAGE_MAX_BYTES;
+  const hasCustomImage = typeof value === "string" && value.length > 0;
+
+  const handleFileChange = async (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+
+    if (file.size > maxBytes) {
+      onError?.("Image must be 2MB or smaller.");
+      return;
+    }
+
+    const endpoint = mapping.previewSettingsUpload;
+    if (!endpoint) {
+      onError?.("Upload not configured.");
+      return;
+    }
+
+    setUploading(true);
+    onError?.(null);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      if (previewSlug) formData.append("previewSlug", previewSlug);
+      formData.append("slot", field.key);
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        body: formData,
+      });
+      const json = await response.json().catch(() => ({}));
+      const url = json?.data?.url || json?.url;
+      if (!response.ok || !url) {
+        throw new Error(json.message || "Upload failed");
+      }
+      onChange(field.key, url);
+    } catch {
+      onError?.("Could not upload image. Try again.");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <div className="v3-preview-settings__field v3-preview-settings__field--image">
+      <span className="v3-preview-settings__label" id={`${id}-label`}>
+        {label}
+      </span>
+      {hasCustomImage ? (
+        <div className="v3-preview-settings__thumb-row">
+          <img
+            src={value}
+            alt=""
+            className="v3-preview-settings__thumb"
+            data-testid={`preview-setting-thumb-${field.key}`}
+          />
+          <button
+            type="button"
+            className="v3-btn v3-btn--ghost v3-preview-settings__clear"
+            onClick={() => onChange(field.key, field.default ?? null)}
+            data-testid={`preview-setting-clear-${field.key}`}
+          >
+            Clear
+          </button>
+        </div>
+      ) : (
+        <p className="v3-preview-settings__image-hint">Using site default</p>
+      )}
+      <input
+        id={id}
+        className="v3-preview-settings__file"
+        type="file"
+        accept={accept}
+        disabled={uploading}
+        aria-labelledby={`${id}-label`}
+        data-testid={`preview-setting-image-${field.key}`}
+        onChange={handleFileChange}
+      />
+      {uploading ? (
+        <p className="v3-preview-settings__upload-status" role="status">
+          Uploading…
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
+function PreviewSettingsField({ field, value, onChange, previewSlug, onError }) {
   const id = `preview-setting-${field.key}`;
   const label = field.label || field.key;
 
@@ -297,6 +394,38 @@ function PreviewSettingsField({ field, value, onChange }) {
           ))}
         </select>
       </label>
+    );
+  }
+
+  if (field.type === "text" || field.type === "textarea") {
+    const Control = field.type === "textarea" ? "textarea" : "input";
+    return (
+      <label className="v3-preview-settings__field" htmlFor={id}>
+        <span className="v3-preview-settings__label">{label}</span>
+        <Control
+          id={id}
+          className={`v3-preview-settings__control${
+            field.type === "textarea" ? " v3-preview-settings__control--textarea" : ""
+          }`}
+          type={field.type === "text" ? "text" : undefined}
+          rows={field.type === "textarea" ? 3 : undefined}
+          maxLength={field.maxLength}
+          value={value ?? ""}
+          onChange={(event) => onChange(field.key, event.target.value)}
+        />
+      </label>
+    );
+  }
+
+  if (field.type === "image") {
+    return (
+      <PreviewSettingsImageField
+        field={field}
+        value={value}
+        onChange={onChange}
+        previewSlug={previewSlug}
+        onError={onError}
+      />
     );
   }
 
@@ -368,6 +497,8 @@ function PreviewSettingsPanel({
   onSave,
   saveStatus,
   saveError,
+  onError,
+  previewSlug,
   onClose,
 }) {
   useModalBodyLock(show);
@@ -407,6 +538,8 @@ function PreviewSettingsPanel({
               field={field}
               value={settings[field.key]}
               onChange={onChange}
+              previewSlug={previewSlug}
+              onError={onError}
             />
           ))}
         </div>
@@ -526,6 +659,11 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
     setSettings((prev) => ({ ...prev, [key]: value }));
     setSaveStatus("idle");
     setSaveError(null);
+  }, []);
+
+  const handleSettingsError = useCallback((message) => {
+    setSaveError(message);
+    if (message) setSaveStatus("idle");
   }, []);
 
   const handleSaveSettings = useCallback(async () => {
@@ -715,6 +853,8 @@ function PreviewShowcase({ previewUrl, label, previewSlug }) {
         onSave={handleSaveSettings}
         saveStatus={saveStatus}
         saveError={saveError}
+        onError={handleSettingsError}
+        previewSlug={previewSlug}
         onClose={() => setSettingsOpen(false)}
       />
     </div>

@@ -67,14 +67,16 @@ Knobs live on the **portfolio parent** (`carlmanuel.com/?preview={slug}`), not i
 
 **Wire per site:**
 
-1. Add `previewSettings.fields` on the whitelist entry (`number` / `select` / `boolean` + `default` / `label`). Optional mirror in `client.json` for docs — **portfolio whitelist is the source of truth**.
+1. Add `previewSettings.fields` on the whitelist entry (`number` / `select` / `boolean` / `text` / `textarea` / `image` + `default` / `label`; optional `maxLength` / `accept` / `maxBytes` for text & image). Optional mirror in `client.json` for docs — **portfolio whitelist is the source of truth**.
 2. Markup hooks on the marketing page:
-   - `[data-hero-bg]` — hero photo swap (`heroImage` → `assets/{value}.jpg`)
+   - `[data-settings-text="{key}"]` — live text/textarea APPLY (`heroEyebrow`, `heroHeadline`, `heroSubhead`, …)
+   - `[data-hero-bg]` — dual hero images: `heroImageDesktop` as default `background-image`; `heroImageMobile` via injected `@media (max-width: 767px)` (null = site CSS default). Legacy `heroImage` select is retired on XKR.
    - `[data-gallery-item]` on each gallery figure — `galleryCount` hides items beyond N
    - `[data-settings-section="{key}"]` — boolean toggles `display:none`
 3. Include apply-only bridge on the site: `<script src="/preview-settings-bridge.js" data-slug="{slug}"></script>` (listens for `cm:preview-settings:apply` from parent).
 4. `site.js` applies via CustomEvent / `applySettings()` on those data hooks.
-5. Keep admin Settings **read-only** demo — do not wire interactive preview knobs there; admin iframes stay at `/admin/`.
+5. Image knobs: parent file picker → `POST /previewSettings/upload` (`mapping.previewSettingsUpload`, multipart `file` + optional `previewSlug` / `slot`) → store returned HTTPS URL in settings → APPLY. Clear restores `default: null`. Save still notify-only (`POST /previewSettings`); never GET on mount.
+6. Keep admin Settings **read-only** demo — do not wire interactive preview knobs there; admin iframes stay at `/admin/`.
 
 **Working example:** `client-sites/xkr-construction/` + whitelist `xkr-construction`. Retrofit older sites later (oldest first) — do not block new demos on a full batch.
 

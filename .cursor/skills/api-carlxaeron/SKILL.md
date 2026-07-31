@@ -22,7 +22,8 @@ Still on Firebase (skill **firebase-backend**): Analytics client SDK only (+ opt
 | GET | `/health` | `{ ok, service: "api-carlxaeron" }` |
 | POST | `/trackVisit` | Analytics |
 | POST | `/previewFeedback` | Like / dislike / **agree** — admin Web Push + **prospect auto-reply email** when email known (`outreach_jobs.contact_email` or optional body `contactEmail`; one per feedback row; BCC `MAIL_BCC`). **agree** also emails Carl (`MAIL_TO` + BCC) — does not auto-send a service agreement |
-| GET/POST | `/previewSettings` | Client demo settings from portfolio parent (`?preview=`). **Product flow uses POST only** (notify). POST `{ previewSlug, settings, visitorId?, sessionId? }` → audit row + email Carl + Web Push `preview_settings_updated`. GET `?slug=` → `{ data: { settings } }` (debug/audit; parent UI does **not** restore held settings). Throttle `previewSettings` 30/h. Called by `PreviewShowcase` (not Netlify origins) |
+| GET/POST | `/previewSettings` | Client demo settings from portfolio parent (`?preview=`). **Product flow uses POST only** (notify). POST `{ previewSlug, settings, visitorId?, sessionId? }` → audit row + email Carl + Web Push `preview_settings_updated`. GET `?slug=` → `{ data: { settings } }` (debug/audit; parent UI does **not** restore held settings). Settings JSON cap **16KB** (text + image URLs, no blobs). Throttle write `previewSettingsWrite` 30/h. Called by `PreviewShowcase` (not Netlify origins) |
+| POST | `/previewSettings/upload` | Multipart `file` (+ optional `previewSlug`, `slot`) → jpeg/png/webp only, **2MB** max, finfo + getimagesize (reject SVG/HTML). Stores `storage/app/public/preview-settings/{slug}/…`; returns `{ data: { url } }` public `/storage/…` URL. Throttle `previewSettingsUpload` 30/h. CORS path `previewSettings/upload`. **Stellar:** `php artisan storage:link` so `public/storage` → `storage/app/public` |
 | GET | `/analyticsSummary` | Insights panel |
 | POST | `/contact` | Form + SMTP |
 | POST | `/quotation` | Form + SMTP |
@@ -91,6 +92,7 @@ Create body: `slug`, `businessName`, `clientEmail`, `clientName`, `formJson` (ob
 - **`POST /trackVisit`** with `eventType: preview_view` + allowlisted Origin/Referer + valid slug — **one push per slug + session** (Cache TTL `PUSH_PREVIEW_VIEW_THROTTLE_MINUTES`, default **30**)
 - **`POST /previewFeedback`** on successful like/dislike/**agree** (slug + sentiment in title/body; dislike includes comment snippet) — also sends **one auto-reply email** to the prospect when `outreach_jobs.contact_email` or body `contactEmail` resolves (like = thank + soft “push through”; dislike = thank + invite revision; agree = thank + “I’ll follow up”); BCC `MAIL_BCC`; skipped if no email or already sent for that row. **agree** additionally emails Carl (`MAIL_TO` + BCC) with Ready to proceed details (no auto agreement send)
 - **`POST /previewSettings`** on successful save — email Carl (`MAIL_TO` + BCC) + Web Push `preview_settings_updated` (parent preview settings panel → API; notify only)
+- **`POST /previewSettings/upload`** — secure hero image upload (jpeg/png/webp ≤2MB); returns public storage URL for settings JSON (no notify)
 
 Push failure never breaks form/outreach/analytics responses. Service worker + Settings UI live in the portfolio SPA. **iOS:** user must Add to Home Screen (iOS 16.4+), then open Admin and enable notifications.
 
@@ -119,7 +121,7 @@ Stored files: `client-sites/{slug}/assets/outreach-website.jpg`, `outreach-admin
 
 Forms / Insights stay public to the SPA (browser sends Origin). Defaults: contact/quote 8/h, visits 120/min, feedback 30/h, summary 60/min, outreach 60/h.
 
-**Laravel rate limits (live):** named limiters in `AppServiceProvider` + `throttle:{name}` on routes — **never** bare `throttle:max,decay` (that shares one IP key across all routes and lets `trackVisit` 429 unrelated APIs). Buckets: `trackVisit` 120/min, `previewFeedback` 30/h, `previewSettings` 30/h, `analyticsSummary` 60/min, `content` 120/min, `contact`/`quotation` 5/h each, `outreach` 60/h (schedule/pause/pushNotify), `agreementsShow` 60/min, `agreementsSign` 10/h, `adminLogin` 20/5min, `adminApi` 120/min per user.
+**Laravel rate limits (live):** named limiters in `AppServiceProvider` + `throttle:{name}` on routes — **never** bare `throttle:max,decay` (that shares one IP key across all routes and lets `trackVisit` 429 unrelated APIs). Buckets: `trackVisit` 120/min, `previewFeedback` 30/h, `previewSettingsRead` 60/min, `previewSettingsWrite` 30/h, `previewSettingsUpload` 30/h, `analyticsSummary` 60/min, `content` 120/min, `contact`/`quotation` 5/h each, `outreach` 60/h (schedule/pause/pushNotify), `agreementsShow` 60/min, `agreementsSign` 10/h, `adminLogin` 20/5min, `adminApi` 120/min per user.
 
 **`POST /quotation` body** (portfolio Get a Quote): `name`, `email`, `details` required; optional `company`, `phone`, `projectType`, `budgetRange`, `currency` (`PHP`|`USD`), `timeline`, `services[]`. Persisted to `quotations.currency` (nullable). Before first deploy with currency: run `php hosting-php/scripts/migrate-quotations-currency.php` on Stellar and `php artisan migrate` for Laravel.
 
@@ -227,7 +229,7 @@ php artisan serve --port=8080
 2. **Required `.env` DB keys for Laravel:** `DB_CONNECTION=mysql`, `DB_DATABASE` / `DB_USERNAME` / `DB_PASSWORD` (legacy `DB_NAME` / `DB_USER` / `DB_PASS` still work for the mysql connection array). Missing `DB_CONNECTION` defaults to sqlite and analytics will look empty.
 3. Subdomain docroot → `…/public` only.
 4. On server: `composer install --no-dev`, `php artisan migrate --force`, `php artisan db:seed --class=Database\\Seeders\\AdminSeeder --force` (needs `ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env`; seeder reads via `config/portfolio.php`), set `VAPID_*` keys, `php artisan config:cache`. **Web Push:** `minishlink/web-push` pulls `web-token/jwt-library` — never rsync a partial `vendor/` tree; if push test 500s with missing `JWK.php`, run `rm -rf vendor/web-token/jwt-library && composer install --no-dev` on Stellar (Composer may not be on PATH — download to `/tmp/composer` first).
-5. Writable: `storage/`, `bootstrap/cache/`.
+5. Writable: `storage/`, `bootstrap/cache/`. **Public uploads:** `php artisan storage:link` (once) so `public/storage` → `storage/app/public` — required for `POST /previewSettings/upload` URLs at `https://api.carlmanuel.com/storage/…`.
 6. Smoke: `curl https://api.carlmanuel.com/health` + `POST /admin/login`.
 
 Details: [`api-carlxaeron/README.md`](../../../api-carlxaeron/README.md).

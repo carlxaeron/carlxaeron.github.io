@@ -15,6 +15,9 @@ export const mapping = {
   previewSettings: process.env.NODE_ENV === 'development'
     ? 'http://127.0.0.1:5001/carllouismanuel-1e3a9/us-central1/previewSettings'
     : 'https://api.carlmanuel.com/previewSettings',
+  previewSettingsUpload: process.env.NODE_ENV === 'development'
+    ? 'http://127.0.0.1:5001/carllouismanuel-1e3a9/us-central1/previewSettingsUpload'
+    : 'https://api.carlmanuel.com/previewSettings/upload',
   analyticsSummary: process.env.NODE_ENV === 'development'
     ? 'http://127.0.0.1:5001/carllouismanuel-1e3a9/us-central1/analyticsSummary'
     : 'https://api.carlmanuel.com/analyticsSummary',

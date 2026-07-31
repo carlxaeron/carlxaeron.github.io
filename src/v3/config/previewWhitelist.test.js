@@ -99,6 +99,44 @@ describe("getPreviewSettingsSchema", () => {
 
     expect(fields).toEqual([
       {
+        key: "heroEyebrow",
+        type: "text",
+        default: "Rodriguez, Rizal · Construction company",
+        maxLength: 80,
+        label: "Hero eyebrow",
+      },
+      {
+        key: "heroHeadline",
+        type: "text",
+        default: "XKR Construction",
+        maxLength: 120,
+        label: "Hero headline",
+      },
+      {
+        key: "heroSubhead",
+        type: "textarea",
+        default:
+          "We work with government and private agencies on both horizontal and vertical projects — from site development to building works across Rizal and nearby project sites.",
+        maxLength: 400,
+        label: "Hero subhead",
+      },
+      {
+        key: "heroImageDesktop",
+        type: "image",
+        default: null,
+        accept: "image/jpeg,image/png,image/webp",
+        maxBytes: 2097152,
+        label: "Hero image (desktop)",
+      },
+      {
+        key: "heroImageMobile",
+        type: "image",
+        default: null,
+        accept: "image/jpeg,image/png,image/webp",
+        maxBytes: 2097152,
+        label: "Hero image (mobile)",
+      },
+      {
         key: "galleryCount",
         type: "number",
         min: 2,
@@ -107,24 +145,18 @@ describe("getPreviewSettingsSchema", () => {
         label: "Gallery photos shown",
       },
       {
-        key: "heroImage",
-        type: "select",
-        options: ["project-01", "project-02", "project-03", "project-04"],
-        default: "project-01",
-        label: "Hero background photo",
-      },
-      {
         key: "showWhyUs",
         type: "boolean",
         default: true,
         label: "Show Why agencies work with us",
       },
     ]);
+    expect(fields.some((field) => field.key === "heroImage")).toBe(false);
   });
 
   test("accepts site object", () => {
     const site = PREVIEW_SITES.find((entry) => entry.id === "xkr-construction");
-    expect(getPreviewSettingsSchema(site)).toHaveLength(3);
+    expect(getPreviewSettingsSchema(site)).toHaveLength(7);
   });
 
   test("returns empty array when site has no previewSettings", () => {
@@ -137,8 +169,13 @@ describe("getPreviewSettingsSchema", () => {
 describe("getPreviewSettingsDefaults", () => {
   test("maps field defaults by key", () => {
     expect(getPreviewSettingsDefaults(getPreviewSettingsSchema("xkr-construction"))).toEqual({
+      heroEyebrow: "Rodriguez, Rizal · Construction company",
+      heroHeadline: "XKR Construction",
+      heroSubhead:
+        "We work with government and private agencies on both horizontal and vertical projects — from site development to building works across Rizal and nearby project sites.",
+      heroImageDesktop: null,
+      heroImageMobile: null,
       galleryCount: 4,
-      heroImage: "project-01",
       showWhyUs: true,
     });
   });

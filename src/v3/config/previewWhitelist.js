@@ -325,19 +325,50 @@ export const PREVIEW_SITES = [
     previewSettings: {
       fields: [
         {
+          key: "heroEyebrow",
+          type: "text",
+          default: "Rodriguez, Rizal · Construction company",
+          maxLength: 80,
+          label: "Hero eyebrow",
+        },
+        {
+          key: "heroHeadline",
+          type: "text",
+          default: "XKR Construction",
+          maxLength: 120,
+          label: "Hero headline",
+        },
+        {
+          key: "heroSubhead",
+          type: "textarea",
+          default:
+            "We work with government and private agencies on both horizontal and vertical projects — from site development to building works across Rizal and nearby project sites.",
+          maxLength: 400,
+          label: "Hero subhead",
+        },
+        {
+          key: "heroImageDesktop",
+          type: "image",
+          default: null,
+          accept: "image/jpeg,image/png,image/webp",
+          maxBytes: 2097152,
+          label: "Hero image (desktop)",
+        },
+        {
+          key: "heroImageMobile",
+          type: "image",
+          default: null,
+          accept: "image/jpeg,image/png,image/webp",
+          maxBytes: 2097152,
+          label: "Hero image (mobile)",
+        },
+        {
           key: "galleryCount",
           type: "number",
           min: 2,
           max: 4,
           default: 4,
           label: "Gallery photos shown",
-        },
-        {
-          key: "heroImage",
-          type: "select",
-          options: ["project-01", "project-02", "project-03", "project-04"],
-          default: "project-01",
-          label: "Hero background photo",
         },
         {
           key: "showWhyUs",

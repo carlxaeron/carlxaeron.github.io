@@ -185,6 +185,17 @@ describe("PreviewShowcase", () => {
   });
 });
 
+const XKR_DEFAULT_SETTINGS = {
+  heroEyebrow: "Rodriguez, Rizal · Construction company",
+  heroHeadline: "XKR Construction",
+  heroSubhead:
+    "We work with government and private agencies on both horizontal and vertical projects — from site development to building works across Rizal and nearby project sites.",
+  heroImageDesktop: null,
+  heroImageMobile: null,
+  galleryCount: 4,
+  showWhyUs: true,
+};
+
 describe("PreviewShowcase parent-owned preview settings", () => {
   let restoreMatchMedia;
   let originalFetch;
@@ -225,9 +236,14 @@ describe("PreviewShowcase parent-owned preview settings", () => {
 
     expect(screen.getByTestId("preview-settings-panel")).toBeInTheDocument();
     expect(screen.getByRole("dialog")).toBeInTheDocument();
+    expect(screen.getByLabelText(/Hero eyebrow/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Hero headline/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Hero subhead/i)).toBeInTheDocument();
+    expect(screen.getByTestId("preview-setting-image-heroImageDesktop")).toBeInTheDocument();
+    expect(screen.getByTestId("preview-setting-image-heroImageMobile")).toBeInTheDocument();
     expect(screen.getByLabelText(/Gallery photos shown/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Hero background photo/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Show Why agencies work with us/i)).toBeInTheDocument();
+    expect(screen.queryByLabelText(/Hero background photo/i)).not.toBeInTheDocument();
   });
 
   test("hides settings launcher when slug has no schema fields", () => {
@@ -298,9 +314,8 @@ describe("PreviewShowcase parent-owned preview settings", () => {
       type: "cm:preview-settings:apply",
       slug: XKR_SLUG,
       settings: {
+        ...XKR_DEFAULT_SETTINGS,
         galleryCount: 2,
-        heroImage: "project-01",
-        showWhyUs: true,
       },
     };
 
@@ -310,6 +325,125 @@ describe("PreviewShowcase parent-owned preview settings", () => {
     adminSpies.forEach((spy) => {
       expect(spy).not.toHaveBeenCalled();
       spy.mockRestore();
+    });
+  });
+
+  test("changing text settings posts APPLY with updated copy", () => {
+    render(
+      <PreviewShowcase
+        previewUrl={XKR_HOST}
+        label="XKR Construction"
+        previewSlug={XKR_SLUG}
+      />
+    );
+
+    openPreviewSettings();
+
+    const siteFrames = getSiteIframes();
+    const sitePostMessages = siteFrames.map((iframe) => {
+      const postMessage = jest.fn();
+      Object.defineProperty(iframe, "contentWindow", {
+        configurable: true,
+        value: { postMessage },
+      });
+      return postMessage;
+    });
+
+    fireEvent.change(screen.getByLabelText(/Hero headline/i), {
+      target: { value: "Custom XKR headline" },
+    });
+
+    const expectedPayload = {
+      type: "cm:preview-settings:apply",
+      slug: XKR_SLUG,
+      settings: {
+        ...XKR_DEFAULT_SETTINGS,
+        heroHeadline: "Custom XKR headline",
+      },
+    };
+
+    sitePostMessages.forEach((postMessage) => {
+      expect(postMessage).toHaveBeenCalledWith(expectedPayload, XKR_HOST);
+    });
+  });
+
+  test("image upload POSTs multipart then APPLYs returned URL", async () => {
+    const uploadedUrl = "https://api.carlmanuel.com/storage/preview-settings/xkr/hero.jpg";
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ status: 200, data: { url: uploadedUrl } }),
+    });
+
+    render(
+      <PreviewShowcase
+        previewUrl={XKR_HOST}
+        label="XKR Construction"
+        previewSlug={XKR_SLUG}
+      />
+    );
+
+    openPreviewSettings();
+
+    const siteFrames = getSiteIframes();
+    const sitePostMessages = siteFrames.map((iframe) => {
+      const postMessage = jest.fn();
+      Object.defineProperty(iframe, "contentWindow", {
+        configurable: true,
+        value: { postMessage },
+      });
+      return postMessage;
+    });
+
+    const file = new File(["fake-image"], "hero.jpg", { type: "image/jpeg" });
+    fireEvent.change(screen.getByTestId("preview-setting-image-heroImageDesktop"), {
+      target: { files: [file] },
+    });
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        mapping.previewSettingsUpload,
+        expect.objectContaining({ method: "POST" })
+      );
+    });
+
+    const uploadCall = global.fetch.mock.calls[0];
+    expect(uploadCall[1].body).toBeInstanceOf(FormData);
+    expect(uploadCall[1].headers).toBeUndefined();
+
+    await waitFor(() => {
+      sitePostMessages.forEach((postMessage) => {
+        expect(postMessage).toHaveBeenCalledWith(
+          {
+            type: "cm:preview-settings:apply",
+            slug: XKR_SLUG,
+            settings: {
+              ...XKR_DEFAULT_SETTINGS,
+              heroImageDesktop: uploadedUrl,
+            },
+          },
+          XKR_HOST
+        );
+      });
+    });
+
+    expect(screen.getByTestId("preview-setting-thumb-heroImageDesktop")).toHaveAttribute(
+      "src",
+      uploadedUrl
+    );
+
+    fireEvent.click(screen.getByTestId("preview-setting-clear-heroImageDesktop"));
+
+    await waitFor(() => {
+      sitePostMessages.forEach((postMessage) => {
+        expect(postMessage).toHaveBeenCalledWith(
+          {
+            type: "cm:preview-settings:apply",
+            slug: XKR_SLUG,
+            settings: XKR_DEFAULT_SETTINGS,
+          },
+          XKR_HOST
+        );
+      });
     });
   });
 
@@ -335,11 +469,7 @@ describe("PreviewShowcase parent-owned preview settings", () => {
       {
         type: "cm:preview-settings:apply",
         slug: XKR_SLUG,
-        settings: {
-          galleryCount: 4,
-          heroImage: "project-01",
-          showWhyUs: true,
-        },
+        settings: XKR_DEFAULT_SETTINGS,
       },
       XKR_HOST
     );
@@ -375,11 +505,7 @@ describe("PreviewShowcase parent-owned preview settings", () => {
     const postBody = JSON.parse(global.fetch.mock.calls[0][1].body);
     expect(postBody).toMatchObject({
       previewSlug: XKR_SLUG,
-      settings: {
-        galleryCount: 4,
-        heroImage: "project-01",
-        showWhyUs: true,
-      },
+      settings: XKR_DEFAULT_SETTINGS,
     });
     expect(typeof postBody.visitorId).toBe("string");
     expect(typeof postBody.sessionId).toBe("string");
@@ -394,6 +520,56 @@ describe("PreviewShowcase parent-owned preview settings", () => {
           !(typeof url === "string" && url.includes("?slug=") && (!options || !options.method))
       )
     ).toBe(true);
+  });
+
+  test("Save payload includes uploaded image URLs", async () => {
+    const uploadedUrl = "https://api.carlmanuel.com/storage/preview-settings/xkr/mobile.webp";
+    global.fetch
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ status: 200, data: { url: uploadedUrl } }),
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ status: 200 }),
+      });
+
+    render(
+      <PreviewShowcase
+        previewUrl={XKR_HOST}
+        label="XKR Construction"
+        previewSlug={XKR_SLUG}
+      />
+    );
+
+    openPreviewSettings();
+
+    const file = new File(["fake-image"], "mobile.webp", { type: "image/webp" });
+    fireEvent.change(screen.getByTestId("preview-setting-image-heroImageMobile"), {
+      target: { files: [file] },
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId("preview-setting-thumb-heroImageMobile")).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getByTestId("preview-settings-save"));
+
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith(
+        mapping.previewSettings,
+        expect.objectContaining({ method: "POST" })
+      );
+    });
+
+    const saveCall = global.fetch.mock.calls.find(
+      ([url]) => url === mapping.previewSettings
+    );
+    const postBody = JSON.parse(saveCall[1].body);
+    expect(postBody.settings).toMatchObject({
+      heroImageMobile: uploadedUrl,
+      heroImageDesktop: null,
+    });
   });
 
   test("closes settings modal", async () => {
