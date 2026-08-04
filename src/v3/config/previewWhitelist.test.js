@@ -160,9 +160,30 @@ describe("getPreviewSettingsSchema", () => {
   });
 
   test("returns empty array when site has no previewSettings", () => {
-    expect(getPreviewSettingsSchema("machinemate")).toEqual([]);
     expect(getPreviewSettingsSchema(null)).toEqual([]);
     expect(getPreviewSettingsSchema("unknown-slug")).toEqual([]);
+  });
+
+  test("machinemate ships CMS v1 previewSettings after catalog retrofit", () => {
+    const fields = getPreviewSettingsSchema("machinemate");
+    expect(fields.map((f) => f.key)).toEqual(
+      expect.arrayContaining([
+        "heroEyebrow",
+        "heroHeadline",
+        "heroSubhead",
+        "heroImageDesktop",
+        "heroImageMobile",
+        "galleryCount",
+        "showWhyUs",
+      ])
+    );
+  });
+
+  test("every whitelist site ships previewSettings.fields", () => {
+    const missing = PREVIEW_SITES.filter(
+      (site) => !Array.isArray(site.previewSettings?.fields) || site.previewSettings.fields.length === 0
+    ).map((site) => site.id);
+    expect(missing).toEqual([]);
   });
 
   test.each([

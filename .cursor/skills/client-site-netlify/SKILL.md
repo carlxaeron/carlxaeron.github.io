@@ -85,11 +85,13 @@ Knobs live on the **portfolio parent** (`carlmanuel.com/?preview={slug}`), not i
 When retrofitting existing Netlify demos (e.g. after a follow-up day, oldest first):
 
 1. Copy apply-only `preview-settings-bridge.js` from `_template`; load on `index.html` with `data-slug="{slug}"` (before `site.js`).
-2. Ensure `site.js` `applySettings` supports: `data-settings-text` keys, `heroImageDesktop`/`heroImageMobile`, `galleryCount`, `showWhyUs` (legacy `heroImage` OK if present).
-3. Markup: `data-settings-text` on hero eyebrow/headline/subhead (defaults = live copy); `data-gallery-item` on gallery figures/imgs (or facilities/programs cards if no gallery); `data-settings-section="showWhyUs"` on About (or Why) if that section exists.
+2. Ensure `site.js` `applySettings` supports: `data-settings-text` keys, `heroImageDesktop`/`heroImageMobile`, `galleryCount`, `showWhyUs` (legacy `heroImage` OK if present). **Call `initPreviewSettings()` from `init()`** — defining apply helpers without wiring the listener is a no-op.
+3. Markup: `data-settings-text` on hero eyebrow/headline/subhead (defaults = live copy); `data-gallery-item` on gallery figures/imgs (or facilities/programs cards if no gallery); `data-settings-section="showWhyUs"` on About (or Why) if that section exists. Skip `galleryCount` in the whitelist when the site has fewer than 2 gallery items.
 4. Whitelist `previewSettings.fields` — only fields the markup can apply; text defaults from HTML; image defaults `null`; `galleryCount.max` = item count.
-5. Redeploy each Netlify site. Commit `client-sites` submodule; bump parent gitlink + whitelist; if whitelist changed, portfolio patch + tag so carlmanuel.com gets schemas.
+5. Redeploy each Netlify site (**CLI:** `npx netlify-cli deploy --prod --site {site-uuid}` — prefer UUID from `netlify api listSites`, not the short name; clear `.netlify/edge-functions-dist` / use `--skip-functions-cache`). Commit `client-sites` submodule; bump parent gitlink + whitelist; if whitelist changed, portfolio patch + tag so carlmanuel.com gets schemas.
 6. **Do not** auto-resend outreach. Live preview stays ephemeral; Save = notify only. Images use existing `POST /previewSettings/upload` — do not reimplement upload.
+
+**Catalog status (CMS v1):** all `PREVIEW_SITES` entries ship `previewSettings.fields` (texts + dual hero; gallery/About when markup supports). Helper script: `client-sites/_scripts/retrofit-preview-settings.py` (re-run only for new demos that launched without hooks).
 
 ### Per-client customization (mandatory — do not ship defaults)
 

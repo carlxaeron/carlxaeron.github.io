@@ -251,7 +251,7 @@ describe("PreviewShowcase parent-owned preview settings", () => {
       <PreviewShowcase
         previewUrl={PREVIEW_HOST}
         label="Sample"
-        previewSlug={PREVIEW_SLUG}
+        previewSlug="unknown-no-settings-slug"
       />
     );
 

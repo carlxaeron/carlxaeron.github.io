@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.14] — 2026-08-04
+
+### Added
+- **Preview settings catalog-wide** — CMS v1 (texts + dual hero + gallery/About when present) on all remaining `PREVIEW_SITES`; prior-batch `initPreviewSettings()` wire-up fix; Netlify redeploys; whitelist schemas so Customize works on every preview slug
+
 ## [3.1.13] — 2026-07-31
 
 ### Changed
