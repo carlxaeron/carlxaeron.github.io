@@ -17,7 +17,7 @@ Keep Firebase-shaped JSON and **unprefixed** paths: `/health`, `/trackVisit`, `/
 
 Live Stellar may still run **hosting-php** (custom PHP) until Laravel is fully deployed — outreach cron lives there.
 
-**Outreach cadence (live):** `3d1w` = **3d → 7d → 7d → 7d**, max **4** follow-ups. Yes-to-send enables auto follow-ups (no cadence ask).
+**Outreach cadence (live):** `3d1w` = **3d → 7d → 7d → 7d → 7d**, max **5** follow-ups. Yes-to-send enables auto follow-ups (no cadence ask).
 
 ## Stack
 
@@ -43,7 +43,7 @@ cd api-carlxaeron && php artisan test
 php api-carlxaeron/hosting-php/tests/run-unit.php
 ```
 
-Covers cadence normalize, **3d → 7d → 7d → 7d** delays, default max **4**, payment-terms copy.  
+Covers cadence normalize, **3d → 7d → 7d → 7d → 7d** delays, default max **5**, payment-terms copy.  
 **Do not** `hosting_upload` `outreach.php` (or related cron/migrate scripts) until this exits 0.
 
 See also rule [`.cursor/rules/test-before-deploy.mdc`](test-before-deploy.mdc).

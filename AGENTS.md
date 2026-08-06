@@ -49,7 +49,7 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 | [.cursor/skills/firebase-backend/SKILL.md](.cursor/skills/firebase-backend/SKILL.md) | Firebase Analytics + leftover legacy functions (assistant/weekly/license moved/deleted) |
 | [.cursor/skills/namecheap-browser/SKILL.md](.cursor/skills/namecheap-browser/SKILL.md) | Namecheap DNS via browser (when API access unavailable) |
 | [.cursor/skills/onlinejobs-apify/SKILL.md](.cursor/skills/onlinejobs-apify/SKILL.md) | OnlineJobs.ph search, apply, CV, dashboard |
-| [.cursor/skills/client-site-netlify/SKILL.md](.cursor/skills/client-site-netlify/SKILL.md) | Client sites, Netlify, `?preview=`, ask-before-send + 3d→7d×3 follow-ups (discount stack to 50% + commission) |
+| [.cursor/skills/client-site-netlify/SKILL.md](.cursor/skills/client-site-netlify/SKILL.md) | Client sites, Netlify, `?preview=`, ask-before-send + 3d→7d×4 follow-ups (discount stack to 50% + commission; FU5 last check-in) |
 
 ## Rules (auto-attached by glob)
 
@@ -117,7 +117,7 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 7. Add host to `src/v3/config/previewWhitelist.js` (optional **`previewSettings.fields`** for parent knobs); update `client.json` (`quotation.previewUrl` uses `?preview={slug}`)
 8. **Update [`client-sites/README.md`](client-sites/README.md)** — catalog table + per-client detail section (include system type)
 9. Draft outreach (**website + admin** on desktop & mobile): `quotation-email.md`, `quotation-sms.txt`, `quotation-messenger.txt`, plus follow-ups
-10. **If email found** → ask: send quotation now? (**Yes** = send + enable hosting auto follow-ups; cadence **`3d1w`** = **3d → 7d → 7d → 7d**, max **4** — do not ask cadence separately.) Use stored **`assets/outreach-website.jpg`** + **`assets/outreach-admin.jpg`** (capture via `node scripts/capture-client-screenshots.mjs --slug {slug}` if missing) and pass as `attachments` on `outreachSchedule` (`--print-attachments` for base64 JSON). **Do not** use browser MCP for outreach screenshots. Pass optional **`systemLabel`** / **`previewHost`** on `outreachSchedule` (mints site+admin **one-time** Netlify unlock links). **Never send initial without a clear yes**.
+10. **If email found** → ask: send quotation now? (**Yes** = send + enable hosting auto follow-ups; cadence **`3d1w`** = **3d → 7d → 7d → 7d → 7d**, max **5** — do not ask cadence separately.) Use stored **`assets/outreach-website.jpg`** + **`assets/outreach-admin.jpg`** (capture via `node scripts/capture-client-screenshots.mjs --slug {slug}` if missing) and pass as `attachments` on `outreachSchedule` (`--print-attachments` for base64 JSON). **Do not** use browser MCP for outreach screenshots. Pass optional **`systemLabel`** / **`previewHost`** on `outreachSchedule` (mints site+admin **one-time** Netlify unlock links). **Never send initial without a clear yes**.
 11. After approval → `POST https://api.carlmanuel.com/outreachSchedule` (`sendInitial` + `autoFollowUp` + screenshot `attachments`); cron on Stellar sends follow-ups while offline
 12. Pause anytime via `POST /outreachPause` if prospect asks to stop
 13. Share preview `https://carlmanuel.com/?preview={slug}` + drafts for user review (embed-only — direct client URL returns 403 unless one-time `?access=` token)

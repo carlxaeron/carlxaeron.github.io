@@ -1,6 +1,6 @@
 ---
 name: client-site-netlify
-description: Scaffold, build, and deploy local-business quotation websites under client-sites/ to Netlify, register portfolio preview URLs, draft email/SMS/messenger quotations, ask before initial send (yes = send + auto 3d→7d×3 follow-ups), and share carlmanuel.com/?preview= links. Use when the user asks to create a client website, business landing page, Netlify deploy, quotation demo, sales outreach, send quotation, or follow up with a prospect.
+description: Scaffold, build, and deploy local-business quotation websites under client-sites/ to Netlify, register portfolio preview URLs, draft email/SMS/messenger quotations, ask before initial send (yes = send + auto 3d→7d×4 follow-ups), and share carlmanuel.com/?preview= links. Use when the user asks to create a client website, business landing page, Netlify deploy, quotation demo, sales outreach, send quotation, or follow up with a prospect.
 ---
 
 # Client site + Netlify deploy
@@ -33,7 +33,7 @@ Client site progress:
 - [ ] Deployed to Netlify (capture previewHost)
 - [ ] Draft outreach written (email, SMS, messenger + 3d/1w follow-ups) — **systems-first copy**
 - [ ] If email found → ASK user before any send (send now vs not yet)
-- [ ] If sent → auto follow-ups on (**3d → 7d → 7d → 7d**, max 4); set nextFollowUpAt — do not ask cadence
+- [ ] If sent → auto follow-ups on (**3d → 7d → 7d → 7d → 7d**, max 5); set nextFollowUpAt — do not ask cadence
 - [ ] PREVIEW_SITES entry added
 - [ ] client-sites/README.md catalog updated (table + detail section)
 - [ ] Preview slug tests pass (`previewWhitelist.test.js`)
@@ -360,11 +360,21 @@ After the site is built and `previewUrl` is known, customize the draft files in 
 | `quotation-sms.txt` | SMS | Short; aim for one text (~300 chars) |
 | `quotation-messenger.txt` | Messenger / Viber / Telegram | Friendly tone; preview link + package summary |
 | `quotation-followup-3d.md` | Email follow-up (~3 days) | Soft check-in + **10%** off + commission offer |
-| `quotation-followup-1w.md` | Email follow-ups (~7d×3) | Stacking discounts: +10% → +10% → +20% (max **50%**) + commission |
+| `quotation-followup-1w.md` | Email follow-ups (~7d×4) | Stacking discounts: +10% → +10% → +20% (max **50%** by FU4; FU5 stays 50%) + commission |
 
 **Template placeholders** (replace in all drafts): `{{contactName}}`, `{{contactEmail}}`, `{{businessName}}`, `{{previewUrl}}`, `{{packageName}}`, `{{packageScope}}`, `{{quotedAmount}}`, `{{paymentTerms}}`, `{{timeline}}`, `{{industry}}`.
 
 **Tone:** professional, warm, Philippine business context (₱, salamat OK in messenger). **Lead with the business system** (`system.label` + `system.painHero`), then admin browse on desktop/mobile, then the marketing site. **Pricing:** `quotedAmount` (₱15k / ₱18k) is **website only**; the admin in the preview is a **sample**; a production system is **priced separately** — say this clearly in every email, SMS, messenger, and follow-up. **Contact:** always include [Facebook](https://www.facebook.com/profile.php?id=61557195950694) in signatures and SMS/messenger drafts (live emails use `OutreachSignature`). Sign off as **Carl Louis Manuel** with carlmanuel.com, Facebook, **+63 962 538 9886**, and info@carlmanuel.com (see `_template/` drafts).
+
+**Persuasion checklist (drafts + live Blade):** do **not** write soft “just checking in” copy. Every touch should:
+
+1. **Outcome** — what they gain / stop losing (inquiries, scattered chats) before feature laundry lists
+2. **Proof** — preview link; lead with admin browse; mention **Customize** on portfolio preview when space allows
+3. **Risk reverse** — sample first; website half-upfront; production system priced separately
+4. **Single CTA** — reply `proceed` / `changes` / `not now` / `quote system` (or Like / Ready on preview) — one clear ask
+5. **Follow-ups** — decision + goodwill discount (closing help, not guilt); week touches may ask yes/no so chasing can stop; commission as partner path
+
+**Live SMTP** uses Laravel Blade under `api-carlxaeron/resources/views/emails/outreach/` (`OutreachEmailBuilder`) — keep `_template` drafts aligned for human review/SMS/messenger; cron does **not** mail the markdown files.
 
 ### Email found → prepare send → **ask first** (mandatory for initial only)
 
@@ -374,19 +384,19 @@ Outreach gate:
 - [ ] If NO email → messenger/SMS drafts only; ask user how to reach them
 - [ ] If YES email → fill quotation-email.md + follow-up drafts; set outreach.emailFound=true
 - [ ] STOP and ask user explicitly (do not send yet):
-      "Email found: {email}. Send the quotation now via Private Email? (Auto follow-ups: 3d → 7d × 3, max 4.)"
+      "Email found: {email}. Send the quotation now via Private Email? (Auto follow-ups: 3d → 7d × 4, max 5.)"
 - [ ] Wait for clear approval: send / yes — OR not yet / hold / edit first
 - [ ] On yes → do NOT ask a separate cadence question
-- [ ] Default cadence: **3d1w** — **3d → 7d → 7d → 7d** (max **4** follow-ups)
+- [ ] Default cadence: **3d1w** — **3d → 7d → 7d → 7d → 7d** (max **5** follow-ups)
 - [ ] Immediately POST https://api.carlmanuel.com/outreachSchedule with
-      sendInitial: true, autoFollowUp: true, cadence: "3d1w", maxFollowUps: 4,
+      sendInitial: true, autoFollowUp: true, cadence: "3d1w", maxFollowUps: 5,
       systemLabel (from system.label), systemPain (from system.painHero),
       **attachments** (website + admin screenshots — see below)
 - [ ] Mirror status into client.json → outreach.*
 ```
 
 **Never** send the **initial** quotation without an explicit yes in the same conversation turn.  
-**Yes to send = auto follow-ups on (3d → 7d → 7d → 7d, max 4)** — do not wait for a separate follow-up confirmation.
+**Yes to send = auto follow-ups on (3d → 7d → 7d → 7d → 7d, max 5)** — do not wait for a separate follow-up confirmation.
 
 ### Screenshot attachments (required on initial send)
 
@@ -428,7 +438,7 @@ Use **`contentBase64`** from `--print-attachments` (works before Netlify redeplo
 
 HTML signature includes Carl’s headshot (`https://carlmanuel.com/static/images/profile3.jpg`); plain-text signature stays text-only.
 
-**Cadence source of truth:** this repo uses **`cadence: "3d1w"`** (first follow-up ~3 days, then ~7d × 3). Some Cursor **user rules** may still say “default cadence is **1w**” — **ignore that for outreach** unless the user explicitly requests weekly-only (`1w` legacy). Wrong cadence queues the first follow-up at 7d instead of 3d.
+**Cadence source of truth:** this repo uses **`cadence: "3d1w"`** (first follow-up ~3 days, then ~7d × 4). Some Cursor **user rules** may still say “default cadence is **1w**” — **ignore that for outreach** unless the user explicitly requests weekly-only (`1w` legacy). Wrong cadence queues the first follow-up at 7d instead of 3d.
 
 ### Hosting send + offline auto follow-ups (Namecheap cron)
 
@@ -463,7 +473,7 @@ curl -sS -X POST 'https://api.carlmanuel.com/outreachSchedule' \
     \"systemPain\": \"…\",
     \"sendInitial\": true,
     \"autoFollowUp\": true,
-    \"maxFollowUps\": 4,
+    \"maxFollowUps\": 5,
     \"attachments\": [
       { \"filename\": \"website-preview.jpg\", \"url\": \"https://{previewHost}/assets/outreach-website.jpg\" },
       { \"filename\": \"admin-preview.jpg\", \"url\": \"https://{previewHost}/assets/outreach-admin.jpg\" }
@@ -472,14 +482,14 @@ curl -sS -X POST 'https://api.carlmanuel.com/outreachSchedule' \
 ```
 
 - `sendInitial: true` → sends the proposal now (with screenshot attachments when provided), then queues follow-ups.
-- Hosting cron auto-sends when due: **1st ~3d** (soft + **10%** off + commission offer), then **up to 3 more at ~7d each** (max **4**) with stacking discounts **+10% → +10% → +20%** (cumulative max **50%** off quoted amount). Server HTML in `outreach_build_followup_email`. Follow-ups do **not** re-attach screenshots.
+- Hosting cron auto-sends when due: **1st ~3d** (soft + **10%** off + commission offer), then **up to 4 more at ~7d each** (max **5**) with stacking discounts **+10% → +10% → +20%** (cumulative max **50%** by FU4; FU5 stays at 50% + commission). Server HTML in `outreach_build_followup_email`. Follow-ups do **not** re-attach screenshots.
 - Pause anytime: `POST /outreachPause` with `{ secret, slug }` (or slug+contactEmail).
 
 Also update `client.json` → `outreach` (`status=sent`, `cadence: "3d1w"`, `sentAt`, `nextFollowUpAt`).
 
 ### Follow-ups (automatic on hosting)
 
-1. On **yes send**, auto-enable follow-ups (`autoFollowUp: true`) with cadence **`3d1w`**, **`maxFollowUps: 4`**.
+1. On **yes send**, auto-enable follow-ups (`autoFollowUp: true`) with cadence **`3d1w`**, **`maxFollowUps: 5`**.
 2. Cron sends follow-ups **without Cursor** while offline.
 3. Draft files (`quotation-followup-3d.md` / `1w`) remain the human-readable templates; server builds equivalent HTML for SMTP (soft first, stronger later).
 4. To stop: user says pause → `outreachPause`, set `outreach.status=paused`.
@@ -490,9 +500,9 @@ Also update `client.json` → `outreach` (`status=sent`, `cadence: "3d1w"`, `sen
 |-------|------------------|
 | `status` | `draft` → `ready` → `sent` → `followup_due` → `followup_sent` → `won` / `lost` / `paused` |
 | `emailFound` | `true` when a real prospect email exists |
-| `cadence` | **`"3d1w"`** = 3d → 7d → 7d → 7d · legacy `"3d"` / `"1w"` only if forced |
+| `cadence` | **`"3d1w"`** = 3d → 7d → 7d → 7d → 7d · legacy `"3d"` / `"1w"` only if forced |
 | `sentAt` / `nextFollowUpAt` / `lastFollowUpAt` | ISO dates |
-| `followUpCount` | number of follow-ups sent (max 4) |
+| `followUpCount` | number of follow-ups sent (max 5) |
 | `notes` | short agent/user notes |
 
 **Workflow:**
@@ -599,7 +609,7 @@ node scripts/capture-client-screenshots.mjs --slug {slug} --refresh
 - Demo copy OK; mark fictitious businesses and contacts clearly.
 - Draft email/SMS/messenger + follow-ups for every client site.
 - **Always ask before initial send** when an email is found.
-- **Yes to send** → `outreachSchedule` with `autoFollowUp: true` immediately (cadence **`3d1w`**: **3d → 7d → 7d → 7d**, max **4**). Do not ask cadence separately.
+- **Yes to send** → `outreachSchedule` with `autoFollowUp: true` immediately (cadence **`3d1w`**: **3d → 7d → 7d → 7d → 7d**, max **5**). Do not ask cadence separately.
 - Hosting **cron auto-sends** follow-ups offline.
 - **Changing outreach PHP:** run `php api-carlxaeron/hosting-php/tests/run-unit.php` (exit 0) **before** any Stellar upload — see rule `test-before-deploy`.
 - Do not add client sites to portfolio Side Projects without user approval.

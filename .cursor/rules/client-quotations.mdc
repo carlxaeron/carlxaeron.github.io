@@ -1,5 +1,5 @@
 ---
-description: Client quotation websites — client-sites/, Netlify, ?preview=, ask-before-send; yes = send + auto 3d→7d×3 (max 4) follow-ups
+description: Client quotation websites — client-sites/, Netlify, ?preview=, ask-before-send; yes = send + auto 3d→7d×4 (max 5) follow-ups
 globs:
   - client-sites/**
   - src/v3/config/previewWhitelist.js
@@ -20,7 +20,7 @@ Each client demo is **website + browsable admin system** on one Netlify host:
 - Marketing site: `/`
 - Portfolio `?preview={slug}` → **4 panels:** admin desktop/mobile **first**, then site desktop/mobile
 
-Pricing: **₱15k / ₱18k = website only**. Admin in the preview is a **sample**; a production business system is **priced separately**. Say this in every outreach email/SMS/messenger. Cadence remains **`3d1w`** (3d → 7d × 3, max 4).
+Pricing: **₱15k / ₱18k = website only**. Admin in the preview is a **sample**; a production business system is **priced separately**. Say this in every outreach email/SMS/messenger. Cadence remains **`3d1w`** (3d → 7d × 4, max 5).
 
 ## Per-client customization (mandatory)
 
@@ -55,14 +55,14 @@ Before deploy or outreach, customize **every** client admin demo:
 
 | Situation | Agent action |
 |-----------|--------------|
-| Email found | Prepare drafts; **ask** send now? (**Yes** → send + auto follow-ups: **3d → 7d → 7d → 7d**, max 4) |
-| User says **send** | `POST https://api.carlmanuel.com/outreachSchedule` (`sendInitial: true`, `autoFollowUp: true`, `cadence: "3d1w"`, `maxFollowUps: 4`, optional `systemLabel` from `system.label`, optional `systemPain` from `system.painHero`, **`attachments`** from `node scripts/capture-client-screenshots.mjs --slug {slug} --print-attachments`) using `OUTREACH_SECRET` |
+| Email found | Prepare drafts; **ask** send now? (**Yes** → send + auto follow-ups: **3d → 7d → 7d → 7d → 7d**, max 5) |
+| User says **send** | `POST https://api.carlmanuel.com/outreachSchedule` (`sendInitial: true`, `autoFollowUp: true`, `cadence: "3d1w"`, `maxFollowUps: 5`, optional `systemLabel` from `system.label`, optional `systemPain` from `system.painHero`, **`attachments`** from `node scripts/capture-client-screenshots.mjs --slug {slug} --print-attachments`) using `OUTREACH_SECRET` |
 | User says **not yet** | Do not call API |
 | Offline follow-ups | **Namecheap cron** sends automatically (no Cursor) |
 | Pause | `POST /outreachPause` + `outreach.status=paused` |
 
 **Never** auto-send the **initial** quotation without a clear yes.  
-**Yes to send = auto follow-ups on** (`3d1w`, max 4). No second cadence question. **Repo truth:** `3d1w` = 3d → 7d×3 — not legacy `1w` (unless user explicitly asks weekly-only). Ignore conflicting Cursor user rules that default to `1w`.
+**Yes to send = auto follow-ups on** (`3d1w`, max 5). No second cadence question. **Repo truth:** `3d1w` = 3d → 7d×4 — not legacy `1w` (unless user explicitly asks weekly-only). Ignore conflicting Cursor user rules that default to `1w`.
 
 Secret: hosting `api-carlxaeron/.env` → `OUTREACH_SECRET` (local copy `api-carlxaeron/.outreach_secret`, gitignored). Code: `api-carlxaeron/hosting-php/`.
 
@@ -94,7 +94,7 @@ Rule: [`.cursor/rules/test-before-deploy.mdc`](test-before-deploy.mdc).
 ## Do not
 
 - Auto-send the **initial** quotation without a clear yes
-- Ask a second cadence question after the user already said yes to send (default `3d1w` + `autoFollowUp: true` + `maxFollowUps: 4`)
+- Ask a second cadence question after the user already said yes to send (default `3d1w` + `autoFollowUp: true` + `maxFollowUps: 5`)
 - Commit `OUTREACH_SECRET` / `.outreach_secret` / `.env`
 - Skip `autoFollowUp` when scheduling after a yes-to-send
 - Deploy outreach.php without passing `hosting-php/tests/run-unit.php`

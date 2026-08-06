@@ -33,7 +33,7 @@ php api-carlxaeron/hosting-php/tests/run-unit.php
 
 Must exit **0**. Only then `hosting_upload` / sync to Stellar.
 
-Sequence under test: **3d → 7d → 7d → 7d**, max **4** follow-ups (`cadence: 3d1w`).
+Sequence under test: **3d → 7d → 7d → 7d → 7d**, max **5** follow-ups (`cadence: 3d1w`).
 
 ## Laravel API (`api-carlxaeron/`)
 

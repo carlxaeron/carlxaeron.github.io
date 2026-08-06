@@ -44,7 +44,7 @@ Variant helper: `src/v3/config/portfolioVariant.js` · Shell: `src/v3/containers
 | Firebase Analytics / leftover functions | `.cursor/skills/firebase-backend/` |
 | OnlineJobs search & apply | `.cursor/skills/onlinejobs-apify/` |
 | Client site + Netlify | `.cursor/skills/client-site-netlify/` |
-| Quotation send / follow-up (ask first; **yes** → auto **3d→7d×3** max 4) | `.cursor/skills/client-site-netlify/` (Step 5 outreach gate) |
+| Quotation send / follow-up (ask first; **yes** → auto **3d→7d×4** max 5) | `.cursor/skills/client-site-netlify/` (Step 5 outreach gate) |
 | Namecheap DNS (browser) | `.cursor/skills/namecheap-browser/` |
 
 ## Hard rules
