@@ -1,7 +1,7 @@
 import { EXPERIENCES, COMPANIES, SKILLS } from "../../external-config";
 
 export const RESULTS_HERO = {
-  eyebrow: "Senior engineer · 12 years in production",
+  eyebrow: "Senior engineer · 14 years in production",
   nameLine1: "Carl Louis",
   nameLine2: "Manuel",
   nameAccent: "Manuel",
@@ -27,7 +27,7 @@ export const RESULTS_ABOUT = {
     "Full-stack",
   ],
   stats: [
-    { value: "12+", label: "Years experience" },
+    { value: "14+", label: "Years experience" },
     { value: "3", label: "ABS-CBN sites built" },
     { value: "1", label: "GoAutoDial rewrite led" },
     { value: "50+", label: "Projects" },
@@ -118,12 +118,12 @@ export const RESULTS_PORTFOLIO_CONTENT = {
 export const RESULTS_SEO = {
   title: "Carl Louis Manuel — Senior Full-Stack Engineer (Remote)",
   description:
-    "12+ years building web apps for Metrobank, ABS-CBN, GoAutoDial, and others. React, Laravel, Firebase, OpenAI. Based in the Philippines, available for remote work.",
+    "14+ years building web apps for Metrobank, ABS-CBN, GoAutoDial, and others. React, Laravel, Firebase, OpenAI. Based in the Philippines, available for remote work.",
 };
 
 export const RESUME_SEO = {
   title:
     "Carl Louis Manuel — Building AI-Powered Applications | Full-Stack Engineer & SaaS Builder",
   description:
-    "Building AI-powered enterprise applications and SaaS products. 12+ years across banks, media companies & enterprises — ReactJS, Laravel, OpenAI API, Flutter, Firebase. Senior Full-Stack Engineer based in the Philippines.",
+    "Building AI-powered enterprise applications and SaaS products. 14+ years across banks, media companies & enterprises — ReactJS, Laravel, OpenAI API, Flutter, Firebase. Senior Full-Stack Engineer based in the Philippines.",
 };

@@ -19,7 +19,7 @@ const LiParent = styled.li`
 export const PROJECTS_DESCRIPTION_AI = (data) => (
   <div className='m-4 text-sm lg:text-lg text-left'>
     <ul>
-      <LiParent>Hi! I have 12 years ({data.time}) experience (and still counting) as a full-stack web developer, building web applications and websites that are robust and responsive. I have been experimenting with all sorts of technology, modern to old, since I began in 2012, to come up with solutions that are secure, fault-tolerant, user-centric, and scalable.</LiParent>
+      <LiParent>Hi! I have 14 years ({data.time}) experience (and still counting) as a full-stack web developer, building web applications and websites that are robust and responsive. I have been experimenting with all sorts of technology, modern to old, since I began in 2012, to come up with solutions that are secure, fault-tolerant, user-centric, and scalable.</LiParent>
       <LiParent>
         <b>My Expertise:</b>
         <ul>

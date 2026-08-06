@@ -36,6 +36,7 @@
         "npm:os@~0.1.2",
         "npm:path-browserify@^1.0.1",
         "npm:path@~0.12.7",
+        "npm:playwright@^1.62.0",
         "npm:postcss@^8.4.47",
         "npm:react-bootstrap@^2.10.5",
         "npm:react-dom@^18.2.0",

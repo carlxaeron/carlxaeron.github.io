@@ -31,7 +31,7 @@ All copy under `src/v3/` and in `src/external-config.js` must follow these conve
 | AI & LLM integration | OpenAI API, AI chat assistants, LLM-powered features |
 | Full-stack architecture | ReactJS frontends + PHP/Laravel backends + Firebase real-time + Flutter mobile |
 | Scale & security | Banking-grade security, high-load systems, end-to-end testing (Jest, Cypress) |
-| 12+ years depth | Consistent record across media, banking, gaming, and technology sectors |
+| 14+ years depth | Consistent record across media, banking, gaming, and technology sectors |
 
 ## Results mode (default `/`)
 
@@ -49,12 +49,12 @@ Target: **international clients** — lead with real companies and what you actu
 
 - **Eyebrow (small label above h1):** `Senior Full-Stack Engineer · AI Integration Specialist`
 - **H1 (name block):** Keep `Carl Louis` / `Manuel` split — name is the brand.
-- **Sub-headline:** `12+ years delivering secure, scalable applications for banks, media companies & enterprises. ReactJS · Laravel · OpenAI · Flutter.`
+- **Sub-headline:** `14+ years delivering secure, scalable applications for banks, media companies & enterprises. ReactJS · Laravel · OpenAI · Flutter.`
 - **CTAs:** "View My Work" (primary) + "Get In Touch" (ghost) — keep as-is.
 
 ## About bio (3-paragraph arc)
 
-1. **Who + credentials:** "I'm Carl Louis Manuel — a Senior Full-Stack Engineer with 12+ years of experience architecting and delivering production-grade web and mobile applications for enterprises across banking, media, and technology sectors."
+1. **Who + credentials:** "I'm Carl Louis Manuel — a Senior Full-Stack Engineer with 14+ years of experience architecting and delivering production-grade web and mobile applications for enterprises across banking, media, and technology sectors."
 2. **What I build:** "My work spans the full stack: from pixel-perfect ReactJS frontends to secure PHP/Laravel backends, Firebase real-time systems, and AI-powered features using OpenAI's API. I've built banking applications at Metrobank, modernized legacy call-center systems at GoAutoDial, and created responsive digital experiences for ABS-CBN's properties."
 3. **Why it matters:** "I don't just write code — I architect solutions that scale, stay secure under load, and deliver measurable business outcomes. Whether you're building an enterprise platform or integrating AI into your product, I bring the depth and discipline to do it right."
 
@@ -69,8 +69,8 @@ Include: `ReactJS`, `Vue`, `PHP`, `Laravel`, `Node.js`, `Flutter`, `Firebase`, *
 
 ## Meta / SEO (external-config.js)
 
-- **`HEADERCONFIG.title`:** `"Carl Louis Manuel — Senior Full-Stack Engineer & AI Integration Specialist | 12+ Years Enterprise Experience"`
-- **`description` meta content:** `"Senior Full-Stack Engineer & AI Integration Specialist with 12+ years delivering enterprise-grade web applications for banks, media companies, and technology firms. Expert in ReactJS, Laravel, OpenAI API, Flutter, and Firebase."`
+- **`HEADERCONFIG.title`:** `"Carl Louis Manuel — Senior Full-Stack Engineer & AI Integration Specialist | 14+ Years Enterprise Experience"`
+- **`description` meta content:** `"Senior Full-Stack Engineer & AI Integration Specialist with 14+ years delivering enterprise-grade web applications for banks, media companies, and technology firms. Expert in ReactJS, Laravel, OpenAI API, Flutter, and Firebase."`
 
 ## What to avoid
 

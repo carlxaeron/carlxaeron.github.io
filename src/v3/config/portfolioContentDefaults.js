@@ -12,7 +12,7 @@ export const HERO_DEFAULTS = {
   nameLine2: "Manuel",
   nameAccent: "Manuel",
   subheadline:
-    "12+ years architecting production-grade systems for banks, media companies & enterprises — with AI built in. ReactJS · Laravel · OpenAI API · Firebase · Flutter",
+    "14+ years architecting production-grade systems for banks, media companies & enterprises — with AI built in. ReactJS · Laravel · OpenAI API · Firebase · Flutter",
   ctaPrimary: "View My Work",
   ctaSecondary: "Get In Touch",
 };
@@ -20,7 +20,7 @@ export const HERO_DEFAULTS = {
 export const ABOUT_DEFAULTS = {
   heading: "I'm Carl Louis Manuel",
   paragraphs: [
-    "I build AI-powered applications and automation workflows that enterprises actually ship. With 12+ years across banking, media, and technology — I've led full-stack delivery at Metrobank, ABS-CBN, and GoAutoDial, integrating AI features and MCP-powered tooling that solve real business problems.",
+    "I build AI-powered applications and automation workflows that enterprises actually ship. With 14+ years across banking, media, and technology — I've led full-stack delivery at Metrobank, ABS-CBN, and GoAutoDial, integrating AI features and MCP-powered tooling that solve real business problems.",
     "My stack spans pixel-perfect ReactJS frontends, secure PHP/Laravel backends, Firebase real-time systems, and OpenAI API integrations in live client-facing products. At Metrobank I helped deliver secure banking interfaces across multiple modules. At GoAutoDial I led a full legacy-to-modern migration — jQuery/PHP rewritten into a React/Laravel platform — that cut bug reports and improved agent productivity. At ABS-CBN I built 3 complete web properties from scratch serving millions of visitors.",
     "Beyond client work, I ship independently — including Tahanan, a community SaaS live in the Philippines. Whether you need enterprise-grade engineering or AI woven into your product, I bring the depth and discipline to do it right.",
   ],
@@ -41,7 +41,7 @@ export const ABOUT_DEFAULTS = {
     "Node.js",
   ],
   stats: [
-    { value: "12+", label: "Years Experience" },
+    { value: "14+", label: "Years Experience" },
     { value: "10+", label: "Companies" },
     { value: "50+", label: "Projects" },
     { value: "2", label: "Side Projects Shipped" },

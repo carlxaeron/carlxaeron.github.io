@@ -16,7 +16,7 @@ describe('V3Home', () => {
     const onNavigate = jest.fn();
     renderHome(PORTFOLIO_VARIANTS.RESULTS, { onNavigate });
 
-    expect(screen.getByText(/Senior engineer · 12 years in production/i)).toBeInTheDocument();
+    expect(screen.getByText(/Senior engineer · 14 years in production/i)).toBeInTheDocument();
     expect(screen.getByText(/I build web apps for banks, media, and product teams/i)).toBeInTheDocument();
     expect(screen.getByText(/Carl Louis/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /See the work/i })).toBeInTheDocument();
@@ -27,7 +27,7 @@ describe('V3Home', () => {
     renderHome(PORTFOLIO_VARIANTS.RESUME);
 
     expect(screen.getByText(/Building AI-Powered Enterprise Applications/i)).toBeInTheDocument();
-    expect(screen.getByText(/12\+ years architecting production-grade systems/i)).toBeInTheDocument();
+    expect(screen.getByText(/14\+ years architecting production-grade systems/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /View My Work/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Get In Touch/i })).toBeInTheDocument();
   });

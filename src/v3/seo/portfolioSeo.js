@@ -16,9 +16,9 @@ const PORTFOLIO_SEO = {
   siteUrl: SITE_URL,
   title: "Carl Louis Manuel — Senior Full-Stack Engineer (Remote)",
   description:
-    "12+ years building web apps for Metrobank, ABS-CBN, GoAutoDial, and others. React, Laravel, Firebase, OpenAI. Based in the Philippines, available for remote work.",
+    "14+ years building web apps for Metrobank, ABS-CBN, GoAutoDial, and others. React, Laravel, Firebase, OpenAI. Based in the Philippines, available for remote work.",
   hero: {
-    eyebrow: "Senior engineer · 12 years in production",
+    eyebrow: "Senior engineer · 14 years in production",
     nameLine1: "Carl Louis",
     nameLine2: "Manuel",
     subheadline:
@@ -49,7 +49,7 @@ const RESUME_PORTFOLIO_SEO = {
   title:
     "Carl Louis Manuel — Building AI-Powered Applications | Full-Stack Engineer & SaaS Builder",
   description:
-    "Building AI-powered enterprise applications and SaaS products. 12+ years across banks, media companies & enterprises — ReactJS, Laravel, OpenAI API, Flutter, Firebase. Senior Full-Stack Engineer based in the Philippines.",
+    "Building AI-powered enterprise applications and SaaS products. 14+ years across banks, media companies & enterprises — ReactJS, Laravel, OpenAI API, Flutter, Firebase. Senior Full-Stack Engineer based in the Philippines.",
 };
 
 /**
