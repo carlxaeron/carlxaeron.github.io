@@ -13,13 +13,33 @@ description: Scaffold, build, and deploy local-business quotation websites under
 **Whitelist:** [src/v3/config/previewWhitelist.js](../../src/v3/config/previewWhitelist.js)  
 **Tests:** [previewWhitelist.test.js](../../src/v3/config/previewWhitelist.test.js), PreviewShowcase + Index preview routing tests  
 **Site catalog:** [client-sites/README.md](../../client-sites/README.md) — list of all clients, preview links, contact, packages  
-**Template:** [client-sites/_template/](../../client-sites/_template/)
+**Template:** [client-sites/_template/](../../client-sites/_template/)  
+**Daily prospect discovery:** `npm run discover-prospects` → [`prospects/queue.json`](../../prospects/) (Places API; Rodriguez + Manila; skip government; no auto-send)
 
 ## Prerequisites
 
 - Netlify MCP in Cursor (see [.cursor/MCP.md](../../MCP.md))
 - Node.js 22+ for `@netlify/mcp`
 - Netlify account authenticated on first MCP use
+- For autopilot discovery: repo root `.env` with `GOOGLE_PLACE_API_KEY` (or `GOOGLE_PLACES_API_KEY`); GCP project must have **Billing enabled** + **Places API (New)**; key restricted to that API
+
+## Daily prospect autopilot (search only)
+
+Goal: find 3–5 local businesses/day (Rodriguez + Manila) that need a better web presence, queue them for demo builds. **Never** auto-send quotation email.
+
+```bash
+npm run discover-prospects          # writes prospects/queue.json + digest-YYYY-MM-DD.md
+npm run discover-prospects -- --dry-run
+npm run discover-prospects -- --no-probe   # faster, weaker website scoring
+```
+
+Pipeline after digest:
+
+1. Review `prospects/digest-*.md` with the user (or build the top picks)
+2. For each approved prospect → normal Step 1–7 (Facebook scrape when URL known; Maps/phone from queue)
+3. Still **ask before** `outreachSchedule` initial send
+
+Filters: skip government / LGU name heuristics; skip existing `client-sites/` slugs & names; prefer no website or weak site (no viewport / no HTTPS / unreachable).
 
 ## Workflow checklist
 

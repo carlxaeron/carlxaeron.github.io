@@ -108,6 +108,8 @@ Product commits are separate — don’t invent changelog noise; doc-only agent-
 
 **Systems-first:** each demo = marketing site (`/`) + browsable admin (`/admin/`) on one Netlify host. Portfolio preview shows **4 panels** (site desktop/mobile + admin desktop/mobile).
 
+**Daily prospect search:** `npm run discover-prospects` (Places API → `prospects/queue.json`, Rodriguez + Manila, skip government; build demos from digest; **still ask before send**). Needs billing + Places API (New) on GCP.
+
 1. Copy `client-sites/_template/` → `client-sites/{slug}/`
 2. **Scrape client Facebook** via Chrome DevTools MCP (About + Photos → inspect + download to `assets/`); see client-site-netlify skill Step 1b
 3. Customize HTML with **Tailwind CDN** + supplemental `styles.css`; wire `/admin/` from `client-sites/_systems/admin/` when available; keep `site.js` + **`hero-motion.js`** + **`hero-three.js`**

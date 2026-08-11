@@ -1,0 +1,4 @@
+# Generated prospect digests (daily Places discovery)
+queue.json
+digest-*.md
+!.gitkeep
