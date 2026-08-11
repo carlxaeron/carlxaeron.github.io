@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.15] — 2026-08-11
+
+### Added
+- **Client demos** — Pearl Garden Hotel (Malate), Fleur de Lys (Morato), Midnight Haven (Ermita) quotation sites + preview whitelist entries (`?preview=` booking admin samples)
+
 ## [3.1.14] — 2026-08-04
 
 ### Added
