@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.16] — 2026-09-14
+
+### Added
+- **I-Tul Design & Software** — experience entry (Mar 2025 – Sep 2026) with company logo; results hero/about copy updated for recent US contractor work
+
 ## [3.1.15] — 2026-08-11
 
 ### Added

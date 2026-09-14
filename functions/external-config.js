@@ -454,6 +454,19 @@ const COMPANIES = [
 
 const EXPERIENCES = [
   {
+      "companyLogo": "/static/images/companies/i-tul.svg",
+      "companyName": "I-Tul Design & Software, Inc.",
+      "jobTitle": "Full-Stack Developer (Independent Contractor / Remote)",
+      "dateRange": "(Mar 2025 - Sep 2026)",
+      "skills": ['Laravel', 'PHP', 'ReactJS', 'BigCommerce', 'WHMCS', 'MySQL', 'Vite', 'Bug Fixing', 'Client Support'],
+      "jobDescription": `At I-Tul Design & Software (Roseville, CA), I worked remotely as an independent contractor on client software, e-commerce, and support work across their US portfolio.<br/><br/>
+• Built and maintained Laravel apps for client portals — including a multi-event camp volunteer/camper registration system with admin workflows, bunking, and magic-link auth.<br/>
+• Supported BigCommerce storefronts and custom widgets for retail/wholesale clients (catalog, promos, scheduled banners).<br/>
+• Contributed to behavioral-health EHR features and documentation flows for clinical staff.<br/>
+• Assisted with WHMCS / hosting-adjacent tooling and day-to-day client bug fixes under agreed scopes of work.<br/>
+<b>Impact:</b> Production support and feature delivery for I-Tul’s client apps from Mar 2025 to Sep 2026 under a Remofirst contractor arrangement with US-based product owners.`
+  },
+  {
       "companyLogo": "/static/images/companies/mb.jpg",
       "companyName": "Metropolitan Bank & Trust (Metrobank).",
       "jobTitle": "Programmer Analyst / Javascript Developer",

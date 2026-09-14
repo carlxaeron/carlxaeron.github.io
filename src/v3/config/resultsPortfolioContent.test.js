@@ -16,6 +16,14 @@ describe("resultsPortfolioContent", () => {
     expect(RESULTS_PORTFOLIO_CONTENT.hero.subheadline).not.toMatch(/Proof over pitch/i);
   });
 
+  test("includes I-Tul as recent experience with logo", () => {
+    const first = RESULTS_PORTFOLIO_CONTENT.experiences[0];
+    expect(first.companyName).toMatch(/I-Tul/i);
+    expect(first.companyLogo).toBe("/static/images/companies/i-tul.svg");
+    expect(first.dateRange).toMatch(/Mar 2025 - Sep 2026/i);
+    expect(first.jobDescription).toMatch(/Laravel|BigCommerce|camp/i);
+  });
+
   test("resume defaults keep all sections enabled", () => {
     expect(SETTINGS_DEFAULTS.sections.blog).toBe(true);
     expect(SETTINGS_DEFAULTS.sections.quote).toBe(true);

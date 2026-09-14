@@ -6,7 +6,7 @@ export const RESULTS_HERO = {
   nameLine2: "Manuel",
   nameAccent: "Manuel",
   subheadline:
-    "I build web apps for banks, media, and product teams. Lately: banking modules at Metrobank, a full agent-app rewrite at GoAutoDial (jQuery/PHP to React/Laravel), and three sites I built from scratch at ABS-CBN. Based in the Philippines, open to remote work overseas.",
+    "I build web apps for banks, media, and product teams. Most recently: client apps for I-Tul Design & Software (US) — Laravel portals, BigCommerce, EHR. Before that: banking modules at Metrobank, a full agent-app rewrite at GoAutoDial (jQuery/PHP to React/Laravel), and three sites from scratch at ABS-CBN. Based in the Philippines, open to remote work overseas.",
   ctaPrimary: "See the work",
   ctaSecondary: "Contact",
 };
@@ -56,6 +56,7 @@ function stripConfirmPlaceholders(html) {
 /** Shorter, plain-language role summaries for results mode. */
 export const RESULTS_EXPERIENCES = EXPERIENCES.map((exp) => {
   const plainByCompany = {
+    "I-Tul Design & Software, Inc.": `At I-Tul (Roseville, CA) I contracted remotely on client apps — Laravel portals (camp volunteer/camper registration), BigCommerce storefronts and widgets, EHR features for clinical staff, and WHMCS/hosting support. Day-to-day: shipped scopes, fixed production bugs, worked with US product owners. Engagement ended Sep 2026 when project volume slowed.`,
     "Metropolitan Bank & Trust (Metrobank).": `At Metrobank I built and maintained customer-facing banking modules in React and Redux. Most days: UI from specs, API hooks (Postman, Mockoon when backend was late), tests with Jest and Cypress, releases through GitLab CI. Regular coordination with QA and business analysts.`,
     "GoAutoDial, Inc.": `GoAutoDial's agent app ran on jQuery and PHP. I rewrote it in React and Laravel — same product, new codebase. Bug reports went down after launch and the UI finally worked on mobile. I also built a WHMCS module that automated cloud provisioning they used to do manually.`,
     "UCC, Cornerstone and MNX": `Banking web modules in Laravel and Vue, plus Dragonpay payment integrations. Built a Flutter app on Firebase with real-time sync. Mix of API work, payment gateways, and mobile.`,
