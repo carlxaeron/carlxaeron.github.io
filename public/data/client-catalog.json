@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-31T08:57:13.075Z",
+  "generatedAt": "2026-09-14T05:12:45.711Z",
   "clients": [
     {
       "slug": "a-and-c-private-pool",
@@ -563,6 +563,39 @@
       }
     },
     {
+      "slug": "fleur-de-lys",
+      "businessName": "Fleur de Lys",
+      "industry": "Patisserie / café · Tomas Morato",
+      "contact": {
+        "name": "Fleur de Lys",
+        "email": "",
+        "phone": "(02) 8372 0631"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (cakes & café, gallery, about, FAQ, contact). Admin preview is a sample; production system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=fleur-de-lys"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Cake & table booking admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "305 Tomas Morato Ave, South Triangle, Quezon City"
+      }
+    },
+    {
       "slug": "frances-teresa-garden",
       "businessName": "Frances Teresa Garden — The Party Place",
       "industry": "Party venue / garden event place",
@@ -1025,6 +1058,39 @@
       }
     },
     {
+      "slug": "midnight-haven",
+      "businessName": "Midnight Haven",
+      "industry": "Live music bar & café · 24 hours · Ermita",
+      "contact": {
+        "name": "Midnight Haven",
+        "email": "",
+        "phone": "(02) 8708 4937"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (experience, gallery, about, FAQ, contact). Admin preview is a sample; production system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=midnight-haven"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Table & event booking admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "1429 M.H. Del Pilar St, Ermita, Manila"
+      }
+    },
+    {
       "slug": "mphs-fairview",
       "businessName": "MPHS Mother of Perpetual Help Inc. Fairview",
       "industry": "K–12 school / nonprofit education",
@@ -1154,6 +1220,39 @@
       },
       "sources": {
         "address": "Chico Street, Torres Subd., San Jose, Rodriguez, Philippines, 1850"
+      }
+    },
+    {
+      "slug": "pearl-garden-hotel",
+      "businessName": "Pearl Garden Hotel",
+      "industry": "Budget hotel · Malate",
+      "contact": {
+        "name": "Pearl Garden Hotel Reservations",
+        "email": "reservation@pearlgardenhotel.net",
+        "phone": "(02) 8525 1000"
+      },
+      "quotation": {
+        "packageName": "Starter Business Website",
+        "packageScope": "One-page responsive website only (rooms, gallery, about, FAQ, contact). Admin preview is a sample; production system priced separately.",
+        "quotedAmount": "₱15,000",
+        "paymentTerms": "50% upfront to begin · 50% on delivery (not the full amount upfront)",
+        "timeline": "5–7 business days after content approval",
+        "previewUrl": "https://carlmanuel.com/?preview=pearl-garden-hotel"
+      },
+      "system": {
+        "type": "booking",
+        "adminPath": "/admin/",
+        "label": "Room & reservation admin",
+        "navPages": [
+          "Dashboard",
+          "Bookings",
+          "Calendar",
+          "Guests",
+          "Settings"
+        ]
+      },
+      "sources": {
+        "address": "1700 M. Adriatico cor Gen. Malvar, Malate, Manila"
       }
     },
     {
