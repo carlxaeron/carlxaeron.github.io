@@ -60,6 +60,7 @@ CV is generated via `apply_canva_cv_design.py --output ... --tagline ... --no-ba
 - Reference Metrobank, GoAutoDial, ABS-CBN only as **public** portfolio proof — no confidential details.
 - **Never** mention Tahanan, HOA platform, or `tahanan.org` in submission text.
 - Do not invent salary or employer facts not in the listing.
+- **AI-tailored per job:** `build_submission_text` calls `onlinejobs_mcp_server/ai_tailor.py`, which tries providers in order **Groq (`GROQ_API_KEY`) → Google Gemini (`GEMINI_API_KEY`) → OpenAI (`OPENAI_API_KEY`)** — first one with a key set that returns valid, non-banned output wins; any failure falls through to the next. Subject + body genuinely vary with `job_title`/`company`/`job_description`/`extra_notes` plus the **master bio** from `job-applications/_profile.json` (dashboard Settings; built-in `CANDIDATE_PROFILE` if empty) — not a title-swapped static paragraph. Pass `job_description` to `create_job_application` when the listing text is known (search results include it when the Apify actor returns it) so the model has real grounding. Falls back to the static template (unchanged) if all configured providers are missing/fail — never crashes, never logs any key. Free AI can draft the master bio in Settings; after saving a new pitch, use **Regenerate submission** on existing apps.
 
 ## Before user submits
 

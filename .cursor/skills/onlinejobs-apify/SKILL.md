@@ -30,6 +30,8 @@ uv run job-dashboard
 
 Open **http://localhost:8787** — list applications, update status/notes, search & apply, manual create.
 
+**Runs as a launchd LaunchAgent** (`com.carlmanuel.olj-dashboard`, `~/Library/LaunchAgents/com.carlmanuel.olj-dashboard.plist`) so it survives reboots/logouts. launchd gives the process a **minimal environment with no `PATH`** (unlike an interactive shell) — any code that shells out to a bare command name (e.g. `subprocess.run(["uv", ...])`) will fail with `[Errno 2] No such file or directory` under this service even though it works fine in a terminal. `applications.py`'s `resolve_uv_path()` resolves an absolute path (`shutil.which("uv")`, falling back to `~/.local/bin/uv`, `/opt/homebrew/bin/uv`, `/usr/local/bin/uv`) for this reason — apply the same pattern to any new bare-executable `subprocess` call. The plist also sets `EnvironmentVariables.PATH` as defense-in-depth. After editing the plist, `kickstart -k` does **not** reload it — use `launchctl bootout gui/$(id -u)/com.carlmanuel.olj-dashboard` then `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.carlmanuel.olj-dashboard.plist`.
+
 ## End-to-end workflow
 
 ```text
@@ -80,6 +82,7 @@ job-applications/
 | `tailored_tagline` | no | Auto-inferred from title if omitted |
 | `extra_notes` | no | Appended to cover message |
 | `upload_cv_to_cloud` | no | Default `true`; uploads when `CV_UPLOAD_PROVIDER` is set |
+| `job_description` | no | Listing description text (if scraped/known) — grounds the AI-tailored cover message in real job specifics |
 
 ### `list_job_applications`
 
@@ -124,6 +127,8 @@ Hi [Company or Hiring Manager],
 ---
 URL: [job_url]
 ```
+
+**Subject + body generation:** `build_submission_text` (`applications.py`) calls `onlinejobs_mcp_server/ai_tailor.py` per job with `job_title`/`company`/`job_description`/`extra_notes` plus the **master bio** from `job-applications/_profile.json` (Settings tab; falls back to built-in `CANDIDATE_PROFILE` when empty), trying providers in order **Groq (`GROQ_API_KEY`) → Google Gemini (`GEMINI_API_KEY`) → OpenAI (`OPENAI_API_KEY`)** (`.env` or MCP env; all optional) — first provider with a key set that returns valid, non-banned output wins, so each submission is genuinely tailored, not the same paragraph with only the title swapped in. Falls back to the static keyword-matched template (unchanged, no crash) when every configured provider is missing/fails; a warning is logged to stderr, never into `submission.txt`, and no API key is ever logged. Contact info, portfolio link, and CV line stay deterministic (not model-generated). Model output that mentions Tahanan is rejected for that provider and the chain tries the next one (or falls to static if it was the last). Dashboard **Settings** can also draft the master bio via free AI (`POST /api/profile/generate`); Save is still required. After changing the master bio, use **Regenerate submission** on existing applications.
 
 Paste the block under `--- ONLINEJOBS.PH MESSAGE ---` into OnlineJobs.ph when applying.
 
