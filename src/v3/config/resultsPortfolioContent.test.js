@@ -16,6 +16,20 @@ describe("resultsPortfolioContent", () => {
     expect(RESULTS_PORTFOLIO_CONTENT.hero.subheadline).not.toMatch(/Proof over pitch/i);
   });
 
+  test("includes Premium DesignScape from the Tabulate CRM work", () => {
+    const role = RESULTS_PORTFOLIO_CONTENT.experiences.find((exp) =>
+      /Premium DesignScape/i.test(exp.companyName)
+    );
+    expect(role).toBeTruthy();
+    expect(role.dateRange).toMatch(/Feb 2025 - Nov 2025/);
+    expect(role.jobDescription).toMatch(/price matrix/i);
+    expect(role.jobDescription).toMatch(/TabulateSaaS/);
+    const projectIds = RESULTS_PORTFOLIO_CONTENT.companies
+      .flatMap((company) => company.projects || [])
+      .map((project) => project.id);
+    expect(projectIds).toEqual(expect.arrayContaining(["tabulate-saas", "pd-crm", "tabulate-api"]));
+  });
+
   test("includes I-Tul as recent experience with logo", () => {
     const first = RESULTS_PORTFOLIO_CONTENT.experiences[0];
     expect(first.companyName).toMatch(/I-Tul/i);

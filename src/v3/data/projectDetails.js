@@ -455,6 +455,36 @@ export const PROJECT_DETAILS = {
       "#responsive"
     ]
   },
+  "tabulate-saas": {
+    "description": "TabulateSaaS is the multi-tenant platform behind Premium DesignScape (also called Premium Design). I was the main committer from 3 Feb 2025 to 8 Oct 2025.\n\nI built tenant registration, subscription billing, and PayPal payments, plus roles and permissions for blog and web-content managers. Webhooks fire when a tenant is provisioned or deprovisioned so the CRM instance can be created or removed. The admin UI is React and TypeScript (tenants, services, documents, blogs) on a Laravel API, with Bugsnag for errors and feature tests around registration, webhooks, and billing.",
+    "impact": "Main committer on the SaaS that signs up tenants, bills them, and provisions their CRM.",
+    "tags": ["#laravel", "#react", "#typescript", "#paypal", "#saas", "#multitenant", "#webhooks", "#mysql"],
+    "websiteUrl": "https://tabulatecrm.com"
+  },
+  "pds-web": {
+    "description": "PD-CRM includes a CMS for the public customer website. I added management for the welcome page, sliders, popular services, service summaries, packages, “why choose us,” our performance, and latest projects, with visibility toggles and tests.\n\nThat content is what the Premium DesignScape marketing site renders: services, packages, gallery, and the how-it-works sections.",
+    "impact": "Customer website sections are edited in the CRM instead of hardcoded pages.",
+    "tags": ["#laravel", "#php", "#cms", "#blade", "#mysql"],
+    "websiteUrl": "https://premiumdesignscape.com"
+  },
+  "pd-crm": {
+    "description": "On the per-tenant CRM I owned the service price matrix from the first recurrence-type work through estimate integration (commits 19 Feb 2025–4 Nov 2025).\n\nServices can carry recurring price bands, custom fields, and extra rules per recurrence type. The matrix validates overlapping ranges, supports copy and paste between bands, and sets the estimate unit price from the selected service, recurrence, and custom fields. I also shipped the notifications inbox, including mark-all-as-read.",
+    "impact": "Estimates pick a unit price from the service price matrix instead of a single flat rate.",
+    "tags": ["#laravel", "#php", "#mysql", "#blade", "#alpinejs", "#pricing"],
+    "websiteUrl": "https://premiumdesignscape.com"
+  },
+  "tabulate-api": {
+    "description": "Tabulate CRM V2 is the Laravel API between TabulateSaaS and each PD-CRM tenant. I wrote almost all of it from 12 Jun 2025 to 8 Oct 2025.\n\nIt receives provision and deprovision webhooks, creates the tenant domain, retries PD-CRM setup when it fails, and exposes vendor and vendor-contact APIs with Postman collections and OpenAPI docs. Bugsnag covers production errors. Feature tests cover webhook provisioning.",
+    "impact": "SaaS signup provisions a CRM tenant through this API instead of a manual server setup.",
+    "tags": ["#laravel", "#php", "#webhooks", "#openapi", "#mysql", "#bugsnag"],
+    "websiteUrl": "https://tabulatecrm.com"
+  },
+  "tabulate-mobile": {
+    "description": "On 24 Jul 2025 I started TabulateCRM Mobile, a React Native and Expo app for the V2 API.\n\nThat day I set up the iOS project (TabulateCRM Mobile), themed the login and dashboard, added a financial overview and recent activity on the dashboard, and wired logout so local storage clears even if the server call fails.",
+    "impact": "First mobile client for Tabulate CRM: login, dashboard, and profile against the V2 API.",
+    "tags": ["#reactnative", "#expo", "#typescript", "#ios"],
+    "websiteUrl": "https://tabulatecrm.com"
+  },
   "tahanan": {
     "description": "Tahanan is a multi-tenant community platform I designed and built solo for homeowners associations and residential communities in the Philippines — live in production with real users, not a demo.\n\nI owned the product end-to-end without external funding. Deeper architecture and case-study detail are available on request for serious inquiries.",
     "impact": "Solo-shipped SaaS serving real communities in the Philippines — full product ownership from idea to production.",

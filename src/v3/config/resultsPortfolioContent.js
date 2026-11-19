@@ -6,7 +6,7 @@ export const RESULTS_HERO = {
   nameLine2: "Manuel",
   nameAccent: "Manuel",
   subheadline:
-    "I build web apps for banks, media, and product teams. Most recently: client apps for I-Tul Design & Software (US) — Laravel portals, BigCommerce, EHR. Before that: banking modules at Metrobank, a full agent-app rewrite at GoAutoDial (jQuery/PHP to React/Laravel), and three sites from scratch at ABS-CBN. Based in the Philippines, open to remote work overseas.",
+    "I build web apps for banks, media, and product teams. Most recently: client apps for I-Tul Design & Software (US) — Laravel portals, BigCommerce, EHR — and Tabulate CRM for Premium DesignScape (SaaS billing, service price matrix, tenant provisioning). Before that: banking modules at Metrobank, a full agent-app rewrite at GoAutoDial (jQuery/PHP to React/Laravel), and three sites from scratch at ABS-CBN. Based in the Philippines, open to remote work overseas.",
   ctaPrimary: "See the work",
   ctaSecondary: "Contact",
 };
@@ -15,7 +15,7 @@ export const RESULTS_ABOUT = {
   heading: "A bit about me",
   paragraphs: [
     "I'm Carl Louis Manuel. Most of my career has been web development under normal pressure — compliance at a bank, daily use by call-center agents, campaign traffic at a TV network.",
-    "At Metrobank I worked on customer banking modules in React. At GoAutoDial I led the rewrite of their agent tool and a WHMCS provisioning script. At ABS-CBN I built three properties from zero. On the side I run Tahanan, a small community app that's actually live.",
+    "At Metrobank I worked on customer banking modules in React. At GoAutoDial I led the rewrite of their agent tool and a WHMCS provisioning script. At ABS-CBN I built three properties from zero. For Premium DesignScape I built TabulateSaaS, the CRM price matrix, and the API that provisions tenants. On the side I run Tahanan, a small community app that's actually live.",
     "I'm looking for remote roles with teams outside the Philippines. If you want to know whether I can own a feature and ship it, the projects here are a better read than a list of frameworks.",
   ],
   skillTags: [
@@ -57,6 +57,7 @@ function stripConfirmPlaceholders(html) {
 export const RESULTS_EXPERIENCES = EXPERIENCES.map((exp) => {
   const plainByCompany = {
     "I-Tul Design & Software, Inc.": `At I-Tul (Roseville, CA) I contracted remotely on client apps — Laravel portals (camp volunteer/camper registration), BigCommerce storefronts and widgets, EHR features for clinical staff, and WHMCS/hosting support. Day-to-day: shipped scopes, fixed production bugs, worked with US product owners. Engagement ended Sep 2026 when project volume slowed.`,
+    "Premium DesignScape": `Premium DesignScape (Premium Design) builds software for landscaping operations. From Feb to Nov 2025 I worked on three repos. TabulateSaaS (Laravel, React, TypeScript): tenant signup, subscriptions, PayPal, roles, and the webhooks that provision and remove tenants — I was the main committer. PD-CRM: the service price matrix (recurring prices, custom fields, overlap checks) used on estimates, the notifications inbox, and the CMS for the customer website (welcome page, sliders, services, packages). Tabulate CRM V2 API: provisioning with webhook retry into the CRM, plus vendor APIs. On 24 Jul 2025 I started the React Native app (login, dashboard, profile).`,
     "Metropolitan Bank & Trust (Metrobank).": `At Metrobank I built and maintained customer-facing banking modules in React and Redux. Most days: UI from specs, API hooks (Postman, Mockoon when backend was late), tests with Jest and Cypress, releases through GitLab CI. Regular coordination with QA and business analysts.`,
     "GoAutoDial, Inc.": `GoAutoDial's agent app ran on jQuery and PHP. I rewrote it in React and Laravel — same product, new codebase. Bug reports went down after launch and the UI finally worked on mobile. I also built a WHMCS module that automated cloud provisioning they used to do manually.`,
     "UCC, Cornerstone and MNX": `Banking web modules in Laravel and Vue, plus Dragonpay payment integrations. Built a Flutter app on Firebase with real-time sync. Mix of API work, payment gateways, and mobile.`,
@@ -77,6 +78,11 @@ export const RESULTS_COMPANIES = COMPANIES.map((company) => ({
   projects: (company.projects || []).map((project) => {
     const resultLines = {
       tahanan: "Community app I built and run",
+      "tabulate-saas": "Tenant SaaS — billing, roles, webhooks",
+      "pds-web": "CMS for the customer website",
+      "pd-crm": "Service price matrix and estimates",
+      "tabulate-api": "API that provisions tenants",
+      "tabulate-mobile": "React Native app — login and dashboard",
       "ojp-workflow": "Job search automation I use myself",
       mb1: "Metrobank banking module",
       agent: "Agent app — jQuery/PHP to React/Laravel",

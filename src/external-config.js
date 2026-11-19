@@ -274,6 +274,37 @@ const COMPANIES = [
       ],
   },
   {
+      id: 'pds',
+      title: 'Premium DesignScape',
+      projects: [
+          {
+              id: 'tabulate-saas',
+              imgType: 'jpg',
+              title: 'TabulateSaaS',
+          },
+          {
+              id: 'pds-web',
+              imgType: 'jpg',
+              title: 'Customer website CMS',
+          },
+          {
+              id: 'pd-crm',
+              imgType: 'jpg',
+              title: 'PD-CRM price matrix',
+          },
+          {
+              id: 'tabulate-api',
+              imgType: 'jpg',
+              title: 'Tabulate CRM V2 API',
+          },
+          {
+              id: 'tabulate-mobile',
+              imgType: 'jpg',
+              title: 'TabulateCRM Mobile',
+          },
+      ],
+  },
+  {
       id: 'mb',
       title: 'Metrobank',
       projects: [
@@ -465,6 +496,15 @@ const EXPERIENCES = [
 • Contributed to behavioral-health EHR features and documentation flows for clinical staff.<br/>
 • Assisted with WHMCS / hosting-adjacent tooling and day-to-day client bug fixes under agreed scopes of work.<br/>
 <b>Impact:</b> Production support and feature delivery for I-Tul’s client apps from Mar 2025 to Sep 2026 under a Remofirst contractor arrangement with US-based product owners.`
+  },
+  {
+      "companyName": "Premium DesignScape",
+      "jobTitle": "Full-Stack Developer",
+      "dateRange": "(Feb 2025 - Nov 2025)",
+      "skills": ['Laravel', 'PHP', 'React', 'TypeScript', 'MySQL', 'PayPal', 'React Native', 'Expo', 'Webhooks'],
+      "jobDescription": `• Built TabulateSaaS (Laravel, React, TypeScript) for Premium DesignScape: tenant registration, subscriptions, PayPal payments, roles and permissions, and webhooks for tenant provisioned and deprovisioned. Main committer on that repo, Feb–Oct 2025.<br/>
+• On PD-CRM, shipped the service price matrix (recurrence types, custom fields, overlap checks) and used it on customer estimates. Also built the notifications inbox and the customer-website CMS (welcome page, sliders, services, packages, latest projects).<br/>
+• Wrote the Tabulate CRM V2 API (Laravel, Jun–Oct 2025): tenant provisioning with webhook retry into PD-CRM, vendor and vendor-contact APIs, and OpenAPI/Postman docs. Started TabulateCRM Mobile (React Native, Expo) on 24 Jul 2025 — login, dashboard, profile, logout.`
   },
   {
       "companyLogo": "/static/images/companies/mb.jpg",
