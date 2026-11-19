@@ -21,6 +21,7 @@ describe("resultsPortfolioContent", () => {
       /Premium DesignScape/i.test(exp.companyName)
     );
     expect(role).toBeTruthy();
+    expect(role.companyLogo).toBe("/static/images/companies/premium-designscape.png");
     expect(role.dateRange).toMatch(/Feb 2025 - Nov 2025/);
     expect(role.jobDescription).toMatch(/price matrix/i);
     expect(role.jobDescription).toMatch(/TabulateSaaS/);

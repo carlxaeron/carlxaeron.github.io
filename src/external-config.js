@@ -498,6 +498,7 @@ const EXPERIENCES = [
 <b>Impact:</b> Production support and feature delivery for I-Tul’s client apps from Mar 2025 to Sep 2026 under a Remofirst contractor arrangement with US-based product owners.`
   },
   {
+      "companyLogo": "/static/images/companies/premium-designscape.png",
       "companyName": "Premium DesignScape",
       "jobTitle": "Full-Stack Developer",
       "dateRange": "(Feb 2025 - Nov 2025)",
